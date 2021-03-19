@@ -1,0 +1,5 @@
+D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\netcoreapp3.1\QuanLyGaraOto.csprojAssemblyReference.cache
+D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\netcoreapp3.1\App.g.cs
+D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\netcoreapp3.1\QuanLyGaraOto_MarkupCompile.cache
+D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\netcoreapp3.1\QuanLyGaraOto_MarkupCompile.lref
