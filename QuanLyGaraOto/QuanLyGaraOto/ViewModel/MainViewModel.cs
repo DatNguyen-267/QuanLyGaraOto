@@ -9,7 +9,7 @@ namespace QuanLyGaraOto.ViewModel
     {
         public MainViewModel()
         {
-            MessageBox.Show("Tao đã vào được bên trong"); 
+           
         }
     }
 }
