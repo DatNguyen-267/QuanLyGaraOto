@@ -22,3 +22,27 @@ C:\Users\datng\OneDrive\Desktop\New folder\QuanLyGaraOto\QuanLyGaraOto\obj\Debug
 C:\Users\datng\OneDrive\Desktop\New folder\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.csproj.CopyComplete
 C:\Users\datng\OneDrive\Desktop\New folder\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.exe
 C:\Users\datng\OneDrive\Desktop\New folder\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.pdb
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\QuanLyGaraOto.exe.config
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\QuanLyGaraOto.exe
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\QuanLyGaraOto.pdb
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\MaterialDesignColors.dll
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\MaterialDesignThemes.Wpf.dll
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\MaterialDesignColors.pdb
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\MaterialDesignThemes.Wpf.pdb
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\MaterialDesignThemes.Wpf.xml
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.csprojAssemblyReference.cache
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\MainWindow.g.cs
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\App.g.cs
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\GeneratedInternalTypeHelper.g.cs
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto_MarkupCompile.cache
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto_MarkupCompile.lref
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\App.baml
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\MainWindow.baml
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\ResourceXAML\MainResource.baml
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.g.resources
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.Properties.Resources.resources
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.csproj.GenerateResource.cache
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.csproj.CoreCompileInputs.cache
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.csproj.CopyComplete
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.exe
+Z:\GitProject\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.pdb
