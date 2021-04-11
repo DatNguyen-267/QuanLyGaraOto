@@ -37,6 +37,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.0\lib\net452\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -44,7 +50,10 @@
       <HintPath>..\packages\MaterialDesignThemes.4.0.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -63,6 +72,48 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\CAR_BRAND.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CAR_IN_DEBT.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CAR_STATUS.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CUSTOMER.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GaraEFModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GaraEFModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GaraEFModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GaraEFModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GaraEFModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GARA_SERVICE.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LICENSE_PLATE.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RECEIPT.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\STAFF_ACCOUNT.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SUPPLIES.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TempModel.cs" />
     <Compile Include="UserControlGaraOto\TempUserControl.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -102,6 +153,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Model\GaraEFModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GaraEFModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\GaraEFModel.edmx.diagram">
+      <DependentUpon>GaraEFModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -111,7 +169,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Model\GaraEFModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GaraEFModel.Context.cs</LastGenOutput>
+      <DependentUpon>GaraEFModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\GaraEFModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GaraEFModel.edmx</DependentUpon>
+      <LastGenOutput>GaraEFModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
