@@ -3,6 +3,7 @@
 -- Khoi tao database
 create database GARA;
 use GARA;
+-- drop database GARA;
 ---------------------DON HANG CUA KHACH HANG-----------------------------------
 
 -- Thiet lap danh sach cac hang xe
@@ -40,7 +41,12 @@ create table SUPPLIES
     Amount int
 );
 -- drop table SUPPLIES;
-
+-- Thiet lap trang thai xe
+create table CAR_STATUS
+(
+    ID int primary key not NULL IDENTITY(1, 1),
+    Name varchar(50) not NULL
+);
 -- Thiet lap danh sach cac xe co tai gara
 create table LICENSE_PLATE
 (
@@ -61,18 +67,13 @@ create table REPAIR_TICKET
     Date datetime not NULL,
     License_ID int not NULL,
     Content varchar(256) not NULL,
-    Supply_ID int not NULL,
+    Supply_ID varchar(255) not NULL,
     Supplies_Amount int not NULL,
     Pay int not NULL,
     constraint FK_TICKET_LICENSEPLATE foreign key (License_ID) references LICENSE_PLATE(ID),
     constraint FK_TICKET_SUPPLIES foreign key (Supply_ID) references SUPPLIES(ID)
 );
 -- Thiet lap trang thai cua cac xe 
-create table CAR_STATUS
-(
-    ID int primary key not NULL IDENTITY(1, 1),
-    Name varchar(50) not NULL
-);
 -- drop table CAR_STATUS;
 
 -- Thiet lap danh sach cac xe dang trong qua trinh thu no

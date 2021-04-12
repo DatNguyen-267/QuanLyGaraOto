@@ -14,7 +14,7 @@ namespace QuanLyGaraOto.Model
     
     public partial class GARA_SERVICE
     {
-        public int Servive_ID { get; set; }
-        public string Service_Name { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

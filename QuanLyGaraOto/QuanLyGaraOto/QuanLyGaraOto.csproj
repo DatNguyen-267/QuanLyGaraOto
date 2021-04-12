@@ -109,7 +109,7 @@
     <Compile Include="Model\RECEIPT.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\STAFF_ACCOUNT.cs">
+    <Compile Include="Model\REPAIR_TICKET.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SUPPLIES.cs">
