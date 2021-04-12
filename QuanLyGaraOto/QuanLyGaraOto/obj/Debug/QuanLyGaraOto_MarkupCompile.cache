@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\admin\Documents\GitHub\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\
+D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\
 QuanLyGaraOto
 none
 false
 DEBUG;TRACE
-C:\Users\admin\Documents\GitHub\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\App.xaml
-22079336165
+D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\App.xaml
+41319242371
 2782429596
-21-1300568106
-20-76986700
-MainWindow.xaml;ResourceXAML\MainResource.xaml;
+25-1151625487
+22-533393683
+CarReceptionWindow.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;ServiceWindow.xaml;
 
 False
 

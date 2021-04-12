@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
-                    xmlns:viewmodel="clr-namespace:QuanLyGaraOto.ViewModel">
-
+                    xmlns:viewmodel="clr-namespace:QuanLyGaraOto.ViewModel"
+                    xmlns:framework="clr-namespace:TimeRecorder.Framework;assembly=MyAssembly">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:ServiceViewModel x:Key="ServiceVM"></viewmodel:ServiceViewModel>
+    <viewmodel:CarReceptionViewModel x:Key="CarReceptionVM"></viewmodel:CarReceptionViewModel>
 </ResourceDictionary>
