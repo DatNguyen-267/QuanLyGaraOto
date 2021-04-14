@@ -14,7 +14,7 @@ namespace QuanLyGaraOto.Model
     
     public partial class RECEIPT
     {
-        public string License_Number { get; set; }
+        public int License_ID { get; set; }
         public string Email_Address { get; set; }
         public Nullable<System.DateTime> Receipt_Date { get; set; }
         public Nullable<int> Amount { get; set; }

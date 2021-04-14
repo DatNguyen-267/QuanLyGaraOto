@@ -14,14 +14,24 @@ namespace QuanLyGaraOto.Model
     
     public partial class LICENSE_PLATE
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LICENSE_PLATE()
+        {
+            this.REPAIR_TICKET = new HashSet<REPAIR_TICKET>();
+        }
+    
+        public int ID { get; set; }
         public string License_Number { get; set; }
         public int Brand_ID { get; set; }
         public int Customer_ID { get; set; }
+        public int Status { get; set; }
     
         public virtual CAR_BRAND CAR_BRAND { get; set; }
         public virtual CAR_IN_DEBT CAR_IN_DEBT { get; set; }
         public virtual CAR_STATUS CAR_STATUS { get; set; }
         public virtual CUSTOMER CUSTOMER { get; set; }
         public virtual RECEIPT RECEIPT { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REPAIR_TICKET> REPAIR_TICKET { get; set; }
     }
 }

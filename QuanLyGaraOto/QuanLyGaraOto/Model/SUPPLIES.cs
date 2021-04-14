@@ -14,9 +14,18 @@ namespace QuanLyGaraOto.Model
     
     public partial class SUPPLIES
     {
-        public string Supplies_ID { get; set; }
-        public string Supplies_Name { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SUPPLIES()
+        {
+            this.REPAIR_TICKET = new HashSet<REPAIR_TICKET>();
+        }
+    
+        public string ID { get; set; }
+        public string Name { get; set; }
         public Nullable<int> Price { get; set; }
         public Nullable<int> Amount { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REPAIR_TICKET> REPAIR_TICKET { get; set; }
     }
 }
