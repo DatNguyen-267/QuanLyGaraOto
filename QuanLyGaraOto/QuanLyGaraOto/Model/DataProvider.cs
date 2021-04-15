@@ -24,7 +24,7 @@ namespace QuanLyGaraOto.Model
 
         public GARAEntities DB { get; set; }
 
-        public DataProvider()
+        private DataProvider()
         {
             DB = new GARAEntities();
         }
