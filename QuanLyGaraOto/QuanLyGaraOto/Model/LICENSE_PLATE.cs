@@ -17,7 +17,7 @@ namespace QuanLyGaraOto.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LICENSE_PLATE()
         {
-            this.REPAIR_TICKET = new HashSet<REPAIR_TICKET>();
+            this.RECEIVING_TICKET = new HashSet<RECEIVING_TICKET>();
         }
     
         public int ID { get; set; }
@@ -32,6 +32,6 @@ namespace QuanLyGaraOto.Model
         public virtual CUSTOMER CUSTOMER { get; set; }
         public virtual RECEIPT RECEIPT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REPAIR_TICKET> REPAIR_TICKET { get; set; }
+        public virtual ICollection<RECEIVING_TICKET> RECEIVING_TICKET { get; set; }
     }
 }
