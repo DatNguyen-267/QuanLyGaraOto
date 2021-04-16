@@ -58,6 +58,7 @@ create table LICENSE_PLATE
     Brand_ID int not NULL,
     Customer_ID int not NULL,
     Status int not NULL,
+    
     constraint FK_LICENSEPLATE_BRANDID foreign key (Brand_ID) references CAR_BRAND(ID),
     constraint FK_LICENSEPLATE_CUSTOMER foreign key (Customer_ID) references CUSTOMER(ID),
     constraint FK_LICENSEPLATE_STATUS foreign key (Status) references CAR_STATUS(ID)
@@ -78,6 +79,7 @@ create table RECEIVING_TICKET
     constraint FK_RECEIVINGTICKET_CARBRAND foreign key (Brand_ID) references CAR_BRAND(ID)
 );
 -- drop table RECEIVING_TICKET;
+
 -- Thiet lap phieu sua chua
 create table REPAIR_TICKET
 (
@@ -88,11 +90,13 @@ create table REPAIR_TICKET
     Supply_ID varchar(255) not NULL,
     Supplies_Amount int not NULL,
     Pay int not NULL,
+    Total_Money int not NULL,
 
     constraint FK_TICKET_SUPPLIES foreign key (Supply_ID) references SUPPLIES(ID),
     constraint KF_REPAIRTICKET_RECEIVINGTICKET foreign key (Receiving_ID) references RECEIVING_TICKET(ID)
 );
 -- drop table REPAIR_TICKET;
+
 -- Thiet lap danh sach cac xe dang trong qua trinh thu no
 create table CAR_IN_DEBT
 (
@@ -107,12 +111,13 @@ create table RECEIPT
 (
     License_ID int primary key not NULL,
     Email_Address varchar(50),
-    Receipt_Date datetime,
-    Amount int,
-    IsPayed bit,
+    Receipt_Date datetime not NULL,
+    Total_Money int not NULL,
+    IsPayed bit not NULL,
     constraint FK_RECEIPT_LICENSEPLATE foreign key (License_ID) references LICENSE_PLATE(ID)
 );
 -- drop table RECEIPT;
+
 -- Thiet lap bao cao ton
 
 
