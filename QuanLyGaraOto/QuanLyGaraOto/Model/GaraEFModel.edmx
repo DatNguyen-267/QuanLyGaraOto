@@ -58,9 +58,9 @@
           </Key>
           <Property Name="License_ID" Type="int" Nullable="false" />
           <Property Name="Email_Address" Type="varchar" MaxLength="50" />
-          <Property Name="Receipt_Date" Type="datetime" />
-          <Property Name="Amount" Type="int" />
-          <Property Name="IsPayed" Type="bit" />
+          <Property Name="Receipt_Date" Type="datetime" Nullable="false" />
+          <Property Name="Total_Money" Type="int" Nullable="false" />
+          <Property Name="IsPayed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RECEIVING_TICKET">
           <Key>
@@ -83,6 +83,7 @@
           <Property Name="Supply_ID" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Supplies_Amount" Type="int" Nullable="false" />
           <Property Name="Pay" Type="int" Nullable="false" />
+          <Property Name="Total_Money" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="STAFF_ACCOUNT">
           <Key>
@@ -430,9 +431,9 @@
           </Key>
           <Property Name="License_ID" Type="Int32" Nullable="false" />
           <Property Name="Email_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Receipt_Date" Type="DateTime" Precision="3" />
-          <Property Name="Amount" Type="Int32" />
-          <Property Name="IsPayed" Type="Boolean" />
+          <Property Name="Receipt_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Total_Money" Type="Int32" Nullable="false" />
+          <Property Name="IsPayed" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="LICENSE_PLATE" Relationship="GARAModel.FK_RECEIPT_LICENSEPLATE" FromRole="RECEIPT" ToRole="LICENSE_PLATE" />
         </EntityType>
         <EntityType Name="RECEIVING_TICKET">
@@ -460,6 +461,7 @@
           <Property Name="Supply_ID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Supplies_Amount" Type="Int32" Nullable="false" />
           <Property Name="Pay" Type="Int32" Nullable="false" />
+          <Property Name="Total_Money" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RECEIVING_TICKET" Relationship="GARAModel.KF_REPAIRTICKET_RECEIVINGTICKET" FromRole="REPAIR_TICKET" ToRole="RECEIVING_TICKET" />
           <NavigationProperty Name="SUPPLY" Relationship="GARAModel.FK_TICKET_SUPPLIES" FromRole="REPAIR_TICKET" ToRole="SUPPLy" />
         </EntityType>
@@ -690,7 +692,7 @@
             <EntityTypeMapping TypeName="GARAModel.RECEIPT">
               <MappingFragment StoreEntitySet="RECEIPT">
                 <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Total_Money" ColumnName="Total_Money" />
                 <ScalarProperty Name="Receipt_Date" ColumnName="Receipt_Date" />
                 <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
                 <ScalarProperty Name="License_ID" ColumnName="License_ID" />
@@ -711,6 +713,7 @@
           <EntitySetMapping Name="REPAIR_TICKET">
             <EntityTypeMapping TypeName="GARAModel.REPAIR_TICKET">
               <MappingFragment StoreEntitySet="REPAIR_TICKET">
+                <ScalarProperty Name="Total_Money" ColumnName="Total_Money" />
                 <ScalarProperty Name="Pay" ColumnName="Pay" />
                 <ScalarProperty Name="Supplies_Amount" ColumnName="Supplies_Amount" />
                 <ScalarProperty Name="Supply_ID" ColumnName="Supply_ID" />
