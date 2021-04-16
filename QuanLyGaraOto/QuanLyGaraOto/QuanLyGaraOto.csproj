@@ -118,6 +118,9 @@
     <Compile Include="Model\LICENSE_PLATE.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\PAY.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\RECEIPT.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
