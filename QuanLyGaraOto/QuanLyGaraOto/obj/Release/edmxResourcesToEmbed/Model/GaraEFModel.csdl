@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GARAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CAR_BRAND">
+    <Key>
+      <PropertyRef Name="Brand_ID" />
+    </Key>
+    <Property Name="Brand_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Brand_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="Self.FK_LICENSEPLATE_BRANDID" FromRole="CAR_BRAND" ToRole="LICENSE_PLATE" />
+  </EntityType>
+  <EntityType Name="CAR_IN_DEBT">
+    <Key>
+      <PropertyRef Name="License_Number" />
+    </Key>
+    <Property Name="License_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Debt" Type="Int32" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="Self.FK_CARLIST_LICENSEPLATE" FromRole="CAR_IN_DEBT" ToRole="LICENSE_PLATE" />
+  </EntityType>
+  <EntityType Name="CAR_STATUS">
+    <Key>
+      <PropertyRef Name="License_Number" />
+    </Key>
+    <Property Name="License_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="Self.FK_STATUS_PLATE" FromRole="CAR_STATUS" ToRole="LICENSE_PLATE" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="Customer_ID" />
+    </Key>
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Customer_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Customer_Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="Self.FK_LICENSEPLATE_CUSTOMER" FromRole="CUSTOMER" ToRole="LICENSE_PLATE" />
+  </EntityType>
+  <EntityType Name="GARA_SERVICE">
+    <Key>
+      <PropertyRef Name="Servive_ID" />
+    </Key>
+    <Property Name="Servive_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Service_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LICENSE_PLATE">
+    <Key>
+      <PropertyRef Name="License_Number" />
+    </Key>
+    <Property Name="License_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Brand_ID" Type="Int32" Nullable="false" />
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CAR_BRAND" Relationship="Self.FK_LICENSEPLATE_BRANDID" FromRole="LICENSE_PLATE" ToRole="CAR_BRAND" />
+    <NavigationProperty Name="CAR_IN_DEBT" Relationship="Self.FK_CARLIST_LICENSEPLATE" FromRole="LICENSE_PLATE" ToRole="CAR_IN_DEBT" />
+    <NavigationProperty Name="CAR_STATUS" Relationship="Self.FK_STATUS_PLATE" FromRole="LICENSE_PLATE" ToRole="CAR_STATUS" />
+    <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_LICENSEPLATE_CUSTOMER" FromRole="LICENSE_PLATE" ToRole="CUSTOMER" />
+    <NavigationProperty Name="RECEIPT" Relationship="Self.FK_RECEIPT_LICENSEPLATE" FromRole="LICENSE_PLATE" ToRole="RECEIPT" />
+  </EntityType>
+  <EntityType Name="RECEIPT">
+    <Key>
+      <PropertyRef Name="License_Number" />
+    </Key>
+    <Property Name="License_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Receipt_Date" Type="DateTime" Precision="3" />
+    <Property Name="Amount" Type="Int32" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="Self.FK_RECEIPT_LICENSEPLATE" FromRole="RECEIPT" ToRole="LICENSE_PLATE" />
+  </EntityType>
+  <EntityType Name="STAFF_ACCOUNT">
+    <Key>
+      <PropertyRef Name="User_Name" />
+    </Key>
+    <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SUPPLIES">
+    <Key>
+      <PropertyRef Name="Supplies_ID" />
+    </Key>
+    <Property Name="Supplies_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Supplies_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="Amount" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_LICENSEPLATE_BRANDID">
+    <End Role="CAR_BRAND" Type="Self.CAR_BRAND" Multiplicity="1" />
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAR_BRAND">
+        <PropertyRef Name="Brand_ID" />
+      </Principal>
+      <Dependent Role="LICENSE_PLATE">
+        <PropertyRef Name="Brand_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CARLIST_LICENSEPLATE">
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="1" />
+    <End Role="CAR_IN_DEBT" Type="Self.CAR_IN_DEBT" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="LICENSE_PLATE">
+        <PropertyRef Name="License_Number" />
+      </Principal>
+      <Dependent Role="CAR_IN_DEBT">
+        <PropertyRef Name="License_Number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STATUS_PLATE">
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="1" />
+    <End Role="CAR_STATUS" Type="Self.CAR_STATUS" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="LICENSE_PLATE">
+        <PropertyRef Name="License_Number" />
+      </Principal>
+      <Dependent Role="CAR_STATUS">
+        <PropertyRef Name="License_Number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LICENSEPLATE_CUSTOMER">
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="Customer_ID" />
+      </Principal>
+      <Dependent Role="LICENSE_PLATE">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIPT_LICENSEPLATE">
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="1" />
+    <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="LICENSE_PLATE">
+        <PropertyRef Name="License_Number" />
+      </Principal>
+      <Dependent Role="RECEIPT">
+        <PropertyRef Name="License_Number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GARAEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CAR_BRAND" EntityType="Self.CAR_BRAND" />
+    <EntitySet Name="CAR_IN_DEBT" EntityType="Self.CAR_IN_DEBT" />
+    <EntitySet Name="CAR_STATUS" EntityType="Self.CAR_STATUS" />
+    <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
+    <EntitySet Name="GARA_SERVICE" EntityType="Self.GARA_SERVICE" />
+    <EntitySet Name="LICENSE_PLATE" EntityType="Self.LICENSE_PLATE" />
+    <EntitySet Name="RECEIPTs" EntityType="Self.RECEIPT" />
+    <EntitySet Name="STAFF_ACCOUNT" EntityType="Self.STAFF_ACCOUNT" />
+    <EntitySet Name="SUPPLIES" EntityType="GARAModel.SUPPLIES" />
+    <AssociationSet Name="FK_LICENSEPLATE_BRANDID" Association="Self.FK_LICENSEPLATE_BRANDID">
+      <End Role="CAR_BRAND" EntitySet="CAR_BRAND" />
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CARLIST_LICENSEPLATE" Association="Self.FK_CARLIST_LICENSEPLATE">
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+      <End Role="CAR_IN_DEBT" EntitySet="CAR_IN_DEBT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STATUS_PLATE" Association="Self.FK_STATUS_PLATE">
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+      <End Role="CAR_STATUS" EntitySet="CAR_STATUS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LICENSEPLATE_CUSTOMER" Association="Self.FK_LICENSEPLATE_CUSTOMER">
+      <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIPT_LICENSEPLATE" Association="Self.FK_RECEIPT_LICENSEPLATE">
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+      <End Role="RECEIPT" EntitySet="RECEIPTs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

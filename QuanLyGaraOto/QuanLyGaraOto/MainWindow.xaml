@@ -5,9 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
-         Title="Quan Ly Gara" Height="500" Width="800"
         DataContext="{StaticResource MainVM}"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+         Title="Quan Ly Gara" Height="500" Width="800"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
+                                   CommandParameter="{Binding ElementName=WidthMenu}"
+                                   >
+                
+            </i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" x:Name="WidthMenu"></ColumnDefinition>
@@ -37,7 +49,8 @@
                     <RowDefinition ></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <Button Height="40" Background="Transparent"
+                    <Button Command="{Binding TrangChuCommand}"
+                        Height="40" Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
                                 Padding="-4"
@@ -61,7 +74,8 @@
                     </Button>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <Button Height="40" Background="Transparent"
+                    <Button Command="{Binding DichVuCommand}"
+                        Height="40" Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
                                 Padding="-4"
@@ -85,7 +99,9 @@
                     </Button>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <Button Height="40" Background="Transparent"
+                    <Button 
+                        Command="{Binding KhoHangCommand}"
+                        Height="40" Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
                                 Padding="-4"
@@ -111,6 +127,7 @@
                 </Grid>
                 <Grid Grid.Row="3">
                     <Button Height="40" 
+                            Command="{Binding NhanVienCommand}"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
@@ -136,6 +153,7 @@
                 </Grid>
                 <Grid Grid.Row="4">
                     <Button Height="40" 
+                            Command="{Binding ThongKeCommand}"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
@@ -165,6 +183,7 @@
                         <ColumnDefinition Width="69*"/>
                     </Grid.ColumnDefinitions>
                     <Button Height="40" 
+                            Command="{Binding CaiDatCommand}"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
@@ -189,7 +208,8 @@
                     </Button>
                 </Grid>
                 <Grid Grid.Row="10" VerticalAlignment="Bottom">
-                    <Button Height="40" Background="Transparent"
+                    <Button Command="{Binding ExitCommand}" 
+                        Height="40" Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
                                 Padding="-4"
@@ -216,33 +236,11 @@
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <TextBlock Text="Title" HorizontalAlignment="Center"
-                               TextAlignment="Center"
-                               Height="auto"
-                               FontSize="30"
-                               Margin="16 0 0 0"
-                               ></TextBlock>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <materialDesign:Card HorizontalAlignment="Right"
-                                         Width="150"
-                                         Margin="0 8 20 8"
-                                         
-                                         ></materialDesign:Card>
-
-                </Grid>
-            </Grid>
-            <Grid Grid.Row="1" Background="#ecf2f6">
-
+            <Grid Grid.Row="0" Background="#ecf2f6">
+                
             </Grid>
         </Grid>
     </Grid>
