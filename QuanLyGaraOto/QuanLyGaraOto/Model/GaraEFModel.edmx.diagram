@@ -4,23 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="623bb268ee1943b6a1333b99ccaa6769" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="GARAModel.CAR_BRAND" Width="1.5" PointX="0.75" PointY="7.5" />
-        <EntityTypeShape EntityType="GARAModel.CAR_IN_DEBT" Width="1.5" PointX="5.25" PointY="9.25" />
-        <EntityTypeShape EntityType="GARAModel.CAR_STATUS" Width="1.5" PointX="0.75" PointY="1.125" />
-        <EntityTypeShape EntityType="GARAModel.CUSTOMER" Width="1.5" PointX="0.75" PointY="4.125" />
-        <EntityTypeShape EntityType="GARAModel.GARA_SERVICE" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GARAModel.LICENSE_PLATE" Width="1.5" PointX="3" PointY="3.5" />
-        <EntityTypeShape EntityType="GARAModel.RECEIPT" Width="1.5" PointX="5.25" PointY="3" />
-        <EntityTypeShape EntityType="GARAModel.REPAIR_TICKET" Width="1.5" PointX="8.25" PointY="3.75" />
-        <EntityTypeShape EntityType="GARAModel.SUPPLIES" Width="1.5" PointX="6" PointY="6.125" />
+      <Diagram DiagramId="623bb268ee1943b6a1333b99ccaa6769" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="GARAModel.CAR_BRAND" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="GARAModel.CAR_IN_DEBT" Width="1.5" PointX="5.25" PointY="9.875" />
+        <EntityTypeShape EntityType="GARAModel.CAR_STATUS" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="GARAModel.CUSTOMER" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="GARAModel.GARA_SERVICE" Width="1.5" PointX="3.75" PointY="1" />
+        <EntityTypeShape EntityType="GARAModel.LICENSE_PLATE" Width="1.5" PointX="3" PointY="4.125" />
+        <EntityTypeShape EntityType="GARAModel.RECEIPT" Width="1.5" PointX="5.75" PointY="2.875" />
+        <EntityTypeShape EntityType="GARAModel.RECEIVING_TICKET" Width="1.5" PointX="8.25" PointY="4.375" />
+        <EntityTypeShape EntityType="GARAModel.REPAIR_TICKET" Width="1.5" PointX="10.5" PointY="4.375" />
+        <EntityTypeShape EntityType="GARAModel.STAFF_ACCOUNT" Width="1.5" PointX="7.75" PointY="8.625" />
+        <EntityTypeShape EntityType="GARAModel.STAFF_INFORMATION" Width="1.5" PointX="10" PointY="8.5" />
+        <EntityTypeShape EntityType="GARAModel.SUPPLIES" Width="1.5" PointX="8.25" PointY="0.75" />
         <AssociationConnector Association="GARAModel.FK_LICENSEPLATE_BRANDID" />
+        <AssociationConnector Association="GARAModel.FK_RECEIVINGTICKET_CARBRAND" />
         <AssociationConnector Association="GARAModel.FK_CARLIST_LICENSEPLATE" />
         <AssociationConnector Association="GARAModel.FK_LICENSEPLATE_STATUS" />
         <AssociationConnector Association="GARAModel.FK_LICENSEPLATE_CUSTOMER" />
+        <AssociationConnector Association="GARAModel.FK_RECEIVINGTICKET_CUSTOMER" />
         <AssociationConnector Association="GARAModel.FK_RECEIPT_LICENSEPLATE" />
-        <AssociationConnector Association="GARAModel.FK_TICKET_LICENSEPLATE" />
+        <AssociationConnector Association="GARAModel.FK_RECEIVINGTICKET_LICENSEPLATE" />
+        <AssociationConnector Association="GARAModel.KF_REPAIRTICKET_RECEIVINGTICKET" />
         <AssociationConnector Association="GARAModel.FK_TICKET_SUPPLIES" />
+        <AssociationConnector Association="GARAModel.FK_INFORMATION_ACCOUNT" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

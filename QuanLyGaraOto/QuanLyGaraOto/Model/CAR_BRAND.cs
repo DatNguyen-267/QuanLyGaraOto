@@ -18,12 +18,15 @@ namespace QuanLyGaraOto.Model
         public CAR_BRAND()
         {
             this.LICENSE_PLATE = new HashSet<LICENSE_PLATE>();
+            this.RECEIVING_TICKET = new HashSet<RECEIVING_TICKET>();
         }
-    
+
         public int ID { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LICENSE_PLATE> LICENSE_PLATE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RECEIVING_TICKET> RECEIVING_TICKET { get; set; }
     }
 }

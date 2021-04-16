@@ -12,17 +12,15 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class REPAIR_TICKET
+    public partial class STAFF_INFORMATION
     {
-        public int ID { get; set; }
-        public int Receiving_ID { get; set; }
-        public System.DateTime Repair_Date { get; set; }
-        public string Content { get; set; }
-        public string Supply_ID { get; set; }
-        public int Supplies_Amount { get; set; }
-        public int Pay { get; set; }
+        public int Staff_ID { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public Nullable<System.DateTime> Birthdate { get; set; }
+        public string Telephone { get; set; }
+        public string CMND { get; set; }
     
-        public virtual RECEIVING_TICKET RECEIVING_TICKET { get; set; }
-        public virtual SUPPLIES SUPPLY { get; set; }
+        public virtual STAFF_ACCOUNT STAFF_ACCOUNT { get; set; }
     }
 }

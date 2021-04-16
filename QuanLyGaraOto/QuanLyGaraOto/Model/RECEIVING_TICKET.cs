@@ -12,23 +12,24 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CUSTOMER
+    public partial class RECEIVING_TICKET
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CUSTOMER()
+        public RECEIVING_TICKET()
         {
-            this.LICENSE_PLATE = new HashSet<LICENSE_PLATE>();
-            this.RECEIVING_TICKET = new HashSet<RECEIVING_TICKET>();
+            this.REPAIR_TICKET = new HashSet<REPAIR_TICKET>();
         }
     
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string Telephone { get; set; }
+        public int Customer_ID { get; set; }
+        public int License_ID { get; set; }
+        public int Brand_ID { get; set; }
+        public System.DateTime Receiving_Date { get; set; }
     
+        public virtual CAR_BRAND CAR_BRAND { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
+        public virtual LICENSE_PLATE LICENSE_PLATE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LICENSE_PLATE> LICENSE_PLATE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RECEIVING_TICKET> RECEIVING_TICKET { get; set; }
+        public virtual ICollection<REPAIR_TICKET> REPAIR_TICKET { get; set; }
     }
 }
