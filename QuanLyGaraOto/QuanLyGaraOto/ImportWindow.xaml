@@ -1,0 +1,276 @@
+﻿<Window x:Class="QuanLyGaraOto.ImportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyGaraOto"
+        mc:Ignorable="d"
+        Title="Nhập phụ tùng"
+      Height="600"
+      Width="480"
+      Background="#ffffff"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Grid>
+        <Grid
+            Margin="16 16 16 80"
+            Height="400"
+            >
+            <Grid
+                Margin="0"
+                VerticalAlignment="Top"
+                Height="40">
+                <Label
+                    Content="Loại phụ tùng"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Rectangle
+                    Margin="0"
+                    Height="40"
+                    Width="240"
+                    HorizontalAlignment="Right"
+                    RadiusX="4"
+                    RadiusY="4"
+                    Stroke="Black"
+                    />
+                <ComboBox
+                    x:Name="cbType"
+                    materialDesign:HintAssist.Hint="Chọn loại phụ tùng"
+                    Height="40" 
+                    FontSize="14" 
+                    Width="220"
+                    BorderThickness="0" 
+                    Padding="0" 
+                    Margin="0,0,10,0" 
+                    HorizontalAlignment="Right"
+                    VerticalContentAlignment="Center" 
+                    HorizontalContentAlignment="Left"
+                    FontWeight="SemiBold">
+                </ComboBox>
+            </Grid>
+            <Grid
+                Margin="0 60 0 0"
+                VerticalAlignment="Top"
+                Height="40">
+                <Label
+                    Content="Tên phụ tùng"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Rectangle
+                    Margin="0"
+                    Height="40"
+                    Width="240"
+                    HorizontalAlignment="Right"
+                    RadiusX="4"
+                    RadiusY="4"
+                    Stroke="Black"
+                    />
+                <ComboBox
+                    x:Name="cbName"
+                    materialDesign:HintAssist.Hint="Chọn phụ tùng"
+                    Height="40" 
+                    FontSize="14" 
+                    Width="220"
+                    BorderThickness="0" 
+                    Padding="0" 
+                    Margin="0,0,10,0" 
+                    HorizontalAlignment="Right"
+                    VerticalContentAlignment="Center" 
+                    HorizontalContentAlignment="Left"
+                    FontWeight="SemiBold">
+                </ComboBox>
+            </Grid>
+            <Grid
+                Margin="0 120 0 0"
+                VerticalAlignment="Top"
+                Height="40">
+                <Label
+                    Content="Giá nhập"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Rectangle
+                    Margin="0"
+                    Height="40"
+                    Width="240"
+                    HorizontalAlignment="Right"
+                    RadiusX="4"
+                    RadiusY="4"
+                    Stroke="Black"
+                    />
+                <TextBox
+                    x:Name="txbPrice"
+                    materialDesign:HintAssist.Hint="Giá niêm yết"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    IsReadOnly="True"
+                    Width="220"
+                    Margin="0 0 10 0"
+                    Foreground="Black"
+                    />
+            </Grid>
+            <Grid
+                Margin="0 180 0 0"
+                VerticalAlignment="Top"
+                Height="40">
+                <Label
+                    Content="Số lượng"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Rectangle
+                    Margin="0"
+                    Height="40"
+                    Width="240"
+                    HorizontalAlignment="Right"
+                    RadiusX="4"
+                    RadiusY="4"
+                    Stroke="Black"
+                    />
+                <TextBox
+                    x:Name="txbAmount"
+                    materialDesign:HintAssist.Hint="Chọn số lượng"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Width="220"
+                    Margin="0 0 10 0"
+                    Foreground="Black"
+                    />
+            </Grid>
+            <Grid
+                Margin="0 240 0 0"
+                VerticalAlignment="Top"
+                Height="40">
+                <Label
+                    Content="Ngày nhập"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Rectangle
+                    Margin="0"
+                    Height="40"
+                    Width="240"
+                    HorizontalAlignment="Right"
+                    RadiusX="4"
+                    RadiusY="4"
+                    Stroke="Black"
+                    />
+                <DatePicker 
+                    x:Name="dpImportDate"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,11,0" 
+                    Padding="0"
+                    materialDesign:HintAssist.Hint="Ngày nhập" 
+                    Width="210" 
+                    Height="40"
+                    BorderThickness="0" 
+                    FontSize="14"
+                    HorizontalContentAlignment="Left"
+                    VerticalContentAlignment="Center" FontWeight="SemiBold"/>
+            </Grid>
+            <Grid
+                Margin="0 300 0 0"
+                VerticalAlignment="Top"
+                Height="40">
+                <Label
+                    Content="Mã đơn nhập"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Rectangle
+                    Margin="0"
+                    Height="40"
+                    Width="240"
+                    HorizontalAlignment="Right"
+                    RadiusX="4"
+                    RadiusY="4"
+                    Stroke="Black"
+                    />
+                <TextBox
+                    x:Name="txbImportBillID"
+                    materialDesign:HintAssist.Hint="Được tạo tự động"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    IsReadOnly="True"
+                    FontSize="14"
+                    Width="220"
+                    Margin="0 0 10 0"
+                    Foreground="Black"
+                    />
+            </Grid>
+            <Grid
+                Margin="0"
+                VerticalAlignment="Bottom"
+                Height="40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="79*"/>
+                    <ColumnDefinition Width="142*"/>
+                </Grid.ColumnDefinitions>
+                <Label
+                    Content="Tổng"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Black" Margin="0,5"
+                    />
+
+                <TextBox
+                    x:Name="txbCost"
+                    materialDesign:HintAssist.Hint="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Right"
+                    FontSize="14"
+                    IsReadOnly="True"
+                    Width="220"
+                    Margin="0,6,9.6,6"
+                    Foreground="Black" Grid.Column="1"
+                    />
+            </Grid>
+        </Grid>
+        <Grid
+            Margin="0 480 16 0"
+            Width="240"
+            Height="40"
+            HorizontalAlignment="Right">
+            <Button
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Width="100"
+                HorizontalAlignment="Left"
+                ToolTip="Resource name: MaterialDesignRaisedButton">
+                _Nhập
+            </Button>
+            <Button
+                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                Width="100"
+                HorizontalAlignment="Right"
+                ToolTip="Resource name: MaterialDesignRaisedLightButton">
+                _Hủy
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
+

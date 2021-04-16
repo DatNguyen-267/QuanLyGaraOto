@@ -75,7 +75,7 @@ namespace QuanLyGaraOto.Model
         public virtual CUSTOMER CUSTOMER
         {
             get => _CUSTOMER;
-            set => { _CUSTOMER = value; OnPropertyChanged(); }
+            set { _CUSTOMER = value; OnPropertyChanged(); }
         }
         private RECEIPT _RECEIPT;
         public virtual RECEIPT RECEIPT

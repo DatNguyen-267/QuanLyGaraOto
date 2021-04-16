@@ -1,0 +1,302 @@
+﻿<Page x:Class="QuanLyGaraOto.BunkPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyGaraOto"
+      mc:Ignorable="d" 
+      Title="Kho vat tu"
+      Height="470"
+      Width="600"
+      DataContext="{StaticResource MainVM}"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#ffffff">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBlock Text="Phụ Tùng" HorizontalAlignment="Center"
+                    TextAlignment="Center"
+                    Foreground="#FF673AB7"
+                    FontWeight="Bold"
+                    Height="auto"
+                    FontSize="28"
+                    Margin="16 0 0 0"
+                    ></TextBlock>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Button
+                    x:Name="btnAddGood"
+                    HorizontalAlignment="Center"
+                    FontSize="12"
+                    Width="150"
+                    Height="Auto"
+                    Margin="0 8 64 8"
+                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    Nhập hàng
+                </Button>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Button
+                    x:Name="btnImportView"
+                    HorizontalAlignment="Right"
+                    FontSize="12"
+                    Width="150"
+                    Height="Auto"
+                    Margin="0 8 20 8"
+                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    Danh sách đơn nhập
+                </Button>
+
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width ="400" x:Name ="table"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Background="#f1f1f1">
+                <Label
+                    Content="Danh sách phụ tùng"
+                    Margin="16 4 220 396"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Grid
+                    Margin="200 8 8 396"
+                    >
+                    <Rectangle
+                    
+                        RadiusX="4"
+                        RadiusY="4"
+                        Stroke="Black"
+                        />
+                    <TextBox
+                        x:Name="txbSearch"
+                        materialDesign:HintAssist.Hint="Tìm phụ tùng"
+                        FontSize="12"
+                        Margin="8 0 0 0"
+                        Foreground="Black"
+                        />
+
+                </Grid>
+                <Border
+                    CornerRadius="2"
+                    Margin="16 40 8 8"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+
+                    >
+                </Border>
+                <ListView
+                ItemsSource="{Binding Items1}"
+                    Margin="16 40 8 8"
+                    >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Background" Value="#ffffff" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn
+                            DisplayMemberBinding="{Binding ID}"
+                            Header="ID" 
+                            Width="80"/>
+                            <GridViewColumn
+                            DisplayMemberBinding="{Binding Name}"
+                            Header="Tên"
+                            Width="180"/>
+                            <GridViewColumn
+                            DisplayMemberBinding="{Binding Price}"
+                            Header="Số lượng" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+            <Grid Grid.Column="1" Background="#ffffff">
+                <Label
+                    Content="Tên phụ tùng"
+                    Margin="8 8 16 396"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Grid
+                    Margin="8 44 16 360"
+                    Height="26"
+                    >
+                    <Rectangle
+                    
+                        RadiusX="4"
+                        RadiusY="4"
+                        Stroke="Black"
+                        />
+                    <TextBox
+                        x:Name="txbName"
+                        FontSize="12"
+                        Margin="8 0 0 0"
+                        Foreground="Black"
+                        />
+
+                </Grid>
+                <Label
+                    Content="Nhà cung cấp"
+                    Margin="8 80 16 324"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Grid
+                    Margin="8 116 16 288"
+                    Height="26"
+                    >
+                    <Rectangle
+                    
+                        RadiusX="4"
+                        RadiusY="4"
+                        Stroke="Black"
+                        />
+                    <TextBox
+                        x:Name="txbProduce"
+                        FontSize="12"
+                        Margin="8 0 0 0"
+                        Foreground="Black"
+                        />
+
+                </Grid>
+                <Label
+                    Content="Giá"
+                    Margin="8 152 16 252"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Grid
+                    Margin="8 188 16 216"
+                    Height="26"
+                    >
+                    <Rectangle
+                    
+                        RadiusX="4"
+                        RadiusY="4"
+                        Stroke="Black"
+                        />
+                    <TextBox
+                        x:Name="txbPrice"
+                        FontSize="12"
+                        Margin="8 0 0 0"
+                        Foreground="Black"
+                        />
+
+                </Grid>
+                <Label
+                    Content="Tiền công"
+                    Margin="8 224 16 180"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Grid
+                    Margin="8 260 16 144"
+                    Height="26"
+                    >
+                    <Rectangle
+                    
+                        RadiusX="4"
+                        RadiusY="4"
+                        Stroke="Black"
+                        />
+                    <TextBox
+                        x:Name="txbPay"
+                        FontSize="12"
+                        Margin="8 0 0 0"
+                        Foreground="Black"
+                        />
+
+                </Grid>
+                <Label
+                    Content="Loại phụ tùng"
+                    Margin="8 296 16 108"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    />
+                <Grid
+                    Margin="8 332 16 72"
+                    Height="26"
+                    >
+                    <Rectangle
+                    
+                        RadiusX="4"
+                        RadiusY="4"
+                        Stroke="Black"
+                        />
+                    <TextBox
+                        x:Name="txbType"
+                        FontSize="12"
+                        Margin="8 0 0 0"
+                        Foreground="Black"
+                        />
+
+                </Grid>
+                <Grid
+                    Margin="16 0 16 8"
+                    VerticalAlignment="Bottom"
+                    Height="40"
+                    >
+                    <Button
+                         Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                         ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                         HorizontalAlignment="Left">
+                        <materialDesign:PackIcon
+                         Kind="Plus"
+                         Height="24"
+                         Width="24" />
+                    </Button>
+                    <ToggleButton
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="MaterialDesignActionLightToggleButton"
+                        HorizontalAlignment="Right"
+                        Height="40"
+                        Width="40">
+                        <ToggleButton.Content>
+                            <materialDesign:PackIcon
+                                Kind="LockOpen"
+                                Height="24"
+                                Width=" 24"/>
+                        </ToggleButton.Content>
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon
+                                Kind="LockOutline"
+                                Height="24"
+                                Width=" 24"/>
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                    </ToggleButton>
+                    <Button
+                         Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                         ToolTip="MaterialDesignFloatingActionMiniLightButton"
+                         HorizontalAlignment="Center">
+                        <materialDesign:PackIcon
+                         Kind="BorderColor"
+                         Foreground="AliceBlue"
+                         Height="24"
+                         Width="24" />
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
