@@ -9,29 +9,86 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class LICENSE_PLATE
+    public partial class LICENSE_PLATE : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LICENSE_PLATE()
         {
             this.RECEIVING_TICKET = new HashSet<RECEIVING_TICKET>();
         }
-    
-        public int ID { get; set; }
-        public string License_Number { get; set; }
-        public int Brand_ID { get; set; }
-        public int Customer_ID { get; set; }
-        public int Status { get; set; }
-    
-        public virtual CAR_BRAND CAR_BRAND { get; set; }
-        public virtual CAR_IN_DEBT CAR_IN_DEBT { get; set; }
-        public virtual CAR_STATUS CAR_STATUS { get; set; }
-        public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual RECEIPT RECEIPT { get; set; }
+
+
+        private int _ID;
+        public int ID
+        {
+            get => _ID;
+            set { _ID = value; OnPropertyChanged(); }
+        }
+        private string _License_Number;
+        public string License_Number
+        {
+            get => _License_Number;
+            set { _License_Number = value; OnPropertyChanged(); }
+        }
+        private int _Brand_ID;
+        public int Brand_ID
+        {
+            get => _Brand_ID;
+            set { _Brand_ID = value; OnPropertyChanged(); }
+        }
+        private int _Customer_ID;
+        public int Customer_ID
+        {
+            get => _Customer_ID;
+            set { _Customer_ID = value; OnPropertyChanged(); }
+        }
+        private int _Status;
+        public int Status
+        {
+            get => _Status;
+            set { _Status = value; OnPropertyChanged(); }
+        }
+
+        private CAR_BRAND _CAR_BRAND;
+        public virtual CAR_BRAND CAR_BRAND
+        {
+            get => _CAR_BRAND;
+            set { _CAR_BRAND = value; OnPropertyChanged(); }
+        }
+        private CAR_IN_DEBT _CAR_IN_DEBT;
+        public virtual CAR_IN_DEBT CAR_IN_DEBT
+        {
+            get => _CAR_IN_DEBT;
+            set { _CAR_IN_DEBT = value; OnPropertyChanged(); }
+        }
+        private CAR_STATUS _CAR_STATUS;
+        public virtual CAR_STATUS CAR_STATUS
+        {
+            get => _CAR_STATUS;
+            set { _CAR_STATUS = value; OnPropertyChanged(); }
+        }
+        private CUSTOMER _CUSTOMER;
+        public virtual CUSTOMER CUSTOMER
+        {
+            get => _CUSTOMER;
+            set => { _CUSTOMER = value; OnPropertyChanged(); }
+        }
+        private RECEIPT _RECEIPT;
+        public virtual RECEIPT RECEIPT
+        {
+            get => _RECEIPT;
+            set { _RECEIPT = value; OnPropertyChanged(); }
+        }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RECEIVING_TICKET> RECEIVING_TICKET { get; set; }
+        private ICollection<RECEIVING_TICKET> _RECEIVING_TICKET;
+        public virtual ICollection<RECEIVING_TICKET> RECEIVING_TICKET
+        {
+            get => _RECEIVING_TICKET;
+            set { _RECEIVING_TICKET = value; OnPropertyChanged(); }
+        }
     }
 }

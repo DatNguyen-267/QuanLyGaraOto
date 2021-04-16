@@ -24,6 +24,13 @@ create table CUSTOMER
 );
 -- drop table CUSTOMER;
 
+-- Thiet lap danh sach loai tien cong
+create table PAY
+(
+    ID int primary key not NULL IDENTITY(1, 1),
+    Name varchar(256) not NULL,
+    Price int not NULL
+);
 -- Thiet lap danh sach cac dich vu tai gara
 create table GARA_SERVICE
 (
@@ -89,11 +96,12 @@ create table REPAIR_TICKET
     Content varchar(256) not NULL,
     Supply_ID varchar(255) not NULL,
     Supplies_Amount int not NULL,
-    Pay int not NULL,
+    Pay_ID int not NULL,
     Total_Money int not NULL,
 
     constraint FK_TICKET_SUPPLIES foreign key (Supply_ID) references SUPPLIES(ID),
-    constraint KF_REPAIRTICKET_RECEIVINGTICKET foreign key (Receiving_ID) references RECEIVING_TICKET(ID)
+    constraint FK_REPAIRTICKET_RECEIVINGTICKET foreign key (Receiving_ID) references RECEIVING_TICKET(ID),
+    constraint FK_REPAIRTICKET_PAY foreign key (Pay_ID) references PAY(ID)
 );
 -- drop table REPAIR_TICKET;
 

@@ -9,14 +9,31 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class CAR_IN_DEBT
+    public partial class CAR_IN_DEBT : BaseViewModel
     {
-        public int License_ID { get; set; }
-        public Nullable<int> Debt { get; set; }
-    
-        public virtual LICENSE_PLATE LICENSE_PLATE { get; set; }
+        private int _License_ID;
+        public int License_ID
+        {
+            get => _License_ID;
+            set { _License_ID = value; OnPropertyChanged(); }
+        }
+
+        private Nullable<int> _Debt;
+        public Nullable<int> Debt
+        {
+            get => _Debt;
+            set { _Debt = value; OnPropertyChanged(); }
+        }
+
+        private LICENSE_PLATE _LICENSE_PLATE;
+        public virtual LICENSE_PLATE LICENSE_PLATE
+        {
+            get => _LICENSE_PLATE;
+            set { _LICENSE_PLATE = value; OnPropertyChanged(); }
+        }
     }
 }

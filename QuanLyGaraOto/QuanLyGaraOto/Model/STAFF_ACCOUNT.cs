@@ -9,16 +9,42 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class STAFF_ACCOUNT
+    public partial class STAFF_ACCOUNT : BaseViewModel
     {
-        public int ID { get; set; }
-        public string User_Name { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
-    
-        public virtual STAFF_INFORMATION STAFF_INFORMATION { get; set; }
+        private int _ID;
+        public int ID
+        {
+            get => _ID;
+            set { _ID = value; OnPropertyChanged(); }
+        }
+        private string _User_Name;
+        public string User_Name
+        {
+            get => _User_Name;
+            set { _User_Name = value; OnPropertyChanged(); }
+        }
+        private string _Password;
+        public string Password
+        {
+            get => _Password;
+            set { _Password = value; OnPropertyChanged(); }
+        }
+        private string _Role;
+        public string Role
+        {
+            get => _Role;
+            set { _Role = value; OnPropertyChanged(); }
+        }
+
+        private STAFF_INFORMATION _STAFF_INFORMATION;
+        public virtual STAFF_INFORMATION STAFF_INFORMATION
+        {
+            get => _STAFF_INFORMATION;
+            set { _STAFF_INFORMATION = value; OnPropertyChanged(); }
+        }
     }
 }

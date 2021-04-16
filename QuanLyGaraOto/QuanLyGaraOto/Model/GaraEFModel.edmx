@@ -52,6 +52,14 @@
           <Property Name="Customer_ID" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PAY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="RECEIPT">
           <Key>
             <PropertyRef Name="License_ID" />
@@ -82,7 +90,7 @@
           <Property Name="Content" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="Supply_ID" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Supplies_Amount" Type="int" Nullable="false" />
-          <Property Name="Pay" Type="int" Nullable="false" />
+          <Property Name="Pay_ID" Type="int" Nullable="false" />
           <Property Name="Total_Money" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="STAFF_ACCOUNT">
@@ -222,6 +230,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_REPAIRTICKET_PAY">
+          <End Role="PAY" Type="Self.PAY" Multiplicity="1" />
+          <End Role="REPAIR_TICKET" Type="Self.REPAIR_TICKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="REPAIR_TICKET">
+              <PropertyRef Name="Pay_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REPAIRTICKET_RECEIVINGTICKET">
+          <End Role="RECEIVING_TICKET" Type="Self.RECEIVING_TICKET" Multiplicity="1" />
+          <End Role="REPAIR_TICKET" Type="Self.REPAIR_TICKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECEIVING_TICKET">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="REPAIR_TICKET">
+              <PropertyRef Name="Receiving_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TICKET_SUPPLIES">
           <End Role="SUPPLIES" Type="Self.SUPPLIES" Multiplicity="1" />
           <End Role="REPAIR_TICKET" Type="Self.REPAIR_TICKET" Multiplicity="*" />
@@ -234,18 +266,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="KF_REPAIRTICKET_RECEIVINGTICKET">
-          <End Role="RECEIVING_TICKET" Type="Self.RECEIVING_TICKET" Multiplicity="1" />
-          <End Role="REPAIR_TICKET" Type="Self.REPAIR_TICKET" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RECEIVING_TICKET">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="REPAIR_TICKET">
-              <PropertyRef Name="Receiving_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="GARAModelStoreContainer">
           <EntitySet Name="CAR_BRAND" EntityType="Self.CAR_BRAND" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAR_IN_DEBT" EntityType="Self.CAR_IN_DEBT" Schema="dbo" store:Type="Tables" />
@@ -253,6 +273,7 @@
           <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GARA_SERVICE" EntityType="Self.GARA_SERVICE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LICENSE_PLATE" EntityType="Self.LICENSE_PLATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAY" EntityType="Self.PAY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RECEIPT" EntityType="Self.RECEIPT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RECEIVING_TICKET" EntityType="Self.RECEIVING_TICKET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REPAIR_TICKET" EntityType="Self.REPAIR_TICKET" Schema="dbo" store:Type="Tables" />
@@ -295,12 +316,16 @@
             <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
             <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
           </AssociationSet>
-          <AssociationSet Name="FK_TICKET_SUPPLIES" Association="Self.FK_TICKET_SUPPLIES">
-            <End Role="SUPPLIES" EntitySet="SUPPLIES" />
+          <AssociationSet Name="FK_REPAIRTICKET_PAY" Association="Self.FK_REPAIRTICKET_PAY">
+            <End Role="PAY" EntitySet="PAY" />
             <End Role="REPAIR_TICKET" EntitySet="REPAIR_TICKET" />
           </AssociationSet>
-          <AssociationSet Name="KF_REPAIRTICKET_RECEIVINGTICKET" Association="Self.KF_REPAIRTICKET_RECEIVINGTICKET">
+          <AssociationSet Name="FK_REPAIRTICKET_RECEIVINGTICKET" Association="Self.FK_REPAIRTICKET_RECEIVINGTICKET">
             <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
+            <End Role="REPAIR_TICKET" EntitySet="REPAIR_TICKET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TICKET_SUPPLIES" Association="Self.FK_TICKET_SUPPLIES">
+            <End Role="SUPPLIES" EntitySet="SUPPLIES" />
             <End Role="REPAIR_TICKET" EntitySet="REPAIR_TICKET" />
           </AssociationSet>
         </EntityContainer>
@@ -315,6 +340,7 @@
           <EntitySet Name="CUSTOMERs" EntityType="GARAModel.CUSTOMER" />
           <EntitySet Name="GARA_SERVICE" EntityType="GARAModel.GARA_SERVICE" />
           <EntitySet Name="LICENSE_PLATE" EntityType="GARAModel.LICENSE_PLATE" />
+          <EntitySet Name="PAYs" EntityType="GARAModel.PAY" />
           <EntitySet Name="RECEIPTs" EntityType="GARAModel.RECEIPT" />
           <EntitySet Name="RECEIVING_TICKET" EntityType="GARAModel.RECEIVING_TICKET" />
           <EntitySet Name="REPAIR_TICKET" EntityType="GARAModel.REPAIR_TICKET" />
@@ -353,7 +379,11 @@
             <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
             <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
           </AssociationSet>
-          <AssociationSet Name="KF_REPAIRTICKET_RECEIVINGTICKET" Association="GARAModel.KF_REPAIRTICKET_RECEIVINGTICKET">
+          <AssociationSet Name="FK_REPAIRTICKET_PAY" Association="GARAModel.FK_REPAIRTICKET_PAY">
+            <End Role="PAY" EntitySet="PAYs" />
+            <End Role="REPAIR_TICKET" EntitySet="REPAIR_TICKET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REPAIRTICKET_RECEIVINGTICKET" Association="GARAModel.FK_REPAIRTICKET_RECEIVINGTICKET">
             <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
             <End Role="REPAIR_TICKET" EntitySet="REPAIR_TICKET" />
           </AssociationSet>
@@ -425,6 +455,15 @@
           <NavigationProperty Name="RECEIPT" Relationship="GARAModel.FK_RECEIPT_LICENSEPLATE" FromRole="LICENSE_PLATE" ToRole="RECEIPT" />
           <NavigationProperty Name="RECEIVING_TICKET" Relationship="GARAModel.FK_RECEIVINGTICKET_LICENSEPLATE" FromRole="LICENSE_PLATE" ToRole="RECEIVING_TICKET" />
         </EntityType>
+        <EntityType Name="PAY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="REPAIR_TICKET" Relationship="GARAModel.FK_REPAIRTICKET_PAY" FromRole="PAY" ToRole="REPAIR_TICKET" />
+        </EntityType>
         <EntityType Name="RECEIPT">
           <Key>
             <PropertyRef Name="License_ID" />
@@ -448,7 +487,7 @@
           <NavigationProperty Name="CAR_BRAND" Relationship="GARAModel.FK_RECEIVINGTICKET_CARBRAND" FromRole="RECEIVING_TICKET" ToRole="CAR_BRAND" />
           <NavigationProperty Name="CUSTOMER" Relationship="GARAModel.FK_RECEIVINGTICKET_CUSTOMER" FromRole="RECEIVING_TICKET" ToRole="CUSTOMER" />
           <NavigationProperty Name="LICENSE_PLATE" Relationship="GARAModel.FK_RECEIVINGTICKET_LICENSEPLATE" FromRole="RECEIVING_TICKET" ToRole="LICENSE_PLATE" />
-          <NavigationProperty Name="REPAIR_TICKET" Relationship="GARAModel.KF_REPAIRTICKET_RECEIVINGTICKET" FromRole="RECEIVING_TICKET" ToRole="REPAIR_TICKET" />
+          <NavigationProperty Name="REPAIR_TICKET" Relationship="GARAModel.FK_REPAIRTICKET_RECEIVINGTICKET" FromRole="RECEIVING_TICKET" ToRole="REPAIR_TICKET" />
         </EntityType>
         <EntityType Name="REPAIR_TICKET">
           <Key>
@@ -460,9 +499,10 @@
           <Property Name="Content" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="Supply_ID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Supplies_Amount" Type="Int32" Nullable="false" />
-          <Property Name="Pay" Type="Int32" Nullable="false" />
+          <Property Name="Pay_ID" Type="Int32" Nullable="false" />
           <Property Name="Total_Money" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RECEIVING_TICKET" Relationship="GARAModel.KF_REPAIRTICKET_RECEIVINGTICKET" FromRole="REPAIR_TICKET" ToRole="RECEIVING_TICKET" />
+          <NavigationProperty Name="PAY" Relationship="GARAModel.FK_REPAIRTICKET_PAY" FromRole="REPAIR_TICKET" ToRole="PAY" />
+          <NavigationProperty Name="RECEIVING_TICKET" Relationship="GARAModel.FK_REPAIRTICKET_RECEIVINGTICKET" FromRole="REPAIR_TICKET" ToRole="RECEIVING_TICKET" />
           <NavigationProperty Name="SUPPLY" Relationship="GARAModel.FK_TICKET_SUPPLIES" FromRole="REPAIR_TICKET" ToRole="SUPPLy" />
         </EntityType>
         <EntityType Name="STAFF_ACCOUNT">
@@ -593,7 +633,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="KF_REPAIRTICKET_RECEIVINGTICKET">
+        <Association Name="FK_REPAIRTICKET_PAY">
+          <End Type="GARAModel.PAY" Role="PAY" Multiplicity="1" />
+          <End Type="GARAModel.REPAIR_TICKET" Role="REPAIR_TICKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="REPAIR_TICKET">
+              <PropertyRef Name="Pay_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REPAIRTICKET_RECEIVINGTICKET">
           <End Type="GARAModel.RECEIVING_TICKET" Role="RECEIVING_TICKET" Multiplicity="1" />
           <End Type="GARAModel.REPAIR_TICKET" Role="REPAIR_TICKET" Multiplicity="*" />
           <ReferentialConstraint>
@@ -688,6 +740,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PAYs">
+            <EntityTypeMapping TypeName="GARAModel.PAY">
+              <MappingFragment StoreEntitySet="PAY">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RECEIPTs">
             <EntityTypeMapping TypeName="GARAModel.RECEIPT">
               <MappingFragment StoreEntitySet="RECEIPT">
@@ -714,7 +775,7 @@
             <EntityTypeMapping TypeName="GARAModel.REPAIR_TICKET">
               <MappingFragment StoreEntitySet="REPAIR_TICKET">
                 <ScalarProperty Name="Total_Money" ColumnName="Total_Money" />
-                <ScalarProperty Name="Pay" ColumnName="Pay" />
+                <ScalarProperty Name="Pay_ID" ColumnName="Pay_ID" />
                 <ScalarProperty Name="Supplies_Amount" ColumnName="Supplies_Amount" />
                 <ScalarProperty Name="Supply_ID" ColumnName="Supply_ID" />
                 <ScalarProperty Name="Content" ColumnName="Content" />

@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GARAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CAR_BRAND">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CAR_IN_DEBT">
+    <Key>
+      <PropertyRef Name="License_ID" />
+    </Key>
+    <Property Name="License_ID" Type="int" Nullable="false" />
+    <Property Name="Debt" Type="int" />
+  </EntityType>
+  <EntityType Name="CAR_STATUS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="256" />
+    <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GARA_SERVICE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LICENSE_PLATE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="License_Number" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Brand_ID" Type="int" Nullable="false" />
+    <Property Name="Customer_ID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RECEIPT">
+    <Key>
+      <PropertyRef Name="License_ID" />
+    </Key>
+    <Property Name="License_ID" Type="int" Nullable="false" />
+    <Property Name="Email_Address" Type="varchar" MaxLength="50" />
+    <Property Name="Receipt_Date" Type="datetime" Nullable="false" />
+    <Property Name="Total_Money" Type="int" Nullable="false" />
+    <Property Name="IsPayed" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RECEIVING_TICKET">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer_ID" Type="int" Nullable="false" />
+    <Property Name="License_ID" Type="int" Nullable="false" />
+    <Property Name="Brand_ID" Type="int" Nullable="false" />
+    <Property Name="Receiving_Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="REPAIR_TICKET">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Receiving_ID" Type="int" Nullable="false" />
+    <Property Name="Repair_Date" Type="datetime" Nullable="false" />
+    <Property Name="Content" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="Supply_ID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Supplies_Amount" Type="int" Nullable="false" />
+    <Property Name="Pay" Type="int" Nullable="false" />
+    <Property Name="Total_Money" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="STAFF_ACCOUNT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="STAFF_INFORMATION">
+    <Key>
+      <PropertyRef Name="Staff_ID" />
+    </Key>
+    <Property Name="Staff_ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="Birthdate" Type="datetime" />
+    <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CMND" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SUPPLIES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Amount" Type="int" />
+  </EntityType>
+  <Association Name="FK_CARLIST_LICENSEPLATE">
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="1" />
+    <End Role="CAR_IN_DEBT" Type="Self.CAR_IN_DEBT" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="LICENSE_PLATE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CAR_IN_DEBT">
+        <PropertyRef Name="License_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMATION_ACCOUNT">
+    <End Role="STAFF_ACCOUNT" Type="Self.STAFF_ACCOUNT" Multiplicity="1" />
+    <End Role="STAFF_INFORMATION" Type="Self.STAFF_INFORMATION" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="STAFF_ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STAFF_INFORMATION">
+        <PropertyRef Name="Staff_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LICENSEPLATE_BRANDID">
+    <End Role="CAR_BRAND" Type="Self.CAR_BRAND" Multiplicity="1" />
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAR_BRAND">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LICENSE_PLATE">
+        <PropertyRef Name="Brand_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LICENSEPLATE_CUSTOMER">
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LICENSE_PLATE">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LICENSEPLATE_STATUS">
+    <End Role="CAR_STATUS" Type="Self.CAR_STATUS" Multiplicity="1" />
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAR_STATUS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LICENSE_PLATE">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIPT_LICENSEPLATE">
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="1" />
+    <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="LICENSE_PLATE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RECEIPT">
+        <PropertyRef Name="License_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIVINGTICKET_CARBRAND">
+    <End Role="CAR_BRAND" Type="Self.CAR_BRAND" Multiplicity="1" />
+    <End Role="RECEIVING_TICKET" Type="Self.RECEIVING_TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAR_BRAND">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RECEIVING_TICKET">
+        <PropertyRef Name="Brand_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIVINGTICKET_CUSTOMER">
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+    <End Role="RECEIVING_TICKET" Type="Self.RECEIVING_TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RECEIVING_TICKET">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIVINGTICKET_LICENSEPLATE">
+    <End Role="LICENSE_PLATE" Type="Self.LICENSE_PLATE" Multiplicity="1" />
+    <End Role="RECEIVING_TICKET" Type="Self.RECEIVING_TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LICENSE_PLATE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RECEIVING_TICKET">
+        <PropertyRef Name="License_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TICKET_SUPPLIES">
+    <End Role="SUPPLIES" Type="Self.SUPPLIES" Multiplicity="1" />
+    <End Role="REPAIR_TICKET" Type="Self.REPAIR_TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUPPLIES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="REPAIR_TICKET">
+        <PropertyRef Name="Supply_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KF_REPAIRTICKET_RECEIVINGTICKET">
+    <End Role="RECEIVING_TICKET" Type="Self.RECEIVING_TICKET" Multiplicity="1" />
+    <End Role="REPAIR_TICKET" Type="Self.REPAIR_TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RECEIVING_TICKET">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="REPAIR_TICKET">
+        <PropertyRef Name="Receiving_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GARAModelStoreContainer">
+    <EntitySet Name="CAR_BRAND" EntityType="Self.CAR_BRAND" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CAR_IN_DEBT" EntityType="Self.CAR_IN_DEBT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CAR_STATUS" EntityType="Self.CAR_STATUS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GARA_SERVICE" EntityType="Self.GARA_SERVICE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LICENSE_PLATE" EntityType="Self.LICENSE_PLATE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RECEIPT" EntityType="Self.RECEIPT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RECEIVING_TICKET" EntityType="Self.RECEIVING_TICKET" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="REPAIR_TICKET" EntityType="Self.REPAIR_TICKET" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STAFF_ACCOUNT" EntityType="Self.STAFF_ACCOUNT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STAFF_INFORMATION" EntityType="Self.STAFF_INFORMATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SUPPLIES" EntityType="Self.SUPPLIES" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CARLIST_LICENSEPLATE" Association="Self.FK_CARLIST_LICENSEPLATE">
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+      <End Role="CAR_IN_DEBT" EntitySet="CAR_IN_DEBT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMATION_ACCOUNT" Association="Self.FK_INFORMATION_ACCOUNT">
+      <End Role="STAFF_ACCOUNT" EntitySet="STAFF_ACCOUNT" />
+      <End Role="STAFF_INFORMATION" EntitySet="STAFF_INFORMATION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LICENSEPLATE_BRANDID" Association="Self.FK_LICENSEPLATE_BRANDID">
+      <End Role="CAR_BRAND" EntitySet="CAR_BRAND" />
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LICENSEPLATE_CUSTOMER" Association="Self.FK_LICENSEPLATE_CUSTOMER">
+      <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LICENSEPLATE_STATUS" Association="Self.FK_LICENSEPLATE_STATUS">
+      <End Role="CAR_STATUS" EntitySet="CAR_STATUS" />
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIPT_LICENSEPLATE" Association="Self.FK_RECEIPT_LICENSEPLATE">
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+      <End Role="RECEIPT" EntitySet="RECEIPT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIVINGTICKET_CARBRAND" Association="Self.FK_RECEIVINGTICKET_CARBRAND">
+      <End Role="CAR_BRAND" EntitySet="CAR_BRAND" />
+      <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIVINGTICKET_CUSTOMER" Association="Self.FK_RECEIVINGTICKET_CUSTOMER">
+      <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+      <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIVINGTICKET_LICENSEPLATE" Association="Self.FK_RECEIVINGTICKET_LICENSEPLATE">
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+      <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TICKET_SUPPLIES" Association="Self.FK_TICKET_SUPPLIES">
+      <End Role="SUPPLIES" EntitySet="SUPPLIES" />
+      <End Role="REPAIR_TICKET" EntitySet="REPAIR_TICKET" />
+    </AssociationSet>
+    <AssociationSet Name="KF_REPAIRTICKET_RECEIVINGTICKET" Association="Self.KF_REPAIRTICKET_RECEIVINGTICKET">
+      <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
+      <End Role="REPAIR_TICKET" EntitySet="REPAIR_TICKET" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

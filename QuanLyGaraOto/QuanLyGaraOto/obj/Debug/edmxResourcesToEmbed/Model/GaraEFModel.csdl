@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GARAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GARAEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CAR_BRAND" EntityType="GARAModel.CAR_BRAND" />
+    <EntitySet Name="CAR_IN_DEBT" EntityType="GARAModel.CAR_IN_DEBT" />
+    <EntitySet Name="CAR_STATUS" EntityType="GARAModel.CAR_STATUS" />
+    <EntitySet Name="CUSTOMERs" EntityType="GARAModel.CUSTOMER" />
+    <EntitySet Name="GARA_SERVICE" EntityType="GARAModel.GARA_SERVICE" />
+    <EntitySet Name="LICENSE_PLATE" EntityType="GARAModel.LICENSE_PLATE" />
+    <EntitySet Name="RECEIPTs" EntityType="GARAModel.RECEIPT" />
+    <EntitySet Name="RECEIVING_TICKET" EntityType="GARAModel.RECEIVING_TICKET" />
+    <EntitySet Name="REPAIR_TICKET" EntityType="GARAModel.REPAIR_TICKET" />
+    <EntitySet Name="STAFF_ACCOUNT" EntityType="GARAModel.STAFF_ACCOUNT" />
+    <EntitySet Name="STAFF_INFORMATION" EntityType="GARAModel.STAFF_INFORMATION" />
+    <EntitySet Name="SUPPLIES" EntityType="GARAModel.SUPPLIES" />
+    <AssociationSet Name="FK_LICENSEPLATE_BRANDID" Association="GARAModel.FK_LICENSEPLATE_BRANDID">
+      <End Role="CAR_BRAND" EntitySet="CAR_BRAND" />
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIVINGTICKET_CARBRAND" Association="GARAModel.FK_RECEIVINGTICKET_CARBRAND">
+      <End Role="CAR_BRAND" EntitySet="CAR_BRAND" />
+      <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CARLIST_LICENSEPLATE" Association="GARAModel.FK_CARLIST_LICENSEPLATE">
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+      <End Role="CAR_IN_DEBT" EntitySet="CAR_IN_DEBT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LICENSEPLATE_STATUS" Association="GARAModel.FK_LICENSEPLATE_STATUS">
+      <End Role="CAR_STATUS" EntitySet="CAR_STATUS" />
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LICENSEPLATE_CUSTOMER" Association="GARAModel.FK_LICENSEPLATE_CUSTOMER">
+      <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIVINGTICKET_CUSTOMER" Association="GARAModel.FK_RECEIVINGTICKET_CUSTOMER">
+      <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+      <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIPT_LICENSEPLATE" Association="GARAModel.FK_RECEIPT_LICENSEPLATE">
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+      <End Role="RECEIPT" EntitySet="RECEIPTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIVINGTICKET_LICENSEPLATE" Association="GARAModel.FK_RECEIVINGTICKET_LICENSEPLATE">
+      <End Role="LICENSE_PLATE" EntitySet="LICENSE_PLATE" />
+      <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
+    </AssociationSet>
+    <AssociationSet Name="KF_REPAIRTICKET_RECEIVINGTICKET" Association="GARAModel.KF_REPAIRTICKET_RECEIVINGTICKET">
+      <End Role="RECEIVING_TICKET" EntitySet="RECEIVING_TICKET" />
+      <End Role="REPAIR_TICKET" EntitySet="REPAIR_TICKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TICKET_SUPPLIES" Association="GARAModel.FK_TICKET_SUPPLIES">
+      <End Role="SUPPLy" EntitySet="SUPPLIES" />
+      <End Role="REPAIR_TICKET" EntitySet="REPAIR_TICKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMATION_ACCOUNT" Association="GARAModel.FK_INFORMATION_ACCOUNT">
+      <End Role="STAFF_ACCOUNT" EntitySet="STAFF_ACCOUNT" />
+      <End Role="STAFF_INFORMATION" EntitySet="STAFF_INFORMATION" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CAR_BRAND">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="GARAModel.FK_LICENSEPLATE_BRANDID" FromRole="CAR_BRAND" ToRole="LICENSE_PLATE" />
+    <NavigationProperty Name="RECEIVING_TICKET" Relationship="GARAModel.FK_RECEIVINGTICKET_CARBRAND" FromRole="CAR_BRAND" ToRole="RECEIVING_TICKET" />
+  </EntityType>
+  <EntityType Name="CAR_IN_DEBT">
+    <Key>
+      <PropertyRef Name="License_ID" />
+    </Key>
+    <Property Name="License_ID" Type="Int32" Nullable="false" />
+    <Property Name="Debt" Type="Int32" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="GARAModel.FK_CARLIST_LICENSEPLATE" FromRole="CAR_IN_DEBT" ToRole="LICENSE_PLATE" />
+  </EntityType>
+  <EntityType Name="CAR_STATUS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="GARAModel.FK_LICENSEPLATE_STATUS" FromRole="CAR_STATUS" ToRole="LICENSE_PLATE" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="Telephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="GARAModel.FK_LICENSEPLATE_CUSTOMER" FromRole="CUSTOMER" ToRole="LICENSE_PLATE" />
+    <NavigationProperty Name="RECEIVING_TICKET" Relationship="GARAModel.FK_RECEIVINGTICKET_CUSTOMER" FromRole="CUSTOMER" ToRole="RECEIVING_TICKET" />
+  </EntityType>
+  <EntityType Name="GARA_SERVICE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LICENSE_PLATE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="License_Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Brand_ID" Type="Int32" Nullable="false" />
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CAR_BRAND" Relationship="GARAModel.FK_LICENSEPLATE_BRANDID" FromRole="LICENSE_PLATE" ToRole="CAR_BRAND" />
+    <NavigationProperty Name="CAR_IN_DEBT" Relationship="GARAModel.FK_CARLIST_LICENSEPLATE" FromRole="LICENSE_PLATE" ToRole="CAR_IN_DEBT" />
+    <NavigationProperty Name="CAR_STATUS" Relationship="GARAModel.FK_LICENSEPLATE_STATUS" FromRole="LICENSE_PLATE" ToRole="CAR_STATUS" />
+    <NavigationProperty Name="CUSTOMER" Relationship="GARAModel.FK_LICENSEPLATE_CUSTOMER" FromRole="LICENSE_PLATE" ToRole="CUSTOMER" />
+    <NavigationProperty Name="RECEIPT" Relationship="GARAModel.FK_RECEIPT_LICENSEPLATE" FromRole="LICENSE_PLATE" ToRole="RECEIPT" />
+    <NavigationProperty Name="RECEIVING_TICKET" Relationship="GARAModel.FK_RECEIVINGTICKET_LICENSEPLATE" FromRole="LICENSE_PLATE" ToRole="RECEIVING_TICKET" />
+  </EntityType>
+  <EntityType Name="RECEIPT">
+    <Key>
+      <PropertyRef Name="License_ID" />
+    </Key>
+    <Property Name="License_ID" Type="Int32" Nullable="false" />
+    <Property Name="Email_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Receipt_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Total_Money" Type="Int32" Nullable="false" />
+    <Property Name="IsPayed" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="GARAModel.FK_RECEIPT_LICENSEPLATE" FromRole="RECEIPT" ToRole="LICENSE_PLATE" />
+  </EntityType>
+  <EntityType Name="RECEIVING_TICKET">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+    <Property Name="License_ID" Type="Int32" Nullable="false" />
+    <Property Name="Brand_ID" Type="Int32" Nullable="false" />
+    <Property Name="Receiving_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="CAR_BRAND" Relationship="GARAModel.FK_RECEIVINGTICKET_CARBRAND" FromRole="RECEIVING_TICKET" ToRole="CAR_BRAND" />
+    <NavigationProperty Name="CUSTOMER" Relationship="GARAModel.FK_RECEIVINGTICKET_CUSTOMER" FromRole="RECEIVING_TICKET" ToRole="CUSTOMER" />
+    <NavigationProperty Name="LICENSE_PLATE" Relationship="GARAModel.FK_RECEIVINGTICKET_LICENSEPLATE" FromRole="RECEIVING_TICKET" ToRole="LICENSE_PLATE" />
+    <NavigationProperty Name="REPAIR_TICKET" Relationship="GARAModel.KF_REPAIRTICKET_RECEIVINGTICKET" FromRole="RECEIVING_TICKET" ToRole="REPAIR_TICKET" />
+  </EntityType>
+  <EntityType Name="REPAIR_TICKET">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Receiving_ID" Type="Int32" Nullable="false" />
+    <Property Name="Repair_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Content" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="Supply_ID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Supplies_Amount" Type="Int32" Nullable="false" />
+    <Property Name="Pay" Type="Int32" Nullable="false" />
+    <Property Name="Total_Money" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RECEIVING_TICKET" Relationship="GARAModel.KF_REPAIRTICKET_RECEIVINGTICKET" FromRole="REPAIR_TICKET" ToRole="RECEIVING_TICKET" />
+    <NavigationProperty Name="SUPPLY" Relationship="GARAModel.FK_TICKET_SUPPLIES" FromRole="REPAIR_TICKET" ToRole="SUPPLy" />
+  </EntityType>
+  <EntityType Name="STAFF_ACCOUNT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="STAFF_INFORMATION" Relationship="GARAModel.FK_INFORMATION_ACCOUNT" FromRole="STAFF_ACCOUNT" ToRole="STAFF_INFORMATION" />
+  </EntityType>
+  <EntityType Name="STAFF_INFORMATION">
+    <Key>
+      <PropertyRef Name="Staff_ID" />
+    </Key>
+    <Property Name="Staff_ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Birthdate" Type="DateTime" Precision="3" />
+    <Property Name="Telephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CMND" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="STAFF_ACCOUNT" Relationship="GARAModel.FK_INFORMATION_ACCOUNT" FromRole="STAFF_INFORMATION" ToRole="STAFF_ACCOUNT" />
+  </EntityType>
+  <EntityType Name="SUPPLIES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="Amount" Type="Int32" />
+    <NavigationProperty Name="REPAIR_TICKET" Relationship="GARAModel.FK_TICKET_SUPPLIES" FromRole="SUPPLy" ToRole="REPAIR_TICKET" />
+  </EntityType>
+  <Association Name="FK_LICENSEPLATE_BRANDID">
+    <End Type="GARAModel.CAR_BRAND" Role="CAR_BRAND" Multiplicity="1" />
+    <End Type="GARAModel.LICENSE_PLATE" Role="LICENSE_PLATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAR_BRAND">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LICENSE_PLATE">
+        <PropertyRef Name="Brand_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIVINGTICKET_CARBRAND">
+    <End Type="GARAModel.CAR_BRAND" Role="CAR_BRAND" Multiplicity="1" />
+    <End Type="GARAModel.RECEIVING_TICKET" Role="RECEIVING_TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAR_BRAND">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RECEIVING_TICKET">
+        <PropertyRef Name="Brand_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CARLIST_LICENSEPLATE">
+    <End Type="GARAModel.LICENSE_PLATE" Role="LICENSE_PLATE" Multiplicity="1" />
+    <End Type="GARAModel.CAR_IN_DEBT" Role="CAR_IN_DEBT" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="LICENSE_PLATE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CAR_IN_DEBT">
+        <PropertyRef Name="License_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LICENSEPLATE_STATUS">
+    <End Type="GARAModel.CAR_STATUS" Role="CAR_STATUS" Multiplicity="1" />
+    <End Type="GARAModel.LICENSE_PLATE" Role="LICENSE_PLATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAR_STATUS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LICENSE_PLATE">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LICENSEPLATE_CUSTOMER">
+    <End Type="GARAModel.CUSTOMER" Role="CUSTOMER" Multiplicity="1" />
+    <End Type="GARAModel.LICENSE_PLATE" Role="LICENSE_PLATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LICENSE_PLATE">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIVINGTICKET_CUSTOMER">
+    <End Type="GARAModel.CUSTOMER" Role="CUSTOMER" Multiplicity="1" />
+    <End Type="GARAModel.RECEIVING_TICKET" Role="RECEIVING_TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RECEIVING_TICKET">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIPT_LICENSEPLATE">
+    <End Type="GARAModel.LICENSE_PLATE" Role="LICENSE_PLATE" Multiplicity="1" />
+    <End Type="GARAModel.RECEIPT" Role="RECEIPT" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="LICENSE_PLATE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RECEIPT">
+        <PropertyRef Name="License_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIVINGTICKET_LICENSEPLATE">
+    <End Type="GARAModel.LICENSE_PLATE" Role="LICENSE_PLATE" Multiplicity="1" />
+    <End Type="GARAModel.RECEIVING_TICKET" Role="RECEIVING_TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LICENSE_PLATE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RECEIVING_TICKET">
+        <PropertyRef Name="License_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KF_REPAIRTICKET_RECEIVINGTICKET">
+    <End Type="GARAModel.RECEIVING_TICKET" Role="RECEIVING_TICKET" Multiplicity="1" />
+    <End Type="GARAModel.REPAIR_TICKET" Role="REPAIR_TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RECEIVING_TICKET">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="REPAIR_TICKET">
+        <PropertyRef Name="Receiving_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TICKET_SUPPLIES">
+    <End Type="GARAModel.SUPPLIES" Role="SUPPLy" Multiplicity="1" />
+    <End Type="GARAModel.REPAIR_TICKET" Role="REPAIR_TICKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUPPLy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="REPAIR_TICKET">
+        <PropertyRef Name="Supply_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMATION_ACCOUNT">
+    <End Type="GARAModel.STAFF_ACCOUNT" Role="STAFF_ACCOUNT" Multiplicity="1" />
+    <End Type="GARAModel.STAFF_INFORMATION" Role="STAFF_INFORMATION" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="STAFF_ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STAFF_INFORMATION">
+        <PropertyRef Name="Staff_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

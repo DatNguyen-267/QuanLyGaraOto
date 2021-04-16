@@ -9,17 +9,48 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class RECEIPT
+    public partial class RECEIPT : BaseViewModel
     {
-        public int License_ID { get; set; }
-        public string Email_Address { get; set; }
-        public System.DateTime Receipt_Date { get; set; }
-        public int Total_Money { get; set; }
-        public bool IsPayed { get; set; }
-    
-        public virtual LICENSE_PLATE LICENSE_PLATE { get; set; }
+        private int _License_ID;
+        public int License_ID
+        {
+            get => _License_ID;
+            set { _License_ID = value; OnPropertyChanged(); }
+        }
+        private string _Email_Address;
+        public string Email_Address
+        {
+            get => _Email_Address;
+            set { _Email_Address = value; OnPropertyChanged(); }
+        }
+        private System.DateTime _Receipt_Date;
+        public System.DateTime Receipt_Date
+        {
+            get => _Receipt_Date;
+            set { _Receipt_Date = value; OnPropertyChanged(); }
+        }
+        private int _Total_Money;
+        public int Total_Money
+        {
+            get => _Total_Money;
+            set { _Total_Money = value; OnPropertyChanged(); }
+        }
+        private bool _IsPayed;
+        public bool IsPayed
+        {
+            get => _IsPayed;
+            set { _IsPayed = value; OnPropertyChanged(); }
+        }
+
+        private LICENSE_PLATE _LICENSE_PLATE;
+        public virtual LICENSE_PLATE LICENSE_PLATE
+        {
+            get => _LICENSE_PLATE;
+            set { _LICENSE_PLATE = value; OnPropertyChanged(); }
+        }
     }
 }
