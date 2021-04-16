@@ -1,8 +1,0 @@
-D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Release\CarReceptionWindow.g.cs
-D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Release\MainWindow.g.cs
-D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Release\ServiceWindow.g.cs
-D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Release\App.g.cs
-D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Release\QuanLyGaraOto_Content.g.cs
-D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Release\GeneratedInternalTypeHelper.g.cs
-D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Release\QuanLyGaraOto_MarkupCompile.cache
-D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Release\QuanLyGaraOto_MarkupCompile.lref

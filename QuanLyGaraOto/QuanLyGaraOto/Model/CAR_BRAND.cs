@@ -20,7 +20,7 @@ namespace QuanLyGaraOto.Model
             this.LICENSE_PLATE = new HashSet<LICENSE_PLATE>();
             this.RECEIVING_TICKET = new HashSet<RECEIVING_TICKET>();
         }
-
+    
         public int ID { get; set; }
         public string Name { get; set; }
     

@@ -16,9 +16,9 @@ namespace QuanLyGaraOto.Model
     {
         public int License_ID { get; set; }
         public string Email_Address { get; set; }
-        public Nullable<System.DateTime> Receipt_Date { get; set; }
-        public Nullable<int> Amount { get; set; }
-        public Nullable<bool> IsPayed { get; set; }
+        public System.DateTime Receipt_Date { get; set; }
+        public int Total_Money { get; set; }
+        public bool IsPayed { get; set; }
     
         public virtual LICENSE_PLATE LICENSE_PLATE { get; set; }
     }

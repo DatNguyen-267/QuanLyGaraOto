@@ -21,6 +21,7 @@ namespace QuanLyGaraOto.Model
         public string Supply_ID { get; set; }
         public int Supplies_Amount { get; set; }
         public int Pay { get; set; }
+        public int Total_Money { get; set; }
     
         public virtual RECEIVING_TICKET RECEIVING_TICKET { get; set; }
         public virtual SUPPLIES SUPPLY { get; set; }
