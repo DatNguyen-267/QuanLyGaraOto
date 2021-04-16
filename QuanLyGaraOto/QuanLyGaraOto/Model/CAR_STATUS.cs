@@ -14,9 +14,16 @@ namespace QuanLyGaraOto.Model
     
     public partial class CAR_STATUS
     {
-        public string License_Number { get; set; }
-        public string Status { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CAR_STATUS()
+        {
+            this.LICENSE_PLATE = new HashSet<LICENSE_PLATE>();
+        }
     
-        public virtual LICENSE_PLATE LICENSE_PLATE { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LICENSE_PLATE> LICENSE_PLATE { get; set; }
     }
 }

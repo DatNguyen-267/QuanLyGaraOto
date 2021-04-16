@@ -20,8 +20,8 @@ namespace QuanLyGaraOto.Model
             this.LICENSE_PLATE = new HashSet<LICENSE_PLATE>();
         }
     
-        public int Brand_ID { get; set; }
-        public string Brand_Name { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LICENSE_PLATE> LICENSE_PLATE { get; set; }

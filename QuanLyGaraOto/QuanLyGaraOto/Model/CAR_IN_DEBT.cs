@@ -14,7 +14,7 @@ namespace QuanLyGaraOto.Model
     
     public partial class CAR_IN_DEBT
     {
-        public string License_Number { get; set; }
+        public int License_ID { get; set; }
         public Nullable<int> Debt { get; set; }
     
         public virtual LICENSE_PLATE LICENSE_PLATE { get; set; }
