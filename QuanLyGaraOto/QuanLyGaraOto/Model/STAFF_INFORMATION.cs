@@ -9,54 +9,18 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class STAFF_INFORMATION  : BaseViewModel
+    public partial class STAFF_INFORMATION
     {
-        private int _Staff_ID;
-        public int Staff_ID
-        {
-            get => _Staff_ID;
-            set { _Staff_ID = value; OnPropertyChanged(); }
-        }
-        private string _Name;
-        public string Name
-        {
-            get => _Name;
-            set { _Name = value; OnPropertyChanged(); }
-        }
-        private string _Address;
-        public string Address
-        {
-            get => _Address;
-            set { _Address = value; OnPropertyChanged(); }
-        }
-        private Nullable<System.DateTime> _BirthDate;
-        public Nullable<System.DateTime> Birthdate
-        {
-            get => _BirthDate;
-            set { _BirthDate = value; OnPropertyChanged(); }
-        }
-        private string _Telephone;
-        public string Telephone
-        {
-            get => _Telephone;
-            set { _Telephone = value; OnPropertyChanged(); }
-        }
-        private string _CMND;
-        public string CMND
-        {
-            get => _CMND;
-            set { _CMND = value; OnPropertyChanged(); }
-        }
-
-        private STAFF_ACCOUNT _STAFF_ACCOUNT;
-        public virtual STAFF_ACCOUNT STAFF_ACCOUNT
-        {
-            get => _STAFF_ACCOUNT;
-            set { _STAFF_ACCOUNT = value; OnPropertyChanged(); }
-        }
+        public int Staff_ID { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public Nullable<System.DateTime> Birthdate { get; set; }
+        public string Telephone { get; set; }
+        public string CMND { get; set; }
+    
+        public virtual STAFF_ACCOUNT STAFF_ACCOUNT { get; set; }
     }
 }

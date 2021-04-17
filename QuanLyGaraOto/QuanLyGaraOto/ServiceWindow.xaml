@@ -72,16 +72,16 @@
             
         </Grid>
         <Grid Grid.Row="2">
-            <ListView ItemsSource="{Binding ListGara}">
+            <ListView ItemsSource="{Binding ListCar}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Id, Mode=OneWayToSource
                             ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding Number, Mode=OneWayToSource
+                        <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding License_Number, Mode=OneWayToSource
                             ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding Brand, Mode=OneWayToSource
+                        <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding CAR_BRAND.Name, Mode=OneWayToSource
                             ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Chủ Xe" DisplayMemberBinding="{Binding Customer.Name, Mode=OneWayToSource
+                        <GridViewColumn Header="Chủ Xe" DisplayMemberBinding="{Binding CUSTOMER.Name, Mode=OneWayToSource
                             ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                         <GridViewColumn Header="Tiền nợ" DisplayMemberBinding="{Binding Debt, Mode=OneWayToSource
                             ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>

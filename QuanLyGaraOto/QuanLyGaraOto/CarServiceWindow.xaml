@@ -70,6 +70,7 @@
                                         <materialDesign:PackIcon Kind="Account" 
                                                      Grid.Column="0"/>
                                         <TextBox Grid.Column="2"
+                                                 IsReadOnly="True"
                                             Text="{Binding UserName}"
                                      materialDesign:HintAssist.Hint="Tên chủ xe"
                                      Width="200"
