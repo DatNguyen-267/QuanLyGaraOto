@@ -9,11 +9,10 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class CUSTOMER : BaseViewModel
+    public partial class CUSTOMER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CUSTOMER()
@@ -21,45 +20,15 @@ namespace QuanLyGaraOto.Model
             this.LICENSE_PLATE = new HashSet<LICENSE_PLATE>();
             this.RECEIVING_TICKET = new HashSet<RECEIVING_TICKET>();
         }
-
-        private int _ID;
-        public int ID
-        {
-            get => _ID;
-            set { _ID = value; OnPropertyChanged(); }
-        }
-        private string _Name;
-        public string Name
-        {
-            get => _Name;
-            set { _Name = value; OnPropertyChanged(); }
-        }
-        private string _Address;
-        public string Address
-        {
-            get => _Address;
-            set { _Address = value; OnPropertyChanged(); }
-        }
-        private string _Telephone;
-        public string Telephone
-        {
-            get => _Telephone;
-            set { _Telephone = value; OnPropertyChanged(); }
-        }
-
+    
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Telephone { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<LICENSE_PLATE> _LICESENE_PLATE;
-        public virtual ICollection<LICENSE_PLATE> LICENSE_PLATE
-        {
-            get => _LICESENE_PLATE;
-            set { _LICESENE_PLATE = value; OnPropertyChanged(); }
-        }
+        public virtual ICollection<LICENSE_PLATE> LICENSE_PLATE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<RECEIVING_TICKET> _RECEIVING_TICKET;
-        public virtual ICollection<RECEIVING_TICKET> RECEIVING_TICKET
-        {
-            get => _RECEIVING_TICKET; 
-            set { _RECEIVING_TICKET = value; OnPropertyChanged(); }
-        }
+        public virtual ICollection<RECEIVING_TICKET> RECEIVING_TICKET { get; set; }
     }
 }

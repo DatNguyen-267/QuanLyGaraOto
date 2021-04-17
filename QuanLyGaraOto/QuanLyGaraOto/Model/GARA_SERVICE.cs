@@ -9,23 +9,12 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class GARA_SERVICE : BaseViewModel
+    public partial class GARA_SERVICE
     {
-        private int _ID;
-        public int ID
-        {
-            get => _ID; 
-            set { _ID = value; OnPropertyChanged(); }
-        }
-        private string _Name;
-        public string Name
-        {
-            get => _Name;
-            set { _Name = value; OnPropertyChanged(); }
-        }
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

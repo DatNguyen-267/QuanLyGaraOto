@@ -9,43 +9,22 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class PAY : BaseViewModel
+    public partial class PAY
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PAY()
         {
             this.REPAIR_TICKET = new HashSet<REPAIR_TICKET>();
         }
-
-        private int _ID;
-        public int ID
-        {
-            get => _ID;
-            set { _ID = value; OnPropertyChanged(); }
-        }
-        private string _Name;
-        public string Name
-        {
-            get => _Name;
-            set { _Name = value; OnPropertyChanged(); }
-        }
-        private int _Price;
-        public int Price
-        {
-            get => _Price;
-            set { _Price = value; OnPropertyChanged(); }
-        }
-
+    
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int Price { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<REPAIR_TICKET> _REPAIR_TICKET;
-        public virtual ICollection<REPAIR_TICKET> REPAIR_TICKET
-        {
-            get => _REPAIR_TICKET;
-            set { _REPAIR_TICKET = value; OnPropertyChanged(); }
-        }
+        public virtual ICollection<REPAIR_TICKET> REPAIR_TICKET { get; set; }
     }
 }

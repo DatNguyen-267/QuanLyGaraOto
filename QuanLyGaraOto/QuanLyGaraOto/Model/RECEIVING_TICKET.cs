@@ -9,76 +9,27 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class RECEIVING_TICKET : BaseViewModel
+    public partial class RECEIVING_TICKET
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RECEIVING_TICKET()
         {
             this.REPAIR_TICKET = new HashSet<REPAIR_TICKET>();
         }
-
-        private int _ID;
-        public int ID
-        {
-            get => _ID;
-            set { _ID = value; OnPropertyChanged(); }
-        }
-        private int _Customer_ID;
-        public int Customer_ID
-        {
-            get => _Customer_ID;
-            set { _Customer_ID = value; }
-        }
-        private int _License_ID;
-        public int License_ID
-        {
-            get => _License_ID;
-            set { _License_ID = value; OnPropertyChanged(); }
-        }
-        private int _Brand_ID;
-        public int Brand_ID
-        {
-            get => _Brand_ID;
-            set { _Brand_ID = value; OnPropertyChanged(); }
-        }
-        private System.DateTime _Receiving_Date;
-        public System.DateTime Receiving_Date
-        {
-            get => _Receiving_Date;
-            set { _Receiving_Date = value; OnPropertyChanged(); }
-        }
-
-        private CAR_BRAND _CAR_BRAND;
-        public virtual CAR_BRAND CAR_BRAND
-        {
-            get => _CAR_BRAND;
-            set { _CAR_BRAND = value; OnPropertyChanged(); }
-        }
-        private CUSTOMER _CUSTOMER;
-        public virtual CUSTOMER CUSTOMER
-        {
-            get => _CUSTOMER;
-            set { _CUSTOMER = value; OnPropertyChanged(); }
-        }
-        private LICENSE_PLATE _LICENSE_PLATE;
-        public virtual LICENSE_PLATE LICENSE_PLATE
-        {
-            get => _LICENSE_PLATE; set
-            {
-                _LICENSE_PLATE = value;
-                OnPropertyChanged();
-            }
-        }
+    
+        public int ID { get; set; }
+        public int Customer_ID { get; set; }
+        public int License_ID { get; set; }
+        public int Brand_ID { get; set; }
+        public System.DateTime Receiving_Date { get; set; }
+    
+        public virtual CAR_BRAND CAR_BRAND { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
+        public virtual LICENSE_PLATE LICENSE_PLATE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<REPAIR_TICKET> _REPAIR_TICKET;
-        public virtual ICollection<REPAIR_TICKET> REPAIR_TICKET
-        {
-            get => _REPAIR_TICKET;
-            set { _REPAIR_TICKET = value; OnPropertyChanged(); }
-        }
+        public virtual ICollection<REPAIR_TICKET> REPAIR_TICKET { get; set; }
     }
 }
