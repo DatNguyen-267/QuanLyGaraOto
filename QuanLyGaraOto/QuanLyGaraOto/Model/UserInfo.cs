@@ -9,60 +9,19 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class UserInfo : BaseViewModel
+    public partial class UserInfo
     {
-        private int _Id;
-        public int Id
-        {
-            get => _Id;
-            set { _Id = value; OnPropertyChanged(); }
-        }
-        private int _IdUser;
-        public int IdUser
-        {
-            get => _IdUser;
-            set { _IdUser = value; OnPropertyChanged(); }
-        }
-        private string _Name;
-        public string Name
-        {
-            get => _Name;
-            set { _Name = value; OnPropertyChanged(); }
-        }
-        private string _Address;
-        public string Address
-        {
-            get => _Address;
-            set { _Address = value; OnPropertyChanged(); }
-        }
-        private Nullable<System.DateTime> _BirthDate;
-        public Nullable<System.DateTime> BirthDate
-        {
-            get => _BirthDate;
-            set { _BirthDate = value; OnPropertyChanged(); }
-        }
-        private string _Telephone;
-        public string Telephone
-        {
-            get => _Telephone;
-            set { _Telephone = value; OnPropertyChanged(); }
-        }
-        private string _CMND;
-        public string CMND
-        {
-            get => _CMND;
-            set { _CMND = value; OnPropertyChanged(); }
-        }
-
-        private User _User;
-        public virtual User User
-        {
-            get => _User;
-            set { _User = value; OnPropertyChanged(); }
-        }
+        public int Id { get; set; }
+        public int IdUser { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
+        public string Telephone { get; set; }
+        public string CMND { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }

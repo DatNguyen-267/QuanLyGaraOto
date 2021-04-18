@@ -54,17 +54,17 @@ create table CarStatus
 GO
 
 -- Thiet lap phieu tiep nhan xe
-create table CarReceiption
+create table CarReception
 (
     Id int primary key not NULL IDENTITY(1, 1),
     IdCustomer int not NULL,
     LicensePlate varchar(50) not NULL,
     IdBrand int not NULL,
-    ReceiptionDate datetime not NULL,
+    ReceptionDate datetime not NULL,
 	IdStatus int not null,
-    constraint FK_CarReceiption_Customer foreign key (IdCustomer) references Customer(Id),
-    constraint FK_CarReceiption_CarBrand foreign key (IdBrand) references CarBrand(Id),
-	constraint FK_CarReceiption_CarStatus foreign key (IdStatus) references CarStatus(Id)
+    constraint FK_CarReception_Customer foreign key (IdCustomer) references Customer(Id),
+    constraint FK_CarReception_CarBrand foreign key (IdBrand) references CarBrand(Id),
+	constraint FK_CarReception_CarStatus foreign key (IdStatus) references CarStatus(Id)
 );
 GO
 
@@ -72,7 +72,7 @@ GO
 create table RepairForm
 (
     Id int primary key not NULL IDENTITY(1, 1),
-    IdCarReceiption int not NULL,
+    IdCarReception int not NULL,
     RepairDate datetime not NULL,
 );
 GO
@@ -107,22 +107,22 @@ create table GaraInfo
 (
 	Id int primary key identity (1,1) not null,
 	MaxCar int,
-	MaxCarReceiption int,
+	MaxCarReception int,
 	Phone varchar(20),
 	Email varchar(200),
 	Address varchar(max),
 );
 Go
 -- Thiet lap danh sach cac hoa don -> doanh so cua thang
-create table Receipt
+create table Recept
 (
 	Id int primary key identity(1,1) not null,
-    IdCarReceiption int not NULL,
+    IdCarReception int not NULL,
     IdGaraInfo int not null,
-    ReceiptDate datetime not NULL,
+    ReceptDate datetime not NULL,
     TotalMoney int not NULL,
-    constraint FK_Receipt_CarReceiption foreign key (IdCarReceiption) references CarReceiption(Id),
-	constraint FK_Receipt_GaraInfo foreign key (IdGaraInfo) references GaraInfo(Id)
+    constraint FK_Recept_CarReception foreign key (IdCarReception) references CarReception(Id),
+	constraint FK_Recept_GaraInfo foreign key (IdGaraInfo) references GaraInfo(Id)
 );
 GO
 

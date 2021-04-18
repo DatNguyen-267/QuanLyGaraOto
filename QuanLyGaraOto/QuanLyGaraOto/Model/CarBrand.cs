@@ -18,7 +18,7 @@ namespace QuanLyGaraOto.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CarBrand()
         {
-            this.CarReceiptions = new HashSet<CarReceiption>();
+            this.CarReceptions = new HashSet<CarReception>();
         }
 
         private int _Id;
@@ -35,11 +35,11 @@ namespace QuanLyGaraOto.Model
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<CarReceiption> _CarReceiptions;
-        public virtual ICollection<CarReceiption> CarReceiptions
+        private ICollection<CarReception> _CarReceptions;
+        public virtual ICollection<CarReception> CarReceptions
         {
-            get => _CarReceiptions;
-            set { _CarReceiptions = value; OnPropertyChanged(); }
+            get => _CarReceptions;
+            set { _CarReceptions = value; OnPropertyChanged(); }
         }
     }
 }
