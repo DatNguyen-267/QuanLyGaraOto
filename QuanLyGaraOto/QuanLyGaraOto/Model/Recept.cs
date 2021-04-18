@@ -12,7 +12,7 @@ namespace QuanLyGaraOto.Model
     using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Recept : BaseViewModel
     {
         private int _Id;
@@ -46,17 +46,7 @@ namespace QuanLyGaraOto.Model
             set { _TotalMoney = value; OnPropertyChanged(); }
         }
 
-        private CarReception _CarReception;
-        public virtual CarReception CarReception
-        {
-            get => _CarReception;
-            set { _CarReception = value; OnPropertyChanged(); }
-        }
-        private GaraInfo _GaraInfo;
-        public virtual GaraInfo GaraInfo
-        {
-            get => _GaraInfo;
-            set { _GaraInfo = value; OnPropertyChanged(); }
-        }
+        public virtual CarReception CarReception { get; set; }
+        public virtual GaraInfo GaraInfo { get; set; }
     }
 }

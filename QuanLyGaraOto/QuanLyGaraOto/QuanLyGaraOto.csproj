@@ -128,7 +128,16 @@
     <Compile Include="Model\RepairInfo.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_helpdiagrams_Result.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Supply.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TempModel.cs" />
