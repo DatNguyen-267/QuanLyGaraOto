@@ -12,7 +12,7 @@ namespace QuanLyGaraOto.Model
     using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class User : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -47,7 +47,17 @@ namespace QuanLyGaraOto.Model
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInfo> UserInfoes { get; set; }
-        public virtual UserRole UserRole { get; set; }
+        private ICollection<UserInfo> _UserInfoes;
+        public virtual ICollection<UserInfo> UserInfoes
+        {
+            get => _UserInfoes;
+            set { _UserInfoes = value; OnPropertyChanged(); }
+        }
+        private UserRole _UserRole;
+        public virtual UserRole UserRole
+        {
+            get => _UserRole;
+            set { _UserRole = value; OnPropertyChanged(); }
+        }
     }
 }

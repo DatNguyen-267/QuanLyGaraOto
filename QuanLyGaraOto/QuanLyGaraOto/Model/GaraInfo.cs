@@ -12,13 +12,13 @@ namespace QuanLyGaraOto.Model
     using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class GaraInfo : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GaraInfo()
         {
-            this.Recepts = new HashSet<Recept>();
+            this.Receipts = new HashSet<Receipt>();
         }
 
         private int _Id;
@@ -59,6 +59,11 @@ namespace QuanLyGaraOto.Model
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recept> Recepts { get; set; }
+        private ICollection<Receipt> _Receipts;
+        public virtual ICollection<Receipt> Receipts
+        {
+            get => _Receipts;
+            set { _Receipts = value; OnPropertyChanged(); }
+        }
     }
 }
