@@ -1,0 +1,78 @@
+﻿<Page x:Class="QuanLyGaraOto.GoodBillPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyGaraOto"
+      mc:Ignorable="d" 
+      Title="GoodBill"
+      Height="430"
+      Width="600"
+      DataContext="{StaticResource MainVM}"
+      Background="#f1f1f1"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Grid>
+        <Label
+            Content="Danh sách đơn nhập"
+            Margin="16 4 420 396"
+            FontSize="16"
+            FontWeight="Bold"
+            Foreground="Black"
+            />
+        <Grid
+            Margin="200 8 16 396"
+            >
+            <Rectangle
+                    
+                RadiusX="4"
+                RadiusY="4"
+                Stroke="Black"
+                />
+            <TextBox
+                x:Name="txbSearch"
+                materialDesign:HintAssist.Hint="Tìm theo mã đơn"
+                FontSize="12"
+                Margin="8 0 0 0"
+                Foreground="Black"
+                />
+
+
+        </Grid>
+        <Border
+                    CornerRadius="2"
+                    Margin="16 40 16 16"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+
+                    >
+        </Border>
+        <ListView
+                ItemsSource="{Binding Items1}"
+                    Margin="16 40 16 16"
+                    >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Background" Value="#ffffff" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding ID}"
+                        Header="Mã đơn nhập" 
+                        Width="160"/>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Name}"
+                        Header="Ngày"
+                        Width="160"/>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Price}"
+                        Header="Đơn giá"
+                        Width="auto"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>
