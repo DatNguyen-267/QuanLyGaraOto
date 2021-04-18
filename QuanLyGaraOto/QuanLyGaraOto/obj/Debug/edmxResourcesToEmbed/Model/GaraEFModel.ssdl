@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GARAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CarBrand">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarReception">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCustomer" Type="int" Nullable="false" />
+    <Property Name="LicensePlate" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdBrand" Type="int" Nullable="false" />
+    <Property Name="ReceptionDate" Type="datetime" Nullable="false" />
+    <Property Name="IdStatus" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GaraInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaxCar" Type="int" />
+    <Property Name="MaxCarReception" Type="int" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="varchar" MaxLength="200" />
+    <Property Name="Address" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Pay">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Receipt">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCarReception" Type="int" Nullable="false" />
+    <Property Name="IdGaraInfo" Type="int" Nullable="false" />
+    <Property Name="ReceptDate" Type="datetime" Nullable="false" />
+    <Property Name="TotalMoney" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RepairForm">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCarReception" Type="int" Nullable="false" />
+    <Property Name="RepairDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RepairInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdRepairForm" Type="int" Nullable="false" />
+    <Property Name="Content" Type="varchar(max)" Nullable="false" />
+    <Property Name="IdSupply" Type="int" />
+    <Property Name="SuppliesAmount" Type="int" />
+    <Property Name="IdPay" Type="int" Nullable="false" />
+    <Property Name="TotalMoney" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Supply">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Amount" Type="int" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUser" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CMND" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IdRole" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Users__IdRole__4222D4EF">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarReception_CarBrand">
+    <End Role="CarBrand" Type="Self.CarBrand" Multiplicity="1" />
+    <End Role="CarReception" Type="Self.CarReception" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarBrand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarReception">
+        <PropertyRef Name="IdBrand" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarReception_CarStatus">
+    <End Role="CarStatus" Type="Self.CarStatus" Multiplicity="1" />
+    <End Role="CarReception" Type="Self.CarReception" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarReception">
+        <PropertyRef Name="IdStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarReception_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="CarReception" Type="Self.CarReception" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarReception">
+        <PropertyRef Name="IdCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receipt_CarReception">
+    <End Role="CarReception" Type="Self.CarReception" Multiplicity="1" />
+    <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarReception">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Receipt">
+        <PropertyRef Name="IdCarReception" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receipt_GaraInfo">
+    <End Role="GaraInfo" Type="Self.GaraInfo" Multiplicity="1" />
+    <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GaraInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Receipt">
+        <PropertyRef Name="IdGaraInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RepairForm_CarReception">
+    <End Role="CarReception" Type="Self.CarReception" Multiplicity="1" />
+    <End Role="RepairForm" Type="Self.RepairForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarReception">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RepairForm">
+        <PropertyRef Name="IdCarReception" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RepairInfo_Pay">
+    <End Role="Pay" Type="Self.Pay" Multiplicity="1" />
+    <End Role="RepairInfo" Type="Self.RepairInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pay">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RepairInfo">
+        <PropertyRef Name="IdPay" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RepairInfo_RepairForm">
+    <End Role="RepairForm" Type="Self.RepairForm" Multiplicity="1" />
+    <End Role="RepairInfo" Type="Self.RepairInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RepairForm">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RepairInfo">
+        <PropertyRef Name="IdRepairForm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RepairInfo_Supply">
+    <End Role="Supply" Type="Self.Supply" Multiplicity="0..1" />
+    <End Role="RepairInfo" Type="Self.RepairInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supply">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RepairInfo">
+        <PropertyRef Name="IdSupply" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GARAModelStoreContainer">
+    <EntitySet Name="CarBrand" EntityType="Self.CarBrand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarReception" EntityType="Self.CarReception" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarStatus" EntityType="Self.CarStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GaraInfo" EntityType="Self.GaraInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pay" EntityType="Self.Pay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RepairForm" EntityType="Self.RepairForm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RepairInfo" EntityType="Self.RepairInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supply" EntityType="Self.Supply" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Users__IdRole__4222D4EF" Association="Self.FK__Users__IdRole__4222D4EF">
+      <End Role="UserRole" EntitySet="UserRole" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarReception_CarBrand" Association="Self.FK_CarReception_CarBrand">
+      <End Role="CarBrand" EntitySet="CarBrand" />
+      <End Role="CarReception" EntitySet="CarReception" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarReception_CarStatus" Association="Self.FK_CarReception_CarStatus">
+      <End Role="CarStatus" EntitySet="CarStatus" />
+      <End Role="CarReception" EntitySet="CarReception" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarReception_Customer" Association="Self.FK_CarReception_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="CarReception" EntitySet="CarReception" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receipt_CarReception" Association="Self.FK_Receipt_CarReception">
+      <End Role="CarReception" EntitySet="CarReception" />
+      <End Role="Receipt" EntitySet="Receipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receipt_GaraInfo" Association="Self.FK_Receipt_GaraInfo">
+      <End Role="GaraInfo" EntitySet="GaraInfo" />
+      <End Role="Receipt" EntitySet="Receipt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RepairForm_CarReception" Association="Self.FK_RepairForm_CarReception">
+      <End Role="CarReception" EntitySet="CarReception" />
+      <End Role="RepairForm" EntitySet="RepairForm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RepairInfo_Pay" Association="Self.FK_RepairInfo_Pay">
+      <End Role="Pay" EntitySet="Pay" />
+      <End Role="RepairInfo" EntitySet="RepairInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RepairInfo_RepairForm" Association="Self.FK_RepairInfo_RepairForm">
+      <End Role="RepairForm" EntitySet="RepairForm" />
+      <End Role="RepairInfo" EntitySet="RepairInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RepairInfo_Supply" Association="Self.FK_RepairInfo_Supply">
+      <End Role="Supply" EntitySet="Supply" />
+      <End Role="RepairInfo" EntitySet="RepairInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_Users" Association="Self.FK_UserInfo_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
