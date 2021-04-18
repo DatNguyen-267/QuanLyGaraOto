@@ -9,21 +9,72 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class RepairInfo
+
+    public partial class RepairInfo : BaseViewModel
     {
-        public int Id { get; set; }
-        public int IdRepairForm { get; set; }
-        public string Content { get; set; }
-        public Nullable<int> IdSupply { get; set; }
-        public Nullable<int> SuppliesAmount { get; set; }
-        public int IdPay { get; set; }
-        public int TotalMoney { get; set; }
-    
-        public virtual Pay Pay { get; set; }
-        public virtual RepairForm RepairForm { get; set; }
-        public virtual Supply Supply { get; set; }
+        private int _Id;
+        public int Id
+        {
+            get => _Id;
+            set { _Id = value; OnPropertyChanged(); }
+        }
+        private int _IdRepairForm;
+        public int IdRepairForm
+        {
+            get => _IdRepairForm;
+            set { _IdRepairForm = value; OnPropertyChanged(); }
+        }
+        private string _Content;
+        public string Content
+        {
+            get => _Content;
+            set { _Content = value; OnPropertyChanged(); }
+        }
+        private Nullable<int> _IdSupply;
+        public Nullable<int> IdSupply
+        {
+            get => _IdSupply;
+            set { _IdSupply = value; OnPropertyChanged(); }
+        }
+        private Nullable<int> _SuppliesAmount;
+        public Nullable<int> SuppliesAmount
+        {
+            get => _SuppliesAmount;
+            set { _SuppliesAmount = value; OnPropertyChanged(); }
+        }
+        private int _IdPay;
+        public int IdPay
+        {
+            get => _IdPay;
+            set { _IdPay = value; OnPropertyChanged(); }
+        }
+        private int _TotalMoney;
+        public int TotalMoney
+        {
+            get => _TotalMoney;
+            set { _TotalMoney = value; OnPropertyChanged(); }
+        }
+
+        private Pay _Pay;
+        public virtual Pay Pay
+        {
+            get => _Pay;
+            set { _Pay = value; OnPropertyChanged(); }
+        }
+        private RepairForm _RepairForm;
+        public virtual RepairForm RepairForm
+        {
+            get => _RepairForm;
+            set { _RepairForm = value; OnPropertyChanged(); }
+        }
+        private Supply _Supply;
+        public virtual Supply Supply
+        {
+            get => _Supply;
+            set { _Supply = value; OnPropertyChanged(); }
+        }
     }
 }

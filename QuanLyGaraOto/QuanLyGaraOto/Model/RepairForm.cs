@@ -9,22 +9,43 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class RepairForm
+
+    public partial class RepairForm : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RepairForm()
         {
             this.RepairInfoes = new HashSet<RepairInfo>();
         }
-    
-        public int Id { get; set; }
-        public int IdCarReception { get; set; }
-        public System.DateTime RepairDate { get; set; }
-    
+
+        private int _Id;
+        public int Id
+        {
+            get => _Id;
+            set { _Id = value; OnPropertyChanged(); }
+        }
+        private int _IdCarReception;
+        public int IdCarReception
+        {
+            get => _IdCarReception;
+            set { _IdCarReception = value; OnPropertyChanged(); }
+        }
+        private System.DateTime _RepairDate;
+        public System.DateTime RepairDate
+        {
+            get => _RepairDate;
+            set { _RepairDate = value; OnPropertyChanged(); }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RepairInfo> RepairInfoes { get; set; }
+        private ICollection<RepairInfo> _RepairInfoes;
+        public virtual ICollection<RepairInfo> RepairInfoes
+        {
+            get => _RepairInfoes;
+            set { _RepairInfoes = value; OnPropertyChanged(); }
+        }
     }
 }

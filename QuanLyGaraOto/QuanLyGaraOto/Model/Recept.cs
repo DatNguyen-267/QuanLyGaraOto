@@ -9,18 +9,54 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class Recept
+
+    public partial class Recept : BaseViewModel
     {
-        public int Id { get; set; }
-        public int IdCarReception { get; set; }
-        public int IdGaraInfo { get; set; }
-        public System.DateTime ReceptDate { get; set; }
-        public int TotalMoney { get; set; }
-    
-        public virtual CarReception CarReception { get; set; }
-        public virtual GaraInfo GaraInfo { get; set; }
+        private int _Id;
+        public int Id
+        {
+            get => _Id;
+            set { _Id = value; OnPropertyChanged(); }
+        }
+        private int _IdCarReception;
+        public int IdCarReception
+        {
+            get => _IdCarReception;
+            set { _IdCarReception = value; OnPropertyChanged(); }
+        }
+        private int _IdGaraInfo;
+        public int IdGaraInfo
+        {
+            get => _IdGaraInfo;
+            set { _IdGaraInfo = value; OnPropertyChanged(); }
+        }
+        private System.DateTime _ReceptDate;
+        public System.DateTime ReceptDate
+        {
+            get => _ReceptDate;
+            set { _ReceptDate = value; OnPropertyChanged(); }
+        }
+        private int _TotalMoney;
+        public int TotalMoney
+        {
+            get => _TotalMoney;
+            set { _TotalMoney = value; OnPropertyChanged(); }
+        }
+
+        private CarReception _CarReception;
+        public virtual CarReception CarReception
+        {
+            get => _CarReception;
+            set { _CarReception = value; OnPropertyChanged(); }
+        }
+        private GaraInfo _GaraInfo;
+        public virtual GaraInfo GaraInfo
+        {
+            get => _GaraInfo;
+            set { _GaraInfo = value; OnPropertyChanged(); }
+        }
     }
 }
