@@ -29,8 +29,6 @@ namespace QuanLyGaraOto.ViewModel
         public void LoadListData()
         {
             ListCar = new ObservableCollection<ListCar>();
-            var ListLicensePlate = DataProvider.Ins.DB.LICENSE_PLATE;
-
         }
     }
 }

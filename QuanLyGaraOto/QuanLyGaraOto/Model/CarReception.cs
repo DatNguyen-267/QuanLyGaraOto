@@ -12,13 +12,13 @@ namespace QuanLyGaraOto.Model
     using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-
-    public partial class CarReceiption : BaseViewModel
+    
+    public partial class CarReception : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CarReceiption()
+        public CarReception()
         {
-            this.Receipts = new HashSet<Receipt>();
+            this.Recepts = new HashSet<Recept>();
         }
 
         private int _Id;
@@ -45,11 +45,11 @@ namespace QuanLyGaraOto.Model
             get => _IdBrand;
             set { _IdBrand = value; OnPropertyChanged(); }
         }
-        private System.DateTime _ReceiptionDate;
-        public System.DateTime ReceiptionDate
+        private System.DateTime _ReceptionDate;
+        public System.DateTime ReceptionDate
         {
-            get => _ReceiptionDate;
-            set { _ReceiptionDate = value; OnPropertyChanged(); }
+            get => _ReceptionDate;
+            set { _ReceptionDate = value; OnPropertyChanged(); }
         }
         private int _IdStatus;
         public int IdStatus
@@ -77,11 +77,11 @@ namespace QuanLyGaraOto.Model
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<Receipt> _Receipts;
-        public virtual ICollection<Receipt> Receipts
+        private ICollection<Recept> _Recepts;
+        public virtual ICollection<Recept> Recepts
         {
-            get => _Receipts;
-            set { _Receipts = value; OnPropertyChanged(); }
+            get => _Recepts;
+            set { _Recepts = value; OnPropertyChanged(); }
         }
     }
 }

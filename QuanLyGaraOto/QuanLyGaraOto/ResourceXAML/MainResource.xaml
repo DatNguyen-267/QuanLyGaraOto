@@ -4,6 +4,6 @@
                     xmlns:framework="clr-namespace:TimeRecorder.Framework;assembly=MyAssembly">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:ServiceViewModel x:Key="ServiceVM"></viewmodel:ServiceViewModel>
-    <viewmodel:CarReceiptionViewModel x:Key="CarReceptionVM"></viewmodel:CarReceiptionViewModel>
+    <viewmodel:CarReceptionViewModel x:Key="CarReceptionVM"></viewmodel:CarReceptionViewModel>
     <viewmodel:CarServiceViewModel x:Key="CarServiceVM"></viewmodel:CarServiceViewModel>
 </ResourceDictionary>

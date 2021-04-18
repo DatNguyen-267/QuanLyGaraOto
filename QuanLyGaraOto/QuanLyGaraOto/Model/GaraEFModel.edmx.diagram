@@ -4,25 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="623bb268ee1943b6a1333b99ccaa6769" Name="Diagram1" ZoomLevel="90">
-        <EntityTypeShape EntityType="GARAModel.CarBrand" Width="1.5" PointX="0.75" PointY="7.125" />
-        <EntityTypeShape EntityType="GARAModel.CarReceiption" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="GARAModel.CarStatus" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="GARAModel.Customer" Width="1.5" PointX="0.75" PointY="1.5" />
+      <Diagram DiagramId="623bb268ee1943b6a1333b99ccaa6769" Name="Diagram1" ZoomLevel="192">
+        <EntityTypeShape EntityType="GARAModel.CarBrand" Width="1.5" PointX="0.75" PointY="7.875" />
+        <EntityTypeShape EntityType="GARAModel.CarReception" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="GARAModel.CarStatus" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="GARAModel.Customer" Width="1.5" PointX="0.75" PointY="5.125" />
         <EntityTypeShape EntityType="GARAModel.GaraInfo" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="GARAModel.Pay" Width="1.5" PointX="5.75" PointY="8.125" />
-        <EntityTypeShape EntityType="GARAModel.Receipt" Width="1.5" PointX="5.25" PointY="1.25" />
-        <EntityTypeShape EntityType="GARAModel.RepairForm" Width="1.5" PointX="5.75" PointY="5.5" />
+        <EntityTypeShape EntityType="GARAModel.Pay" Width="1.5" PointX="5.75" PointY="10.875" />
+        <EntityTypeShape EntityType="GARAModel.Recept" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="GARAModel.RepairForm" Width="1.5" PointX="5.75" PointY="8.25" />
         <EntityTypeShape EntityType="GARAModel.RepairInfo" Width="1.5" PointX="8" PointY="5" />
-        <EntityTypeShape EntityType="GARAModel.Supply" Width="1.5" PointX="5.75" PointY="10.75" />
+        <EntityTypeShape EntityType="GARAModel.Supply" Width="1.5" PointX="5.75" PointY="5.5" />
         <EntityTypeShape EntityType="GARAModel.UserInfo" Width="1.5" PointX="12.25" PointY="1" />
         <EntityTypeShape EntityType="GARAModel.UserRole" Width="1.5" PointX="7.75" PointY="1.375" />
         <EntityTypeShape EntityType="GARAModel.User" Width="1.5" PointX="10" PointY="1.125" />
-        <AssociationConnector Association="GARAModel.FK_CarReceiption_CarBrand" />
-        <AssociationConnector Association="GARAModel.FK_CarReceiption_CarStatus" />
-        <AssociationConnector Association="GARAModel.FK_CarReceiption_Customer" />
-        <AssociationConnector Association="GARAModel.FK_Receipt_CarReceiption" />
-        <AssociationConnector Association="GARAModel.FK_Receipt_GaraInfo" />
+        <AssociationConnector Association="GARAModel.FK_CarReception_CarBrand" />
+        <AssociationConnector Association="GARAModel.FK_CarReception_CarStatus" />
+        <AssociationConnector Association="GARAModel.FK_CarReception_Customer" />
+        <AssociationConnector Association="GARAModel.FK_Recept_CarReception" />
+        <AssociationConnector Association="GARAModel.FK_Recept_GaraInfo" />
         <AssociationConnector Association="GARAModel.FK_RepairInfo_Pay" />
         <AssociationConnector Association="GARAModel.FK_RepairInfo_RepairForm" />
         <AssociationConnector Association="GARAModel.FK_RepairInfo_Supply" />
