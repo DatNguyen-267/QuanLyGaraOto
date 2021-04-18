@@ -9,25 +9,61 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-    
-    public partial class GaraInfo
+
+    public partial class GaraInfo : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GaraInfo()
         {
             this.Recepts = new HashSet<Recept>();
         }
-    
-        public int Id { get; set; }
-        public Nullable<int> MaxCar { get; set; }
-        public Nullable<int> MaxCarReception { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Address { get; set; }
-    
+
+        private int _Id;
+        public int Id
+        {
+            get => _Id;
+            set { _Id = value; OnPropertyChanged(); }
+        }
+        private Nullable<int> _MaxCar;
+        public Nullable<int> MaxCar
+        {
+            get => _MaxCar;
+            set { _MaxCar = value; OnPropertyChanged(); }
+        }
+        private Nullable<int> _MaxCarReception;
+        public Nullable<int> MaxCarReception
+        {
+            get => _MaxCarReception;
+            set { _MaxCarReception = value; OnPropertyChanged(); }
+        }
+        private string _Phone;
+        public string Phone
+        {
+            get => _Phone;
+            set { _Phone = value; OnPropertyChanged(); }
+        }
+        private string _Email;
+        public string Email
+        {
+            get => _Email;
+            set { _Email = value; OnPropertyChanged(); }
+        }
+        private string _Address;
+        public string Address
+        {
+            get => _Address;
+            set { _Address = value; OnPropertyChanged(); }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recept> Recepts { get; set; }
+        private ICollection<Recept> _Recepts;
+        public virtual ICollection<Recept> Recepts
+        {
+            get => _Recepts;
+            set { _Recepts = value; OnPropertyChanged(); }
+        }
     }
 }
