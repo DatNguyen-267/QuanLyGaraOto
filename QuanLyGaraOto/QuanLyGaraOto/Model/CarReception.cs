@@ -19,6 +19,7 @@ namespace QuanLyGaraOto.Model
         public CarReception()
         {
             this.Recepts = new HashSet<Recept>();
+            this.RepairForms = new HashSet<RepairForm>();
         }
 
         private int _Id;
@@ -75,13 +76,19 @@ namespace QuanLyGaraOto.Model
             get => _Customer;
             set { _Customer = value; OnPropertyChanged(); }
         }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<Recept> _Recepts;
+        private ICollection<Recept> _Recepts { get; set; }
         public virtual ICollection<Recept> Recepts
         {
             get => _Recepts;
             set { _Recepts = value; OnPropertyChanged(); }
+        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        private ICollection<RepairForm> _RepairForms { get; set; }
+        public virtual ICollection<RepairForm> RepairForms 
+        {
+            get => _RepairForms;
+            set { _RepairForms = value; OnPropertyChanged(); }
         }
     }
 }

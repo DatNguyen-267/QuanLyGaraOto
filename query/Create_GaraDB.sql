@@ -74,6 +74,7 @@ create table RepairForm
     Id int primary key not NULL IDENTITY(1, 1),
     IdCarReception int not NULL,
     RepairDate datetime not NULL,
+	constraint FK_RepairForm_CarReception foreign key (IdCarReception) references CarReception(Id),
 );
 GO
 -- Thiet lap danh sach noi dung sua chua

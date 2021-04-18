@@ -12,7 +12,7 @@ namespace QuanLyGaraOto.Model
     using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class GaraInfo : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -59,11 +59,6 @@ namespace QuanLyGaraOto.Model
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<Recept> _Recepts;
-        public virtual ICollection<Recept> Recepts
-        {
-            get => _Recepts;
-            set { _Recepts = value; OnPropertyChanged(); }
-        }
+        public virtual ICollection<Recept> Recepts { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace QuanLyGaraOto.Model
     using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class UserInfo : BaseViewModel
     {
         private int _Id;
@@ -58,11 +58,7 @@ namespace QuanLyGaraOto.Model
             set { _CMND = value; OnPropertyChanged(); }
         }
 
-        private User _User;
-        public virtual User User
-        {
-            get => _User;
-            set { _User = value; OnPropertyChanged(); }
-        }
+
+        public virtual User User { get; set; }
     }
 }

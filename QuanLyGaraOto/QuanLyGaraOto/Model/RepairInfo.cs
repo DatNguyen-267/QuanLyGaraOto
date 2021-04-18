@@ -12,7 +12,7 @@ namespace QuanLyGaraOto.Model
     using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class RepairInfo : BaseViewModel
     {
         private int _Id;
@@ -57,24 +57,8 @@ namespace QuanLyGaraOto.Model
             get => _TotalMoney;
             set { _TotalMoney = value; OnPropertyChanged(); }
         }
-
-        private Pay _Pay;
-        public virtual Pay Pay
-        {
-            get => _Pay;
-            set { _Pay = value; OnPropertyChanged(); }
-        }
-        private RepairForm _RepairForm;
-        public virtual RepairForm RepairForm
-        {
-            get => _RepairForm;
-            set { _RepairForm = value; OnPropertyChanged(); }
-        }
-        private Supply _Supply;
-        public virtual Supply Supply
-        {
-            get => _Supply;
-            set { _Supply = value; OnPropertyChanged(); }
-        }
+        public virtual Pay Pay { get; set; }
+        public virtual RepairForm RepairForm { get; set; }
+        public virtual Supply Supply { get; set; }
     }
 }

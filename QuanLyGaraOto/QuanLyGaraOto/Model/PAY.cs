@@ -12,7 +12,7 @@ namespace QuanLyGaraOto.Model
     using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Pay : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -41,11 +41,6 @@ namespace QuanLyGaraOto.Model
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<RepairInfo> _RepairInfoes;
-        public virtual ICollection<RepairInfo> RepairInfoes
-        {
-            get => _RepairInfoes;
-            set { _RepairInfoes = value; OnPropertyChanged(); }
-        }
+        public virtual ICollection<RepairInfo> RepairInfoes { get; set; }
     }
 }
