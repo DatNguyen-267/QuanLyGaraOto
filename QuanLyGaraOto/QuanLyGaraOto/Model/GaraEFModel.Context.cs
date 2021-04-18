@@ -25,18 +25,18 @@ namespace QuanLyGaraOto.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CAR_BRAND> CAR_BRAND { get; set; }
-        public virtual DbSet<CAR_IN_DEBT> CAR_IN_DEBT { get; set; }
-        public virtual DbSet<CAR_STATUS> CAR_STATUS { get; set; }
-        public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
-        public virtual DbSet<GARA_SERVICE> GARA_SERVICE { get; set; }
-        public virtual DbSet<LICENSE_PLATE> LICENSE_PLATE { get; set; }
-        public virtual DbSet<PAY> PAYs { get; set; }
-        public virtual DbSet<RECEIPT> RECEIPTs { get; set; }
-        public virtual DbSet<RECEIVING_TICKET> RECEIVING_TICKET { get; set; }
-        public virtual DbSet<REPAIR_TICKET> REPAIR_TICKET { get; set; }
-        public virtual DbSet<STAFF_ACCOUNT> STAFF_ACCOUNT { get; set; }
-        public virtual DbSet<STAFF_INFORMATION> STAFF_INFORMATION { get; set; }
-        public virtual DbSet<SUPPLIES> SUPPLIES { get; set; }
+        public virtual DbSet<CarBrand> CarBrands { get; set; }
+        public virtual DbSet<CarReceiption> CarReceiptions { get; set; }
+        public virtual DbSet<CarStatus> CarStatus1 { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<GaraInfo> GaraInfoes { get; set; }
+        public virtual DbSet<Pay> Pays { get; set; }
+        public virtual DbSet<Receipt> Receipts { get; set; }
+        public virtual DbSet<RepairForm> RepairForms { get; set; }
+        public virtual DbSet<RepairInfo> RepairInfoes { get; set; }
+        public virtual DbSet<Supply> Supplies { get; set; }
+        public virtual DbSet<UserInfo> UserInfoes { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

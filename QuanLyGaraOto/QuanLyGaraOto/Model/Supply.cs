@@ -13,10 +13,10 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Pay : BaseViewModel
+    public partial class Supply : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Pay()
+        public Supply()
         {
             this.RepairInfoes = new HashSet<RepairInfo>();
         }
@@ -33,11 +33,17 @@ namespace QuanLyGaraOto.Model
             get => _Name;
             set { _Name = value; OnPropertyChanged(); }
         }
-        private int _Price;
-        public int Price
+        private Nullable<int> _Price;
+        public Nullable<int> Price
         {
-            get => _Price;
+            get => _Price;  
             set { _Price = value; OnPropertyChanged(); }
+        }
+        private Nullable<int> _Amount;
+        public Nullable<int> Amount
+        {
+            get => _Amount;
+            set { _Amount = value; OnPropertyChanged(); }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

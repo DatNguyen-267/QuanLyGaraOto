@@ -9,27 +9,37 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class RECEIVING_TICKET
+    public partial class CarBrand : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RECEIVING_TICKET()
+        public CarBrand()
         {
-            this.REPAIR_TICKET = new HashSet<REPAIR_TICKET>();
+            this.CarReceiptions = new HashSet<CarReceiption>();
         }
-    
-        public int ID { get; set; }
-        public int Customer_ID { get; set; }
-        public int License_ID { get; set; }
-        public int Brand_ID { get; set; }
-        public System.DateTime Receiving_Date { get; set; }
-    
-        public virtual CAR_BRAND CAR_BRAND { get; set; }
-        public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual LICENSE_PLATE LICENSE_PLATE { get; set; }
+
+        private int _Id;
+        public int Id
+        {
+            get => _Id;
+            set { _Id = value; OnPropertyChanged(); }
+        }
+        private string _Name;
+        public string Name
+        {
+            get => _Name;
+            set { _Name = value; OnPropertyChanged(); }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REPAIR_TICKET> REPAIR_TICKET { get; set; }
+        private ICollection<CarReceiption> _CarReceiptions;
+        public virtual ICollection<CarReceiption> CarReceiptions
+        {
+            get => _CarReceiptions;
+            set { _CarReceiptions = value; OnPropertyChanged(); }
+        }
     }
 }

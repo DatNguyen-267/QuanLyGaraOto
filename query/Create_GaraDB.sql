@@ -54,17 +54,17 @@ create table CarStatus
 GO
 
 -- Thiet lap phieu tiep nhan xe
-create table CarReception
+create table CarReceiption
 (
     Id int primary key not NULL IDENTITY(1, 1),
     IdCustomer int not NULL,
     LicensePlate varchar(50) not NULL,
     IdBrand int not NULL,
-    ReceptionDate datetime not NULL,
+    ReceiptionDate datetime not NULL,
 	IdStatus int not null,
-    constraint FK_CarReception_Customer foreign key (IdCustomer) references Customer(Id),
-    constraint FK_CarReception_CarBrand foreign key (IdBrand) references CarBrand(Id),
-	constraint FK_CarReception_CarStatus foreign key (IdStatus) references CarStatus(Id)
+    constraint FK_CarReceiption_Customer foreign key (IdCustomer) references Customer(Id),
+    constraint FK_CarReceiption_CarBrand foreign key (IdBrand) references CarBrand(Id),
+	constraint FK_CarReceiption_CarStatus foreign key (IdStatus) references CarStatus(Id)
 );
 GO
 
@@ -72,7 +72,7 @@ GO
 create table RepairForm
 (
     Id int primary key not NULL IDENTITY(1, 1),
-    IdCarReception int not NULL,
+    IdCarReceiption int not NULL,
     RepairDate datetime not NULL,
 );
 GO
@@ -90,7 +90,7 @@ create table RepairInfo
     constraint FK_RepairInfo_Pay foreign key (IdPay) references Pay(Id),
 	constraint FK_RepairInfo_RepairForm foreign key (IdRepairForm) references RepairForm(Id)
 )
-go
+GO
 -- drop table REPAIR_TICKET;
 
 -- Thiet lap danh sach cac xe dang trong qua trinh thu no
@@ -107,7 +107,7 @@ create table GaraInfo
 (
 	Id int primary key identity (1,1) not null,
 	MaxCar int,
-	MaxCarReception int,
+	MaxCarReceiption int,
 	Phone varchar(20),
 	Email varchar(200),
 	Address varchar(max),
@@ -117,12 +117,12 @@ Go
 create table Receipt
 (
 	Id int primary key identity(1,1) not null,
-    IdCarReception int not NULL,
+    IdCarReceiption int not NULL,
     IdGaraInfo int not null,
     ReceiptDate datetime not NULL,
     TotalMoney int not NULL,
-    constraint FK_Receipt_CarReception foreign key (IdCarReception) references CarReception(Id),
-	constraint FK_Receipt_GaraInfor foreign key (IdGaraInfo) references GaraInfo(Id)
+    constraint FK_Receipt_CarReceiption foreign key (IdCarReceiption) references CarReceiption(Id),
+	constraint FK_Receipt_GaraInfo foreign key (IdGaraInfo) references GaraInfo(Id)
 );
 GO
 

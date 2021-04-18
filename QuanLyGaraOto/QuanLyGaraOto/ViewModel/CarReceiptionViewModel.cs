@@ -7,10 +7,10 @@ using System.Windows;
 using System.Windows.Input;
 namespace QuanLyGaraOto.ViewModel
 {
-    public class CarReceptionViewModel :BaseViewModel
+    public class CarReceiptionViewModel :BaseViewModel
     {
         public ICommand CloseCommand { get; set; }
-        public CarReceptionViewModel()
+        public CarReceiptionViewModel()
         {
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
