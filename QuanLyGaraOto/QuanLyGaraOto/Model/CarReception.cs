@@ -18,7 +18,7 @@ namespace QuanLyGaraOto.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CarReception()
         {
-            this.Recepts = new HashSet<Recept>();
+            this.Receipts = new HashSet<Receipt>();
             this.RepairForms = new HashSet<RepairForm>();
         }
 
@@ -58,6 +58,8 @@ namespace QuanLyGaraOto.Model
             get => _IdStatus;
             set { _IdStatus = value; OnPropertyChanged(); }
         }
+
+
         private CarBrand _CarBrand;
         public virtual CarBrand CarBrand
         {
@@ -76,19 +78,20 @@ namespace QuanLyGaraOto.Model
             get => _Customer;
             set { _Customer = value; OnPropertyChanged(); }
         }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<Recept> _Recepts { get; set; }
-        public virtual ICollection<Recept> Recepts
+        private ICollection<Receipt> _Receipts;
+        public virtual ICollection<Receipt> Receipts
         {
-            get => _Recepts;
-            set { _Recepts = value; OnPropertyChanged(); }
+            get => _Receipts;
+            set { _Receipts = value; OnPropertyChanged(); }
         }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<RepairForm> _RepairForms { get; set; }
-        public virtual ICollection<RepairForm> RepairForms 
+        private ICollection<RepairForm> _RepairForms
         {
             get => _RepairForms;
             set { _RepairForms = value; OnPropertyChanged(); }
         }
+        public virtual ICollection<RepairForm> RepairForms { get; set; }
     }
 }

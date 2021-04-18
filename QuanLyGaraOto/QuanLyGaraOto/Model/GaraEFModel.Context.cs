@@ -33,11 +33,10 @@ namespace QuanLyGaraOto.Model
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<GaraInfo> GaraInfoes { get; set; }
         public virtual DbSet<Pay> Pays { get; set; }
-        public virtual DbSet<Recept> Recepts { get; set; }
+        public virtual DbSet<Receipt> Receipts { get; set; }
         public virtual DbSet<RepairForm> RepairForms { get; set; }
         public virtual DbSet<RepairInfo> RepairInfoes { get; set; }
         public virtual DbSet<Supply> Supplies { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }

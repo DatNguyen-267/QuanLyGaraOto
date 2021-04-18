@@ -115,15 +115,15 @@ create table GaraInfo
 );
 Go
 -- Thiet lap danh sach cac hoa don -> doanh so cua thang
-create table Recept
+create table Receipt
 (
 	Id int primary key identity(1,1) not null,
     IdCarReception int not NULL,
     IdGaraInfo int not null,
     ReceptDate datetime not NULL,
     TotalMoney int not NULL,
-    constraint FK_Recept_CarReception foreign key (IdCarReception) references CarReception(Id),
-	constraint FK_Recept_GaraInfo foreign key (IdGaraInfo) references GaraInfo(Id)
+    constraint FK_Receipt_CarReception foreign key (IdCarReception) references CarReception(Id),
+	constraint FK_Receipt_GaraInfo foreign key (IdGaraInfo) references GaraInfo(Id)
 );
 GO
 

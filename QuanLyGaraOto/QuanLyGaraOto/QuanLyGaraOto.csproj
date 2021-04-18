@@ -119,7 +119,7 @@
     <Compile Include="Model\Pay.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Recept.cs">
+    <Compile Include="Model\Receipt.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\RepairForm.cs">
@@ -135,9 +135,6 @@
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Supply.cs">
-      <DependentUpon>GaraEFModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TempModel.cs" />
