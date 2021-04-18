@@ -13,19 +13,19 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer : BaseViewModel
+    public partial class UserInfo : BaseViewModel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
-        {
-            this.CarReceiptions = new HashSet<CarReceiption>();
-        }
-
         private int _Id;
         public int Id
         {
             get => _Id;
             set { _Id = value; OnPropertyChanged(); }
+        }
+        private int _IdUser;
+        public int IdUser
+        {
+            get => _IdUser;
+            set { _IdUser = value; OnPropertyChanged(); }
         }
         private string _Name;
         public string Name
@@ -39,19 +39,30 @@ namespace QuanLyGaraOto.Model
             get => _Address;
             set { _Address = value; OnPropertyChanged(); }
         }
+        private Nullable<System.DateTime> _BirthDate;
+        public Nullable<System.DateTime> BirthDate
+        {
+            get => _BirthDate;
+            set { _BirthDate = value; OnPropertyChanged(); }
+        }
         private string _Telephone;
         public string Telephone
         {
             get => _Telephone;
             set { _Telephone = value; OnPropertyChanged(); }
         }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<CarReceiption> _CarReceiptons;
-        public virtual ICollection<CarReceiption> CarReceiptions
+        private string _CMND;
+        public string CMND
         {
-            get => _CarReceiptons;
-            set { _CarReceiptons = value; OnPropertyChanged(); }
+            get => _CMND;
+            set { _CMND = value; OnPropertyChanged(); }
+        }
+
+        private User _User;
+        public virtual User User
+        {
+            get => _User;
+            set { _User = value; OnPropertyChanged(); }
         }
     }
 }

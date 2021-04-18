@@ -13,12 +13,12 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer : BaseViewModel
+    public partial class GaraInfo : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public GaraInfo()
         {
-            this.CarReceiptions = new HashSet<CarReceiption>();
+            this.Receipts = new HashSet<Receipt>();
         }
 
         private int _Id;
@@ -27,11 +27,29 @@ namespace QuanLyGaraOto.Model
             get => _Id;
             set { _Id = value; OnPropertyChanged(); }
         }
-        private string _Name;
-        public string Name
+        private Nullable<int> _MaxCar;
+        public Nullable<int> MaxCar
         {
-            get => _Name;
-            set { _Name = value; OnPropertyChanged(); }
+            get => _MaxCar;
+            set { _MaxCar = value; OnPropertyChanged(); }
+        }
+        private Nullable<int> _MaxCarReceiption;
+        public Nullable<int> MaxCarReceiption
+        {
+            get => _MaxCarReceiption;
+            set { _MaxCarReceiption = value; OnPropertyChanged(); }
+        }
+        private string _Phone;
+        public string Phone
+        {
+            get => _Phone;
+            set { _Phone = value; OnPropertyChanged(); }
+        }
+        private string _Email;
+        public string Email
+        {
+            get => _Email;
+            set { _Email = value; OnPropertyChanged(); }
         }
         private string _Address;
         public string Address
@@ -39,19 +57,13 @@ namespace QuanLyGaraOto.Model
             get => _Address;
             set { _Address = value; OnPropertyChanged(); }
         }
-        private string _Telephone;
-        public string Telephone
-        {
-            get => _Telephone;
-            set { _Telephone = value; OnPropertyChanged(); }
-        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<CarReceiption> _CarReceiptons;
-        public virtual ICollection<CarReceiption> CarReceiptions
+        private ICollection<Receipt> _Receipts;
+        public virtual ICollection<Receipt> Receipts
         {
-            get => _CarReceiptons;
-            set { _CarReceiptons = value; OnPropertyChanged(); }
+            get => _Receipts;
+            set { _Receipts = value; OnPropertyChanged(); }
         }
     }
 }

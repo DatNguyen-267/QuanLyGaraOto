@@ -13,12 +13,12 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Pay : BaseViewModel
+    public partial class User : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Pay()
+        public User()
         {
-            this.RepairInfoes = new HashSet<RepairInfo>();
+            this.UserInfoes = new HashSet<UserInfo>();
         }
 
         private int _Id;
@@ -27,25 +27,37 @@ namespace QuanLyGaraOto.Model
             get => _Id;
             set { _Id = value; OnPropertyChanged(); }
         }
-        private string _Name;
-        public string Name
+        private string _UserName;
+        public string UserName
         {
-            get => _Name;
-            set { _Name = value; OnPropertyChanged(); }
+            get => _UserName;
+            set { _UserName = value; OnPropertyChanged(); }
         }
-        private int _Price;
-        public int Price
+        private string _Password;
+        public string Password
         {
-            get => _Price;
-            set { _Price = value; OnPropertyChanged(); }
+            get => _Password;
+            set { _Password = value; OnPropertyChanged(); }
+        }
+        private int _IdRole;
+        public int IdRole
+        {
+            get => _IdRole;
+            set { _IdRole = value; OnPropertyChanged(); }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<RepairInfo> _RepairInfoes;
-        public virtual ICollection<RepairInfo> RepairInfoes
+        private ICollection<UserInfo> _UserInfoes;
+        public virtual ICollection<UserInfo> UserInfoes
         {
-            get => _RepairInfoes;
-            set { _RepairInfoes = value; OnPropertyChanged(); }
+            get => _UserInfoes;
+            set { _UserInfoes = value; OnPropertyChanged(); }
+        }
+        private UserRole _UserRole;
+        public virtual UserRole UserRole
+        {
+            get => _UserRole;
+            set { _UserRole = value; OnPropertyChanged(); }
         }
     }
 }

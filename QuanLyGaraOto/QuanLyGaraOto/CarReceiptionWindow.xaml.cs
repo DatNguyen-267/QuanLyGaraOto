@@ -17,9 +17,9 @@ namespace QuanLyGaraOto
     /// <summary>
     /// Interaction logic for CarReceptionWindow.xaml
     /// </summary>
-    public partial class CarReceptionWindow : Window
+    public partial class CarReceiptionWindow : Window
     {
-        public CarReceptionWindow()
+        public CarReceiptionWindow()
         {
             InitializeComponent();
         }

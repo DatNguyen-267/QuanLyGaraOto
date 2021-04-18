@@ -9,17 +9,54 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class RECEIPT
+    public partial class Receipt : BaseViewModel
     {
-        public int License_ID { get; set; }
-        public string Email_Address { get; set; }
-        public System.DateTime Receipt_Date { get; set; }
-        public int Total_Money { get; set; }
-        public bool IsPayed { get; set; }
-    
-        public virtual LICENSE_PLATE LICENSE_PLATE { get; set; }
+        private int _Id;
+        public int Id
+        {
+            get => _Id;
+            set { _Id = value; OnPropertyChanged(); }
+        }
+        private int _IdCarReceiption;
+        public int IdCarReceiption
+        {
+            get => _IdCarReceiption;
+            set { _IdCarReceiption = value; OnPropertyChanged(); }
+        }
+        private int _IdGaraInfo;
+        public int IdGaraInfo
+        {
+            get => _IdGaraInfo;
+            set { _IdGaraInfo = value; OnPropertyChanged(); }
+        }
+        private System.DateTime _ReceptDate;
+        public System.DateTime ReceiptDate
+        {
+            get => _ReceptDate;
+            set { _ReceptDate = value; OnPropertyChanged(); }
+        }
+        private int _TotalMoney;
+        public int TotalMoney
+        {
+            get => _TotalMoney;
+            set { _TotalMoney = value; OnPropertyChanged(); }
+        }
+
+        private CarReceiption _CarReceiption;
+        public virtual CarReceiption CarReceiption
+        {
+            get => _CarReceiption;
+            set { _CarReceiption = value; OnPropertyChanged(); }
+        }
+        private GaraInfo _GaraInfo;
+        public virtual GaraInfo GaraInfo
+        {
+            get => _GaraInfo;
+            set { _GaraInfo = value; OnPropertyChanged(); }
+        }
     }
 }
