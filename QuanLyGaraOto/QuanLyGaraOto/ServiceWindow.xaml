@@ -54,6 +54,7 @@
             <Grid Grid.Column="1">
                 <DockPanel Width="300">
                     <Button
+                        Command="{Binding DeleteCommand}"
                         Width="100"
                                Background="#455A64"
                         Margin="10 0 10 0"
@@ -72,18 +73,18 @@
             
         </Grid>
         <Grid Grid.Row="2">
-            <ListView ItemsSource="{Binding ListCar}">
+            <ListView ItemsSource="{Binding ListCar}" SelectedItem="{Binding SelectedItem}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Id, Mode=OneWayToSource
+                        <GridViewColumn Header="STT" DisplayMemberBinding="{Binding CarReception.Id, Mode=TwoWay
                             ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding License_Number, Mode=OneWayToSource
+                        <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding CarReception.LicensePlate, Mode=TwoWay
                             ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding CAR_BRAND.Name, Mode=OneWayToSource
+                        <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding CarReception.CarBrand.Name, Mode=TwoWay
                             ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Chủ Xe" DisplayMemberBinding="{Binding CUSTOMER.Name, Mode=OneWayToSource
+                        <GridViewColumn Header="Chủ Xe" DisplayMemberBinding="{Binding CarReception.Customer.Name, Mode=TwoWay
                             ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Tiền nợ" DisplayMemberBinding="{Binding Debt, Mode=OneWayToSource
+                        <GridViewColumn Header="Tiền nợ" DisplayMemberBinding="{Binding Debt, Mode=TwoWay
                             ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                     </GridView>
                 </ListView.View>

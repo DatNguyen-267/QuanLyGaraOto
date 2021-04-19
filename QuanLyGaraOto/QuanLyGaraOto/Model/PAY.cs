@@ -9,43 +9,22 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-
-    public partial class Pay : BaseViewModel
+    
+    public partial class Pay
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pay()
         {
             this.RepairInfoes = new HashSet<RepairInfo>();
         }
-
-        private int _Id;
-        public int Id
-        {
-            get => _Id;
-            set { _Id = value; OnPropertyChanged(); }
-        }
-        private string _Name;
-        public string Name
-        {
-            get => _Name;
-            set { _Name = value; OnPropertyChanged(); }
-        }
-        private int _Price;
-        public int Price
-        {
-            get => _Price;
-            set { _Price = value; OnPropertyChanged(); }
-        }
-
+    
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Price { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<RepairInfo> _RepairInfoes;
-        public virtual ICollection<RepairInfo> RepairInfoes
-        {
-            get => _RepairInfoes;
-            set { _RepairInfoes = value; OnPropertyChanged(); }
-        }
+        public virtual ICollection<RepairInfo> RepairInfoes { get; set; }
     }
 }

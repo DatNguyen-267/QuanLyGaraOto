@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
-       
         Name="CarServiceWD"
         Title="Dịch vụ và thông tin xe" 
         Height="700" Width="1000"
@@ -33,8 +32,21 @@
                 <ColumnDefinition Width="280"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ScrollViewer>
-                <materialDesign:Card Grid.Column="0"
+            <materialDesign:Card  Grid.Column="0" x:Name="ReceptionCard"
+                                 Margin="20 20 20 10"
+                                 Height="auto">
+                <Button Content="Tiếp nhận xe"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Height="auto"
+                        Padding="20 10 20 10"
+                        FontSize="20"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        >
+                </Button>
+            </materialDesign:Card>
+            <ScrollViewer Visibility="Collapsed" x:Name="InfoCard">
+                <materialDesign:Card Grid.Column="0" 
                                  Margin="20 20 20 10"
                                  Height="auto"
                                  >
@@ -177,10 +189,25 @@
                     </Grid>
                 </materialDesign:Card>
             </ScrollViewer>
-           
+            
+            <materialDesign:Card  Grid.Column="1" x:Name="AddRepairCard"
+                                 Margin="20 20 20 10"
+                                 Height="auto">
+                <Button Content="Thêm phiếu sửa chữa"
+                        IsEnabled="false"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Height="auto"
+                        Padding="20 10 20 10"
+                        FontSize="20"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        >
+                </Button>
+            </materialDesign:Card>
             <materialDesign:Card Grid.Column="1"
+                                 x:Name="RepairSeviceCard"
                                  Margin="0 20 20 10"
-                                
+                                 Visibility="Collapsed"
                                  >
                 <Grid>
                     <Grid.RowDefinitions>
@@ -248,6 +275,8 @@
                         Orientation="Horizontal">
 
                 <Button
+                    Visibility="Collapsed"
+                    x:Name="BtnReceipt"
                     Content="Thanh toán và hoàn trả xe"
                     Width="auto"
                     FontSize="16"
