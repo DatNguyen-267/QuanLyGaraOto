@@ -14,7 +14,7 @@ namespace QuanLyGaraOto.ViewModel
         public MainViewModel()
         {
             LoadedWindowCommand = new RelayCommand<object>((p)=> { return true; }, (p)=> {
-                //CarServiceWindow serviceWindow = new CarServiceWindow();
+                //ServiceWindow serviceWindow = new ServiceWindow();
                 //serviceWindow.ShowDialog();
             });
         }

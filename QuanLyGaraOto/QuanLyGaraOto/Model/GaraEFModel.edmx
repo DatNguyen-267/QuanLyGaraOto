@@ -353,7 +353,7 @@
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="CarBrands" EntityType="GARAModel.CarBrand" />
           <EntitySet Name="CarReceptions" EntityType="GARAModel.CarReception" />
-          <EntitySet Name="CarStatus1" EntityType="GARAModel.CarStatus" />
+          <EntitySet Name="CarStatus" EntityType="GARAModel.CarStatus" />
           <EntitySet Name="Customers" EntityType="GARAModel.Customer" />
           <EntitySet Name="GaraInfoes" EntityType="GARAModel.GaraInfo" />
           <EntitySet Name="Pays" EntityType="GARAModel.Pay" />
@@ -369,7 +369,7 @@
             <End Role="CarReception" EntitySet="CarReceptions" />
           </AssociationSet>
           <AssociationSet Name="FK_CarReception_CarStatus" Association="GARAModel.FK_CarReception_CarStatus">
-            <End Role="CarStatu" EntitySet="CarStatus1" />
+            <End Role="CarStatu" EntitySet="CarStatus" />
             <End Role="CarReception" EntitySet="CarReceptions" />
           </AssociationSet>
           <AssociationSet Name="FK_CarReception_Customer" Association="GARAModel.FK_CarReception_Customer">
@@ -439,7 +439,7 @@
           <Property Name="ReceptionDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdStatus" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CarBrand" Relationship="GARAModel.FK_CarReception_CarBrand" FromRole="CarReception" ToRole="CarBrand" />
-          <NavigationProperty Name="CarStatus" Relationship="GARAModel.FK_CarReception_CarStatus" FromRole="CarReception" ToRole="CarStatu" />
+          <NavigationProperty Name="CarStatu" Relationship="GARAModel.FK_CarReception_CarStatus" FromRole="CarReception" ToRole="CarStatu" />
           <NavigationProperty Name="Customer" Relationship="GARAModel.FK_CarReception_Customer" FromRole="CarReception" ToRole="Customer" />
           <NavigationProperty Name="Receipts" Relationship="GARAModel.FK_Receipt_CarReception" FromRole="CarReception" ToRole="Receipt" />
           <NavigationProperty Name="RepairForms" Relationship="GARAModel.FK_RepairForm_CarReception" FromRole="CarReception" ToRole="RepairForm" />
@@ -720,7 +720,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CarStatus1">
+          <EntitySetMapping Name="CarStatus">
             <EntityTypeMapping TypeName="GARAModel.CarStatus">
               <MappingFragment StoreEntitySet="CarStatus">
                 <ScalarProperty Name="Name" ColumnName="Name" />

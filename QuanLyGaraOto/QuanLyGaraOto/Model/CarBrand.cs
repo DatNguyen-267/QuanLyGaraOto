@@ -9,37 +9,21 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
-
-    public partial class CarBrand : BaseViewModel
+    
+    public partial class CarBrand
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CarBrand()
         {
             this.CarReceptions = new HashSet<CarReception>();
         }
-
-        private int _Id;
-        public int Id
-        {
-            get => _Id;
-            set { _Id = value; OnPropertyChanged(); }
-        }
-        private string _Name;
-        public string Name
-        {
-            get => _Name;
-            set { _Name = value; OnPropertyChanged(); }
-        }
-
+    
+        public int Id { get; set; }
+        public string Name { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<CarReception> _CarReceptions;
-        public virtual ICollection<CarReception> CarReceptions
-        {
-            get => _CarReceptions;
-            set { _CarReceptions = value; OnPropertyChanged(); }
-        }
+        public virtual ICollection<CarReception> CarReceptions { get; set; }
     }
 }

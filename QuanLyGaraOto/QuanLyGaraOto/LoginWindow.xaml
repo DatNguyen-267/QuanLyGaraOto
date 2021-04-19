@@ -10,7 +10,7 @@
         Title="LoginWindow" Height="450" Width="380"
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
-        MouseDown="LoginWindow_OnMouseDown">
+       >
     <Grid>
         <Grid>
             <Grid.RowDefinitions>

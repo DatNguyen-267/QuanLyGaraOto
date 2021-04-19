@@ -9,11 +9,10 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class CarReception : BaseViewModel
+    public partial class CarReception
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CarReception()
@@ -21,77 +20,20 @@ namespace QuanLyGaraOto.Model
             this.Receipts = new HashSet<Receipt>();
             this.RepairForms = new HashSet<RepairForm>();
         }
-
-        private int _Id;
-        public int Id
-        {
-            get => _Id;
-            set { _Id = value; OnPropertyChanged(); }
-        }
-        private int _IdCustomer;
-        public int IdCustomer
-        {
-            get => _IdCustomer;
-            set { _IdCustomer = value; OnPropertyChanged(); }
-        }
-        private string _LicensePlate;
-        public string LicensePlate
-        {
-            get => _LicensePlate;
-            set { _LicensePlate = value; OnPropertyChanged(); }
-        }
-        private int _IdBrand;
-        public int IdBrand
-        {
-            get => _IdBrand;
-            set { _IdBrand = value; OnPropertyChanged(); }
-        }
-        private System.DateTime _ReceptionDate;
-        public System.DateTime ReceptionDate
-        {
-            get => _ReceptionDate;
-            set { _ReceptionDate = value; OnPropertyChanged(); }
-        }
-        private int _IdStatus;
-        public int IdStatus
-        {
-            get => _IdStatus;
-            set { _IdStatus = value; OnPropertyChanged(); }
-        }
-
-
-        private CarBrand _CarBrand;
-        public virtual CarBrand CarBrand
-        {
-            get => _CarBrand;
-            set { _CarBrand = value; OnPropertyChanged(); }
-        }
-        private CarStatus _CarStatus;
-        public virtual CarStatus CarStatus
-        {
-            get => _CarStatus;
-            set { _CarStatus = value; OnPropertyChanged(); }
-        }
-        private Customer _Customer;
-        public virtual Customer Customer
-        {
-            get => _Customer;
-            set { _Customer = value; OnPropertyChanged(); }
-        }
-
+    
+        public int Id { get; set; }
+        public int IdCustomer { get; set; }
+        public string LicensePlate { get; set; }
+        public int IdBrand { get; set; }
+        public System.DateTime ReceptionDate { get; set; }
+        public int IdStatus { get; set; }
+    
+        public virtual CarBrand CarBrand { get; set; }
+        public virtual CarStatus CarStatu { get; set; }
+        public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<Receipt> _Receipts;
-        public virtual ICollection<Receipt> Receipts
-        {
-            get => _Receipts;
-            set { _Receipts = value; OnPropertyChanged(); }
-        }
+        public virtual ICollection<Receipt> Receipts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<RepairForm> _RepairForms
-        {
-            get => _RepairForms;
-            set { _RepairForms = value; OnPropertyChanged(); }
-        }
         public virtual ICollection<RepairForm> RepairForms { get; set; }
     }
 }
