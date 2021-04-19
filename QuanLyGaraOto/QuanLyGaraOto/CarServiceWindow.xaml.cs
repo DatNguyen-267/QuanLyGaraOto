@@ -24,7 +24,7 @@ namespace QuanLyGaraOto
         public CarServiceWindow()
         {
             InitializeComponent();
-            this.DataContext = carServiceViewModel(this);
+            //this.DataContext = carServiceViewModel(this);
         }
     }
 }
