@@ -4,6 +4,7 @@ create database GARA;
 GO
 use GARA;
 GO
+-- drop database GARA;
 ---------------------DON HANG CUA KHACH HANG-----------------------------------
 
 -- Thiet lap danh sach cac hang xe
@@ -160,5 +161,3 @@ create table UserInfo
     CMND varchar(100) not NULL,
     constraint FK_UserInfo_Users foreign key (IdUser) references Users(Id)
 );
-
-

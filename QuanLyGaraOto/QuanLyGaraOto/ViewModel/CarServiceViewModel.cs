@@ -21,8 +21,6 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     CarReceptionWindow carReceptionWindow = new CarReceptionWindow();
                     carReceptionWindow.ShowDialog();
-
-
                 });
         }
     }
