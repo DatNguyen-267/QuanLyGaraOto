@@ -137,13 +137,13 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid x:Name="BrandSetting" Visibility="Collapsed">
+            <Grid x:Name="BrandSetting" Visibility="Visible">
                 <!--Visibility="{Binding BrandSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
+                    <ColumnDefinition MaxWidth="300"/>
+                    <ColumnDefinition Width="200"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="1">
@@ -212,7 +212,7 @@
                     
                 </Grid>
             </Grid>
-            <Grid x:Name="UserSetting" Visibility="Visible">
+            <Grid x:Name="UserSetting" Visibility="Collapsed">
                 <!--Visibility="{Binding UserSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
