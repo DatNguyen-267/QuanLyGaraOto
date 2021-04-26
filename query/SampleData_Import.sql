@@ -36,3 +36,5 @@ insert into RepairInfo values(1,N'Thay lốp',1,1,2,330000)
 insert into RepairInfo values(1,N'Thay lốp',1,1,2,330000)
 
 insert into Receipt values(1,1,'05-10-2020', 660000)
+
+insert into UserInfo values(1, 'Huynh Anh Kiet', 'TP.HCM', '11/24/2001', '0945253415', '212861998')

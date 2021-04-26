@@ -6,4 +6,5 @@
     <viewmodel:ServiceViewModel x:Key="ServiceVM"></viewmodel:ServiceViewModel>
     <viewmodel:CarReceptionViewModel x:Key="CarReceptionVM"></viewmodel:CarReceptionViewModel>
     <viewmodel:CarServiceViewModel x:Key="CarServiceVM"></viewmodel:CarServiceViewModel>
+    <viewmodel:SettingViewModel x:Key="SettingVM"></viewmodel:SettingViewModel>
 </ResourceDictionary>
