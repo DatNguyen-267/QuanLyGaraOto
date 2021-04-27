@@ -25,11 +25,11 @@ namespace QuanLyGaraOto.Model
         public int IdCustomer { get; set; }
         public string LicensePlate { get; set; }
         public int IdBrand { get; set; }
-        public System.DateTime ReceptionDate { get; set; }
+        public System.DateTime? ReceptionDate { get; set; }
         public int IdStatus { get; set; }
     
         public virtual CarBrand CarBrand { get; set; }
-        public virtual CarStatus CarStatu { get; set; }
+        public virtual CarStatu CarStatu { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Receipt> Receipts { get; set; }

@@ -12,10 +12,10 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CarStatus
+    public partial class CarStatu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CarStatus()
+        public CarStatu()
         {
             this.CarReceptions = new HashSet<CarReception>();
         }

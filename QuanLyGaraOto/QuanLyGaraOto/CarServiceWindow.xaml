@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Name="CarServiceWD"
         Title="Dịch vụ và thông tin xe" 
-        Height="700" Width="1000"
+        Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        DataContext="{StaticResource CarServiceVM}"
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -32,10 +33,14 @@
                 <ColumnDefinition Width="280"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <materialDesign:Card  Grid.Column="0" x:Name="ReceptionCard"
-                                 Margin="20 20 20 10"
+            <materialDesign:Card Visibility="{Binding VisReceptionCard,
+                Converter={StaticResource BooleanToVisibilityConverter}}"
+                Grid.Column="0" x:Name="ReceptionCard"
+                                 Margin="20 20 5 10"
                                  Height="auto">
                 <Button Content="Tiếp nhận xe"
+                        IsEnabled="{Binding IsEnableReceptionBtn}"
+                        Command="{Binding ReceptionCommand}"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Height="auto"
@@ -45,11 +50,12 @@
                         >
                 </Button>
             </materialDesign:Card>
-            <ScrollViewer Visibility="Collapsed" x:Name="InfoCard">
+            <ScrollViewer  Visibility="{Binding VisInfo,
+                Converter={StaticResource BooleanToVisibilityConverter}}"
+                          x:Name="InfoCard">
                 <materialDesign:Card Grid.Column="0" 
                                  Margin="20 20 20 10"
-                                 Height="auto"
-                                 >
+                                 Height="auto">
                     <Grid>
                         <Grid.Resources>
                             <Style TargetType="Grid" x:Key="GridWidth400">
@@ -83,7 +89,7 @@
                                                      Grid.Column="0"/>
                                         <TextBox Grid.Column="2"
                                                  IsReadOnly="True"
-                                            Text="{Binding UserName}"
+                                            Text="{Binding Name}"
                                      materialDesign:HintAssist.Hint="Tên chủ xe"
                                      Width="200"
                                          Margin="0 0 0 10"
@@ -99,12 +105,15 @@
                                         </Grid.ColumnDefinitions>
                                         <materialDesign:PackIcon Kind="ClipboardOutline" 
                                                      Grid.Column="0"/>
-                                        <TextBox Grid.Column="1"
-                                     Margin="0 0 0 10"
-                            materialDesign:HintAssist.Hint="Biển số xe"
-                                     Width="200"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                                        <TextBox 
+                                            Text="{Binding LicensePlate}"
+                                            Grid.Column="1"
+                                           IsReadOnly="True"
+                                            Margin="0 0 0 10"
+                                            materialDesign:HintAssist.Hint="Biển số xe"
+                                            Width="200"   
+                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
                                 <Grid Margin="10 10 10 0">
@@ -115,14 +124,16 @@
                                         </Grid.ColumnDefinitions>
                                         <materialDesign:PackIcon Kind="Watermark" 
                                                      Grid.Column="0"/>
-                                        <ComboBox Grid.Column="1"
-                                Width="200"
-                                      ItemsSource="{Binding ListCarBrand}"
-                                      DisplayMemberPath="Name"
-                                VerticalAlignment="Center"
-                                materialDesign:HintAssist.Hint="Hiệu xe"
-                                materialDesign:HintAssist.HintOpacity=".26"
-                                IsEditable="True">
+                                        <ComboBox 
+                                            Grid.Column="1"
+                                            Width="200"
+                                            ItemsSource="{Binding ListBrand}"
+                                            SelectedItem="{Binding SelectedBrand}"
+                                            DisplayMemberPath="Name"
+                                            VerticalAlignment="Center"
+                                            materialDesign:HintAssist.Hint="Hiệu xe"
+                                            materialDesign:HintAssist.HintOpacity=".26"
+                                            IsReadOnly="True">  
                                         </ComboBox>
                                     </Grid>
                                 </Grid>
@@ -134,12 +145,15 @@
                                         </Grid.ColumnDefinitions>
                                         <materialDesign:PackIcon Kind="MapMarkerOutline" 
                                                      Grid.Column="0"/>
-                                        <TextBox Grid.Column="2"
-                            materialDesign:HintAssist.Hint="Địa chỉ"
-                                     Width="200"
-                                         Margin="0 0 0 10"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                                        <TextBox 
+                                           IsReadOnly="True"
+                                            Text="{Binding Address}"
+                                            Grid.Column="2"
+                                            materialDesign:HintAssist.Hint="Địa chỉ"
+                                            Width="200"
+                                            Margin="0 0 0 10"
+                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
                                 <Grid Margin="10 10 10 0">
@@ -150,7 +164,10 @@
                                         </Grid.ColumnDefinitions>
                                         <materialDesign:PackIcon Kind="Phone" 
                                                      Grid.Column="0"/>
-                                        <TextBox Grid.Column="1"
+                                        <TextBox 
+                                            Text="{Binding Phone}"
+                                           IsReadOnly="True"
+                                            Grid.Column="1"
                                      Margin="0 0 0 10"
                             materialDesign:HintAssist.Hint="Số Điện thoại"
                                      Width="200"
@@ -166,11 +183,14 @@
                                         </Grid.ColumnDefinitions>
                                         <materialDesign:PackIcon Kind="DateRange" 
                                                      Grid.Column="0"/>
-                                        <DatePicker Grid.Column="1"
-                               Width="200"
-                                        Height="auto"
-                                VerticalAlignment="Center"
-                              materialDesign:HintAssist.Hint="Ngày tiếp nhận"
+                                        <DatePicker 
+                                            IsEnabled="false"
+                                            Text="{Binding ReceptionDate}"
+                                            Grid.Column="1"
+                                            Width="200"
+                                            Height="auto"
+                                            VerticalAlignment="Center"
+                                            materialDesign:HintAssist.Hint="Ngày tiếp nhận"
                               Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                                     </Grid>
                                 </Grid>
@@ -190,11 +210,15 @@
                 </materialDesign:Card>
             </ScrollViewer>
             
-            <materialDesign:Card  Grid.Column="1" x:Name="AddRepairCard"
-                                 Margin="20 20 20 10"
+            <materialDesign:Card Visibility="{Binding VisAddRepairCard,
+                Converter={StaticResource BooleanToVisibilityConverter}}"
+                Grid.Column="1" x:Name="AddRepairCard"
+                                 Margin="5 20 20 10"
                                  Height="auto">
-                <Button Content="Thêm phiếu sửa chữa"
-                        IsEnabled="false"
+                <Button 
+                    
+                    Content="Thêm phiếu sửa chữa"
+                        IsEnabled="{Binding IsEnabledBtnAddRepair}"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Height="auto"
@@ -204,11 +228,11 @@
                         >
                 </Button>
             </materialDesign:Card>
-            <materialDesign:Card Grid.Column="1"
+            <materialDesign:Card  Visibility="{Binding VisRepairServiceCard,
+                Converter={StaticResource BooleanToVisibilityConverter}}"
+                Grid.Column="1"
                                  x:Name="RepairSeviceCard"
-                                 Margin="0 20 20 10"
-                                 Visibility="Collapsed"
-                                 >
+                                 Margin="0 20 20 10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="70"></RowDefinition>
