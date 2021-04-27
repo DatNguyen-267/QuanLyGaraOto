@@ -353,7 +353,7 @@
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="CarBrands" EntityType="GARAModel.CarBrand" />
           <EntitySet Name="CarReceptions" EntityType="GARAModel.CarReception" />
-          <EntitySet Name="CarStatus" EntityType="GARAModel.CarStatus" />
+          <EntitySet Name="CarStatus" EntityType="GARAModel.CarStatu" />
           <EntitySet Name="Customers" EntityType="GARAModel.Customer" />
           <EntitySet Name="GaraInfoes" EntityType="GARAModel.GaraInfo" />
           <EntitySet Name="Pays" EntityType="GARAModel.Pay" />
@@ -444,7 +444,7 @@
           <NavigationProperty Name="Receipts" Relationship="GARAModel.FK_Receipt_CarReception" FromRole="CarReception" ToRole="Receipt" />
           <NavigationProperty Name="RepairForms" Relationship="GARAModel.FK_RepairForm_CarReception" FromRole="CarReception" ToRole="RepairForm" />
         </EntityType>
-        <EntityType Name="CarStatus">
+        <EntityType Name="CarStatu">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -575,7 +575,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CarReception_CarStatus">
-          <End Type="GARAModel.CarStatus" Role="CarStatu" Multiplicity="1" />
+          <End Type="GARAModel.CarStatu" Role="CarStatu" Multiplicity="1" />
           <End Type="GARAModel.CarReception" Role="CarReception" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CarStatu">
@@ -721,7 +721,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CarStatus">
-            <EntityTypeMapping TypeName="GARAModel.CarStatus">
+            <EntityTypeMapping TypeName="GARAModel.CarStatu">
               <MappingFragment StoreEntitySet="CarStatus">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

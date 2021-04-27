@@ -57,7 +57,9 @@
                             </Grid.ColumnDefinitions>
                             <materialDesign:PackIcon Kind="Account" 
                                                      Grid.Column="0"/>
-                            <TextBox Grid.Column="2"
+                            <TextBox 
+                                Text="{Binding Name}"
+                                Grid.Column="2"
                             materialDesign:HintAssist.Hint="Tên chủ xe"
                                      Width="200"
                                          Margin="0 0 0 10"
@@ -73,7 +75,9 @@
                             </Grid.ColumnDefinitions>
                             <materialDesign:PackIcon Kind="ClipboardOutline" 
                                                      Grid.Column="0"/>
-                            <TextBox Grid.Column="1"
+                            <TextBox 
+                                Text="{Binding LicensePlate}"
+                                Grid.Column="1"
                                      Margin="0 0 0 10"
                             materialDesign:HintAssist.Hint="Biển số xe"
                                      Width="200"
@@ -89,10 +93,13 @@
                             </Grid.ColumnDefinitions>
                             <materialDesign:PackIcon Kind="Watermark" 
                                                      Grid.Column="0"/>
-                            <ComboBox Grid.Column="1"
+                            <ComboBox 
+                               ItemsSource="{Binding ListBrand, UpdateSourceTrigger=PropertyChanged}"
+                               SelectedItem="{Binding SelectedBrand, Mode=TwoWay}"
+                                DisplayMemberPath="Name"
+                                Grid.Column="1"
                                 Width="200"
-                                      ItemsSource="{Binding ListCarBrand}"
-                                      DisplayMemberPath="Name"
+                                
                                 VerticalAlignment="Center"
                                 materialDesign:HintAssist.Hint="Hiệu xe"
                                 materialDesign:HintAssist.HintOpacity=".26"
@@ -108,7 +115,9 @@
                             </Grid.ColumnDefinitions>
                             <materialDesign:PackIcon Kind="MapMarkerOutline" 
                                                      Grid.Column="0"/>
-                            <TextBox Grid.Column="2"
+                            <TextBox 
+                                Text="{Binding Address}"
+                                Grid.Column="2"
                             materialDesign:HintAssist.Hint="Địa chỉ"
                                      Width="200"
                                          Margin="0 0 0 10"
@@ -124,7 +133,9 @@
                             </Grid.ColumnDefinitions>
                             <materialDesign:PackIcon Kind="Phone" 
                                                      Grid.Column="0"/>
-                            <TextBox Grid.Column="1"
+                            <TextBox 
+                                Text="{Binding Phone}"
+                                Grid.Column="1"
                                      Margin="0 0 0 10"
                             materialDesign:HintAssist.Hint="Số Điện thoại"
                                      Width="200"
@@ -140,7 +151,9 @@
                             </Grid.ColumnDefinitions>
                             <materialDesign:PackIcon Kind="DateRange" 
                                                      Grid.Column="0"/>
-                            <DatePicker Grid.Column="1"
+                            <DatePicker 
+                                SelectedDate="{Binding ReceptionDate}"
+                                Grid.Column="1"
                                Width="200"
                                         Height="auto"
                                 VerticalAlignment="Center"
@@ -157,7 +170,9 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button
-                   Grid.Column="0"
+                    Command="{Binding ConfirmCommand}"
+                    CommandParameter="{Binding ElementName=CarReceptionWD}"
+                    Grid.Column="0"
                     Width="100"
                     Background="#455A64"
                   Style="{StaticResource MaterialDesignRaisedButton}"
