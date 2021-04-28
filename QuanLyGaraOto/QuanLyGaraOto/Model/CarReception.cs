@@ -25,7 +25,7 @@ namespace QuanLyGaraOto.Model
         public int IdCustomer { get; set; }
         public string LicensePlate { get; set; }
         public int IdBrand { get; set; }
-        public System.DateTime? ReceptionDate { get; set; }
+        public System.DateTime ReceptionDate { get; set; }
         public int IdStatus { get; set; }
     
         public virtual CarBrand CarBrand { get; set; }
