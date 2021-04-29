@@ -82,6 +82,9 @@
     <Compile Include="AddNewGoodWindow.xaml.cs">
       <DependentUpon>AddNewGoodWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddRepairFormWindow.xaml.cs">
+      <DependentUpon>AddRepairFormWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BunkPage.xaml.cs">
       <DependentUpon>BunkPage.xaml</DependentUpon>
     </Compile>
@@ -171,6 +174,7 @@
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlGaraOto\TempUserControl.cs" />
+    <Compile Include="ViewModel\AddRepairFormViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CarReceptionViewModel.cs" />
     <Compile Include="ViewModel\CarServiceViewModel.cs" />
@@ -180,6 +184,10 @@
     <Page Include="AddNewGoodWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddRepairFormWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BunkPage.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -22,7 +22,7 @@ namespace QuanLyGaraOto.Model
     
         public int Id { get; set; }
         public int IdCarReception { get; set; }
-        public System.DateTime RepairDate { get; set; }
+        public System.DateTime? RepairDate { get; set; }
     
         public virtual CarReception CarReception { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

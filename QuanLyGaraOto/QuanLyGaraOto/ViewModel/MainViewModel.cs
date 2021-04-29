@@ -14,11 +14,11 @@ namespace QuanLyGaraOto.ViewModel
         public MainViewModel()
         {
             LoadedWindowCommand = new RelayCommand<object>((p)=> { return true; }, (p)=> {
-                //ServiceWindow serviceWindow = new ServiceWindow();
-                //serviceWindow.ShowDialog();
+                ServiceWindow serviceWindow = new ServiceWindow();
+                serviceWindow.ShowDialog();
 
-                SettingWindow settingWindow = new SettingWindow();
-                settingWindow.ShowDialog();
+                //SettingWindow settingWindow = new SettingWindow();
+                //settingWindow.ShowDialog();
             });
         }
     }

@@ -216,8 +216,8 @@
                                  Margin="5 20 20 10"
                                  Height="auto">
                 <Button 
-                    
-                    Content="Thêm phiếu sửa chữa"
+                        Command="{Binding AddRepairCommand}"
+                        Content="Thêm phiếu sửa chữa"
                         IsEnabled="{Binding IsEnabledBtnAddRepair}"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"

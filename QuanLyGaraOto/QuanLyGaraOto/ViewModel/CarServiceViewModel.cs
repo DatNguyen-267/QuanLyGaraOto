@@ -52,6 +52,12 @@ namespace QuanLyGaraOto.ViewModel
         private DateTime? _ReceptionDate { get; set; }
         public DateTime? ReceptionDate { get => _ReceptionDate; set { _ReceptionDate = value; OnPropertyChanged(); } }
         #endregion
+        #region Important Data
+        private RepairForm _RepairForm { get; set; }
+        public RepairForm RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
+        private CarReception _CarReception { get; set; }
+        public CarReception CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
+        #endregion
         public CarServiceViewModel()
         {
             InitVis();
@@ -71,10 +77,21 @@ namespace QuanLyGaraOto.ViewModel
                     };
                 });
             AddRepairCommand = new RelayCommand<Object>(
-                (p) => { return true; },
+                (p) => {
+                    if (IsEnabledAddRepairBtn) return true;
+                    return false;
+                        },
                 (p) =>
                 {
-                    //
+                    AddRepairFormWindow addRepairFormWindow = new AddRepairFormWindow();
+                    addRepairFormWindow.ShowDialog();
+
+                    AddRepairFormViewModel addRepairFormViewModel = (addRepairFormWindow.DataContext as AddRepairFormViewModel);
+                    if (addRepairFormViewModel.IsSuccess)
+                    {
+                        AddRepairForm(addRepairFormViewModel.NewRepairForm);
+                        VisRepair(true);
+                    }
                 });
         }
         public void InitBtn()
@@ -117,14 +134,25 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void LoadCarInfo(int IdNewCar)
         {
-            CarReception carReception = new CarReception();
-            carReception = DataProvider.Ins.DB.CarReceptions.Where(x => x.Id == IdNewCar).Single();
-            Name = carReception.Customer.Name;
-            Address = carReception.Customer.Address;
-            Phone = carReception.Customer.Telephone;
-            LicensePlate = carReception.LicensePlate;
-            ReceptionDate = carReception.ReceptionDate;
-            SelectedBrand = carReception.CarBrand;
+            CarReception = new CarReception();
+            CarReception = DataProvider.Ins.DB.CarReceptions.Where(x => x.Id == IdNewCar).Single();
+            Name = CarReception.Customer.Name;
+            Address = CarReception.Customer.Address;
+            Phone = CarReception.Customer.Telephone;
+            LicensePlate = CarReception.LicensePlate;
+            ReceptionDate = CarReception.ReceptionDate;
+            SelectedBrand = CarReception.CarBrand;
+        }
+        public void LoadRepairInfo()
+        {
+
+        }
+        public void AddRepairForm(RepairForm newRepairForm)
+        {
+            newRepairForm.IdCarReception = CarReception.Id;
+            DataProvider.Ins.DB.RepairForms.Add(newRepairForm);
+            DataProvider.Ins.DB.SaveChanges();
+            RepairForm = newRepairForm;
         }
     }
 }
