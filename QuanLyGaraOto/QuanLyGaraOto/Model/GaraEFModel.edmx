@@ -10,7 +10,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="CarReception">
           <Key>
@@ -18,7 +18,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdCustomer" Type="int" Nullable="false" />
-          <Property Name="LicensePlate" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LicensePlate" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdBrand" Type="int" Nullable="false" />
           <Property Name="ReceptionDate" Type="datetime" Nullable="false" />
           <Property Name="IdStatus" Type="int" Nullable="false" />
@@ -28,16 +28,16 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Address" Type="varchar(max)" />
-          <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="GaraInfo">
           <Key>
@@ -46,16 +46,16 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaxCar" Type="int" />
           <Property Name="MaxCarReception" Type="int" />
-          <Property Name="Phone" Type="varchar" MaxLength="20" />
-          <Property Name="Email" Type="varchar" MaxLength="200" />
-          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Pay">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Receipt">
@@ -82,7 +82,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRepairForm" Type="int" Nullable="false" />
-          <Property Name="Content" Type="varchar(max)" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IdSupply" Type="int" />
           <Property Name="SuppliesAmount" Type="int" />
           <Property Name="IdPay" Type="int" Nullable="false" />
@@ -93,7 +93,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="Price" Type="int" />
           <Property Name="Amount" Type="int" />
         </EntityType>
@@ -103,11 +103,11 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUser" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="BirthDate" Type="datetime" />
-          <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="CMND" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CMND" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -121,8 +121,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="IdRole" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__Users__IdRole__4222D4EF">
@@ -425,7 +425,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CarReceptions" Relationship="GARAModel.FK_CarReception_CarBrand" FromRole="CarBrand" ToRole="CarReception" />
         </EntityType>
         <EntityType Name="CarReception">
@@ -434,7 +434,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdCustomer" Type="Int32" Nullable="false" />
-          <Property Name="LicensePlate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LicensePlate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IdBrand" Type="Int32" Nullable="false" />
           <Property Name="ReceptionDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdStatus" Type="Int32" Nullable="false" />
@@ -449,7 +449,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CarReceptions" Relationship="GARAModel.FK_CarReception_CarStatus" FromRole="CarStatu" ToRole="CarReception" />
         </EntityType>
         <EntityType Name="Customer">
@@ -457,9 +457,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CarReceptions" Relationship="GARAModel.FK_CarReception_Customer" FromRole="Customer" ToRole="CarReception" />
         </EntityType>
         <EntityType Name="GaraInfo">
@@ -469,9 +469,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaxCar" Type="Int32" />
           <Property Name="MaxCarReception" Type="Int32" />
-          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Receipts" Relationship="GARAModel.FK_Receipt_GaraInfo" FromRole="GaraInfo" ToRole="Receipt" />
         </EntityType>
         <EntityType Name="Pay">
@@ -479,7 +479,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RepairInfoes" Relationship="GARAModel.FK_RepairInfo_Pay" FromRole="Pay" ToRole="RepairInfo" />
         </EntityType>
@@ -511,7 +511,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRepairForm" Type="Int32" Nullable="false" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IdSupply" Type="Int32" />
           <Property Name="SuppliesAmount" Type="Int32" />
           <Property Name="IdPay" Type="Int32" Nullable="false" />
@@ -525,7 +525,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Int32" />
           <Property Name="Amount" Type="Int32" />
           <NavigationProperty Name="RepairInfoes" Relationship="GARAModel.FK_RepairInfo_Supply" FromRole="Supply" ToRole="RepairInfo" />
@@ -536,11 +536,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdUser" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BirthDate" Type="DateTime" Precision="3" />
-          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CMND" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CMND" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="GARAModel.FK_UserInfo_Users" FromRole="UserInfo" ToRole="User" />
         </EntityType>
         <EntityType Name="UserRole">
@@ -556,8 +556,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserInfoes" Relationship="GARAModel.FK_UserInfo_Users" FromRole="User" ToRole="UserInfo" />
           <NavigationProperty Name="UserRole" Relationship="GARAModel.FK__Users__IdRole__4222D4EF" FromRole="User" ToRole="UserRole" />
