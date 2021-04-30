@@ -34,6 +34,10 @@ namespace QuanLyGaraOto.ViewModel
         #region Command
         public ICommand ReceptionCommand { get; set; }
         public ICommand AddRepairCommand { get; set; }
+        public ICommand AddCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+
         #endregion
 
         #region Data
@@ -92,6 +96,14 @@ namespace QuanLyGaraOto.ViewModel
                         AddRepairForm(addRepairFormViewModel.NewRepairForm);
                         VisRepair(true);
                     }
+                });
+            AddCommand = new RelayCommand<Object>(
+                (p) => {
+                    return true;
+                },
+                (p) =>
+                {
+                    
                 });
         }
         public void InitBtn()

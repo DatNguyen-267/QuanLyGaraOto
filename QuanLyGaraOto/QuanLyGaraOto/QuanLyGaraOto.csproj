@@ -85,6 +85,9 @@
     <Compile Include="AddRepairFormWindow.xaml.cs">
       <DependentUpon>AddRepairFormWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddRepairInfoWindow.xaml.cs">
+      <DependentUpon>AddRepairInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BunkPage.xaml.cs">
       <DependentUpon>BunkPage.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AddRepairFormWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddRepairInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

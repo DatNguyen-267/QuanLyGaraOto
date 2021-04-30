@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\App.xaml
-121581259262
+13373008598
 2782429596
-46-947698754
+472062285029
 23-1173338745
-AddNewGoodWindow.xaml;AddRepairFormWindow.xaml;BunkPage.xaml;CarReceptionWindow.xaml;CarServiceWindow.xaml;GoodBillPage.xaml;ImportWindow.xaml;LoginWindow.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;ServiceWindow.xaml;SettingWindow.xaml;
+AddNewGoodWindow.xaml;AddRepairFormWindow.xaml;AddRepairInfoWindow.xaml;BunkPage.xaml;CarReceptionWindow.xaml;CarServiceWindow.xaml;GoodBillPage.xaml;ImportWindow.xaml;LoginWindow.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;ServiceWindow.xaml;SettingWindow.xaml;
 
-True
+False
 
