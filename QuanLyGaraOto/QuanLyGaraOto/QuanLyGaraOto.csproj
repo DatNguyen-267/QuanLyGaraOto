@@ -106,7 +106,7 @@
     <Compile Include="Model\CarReception.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CarStatu.cs">
+    <Compile Include="Model\CarStatus.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Customer.cs">

@@ -58,7 +58,7 @@ namespace QuanLyGaraOto.ViewModel
                 CarReception carReception = new CarReception() { 
                     IdCustomer = customer.Id,
                     IdStatus = 1,
-                    LicensePlate = LicensePlate,
+                    LicensePlate = LicensePlate,    
                     ReceptionDate = ReceptionDate,
                     IdBrand = SelectedBrand.Id
                 };
