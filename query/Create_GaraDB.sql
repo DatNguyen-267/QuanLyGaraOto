@@ -61,7 +61,7 @@ create table CarReception
     IdCustomer int not NULL,
     LicensePlate varchar(50) not NULL,
     IdBrand int not NULL,
-    ReceptionDate datetime not NULL,
+    ReceptionDate date not NULL,
 	IdStatus int not null,
     constraint FK_CarReception_Customer foreign key (IdCustomer) references Customer(Id),
     constraint FK_CarReception_CarBrand foreign key (IdBrand) references CarBrand(Id),
@@ -74,7 +74,7 @@ create table RepairForm
 (
     Id int primary key not NULL IDENTITY(1, 1),
     IdCarReception int not NULL,
-    RepairDate datetime not NULL,
+    RepairDate date not NULL,
 	constraint FK_RepairForm_CarReception foreign key (IdCarReception) references CarReception(Id),
 );
 GO
@@ -121,7 +121,7 @@ create table Receipt
 	Id int primary key identity(1,1) not null,
     IdCarReception int not NULL,
     IdGaraInfo int not null,
-    ReceptDate datetime not NULL,
+    ReceptDate date not NULL,
     TotalMoney int not NULL,
     constraint FK_Receipt_CarReception foreign key (IdCarReception) references CarReception(Id),
 	constraint FK_Receipt_GaraInfo foreign key (IdGaraInfo) references GaraInfo(Id)
@@ -156,7 +156,7 @@ create table UserInfo
 	IdUser int not null,
     Name varchar(200) not NULL,
     Address varchar(max),
-    BirthDate datetime,
+    BirthDate date,
     Telephone varchar(20) not NULL,
     CMND varchar(100) not NULL,
     constraint FK_UserInfo_Users foreign key (IdUser) references Users(Id)

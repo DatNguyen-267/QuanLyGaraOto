@@ -17,7 +17,7 @@ namespace QuanLyGaraOto.Model
         public int Id { get; set; }
         public int IdCarReception { get; set; }
         public int IdGaraInfo { get; set; }
-        public System.DateTime ReceptDate { get; set; }
+        public System.DateTime? ReceptDate { get; set; }
         public int TotalMoney { get; set; }
     
         public virtual CarReception CarReception { get; set; }
