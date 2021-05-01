@@ -28,9 +28,6 @@ namespace QuanLyGaraOto.ViewModel
         public bool IsEnableReceptionBtn { get => _IsEnableReceptionBtn; set { _IsEnableReceptionBtn = value; OnPropertyChanged(); } }
         #endregion
 
-        private CarServiceWindow _carServiceWindow { get; set; }
-        public CarServiceWindow carServiceWindow { get => _carServiceWindow; set { _carServiceWindow = value; } }
-
         #region Command
         public ICommand ReceptionCommand { get; set; }
         public ICommand AddRepairCommand { get; set; }
@@ -40,7 +37,7 @@ namespace QuanLyGaraOto.ViewModel
 
         #endregion
 
-        #region Data
+        #region Data Reception
         private ObservableCollection<CarBrand> _ListBrand { get; set; }
         public ObservableCollection<CarBrand> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
         private CarBrand _SelectedBrand { get; set; }
@@ -56,7 +53,32 @@ namespace QuanLyGaraOto.ViewModel
         private DateTime? _ReceptionDate { get; set; }
         public DateTime? ReceptionDate { get => _ReceptionDate; set { _ReceptionDate = value; OnPropertyChanged(); } }
         #endregion
+        #region Data Repair
+        private ObservableCollection<RepairItem> _ListRepair { get; set; }
+        public ObservableCollection<RepairItem> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
+        private ObservableCollection<Supply> _ListSupply { get; set; }
+        public ObservableCollection<Supply> ListSupply { get => _ListSupply; set { _ListSupply = value; OnPropertyChanged(); } }
+        private ObservableCollection<Pay> _ListPay { get; set; }
+        public ObservableCollection<Pay> ListPay { get => _ListPay; set { _ListPay = value; OnPropertyChanged(); } }
+        private CarBrand _SelectedItem { get; set; }
+        public CarBrand SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
+        private string _Content { get; set; }
+        public string Content { get => _Content; set { _Content = value; OnPropertyChanged(); } }
+        private Supply _SelectedSupply { get; set; }
+        public Supply SelectedSupply { get => _SelectedSupply; set { _SelectedSupply = value; OnPropertyChanged(); } }
+        private Pay _SelectedPay { get; set; }
+        public Pay SelectedPay { get => _SelectedPay; set { _SelectedPay = value; OnPropertyChanged(); } }
+        private int? _SelectedAmount { get; set; }
+        public int? SelectedAmount { get => _SelectedAmount; set { _SelectedAmount = value; OnPropertyChanged(); } }
+        private int? _Price { get; set; }
+        public int? Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
+        private int? _TotalMoney { get; set; }
+        public int? TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
+        #endregion
+
         #region Important Data
+        private CarServiceWindow _carServiceWindow { get; set; }
+        public CarServiceWindow carServiceWindow { get => _carServiceWindow; set { _carServiceWindow = value; } }
         private RepairForm _RepairForm { get; set; }
         public RepairForm RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
         private CarReception _CarReception { get; set; }
@@ -64,6 +86,7 @@ namespace QuanLyGaraOto.ViewModel
         #endregion
         public CarServiceViewModel()
         {
+            InitData();
             InitVis();
             InitBtn();
             ListBrand = new ObservableCollection<CarBrand>(DataProvider.Ins.DB.CarBrands);
@@ -99,12 +122,25 @@ namespace QuanLyGaraOto.ViewModel
                 });
             AddCommand = new RelayCommand<Object>(
                 (p) => {
+                    if (Content == null
+                    || SelectedSupply == null
+                    || (SelectedAmount == null || SelectedAmount.GetType() != typeof(int))
+                    || SelectedPay == null
+                    || (Price == null || Price.GetType() != typeof(int))
+                    || (TotalMoney == null || TotalMoney.GetType() != typeof(int))
+                    ) return false;
                     return true;
                 },
                 (p) =>
                 {
                     
                 });
+        }
+        public void InitData()
+        {
+            SelectedAmount = 0;
+            Price = 0;
+            TotalMoney = 0;
         }
         public void InitBtn()
         {

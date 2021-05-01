@@ -21,8 +21,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CarStatus">
-      <EntityTypeMapping TypeName="GARAModel.CarStatu">
+    <EntitySetMapping Name="CarStatus1">
+      <EntityTypeMapping TypeName="GARAModel.CarStatus">
         <MappingFragment StoreEntitySet="CarStatus">
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />

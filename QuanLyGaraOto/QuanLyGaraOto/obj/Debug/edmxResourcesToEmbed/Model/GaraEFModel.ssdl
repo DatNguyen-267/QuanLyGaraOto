@@ -15,7 +15,7 @@
     <Property Name="IdCustomer" Type="int" Nullable="false" />
     <Property Name="LicensePlate" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="IdBrand" Type="int" Nullable="false" />
-    <Property Name="ReceptionDate" Type="datetime" Nullable="false" />
+    <Property Name="ReceptionDate" Type="date" Nullable="false" />
     <Property Name="IdStatus" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CarStatus">
@@ -60,7 +60,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdCarReception" Type="int" Nullable="false" />
     <Property Name="IdGaraInfo" Type="int" Nullable="false" />
-    <Property Name="ReceptDate" Type="datetime" Nullable="false" />
+    <Property Name="ReceptDate" Type="date" Nullable="false" />
     <Property Name="TotalMoney" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RepairForm">
@@ -69,7 +69,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdCarReception" Type="int" Nullable="false" />
-    <Property Name="RepairDate" Type="datetime" Nullable="false" />
+    <Property Name="RepairDate" Type="date" Nullable="false" />
   </EntityType>
   <EntityType Name="RepairInfo">
     <Key>
@@ -100,7 +100,7 @@
     <Property Name="IdUser" Type="int" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Address" Type="varchar(max)" />
-    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="BirthDate" Type="date" />
     <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="CMND" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>

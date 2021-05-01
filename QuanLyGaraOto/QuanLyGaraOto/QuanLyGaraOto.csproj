@@ -151,6 +151,7 @@
     <Compile Include="Model\RepairInfo.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RepairItem.cs" />
     <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
