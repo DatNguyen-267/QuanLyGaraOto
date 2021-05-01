@@ -29,7 +29,7 @@ namespace QuanLyGaraOto.Model
     
         public virtual DbSet<CarBrand> CarBrands { get; set; }
         public virtual DbSet<CarReception> CarReceptions { get; set; }
-        public virtual DbSet<CarStatu> CarStatus { get; set; }
+        public virtual DbSet<CarStatus> CarStatus1 { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<GaraInfo> GaraInfoes { get; set; }
         public virtual DbSet<Pay> Pays { get; set; }

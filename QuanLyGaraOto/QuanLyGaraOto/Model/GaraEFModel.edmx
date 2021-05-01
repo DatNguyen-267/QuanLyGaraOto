@@ -20,7 +20,7 @@
           <Property Name="IdCustomer" Type="int" Nullable="false" />
           <Property Name="LicensePlate" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdBrand" Type="int" Nullable="false" />
-          <Property Name="ReceptionDate" Type="datetime" Nullable="false" />
+          <Property Name="ReceptionDate" Type="date" Nullable="false" />
           <Property Name="IdStatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CarStatus">
@@ -65,7 +65,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdCarReception" Type="int" Nullable="false" />
           <Property Name="IdGaraInfo" Type="int" Nullable="false" />
-          <Property Name="ReceptDate" Type="datetime" Nullable="false" />
+          <Property Name="ReceptDate" Type="date" Nullable="false" />
           <Property Name="TotalMoney" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RepairForm">
@@ -74,7 +74,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdCarReception" Type="int" Nullable="false" />
-          <Property Name="RepairDate" Type="datetime" Nullable="false" />
+          <Property Name="RepairDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="RepairInfo">
           <Key>
@@ -105,7 +105,7 @@
           <Property Name="IdUser" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Address" Type="varchar(max)" />
-          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="BirthDate" Type="date" />
           <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="CMND" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -353,7 +353,7 @@
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="CarBrands" EntityType="GARAModel.CarBrand" />
           <EntitySet Name="CarReceptions" EntityType="GARAModel.CarReception" />
-          <EntitySet Name="CarStatus" EntityType="GARAModel.CarStatu" />
+          <EntitySet Name="CarStatus1" EntityType="GARAModel.CarStatus" />
           <EntitySet Name="Customers" EntityType="GARAModel.Customer" />
           <EntitySet Name="GaraInfoes" EntityType="GARAModel.GaraInfo" />
           <EntitySet Name="Pays" EntityType="GARAModel.Pay" />
@@ -369,7 +369,7 @@
             <End Role="CarReception" EntitySet="CarReceptions" />
           </AssociationSet>
           <AssociationSet Name="FK_CarReception_CarStatus" Association="GARAModel.FK_CarReception_CarStatus">
-            <End Role="CarStatu" EntitySet="CarStatus" />
+            <End Role="CarStatu" EntitySet="CarStatus1" />
             <End Role="CarReception" EntitySet="CarReceptions" />
           </AssociationSet>
           <AssociationSet Name="FK_CarReception_Customer" Association="GARAModel.FK_CarReception_Customer">
@@ -436,15 +436,15 @@
           <Property Name="IdCustomer" Type="Int32" Nullable="false" />
           <Property Name="LicensePlate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdBrand" Type="Int32" Nullable="false" />
-          <Property Name="ReceptionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReceptionDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IdStatus" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CarBrand" Relationship="GARAModel.FK_CarReception_CarBrand" FromRole="CarReception" ToRole="CarBrand" />
-          <NavigationProperty Name="CarStatu" Relationship="GARAModel.FK_CarReception_CarStatus" FromRole="CarReception" ToRole="CarStatu" />
+          <NavigationProperty Name="CarStatus" Relationship="GARAModel.FK_CarReception_CarStatus" FromRole="CarReception" ToRole="CarStatu" />
           <NavigationProperty Name="Customer" Relationship="GARAModel.FK_CarReception_Customer" FromRole="CarReception" ToRole="Customer" />
           <NavigationProperty Name="Receipts" Relationship="GARAModel.FK_Receipt_CarReception" FromRole="CarReception" ToRole="Receipt" />
           <NavigationProperty Name="RepairForms" Relationship="GARAModel.FK_RepairForm_CarReception" FromRole="CarReception" ToRole="RepairForm" />
         </EntityType>
-        <EntityType Name="CarStatu">
+        <EntityType Name="CarStatus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -490,7 +490,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdCarReception" Type="Int32" Nullable="false" />
           <Property Name="IdGaraInfo" Type="Int32" Nullable="false" />
-          <Property Name="ReceptDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReceptDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="TotalMoney" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CarReception" Relationship="GARAModel.FK_Receipt_CarReception" FromRole="Receipt" ToRole="CarReception" />
           <NavigationProperty Name="GaraInfo" Relationship="GARAModel.FK_Receipt_GaraInfo" FromRole="Receipt" ToRole="GaraInfo" />
@@ -501,7 +501,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdCarReception" Type="Int32" Nullable="false" />
-          <Property Name="RepairDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RepairDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="CarReception" Relationship="GARAModel.FK_RepairForm_CarReception" FromRole="RepairForm" ToRole="CarReception" />
           <NavigationProperty Name="RepairInfoes" Relationship="GARAModel.FK_RepairInfo_RepairForm" FromRole="RepairForm" ToRole="RepairInfo" />
         </EntityType>
@@ -538,7 +538,7 @@
           <Property Name="IdUser" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
           <Property Name="Telephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CMND" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="GARAModel.FK_UserInfo_Users" FromRole="UserInfo" ToRole="User" />
@@ -575,7 +575,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CarReception_CarStatus">
-          <End Type="GARAModel.CarStatu" Role="CarStatu" Multiplicity="1" />
+          <End Type="GARAModel.CarStatus" Role="CarStatu" Multiplicity="1" />
           <End Type="GARAModel.CarReception" Role="CarReception" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CarStatu">
@@ -720,8 +720,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CarStatus">
-            <EntityTypeMapping TypeName="GARAModel.CarStatu">
+          <EntitySetMapping Name="CarStatus1">
+            <EntityTypeMapping TypeName="GARAModel.CarStatus">
               <MappingFragment StoreEntitySet="CarStatus">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
