@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
         DataContext="{StaticResource SettingVM}"
         mc:Ignorable="d"
         Title="Cài đặt" Height="450" Width="800">
@@ -56,7 +57,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <Grid x:Name="AppSetting" Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid x:Name="AppSetting" Visibility="Collapsed">
                 <!--Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -111,19 +112,43 @@
 
                         <Grid Grid.Row="1">
                             <TextBox Text="{Binding MaxCarReception}" IsEnabled="True" TextAlignment="Center"
-                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
+                                </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
                         </Grid>
                         <Grid Grid.Row="2">
                             <TextBox Text="{Binding Telephone}" IsEnabled="True" TextAlignment="Center"
-                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
                         </Grid>
                         <Grid Grid.Row="3">
                             <TextBox Text="{Binding Email}" IsEnabled="True" TextAlignment="Center"
-                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
                         </Grid>
                         <Grid Grid.Row="4">
                             <TextBox Text="{Binding Address}" IsEnabled="True" TextAlignment="Center"
-                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
                         </Grid>
                         <Grid Grid.Row="5">
                             <Button
@@ -137,7 +162,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid x:Name="BrandSetting" Visibility="{Binding BrandSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid x:Name="BrandSetting" Visibility="Collapsed">
                 <!--Visibility="{Binding BrandSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -212,7 +237,7 @@
                     
                 </Grid>
             </Grid>
-            <Grid x:Name="UserSetting" Visibility="{Binding UserSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid x:Name="UserSetting" Visibility="Visible">
                 <!--Visibility="{Binding UserSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -274,27 +299,57 @@
                     <Grid Grid.Row="1">
                         <TextBox
                             Text="{Binding UserName}" IsEnabled="True" TextAlignment="Center"
-                                  MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                  MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
                     <Grid Grid.Row="2">
                         <TextBox
                             Text="{Binding UserAddress}" IsEnabled="True" TextAlignment="Center"
-                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
                     <Grid Grid.Row="3">
                         <TextBox
                             Text="{Binding UserBirth, StringFormat='dd/MM/yyyy'}" IsEnabled="True" TextAlignment="Center"
-                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
                     <Grid Grid.Row="4">
                         <TextBox
                             Text="{Binding UserTelephone}" IsEnabled="True" TextAlignment="Center"
-                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
                     <Grid Grid.Row="5">
                         <TextBox
                             Text="{Binding UserCMND}" IsEnabled="True" TextAlignment="Center"
-                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
                     <Grid Grid.Row="6">
                         <Button

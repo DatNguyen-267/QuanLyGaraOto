@@ -89,6 +89,8 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
+        public ICommand ChangeEnableButttonInGaraInformation { get; set; }
+        public ICommand ChangeEnableButtonInUserInformation { get; set; }
 
         // Setting gara information
         private int _MaxCarReception;
@@ -98,7 +100,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _MaxCarReception = value;
-                SetEnableStatusButtonInGaraInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -110,7 +111,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _Telephone = value;
-                SetEnableStatusButtonInGaraInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -122,7 +122,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _Email = value;
-                SetEnableStatusButtonInGaraInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -134,7 +133,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _Address = value;
-                SetEnableStatusButtonInGaraInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -215,7 +213,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _UserCMND = value;
-                SetEnableStatusButtonInUserInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -334,6 +331,14 @@ namespace QuanLyGaraOto.ViewModel
             IsEnableChangeButtonInUserInformation = false;
             IsEnableResetButtonInGaraInformation = false;
             IsEnableResetButtonInUserInformation = false;
+
+            // Change enable button
+            ChangeEnableButtonInUserInformation = new RelayCommand<object>((p) => { return true; }, (p) => {
+                SetEnableStatusButtonInUserInformation(true);
+            });
+            ChangeEnableButttonInGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) => {
+                SetEnableStatusButtonInGaraInformation(true);
+            });
         }
 
         private void SetEnableStatusButtonInGaraInformation(bool b)
