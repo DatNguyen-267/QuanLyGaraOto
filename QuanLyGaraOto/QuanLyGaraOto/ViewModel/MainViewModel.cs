@@ -17,8 +17,8 @@ namespace QuanLyGaraOto.ViewModel
                 //ServiceWindow serviceWindow = new ServiceWindow();
                 //serviceWindow.ShowDialog();
 
-                //SettingWindow settingWindow = new SettingWindow();
-                //settingWindow.ShowDialog();
+                SettingWindow settingWindow = new SettingWindow();
+                settingWindow.ShowDialog();
             });
         }
     }

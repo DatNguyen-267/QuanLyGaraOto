@@ -157,6 +157,30 @@ namespace QuanLyGaraOto.ViewModel
             set { _SelectedBrand = value; OnPropertyChanged(); }
         }
 
+        // Is enable button in car brand setting
+        private bool _IsEnableModifyButtonInBrandSetting;
+        public bool IsEnableModifyButtonInBrandSetting
+        {
+            get => _IsEnableModifyButtonInBrandSetting; set
+            {
+                _IsEnableModifyButtonInBrandSetting = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _IsEnableDeleteButtonInBrandSetting;
+        public bool IsEnableDeleteButtonInBrandSetting
+        {
+            get => _IsEnableDeleteButtonInBrandSetting; set
+            {
+                _IsEnableDeleteButtonInBrandSetting = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand ChangeEnableButtonInCarBrandSetting { get; set; }
+        public ICommand ModifyCarBrand { get; set; }
+        public ICommand DeleteCarBrand { get; set; }
+
         // Setting user information
         private string _UserName;
         public string UserName
@@ -294,6 +318,35 @@ namespace QuanLyGaraOto.ViewModel
             // Car brands
             ListBrands = new ObservableCollection<CarBrand>(DataProvider.Ins.DB.CarBrands);
 
+            IsEnableDeleteButtonInBrandSetting = false;
+            IsEnableModifyButtonInBrandSetting = false;
+
+            ChangeEnableButtonInCarBrandSetting = new RelayCommand<object>(
+                (p) =>
+                {
+                    if (_SelectedBrand == null) return false;
+                    return true;
+                },
+                (p) =>
+                {
+                    SetEnableStatusButotnInCarBrandSetting(true);
+                }
+            );
+
+            ModifyCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                // modify in database
+                SetEnableStatusButotnInCarBrandSetting(false);
+                SelectedBrand = null;
+            });
+
+            DeleteCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                // delete in database
+                SetEnableStatusButotnInCarBrandSetting(false);
+                SelectedBrand = null;
+            });
+
             // User information
             userInfo = DataProvider.Ins.DB.UserInfoes.Where(x => x.IdUser == 1).FirstOrDefault();
             if (userInfo != null)
@@ -331,12 +384,15 @@ namespace QuanLyGaraOto.ViewModel
             IsEnableChangeButtonInUserInformation = false;
             IsEnableResetButtonInGaraInformation = false;
             IsEnableResetButtonInUserInformation = false;
+            
 
             // Change enable button
-            ChangeEnableButtonInUserInformation = new RelayCommand<object>((p) => { return true; }, (p) => {
+            ChangeEnableButtonInUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
                 SetEnableStatusButtonInUserInformation(true);
             });
-            ChangeEnableButttonInGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) => {
+            ChangeEnableButttonInGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
                 SetEnableStatusButtonInGaraInformation(true);
             });
         }
@@ -350,6 +406,11 @@ namespace QuanLyGaraOto.ViewModel
         {
             IsEnableChangeButtonInUserInformation = b;
             IsEnableResetButtonInUserInformation = b;
+        }
+        private void SetEnableStatusButotnInCarBrandSetting(bool b)
+        {
+            IsEnableModifyButtonInBrandSetting = b;
+            IsEnableDeleteButtonInBrandSetting = b;
         }
     }
 }
