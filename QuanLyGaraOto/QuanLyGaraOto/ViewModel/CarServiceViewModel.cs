@@ -34,7 +34,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
-
+        public ICommand UpdateValue { get; set; }
         #endregion
 
         #region Data Reception
@@ -53,6 +53,7 @@ namespace QuanLyGaraOto.ViewModel
         private DateTime? _ReceptionDate { get; set; }
         public DateTime? ReceptionDate { get => _ReceptionDate; set { _ReceptionDate = value; OnPropertyChanged(); } }
         #endregion
+
         #region Data Repair
         private ObservableCollection<RepairItem> _ListRepair { get; set; }
         public ObservableCollection<RepairItem> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
@@ -60,6 +61,8 @@ namespace QuanLyGaraOto.ViewModel
         public ObservableCollection<Supply> ListSupply { get => _ListSupply; set { _ListSupply = value; OnPropertyChanged(); } }
         private ObservableCollection<Pay> _ListPay { get; set; }
         public ObservableCollection<Pay> ListPay { get => _ListPay; set { _ListPay = value; OnPropertyChanged(); } }
+        private ObservableCollection<int> _ListAmount { get; set; }
+        public ObservableCollection<int> ListAmount { get => _ListAmount; set { _ListAmount = value; OnPropertyChanged(); } }
         private CarBrand _SelectedItem { get; set; }
         public CarBrand SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
         private string _Content { get; set; }
@@ -68,12 +71,12 @@ namespace QuanLyGaraOto.ViewModel
         public Supply SelectedSupply { get => _SelectedSupply; set { _SelectedSupply = value; OnPropertyChanged(); } }
         private Pay _SelectedPay { get; set; }
         public Pay SelectedPay { get => _SelectedPay; set { _SelectedPay = value; OnPropertyChanged(); } }
-        private int? _SelectedAmount { get; set; }
-        public int? SelectedAmount { get => _SelectedAmount; set { _SelectedAmount = value; OnPropertyChanged(); } }
-        private int? _Price { get; set; }
-        public int? Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
-        private int? _TotalMoney { get; set; }
-        public int? TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
+        private Nullable<int> _SelectedAmount { get; set; }
+        public Nullable<int> SelectedAmount { get => _SelectedAmount; set { _SelectedAmount = value; OnPropertyChanged(); } }
+        private int _Price { get; set; }
+        public int Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
+        private int _TotalMoney { get; set; }
+        public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
         #endregion
 
         #region Important Data
@@ -89,7 +92,17 @@ namespace QuanLyGaraOto.ViewModel
             InitData();
             InitVis();
             InitBtn();
+
             ListBrand = new ObservableCollection<CarBrand>(DataProvider.Ins.DB.CarBrands);
+            ListPay = new ObservableCollection<Pay>(DataProvider.Ins.DB.Pays);
+            ListSupply = new ObservableCollection<Supply>(DataProvider.Ins.DB.Supplies);
+            ListRepair = new ObservableCollection<RepairItem>();
+            ListAmount = new ObservableCollection<int>();
+            for (int i = 0; i < 100; i++)
+            {
+                ListAmount.Add(i);
+            }
+
             ReceptionCommand = new RelayCommand<object>(
                 (p) => { return true; },
                 (p) =>
@@ -124,17 +137,44 @@ namespace QuanLyGaraOto.ViewModel
                 (p) => {
                     if (Content == null
                     || SelectedSupply == null
-                    || (SelectedAmount == null || SelectedAmount.GetType() != typeof(int))
+                    || ( SelectedAmount.GetType() != typeof(int))
                     || SelectedPay == null
-                    || (Price == null || Price.GetType() != typeof(int))
-                    || (TotalMoney == null || TotalMoney.GetType() != typeof(int))
+                    || ( Price.GetType() != typeof(int))
+                    || ( TotalMoney.GetType() != typeof(int))
                     ) return false;
                     return true;
                 },
                 (p) =>
                 {
-                    
+                    RepairInfo repairInfo = new RepairInfo()
+                    {
+                        Content = Content,
+                        IdPay = SelectedPay.Id,
+                        IdRepairForm = RepairForm.Id
+                    ,
+                        IdSupply = SelectedSupply.Id,
+                        SuppliesAmount = SelectedAmount,
+                        TotalMoney = TotalMoney
+                    };
+                    ListRepair.Add(new RepairItem() {RepairInfo = repairInfo, Price = Price, TotalMoney = TotalMoney});
+                    DataProvider.Ins.DB.RepairInfoes.Add(repairInfo);
+                    DataProvider.Ins.DB.SaveChanges();
                 });
+            UpdateValue = new RelayCommand<Object>(
+                (p) => {
+                    if (SelectedSupply == null || SelectedAmount == null || SelectedPay == null
+                    ) return false;
+                    return true;
+                },
+                (p) =>
+                {
+                    Calculate();
+                });
+        }
+        public void Calculate()
+        {
+            Price = (int)SelectedSupply.Price * (int)SelectedAmount;
+            TotalMoney = (int)Price + (int)SelectedPay.Price;
         }
         public void InitData()
         {

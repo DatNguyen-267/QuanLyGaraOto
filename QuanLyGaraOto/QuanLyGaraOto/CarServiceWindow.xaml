@@ -279,7 +279,7 @@
                                     Margin="3 3 3 0"                 
                                     Width="120"
                                       materialDesign:HintAssist.Hint="Số lượng"
-                                      ItemsSource="{Binding LongListToTestComboVirtualization}"
+                                      ItemsSource="{Binding ListAmount}"
                                       Style="{StaticResource MaterialDesignFilledComboBox}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
@@ -307,7 +307,6 @@
                                     SelectedValue="{Binding SelectedPay}"
                                     ItemsSource="{Binding ListPay}"
                                     DisplayMemberPath="Price"
-                                    SelectedValuePath="Price"
                                     Style="{StaticResource MaterialDesignFilledComboBox}"
                                     materialDesign:HintAssist.Hint="Tiền công"
                                     Margin="3 3 3 0"
@@ -351,6 +350,7 @@
                                 HorizontalAlignment="Right">
                             </Button>
                             <Button 
+                                Command="{Binding AddCommand}"
                                 Width="100"
                                 Content="Thêm"
                                 Background="#455A64"
@@ -368,13 +368,13 @@
                                    HorizontalContentAlignment="Left">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Id,UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"></GridViewColumn>
-                                        <GridViewColumn Header="Nội dung" DisplayMemberBinding="{Binding Content,UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"></GridViewColumn>
-                                        <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding Supply.Name,UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"></GridViewColumn>
-                                        <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding SuppliesAmount,UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"></GridViewColumn>
-                                        <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding Price,UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"></GridViewColumn>
-                                        <GridViewColumn Header="Tiền công" DisplayMemberBinding="{Binding Pay,UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"></GridViewColumn>
-                                        <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding TotalMoney,UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"></GridViewColumn>
+                                        <GridViewColumn Header="STT" DisplayMemberBinding="{Binding RepairInfo.Id}"></GridViewColumn>
+                                        <GridViewColumn Header="Nội dung" DisplayMemberBinding="{Binding RepairInfo.Content}"></GridViewColumn>
+                                        <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding RepairInfo.Supply.Name}"></GridViewColumn>
+                                        <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding RepairInfo.SuppliesAmount}"></GridViewColumn>
+                                        <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                        <GridViewColumn Header="Tiền công" DisplayMemberBinding="{Binding RepairInfo.Pay.Price}"></GridViewColumn>
+                                        <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding TotalMoney}"></GridViewColumn>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
