@@ -153,7 +153,7 @@ GO
 create table UserInfo
 (
     Id int primary key not NULL IDENTITY(1, 1),
-	IdUser int not null,
+	IdUser int,
     Name varchar(200) not NULL,
     Address varchar(max),
     BirthDate date,

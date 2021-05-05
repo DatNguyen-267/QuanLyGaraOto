@@ -15,7 +15,7 @@ namespace QuanLyGaraOto.Model
     public partial class UserInfo
     {
         public int Id { get; set; }
-        public int IdUser { get; set; }
+        public Nullable<int> IdUser { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
