@@ -3,6 +3,7 @@
                     xmlns:viewmodel="clr-namespace:QuanLyGaraOto.ViewModel"
                     xmlns:framework="clr-namespace:TimeRecorder.Framework;assembly=MyAssembly">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
     <viewmodel:ServiceViewModel x:Key="ServiceVM"></viewmodel:ServiceViewModel>
     <viewmodel:CarReceptionViewModel x:Key="CarReceptionVM"></viewmodel:CarReceptionViewModel>
     <viewmodel:CarServiceViewModel x:Key="CarServiceVM"></viewmodel:CarServiceViewModel>

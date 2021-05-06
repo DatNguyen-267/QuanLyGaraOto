@@ -161,3 +161,6 @@ create table UserInfo
     CMND varchar(100) not NULL,
     constraint FK_UserInfo_Users foreign key (IdUser) references Users(Id)
 );
+
+insert into UserRole(Name) values ('admin');
+insert into Users(UserName,Password,IdRole) values ('admin','db69fc039dcbd2962cb4d28f5891aae1',1);
