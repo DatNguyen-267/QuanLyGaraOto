@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
+
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Name="loginWindow"
@@ -16,9 +17,9 @@
         
        >
     <Grid>
-        <Grid>
+        <Grid >
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="200"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -26,96 +27,84 @@
             <Border CornerRadius="10" Grid.RowSpan="2">
                 <Border.Background>
                     <LinearGradientBrush>
-                        <GradientStop Color="#7be9f6" Offset="0.0"/>
-                        <GradientStop Color="#f083da" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.0"/>
+                        <GradientStop Color="White" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
 
 
-            <StackPanel VerticalAlignment="Center">
+            <StackPanel Grid.Row="0" VerticalAlignment="Center" >
 
-                <TextBlock Text="Modern Design"
-                           FontWeight="Light"
+                <TextBlock Text="Login"
+                           FontWeight="Bold"
                            FontFamily="helvetica"
-                           FontSize="22"
-                           Foreground="White"
+                           FontSize="60"
+                           Foreground="#3d4751"
                            HorizontalAlignment="Center"/>
             </StackPanel>
 
 
 
-            <StackPanel Grid.Row="1" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBox FontFamily="Helvetica"
-                             FontWeight="Light"
-                             materialDesign:HintAssist.Hint="Username"
-                             Text="{Binding UserName}"
-                             FontSize="20"
-                             HorizontalAlignment="Center"
-                             Foreground="White"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Width="235"
-                             HorizontalContentAlignment="Left"
-                             Opacity="0.5"
-                             Height="27"
-                             Margin="63,0,0,0"/>
-                    <materialDesign:PackIcon Kind="Account" 
-                                                VerticalAlignment="Center" 
-                                                HorizontalAlignment="Center" 
-                                                Foreground="White"/>
-                </StackPanel>
-                <Border Width="250"
-                        Height="2"
-                        Background="White"
-                        Opacity="0.5"/>
+            <StackPanel Grid.Row="1" Margin="65,0,65,0" >
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="Grid">
+                            <Setter Property="Margin" Value="0 0 0 0"></Setter>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" >
+                        <TextBox
+                        FontSize="20"
+                        Foreground="#3d4751"
+                        materialDesign:HintAssist.Foreground="#3d4751"
+                        materialDesign:TextFieldAssist.UnderlineBrush="#3d4751"
+                        materialDesign:HintAssist.Hint="Tên đăng nhập"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        VerticalAlignment="Center" />
+                    </Grid>
 
-
-
-                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                    <PasswordBox
-                             x:Name="PasswordBox"
-                             FontFamily="Helvetica"
-                             FontWeight="Light"
-                             Password="Password"
-                             FontSize="20"
-                             HorizontalAlignment="Center"
-                             Foreground="White"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Width="235"
-                             HorizontalContentAlignment="Left"
-                             Opacity="0.5"
-                             Height="27"
-                             Margin="63,0,0,0">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PasswordChanged">
-                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" 
+                    <Grid Grid.Row="1">
+                        <PasswordBox
+                        x:Name="PasswordBox"
+                        FontSize="20"
+                        materialDesign:HintAssist.Foreground="#3d4751"
+                        materialDesign:TextFieldAssist.UnderlineBrush="#3d4751"
+                       
+                        materialDesign:HintAssist.Hint="Mật khẩu"
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+ 
+                        VerticalAlignment="Center">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PasswordChanged">
+                                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" 
                                    CommandParameter="{Binding ElementName=PasswordBox}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </PasswordBox>
-                    <materialDesign:PackIcon Kind="FormTextboxPassword" 
-                                                VerticalAlignment="Center" 
-                                                HorizontalAlignment="Center" 
-                                                Foreground="White"/>
-                </StackPanel>
-                <Border Width="250"
-                        Height="2"
-                        Background="White"
-                        Opacity="0.5"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </PasswordBox>
 
+                    </Grid>
 
-                <StackPanel Orientation="Vertical" Margin="0,30,0,0">
-                    <Button Width="250" Height="40" Content="Đăng nhập" Margin="60,0,60,0" Background="#0000FF"
+                </Grid>
+                <Grid Grid.Row="2">
+                <StackPanel Orientation="Vertical" Margin="0,25,0,0">
+                    <Button Width="250" Height="40" Content="Đăng nhập" Margin="0,0,0,4"  Background="#0000FF" BorderThickness="0"
+                            
+                            FontSize="20"
                             Command="{Binding LoginCommand}"
                             CommandParameter="{Binding ElementName=loginWindow}" Click="Button_Click"/>
-                    <Button Width="250" Height="40" Content="Thoát" Background="#C0C0C0"
+                    <Button Height="40" Content="Thoát" Margin="0,4,0,0" Background="#3d4751" BorderThickness="0" 
+                            
+                            FontSize="20"
                             Command="{Binding CloseCommand}"                          
                             CommandParameter="{Binding ElementName=loginWindow}"/>
                 </StackPanel>
-
+                </Grid>
             </StackPanel>
 
 
