@@ -126,17 +126,14 @@
                                         </Grid.ColumnDefinitions>
                                         <materialDesign:PackIcon Kind="Watermark" 
                                                      Grid.Column="0"/>
-                                        <ComboBox 
+                                        <TextBox 
+                                            Text="{Binding Brand}"
                                             Grid.Column="1"
-                                        
-                                            ItemsSource="{Binding ListBrand}"
-                                            SelectedItem="{Binding SelectedBrand}"
-                                            DisplayMemberPath="Name"
+                                            IsReadOnly="true"
                                             VerticalAlignment="Center"
                                             materialDesign:HintAssist.Hint="Hiệu xe"
-                                            materialDesign:HintAssist.HintOpacity=".26"
-                                            IsReadOnly="True">  
-                                        </ComboBox>
+                                            materialDesign:HintAssist.HintOpacity=".26">
+                                        </TextBox>
                                     </Grid>
                                 </Grid>
                                 <Grid  Margin="10 5 10 0">
@@ -191,6 +188,23 @@
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
                                             materialDesign:HintAssist.Hint="Ngày tiếp nhận"
+                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                    </Grid>
+                                </Grid>
+                                <Grid Margin="10 5 10 0">
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <materialDesign:PackIcon Kind="CalendarEnd" 
+                                                     Grid.Column="0"/>
+                                        <DatePicker 
+                                            IsEnabled="false"
+                                            Text="{Binding ReceptionDate}"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            materialDesign:HintAssist.Hint="Ngày sửa chữa"
                                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                                     </Grid>
                                 </Grid>
@@ -334,6 +348,7 @@
                             Orientation="Horizontal"
                             HorizontalAlignment="Left">
                             <Button 
+                                Command="{Binding EditCommand}"
                                 Width="100"
                                 Content="Sửa"
                                 Margin="10 0 10 0"
@@ -342,6 +357,7 @@
                                 HorizontalAlignment="Right">
                             </Button>
                             <Button 
+                                Command="{Binding DeleteCommand}"
                                 Width="100"
                                 Content="Xóa"
                                 Margin="10 0 10 0"
@@ -390,18 +406,52 @@
             <StackPanel HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
-
-                <Button
-                    Visibility="Collapsed"
-                    x:Name="BtnReceipt"
-                    Content="Thanh toán và hoàn trả xe"
-                    Width="auto"
-                    FontSize="16"
-                    Height="40"
-                    Margin="10 0 10 0"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right">
-                </Button>
+                <StackPanel 
+                            Grid.Row="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Left">
+                    <Button 
+                           Visibility="Collapsed"
+                            Width="100"
+                            Content="Sửa"
+                            Margin="10 0 10 0"
+                            VerticalAlignment="Center"
+                            Background="#455A64"
+                            HorizontalAlignment="Right">
+                    </Button>
+                    <Button 
+                            Visibility="Collapsed"
+                            Width="100"
+                            Content="Xóa"
+                            Margin="10 0 10 0"
+                            Background="#455A64"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right">
+                    </Button>
+                    <Button 
+                        x:Name="BtnReceipt"
+                            Content="Thanh toán và hoàn trả xe"
+                            Width="200"
+                            FontSize="16"
+                            Height="40"
+                            Margin="10 0 10 0"
+                            Background="#2e9fdb"
+                            BorderBrush="#2e9fdb"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right">
+                    </Button>
+                    <Button
+                            Margin="10 0 10 0"
+                            Width="200"
+                            FontSize="16"
+                            Height="40"
+                            Content="Close"
+                            Background="#455A64"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right">
+                    </Button>
+                </StackPanel>
+                
             </StackPanel>
         </Grid>
     </Grid>

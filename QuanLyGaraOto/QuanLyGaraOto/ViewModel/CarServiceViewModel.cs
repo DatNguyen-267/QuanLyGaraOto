@@ -40,8 +40,8 @@ namespace QuanLyGaraOto.ViewModel
         #region Data Reception
         private ObservableCollection<CarBrand> _ListBrand { get; set; }
         public ObservableCollection<CarBrand> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
-        private CarBrand _SelectedBrand { get; set; }
-        public CarBrand SelectedBrand { get => _SelectedBrand; set { _SelectedBrand = value; OnPropertyChanged(); } }
+        private string _Brand { get; set; }
+        public string Brand { get => _Brand; set { _Brand = value; OnPropertyChanged(); } }
         private string _Name { get; set; }
         public string Name { get => _Name; set { _Name = value; OnPropertyChanged(); } }
         private string _LicensePlate { get; set; }
@@ -55,6 +55,7 @@ namespace QuanLyGaraOto.ViewModel
         #endregion
 
         #region Data Repair
+
         private ObservableCollection<RepairItem> _ListRepair { get; set; }
         public ObservableCollection<RepairItem> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
         private ObservableCollection<Supply> _ListSupply { get; set; }
@@ -63,8 +64,30 @@ namespace QuanLyGaraOto.ViewModel
         public ObservableCollection<Pay> ListPay { get => _ListPay; set { _ListPay = value; OnPropertyChanged(); } }
         private ObservableCollection<int> _ListAmount { get; set; }
         public ObservableCollection<int> ListAmount { get => _ListAmount; set { _ListAmount = value; OnPropertyChanged(); } }
-        private CarBrand _SelectedItem { get; set; }
-        public CarBrand SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
+        // Danh sach cac List
+
+        private RepairItem _SelectedItem { get; set; }
+        public RepairItem SelectedItem { get => _SelectedItem; 
+            set { 
+                _SelectedItem = value;
+                if (SelectedItem != null)
+                {
+                    Content = SelectedItem.RepairInfo.Content;
+                    SelectedSupply = SelectedItem.RepairInfo.Supply;
+                    SelectedPay = SelectedItem.RepairInfo.Pay;
+                    SelectedAmount = SelectedItem.RepairInfo.SuppliesAmount;
+                    Price = SelectedItem.Price;
+                    TotalMoney = SelectedItem.TotalMoney;
+                } else
+                {
+                    Content = null;
+                    SelectedSupply = null;
+                    SelectedPay = null;
+                    SelectedAmount = 1;
+                    Price = 0;
+                    TotalMoney = 0;
+                }
+                OnPropertyChanged(); } }
         private string _Content { get; set; }
         public string Content { get => _Content; set { _Content = value; OnPropertyChanged(); } }
         private Supply _SelectedSupply { get; set; }
@@ -98,7 +121,7 @@ namespace QuanLyGaraOto.ViewModel
             ListSupply = new ObservableCollection<Supply>(DataProvider.Ins.DB.Supplies);
             ListRepair = new ObservableCollection<RepairItem>();
             ListAmount = new ObservableCollection<int>();
-            for (int i = 0; i < 100; i++)
+            for (int i = 1; i < 100; i++)
             {
                 ListAmount.Add(i);
             }
@@ -137,10 +160,8 @@ namespace QuanLyGaraOto.ViewModel
                 (p) => {
                     if (Content == null
                     || SelectedSupply == null
-                    || ( SelectedAmount.GetType() != typeof(int))
                     || SelectedPay == null
-                    || ( Price.GetType() != typeof(int))
-                    || ( TotalMoney.GetType() != typeof(int))
+                    || SelectedAmount == null
                     ) return false;
                     return true;
                 },
@@ -160,6 +181,38 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.RepairInfoes.Add(repairInfo);
                     DataProvider.Ins.DB.SaveChanges();
                 });
+            EditCommand = new RelayCommand<Object>(
+                (p) => {
+                    if (SelectedItem == null) return false;
+                    if (Content == null || SelectedSupply == null || SelectedPay == null || SelectedAmount == null) return false;
+                    return true;
+                },
+                (p) =>
+                {
+                    RepairInfo temp = DataProvider.Ins.DB.RepairInfoes.Where(x => x.Id == SelectedItem.RepairInfo.Id).SingleOrDefault();
+                    temp.Content = Content;
+                    temp.IdSupply = SelectedSupply.Id;
+                    temp.IdPay = SelectedPay.Id;
+                    temp.SuppliesAmount = SelectedAmount;
+                    temp.TotalMoney = TotalMoney;
+                    DataProvider.Ins.DB.SaveChanges();
+                    SelectedItem.Price = Price;
+                    SelectedItem.TotalMoney = TotalMoney;
+                });
+            DeleteCommand = new RelayCommand<Object>(
+                (p) => {
+                    if (SelectedItem == null) return false;
+                    if (DataProvider.Ins.DB.RepairInfoes.Where(x => x.Id == SelectedItem.RepairInfo.Id).SingleOrDefault() == null)
+                        return false;
+                    return true;
+                },
+                (p) =>
+                {
+                    DeleteModel deleteModel = new DeleteModel();
+                    deleteModel.RepairInfo(SelectedItem.RepairInfo);
+                    ListRepair.Remove(SelectedItem);
+                    
+                });
             UpdateValue = new RelayCommand<Object>(
                 (p) => {
                     if (SelectedSupply == null || SelectedAmount == null || SelectedPay == null
@@ -178,7 +231,7 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void InitData()
         {
-            SelectedAmount = 0;
+            SelectedAmount = 1;
             Price = 0;
             TotalMoney = 0;
         }
@@ -229,7 +282,7 @@ namespace QuanLyGaraOto.ViewModel
             Phone = CarReception.Customer.Telephone;
             LicensePlate = CarReception.LicensePlate;
             ReceptionDate = CarReception.ReceptionDate;
-            SelectedBrand = CarReception.CarBrand;
+            Brand = CarReception.CarBrand.Name;
         }
         public void LoadRepairInfo()
         {

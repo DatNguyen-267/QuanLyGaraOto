@@ -45,5 +45,16 @@ namespace QuanLyGaraOto.Model
             DataProvider.Ins.DB.CarReceptions.Remove(itemDelete);
             DataProvider.Ins.DB.SaveChanges();
         }
+        public void RepairInfo(RepairInfo itemDelete)
+        {
+            DataProvider.Ins.DB.RepairInfoes.Remove(itemDelete);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+        public void RepairInfo(int ID)
+        {
+            DataProvider.Ins.DB.RepairInfoes.Remove(
+                DataProvider.Ins.DB.RepairInfoes.Where(x => x.Id == ID).SingleOrDefault());
+            DataProvider.Ins.DB.SaveChanges();
+        }
     }
 }
