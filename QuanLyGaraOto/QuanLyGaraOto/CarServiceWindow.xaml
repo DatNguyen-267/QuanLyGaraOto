@@ -36,10 +36,13 @@
                 <ColumnDefinition Width="230"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <materialDesign:Card Visibility="{Binding VisReceptionCard,
+            <materialDesign:Card  
+                 materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    materialDesign:ShadowAssist.ShadowEdges="Right,Bottom"
+                Visibility="{Binding VisReceptionCard,
                 Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Column="0" x:Name="ReceptionCard"
-                                 Margin="20 20 5 10"
+                                 Margin="7 20 5 10"
                                  Height="auto">
                 <Button Content="Tiếp nhận xe"
                         IsEnabled="{Binding IsEnableReceptionBtn}"
@@ -53,33 +56,31 @@
                         >
                 </Button>
             </materialDesign:Card>
-            <ScrollViewer  Visibility="{Binding VisInfo,
+            <Grid  Visibility="{Binding VisInfo,
                 Converter={StaticResource BooleanToVisibilityConverter}}"
-                          x:Name="InfoCard">
-                <materialDesign:Card Grid.Column="0" 
-                                 Margin="5 20 5 10"
-                                 Height="auto">
+                          x:Name="InfoCard"
+                   Grid.Column="0" 
+                   >
+                <materialDesign:Card 
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    materialDesign:ShadowAssist.ShadowEdges="Right,Bottom"
+                    Margin="7 20 5 10"
+                    Height="auto">
                     <Grid>
                         <Grid.Resources>
-                            <Style TargetType="Grid" x:Key="GridWidth400">
-                                <Setter Property="Height" Value="50"></Setter>
-                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                            </Style>
                             <Style TargetType="materialDesign:PackIcon">
                                 <Setter Property="Width" Value="30"></Setter>
                                 <Setter Property="Height" Value="30"></Setter>
                                 <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                 <Setter Property="HorizontalAlignment" Value="Right"></Setter>
                                 <Setter Property="Margin" Value="0 0 10 0"></Setter>
-
                             </Style>
                         </Grid.Resources>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="80"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
+                        <ScrollViewer Grid.Row="0">
                             <StackPanel>
                                 <Grid  Margin="10 10 10 0" Height="45">
                                     <Grid>
@@ -209,25 +210,28 @@
                                     </Grid>
                                 </Grid>
                             </StackPanel>
-                        </Grid>
+                        </ScrollViewer>
                         <Grid Grid.Row="1">
                             <Button
-                           Grid.Column="0"
-                            Width="auto"
-                            Background="#455A64"
-                            HorizontalAlignment="Center"
-                          Style="{StaticResource MaterialDesignRaisedButton}"
-                          ToolTip="Resource name: MaterialDesignRaisedButton"
-                          Content="Thay đổi thông tin" />
+                                Margin="0 0 0 10"
+                                Grid.Column="0"
+                                Width="auto"
+                                Background="#455A64"
+                                HorizontalAlignment="Center"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                                Content="Thay đổi thông tin" />
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-            </ScrollViewer>
-            
-            <materialDesign:Card Visibility="{Binding VisAddRepairCard,
+            </Grid>
+            <materialDesign:Card 
+                materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                materialDesign:ShadowAssist.ShadowEdges="Top,Bottom"
+                Visibility="{Binding VisAddRepairCard,
                 Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Column="1" x:Name="AddRepairCard"
-                                 Margin="5 20 20 10"
+                                 Margin="10 20 20 10"
                                  Height="auto">
                 <Button 
                         Command="{Binding AddRepairCommand}"
@@ -242,11 +246,14 @@
                         >
                 </Button>
             </materialDesign:Card>
-            <materialDesign:Card  Visibility="{Binding VisRepairServiceCard,
+            <materialDesign:Card 
+                materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                materialDesign:ShadowAssist.ShadowEdges="Top,Bottom"
+                Visibility="{Binding VisRepairServiceCard,
                 Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Column="1"
                                  x:Name="RepairSeviceCard"
-                                 Margin="0 20 5 10">
+                                 Margin="10 20 5 10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -403,8 +410,23 @@
             </materialDesign:Card>
         </Grid>
         <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <TextBlock Text="TOTAL: "
+                           FontSize="30"
+                           FontWeight="Bold"
+                           Opacity="0.6"
+                           Margin="20 0 0 0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           ></TextBlock>
+            </Grid>
             <StackPanel HorizontalAlignment="Right"
                         VerticalAlignment="Center"
+                        Grid.Column="2"
                         Orientation="Horizontal">
                 <StackPanel 
                             Grid.Row="1"

@@ -26,6 +26,15 @@ namespace QuanLyGaraOto.ViewModel
             }, (p)=> {
                 CarServiceWindow carServiceWindow = new CarServiceWindow();
                 carServiceWindow.ShowDialog();
+
+                CarServiceViewModel carServiceViewModel = (carServiceWindow.DataContext as CarServiceViewModel);
+                if (carServiceViewModel.IsRecepted)
+                {
+                    ListCar tempListCar = new ListCar();
+                    tempListCar.CarReception = carServiceViewModel.CarReception;
+                    tempListCar.Debt = 10000;
+                    ListCar.Add(tempListCar);
+                }
             });
             DeleteCommand = new RelayCommand<object>
                 ((p) =>

@@ -12,6 +12,7 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class CarServiceViewModel:BaseViewModel
     {
+        public bool IsRecepted { get; set; }
         #region Visibility
         private bool _VisReceptionCard { get; set; }
         public bool VisReceptionCard { get => _VisReceptionCard; set { _VisReceptionCard = value; OnPropertyChanged(); } }
@@ -112,6 +113,20 @@ namespace QuanLyGaraOto.ViewModel
         #endregion
         public CarServiceViewModel()
         {
+            
+        }
+        public CarServiceViewModel(CarReception carReception)
+        {
+            GenaralFunction();
+            this.CarReception = carReception;
+            // Load Careption
+            // Check Repair
+            // Load Repair
+            // Load Total
+            
+        }
+        public void GenaralFunction()
+        {
             InitData();
             InitVis();
             InitBtn();
@@ -125,7 +140,6 @@ namespace QuanLyGaraOto.ViewModel
             {
                 ListAmount.Add(i);
             }
-
             ReceptionCommand = new RelayCommand<object>(
                 (p) => { return true; },
                 (p) =>
@@ -133,17 +147,19 @@ namespace QuanLyGaraOto.ViewModel
                     CarReceptionWindow carReceptionWindow = new CarReceptionWindow();
                     carReceptionWindow.ShowDialog();
                     CarReceptionViewModel backData = (carReceptionWindow.DataContext as CarReceptionViewModel);
-                    if (backData.IsSuccess) {
+                    if (backData.IsSuccess)
+                    {
                         VisReption(true);
                         EnableRepairBtn(true);
                         LoadCarInfo(backData.IdNew);
+                        IsRecepted = true;
                     };
                 });
             AddRepairCommand = new RelayCommand<Object>(
                 (p) => {
                     if (IsEnabledAddRepairBtn) return true;
                     return false;
-                        },
+                },
                 (p) =>
                 {
                     AddRepairFormWindow addRepairFormWindow = new AddRepairFormWindow();
@@ -177,7 +193,7 @@ namespace QuanLyGaraOto.ViewModel
                         SuppliesAmount = SelectedAmount,
                         TotalMoney = TotalMoney
                     };
-                    ListRepair.Add(new RepairItem() {RepairInfo = repairInfo, Price = Price, TotalMoney = TotalMoney});
+                    ListRepair.Add(new RepairItem() { RepairInfo = repairInfo, Price = Price, TotalMoney = TotalMoney });
                     DataProvider.Ins.DB.RepairInfoes.Add(repairInfo);
                     DataProvider.Ins.DB.SaveChanges();
                 });
@@ -211,7 +227,7 @@ namespace QuanLyGaraOto.ViewModel
                     DeleteModel deleteModel = new DeleteModel();
                     deleteModel.RepairInfo(SelectedItem.RepairInfo);
                     ListRepair.Remove(SelectedItem);
-                    
+
                 });
             UpdateValue = new RelayCommand<Object>(
                 (p) => {
@@ -231,6 +247,7 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void InitData()
         {
+            IsRecepted = false;
             SelectedAmount = 1;
             Price = 0;
             TotalMoney = 0;
