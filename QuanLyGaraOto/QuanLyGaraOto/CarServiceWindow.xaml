@@ -225,13 +225,13 @@
                     </Grid>
                 </materialDesign:Card>
             </Grid>
-            <materialDesign:Card 
+            <Grid
                 materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                materialDesign:ShadowAssist.ShadowEdges="Top,Bottom"
+                materialDesign:ShadowAssist.ShadowEdges="Left,Bottom"
                 Visibility="{Binding VisAddRepairCard,
                 Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Column="1" x:Name="AddRepairCard"
-                                 Margin="10 20 20 10"
+                                 Margin="10 20 10 10"
                                  Height="auto">
                 <Button 
                         Command="{Binding AddRepairCommand}"
@@ -245,15 +245,15 @@
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         >
                 </Button>
-            </materialDesign:Card>
-            <materialDesign:Card 
+            </Grid>
+            <Grid 
                 materialDesign:ShadowAssist.ShadowDepth="Depth1"
                 materialDesign:ShadowAssist.ShadowEdges="Top,Bottom"
                 Visibility="{Binding VisRepairServiceCard,
                 Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Column="1"
                                  x:Name="RepairSeviceCard"
-                                 Margin="10 20 5 10">
+                                  Margin="10 20 10 10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -273,7 +273,7 @@
                                 HorizontalAlignment="Left">
                                 <TextBox
                                     Text="{Binding Content}"  HorizontalAlignment="Left"
-                                    materialDesign:HintAssist.Hint="Name"
+                                    materialDesign:HintAssist.Hint="Nội dung"
                                     Width="120"
                                     Margin="3 3 3 0"
                                     Style="{StaticResource MaterialDesignFilledTextBox}">
@@ -407,23 +407,31 @@
                           
                           ></Grid>
                 </Grid>
-            </materialDesign:Card>
+            </Grid>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid>
+            <StackPanel Orientation="Horizontal">
                 <TextBlock Text="TOTAL: "
                            FontSize="30"
-                           FontWeight="Bold"
-                           Opacity="0.6"
+                           FontWeight="ExtraBold"
+                           Opacity="0.7"
                            Margin="20 0 0 0"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            ></TextBlock>
-            </Grid>
+                <TextBlock Text="{Binding Total}"
+                           FontSize="30"
+                           FontWeight="Bold"
+                           Opacity="0.7"
+                           Margin="5 0 0 0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           ></TextBlock>
+            </StackPanel>
             <StackPanel HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Grid.Column="2"

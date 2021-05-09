@@ -62,6 +62,7 @@
                     Content="Xóa">
                     </Button>
                     <Button
+                        Command="{Binding OpenCommand}"
                         Background="#455A64"
                         Width="100"
                         Margin="10 0 10 0"

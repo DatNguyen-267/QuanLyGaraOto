@@ -17,7 +17,7 @@ namespace QuanLyGaraOto.ViewModel
         public ListCar SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
         public ICommand CarReceptionCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        
+        public ICommand OpenCommand { get; set; }
         public ServiceViewModel()
         {
             
@@ -32,7 +32,7 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     ListCar tempListCar = new ListCar();
                     tempListCar.CarReception = carServiceViewModel.CarReception;
-                    tempListCar.Debt = 10000;
+                    tempListCar.Debt = carServiceViewModel.Total;
                     ListCar.Add(tempListCar);
                 }
             });
@@ -47,7 +47,41 @@ namespace QuanLyGaraOto.ViewModel
                     deleteModel.CarReception(SelectedItem.CarReception);                    
                 }
             );
+            OpenCommand = new RelayCommand<object>
+                ((p) =>
+                {
+                    if (SelectedItem == null) return false;
+                    return true;
+                }, (p) =>
+                {
+                    CarServiceWindow carServiceWindow = new CarServiceWindow(SelectedItem.CarReception);
+                    carServiceWindow.ShowDialog();
+
+                    CarServiceViewModel carServiceViewModel = (carServiceWindow.DataContext as CarServiceViewModel);
+                    SelectedItem.CarReception = carServiceViewModel.CarReception;
+                    SelectedItem.Debt = carServiceViewModel.Total;
+                }
+            );
             LoadListData();
+        }
+        public int GetDebt(int ID)
+        {
+            int Debt = 0;
+            if (DataProvider.Ins.DB.RepairForms.Where(x=>x.IdCarReception == ID).Count() > 0)
+            {
+                RepairForm repairForm = DataProvider.Ins.DB.RepairForms.Where(x => x.IdCarReception == ID).SingleOrDefault();
+                
+                if (DataProvider.Ins.DB.RepairInfoes.Where(x=> x.IdRepairForm == repairForm.Id).Count() > 0)
+                {
+                    ObservableCollection<RepairInfo> listRepairInfo = new ObservableCollection<RepairInfo>
+                        (DataProvider.Ins.DB.RepairInfoes.Where(x=>x.IdRepairForm == repairForm.Id));
+                    foreach (var item in listRepairInfo)
+                    {
+                        Debt = Debt + item.TotalMoney;
+                    }
+                }
+            }
+            return Debt;
         }
         public void LoadListData()
         {
@@ -57,7 +91,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 ListCar tempListCar = new ListCar();
                 tempListCar.CarReception = item;
-                tempListCar.Debt = 10000;
+                tempListCar.Debt = GetDebt(item.Id);
                 ListCar.Add(tempListCar);
             }
         }

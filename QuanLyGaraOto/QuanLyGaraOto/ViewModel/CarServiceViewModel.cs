@@ -110,20 +110,35 @@ namespace QuanLyGaraOto.ViewModel
         public RepairForm RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
         private CarReception _CarReception { get; set; }
         public CarReception CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
+        private int _Total { get; set; }
+        public int Total { get => _Total; set { _Total = value; OnPropertyChanged(); } }
         #endregion
         public CarServiceViewModel()
         {
-            
+            GenaralFunction();
         }
         public CarServiceViewModel(CarReception carReception)
         {
             GenaralFunction();
             this.CarReception = carReception;
-            // Load Careption
-            // Check Repair
-            // Load Repair
-            // Load Total
-            
+            // base data
+
+            LoadCarInfo(this.CarReception.Id);
+            // Load thông tin xe 
+
+            VisReption(true);
+            // Hiện bảng thông tin và ẩn nút tiếp nhận xe
+
+            if (DataProvider.Ins.DB.RepairForms.Where(x => x.IdCarReception == this.CarReception.Id).Count() > 0)
+            {
+                VisRepair(true);
+                LoadRepairInfo(this.CarReception.Id);
+            }
+            else EnableRepairBtn(true);
+            // Kiểm tra bảng thông tin sửa chữa
+
+            UpdateTotal();
+            // Tính tổng tiền
         }
         public void GenaralFunction()
         {
@@ -196,6 +211,7 @@ namespace QuanLyGaraOto.ViewModel
                     ListRepair.Add(new RepairItem() { RepairInfo = repairInfo, Price = Price, TotalMoney = TotalMoney });
                     DataProvider.Ins.DB.RepairInfoes.Add(repairInfo);
                     DataProvider.Ins.DB.SaveChanges();
+                    UpdateTotal();
                 });
             EditCommand = new RelayCommand<Object>(
                 (p) => {
@@ -214,6 +230,7 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.SaveChanges();
                     SelectedItem.Price = Price;
                     SelectedItem.TotalMoney = TotalMoney;
+                    UpdateTotal();
                 });
             DeleteCommand = new RelayCommand<Object>(
                 (p) => {
@@ -227,7 +244,7 @@ namespace QuanLyGaraOto.ViewModel
                     DeleteModel deleteModel = new DeleteModel();
                     deleteModel.RepairInfo(SelectedItem.RepairInfo);
                     ListRepair.Remove(SelectedItem);
-
+                    UpdateTotal();
                 });
             UpdateValue = new RelayCommand<Object>(
                 (p) => {
@@ -245,12 +262,21 @@ namespace QuanLyGaraOto.ViewModel
             Price = (int)SelectedSupply.Price * (int)SelectedAmount;
             TotalMoney = (int)Price + (int)SelectedPay.Price;
         }
+        public void UpdateTotal()
+        {
+            Total = 0;
+            foreach (var item in ListRepair)
+            {
+                Total = Total + (int)item.TotalMoney;
+            }
+        }
         public void InitData()
         {
             IsRecepted = false;
             SelectedAmount = 1;
             Price = 0;
             TotalMoney = 0;
+            Total = 0;
         }
         public void InitBtn()
         {
@@ -301,9 +327,18 @@ namespace QuanLyGaraOto.ViewModel
             ReceptionDate = CarReception.ReceptionDate;
             Brand = CarReception.CarBrand.Name;
         }
-        public void LoadRepairInfo()
+        public void LoadRepairInfo(int ID)
         {
-
+            RepairForm = DataProvider.Ins.DB.RepairForms.Where(x=> x.IdCarReception == ID).SingleOrDefault();
+            var repairInfo = DataProvider.Ins.DB.RepairInfoes.Where(x => x.IdRepairForm == RepairForm.Id);
+            foreach (var item in repairInfo)
+            {
+                RepairItem repairItem = new RepairItem();
+                repairItem.RepairInfo = item;
+                repairItem.TotalMoney = item.TotalMoney;
+                repairItem.Price = (int)item.Supply.Price * (int)item.SuppliesAmount;
+                ListRepair.Add(repairItem);
+            }
         }
         public void AddRepairForm(RepairForm newRepairForm)
         {
