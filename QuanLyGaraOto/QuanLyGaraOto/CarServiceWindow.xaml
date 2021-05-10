@@ -78,7 +78,7 @@
                         </Grid.Resources>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
                         </Grid.RowDefinitions>
                         <ScrollViewer Grid.Row="0">
                             <StackPanel>
@@ -128,6 +128,7 @@
                                         <materialDesign:PackIcon Kind="Watermark" 
                                                      Grid.Column="0"/>
                                         <TextBox 
+                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                             Text="{Binding Brand}"
                                             Grid.Column="1"
                                             IsReadOnly="true"
@@ -202,7 +203,7 @@
                                                      Grid.Column="0"/>
                                         <DatePicker 
                                             IsEnabled="false"
-                                            Text="{Binding ReceptionDate}"
+                                            Text="{Binding RepairDate}"
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
                                             materialDesign:HintAssist.Hint="Ngày sửa chữa"
@@ -213,9 +214,9 @@
                         </ScrollViewer>
                         <Grid Grid.Row="1">
                             <Button
-                                Margin="0 0 0 10"
+                                Command="{Binding ChangeCarInfoCommand}"
+                                Margin="0 10 0 10"
                                 Grid.Column="0"
-                                Width="auto"
                                 Background="#455A64"
                                 HorizontalAlignment="Center"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
@@ -225,7 +226,7 @@
                     </Grid>
                 </materialDesign:Card>
             </Grid>
-            <Grid
+            <materialDesign:Card
                 materialDesign:ShadowAssist.ShadowDepth="Depth1"
                 materialDesign:ShadowAssist.ShadowEdges="Left,Bottom"
                 Visibility="{Binding VisAddRepairCard,
@@ -245,8 +246,8 @@
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         >
                 </Button>
-            </Grid>
-            <Grid 
+            </materialDesign:Card>
+            <materialDesign:Card 
                 materialDesign:ShadowAssist.ShadowDepth="Depth1"
                 materialDesign:ShadowAssist.ShadowEdges="Top,Bottom"
                 Visibility="{Binding VisRepairServiceCard,
@@ -342,7 +343,7 @@
                                 </ComboBox>
                                 <TextBox
                                     Text="{Binding TotalMoney}"  HorizontalAlignment="Left"
-                                    materialDesign:HintAssist.Hint="Thành tiê"
+                                    materialDesign:HintAssist.Hint="Thành tiền"
                                     Width="120"
                                     Margin="3 3 3 0"
                                     Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -354,6 +355,15 @@
                             Grid.Row="1"
                             Orientation="Horizontal"
                             HorizontalAlignment="Left">
+                            <Button 
+                                Command="{Binding AddCommand}"
+                                Width="100"
+                                Content="Thêm"
+                                Background="#455A64"
+                                Margin="10 0 10 0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right">
+                            </Button>
                             <Button 
                                 Command="{Binding EditCommand}"
                                 Width="100"
@@ -372,15 +382,7 @@
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right">
                             </Button>
-                            <Button 
-                                Command="{Binding AddCommand}"
-                                Width="100"
-                                Content="Thêm"
-                                Background="#455A64"
-                                Margin="10 0 10 0"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Right">
-                            </Button>
+                            
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="0">
@@ -407,7 +409,7 @@
                           
                           ></Grid>
                 </Grid>
-            </Grid>
+            </materialDesign:Card>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -459,9 +461,10 @@
                             HorizontalAlignment="Right">
                     </Button>
                     <Button 
+                        Command="{Binding ReceiptCommand}"
                         x:Name="BtnReceipt"
-                            Content="Thanh toán và hoàn trả xe"
-                            Width="200"
+                            Content="Thanh toán"
+                            Width="150"
                             FontSize="16"
                             Height="40"
                             Margin="10 0 10 0"
@@ -471,8 +474,9 @@
                             HorizontalAlignment="Right">
                     </Button>
                     <Button
+                        Command="{Binding CloseCommand}"
                             Margin="10 0 10 0"
-                            Width="200"
+                            Width="150"
                             FontSize="16"
                             Height="40"
                             Content="Close"

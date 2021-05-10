@@ -108,3 +108,5 @@ D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto
 D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.csproj.CopyComplete
 D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.exe
 D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.pdb
+D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\ChangeCarInfoWindow.g.cs
+D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\ChangeCarInfoWindow.baml

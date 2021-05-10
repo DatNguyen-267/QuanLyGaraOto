@@ -97,6 +97,9 @@
     <Compile Include="CarServiceWindow.xaml.cs">
       <DependentUpon>CarServiceWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChangeCarInfoWindow.xaml.cs">
+      <DependentUpon>ChangeCarInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GoodBillPage.xaml.cs">
       <DependentUpon>GoodBillPage.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CarReceptionViewModel.cs" />
     <Compile Include="ViewModel\CarServiceViewModel.cs" />
+    <Compile Include="ViewModel\ChangeCarInfoViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ServiceViewModel.cs" />
     <Compile Include="ViewModel\SettingViewModel.cs" />
@@ -206,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CarServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangeCarInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

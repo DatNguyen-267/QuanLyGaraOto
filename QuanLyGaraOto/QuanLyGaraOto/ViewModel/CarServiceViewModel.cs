@@ -36,6 +36,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand UpdateValue { get; set; }
+        public ICommand ChangeCarInfoCommand { get; set; }
         #endregion
 
         #region Data Reception
@@ -101,6 +102,9 @@ namespace QuanLyGaraOto.ViewModel
         public int Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
+        private DateTime? _RepairDate { get; set; }
+        public DateTime? RepairDate { get => _RepairDate; set { _RepairDate = value; OnPropertyChanged(); } }
+
         #endregion
 
         #region Important Data
@@ -133,6 +137,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 VisRepair(true);
                 LoadRepairInfo(this.CarReception.Id);
+                RepairDate = RepairForm.RepairDate;
             }
             else EnableRepairBtn(true);
             // Kiểm tra bảng thông tin sửa chữa
@@ -185,6 +190,7 @@ namespace QuanLyGaraOto.ViewModel
                     {
                         AddRepairForm(addRepairFormViewModel.NewRepairForm);
                         VisRepair(true);
+                        RepairDate = addRepairFormViewModel.NewRepairForm.RepairDate;
                     }
                 });
             AddCommand = new RelayCommand<Object>(
@@ -255,6 +261,20 @@ namespace QuanLyGaraOto.ViewModel
                 (p) =>
                 {
                     Calculate();
+                });
+            ChangeCarInfoCommand = new RelayCommand<Object>(
+                (p) => {
+                    return true;
+                },
+                (p) =>
+                {
+                    ChangeCarInfoWindow changeCarInfoWindow = new ChangeCarInfoWindow(CarReception);
+                    changeCarInfoWindow.ShowDialog();
+
+                    ChangeCarInfoViewModel changeCarInfoViewModel = (changeCarInfoWindow.DataContext as ChangeCarInfoViewModel);
+                    CarReception = changeCarInfoViewModel.CarReception;
+                    // RepairDate
+
                 });
         }
         public void Calculate()
