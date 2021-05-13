@@ -184,7 +184,7 @@
                 </Grid.ColumnDefinitions>
                 <Button
                     Command="{Binding ConfirmCommand}"
-                    CommandParameter="{Binding ElementName=CarReceptionWD}"
+                    CommandParameter="{Binding ElementName=ChangeCarInfoWD}"
                     Grid.Column="0"
                     Width="100"
                     Background="#455A64"

@@ -66,7 +66,18 @@ namespace QuanLyGaraOto.ViewModel
                },
                (p) =>
                {
-                   
+                   var carReceptionTemp = DataProvider.Ins.DB.CarReceptions.Where(x => x.Id == CarReception.Id).SingleOrDefault();
+                   carReceptionTemp.Customer.Name = Name;
+                   carReceptionTemp.Customer.Telephone = Phone;
+                   carReceptionTemp.Customer.Address = Address;
+                   carReceptionTemp.CarBrand = SelectedBrand;
+                   carReceptionTemp.ReceptionDate = ReceptionDate;
+                   carReceptionTemp.LicensePlate = LicensePlate;
+                   var repairFormTemp = DataProvider.Ins.DB.RepairForms.Where(x => x.IdCarReception == CarReception.Id).SingleOrDefault();
+                   if (repairFormTemp != null) repairFormTemp.RepairDate = RepairDate;
+
+                   DataProvider.Ins.DB.SaveChanges();
+                   p.Close();
                });
             CloseCommand = new RelayCommand<Window>(
                 (p) => {

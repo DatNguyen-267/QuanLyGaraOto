@@ -94,7 +94,7 @@
                                         <TextBox Grid.Column="2"
                                              
                                                  IsReadOnly="True"
-                                            Text="{Binding Name}"
+                                            Text="{Binding CarReception.Customer.Name}"
                                      materialDesign:HintAssist.Hint="Tên chủ xe"
                                          Margin="0 0 0 10"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -110,7 +110,7 @@
                                         <materialDesign:PackIcon Kind="ClipboardOutline" 
                                                      Grid.Column="0"/>
                                         <TextBox 
-                                            Text="{Binding LicensePlate}"
+                                            Text="{Binding CarReception.LicensePlate}"
                                             Grid.Column="1"
                                            IsReadOnly="True"
                                             Margin="0 0 0 10"
@@ -129,7 +129,7 @@
                                                      Grid.Column="0"/>
                                         <TextBox 
                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                            Text="{Binding Brand}"
+                                            Text="{Binding CarReception.CarBrand.Name}"
                                             Grid.Column="1"
                                             IsReadOnly="true"
                                             VerticalAlignment="Center"
@@ -148,7 +148,7 @@
                                                      Grid.Column="0"/>
                                         <TextBox 
                                            IsReadOnly="True"
-                                            Text="{Binding Address}"
+                                            Text="{Binding CarReception.Customer.Address}"
                                             Grid.Column="2"
                                             materialDesign:HintAssist.Hint="Địa chỉ"
                                       
@@ -166,7 +166,7 @@
                                         <materialDesign:PackIcon Kind="Phone" 
                                                      Grid.Column="0"/>
                                         <TextBox 
-                                            Text="{Binding Phone}"
+                                            Text="{Binding CarReception.Customer.Telephone}"
                                            IsReadOnly="True"
                                             Grid.Column="1"
                                      Margin="0 0 0 10"
@@ -186,7 +186,7 @@
                                                      Grid.Column="0"/>
                                         <DatePicker 
                                             IsEnabled="false"
-                                            Text="{Binding ReceptionDate}"
+                                            Text="{Binding CarReception.ReceptionDate}"
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
                                             materialDesign:HintAssist.Hint="Ngày tiếp nhận"
@@ -203,7 +203,7 @@
                                                      Grid.Column="0"/>
                                         <DatePicker 
                                             IsEnabled="false"
-                                            Text="{Binding RepairDate}"
+                                            Text="{Binding RepairForm.RepairDate}"
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
                                             materialDesign:HintAssist.Hint="Ngày sửa chữa"

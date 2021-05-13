@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\
 QuanLyGaraOto
 none
 false
 DEBUG;TRACE
-D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\App.xaml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\App.xaml
 14-98514227
 2782429596
 50-122083965
-232083142557
+23-1173338745
 AddNewGoodWindow.xaml;AddRepairFormWindow.xaml;AddRepairInfoWindow.xaml;BunkPage.xaml;CarReceptionWindow.xaml;CarServiceWindow.xaml;ChangeCarInfoWindow.xaml;GoodBillPage.xaml;ImportWindow.xaml;LoginWindow.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;ServiceWindow.xaml;SettingWindow.xaml;
 
 True

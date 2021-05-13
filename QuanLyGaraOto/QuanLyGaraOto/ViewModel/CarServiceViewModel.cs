@@ -37,6 +37,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand UpdateValue { get; set; }
         public ICommand ChangeCarInfoCommand { get; set; }
+        public ICommand ReceiptCommand { get; set; }
         #endregion
 
         #region Data Reception
@@ -124,7 +125,7 @@ namespace QuanLyGaraOto.ViewModel
         public CarServiceViewModel(CarReception carReception)
         {
             GenaralFunction();
-            this.CarReception = carReception;
+            this.CarReception = DataProvider.Ins.DB.CarReceptions.Where(x=>x.Id == carReception.Id).SingleOrDefault();
             // base data
 
             LoadCarInfo(this.CarReception.Id);
@@ -276,6 +277,15 @@ namespace QuanLyGaraOto.ViewModel
                     // RepairDate
 
                 });
+            ReceiptCommand = new RelayCommand<Object>(
+                (p) => {
+                    if (RepairForm == null || CarReception == null) return false;
+                    return true;
+                },
+                (p) =>
+                {
+
+                });
         }
         public void Calculate()
         {
@@ -339,7 +349,7 @@ namespace QuanLyGaraOto.ViewModel
         public void LoadCarInfo(int IdNewCar)
         {
             CarReception = new CarReception();
-            CarReception = DataProvider.Ins.DB.CarReceptions.Where(x => x.Id == IdNewCar).Single();
+            CarReception = DataProvider.Ins.DB.CarReceptions.Where(x => x.Id == IdNewCar).SingleOrDefault();
             Name = CarReception.Customer.Name;
             Address = CarReception.Customer.Address;
             Phone = CarReception.Customer.Telephone;
