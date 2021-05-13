@@ -9,353 +9,165 @@
         DataContext="{StaticResource SettingVM}"
         mc:Ignorable="d"
         Title="Cài đặt" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="40"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    <Border Background="LightCyan" BorderThickness="1" Margin="5 10 0 0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0">
-                <Button
-                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                    materialDesign:ButtonAssist.CornerRadius="16 16 0 0"
-                    Margin="3 0 3 0"
-                    ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF3A95F7"
-                    Command="{Binding ChangeAppSettingVis}">
-                    <TextBlock Text="Ứng dụng" />
-                </Button>
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal">
+                    <Button
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        ToolTip="MaterialDesignFlatButton" 
+                        Width="150"
+                        Content="Ứng dụng" Background="LightCyan" FontWeight="Bold"
+                        FontSize="18"
+                        />
+                    <Button
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        ToolTip="MaterialDesignFlatButton" 
+                        Width="150"
+                        Content="Tài khoản" Background="LightCyan" FontWeight="Bold"
+                        FontSize="18"
+                        />
+                </StackPanel>
             </Grid>
-
-            <Grid Grid.Column="1">
-                <Button
-                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                    materialDesign:ButtonAssist.CornerRadius="16 16 0 0"
-                    Margin="3 0 3 0"
-                    ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF3A95F7"
-                    Command="{Binding ChangeBrandSettingVis}">
-                    <TextBlock Text="Hãng xe" />
-                </Button>
-            </Grid>
-
-            <Grid Grid.Column="2">
-                <Button
-                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                    materialDesign:ButtonAssist.CornerRadius="16 16 0 0"
-                    Margin="3 0 3 0"
-                    ToolTip="MaterialDesignRaisedAccentButton with Round Top Corners" Background="#FF3A95F7"
-                    Command="{Binding ChangeUserSettingVis}">
-                    <TextBlock Text="User" />
-                </Button>
-            </Grid>
-        </Grid>
-
-        <Grid Grid.Row="1">
-            <Grid x:Name="AppSetting" Visibility="Collapsed">
-                <!--Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="280"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="45"/>
-                            <RowDefinition Height="45"/>
-                            <RowDefinition Height="45"/>
-                            <RowDefinition Height="45"/>
-                            <RowDefinition Height="55"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.Row="1">
-                            <Label Content="Số xe tối đa" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <Label Content="Số điện thoại" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Grid.Row="3">
-                            <Label Content="Email" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Grid.Row="4">
-                            <Label Content="Địa chỉ" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                        </Grid>
-                        <Grid Grid.Row="5">
-                            <Button
-                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                                IsEnabled="{Binding IsEnableChangeButtonInGaraInformation}"
-                                Content="Lưu thay đổi" 
-                                Height="35" Margin="29,11,1,9"
-                                Command="{Binding ChangeGaraInformation}"/>
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Column="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="45"/>
-                            <RowDefinition Height="45"/>
-                            <RowDefinition Height="45"/>
-                            <RowDefinition Height="45"/>
-                            <RowDefinition Height="55"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.Row="1">
-                            <TextBox Text="{Binding MaxCarReception}" IsEnabled="True" TextAlignment="Center"
-                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
-                                </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </TextBox>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <TextBox Text="{Binding Telephone}" IsEnabled="True" TextAlignment="Center"
-                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="TextChanged">
-                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </TextBox>
-                        </Grid>
-                        <Grid Grid.Row="3">
-                            <TextBox Text="{Binding Email}" IsEnabled="True" TextAlignment="Center"
-                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="TextChanged">
-                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </TextBox>
-                        </Grid>
-                        <Grid Grid.Row="4">
-                            <TextBox Text="{Binding Address}" IsEnabled="True" TextAlignment="Center"
-                                     MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="TextChanged">
-                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </TextBox>
-                        </Grid>
-                        <Grid Grid.Row="5">
-                            <Button
-                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                                Content="Hoàn tác" 
-                                IsEnabled="{Binding IsEnableResetButtonInGaraInformation}"
-                                Height="35" Margin="39,11,91,9"
-                                Command="{Binding ResetGaraInformation}"/>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid x:Name="BrandSetting" Visibility="Visible">
-                <!--Visibility="{Binding BrandSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition MaxWidth="300"/>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition MinWidth="150" MaxWidth="300"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="1">
-                    <ListView ItemsSource="{Binding ListBrands}" SelectedItem="{Binding SelectedBrand}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                                <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                <Grid Grid.Column="0" Margin="5 5 5 5">
+                    <materialDesign:Card UniformCornerRadius="6" Background="LightGreen">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Margin="9"
+                                Text="Thông tin Gara" 
+                                FontSize="20"
+                                FontWeight="Bold"/>
+
+                            <Separator Grid.Row="1" 
+                                       Style="{StaticResource MaterialDesignLightSeparator}" />
+
+                            <Grid Grid.Row="2" Margin="4 0 25 0">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBox 
+                                        Margin="5"
+                                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                                        VerticalAlignment="Top"
+                                        AcceptsReturn="True"
+                                        TextWrapping="Wrap"
+                                        Width="200"
+                                        Height="50"
+                                        HorizontalAlignment="left"
+                                        materialDesign:HintAssist.Hint="Số xe tối đa" />
+                                    <TextBox 
+                                        Margin="5"
+                                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                                        VerticalAlignment="Top"
+                                        AcceptsReturn="True"
+                                        TextWrapping="Wrap"
+                                        Width="200"
+                                        Height="50"
+                                        HorizontalAlignment="left"
+                                        materialDesign:HintAssist.Hint="Số điện thoại" />
+                                    <TextBox 
+                                        Margin="5"
+                                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                                        VerticalAlignment="Top"
+                                        AcceptsReturn="True"
+                                        TextWrapping="Wrap"
+                                        Width="200"
+                                        Height="50"
+                                        HorizontalAlignment="left"
+                                        materialDesign:HintAssist.Hint="Email" />
+                                    <TextBox 
+                                        Margin="5"
+                                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                                        VerticalAlignment="Top"
+                                        AcceptsReturn="True"
+                                        TextWrapping="Wrap"
+                                        Width="200"
+                                        Height="50"
+                                        HorizontalAlignment="left"
+                                        materialDesign:HintAssist.Hint="Địa chỉ" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </materialDesign:Card>
+                    
                 </Grid>
+            
+                <Grid Grid.Column="1" Margin="5 5 5 5" >
+                    <materialDesign:Card UniformCornerRadius="6" Background="LightGreen">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
 
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                Margin="9"
+                                Text="Hãng xe" 
+                                FontSize="20"
+                                FontWeight="Bold"/>
 
-                    <Grid Grid.Row="1">
-                        <Button
-                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                                Content="Thêm" 
-                                IsEnabled="true"
-                                Height="35" Margin="35 0 35 0"/>
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Button
-                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                                Content="Sửa" 
-                                IsEnabled="{Binding IsEnableModifyButtonInBrandSetting}"
-                                Height="35" Margin="35 0 35 0"/>
-                    </Grid>
-                    <Grid Grid.Row="3">
-                        <Button
-                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                                Content="Xóa" 
-                                IsEnabled="{Binding IsEnableDeleteButtonInBrandSetting}"
-                                Height="35" Margin="35 0 35 0"/>
-                    </Grid>
-                </Grid>
+                            <Separator Grid.Row="1" 
+                                       Style="{StaticResource MaterialDesignLightSeparator}" />
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MinWidth="300" Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                                <Grid Grid.Column="0">
+                                    <ListView ItemsSource="{Binding ListBrands}" SelectedItem="{Binding SelectedBrand}">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                                <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </Grid>
 
-                    <Grid Grid.Row="1"/>
-                    <Grid Grid.Row="2"/>
-
-                </Grid>
-            </Grid>
-            <Grid x:Name="UserSetting" Visibility="Collapsed">
-                <!--Visibility="{Binding UserSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="280"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="1">
-                        <Label Content="Tên" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Label Content="Địa chỉ" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                    </Grid>
-                    <Grid Grid.Row="3">
-                        <Label Content="Ngày sinh" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                    </Grid>
-                    <Grid Grid.Row="4">
-                        <Label Content="Số điện thoại" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                    </Grid>
-                    <Grid Grid.Row="5">
-                        <Label Content="Số CMND" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-                    </Grid>
-                    <Grid Grid.Row="6">
-                        <Button
-                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                            ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                            Content="Lưu thay đổi" 
-                            IsEnabled="{Binding IsEnableChangeButtonInUserInformation}"
-                            Height="35" Margin="22.267,11.8,7.333,8.199"
-                            Command="{Binding ChangeUserInformation}"/>
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="45"/>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="1">
-                        <TextBox
-                            Text="{Binding UserName}" IsEnabled="True" TextAlignment="Center"
-                                  MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <TextBox
-                            Text="{Binding UserAddress}" IsEnabled="True" TextAlignment="Center"
-                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
-                    </Grid>
-                    <Grid Grid.Row="3">
-                        <TextBox
-                            Text="{Binding UserBirth, StringFormat='dd/MM/yyyy'}" IsEnabled="True" TextAlignment="Center"
-                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
-                    </Grid>
-                    <Grid Grid.Row="4">
-                        <TextBox
-                            Text="{Binding UserTelephone}" IsEnabled="True" TextAlignment="Center"
-                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
-                    </Grid>
-                    <Grid Grid.Row="5">
-                        <TextBox
-                            Text="{Binding UserCMND}" IsEnabled="True" TextAlignment="Center"
-                                 MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </TextBox>
-                    </Grid>
-                    <Grid Grid.Row="6">
-                        <Button
-                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                            ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                            Content="Hoàn tác" 
-                            IsEnabled="{Binding IsEnableResetButtonInUserInformation}"
-                            Height="35" Margin="27.8,12.683,101.6,7.316"
-                            Command="{Binding ResetUserInformation}"/>
-                    </Grid>
+                                <StackPanel Grid.Column="1">
+                                    <Button
+                                        Margin="5 10 5 10"
+                                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                                        Width="100"
+                                        Content="THÊM" />
+                                    <Button
+                                        Margin="5 10 5 10"
+                                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                                        Width="100"
+                                        Content="SỬA" />
+                                    <Button
+                                        Margin="5 10 5 10"
+                                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                                        Width="100"
+                                        Content="XÓA" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </materialDesign:Card>
                 </Grid>
             </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </Window>
