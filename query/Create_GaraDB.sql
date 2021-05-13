@@ -146,6 +146,7 @@ create table Users
     UserName varchar(100) not NULL,
     Password varchar(100) not NULL,
     IdRole int not NULL,
+	isActive int,
 	foreign key(IdRole) references UserRole(Id),
 );
 GO
