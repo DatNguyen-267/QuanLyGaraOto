@@ -112,3 +112,5 @@ D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\ChangeCarInfo
 D:\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\ChangeCarInfoWindow.baml
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\ChangeCarInfoWindow.g.cs
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\ChangeCarInfoWindow.baml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\PayWindow.g.cs
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\PayWindow.baml
