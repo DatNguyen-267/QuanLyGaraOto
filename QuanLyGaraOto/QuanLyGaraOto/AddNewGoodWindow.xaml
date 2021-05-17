@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
+        x:Name="wdAddSupply"
         Title="Phụ tùng"
         Height="420" Width="480"
-        DataContext="{StaticResource MainVM}"
+        DataContext="{StaticResource BunkVM}"
       Background="#ffffff"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         >
@@ -80,7 +81,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     FontSize="14"
-                    IsReadOnly="True"
+                    IsReadOnly="False"
                     Width="220"
                     Margin="0 0 10 0"
                     Foreground="Black"
@@ -113,7 +114,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     FontSize="14"
-                    IsReadOnly="True"
+                    IsReadOnly="False"
                     Width="220"
                     Margin="0 0 10 0"
                     Foreground="Black"
@@ -151,7 +152,7 @@
                     Foreground="Black"
                     />
             </Grid>
-            <Grid
+            <!--<Grid
                 Margin="0 240 0 0"
                 VerticalAlignment="Top"
                 Height="40">
@@ -186,7 +187,7 @@
                     HorizontalContentAlignment="Left"
                     FontWeight="SemiBold">
                 </ComboBox>
-            </Grid>
+            </Grid>-->
         </Grid>
         <Grid
             Margin="0 0 16 16"
@@ -197,6 +198,8 @@
 
             <Button
                 Style="{StaticResource MaterialDesignRaisedButton}"
+                Command="{Binding AddCommand}"
+                CommandParameter="{Binding ElementName=wdAddSupply}"
                 Width="100"
                 HorizontalAlignment="Left"
                 ToolTip="Resource name: MaterialDesignRaisedButton">

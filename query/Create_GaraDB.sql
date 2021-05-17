@@ -41,6 +41,7 @@ create table Supply
 (
     Id int IDENTITY(1, 1) primary key not NULL,
     Name varchar(1000) not NULL,
+	DisplayName varchar(1000) not NULL,
     Price int,
     Amount int
 );

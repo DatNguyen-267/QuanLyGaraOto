@@ -101,7 +101,7 @@
                 </Grid>
                 <Grid Grid.Row="2">
                     <Button 
-                        Command="{Binding KhoHangCommand}"
+                        Command="{Binding SupplyCommand}"
                         Height="40" Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 

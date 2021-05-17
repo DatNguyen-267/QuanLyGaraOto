@@ -13,6 +13,8 @@ namespace QuanLyGaraOto.ViewModel
     {
         public bool IsLoaded = false;
         public ICommand LoadedWindowCommand { get; set; }
+        public ICommand SupplierCommand { get; set; }
+
         public MainViewModel()
         {
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -44,7 +46,12 @@ namespace QuanLyGaraOto.ViewModel
 
                 //    p.Close();
                 //}
+
+                //BunkWindow bunkWindow = new BunkWindow();
+                //bunkWindow.ShowDialog();
             });
+            
+            //SupplierCommand = new RelayCommand<object>((p) => { return true; }, p => { BunkWindow wd = new BunkWindow(); wd.ShowDialog(); });
         }
     }
 }
