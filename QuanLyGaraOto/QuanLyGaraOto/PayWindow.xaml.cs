@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,12 @@ namespace QuanLyGaraOto
     /// </summary>
     public partial class PayWindow : Window
     {
-        public PayWindow()
+        public PayViewModel payViewModel { get; set; }
+        public PayWindow() { InitializeComponent(); }
+        public PayWindow(CarReception carReception)
         {
             InitializeComponent();
+            this.DataContext = (payViewModel = new PayViewModel(carReception));
         }
     }
 }

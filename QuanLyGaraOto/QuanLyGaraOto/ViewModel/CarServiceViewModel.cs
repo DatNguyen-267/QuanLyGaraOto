@@ -284,6 +284,10 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
+                PayWindow payWindow = new PayWindow(CarReception);
+                payWindow.ShowDialog();
+
+                PayViewModel payViewModel = (payWindow.DataContext as PayViewModel);
 
                 });
         }

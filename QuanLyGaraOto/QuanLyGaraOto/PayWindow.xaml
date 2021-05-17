@@ -19,15 +19,10 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#3d4751">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="949*"/>
-                <ColumnDefinition Width="164*"/>
-            </Grid.ColumnDefinitions>
             <TextBlock HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Text="Hóa đơn thanh toán"
                        FontSize="26"
-                       Margin="440,8,275.5,7"
                        Foreground="White"
                        ></TextBlock>
         </Grid>
@@ -37,16 +32,30 @@
                 <ColumnDefinition Width="300"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="15 5 0 0">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Text="Thông Tin Sửa Chữa"
+                               FontWeight="Bold"
+                               Foreground="#FF1976D2"
+                               FontSize="16"
+                               ></TextBlock>
+                </Grid>
                 <Rectangle
-                    Margin="10 10 0 10"
+                    Grid.Row="1"
+                    Margin="10 5 0 10"
                     RadiusX="6"
                     RadiusY="6"
                     Stroke="DarkGray"
                     StrokeThickness="1"
-                    
                     ></Rectangle>
                 <ListView
-                    Margin="20 20 20 20">
+                    Grid.Row="1"
+                    Margin="20 10 10 20">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
@@ -63,189 +72,202 @@
 
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="100"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <TextBlock HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
+                <Grid Grid.Row="0" Margin="15 5 0 0">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
                                Text="Thông Tin Khách Hàng"
                                FontWeight="Bold"
                                Foreground="#FF1976D2"
-                               FontSize="20"
+                               FontSize="16"
                                ></TextBlock>
                 </Grid>
                 <Grid Grid.Row="1"
-                      Margin="10">
-                    <materialDesign:Card>
-                        <StackPanel>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <TextBlock Text="Tên Chủ Xe :"
-                                           FontSize="15"
-                                           FontWeight="Bold"
+                      Margin="10 5 10 0">
+                    <Rectangle
+                    RadiusX="6"
+                    RadiusY="6"
+                    Stroke="DarkGray"
+                    StrokeThickness="1">
+                    </Rectangle>
+                    <StackPanel>
+                        <Grid Margin="10 ">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock Text="Tên Chủ Xe"
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
                                                
                                            ></TextBlock>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <TextBlock Text="Dat"
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBlock Text="Dat"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
-                                           FontSize="15"
-                                               
-                                           ></TextBlock>
-                                </Grid>
+                                           FontSize="16"></TextBlock>
                             </Grid>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <TextBlock Text="Biển số xe :"
-                                            FontSize="15"
-                                           FontWeight="Bold"
+                        </Grid>
+                        <Grid Margin="10 ">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock Text="Biển số xe"
+                                            FontSize="16"
+                                           FontWeight="SemiBold"
                                                
                                            ></TextBlock>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <TextBlock Text="AAA-T909"
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBlock Text="AAA-T909"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
-                                           FontSize="15"
+                                           FontSize="16"
                                            ></TextBlock>
-                                </Grid>
                             </Grid>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <TextBlock Text="Điện Thoại :"
-                                            FontSize="15"
-                                           FontWeight="Bold"
+                        </Grid>
+                        <Grid Margin="10 ">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock Text="Điện Thoại"
+                                            FontSize="16"
+                                           FontWeight="SemiBold"
                                                
                                            ></TextBlock>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <TextBlock Text="099009998"
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBlock Text="099009998"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
-                                           FontSize="15"
+                                           FontSize="16"
                                            ></TextBlock>
-                                </Grid>
                             </Grid>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <TextBlock Text="Email :"
-                                            FontSize="15"
-                                           FontWeight="Bold"
+                        </Grid>
+                        <Grid Margin="10 ">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock Text="Email"
+                                            FontSize="16"
+                                           FontWeight="SemiBold"
                                                
                                            ></TextBlock>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <TextBlock Text="Dat@gmail.com"
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBlock Text="Dat@gmail.com"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
-                                           FontSize="15"
+                                           FontSize="16"
                                            ></TextBlock>
-                                </Grid>
                             </Grid>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <TextBlock Text="Ngày thu tiền :"
-                                            FontSize="15"
-                                           FontWeight="Bold"
+                        </Grid>
+                        <Grid Margin="10 ">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock Text="Hotline"
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
                                                
                                            ></TextBlock>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <TextBlock Text="11/09/2021"
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBlock Text="099999990"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
-                                           FontSize="15"
+                                           FontSize="16"
                                            ></TextBlock>
-                                </Grid>
                             </Grid>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <TextBlock Text="Số Tiền Thu :"
-                                            FontSize="15"
-                                           FontWeight="Bold"
-                                               
-                                           ></TextBlock>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <TextBlock Text="1,000,999"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Right"
-                                           FontSize="15"
-                                           ></TextBlock>
-                                </Grid>
-                            </Grid>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <TextBlock Text="Hotline :"
-                                           FontSize="15"
-                                           FontWeight="Bold"
-                                               
-                                           ></TextBlock>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <TextBlock Text="099999990"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Right"
-                                           FontSize="15"
-                                           ></TextBlock>
-                                </Grid>
-                            </Grid>
-                            <Separator
+                        </Grid>
+                        <Separator
                                 Margin="10 0 10 0"
-                                Background="#FF1976D2"></Separator>
-                            <Grid Margin="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Tổng Tiền"
+                                Background="DarkGray"></Separator>
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Tổng Tiền"
                                            Foreground="#FF1976D2"
                                            Grid.Column="0"
                                            FontWeight="Bold"
                                            FontSize="20"></TextBlock>
-                                <TextBlock
+                            <TextBlock
                                     Grid.Column="1"
                                     Text="10,020,202"
+                                     Foreground="#FF1976D2"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     FontWeight="DemiBold"
-                                    FontSize="18"></TextBlock>
-                            </Grid>
-                        </StackPanel>
-                    </materialDesign:Card>
+                                    FontSize="16"></TextBlock>
+                        </Grid>
+                    </StackPanel>
                 </Grid>
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="2"
+                      Margin="10 5 10 5"
+                      Height="100"
+                      >
+                    <Rectangle
+                    RadiusX="6"
+                    RadiusY="6"
+                    Stroke="DarkGray"
+                    StrokeThickness="1">
+                    </Rectangle>
+                    <StackPanel>
+                        <Grid Margin="10 5 10 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Số tiền thu"
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
+                                               VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Stretch"
+                                           ></TextBlock>
+                            <Grid Grid.Column="1">
+                                <TextBox
+                                    FontSize="16"          
+                                  VerticalAlignment="Center" />
+                            </Grid>
+                        </Grid>
+                        <Grid Margin="10 5 10 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock Text="Ngày thu tiền"
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
+                                               VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Stretch"
+                                           ></TextBlock>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <DatePicker
+                                  materialDesign:HintAssist.Hint="Ngày thu tiền"
+                                  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="3">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>

@@ -468,8 +468,8 @@
                             FontSize="16"
                             Height="40"
                             Margin="10 0 10 0"
-                            Background="#2e9fdb"
-                            BorderBrush="#2e9fdb"
+                            Background="#FF1976D2"
+                            BorderBrush="#FF1976D2"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right">
                     </Button>

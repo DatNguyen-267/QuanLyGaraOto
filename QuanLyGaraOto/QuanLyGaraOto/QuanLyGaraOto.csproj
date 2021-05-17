@@ -190,6 +190,7 @@
     <Compile Include="ViewModel\CarServiceViewModel.cs" />
     <Compile Include="ViewModel\ChangeCarInfoViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PayViewModel.cs" />
     <Compile Include="ViewModel\ServiceViewModel.cs" />
     <Compile Include="ViewModel\SettingViewModel.cs" />
     <Page Include="AddNewGoodWindow.xaml">
