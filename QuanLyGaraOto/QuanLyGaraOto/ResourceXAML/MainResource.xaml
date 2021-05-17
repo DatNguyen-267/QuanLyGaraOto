@@ -8,4 +8,5 @@
     <viewmodel:CarReceptionViewModel x:Key="CarReceptionVM"></viewmodel:CarReceptionViewModel>
     <viewmodel:CarServiceViewModel x:Key="CarServiceVM"></viewmodel:CarServiceViewModel>
     <viewmodel:SettingViewModel x:Key="SettingVM"></viewmodel:SettingViewModel>
+    <viewmodel:EmployeeViewModel x:Key="EmployeeVM"></viewmodel:EmployeeViewModel>
 </ResourceDictionary>
