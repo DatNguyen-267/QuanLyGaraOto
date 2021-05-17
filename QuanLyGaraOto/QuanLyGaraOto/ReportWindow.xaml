@@ -1,0 +1,166 @@
+﻿<Window x:Class="QuanLyGaraOto.ReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyGaraOto"
+        mc:Ignorable="d"
+        Name="reportWindow"
+        DataContext="{StaticResource ReportVM}"
+        Title="ReportWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+
+        </Grid>
+        <Grid Grid.Row="1" Margin="10,10,10,10">
+            <TabControl  Margin="10,10,10,0" Height="329" VerticalAlignment="Top">
+                <TabItem 
+                   
+       
+                    Header="Lịch sử kinh doanh"
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    >
+                    <Grid>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.6*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.8*"/>
+                                <ColumnDefinition/>
+           
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Text="Mã hóa đơn"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                />
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="Nhân viên"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                />
+                            <TextBlock
+                                Grid.Column="2"
+                                Text="Thời gian"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                />
+                            <TextBlock
+                                Grid.Column="3"
+                                Text="Doanh thu"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                />
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <ScrollViewer
+                                HorizontalScrollBarVisibility="Disabled"
+                                VerticalScrollBarVisibility="Auto">
+                                <StackPanel>
+                                    
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+                <TabItem 
+                   
+       
+                    Header="Lịch sử nhập hàng"
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    >
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.6*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.8*"/>
+                                <ColumnDefinition/>
+
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Text="Mã hóa đơn"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                />
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="Nhân viên"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                />
+                            <TextBlock
+                                Grid.Column="2"
+                                Text="Thời gian"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                />
+                            <TextBlock
+                                Grid.Column="3"
+                                Text="Tổng chi phí"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                />
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <ScrollViewer
+                                HorizontalScrollBarVisibility="Disabled"
+                                VerticalScrollBarVisibility="Auto">
+                                <StackPanel>
+
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+
+
+
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>
