@@ -1,0 +1,258 @@
+﻿<UserControl x:Class="QuanLyGaraOto.Employee"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyGaraOto"
+             mc:Ignorable="d" 
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+      
+       
+        
+        xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+        x:Name="wdEmployee"
+        
+        Height="500" Width="750">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       Text="Nhân viên"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       TextAlignment="Left"
+                       FontWeight="Bold"
+                       FontSize="28"
+                       Foreground="Black"
+                       Margin="16 8 0 8"
+                       ></TextBlock>
+            <Button Grid.Column="1"
+                    Width="150"
+                    Height="30"
+                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Content="Thêm nhân viên"
+                    Margin="0 8 16 8"
+                    FontSize="14" 
+                    Command="{Binding AddEmployeeCommand}"
+                    Background="Black"
+                    BorderBrush="Black"
+                    ></Button>
+        </Grid>
+        <Separator Grid.Row="1"
+                   Margin="16 0 16 0"
+                   BorderThickness="2"
+                   BorderBrush="Black"
+                   ></Separator>
+        <Grid Grid.Row="2" Margin="16 8 16 8">
+            <Rectangle Stroke="Black" 
+                       RadiusX="4" RadiusY="4" 
+                       Width="230" Height="40" 
+                       HorizontalAlignment="Left" 
+                       StrokeThickness="1"
+                       ></Rectangle>
+
+            <materialDesign:PackIcon Kind="Magnify"
+                                     Margin="8 8 0 8"
+                                     VerticalAlignment="Bottom"
+                                     Width="25" Height="25"
+                                     ></materialDesign:PackIcon>
+
+
+            <TextBox materialDesign:HintAssist.Hint="Họ tên nhân viên"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Width="180"
+                     Margin="35 8 0 8"
+                     Name="txtLookUp"
+                    >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding LookUpCommand}"
+                                               CommandParameter="{Binding ElementName=wdEmployee}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+
+        </Grid>
+
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="16 0 8 16">
+                <Border BorderThickness="1" BorderBrush="Black" CornerRadius="4"></Border>
+                <ListView x:Name="lvUsers" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                            <GridViewColumn Header="Họ tên" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <materialDesign:Card Grid.Column="1" Width="350" Margin="8 0 16 16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"
+                           Content="Thông tin chi tiết"
+                           VerticalContentAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           Margin="0 8 0 0"
+                           FontSize="14"
+                           ></Label>
+                    <Grid Grid.Row="1" Margin="16 8 16 0">
+                        <materialDesign:PackIcon Kind="Account" 
+                                                 Width="20"
+                                                 Height="20"
+                                                 VerticalAlignment="Center"
+                                                 FontSize="16"
+                                                 ></materialDesign:PackIcon>
+                        <Label Content="{Binding Name,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                               VerticalAlignment="Center"
+                               Margin="28 0 0 0"
+                               FontSize="14"
+                               ></Label>
+                    </Grid>
+                    <Grid Grid.Row="2" Margin="16 8 16 0">
+                        <materialDesign:PackIcon Kind="BirthdayCake" 
+                                                 Width="20"
+                                                 Height="20"
+                                                 VerticalAlignment="Center"
+                                                 FontSize="16"
+                                                 ></materialDesign:PackIcon>
+                        <Label Content="{Binding BrithDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='dd/MM/yyyy'}"
+                               VerticalAlignment="Center"
+                               Margin="28 0 0 0"
+                               FontSize="14"
+                               ></Label>
+                    </Grid>
+                    <Grid Grid.Row="3" Margin="16 8 16 0">
+                        <materialDesign:PackIcon Kind="CardAccountDetails" 
+                                                 Width="20"
+                                                 Height="20"
+                                                 VerticalAlignment="Center"
+                                                 FontSize="16"
+                                                 ></materialDesign:PackIcon>
+                        <Label Content="{Binding CMND, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                               VerticalAlignment="Center"
+                               Margin="28 0 0 0"
+                               FontSize="14"
+                               ></Label>
+                    </Grid>
+                    <Grid Grid.Row="4" Margin="16 8 16 0">
+                        <materialDesign:PackIcon Kind="AccountCircle" 
+                                                 Width="20"
+                                                 Height="20"
+                                                 VerticalAlignment="Center"
+                                                 FontSize="16"
+                                                 ></materialDesign:PackIcon>
+                        <Label Content="{Binding UserName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                               VerticalAlignment="Center"
+                               Margin="28 0 0 0"
+                               FontSize="14"
+                               ></Label>
+                    </Grid>
+                    <Grid Grid.Row="5" Margin="16 8 16 0">
+                        <materialDesign:PackIcon Kind="Phone" 
+                                                 Width="20"
+                                                 Height="20"
+                                                 VerticalAlignment="Center"
+                                                 FontSize="16"
+                                                 ></materialDesign:PackIcon>
+                        <Label Content="{Binding Telephone, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                               VerticalAlignment="Center"
+                               Margin="28 0 0 0"
+                               FontSize="14"
+                               ></Label>
+                    </Grid>
+                    <Grid Grid.Row="6" Margin="16 8 16 0">
+                        <materialDesign:PackIcon Kind="AddressMarker" 
+                                                 Width="20"
+                                                 Height="20"
+                                                 VerticalAlignment="Center"
+                                                 FontSize="16"
+                                                 ></materialDesign:PackIcon>
+                        <Label Content="{Binding Address, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                               VerticalAlignment="Center"
+                               Margin="28 0 0 0"
+                               FontSize="14"
+                               ></Label>
+                    </Grid>
+                    <Grid Grid.Row="7" Margin="16 0 16 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="100"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="0 0 0 0"
+                                Content="Sửa"      
+                                Command="{Binding EditWindowCommand}"
+                                Background="Black"
+                                BorderBrush="Black"
+                                ></Button>
+                        <Button Grid.Column="1"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="100"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="0 0 0 0"
+                                Content="Tài khoản"     
+                                Command="{Binding AccountCommand}"
+                                Background="Black"
+                                BorderBrush="Black"
+                                ></Button>
+                        <Button Grid.Column="2"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="100"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="0 0 0 0"
+                                Content="Xóa"
+                                Background="Gray"
+                                BorderBrush="Gray"
+                                Command="{Binding DeleteEmployeeCommand}"
+                                ></Button>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</UserControl>
