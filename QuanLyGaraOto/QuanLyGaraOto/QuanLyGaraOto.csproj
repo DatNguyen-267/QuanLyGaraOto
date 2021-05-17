@@ -82,8 +82,8 @@
     <Compile Include="AddNewGoodWindow.xaml.cs">
       <DependentUpon>AddNewGoodWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BunkPage.xaml.cs">
-      <DependentUpon>BunkPage.xaml</DependentUpon>
+    <Compile Include="BunkWindow.xaml.cs">
+      <DependentUpon>BunkWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CarReceptionWindow.xaml.cs">
       <DependentUpon>CarReceptionWindow.xaml</DependentUpon>
@@ -172,6 +172,7 @@
     </Compile>
     <Compile Include="UserControlGaraOto\TempUserControl.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BunkViewModel.cs" />
     <Compile Include="ViewModel\CarReceptionViewModel.cs" />
     <Compile Include="ViewModel\CarServiceViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -182,9 +183,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BunkPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="BunkWindow.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CarReceptionWindow.xaml">
       <SubType>Designer</SubType>
