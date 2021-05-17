@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
         Title="Nhập phụ tùng"
+        x:Name="wdImportSupply"
       Height="600"
       Width="480"
       Background="#ffffff"
+        DataContext="{StaticResource BunkVM}"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Grid>
@@ -73,20 +75,18 @@
                     RadiusY="4"
                     Stroke="Black"
                     />
-                <ComboBox
-                    x:Name="cbName"
-                    materialDesign:HintAssist.Hint="Chọn phụ tùng"
-                    Height="40" 
-                    FontSize="14" 
-                    Width="220"
-                    BorderThickness="0" 
-                    Padding="0" 
-                    Margin="0,0,10,0" 
+                <TextBox
+                    x:Name="txbName"
+                    materialDesign:HintAssist.Hint="Tên Phụ Tùng"
+                    Text="{Binding Name}"
                     HorizontalAlignment="Right"
-                    VerticalContentAlignment="Center" 
-                    HorizontalContentAlignment="Left"
-                    FontWeight="SemiBold">
-                </ComboBox>
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    IsReadOnly="True"
+                    Width="220"
+                    Margin="0 0 10 0"
+                    Foreground="Black"
+                    />
             </Grid>
             <Grid
                 Margin="0 120 0 0"
@@ -112,6 +112,7 @@
                 <TextBox
                     x:Name="txbPrice"
                     materialDesign:HintAssist.Hint="Giá niêm yết"
+                    Text="{Binding Price}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     FontSize="14"
@@ -257,6 +258,8 @@
             Height="40"
             HorizontalAlignment="Right">
             <Button
+                Command="{Binding ImportCommand}"
+                CommandParameter="{Binding ElementName=wdImportSupply}"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Width="100"
                 HorizontalAlignment="Left"

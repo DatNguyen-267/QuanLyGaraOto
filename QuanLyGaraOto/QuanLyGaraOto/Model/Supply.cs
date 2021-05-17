@@ -9,10 +9,11 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Supply
+    public partial class Supply : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supply()
@@ -20,11 +21,19 @@ namespace QuanLyGaraOto.Model
             this.RepairInfoes = new HashSet<RepairInfo>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> Price { get; set; }
-        public Nullable<int> Amount { get; set; }
-    
+        private int _Id { get; set; }
+
+        public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
+        private string _Name { get; set; }
+
+        public string Name { get => _Name; set { _Name = value; OnPropertyChanged(); } }
+
+        private Nullable<int> _Price { get; set; }
+        public Nullable<int> Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
+        private Nullable<int> _Amount { get; set; }
+
+        public Nullable<int> Amount { get => _Amount; set { _Amount = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RepairInfo> RepairInfoes { get; set; }
     }

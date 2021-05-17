@@ -10,19 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace QuanLyGaraOto
 {
     /// <summary>
-    /// Interaction logic for BunkPage.xaml
+    /// Interaction logic for BunkWindow.xaml
     /// </summary>
-    public partial class BunkPage : Page
+    public partial class BunkWindow : Window
     {
-        public BunkPage()
+        public BunkWindow()
         {
+
             InitializeComponent();
         }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        
     }
 }

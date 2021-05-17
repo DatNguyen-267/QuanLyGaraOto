@@ -18,9 +18,9 @@ namespace QuanLyGaraOto
     /// <summary>
     /// Interaction logic for GoodBillPage.xaml
     /// </summary>
-    public partial class GoodBillPage : Page
+    public partial class GoodBillWindow : Window
     {
-        public GoodBillPage()
+        public GoodBillWindow()
         {
             InitializeComponent();
         }
