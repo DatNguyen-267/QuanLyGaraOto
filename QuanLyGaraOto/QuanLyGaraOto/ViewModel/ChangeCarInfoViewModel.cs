@@ -12,8 +12,8 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class ChangeCarInfoViewModel :BaseViewModel
     {
-        private ObservableCollection<CarBrand> _ListBrand { get; set; }
-        public ObservableCollection<CarBrand> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
+        private ObservableCollection<CARBRAND> _ListBrand { get; set; }
+        public ObservableCollection<CARBRAND> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
         public ICommand CloseCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
         private string _Name { get; set; }
@@ -28,24 +28,24 @@ namespace QuanLyGaraOto.ViewModel
         public DateTime? ReceptionDate { get => _ReceptionDate; set { _ReceptionDate = value; OnPropertyChanged(); } }
         private DateTime? _RepairDate { get; set; }
         public DateTime? RepairDate { get => _RepairDate; set { _RepairDate = value; OnPropertyChanged(); } }
-        private CarBrand _SelectedBrand { get; set; }
-        public CarBrand SelectedBrand { get => _SelectedBrand; set { _SelectedBrand = value; OnPropertyChanged(); } }
+        private CARBRAND _SelectedBrand { get; set; }
+        public CARBRAND SelectedBrand { get => _SelectedBrand; set { _SelectedBrand = value; OnPropertyChanged(); } }
 
 
-        private CarReception _CarReception { get; set; }
-        public CarReception CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
-        private RepairForm _RepairForm { get; set; }
-        public RepairForm RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
+        private CARRECEPTION _CarReception { get; set; }
+        public CARRECEPTION CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
+        private REPAIRFORM _RepairForm { get; set; }
+        public REPAIRFORM RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
 
         public ChangeCarInfoViewModel() { }
-        public ChangeCarInfoViewModel(CarReception carReception)
+        public ChangeCarInfoViewModel(CARRECEPTION carReception)
         {
             this.CarReception = carReception;
-            if (DataProvider.Ins.DB.RepairForms.Where(x=> x.IdCarReception == CarReception.Id).Count() > 0)
+            if (DataProvider.Ins.DB.REPAIRFORMs.Where(x=> x.IdCarReception == CarReception.Id).Count() > 0)
             {
-                RepairForm = DataProvider.Ins.DB.RepairForms.Where(x => x.IdCarReception == CarReception.Id).SingleOrDefault();
+                RepairForm = DataProvider.Ins.DB.REPAIRFORMs.Where(x => x.IdCarReception == CarReception.Id).SingleOrDefault();
             }
-            ListBrand = new ObservableCollection<CarBrand>(DataProvider.Ins.DB.CarBrands);
+            ListBrand = new ObservableCollection<CARBRAND>(DataProvider.Ins.DB.CARBRANDs);
 
             InitData();
             Command();
@@ -66,14 +66,14 @@ namespace QuanLyGaraOto.ViewModel
                },
                (p) =>
                {
-                   var carReceptionTemp = DataProvider.Ins.DB.CarReceptions.Where(x => x.Id == CarReception.Id).SingleOrDefault();
-                   carReceptionTemp.Customer.Name = Name;
-                   carReceptionTemp.Customer.Telephone = Phone;
-                   carReceptionTemp.Customer.Address = Address;
-                   carReceptionTemp.CarBrand = SelectedBrand;
+                   var carReceptionTemp = DataProvider.Ins.DB.CARRECEPTIONs.Where(x => x.Id == CarReception.Id).SingleOrDefault();
+                   carReceptionTemp.CUSTOMER.Customer_Name = Name;
+                   carReceptionTemp.CUSTOMER.Customer_Phone = Phone;
+                   carReceptionTemp.CUSTOMER.Customer_Address = Address;
+                   carReceptionTemp.CARBRAND = SelectedBrand;
                    carReceptionTemp.ReceptionDate = ReceptionDate;
                    carReceptionTemp.LicensePlate = LicensePlate;
-                   var repairFormTemp = DataProvider.Ins.DB.RepairForms.Where(x => x.IdCarReception == CarReception.Id).SingleOrDefault();
+                   var repairFormTemp = DataProvider.Ins.DB.REPAIRFORMs.Where(x => x.IdCarReception == CarReception.Id).SingleOrDefault();
                    if (repairFormTemp != null) repairFormTemp.RepairDate = RepairDate;
 
                    DataProvider.Ins.DB.SaveChanges();
@@ -94,11 +94,11 @@ namespace QuanLyGaraOto.ViewModel
             {
                 RepairDate = RepairForm.RepairDate;
             }
-            this.Name = CarReception.Customer.Name;
-            this.Address = CarReception.Customer.Address;
-            this.Phone = CarReception.Customer.Telephone;
+            this.Name = CarReception.CUSTOMER.Customer_Name;
+            this.Address = CarReception.CUSTOMER.Customer_Address;
+            this.Phone = CarReception.CUSTOMER.Customer_Phone;
             this.LicensePlate = CarReception.LicensePlate;
-            this.SelectedBrand = CarReception.CarBrand;
+            this.SelectedBrand = CarReception.CARBRAND;
             this.ReceptionDate = CarReception.ReceptionDate;
         }
     }

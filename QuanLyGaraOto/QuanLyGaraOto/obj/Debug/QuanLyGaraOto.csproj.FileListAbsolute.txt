@@ -16,7 +16,6 @@ C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGa
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\System.Windows.Interactivity.xml
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.csprojAssemblyReference.cache
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\AddNewGoodWindow.g.cs
-C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\BunkPage.g.cs
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\CarReceptionWindow.g.cs
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\CarServiceWindow.g.cs
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\GoodBillPage.g.cs
@@ -32,7 +31,6 @@ C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGa
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto_MarkupCompile.lref
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\App.baml
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\AddNewGoodWindow.baml
-C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\BunkPage.baml
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\CarReceptionWindow.baml
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\CarServiceWindow.baml
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\GoodBillPage.baml
@@ -114,3 +112,17 @@ C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGa
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\ChangeCarInfoWindow.baml
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\PayWindow.g.cs
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\PayWindow.baml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\AddAccountWindow.g.cs
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\AddEmployee.g.cs
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\BunkWindow.g.cs
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\EditAccountWindow.g.cs
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\EditEmployeeWindow.g.cs
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\Employee.g.cs
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\ReportWindow.g.cs
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\AddAccountWindow.baml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\AddEmployee.baml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\BunkWindow.baml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\EditAccountWindow.baml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\EditEmployeeWindow.baml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\Employee.baml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\ReportWindow.baml

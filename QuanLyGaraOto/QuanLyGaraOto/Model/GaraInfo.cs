@@ -12,22 +12,22 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class GaraInfo
+    public partial class GARAINFO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GaraInfo()
+        public GARAINFO()
         {
-            this.Receipts = new HashSet<Receipt>();
+            this.RECEIPTs = new HashSet<RECEIPT>();
         }
     
         public int Id { get; set; }
         public Nullable<int> MaxCar { get; set; }
         public Nullable<int> MaxCarReception { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Address { get; set; }
+        public string GaraInfo_Phone { get; set; }
+        public string GaraInfo_Email { get; set; }
+        public string GaraInfo_Address { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Receipt> Receipts { get; set; }
+        public virtual ICollection<RECEIPT> RECEIPTs { get; set; }
     }
 }

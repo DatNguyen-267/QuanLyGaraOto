@@ -40,9 +40,9 @@ GO
 create table SUPPLIES
 (
     Id int IDENTITY(1, 1) primary key not NULL,
-    Supply_Name varchar(1000) not NULL,
-    Supply_Price int,
-    Supply_Amount int
+    Supplies_Name varchar(1000) not NULL,
+    Supplies_Price int,
+    Supplies_Amount int
 );
 GO
 

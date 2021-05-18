@@ -140,18 +140,18 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeGaraInformation { get; set; }
         public ICommand ResetGaraInformation { get; set; }
 
-        GaraInfo garaInfo;
+        GARAINFO garaInfo;
 
         // Setting car brand
-        private ObservableCollection<CarBrand> _ListBrands;
-        public ObservableCollection<CarBrand> ListBrands
+        private ObservableCollection<CARBRAND> _ListBrands;
+        public ObservableCollection<CARBRAND> ListBrands
         {
             get => _ListBrands;
             set { _ListBrands = value; OnPropertyChanged(); }
         }
 
-        private CarBrand _SelectedBrand;
-        public CarBrand SelectedBrand
+        private CARBRAND _SelectedBrand;
+        public CARBRAND SelectedBrand
         {
             get => _SelectedBrand;
             set { _SelectedBrand = value; OnPropertyChanged(); }
@@ -244,7 +244,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeUserInformation { get; set; }
         public ICommand ResetUserInformation { get; set; }
 
-        UserInfo userInfo;
+        USERINFO userInfo;
 
         public SettingViewModel()
         {
@@ -275,13 +275,13 @@ namespace QuanLyGaraOto.ViewModel
             });
 
             // Gara information
-            garaInfo = DataProvider.Ins.DB.GaraInfoes.SingleOrDefault(x => x.Id == 1);
+            garaInfo = DataProvider.Ins.DB.GARAINFOes.SingleOrDefault(x => x.Id == 1);
             if (garaInfo != null)
             {
                 MaxCarReception = garaInfo.MaxCarReception.Value;
-                Telephone = garaInfo.Phone;
-                Email = garaInfo.Email;
-                Address = garaInfo.Address;
+                Telephone = garaInfo.GaraInfo_Phone;
+                Email = garaInfo.GaraInfo_Email;
+                Address = garaInfo.GaraInfo_Address;
             }
 
             ChangeGaraInformation = new RelayCommand<object>(
@@ -293,9 +293,9 @@ namespace QuanLyGaraOto.ViewModel
                 (p) =>
                 {
                     garaInfo.MaxCarReception = _MaxCarReception;
-                    garaInfo.Phone = _Telephone;
-                    garaInfo.Email = _Email;
-                    garaInfo.Address = _Address;
+                    garaInfo.GaraInfo_Phone = _Telephone;
+                    garaInfo.GaraInfo_Email = _Email;
+                    garaInfo.GaraInfo_Address = _Address;
                     DataProvider.Ins.DB.SaveChanges();
                     SetEnableStatusButtonInGaraInformation(false);
                 });
@@ -309,14 +309,14 @@ namespace QuanLyGaraOto.ViewModel
                 (p) =>
                 {
                     MaxCarReception = garaInfo.MaxCarReception.Value;
-                    Telephone = garaInfo.Phone;
-                    Email = garaInfo.Email;
-                    Address = garaInfo.Address;
+                    Telephone = garaInfo.GaraInfo_Phone;
+                    Email = garaInfo.GaraInfo_Email;
+                    Address = garaInfo.GaraInfo_Address;
                     SetEnableStatusButtonInGaraInformation(false);
                 });
 
             // Car brands
-            ListBrands = new ObservableCollection<CarBrand>(DataProvider.Ins.DB.CarBrands);
+            ListBrands = new ObservableCollection<CARBRAND>(DataProvider.Ins.DB.CARBRANDs);
 
             IsEnableDeleteButtonInBrandSetting = false;
             IsEnableModifyButtonInBrandSetting = false;
@@ -348,34 +348,34 @@ namespace QuanLyGaraOto.ViewModel
             });
 
             // User information
-            userInfo = DataProvider.Ins.DB.UserInfoes.Where(x => x.IdUser == 1).FirstOrDefault();
+            userInfo = DataProvider.Ins.DB.USERINFOes.Where(x => x.IdUser == 1).FirstOrDefault();
             if (userInfo != null)
             {
-                UserName = userInfo.Name;
-                UserAddress = userInfo.Address;
-                UserBirth = userInfo.BirthDate.Value;
-                UserTelephone = userInfo.Telephone;
-                UserCMND = userInfo.CMND;
+                UserName = userInfo.UserInfo_Name;
+                UserAddress = userInfo.UserInfo_Address;
+                UserBirth = userInfo.UserInfo_BirthDate.Value;
+                UserTelephone = userInfo.UserInfo_Telephone;
+                UserCMND = userInfo.UserInfo_CMND;
             }
 
             ChangeUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                userInfo.Name = _UserName;
-                userInfo.Address = _UserAddress;
-                userInfo.BirthDate = _UserBirth;
-                userInfo.Telephone = UserTelephone;
-                userInfo.CMND = UserCMND;
+                userInfo.UserInfo_Name = _UserName;
+                userInfo.UserInfo_Address = _UserAddress;
+                userInfo.UserInfo_BirthDate = _UserBirth;
+                userInfo.UserInfo_Telephone = UserTelephone;
+                userInfo.UserInfo_CMND = UserCMND;
                 DataProvider.Ins.DB.SaveChanges();
                 SetEnableStatusButtonInUserInformation(false);
             });
 
             ResetUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                UserName = userInfo.Name;
-                UserAddress = userInfo.Address;
-                UserBirth = userInfo.BirthDate.Value;
-                UserTelephone = userInfo.Telephone;
-                UserCMND = userInfo.CMND;
+                UserName = userInfo.UserInfo_Name;
+                UserAddress = userInfo.UserInfo_Address;
+                UserBirth = userInfo.UserInfo_BirthDate.Value;
+                UserTelephone = userInfo.UserInfo_Telephone;
+                UserCMND = userInfo.UserInfo_CMND;
                 SetEnableStatusButtonInUserInformation(false);
             });
 

@@ -11,17 +11,17 @@ namespace QuanLyGaraOto.ViewModel
     public class PayViewModel : BaseViewModel
     {
         public bool IsPay {get;set;}
-        private CarReception _CarReception { get; set; }
-        public CarReception CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
-        private RepairForm _RepairForm { get; set; }
-        public RepairForm RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
-        private ObservableCollection<RepairInfo> _ListRepair { get; set; }
-        public ObservableCollection<RepairInfo> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
+        private CARRECEPTION _CarReception { get; set; }
+        public CARRECEPTION CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
+        private REPAIRFORM _RepairForm { get; set; }
+        public REPAIRFORM RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
+        private ObservableCollection<REPAIRINFO> _ListRepair { get; set; }
+        public ObservableCollection<REPAIRINFO> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
         public PayViewModel()
         {
 
         }
-        public PayViewModel(CarReception carReception)
+        public PayViewModel(CARRECEPTION carReception)
         {
             InitData();
             this.CarReception = carReception;
@@ -29,8 +29,8 @@ namespace QuanLyGaraOto.ViewModel
         public void InitData()
         {
             IsPay = false;
-            RepairForm = DataProvider.Ins.DB.RepairForms.Where(x => x.IdCarReception == CarReception.Id).SingleOrDefault();
-            ListRepair = new ObservableCollection<RepairInfo>(DataProvider.Ins.DB.RepairInfoes.Where(
+            RepairForm = DataProvider.Ins.DB.REPAIRFORMs.Where(x => x.IdCarReception == CarReception.Id).SingleOrDefault();
+            ListRepair = new ObservableCollection<REPAIRINFO>(DataProvider.Ins.DB.REPAIRINFOes.Where(
                 x => x.IdRepairForm == RepairForm.Id));
         }
     }

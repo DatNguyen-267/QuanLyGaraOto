@@ -16,8 +16,8 @@ namespace QuanLyGaraOto.ViewModel
         public DateTime? RepairDate { get => _RepairDate; set { _RepairDate = value; OnPropertyChanged(); } }
         public ICommand CloseCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
-        private RepairForm _NewRepairForm { get; set; }
-        public RepairForm NewRepairForm { get => _NewRepairForm; set { _NewRepairForm = value; OnPropertyChanged(); } }
+        private REPAIRFORM _NewRepairForm { get; set; }
+        public REPAIRFORM NewRepairForm { get => _NewRepairForm; set { _NewRepairForm = value; OnPropertyChanged(); } }
         public AddRepairFormViewModel()
         {
             IsSuccess = false;
@@ -30,7 +30,7 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                NewRepairForm = new RepairForm();
+                NewRepairForm = new REPAIRFORM();
                 NewRepairForm.RepairDate = RepairDate;
                 IsSuccess = true;
                 p.Close();

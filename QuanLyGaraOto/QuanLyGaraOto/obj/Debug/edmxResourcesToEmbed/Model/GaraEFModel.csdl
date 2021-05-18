@@ -31,62 +31,62 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
-    <EntitySet Name="CarBrands" EntityType="GARAModel.CarBrand" />
-    <EntitySet Name="CarReceptions" EntityType="GARAModel.CarReception" />
-    <EntitySet Name="CarStatus1" EntityType="GARAModel.CarStatus" />
-    <EntitySet Name="Customers" EntityType="GARAModel.Customer" />
-    <EntitySet Name="GaraInfoes" EntityType="GARAModel.GaraInfo" />
-    <EntitySet Name="Pays" EntityType="GARAModel.Pay" />
-    <EntitySet Name="Receipts" EntityType="GARAModel.Receipt" />
-    <EntitySet Name="RepairForms" EntityType="GARAModel.RepairForm" />
-    <EntitySet Name="RepairInfoes" EntityType="GARAModel.RepairInfo" />
-    <EntitySet Name="Supplies" EntityType="GARAModel.Supply" />
-    <EntitySet Name="UserInfoes" EntityType="GARAModel.UserInfo" />
-    <EntitySet Name="UserRoles" EntityType="GARAModel.UserRole" />
-    <EntitySet Name="Users" EntityType="GARAModel.User" />
+    <EntitySet Name="CARBRANDs" EntityType="GARAModel.CARBRAND" />
+    <EntitySet Name="CARRECEPTIONs" EntityType="GARAModel.CARRECEPTION" />
+    <EntitySet Name="CARSTATUS" EntityType="GARAModel.CARSTATUS" />
+    <EntitySet Name="CUSTOMERs" EntityType="GARAModel.CUSTOMER" />
+    <EntitySet Name="GARAINFOes" EntityType="GARAModel.GARAINFO" />
+    <EntitySet Name="PAYs" EntityType="GARAModel.PAY" />
+    <EntitySet Name="RECEIPTs" EntityType="GARAModel.RECEIPT" />
+    <EntitySet Name="REPAIRFORMs" EntityType="GARAModel.REPAIRFORM" />
+    <EntitySet Name="REPAIRINFOes" EntityType="GARAModel.REPAIRINFO" />
+    <EntitySet Name="ROLEs" EntityType="GARAModel.ROLE" />
+    <EntitySet Name="SUPPLIES" EntityType="GARAModel.SUPPLIES" />
+    <EntitySet Name="USERINFOes" EntityType="GARAModel.USERINFO" />
+    <EntitySet Name="USERS" EntityType="GARAModel.USER" />
     <AssociationSet Name="FK_CarReception_CarBrand" Association="GARAModel.FK_CarReception_CarBrand">
-      <End Role="CarBrand" EntitySet="CarBrands" />
-      <End Role="CarReception" EntitySet="CarReceptions" />
+      <End Role="CARBRAND" EntitySet="CARBRANDs" />
+      <End Role="CARRECEPTION" EntitySet="CARRECEPTIONs" />
     </AssociationSet>
     <AssociationSet Name="FK_CarReception_CarStatus" Association="GARAModel.FK_CarReception_CarStatus">
-      <End Role="CarStatu" EntitySet="CarStatus1" />
-      <End Role="CarReception" EntitySet="CarReceptions" />
+      <End Role="CARSTATU" EntitySet="CARSTATUS" />
+      <End Role="CARRECEPTION" EntitySet="CARRECEPTIONs" />
     </AssociationSet>
     <AssociationSet Name="FK_CarReception_Customer" Association="GARAModel.FK_CarReception_Customer">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="CarReception" EntitySet="CarReceptions" />
+      <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+      <End Role="CARRECEPTION" EntitySet="CARRECEPTIONs" />
     </AssociationSet>
     <AssociationSet Name="FK_Receipt_CarReception" Association="GARAModel.FK_Receipt_CarReception">
-      <End Role="CarReception" EntitySet="CarReceptions" />
-      <End Role="Receipt" EntitySet="Receipts" />
+      <End Role="CARRECEPTION" EntitySet="CARRECEPTIONs" />
+      <End Role="RECEIPT" EntitySet="RECEIPTs" />
     </AssociationSet>
     <AssociationSet Name="FK_RepairForm_CarReception" Association="GARAModel.FK_RepairForm_CarReception">
-      <End Role="CarReception" EntitySet="CarReceptions" />
-      <End Role="RepairForm" EntitySet="RepairForms" />
+      <End Role="CARRECEPTION" EntitySet="CARRECEPTIONs" />
+      <End Role="REPAIRFORM" EntitySet="REPAIRFORMs" />
     </AssociationSet>
     <AssociationSet Name="FK_Receipt_GaraInfo" Association="GARAModel.FK_Receipt_GaraInfo">
-      <End Role="GaraInfo" EntitySet="GaraInfoes" />
-      <End Role="Receipt" EntitySet="Receipts" />
+      <End Role="GARAINFO" EntitySet="GARAINFOes" />
+      <End Role="RECEIPT" EntitySet="RECEIPTs" />
     </AssociationSet>
     <AssociationSet Name="FK_RepairInfo_Pay" Association="GARAModel.FK_RepairInfo_Pay">
-      <End Role="Pay" EntitySet="Pays" />
-      <End Role="RepairInfo" EntitySet="RepairInfoes" />
+      <End Role="PAY" EntitySet="PAYs" />
+      <End Role="REPAIRINFO" EntitySet="REPAIRINFOes" />
     </AssociationSet>
     <AssociationSet Name="FK_RepairInfo_RepairForm" Association="GARAModel.FK_RepairInfo_RepairForm">
-      <End Role="RepairForm" EntitySet="RepairForms" />
-      <End Role="RepairInfo" EntitySet="RepairInfoes" />
+      <End Role="REPAIRFORM" EntitySet="REPAIRFORMs" />
+      <End Role="REPAIRINFO" EntitySet="REPAIRINFOes" />
     </AssociationSet>
     <AssociationSet Name="FK_RepairInfo_Supply" Association="GARAModel.FK_RepairInfo_Supply">
-      <End Role="Supply" EntitySet="Supplies" />
-      <End Role="RepairInfo" EntitySet="RepairInfoes" />
+      <End Role="SUPPLy" EntitySet="SUPPLIES" />
+      <End Role="REPAIRINFO" EntitySet="REPAIRINFOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USERS__IdRole__4222D4EF" Association="GARAModel.FK__USERS__IdRole__4222D4EF">
+      <End Role="ROLE" EntitySet="ROLEs" />
+      <End Role="USER" EntitySet="USERS" />
     </AssociationSet>
     <AssociationSet Name="FK_UserInfo_Users" Association="GARAModel.FK_UserInfo_Users">
-      <End Role="User" EntitySet="Users" />
-      <End Role="UserInfo" EntitySet="UserInfoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Users__IdRole__4222D4EF" Association="GARAModel.FK__Users__IdRole__4222D4EF">
-      <End Role="UserRole" EntitySet="UserRoles" />
-      <End Role="User" EntitySet="Users" />
+      <End Role="USER" EntitySet="USERS" />
+      <End Role="USERINFO" EntitySet="USERINFOes" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -100,15 +100,15 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
-  <EntityType Name="CarBrand">
+  <EntityType Name="CARBRAND">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="CarReceptions" Relationship="GARAModel.FK_CarReception_CarBrand" FromRole="CarBrand" ToRole="CarReception" />
+    <Property Name="CarBrand_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CARRECEPTIONs" Relationship="GARAModel.FK_CarReception_CarBrand" FromRole="CARBRAND" ToRole="CARRECEPTION" />
   </EntityType>
-  <EntityType Name="CarReception">
+  <EntityType Name="CARRECEPTION">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -118,52 +118,52 @@
     <Property Name="IdBrand" Type="Int32" Nullable="false" />
     <Property Name="ReceptionDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="IdStatus" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="CarBrand" Relationship="GARAModel.FK_CarReception_CarBrand" FromRole="CarReception" ToRole="CarBrand" />
-    <NavigationProperty Name="CarStatus" Relationship="GARAModel.FK_CarReception_CarStatus" FromRole="CarReception" ToRole="CarStatu" />
-    <NavigationProperty Name="Customer" Relationship="GARAModel.FK_CarReception_Customer" FromRole="CarReception" ToRole="Customer" />
-    <NavigationProperty Name="Receipts" Relationship="GARAModel.FK_Receipt_CarReception" FromRole="CarReception" ToRole="Receipt" />
-    <NavigationProperty Name="RepairForms" Relationship="GARAModel.FK_RepairForm_CarReception" FromRole="CarReception" ToRole="RepairForm" />
+    <NavigationProperty Name="CARBRAND" Relationship="GARAModel.FK_CarReception_CarBrand" FromRole="CARRECEPTION" ToRole="CARBRAND" />
+    <NavigationProperty Name="CARSTATU" Relationship="GARAModel.FK_CarReception_CarStatus" FromRole="CARRECEPTION" ToRole="CARSTATU" />
+    <NavigationProperty Name="CUSTOMER" Relationship="GARAModel.FK_CarReception_Customer" FromRole="CARRECEPTION" ToRole="CUSTOMER" />
+    <NavigationProperty Name="RECEIPTs" Relationship="GARAModel.FK_Receipt_CarReception" FromRole="CARRECEPTION" ToRole="RECEIPT" />
+    <NavigationProperty Name="REPAIRFORMs" Relationship="GARAModel.FK_RepairForm_CarReception" FromRole="CARRECEPTION" ToRole="REPAIRFORM" />
   </EntityType>
-  <EntityType Name="CarStatus">
+  <EntityType Name="CARSTATUS">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="CarReceptions" Relationship="GARAModel.FK_CarReception_CarStatus" FromRole="CarStatu" ToRole="CarReception" />
+    <Property Name="Status_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CARRECEPTIONs" Relationship="GARAModel.FK_CarReception_CarStatus" FromRole="CARSTATU" ToRole="CARRECEPTION" />
   </EntityType>
-  <EntityType Name="Customer">
+  <EntityType Name="CUSTOMER">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Telephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="CarReceptions" Relationship="GARAModel.FK_CarReception_Customer" FromRole="Customer" ToRole="CarReception" />
+    <Property Name="Customer_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Customer_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Customer_Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CARRECEPTIONs" Relationship="GARAModel.FK_CarReception_Customer" FromRole="CUSTOMER" ToRole="CARRECEPTION" />
   </EntityType>
-  <EntityType Name="GaraInfo">
+  <EntityType Name="GARAINFO">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="MaxCar" Type="Int32" />
     <Property Name="MaxCarReception" Type="Int32" />
-    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Receipts" Relationship="GARAModel.FK_Receipt_GaraInfo" FromRole="GaraInfo" ToRole="Receipt" />
+    <Property Name="GaraInfo_Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="GaraInfo_Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="GaraInfo_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="RECEIPTs" Relationship="GARAModel.FK_Receipt_GaraInfo" FromRole="GARAINFO" ToRole="RECEIPT" />
   </EntityType>
-  <EntityType Name="Pay">
+  <EntityType Name="PAY">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-    <Property Name="Price" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="RepairInfoes" Relationship="GARAModel.FK_RepairInfo_Pay" FromRole="Pay" ToRole="RepairInfo" />
+    <Property Name="Pay_Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Pay_Price" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="REPAIRINFOes" Relationship="GARAModel.FK_RepairInfo_Pay" FromRole="PAY" ToRole="REPAIRINFO" />
   </EntityType>
-  <EntityType Name="Receipt">
+  <EntityType Name="RECEIPT">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -172,66 +172,66 @@
     <Property Name="IdGaraInfo" Type="Int32" Nullable="false" />
     <Property Name="ReceptDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="TotalMoney" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="CarReception" Relationship="GARAModel.FK_Receipt_CarReception" FromRole="Receipt" ToRole="CarReception" />
-    <NavigationProperty Name="GaraInfo" Relationship="GARAModel.FK_Receipt_GaraInfo" FromRole="Receipt" ToRole="GaraInfo" />
+    <NavigationProperty Name="CARRECEPTION" Relationship="GARAModel.FK_Receipt_CarReception" FromRole="RECEIPT" ToRole="CARRECEPTION" />
+    <NavigationProperty Name="GARAINFO" Relationship="GARAModel.FK_Receipt_GaraInfo" FromRole="RECEIPT" ToRole="GARAINFO" />
   </EntityType>
-  <EntityType Name="RepairForm">
+  <EntityType Name="REPAIRFORM">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdCarReception" Type="Int32" Nullable="false" />
     <Property Name="RepairDate" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="CarReception" Relationship="GARAModel.FK_RepairForm_CarReception" FromRole="RepairForm" ToRole="CarReception" />
-    <NavigationProperty Name="RepairInfoes" Relationship="GARAModel.FK_RepairInfo_RepairForm" FromRole="RepairForm" ToRole="RepairInfo" />
+    <NavigationProperty Name="CARRECEPTION" Relationship="GARAModel.FK_RepairForm_CarReception" FromRole="REPAIRFORM" ToRole="CARRECEPTION" />
+    <NavigationProperty Name="REPAIRINFOes" Relationship="GARAModel.FK_RepairInfo_RepairForm" FromRole="REPAIRFORM" ToRole="REPAIRINFO" />
   </EntityType>
-  <EntityType Name="RepairInfo">
+  <EntityType Name="REPAIRINFO">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdRepairForm" Type="Int32" Nullable="false" />
-    <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="IdSupply" Type="Int32" />
     <Property Name="SuppliesAmount" Type="Int32" />
     <Property Name="IdPay" Type="Int32" Nullable="false" />
     <Property Name="TotalMoney" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Pay" Relationship="GARAModel.FK_RepairInfo_Pay" FromRole="RepairInfo" ToRole="Pay" />
-    <NavigationProperty Name="RepairForm" Relationship="GARAModel.FK_RepairInfo_RepairForm" FromRole="RepairInfo" ToRole="RepairForm" />
-    <NavigationProperty Name="Supply" Relationship="GARAModel.FK_RepairInfo_Supply" FromRole="RepairInfo" ToRole="Supply" />
+    <NavigationProperty Name="PAY" Relationship="GARAModel.FK_RepairInfo_Pay" FromRole="REPAIRINFO" ToRole="PAY" />
+    <NavigationProperty Name="REPAIRFORM" Relationship="GARAModel.FK_RepairInfo_RepairForm" FromRole="REPAIRINFO" ToRole="REPAIRFORM" />
+    <NavigationProperty Name="SUPPLy" Relationship="GARAModel.FK_RepairInfo_Supply" FromRole="REPAIRINFO" ToRole="SUPPLy" />
   </EntityType>
-  <EntityType Name="Supply">
+  <EntityType Name="ROLE">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-    <Property Name="Price" Type="Int32" />
-    <Property Name="Amount" Type="Int32" />
-    <NavigationProperty Name="RepairInfoes" Relationship="GARAModel.FK_RepairInfo_Supply" FromRole="Supply" ToRole="RepairInfo" />
+    <Property Name="Role_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="USERS" Relationship="GARAModel.FK__USERS__IdRole__4222D4EF" FromRole="ROLE" ToRole="USER" />
   </EntityType>
-  <EntityType Name="UserInfo">
+  <EntityType Name="SUPPLIES">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdUser" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="BirthDate" Type="DateTime" Precision="0" />
-    <Property Name="Telephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="CMND" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="User" Relationship="GARAModel.FK_UserInfo_Users" FromRole="UserInfo" ToRole="User" />
+    <Property Name="Supplies_Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Supplies_Price" Type="Int32" />
+    <Property Name="Supplies_Amount" Type="Int32" />
+    <NavigationProperty Name="REPAIRINFOes" Relationship="GARAModel.FK_RepairInfo_Supply" FromRole="SUPPLy" ToRole="REPAIRINFO" />
   </EntityType>
-  <EntityType Name="UserRole">
+  <EntityType Name="USERINFO">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Users" Relationship="GARAModel.FK__Users__IdRole__4222D4EF" FromRole="UserRole" ToRole="User" />
+    <Property Name="IdUser" Type="Int32" />
+    <Property Name="UserInfo_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="UserInfo_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UserInfo_BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="UserInfo_Telephone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UserInfo_CMND" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="USER" Relationship="GARAModel.FK_UserInfo_Users" FromRole="USERINFO" ToRole="USER" />
   </EntityType>
-  <EntityType Name="User">
+  <EntityType Name="USER">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -239,138 +239,139 @@
     <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="IdRole" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="UserInfoes" Relationship="GARAModel.FK_UserInfo_Users" FromRole="User" ToRole="UserInfo" />
-    <NavigationProperty Name="UserRole" Relationship="GARAModel.FK__Users__IdRole__4222D4EF" FromRole="User" ToRole="UserRole" />
+    <Property Name="IsActive" Type="Int32" />
+    <NavigationProperty Name="ROLE" Relationship="GARAModel.FK__USERS__IdRole__4222D4EF" FromRole="USER" ToRole="ROLE" />
+    <NavigationProperty Name="USERINFOes" Relationship="GARAModel.FK_UserInfo_Users" FromRole="USER" ToRole="USERINFO" />
   </EntityType>
   <Association Name="FK_CarReception_CarBrand">
-    <End Type="GARAModel.CarBrand" Role="CarBrand" Multiplicity="1" />
-    <End Type="GARAModel.CarReception" Role="CarReception" Multiplicity="*" />
+    <End Type="GARAModel.CARBRAND" Role="CARBRAND" Multiplicity="1" />
+    <End Type="GARAModel.CARRECEPTION" Role="CARRECEPTION" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CarBrand">
+      <Principal Role="CARBRAND">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="CarReception">
+      <Dependent Role="CARRECEPTION">
         <PropertyRef Name="IdBrand" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CarReception_CarStatus">
-    <End Type="GARAModel.CarStatus" Role="CarStatu" Multiplicity="1" />
-    <End Type="GARAModel.CarReception" Role="CarReception" Multiplicity="*" />
+    <End Type="GARAModel.CARSTATUS" Role="CARSTATU" Multiplicity="1" />
+    <End Type="GARAModel.CARRECEPTION" Role="CARRECEPTION" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CarStatu">
+      <Principal Role="CARSTATU">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="CarReception">
+      <Dependent Role="CARRECEPTION">
         <PropertyRef Name="IdStatus" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CarReception_Customer">
-    <End Type="GARAModel.Customer" Role="Customer" Multiplicity="1" />
-    <End Type="GARAModel.CarReception" Role="CarReception" Multiplicity="*" />
+    <End Type="GARAModel.CUSTOMER" Role="CUSTOMER" Multiplicity="1" />
+    <End Type="GARAModel.CARRECEPTION" Role="CARRECEPTION" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customer">
+      <Principal Role="CUSTOMER">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="CarReception">
+      <Dependent Role="CARRECEPTION">
         <PropertyRef Name="IdCustomer" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Receipt_CarReception">
-    <End Type="GARAModel.CarReception" Role="CarReception" Multiplicity="1" />
-    <End Type="GARAModel.Receipt" Role="Receipt" Multiplicity="*" />
+    <End Type="GARAModel.CARRECEPTION" Role="CARRECEPTION" Multiplicity="1" />
+    <End Type="GARAModel.RECEIPT" Role="RECEIPT" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CarReception">
+      <Principal Role="CARRECEPTION">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Receipt">
+      <Dependent Role="RECEIPT">
         <PropertyRef Name="IdCarReception" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_RepairForm_CarReception">
-    <End Type="GARAModel.CarReception" Role="CarReception" Multiplicity="1" />
-    <End Type="GARAModel.RepairForm" Role="RepairForm" Multiplicity="*" />
+    <End Type="GARAModel.CARRECEPTION" Role="CARRECEPTION" Multiplicity="1" />
+    <End Type="GARAModel.REPAIRFORM" Role="REPAIRFORM" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CarReception">
+      <Principal Role="CARRECEPTION">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="RepairForm">
+      <Dependent Role="REPAIRFORM">
         <PropertyRef Name="IdCarReception" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Receipt_GaraInfo">
-    <End Type="GARAModel.GaraInfo" Role="GaraInfo" Multiplicity="1" />
-    <End Type="GARAModel.Receipt" Role="Receipt" Multiplicity="*" />
+    <End Type="GARAModel.GARAINFO" Role="GARAINFO" Multiplicity="1" />
+    <End Type="GARAModel.RECEIPT" Role="RECEIPT" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="GaraInfo">
+      <Principal Role="GARAINFO">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Receipt">
+      <Dependent Role="RECEIPT">
         <PropertyRef Name="IdGaraInfo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_RepairInfo_Pay">
-    <End Type="GARAModel.Pay" Role="Pay" Multiplicity="1" />
-    <End Type="GARAModel.RepairInfo" Role="RepairInfo" Multiplicity="*" />
+    <End Type="GARAModel.PAY" Role="PAY" Multiplicity="1" />
+    <End Type="GARAModel.REPAIRINFO" Role="REPAIRINFO" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Pay">
+      <Principal Role="PAY">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="RepairInfo">
+      <Dependent Role="REPAIRINFO">
         <PropertyRef Name="IdPay" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_RepairInfo_RepairForm">
-    <End Type="GARAModel.RepairForm" Role="RepairForm" Multiplicity="1" />
-    <End Type="GARAModel.RepairInfo" Role="RepairInfo" Multiplicity="*" />
+    <End Type="GARAModel.REPAIRFORM" Role="REPAIRFORM" Multiplicity="1" />
+    <End Type="GARAModel.REPAIRINFO" Role="REPAIRINFO" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="RepairForm">
+      <Principal Role="REPAIRFORM">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="RepairInfo">
+      <Dependent Role="REPAIRINFO">
         <PropertyRef Name="IdRepairForm" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_RepairInfo_Supply">
-    <End Type="GARAModel.Supply" Role="Supply" Multiplicity="0..1" />
-    <End Type="GARAModel.RepairInfo" Role="RepairInfo" Multiplicity="*" />
+    <End Type="GARAModel.SUPPLIES" Role="SUPPLy" Multiplicity="0..1" />
+    <End Type="GARAModel.REPAIRINFO" Role="REPAIRINFO" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Supply">
+      <Principal Role="SUPPLy">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="RepairInfo">
+      <Dependent Role="REPAIRINFO">
         <PropertyRef Name="IdSupply" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserInfo_Users">
-    <End Type="GARAModel.User" Role="User" Multiplicity="1" />
-    <End Type="GARAModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+  <Association Name="FK__USERS__IdRole__4222D4EF">
+    <End Type="GARAModel.ROLE" Role="ROLE" Multiplicity="1" />
+    <End Type="GARAModel.USER" Role="USER" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="User">
+      <Principal Role="ROLE">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="UserInfo">
-        <PropertyRef Name="IdUser" />
+      <Dependent Role="USER">
+        <PropertyRef Name="IdRole" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Users__IdRole__4222D4EF">
-    <End Type="GARAModel.UserRole" Role="UserRole" Multiplicity="1" />
-    <End Type="GARAModel.User" Role="User" Multiplicity="*" />
+  <Association Name="FK_UserInfo_Users">
+    <End Type="GARAModel.USER" Role="USER" Multiplicity="0..1" />
+    <End Type="GARAModel.USERINFO" Role="USERINFO" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="UserRole">
+      <Principal Role="USER">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="User">
-        <PropertyRef Name="IdRole" />
+      <Dependent Role="USERINFO">
+        <PropertyRef Name="IdUser" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -22,7 +22,7 @@ namespace QuanLyGaraOto
     public partial class AddAccountWindow : Window
     {
         EmployeeViewModel Viewmodel { get; set; }
-        public AddAccountWindow(UserInfo u)
+        public AddAccountWindow(USERINFO u)
         {
             InitializeComponent();
             DataContext = Viewmodel = new EmployeeViewModel(u);

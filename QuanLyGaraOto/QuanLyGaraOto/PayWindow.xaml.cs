@@ -23,7 +23,7 @@ namespace QuanLyGaraOto
     {
         public PayViewModel payViewModel { get; set; }
         public PayWindow() { InitializeComponent(); }
-        public PayWindow(CarReception carReception)
+        public PayWindow(CARRECEPTION carReception)
         {
             InitializeComponent();
             this.DataContext = (payViewModel = new PayViewModel(carReception));

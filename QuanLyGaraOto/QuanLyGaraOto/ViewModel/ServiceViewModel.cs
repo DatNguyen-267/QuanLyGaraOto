@@ -67,14 +67,14 @@ namespace QuanLyGaraOto.ViewModel
         public int GetDebt(int ID)
         {
             int Debt = 0;
-            if (DataProvider.Ins.DB.RepairForms.Where(x=>x.IdCarReception == ID).Count() > 0)
+            if (DataProvider.Ins.DB.REPAIRFORMs.Where(x=>x.IdCarReception == ID).Count() > 0)
             {
-                RepairForm repairForm = DataProvider.Ins.DB.RepairForms.Where(x => x.IdCarReception == ID).SingleOrDefault();
+                REPAIRFORM repairForm = DataProvider.Ins.DB.REPAIRFORMs.Where(x => x.IdCarReception == ID).SingleOrDefault();
                 
-                if (DataProvider.Ins.DB.RepairInfoes.Where(x=> x.IdRepairForm == repairForm.Id).Count() > 0)
+                if (DataProvider.Ins.DB.REPAIRINFOes.Where(x=> x.IdRepairForm == repairForm.Id).Count() > 0)
                 {
-                    ObservableCollection<RepairInfo> listRepairInfo = new ObservableCollection<RepairInfo>
-                        (DataProvider.Ins.DB.RepairInfoes.Where(x=>x.IdRepairForm == repairForm.Id));
+                    ObservableCollection<REPAIRINFO> listRepairInfo = new ObservableCollection<REPAIRINFO>
+                        (DataProvider.Ins.DB.REPAIRINFOes.Where(x=>x.IdRepairForm == repairForm.Id));
                     foreach (var item in listRepairInfo)
                     {
                         Debt = Debt + item.TotalMoney;
@@ -85,7 +85,7 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void LoadListData()
         {
-            var ListReception = new ObservableCollection<CarReception>(DataProvider.Ins.DB.CarReceptions);
+            var ListReception = new ObservableCollection<CARRECEPTION>(DataProvider.Ins.DB.CARRECEPTIONs);
             ListCar = new ObservableCollection<ListCar>();
             foreach (var item in ListReception)
             {

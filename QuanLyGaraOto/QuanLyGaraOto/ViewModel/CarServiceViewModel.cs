@@ -41,8 +41,8 @@ namespace QuanLyGaraOto.ViewModel
         #endregion
 
         #region Data Reception
-        private ObservableCollection<CarBrand> _ListBrand { get; set; }
-        public ObservableCollection<CarBrand> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
+        private ObservableCollection<CARBRAND> _ListBrand { get; set; }
+        public ObservableCollection<CARBRAND> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
         private string _Brand { get; set; }
         public string Brand { get => _Brand; set { _Brand = value; OnPropertyChanged(); } }
         private string _Name { get; set; }
@@ -61,10 +61,10 @@ namespace QuanLyGaraOto.ViewModel
 
         private ObservableCollection<RepairItem> _ListRepair { get; set; }
         public ObservableCollection<RepairItem> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
-        private ObservableCollection<Supply> _ListSupply { get; set; }
-        public ObservableCollection<Supply> ListSupply { get => _ListSupply; set { _ListSupply = value; OnPropertyChanged(); } }
-        private ObservableCollection<Pay> _ListPay { get; set; }
-        public ObservableCollection<Pay> ListPay { get => _ListPay; set { _ListPay = value; OnPropertyChanged(); } }
+        private ObservableCollection<SUPPLIES> _ListSupply { get; set; }
+        public ObservableCollection<SUPPLIES> ListSupply { get => _ListSupply; set { _ListSupply = value; OnPropertyChanged(); } }
+        private ObservableCollection<PAY> _ListPay { get; set; }
+        public ObservableCollection<PAY> ListPay { get => _ListPay; set { _ListPay = value; OnPropertyChanged(); } }
         private ObservableCollection<int> _ListAmount { get; set; }
         public ObservableCollection<int> ListAmount { get => _ListAmount; set { _ListAmount = value; OnPropertyChanged(); } }
         // Danh sach cac List
@@ -76,8 +76,8 @@ namespace QuanLyGaraOto.ViewModel
                 if (SelectedItem != null)
                 {
                     Content = SelectedItem.RepairInfo.Content;
-                    SelectedSupply = SelectedItem.RepairInfo.Supply;
-                    SelectedPay = SelectedItem.RepairInfo.Pay;
+                    SelectedSupply = SelectedItem.RepairInfo.SUPPLIES;
+                    SelectedPay = SelectedItem.RepairInfo.PAY;
                     SelectedAmount = SelectedItem.RepairInfo.SuppliesAmount;
                     Price = SelectedItem.Price;
                     TotalMoney = SelectedItem.TotalMoney;
@@ -93,10 +93,10 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged(); } }
         private string _Content { get; set; }
         public string Content { get => _Content; set { _Content = value; OnPropertyChanged(); } }
-        private Supply _SelectedSupply { get; set; }
-        public Supply SelectedSupply { get => _SelectedSupply; set { _SelectedSupply = value; OnPropertyChanged(); } }
-        private Pay _SelectedPay { get; set; }
-        public Pay SelectedPay { get => _SelectedPay; set { _SelectedPay = value; OnPropertyChanged(); } }
+        private SUPPLIES _SelectedSupply { get; set; }
+        public SUPPLIES SelectedSupply { get => _SelectedSupply; set { _SelectedSupply = value; OnPropertyChanged(); } }
+        private PAY _SelectedPay { get; set; }
+        public PAY SelectedPay { get => _SelectedPay; set { _SelectedPay = value; OnPropertyChanged(); } }
         private Nullable<int> _SelectedAmount { get; set; }
         public Nullable<int> SelectedAmount { get => _SelectedAmount; set { _SelectedAmount = value; OnPropertyChanged(); } }
         private int _Price { get; set; }
@@ -111,10 +111,10 @@ namespace QuanLyGaraOto.ViewModel
         #region Important Data
         private CarServiceWindow _carServiceWindow { get; set; }
         public CarServiceWindow carServiceWindow { get => _carServiceWindow; set { _carServiceWindow = value; } }
-        private RepairForm _RepairForm { get; set; }
-        public RepairForm RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
-        private CarReception _CarReception { get; set; }
-        public CarReception CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
+        private REPAIRFORM _RepairForm { get; set; }
+        public REPAIRFORM RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
+        private CARRECEPTION _CarReception { get; set; }
+        public CARRECEPTION CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
         private int _Total { get; set; }
         public int Total { get => _Total; set { _Total = value; OnPropertyChanged(); } }
         #endregion
@@ -122,10 +122,10 @@ namespace QuanLyGaraOto.ViewModel
         {
             GenaralFunction();
         }
-        public CarServiceViewModel(CarReception carReception)
+        public CarServiceViewModel(CARRECEPTION carReception)
         {
             GenaralFunction();
-            this.CarReception = DataProvider.Ins.DB.CarReceptions.Where(x=>x.Id == carReception.Id).SingleOrDefault();
+            this.CarReception = DataProvider.Ins.DB.CARRECEPTIONs.Where(x=>x.Id == carReception.Id).SingleOrDefault();
             // base data
 
             LoadCarInfo(this.CarReception.Id);
@@ -134,7 +134,7 @@ namespace QuanLyGaraOto.ViewModel
             VisReption(true);
             // Hiện bảng thông tin và ẩn nút tiếp nhận xe
 
-            if (DataProvider.Ins.DB.RepairForms.Where(x => x.IdCarReception == this.CarReception.Id).Count() > 0)
+            if (DataProvider.Ins.DB.REPAIRFORMs.Where(x => x.IdCarReception == this.CarReception.Id).Count() > 0)
             {
                 VisRepair(true);
                 LoadRepairInfo(this.CarReception.Id);
@@ -152,9 +152,9 @@ namespace QuanLyGaraOto.ViewModel
             InitVis();
             InitBtn();
 
-            ListBrand = new ObservableCollection<CarBrand>(DataProvider.Ins.DB.CarBrands);
-            ListPay = new ObservableCollection<Pay>(DataProvider.Ins.DB.Pays);
-            ListSupply = new ObservableCollection<Supply>(DataProvider.Ins.DB.Supplies);
+            ListBrand = new ObservableCollection<CARBRAND>(DataProvider.Ins.DB.CARBRANDs);
+            ListPay = new ObservableCollection<PAY>(DataProvider.Ins.DB.PAYs);
+            ListSupply = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
             ListRepair = new ObservableCollection<RepairItem>();
             ListAmount = new ObservableCollection<int>();
             for (int i = 1; i < 100; i++)
@@ -205,7 +205,7 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    RepairInfo repairInfo = new RepairInfo()
+                    REPAIRINFO repairInfo = new REPAIRINFO()
                     {
                         Content = Content,
                         IdPay = SelectedPay.Id,
@@ -216,7 +216,7 @@ namespace QuanLyGaraOto.ViewModel
                         TotalMoney = TotalMoney
                     };
                     ListRepair.Add(new RepairItem() { RepairInfo = repairInfo, Price = Price, TotalMoney = TotalMoney });
-                    DataProvider.Ins.DB.RepairInfoes.Add(repairInfo);
+                    DataProvider.Ins.DB.REPAIRINFOes.Add(repairInfo);
                     DataProvider.Ins.DB.SaveChanges();
                     UpdateTotal();
                 });
@@ -228,7 +228,7 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    RepairInfo temp = DataProvider.Ins.DB.RepairInfoes.Where(x => x.Id == SelectedItem.RepairInfo.Id).SingleOrDefault();
+                    REPAIRINFO temp = DataProvider.Ins.DB.REPAIRINFOes.Where(x => x.Id == SelectedItem.RepairInfo.Id).SingleOrDefault();
                     temp.Content = Content;
                     temp.IdSupply = SelectedSupply.Id;
                     temp.IdPay = SelectedPay.Id;
@@ -242,7 +242,7 @@ namespace QuanLyGaraOto.ViewModel
             DeleteCommand = new RelayCommand<Object>(
                 (p) => {
                     if (SelectedItem == null) return false;
-                    if (DataProvider.Ins.DB.RepairInfoes.Where(x => x.Id == SelectedItem.RepairInfo.Id).SingleOrDefault() == null)
+                    if (DataProvider.Ins.DB.REPAIRINFOes.Where(x => x.Id == SelectedItem.RepairInfo.Id).SingleOrDefault() == null)
                         return false;
                     return true;
                 },
@@ -293,8 +293,8 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void Calculate()
         {
-            Price = (int)SelectedSupply.Price * (int)SelectedAmount;
-            TotalMoney = (int)Price + (int)SelectedPay.Price;
+            Price = (int)SelectedSupply.Supplies_Price * (int)SelectedAmount;
+            TotalMoney = (int)Price + (int)SelectedPay.Pay_Price;
         }
         public void UpdateTotal()
         {
@@ -352,32 +352,32 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void LoadCarInfo(int IdNewCar)
         {
-            CarReception = new CarReception();
-            CarReception = DataProvider.Ins.DB.CarReceptions.Where(x => x.Id == IdNewCar).SingleOrDefault();
-            Name = CarReception.Customer.Name;
-            Address = CarReception.Customer.Address;
-            Phone = CarReception.Customer.Telephone;
+            CarReception = new CARRECEPTION();
+            CarReception = DataProvider.Ins.DB.CARRECEPTIONs.Where(x => x.Id == IdNewCar).SingleOrDefault();
+            Name = CarReception.CUSTOMER.Customer_Name;
+            Address = CarReception.CUSTOMER.Customer_Address;
+            Phone = CarReception.CUSTOMER.Customer_Phone;
             LicensePlate = CarReception.LicensePlate;
             ReceptionDate = CarReception.ReceptionDate;
-            Brand = CarReception.CarBrand.Name;
+            Brand = CarReception.CARBRAND.CarBrand_Name;
         }
         public void LoadRepairInfo(int ID)
         {
-            RepairForm = DataProvider.Ins.DB.RepairForms.Where(x=> x.IdCarReception == ID).SingleOrDefault();
-            var repairInfo = DataProvider.Ins.DB.RepairInfoes.Where(x => x.IdRepairForm == RepairForm.Id);
+            RepairForm = DataProvider.Ins.DB.REPAIRFORMs.Where(x=> x.IdCarReception == ID).SingleOrDefault();
+            var repairInfo = DataProvider.Ins.DB.REPAIRINFOes.Where(x => x.IdRepairForm == RepairForm.Id);
             foreach (var item in repairInfo)
             {
                 RepairItem repairItem = new RepairItem();
                 repairItem.RepairInfo = item;
                 repairItem.TotalMoney = item.TotalMoney;
-                repairItem.Price = (int)item.Supply.Price * (int)item.SuppliesAmount;
+                repairItem.Price = (int)item.SUPPLIES.Supplies_Price * (int)item.SuppliesAmount;
                 ListRepair.Add(repairItem);
             }
         }
-        public void AddRepairForm(RepairForm newRepairForm)
+        public void AddRepairForm(REPAIRFORM newRepairForm)
         {
             newRepairForm.IdCarReception = CarReception.Id;
-            DataProvider.Ins.DB.RepairForms.Add(newRepairForm);
+            DataProvider.Ins.DB.REPAIRFORMs.Add(newRepairForm);
             DataProvider.Ins.DB.SaveChanges();
             RepairForm = newRepairForm;
         }

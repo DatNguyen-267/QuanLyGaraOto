@@ -9,8 +9,8 @@ namespace QuanLyGaraOto.Model
 {
     public class RepairItem : BaseViewModel
     {
-        private RepairInfo _RepairInfo { get; set; }
-        public RepairInfo RepairInfo { get => _RepairInfo; set { _RepairInfo = value; OnPropertyChanged(); } }
+        private REPAIRINFO _RepairInfo { get; set; }
+        public REPAIRINFO RepairInfo { get => _RepairInfo; set { _RepairInfo = value; OnPropertyChanged(); } }
         private int _Price { get; set; }
         public int Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
         private int _TotalMoney { get; set; }

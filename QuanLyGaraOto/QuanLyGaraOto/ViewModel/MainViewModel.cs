@@ -26,9 +26,6 @@ namespace QuanLyGaraOto.ViewModel
                 //SettingWindow settingWindow = new SettingWindow();
                 //settingWindow.ShowDialog();
 
-
-
-
                 //IsLoaded = true;
                 //if (p == null)
                 //    return;
@@ -47,7 +44,6 @@ namespace QuanLyGaraOto.ViewModel
 
                 //    p.Close();
                 //}
-
                 //BunkWindow bunkWindow = new BunkWindow();
                 //bunkWindow.ShowDialog();
             });

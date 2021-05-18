@@ -26,7 +26,7 @@ namespace QuanLyGaraOto
         {
             InitializeComponent();
         }
-        public ChangeCarInfoWindow(CarReception carReception)
+        public ChangeCarInfoWindow(CARRECEPTION carReception)
         {
             InitializeComponent();
             this.DataContext = (changeCarInfoViewModel = new ChangeCarInfoViewModel(carReception));

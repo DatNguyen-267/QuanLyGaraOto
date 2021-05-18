@@ -27,19 +27,19 @@ namespace QuanLyGaraOto.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CarBrand> CarBrands { get; set; }
-        public virtual DbSet<CarReception> CarReceptions { get; set; }
-        public virtual DbSet<CarStatus> CarStatus1 { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<GaraInfo> GaraInfoes { get; set; }
-        public virtual DbSet<Pay> Pays { get; set; }
-        public virtual DbSet<Receipt> Receipts { get; set; }
-        public virtual DbSet<RepairForm> RepairForms { get; set; }
-        public virtual DbSet<RepairInfo> RepairInfoes { get; set; }
-        public virtual DbSet<Supply> Supplies { get; set; }
-        public virtual DbSet<UserInfo> UserInfoes { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<CARBRAND> CARBRANDs { get; set; }
+        public virtual DbSet<CARRECEPTION> CARRECEPTIONs { get; set; }
+        public virtual DbSet<CARSTATUS> CARSTATUS { get; set; }
+        public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
+        public virtual DbSet<GARAINFO> GARAINFOes { get; set; }
+        public virtual DbSet<PAY> PAYs { get; set; }
+        public virtual DbSet<RECEIPT> RECEIPTs { get; set; }
+        public virtual DbSet<REPAIRFORM> REPAIRFORMs { get; set; }
+        public virtual DbSet<REPAIRINFO> REPAIRINFOes { get; set; }
+        public virtual DbSet<ROLE> ROLEs { get; set; }
+        public virtual DbSet<SUPPLIES> SUPPLIES { get; set; }
+        public virtual DbSet<USERINFO> USERINFOes { get; set; }
+        public virtual DbSet<USER> USERS { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

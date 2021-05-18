@@ -12,18 +12,18 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRole
+    public partial class ROLE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserRole()
+        public ROLE()
         {
-            this.Users = new HashSet<User>();
+            this.USERS = new HashSet<USER>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Role_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<USER> USERS { get; set; }
     }
 }

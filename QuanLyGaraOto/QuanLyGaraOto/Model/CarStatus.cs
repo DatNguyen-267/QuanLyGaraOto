@@ -12,18 +12,18 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CarStatus
+    public partial class CARSTATUS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CarStatus()
+        public CARSTATUS()
         {
-            this.CarReceptions = new HashSet<CarReception>();
+            this.CARRECEPTIONs = new HashSet<CARRECEPTION>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Status_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarReception> CarReceptions { get; set; }
+        public virtual ICollection<CARRECEPTION> CARRECEPTIONs { get; set; }
     }
 }

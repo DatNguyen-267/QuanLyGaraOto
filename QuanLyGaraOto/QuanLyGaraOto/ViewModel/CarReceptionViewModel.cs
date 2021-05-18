@@ -12,8 +12,8 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class CarReceptionViewModel :BaseViewModel
     {
-        private ObservableCollection<CarBrand> _ListBrand { get; set; }
-        public ObservableCollection<CarBrand> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
+        private ObservableCollection<CARBRAND> _ListBrand { get; set; }
+        public ObservableCollection<CARBRAND> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
         private bool _IsSuccess { get; set; }
         public bool IsSuccess { get => _IsSuccess; set { _IsSuccess = value; OnPropertyChanged(); } }
         public ICommand CloseCommand { get; set; }
@@ -28,14 +28,14 @@ namespace QuanLyGaraOto.ViewModel
         public string Phone { get => _Phone; set { _Phone = value; OnPropertyChanged(); } }
         private DateTime? _ReceptionDate { get; set; }
         public DateTime? ReceptionDate { get => _ReceptionDate; set { _ReceptionDate = value; OnPropertyChanged(); } }
-        private CarBrand _SelectedBrand { get; set; }
-        public CarBrand SelectedBrand { get => _SelectedBrand; set { _SelectedBrand = value; OnPropertyChanged(); } }
+        private CARBRAND _SelectedBrand { get; set; }
+        public CARBRAND SelectedBrand { get => _SelectedBrand; set { _SelectedBrand = value; OnPropertyChanged(); } }
         private int _IdNew { get; set; }
         public int IdNew { get => _IdNew; set { _IdNew = value; OnPropertyChanged(); } }
         public CarReceptionViewModel()
         {
             IsSuccess = false;
-            ListBrand = new ObservableCollection<CarBrand>(DataProvider.Ins.DB.CarBrands);
+            ListBrand = new ObservableCollection<CARBRAND>(DataProvider.Ins.DB.CARBRANDs);
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
                 p.Close();
@@ -51,18 +51,18 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                Customer customer = new Customer() { Address = Address, Telephone = Phone, Name = Name };
-                DataProvider.Ins.DB.Customers.Add(customer);
+                CUSTOMER customer = new CUSTOMER() {Customer_Address = Address, Customer_Phone = Phone, Customer_Name = Name };
+                DataProvider.Ins.DB.CUSTOMERs.Add(customer);
                 DataProvider.Ins.DB.SaveChanges();
                   
-                CarReception carReception = new CarReception() { 
+                CARRECEPTION carReception = new CARRECEPTION() { 
                     IdCustomer = customer.Id,
                     IdStatus = 1,
                     LicensePlate = LicensePlate,    
                     ReceptionDate = ReceptionDate,
                     IdBrand = SelectedBrand.Id
                 };
-                DataProvider.Ins.DB.CarReceptions.Add(carReception);
+                DataProvider.Ins.DB.CARRECEPTIONs.Add(carReception);
                 DataProvider.Ins.DB.SaveChanges();
                 IsSuccess = true;
                 IdNew = carReception.Id;
