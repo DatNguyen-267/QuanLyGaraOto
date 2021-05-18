@@ -62,7 +62,8 @@
                     Content="Xóa">
                     </Button>
                     <Button
-                               Background="#455A64"
+                        Command="{Binding OpenCommand}"
+                        Background="#455A64"
                         Width="100"
                         Margin="10 0 10 0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
@@ -72,23 +73,22 @@
             </Grid>
             
         </Grid>
-        <Grid Grid.Row="2">
-            <ListView ItemsSource="{Binding ListCar}" SelectedItem="{Binding SelectedItem}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="STT" DisplayMemberBinding="{Binding CarReception.Id, Mode=TwoWay
-                            ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding CarReception.LicensePlate, Mode=TwoWay
-                            ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding CarReception.CarBrand.Name, Mode=TwoWay
-                            ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Chủ Xe" DisplayMemberBinding="{Binding CarReception.Customer.Name, Mode=TwoWay
-                            ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                        <GridViewColumn Header="Tiền nợ" DisplayMemberBinding="{Binding Debt, Mode=TwoWay
-                            ,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Grid>
+        <materialDesign:Card
+            Margin="10 5 10 15"
+            Grid.Row="2">
+            <ScrollViewer>
+                <ListView ItemsSource="{Binding ListCar}" SelectedItem="{Binding SelectedItem}">
+                    <ListView.View>
+                        <GridView>
+    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding CarReception.Id}"></GridViewColumn>
+    <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding CarReception.LicensePlate}"></GridViewColumn>
+    <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding CarReception.CarBrand.Name}"></GridViewColumn>
+    <GridViewColumn Header="Chủ Xe" DisplayMemberBinding="{Binding CarReception.Customer.Name}"></GridViewColumn>
+    <GridViewColumn Header="Tiền nợ" DisplayMemberBinding="{Binding Debt}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
     </Grid>
 </Window>

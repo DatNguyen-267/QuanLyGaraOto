@@ -1,4 +1,5 @@
-﻿using QuanLyGaraOto.ViewModel;
+﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,12 @@ namespace QuanLyGaraOto
         public CarServiceWindow()
         {
             InitializeComponent();
-            //this.DataContext = carServiceViewModel(this);
+            this.DataContext = (carServiceViewModel = new CarServiceViewModel());
+        }
+        public CarServiceWindow(CarReception carReception)
+        {
+            InitializeComponent();
+            this.DataContext = (carServiceViewModel = new CarServiceViewModel(carReception));
         }
     }
 }

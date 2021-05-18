@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyGaraOto.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,11 @@ namespace QuanLyGaraOto
     /// </summary>
     public partial class CarReceptionWindow : Window
     {
+        public CarReceptionViewModel carReceptionViewModel { get; set; }
         public CarReceptionWindow()
         {
             InitializeComponent();
+            this.DataContext = (carReceptionViewModel = new CarReceptionViewModel());
         }
     }
 }

@@ -79,17 +79,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddAccountWindow.xaml.cs">
-      <DependentUpon>AddAccountWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEmployee.xaml.cs">
-      <DependentUpon>AddEmployee.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddNewGoodWindow.xaml.cs">
       <DependentUpon>AddNewGoodWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BunkWindow.xaml.cs">
-      <DependentUpon>BunkWindow.xaml</DependentUpon>
+    <Compile Include="AddRepairFormWindow.xaml.cs">
+      <DependentUpon>AddRepairFormWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddRepairInfoWindow.xaml.cs">
+      <DependentUpon>AddRepairInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BunkPage.xaml.cs">
+      <DependentUpon>BunkPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CarReceptionWindow.xaml.cs">
       <DependentUpon>CarReceptionWindow.xaml</DependentUpon>
@@ -97,14 +97,8 @@
     <Compile Include="CarServiceWindow.xaml.cs">
       <DependentUpon>CarServiceWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditAccountWindow.xaml.cs">
-      <DependentUpon>EditAccountWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditEmployeeWindow.xaml.cs">
-      <DependentUpon>EditEmployeeWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Employee.xaml.cs">
-      <DependentUpon>Employee.xaml</DependentUpon>
+    <Compile Include="ChangeCarInfoWindow.xaml.cs">
+      <DependentUpon>ChangeCarInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GoodBillPage.xaml.cs">
       <DependentUpon>GoodBillPage.xaml</DependentUpon>
@@ -160,6 +154,7 @@
     <Compile Include="Model\RepairInfo.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RepairItem.cs" />
     <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -179,8 +174,8 @@
     <Compile Include="Model\UserRole.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ReportWindow.xaml.cs">
-      <DependentUpon>ReportWindow.xaml</DependentUpon>
+    <Compile Include="PayWindow.xaml.cs">
+      <DependentUpon>PayWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServiceWindow.xaml.cs">
       <DependentUpon>ServiceWindow.xaml</DependentUpon>
@@ -189,31 +184,30 @@
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlGaraOto\TempUserControl.cs" />
+    <Compile Include="ViewModel\AddRepairFormViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\BunkViewModel.cs" />
     <Compile Include="ViewModel\CarReceptionViewModel.cs" />
     <Compile Include="ViewModel\CarServiceViewModel.cs" />
-    <Compile Include="ViewModel\EmployeeViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ChangeCarInfoViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ReportViewModel.cs" />
+    <Compile Include="ViewModel\PayViewModel.cs" />
     <Compile Include="ViewModel\ServiceViewModel.cs" />
     <Compile Include="ViewModel\SettingViewModel.cs" />
-    <Page Include="AddAccountWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEmployee.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AddNewGoodWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BunkWindow.xaml">
+    <Page Include="AddRepairFormWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddRepairInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BunkPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="CarReceptionWindow.xaml">
       <SubType>Designer</SubType>
@@ -223,15 +217,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditAccountWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditEmployeeWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Employee.xaml">
+    <Page Include="ChangeCarInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -259,7 +245,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ReportWindow.xaml">
+    <Page Include="PayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
