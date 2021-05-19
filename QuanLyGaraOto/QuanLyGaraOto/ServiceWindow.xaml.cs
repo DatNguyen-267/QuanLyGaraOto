@@ -17,7 +17,7 @@ namespace QuanLyGaraOto
     /// <summary>
     /// Interaction logic for ServiceWindow.xaml
     /// </summary>
-    public partial class ServiceWindow : Window
+    public partial class ServiceWindow : UserControl
     {
         public ServiceWindow()
         {

@@ -75,7 +75,7 @@
                     </Button>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <Button Command="{Binding DichVuCommand}"
+                    <Button Command="{Binding OpenService}"
                         Height="40" Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
@@ -128,7 +128,7 @@
                 </Grid>
                 <Grid Grid.Row="3">
                     <Button Height="40" 
-                            Command="{Binding NhanVienCommand}"
+                            Command="{Binding OpenEmployee}"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
@@ -235,7 +235,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" x:Name="Container">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>

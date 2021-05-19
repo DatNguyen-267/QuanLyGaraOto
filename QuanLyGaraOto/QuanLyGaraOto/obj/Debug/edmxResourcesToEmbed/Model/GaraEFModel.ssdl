@@ -133,7 +133,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CarReception_CarBrand">
+  <Association Name="FK_CARRECEPTION_CARBRAND">
     <End Role="CARBRAND" Type="Self.CARBRAND" Multiplicity="1" />
     <End Role="CARRECEPTION" Type="Self.CARRECEPTION" Multiplicity="*" />
     <ReferentialConstraint>
@@ -145,7 +145,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CarReception_CarStatus">
+  <Association Name="FK_CARRECEPTION_CARSTATUS">
     <End Role="CARSTATUS" Type="Self.CARSTATUS" Multiplicity="1" />
     <End Role="CARRECEPTION" Type="Self.CARRECEPTION" Multiplicity="*" />
     <ReferentialConstraint>
@@ -157,7 +157,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CarReception_Customer">
+  <Association Name="FK_CARRECEPTION_CUSTOMER">
     <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
     <End Role="CARRECEPTION" Type="Self.CARRECEPTION" Multiplicity="*" />
     <ReferentialConstraint>
@@ -169,7 +169,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Receipt_CarReception">
+  <Association Name="FK_RECEIPT_CARRECEPTION">
     <End Role="CARRECEPTION" Type="Self.CARRECEPTION" Multiplicity="1" />
     <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
     <ReferentialConstraint>
@@ -181,7 +181,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Receipt_GaraInfo">
+  <Association Name="FK_RECEIPT_GARAINFO">
     <End Role="GARAINFO" Type="Self.GARAINFO" Multiplicity="1" />
     <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
     <ReferentialConstraint>
@@ -193,7 +193,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_RepairForm_CarReception">
+  <Association Name="FK_REPAIRFORM_CARRECEPTION">
     <End Role="CARRECEPTION" Type="Self.CARRECEPTION" Multiplicity="1" />
     <End Role="REPAIRFORM" Type="Self.REPAIRFORM" Multiplicity="*" />
     <ReferentialConstraint>
@@ -205,7 +205,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_RepairInfo_Pay">
+  <Association Name="FK_REPAIRINFO_PAY">
     <End Role="PAY" Type="Self.PAY" Multiplicity="1" />
     <End Role="REPAIRINFO" Type="Self.REPAIRINFO" Multiplicity="*" />
     <ReferentialConstraint>
@@ -217,7 +217,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_RepairInfo_RepairForm">
+  <Association Name="FK_REPAIRINFO_REPAIRFORM">
     <End Role="REPAIRFORM" Type="Self.REPAIRFORM" Multiplicity="1" />
     <End Role="REPAIRINFO" Type="Self.REPAIRINFO" Multiplicity="*" />
     <ReferentialConstraint>
@@ -229,7 +229,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_RepairInfo_Supply">
+  <Association Name="FK_REPAIRINFO_SUPPLIES">
     <End Role="SUPPLIES" Type="Self.SUPPLIES" Multiplicity="0..1" />
     <End Role="REPAIRINFO" Type="Self.REPAIRINFO" Multiplicity="*" />
     <ReferentialConstraint>
@@ -241,7 +241,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserInfo_Users">
+  <Association Name="FK_USERINFO_USERS">
     <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
     <End Role="USERINFO" Type="Self.USERINFO" Multiplicity="*" />
     <ReferentialConstraint>
@@ -271,43 +271,43 @@
       <End Role="ROLE" EntitySet="ROLE" />
       <End Role="USERS" EntitySet="USERS" />
     </AssociationSet>
-    <AssociationSet Name="FK_CarReception_CarBrand" Association="Self.FK_CarReception_CarBrand">
+    <AssociationSet Name="FK_CARRECEPTION_CARBRAND" Association="Self.FK_CARRECEPTION_CARBRAND">
       <End Role="CARBRAND" EntitySet="CARBRAND" />
       <End Role="CARRECEPTION" EntitySet="CARRECEPTION" />
     </AssociationSet>
-    <AssociationSet Name="FK_CarReception_CarStatus" Association="Self.FK_CarReception_CarStatus">
+    <AssociationSet Name="FK_CARRECEPTION_CARSTATUS" Association="Self.FK_CARRECEPTION_CARSTATUS">
       <End Role="CARSTATUS" EntitySet="CARSTATUS" />
       <End Role="CARRECEPTION" EntitySet="CARRECEPTION" />
     </AssociationSet>
-    <AssociationSet Name="FK_CarReception_Customer" Association="Self.FK_CarReception_Customer">
+    <AssociationSet Name="FK_CARRECEPTION_CUSTOMER" Association="Self.FK_CARRECEPTION_CUSTOMER">
       <End Role="CUSTOMER" EntitySet="CUSTOMER" />
       <End Role="CARRECEPTION" EntitySet="CARRECEPTION" />
     </AssociationSet>
-    <AssociationSet Name="FK_Receipt_CarReception" Association="Self.FK_Receipt_CarReception">
+    <AssociationSet Name="FK_RECEIPT_CARRECEPTION" Association="Self.FK_RECEIPT_CARRECEPTION">
       <End Role="CARRECEPTION" EntitySet="CARRECEPTION" />
       <End Role="RECEIPT" EntitySet="RECEIPT" />
     </AssociationSet>
-    <AssociationSet Name="FK_Receipt_GaraInfo" Association="Self.FK_Receipt_GaraInfo">
+    <AssociationSet Name="FK_RECEIPT_GARAINFO" Association="Self.FK_RECEIPT_GARAINFO">
       <End Role="GARAINFO" EntitySet="GARAINFO" />
       <End Role="RECEIPT" EntitySet="RECEIPT" />
     </AssociationSet>
-    <AssociationSet Name="FK_RepairForm_CarReception" Association="Self.FK_RepairForm_CarReception">
+    <AssociationSet Name="FK_REPAIRFORM_CARRECEPTION" Association="Self.FK_REPAIRFORM_CARRECEPTION">
       <End Role="CARRECEPTION" EntitySet="CARRECEPTION" />
       <End Role="REPAIRFORM" EntitySet="REPAIRFORM" />
     </AssociationSet>
-    <AssociationSet Name="FK_RepairInfo_Pay" Association="Self.FK_RepairInfo_Pay">
+    <AssociationSet Name="FK_REPAIRINFO_PAY" Association="Self.FK_REPAIRINFO_PAY">
       <End Role="PAY" EntitySet="PAY" />
       <End Role="REPAIRINFO" EntitySet="REPAIRINFO" />
     </AssociationSet>
-    <AssociationSet Name="FK_RepairInfo_RepairForm" Association="Self.FK_RepairInfo_RepairForm">
+    <AssociationSet Name="FK_REPAIRINFO_REPAIRFORM" Association="Self.FK_REPAIRINFO_REPAIRFORM">
       <End Role="REPAIRFORM" EntitySet="REPAIRFORM" />
       <End Role="REPAIRINFO" EntitySet="REPAIRINFO" />
     </AssociationSet>
-    <AssociationSet Name="FK_RepairInfo_Supply" Association="Self.FK_RepairInfo_Supply">
+    <AssociationSet Name="FK_REPAIRINFO_SUPPLIES" Association="Self.FK_REPAIRINFO_SUPPLIES">
       <End Role="SUPPLIES" EntitySet="SUPPLIES" />
       <End Role="REPAIRINFO" EntitySet="REPAIRINFO" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserInfo_Users" Association="Self.FK_UserInfo_Users">
+    <AssociationSet Name="FK_USERINFO_USERS" Association="Self.FK_USERINFO_USERS">
       <End Role="USERS" EntitySet="USERS" />
       <End Role="USERINFO" EntitySet="USERINFO" />
     </AssociationSet>

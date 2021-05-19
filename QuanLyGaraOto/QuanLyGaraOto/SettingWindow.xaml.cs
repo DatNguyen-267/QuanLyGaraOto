@@ -18,7 +18,7 @@ namespace QuanLyGaraOto
     /// <summary>
     /// Interaction logic for SettingWindow.xaml
     /// </summary>
-    public partial class SettingWindow : Window
+    public partial class SettingWindow : UserControl
     {
         public SettingWindow()
         {

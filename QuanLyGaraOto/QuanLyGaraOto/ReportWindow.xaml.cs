@@ -17,7 +17,7 @@ namespace QuanLyGaraOto
     /// <summary>
     /// Interaction logic for ReportWindow.xaml
     /// </summary>
-    public partial class ReportWindow : Window
+    public partial class ReportWindow : UserControl
     {
         public ReportWindow()
         {

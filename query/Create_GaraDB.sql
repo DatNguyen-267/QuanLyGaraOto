@@ -34,7 +34,7 @@ create table PAY
 );
 GO
 
--- Thiet lap danh sach cac dich vu tai gara
+-- Thiet lap danh sach cac dich vu tais gara
 
 -- Thiet lap danh sach vat tu, phu tung
 create table SUPPLIES
@@ -63,9 +63,9 @@ create table CARRECEPTION
     IdBrand int not NULL,
     ReceptionDate date not NULL,
 	IdStatus int not null,
-    constraint FK_CarReception_Customer foreign key (IdCustomer) references CUSTOMER(Id),
-    constraint FK_CarReception_CarBrand foreign key (IdBrand) references CARBRAND(Id),
-	constraint FK_CarReception_CarStatus foreign key (IdStatus) references CARSTATUS(Id)
+    constraint FK_CARRECEPTION_CUSTOMER foreign key (IdCustomer) references CUSTOMER(Id),
+    constraint FK_CARRECEPTION_CARBRAND foreign key (IdBrand) references CARBRAND(Id),
+	constraint FK_CARRECEPTION_CARSTATUS foreign key (IdStatus) references CARSTATUS(Id)
 );
 GO
 
@@ -75,7 +75,7 @@ create table REPAIRFORM
     Id int primary key not NULL IDENTITY(1, 1),
     IdCarReception int not NULL,
     RepairDate date not NULL,
-	constraint FK_RepairForm_CarReception foreign key (IdCarReception) references CarReception(Id),
+	constraint FK_REPAIRFORM_CARRECEPTION foreign key (IdCarReception) references CARRECEPTION(Id),
 );
 GO
 -- Thiet lap danh sach noi dung sua chua
@@ -88,9 +88,9 @@ create table REPAIRINFO
     SuppliesAmount int,
     IdPay int not NULL,
     TotalMoney int not NULL,
-	constraint FK_RepairInfo_Supply foreign key (IdSupply) references Supplies(Id),
-    constraint FK_RepairInfo_Pay foreign key (IdPay) references Pay(Id),
-	constraint FK_RepairInfo_RepairForm foreign key (IdRepairForm) references RepairForm(Id)
+	constraint FK_REPAIRINFO_SUPPLIES foreign key (IdSupply) references SUPPLIES(Id),
+    constraint FK_REPAIRINFO_PAY foreign key (IdPay) references PAY(Id),
+	constraint FK_REPAIRINFO_REPAIRFORM foreign key (IdRepairForm) references REPAIRFORM(Id)
 )
 GO
 -- Thiet lap danh sach thong tin cua gara
@@ -112,8 +112,8 @@ create table RECEIPT
     IdGaraInfo int not null,
     ReceptDate date not NULL,
     TotalMoney int not NULL,
-    constraint FK_Receipt_CarReception foreign key (IdCarReception) references CarReception(Id),
-	constraint FK_Receipt_GaraInfo foreign key (IdGaraInfo) references GaraInfo(Id)
+    constraint FK_RECEIPT_CARRECEPTION foreign key (IdCarReception) references CARRECEPTION(Id),
+	constraint FK_RECEIPT_GARAINFO foreign key (IdGaraInfo) references GARAINFO(Id)
 );
 GO
 
@@ -149,7 +149,7 @@ create table USERINFO
     UserInfo_BirthDate date,
     UserInfo_Telephone varchar(20) not NULL,
     UserInfo_CMND varchar(100) not NULL,
-    constraint FK_UserInfo_Users foreign key (IdUser) references Users(Id)
+    constraint FK_USERINFO_USERS foreign key (IdUser) references USERS(Id)
 );
 
 insert into ROLE(Role_Name) values ('admin');

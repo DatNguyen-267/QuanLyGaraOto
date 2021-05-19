@@ -1,4 +1,4 @@
-﻿<Window x:Class="QuanLyGaraOto.BunkWindow"
+﻿<UserControl x:Class="QuanLyGaraOto.BunkWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
         x:Name="BunkWD"
-        Title="BunkWindow" Height="500" Width="800"
+        Height="500" Width="800"
         DataContext="{StaticResource BunkVM}"
                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
@@ -302,4 +302,4 @@
         </Grid>
     </Grid>
 
-</Window>
+</UserControl>

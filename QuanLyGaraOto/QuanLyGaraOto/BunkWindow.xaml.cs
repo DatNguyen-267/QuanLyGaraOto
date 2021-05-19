@@ -18,7 +18,7 @@ namespace QuanLyGaraOto
     /// <summary>
     /// Interaction logic for BunkWindow.xaml
     /// </summary>
-    public partial class BunkWindow : Window
+    public partial class BunkWindow : UserControl
     {
         public BunkWindow()
         {

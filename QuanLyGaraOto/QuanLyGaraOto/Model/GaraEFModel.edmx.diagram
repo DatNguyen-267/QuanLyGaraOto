@@ -18,17 +18,17 @@
         <EntityTypeShape EntityType="GARAModel.SUPPLIES" Width="1.5" PointX="5.25" PointY="10.75" />
         <EntityTypeShape EntityType="GARAModel.USERINFO" Width="1.5" PointX="12.25" PointY="2.75" />
         <EntityTypeShape EntityType="GARAModel.USER" Width="1.5" PointX="10" PointY="2.875" />
-        <AssociationConnector Association="GARAModel.FK_CarReception_CarBrand" />
-        <AssociationConnector Association="GARAModel.FK_CarReception_CarStatus" />
-        <AssociationConnector Association="GARAModel.FK_CarReception_Customer" />
-        <AssociationConnector Association="GARAModel.FK_Receipt_CarReception" />
-        <AssociationConnector Association="GARAModel.FK_RepairForm_CarReception" />
-        <AssociationConnector Association="GARAModel.FK_Receipt_GaraInfo" />
-        <AssociationConnector Association="GARAModel.FK_RepairInfo_Pay" />
-        <AssociationConnector Association="GARAModel.FK_RepairInfo_RepairForm" />
-        <AssociationConnector Association="GARAModel.FK_RepairInfo_Supply" />
+        <AssociationConnector Association="GARAModel.FK_CARRECEPTION_CARBRAND" />
+        <AssociationConnector Association="GARAModel.FK_CARRECEPTION_CARSTATUS" />
+        <AssociationConnector Association="GARAModel.FK_CARRECEPTION_CUSTOMER" />
+        <AssociationConnector Association="GARAModel.FK_RECEIPT_CARRECEPTION" />
+        <AssociationConnector Association="GARAModel.FK_REPAIRFORM_CARRECEPTION" />
+        <AssociationConnector Association="GARAModel.FK_RECEIPT_GARAINFO" />
+        <AssociationConnector Association="GARAModel.FK_REPAIRINFO_PAY" />
+        <AssociationConnector Association="GARAModel.FK_REPAIRINFO_REPAIRFORM" />
+        <AssociationConnector Association="GARAModel.FK_REPAIRINFO_SUPPLIES" />
         <AssociationConnector Association="GARAModel.FK__USERS__IdRole__4222D4EF" />
-        <AssociationConnector Association="GARAModel.FK_UserInfo_Users" />
+        <AssociationConnector Association="GARAModel.FK_USERINFO_USERS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
