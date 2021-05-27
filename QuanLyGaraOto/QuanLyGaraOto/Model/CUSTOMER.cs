@@ -17,15 +17,15 @@ namespace QuanLyGaraOto.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CUSTOMER()
         {
-            this.CARRECEPTIONs = new HashSet<CARRECEPTION>();
+            this.RECEPTIONs = new HashSet<RECEPTION>();
         }
     
-        public int Id { get; set; }
+        public int Customer_Id { get; set; }
         public string Customer_Name { get; set; }
         public string Customer_Address { get; set; }
         public string Customer_Phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CARRECEPTION> CARRECEPTIONs { get; set; }
+        public virtual ICollection<RECEPTION> RECEPTIONs { get; set; }
     }
 }

@@ -96,7 +96,7 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.Supplies_Id).SingleOrDefault();
                     List.Supplies_Name = Name;
                     List.Supplies_Price = Int32.Parse(Price);
                     DataProvider.Ins.DB.SaveChanges();
@@ -113,7 +113,7 @@ namespace QuanLyGaraOto.ViewModel
                     },
                     (p) =>
                     {
-                        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.Supplies_Id).SingleOrDefault();
                         List.Supplies_Amount += Int32.Parse(p.txbAmount.Text);
                         DataProvider.Ins.DB.SaveChanges();
                         p.Close();

@@ -12,14 +12,16 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class RECEIPT
+    public partial class USER_INFO
     {
-        public int Receipt_Id { get; set; }
-        public System.DateTime ReceiptDate { get; set; }
-        public int MoneyReceived { get; set; }
-        public string Email { get; set; }
-        public int IdReception { get; set; }
+        public int UserInfo_Id { get; set; }
+        public Nullable<int> IdUser { get; set; }
+        public string UserInfo_Name { get; set; }
+        public string UserInfo_Address { get; set; }
+        public Nullable<System.DateTime> UserInfo_BirthDate { get; set; }
+        public string UserInfo_Telephone { get; set; }
+        public string UserInfo_CMND { get; set; }
     
-        public virtual RECEPTION RECEPTION { get; set; }
+        public virtual USER USER { get; set; }
     }
 }

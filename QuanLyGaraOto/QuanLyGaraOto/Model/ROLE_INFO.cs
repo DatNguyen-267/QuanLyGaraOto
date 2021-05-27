@@ -12,21 +12,22 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class USER
+    public partial class ROLE_INFO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USER()
-        {
-            this.USER_INFO = new HashSet<USER_INFO>();
-        }
-    
-        public int Users_Id { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public int RoleInfo_Id { get; set; }
         public int IdRole { get; set; }
+        public bool AccessDashBoard { get; set; }
+        public bool AccessService { get; set; }
+        public bool AccessEmployee { get; set; }
+        public bool AccessSetting { get; set; }
+        public bool AccessReport { get; set; }
+        public bool AccessInventory { get; set; }
+        public bool AllowAddSupplies { get; set; }
+        public bool AllowAddCarBrand { get; set; }
+        public bool AllowAddAccount { get; set; }
+        public bool AllowAddWage { get; set; }
+        public bool AllowEditGaraInfo { get; set; }
     
         public virtual ROLE ROLE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USER_INFO> USER_INFO { get; set; }
     }
 }

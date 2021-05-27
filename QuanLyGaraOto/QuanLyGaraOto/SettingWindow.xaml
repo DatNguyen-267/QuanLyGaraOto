@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:QuanLyGaraOto"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
-        DataContext="{StaticResource SettingVM}"
         mc:Ignorable="d"
         Height="450" Width="800">
     <Border Background="LightCyan" BorderThickness="1" Margin="5 10 0 0">

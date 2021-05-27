@@ -12,14 +12,9 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class RECEIPT
+    public partial class CAR_STATUS
     {
-        public int Receipt_Id { get; set; }
-        public System.DateTime ReceiptDate { get; set; }
-        public int MoneyReceived { get; set; }
-        public string Email { get; set; }
-        public int IdReception { get; set; }
-    
-        public virtual RECEPTION RECEPTION { get; set; }
+        public int CarStatus_Id { get; set; }
+        public string CarStatus_Name { get; set; }
     }
 }

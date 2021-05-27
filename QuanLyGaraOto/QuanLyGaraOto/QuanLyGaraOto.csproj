@@ -124,13 +124,10 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\CARBRAND.cs">
+    <Compile Include="Model\CAR_BRAND.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CARRECEPTION.cs">
-      <DependentUpon>GaraEFModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\CARSTATUS.cs">
+    <Compile Include="Model\CAR_STATUS.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CUSTOMER.cs">
@@ -153,24 +150,42 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GaraEFModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\GARAINFO.cs">
+    <Compile Include="Model\GARA_INFO.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\IMPORT_GOODS.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\INVENTORY_REPORT.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\INVENTORY_REPORT_DETAIL.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ListCar.cs" />
-    <Compile Include="Model\PAY.cs">
-      <DependentUpon>GaraEFModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\RECEIPT.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\REPAIRFORM.cs">
+    <Compile Include="Model\RECEPTION.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\REPAIRINFO.cs">
+    <Compile Include="Model\REPAIR.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\RepairItem.cs" />
+    <Compile Include="Model\REPAIR_DETAIL.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ROLE.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ROLE_INFO.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SALES_REPORT.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SALES_REPORT_DETAIL.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
@@ -186,7 +201,10 @@
     <Compile Include="Model\USER.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\USERINFO.cs">
+    <Compile Include="Model\USER_INFO.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WAGE.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PayWindow.xaml.cs">

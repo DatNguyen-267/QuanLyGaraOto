@@ -12,28 +12,26 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CARRECEPTION
+    public partial class RECEPTION
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CARRECEPTION()
+        public RECEPTION()
         {
             this.RECEIPTs = new HashSet<RECEIPT>();
-            this.REPAIRFORMs = new HashSet<REPAIRFORM>();
+            this.REPAIRs = new HashSet<REPAIR>();
         }
     
-        public int Id { get; set; }
-        public int IdCustomer { get; set; }
+        public int Reception_Id { get; set; }
         public string LicensePlate { get; set; }
-        public int IdBrand { get; set; }
         public System.DateTime? ReceptionDate { get; set; }
-        public int IdStatus { get; set; }
+        public int IdCarBrand { get; set; }
+        public int IdCustomer { get; set; }
     
-        public virtual CARBRAND CARBRAND { get; set; }
-        public virtual CARSTATUS CARSTATUS { get; set; }
+        public virtual CAR_BRAND CAR_BRAND { get; set; }
         public virtual CUSTOMER CUSTOMER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RECEIPT> RECEIPTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REPAIRFORM> REPAIRFORMs { get; set; }
+        public virtual ICollection<REPAIR> REPAIRs { get; set; }
     }
 }

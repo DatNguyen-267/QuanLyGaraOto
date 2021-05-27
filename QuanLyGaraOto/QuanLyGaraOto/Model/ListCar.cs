@@ -10,8 +10,8 @@ namespace QuanLyGaraOto.Model
 {
     public class ListCar : BaseViewModel
     {
-        private CARRECEPTION _CarReception { get; set; }
-        public CARRECEPTION CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
+        private RECEPTION _CarReception { get; set; }
+        public RECEPTION CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
         private int _Debt { get; set; }
         public int Debt { get => _Debt; set { _Debt = value; OnPropertyChanged(); } }
     }

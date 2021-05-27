@@ -140,18 +140,18 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeGaraInformation { get; set; }
         public ICommand ResetGaraInformation { get; set; }
 
-        GARAINFO garaInfo;
+        GARA_INFO garaInfo;
 
         // Setting car brand
-        private ObservableCollection<CARBRAND> _ListBrands;
-        public ObservableCollection<CARBRAND> ListBrands
+        private ObservableCollection<CAR_BRAND> _ListBrands;
+        public ObservableCollection<CAR_BRAND> ListBrands
         {
             get => _ListBrands;
             set { _ListBrands = value; OnPropertyChanged(); }
         }
 
-        private CARBRAND _SelectedBrand;
-        public CARBRAND SelectedBrand
+        private CAR_BRAND _SelectedBrand;
+        public CAR_BRAND SelectedBrand
         {
             get => _SelectedBrand;
             set { _SelectedBrand = value; OnPropertyChanged(); }
@@ -244,7 +244,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeUserInformation { get; set; }
         public ICommand ResetUserInformation { get; set; }
 
-        USERINFO userInfo;
+        USER_INFO userInfo;
 
         public SettingViewModel()
         {
@@ -275,13 +275,10 @@ namespace QuanLyGaraOto.ViewModel
             });
 
             // Gara information
-            garaInfo = DataProvider.Ins.DB.GARAINFOes.SingleOrDefault(x => x.Id == 1);
+            garaInfo = DataProvider.Ins.DB.GARA_INFO.SingleOrDefault(x => x.GaraInfo_Id == 1);
             if (garaInfo != null)
             {
                 MaxCarReception = garaInfo.MaxCarReception.Value;
-                Telephone = garaInfo.GaraInfo_Phone;
-                Email = garaInfo.GaraInfo_Email;
-                Address = garaInfo.GaraInfo_Address;
             }
 
             ChangeGaraInformation = new RelayCommand<object>(
@@ -293,9 +290,6 @@ namespace QuanLyGaraOto.ViewModel
                 (p) =>
                 {
                     garaInfo.MaxCarReception = _MaxCarReception;
-                    garaInfo.GaraInfo_Phone = _Telephone;
-                    garaInfo.GaraInfo_Email = _Email;
-                    garaInfo.GaraInfo_Address = _Address;
                     DataProvider.Ins.DB.SaveChanges();
                     SetEnableStatusButtonInGaraInformation(false);
                 });
@@ -309,14 +303,12 @@ namespace QuanLyGaraOto.ViewModel
                 (p) =>
                 {
                     MaxCarReception = garaInfo.MaxCarReception.Value;
-                    Telephone = garaInfo.GaraInfo_Phone;
-                    Email = garaInfo.GaraInfo_Email;
-                    Address = garaInfo.GaraInfo_Address;
+
                     SetEnableStatusButtonInGaraInformation(false);
                 });
 
             // Car brands
-            ListBrands = new ObservableCollection<CARBRAND>(DataProvider.Ins.DB.CARBRANDs);
+            ListBrands = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
 
             IsEnableDeleteButtonInBrandSetting = false;
             IsEnableModifyButtonInBrandSetting = false;
@@ -348,7 +340,7 @@ namespace QuanLyGaraOto.ViewModel
             });
 
             // User information
-            userInfo = DataProvider.Ins.DB.USERINFOes.Where(x => x.IdUser == 1).FirstOrDefault();
+            userInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == 1).FirstOrDefault();
             if (userInfo != null)
             {
                 UserName = userInfo.UserInfo_Name;

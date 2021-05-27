@@ -12,18 +12,19 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CARBRAND
+    public partial class SALES_REPORT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CARBRAND()
+        public SALES_REPORT()
         {
-            this.CARRECEPTIONs = new HashSet<CARRECEPTION>();
+            this.SALES_REPORT_DETAIL = new HashSet<SALES_REPORT_DETAIL>();
         }
     
-        public int Id { get; set; }
-        public string CarBrand_Name { get; set; }
+        public int SalesReport_Id { get; set; }
+        public int SalesReport_Revenue { get; set; }
+        public System.DateTime? SalesReport_Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CARRECEPTION> CARRECEPTIONs { get; set; }
+        public virtual ICollection<SALES_REPORT_DETAIL> SALES_REPORT_DETAIL { get; set; }
     }
 }

@@ -12,18 +12,18 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CARSTATUS
+    public partial class INVENTORY_REPORT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CARSTATUS()
+        public INVENTORY_REPORT()
         {
-            this.CARRECEPTIONs = new HashSet<CARRECEPTION>();
+            this.INVENTORY_REPORT_DETAIL = new HashSet<INVENTORY_REPORT_DETAIL>();
         }
     
-        public int Id { get; set; }
-        public string Status_Name { get; set; }
+        public int InventoryReport_Id { get; set; }
+        public System.DateTime? InventoryReport_Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CARRECEPTION> CARRECEPTIONs { get; set; }
+        public virtual ICollection<INVENTORY_REPORT_DETAIL> INVENTORY_REPORT_DETAIL { get; set; }
     }
 }

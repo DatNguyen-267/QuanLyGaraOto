@@ -12,19 +12,20 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class PAY
+    public partial class REPAIR
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PAY()
+        public REPAIR()
         {
-            this.REPAIRINFOes = new HashSet<REPAIRINFO>();
+            this.REPAIR_DETAIL = new HashSet<REPAIR_DETAIL>();
         }
     
-        public int Id { get; set; }
-        public string Pay_Name { get; set; }
-        public int Pay_Price { get; set; }
+        public int Repair_Id { get; set; }
+        public int IdReception { get; set; }
+        public System.DateTime? RepairDate { get; set; }
     
+        public virtual RECEPTION RECEPTION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REPAIRINFO> REPAIRINFOes { get; set; }
+        public virtual ICollection<REPAIR_DETAIL> REPAIR_DETAIL { get; set; }
     }
 }

@@ -12,18 +12,16 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class REPAIRINFO
+    public partial class SALES_REPORT_DETAIL
     {
-        public int Id { get; set; }
-        public int IdRepairForm { get; set; }
-        public string Content { get; set; }
-        public Nullable<int> IdSupply { get; set; }
-        public Nullable<int> SuppliesAmount { get; set; }
-        public int IdPay { get; set; }
-        public int TotalMoney { get; set; }
+        public int SalesReportDetail_Id { get; set; }
+        public int IdSalesReport { get; set; }
+        public int IdBrand { get; set; }
+        public Nullable<int> AmountOfTurn { get; set; }
+        public Nullable<int> TotalMoney { get; set; }
+        public Nullable<double> Rate { get; set; }
     
-        public virtual PAY PAY { get; set; }
-        public virtual REPAIRFORM REPAIRFORM { get; set; }
-        public virtual SUPPLIES SUPPLIES { get; set; }
+        public virtual CAR_BRAND CAR_BRAND { get; set; }
+        public virtual SALES_REPORT SALES_REPORT { get; set; }
     }
 }

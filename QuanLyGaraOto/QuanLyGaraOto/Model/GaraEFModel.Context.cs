@@ -27,19 +27,25 @@ namespace QuanLyGaraOto.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CARBRAND> CARBRANDs { get; set; }
-        public virtual DbSet<CARRECEPTION> CARRECEPTIONs { get; set; }
-        public virtual DbSet<CARSTATUS> CARSTATUS { get; set; }
+        public virtual DbSet<CAR_BRAND> CAR_BRAND { get; set; }
+        public virtual DbSet<CAR_STATUS> CAR_STATUS { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
-        public virtual DbSet<GARAINFO> GARAINFOes { get; set; }
-        public virtual DbSet<PAY> PAYs { get; set; }
+        public virtual DbSet<GARA_INFO> GARA_INFO { get; set; }
+        public virtual DbSet<IMPORT_GOODS> IMPORT_GOODS { get; set; }
+        public virtual DbSet<INVENTORY_REPORT> INVENTORY_REPORT { get; set; }
+        public virtual DbSet<INVENTORY_REPORT_DETAIL> INVENTORY_REPORT_DETAIL { get; set; }
         public virtual DbSet<RECEIPT> RECEIPTs { get; set; }
-        public virtual DbSet<REPAIRFORM> REPAIRFORMs { get; set; }
-        public virtual DbSet<REPAIRINFO> REPAIRINFOes { get; set; }
+        public virtual DbSet<RECEPTION> RECEPTIONs { get; set; }
+        public virtual DbSet<REPAIR> REPAIRs { get; set; }
+        public virtual DbSet<REPAIR_DETAIL> REPAIR_DETAIL { get; set; }
         public virtual DbSet<ROLE> ROLEs { get; set; }
+        public virtual DbSet<ROLE_INFO> ROLE_INFO { get; set; }
+        public virtual DbSet<SALES_REPORT> SALES_REPORT { get; set; }
+        public virtual DbSet<SALES_REPORT_DETAIL> SALES_REPORT_DETAIL { get; set; }
         public virtual DbSet<SUPPLIES> SUPPLIES { get; set; }
-        public virtual DbSet<USERINFO> USERINFOes { get; set; }
+        public virtual DbSet<USER_INFO> USER_INFO { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
+        public virtual DbSet<WAGE> WAGEs { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

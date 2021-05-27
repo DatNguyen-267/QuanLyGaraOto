@@ -12,14 +12,15 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class RECEIPT
+    public partial class IMPORT_GOODS
     {
-        public int Receipt_Id { get; set; }
-        public System.DateTime ReceiptDate { get; set; }
-        public int MoneyReceived { get; set; }
-        public string Email { get; set; }
-        public int IdReception { get; set; }
+        public int ImportGoods_Id { get; set; }
+        public int ImportGoods_Amount { get; set; }
+        public System.DateTime? ImportGoods_Date { get; set; }
+        public int ImportGoods_Price { get; set; }
+        public int ImportGoods_Total { get; set; }
+        public int IdSupplies { get; set; }
     
-        public virtual RECEPTION RECEPTION { get; set; }
+        public virtual SUPPLIES SUPPLIES { get; set; }
     }
 }

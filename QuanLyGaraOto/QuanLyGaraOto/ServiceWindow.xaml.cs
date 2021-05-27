@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyGaraOto.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,11 @@ namespace QuanLyGaraOto
     /// </summary>
     public partial class ServiceWindow : UserControl
     {
+        public ServiceViewModel serviceViewModel { get; set; }
         public ServiceWindow()
         {
             InitializeComponent();
+            this.DataContext = (serviceViewModel = new ServiceViewModel());
         }
     }
 }

@@ -17,15 +17,21 @@ namespace QuanLyGaraOto.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SUPPLIES()
         {
-            this.REPAIRINFOes = new HashSet<REPAIRINFO>();
+            this.IMPORT_GOODS = new HashSet<IMPORT_GOODS>();
+            this.INVENTORY_REPORT_DETAIL = new HashSet<INVENTORY_REPORT_DETAIL>();
+            this.REPAIR_DETAIL = new HashSet<REPAIR_DETAIL>();
         }
     
-        public int Id { get; set; }
+        public int Supplies_Id { get; set; }
         public string Supplies_Name { get; set; }
         public Nullable<int> Supplies_Price { get; set; }
         public Nullable<int> Supplies_Amount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REPAIRINFO> REPAIRINFOes { get; set; }
+        public virtual ICollection<IMPORT_GOODS> IMPORT_GOODS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<INVENTORY_REPORT_DETAIL> INVENTORY_REPORT_DETAIL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REPAIR_DETAIL> REPAIR_DETAIL { get; set; }
     }
 }

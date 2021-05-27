@@ -1,31 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="GARAModelStoreContainer" CdmEntityContainer="GARAEntities">
-    <EntitySetMapping Name="CARBRANDs">
-      <EntityTypeMapping TypeName="GARAModel.CARBRAND">
-        <MappingFragment StoreEntitySet="CARBRAND">
+    <EntitySetMapping Name="CAR_BRAND">
+      <EntityTypeMapping TypeName="GARAModel.CAR_BRAND">
+        <MappingFragment StoreEntitySet="CAR_BRAND">
           <ScalarProperty Name="CarBrand_Name" ColumnName="CarBrand_Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CarBrand_Id" ColumnName="CarBrand_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CARRECEPTIONs">
-      <EntityTypeMapping TypeName="GARAModel.CARRECEPTION">
-        <MappingFragment StoreEntitySet="CARRECEPTION">
-          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
-          <ScalarProperty Name="ReceptionDate" ColumnName="ReceptionDate" />
-          <ScalarProperty Name="IdBrand" ColumnName="IdBrand" />
-          <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
-          <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CARSTATUS">
-      <EntityTypeMapping TypeName="GARAModel.CARSTATUS">
-        <MappingFragment StoreEntitySet="CARSTATUS">
-          <ScalarProperty Name="Status_Name" ColumnName="Status_Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="CAR_STATUS">
+      <EntityTypeMapping TypeName="GARAModel.CAR_STATUS">
+        <MappingFragment StoreEntitySet="CAR_STATUS">
+          <ScalarProperty Name="CarStatus_Name" ColumnName="CarStatus_Name" />
+          <ScalarProperty Name="CarStatus_Id" ColumnName="CarStatus_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -35,61 +23,93 @@
           <ScalarProperty Name="Customer_Phone" ColumnName="Customer_Phone" />
           <ScalarProperty Name="Customer_Address" ColumnName="Customer_Address" />
           <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="GARAINFOes">
-      <EntityTypeMapping TypeName="GARAModel.GARAINFO">
-        <MappingFragment StoreEntitySet="GARAINFO">
-          <ScalarProperty Name="GaraInfo_Address" ColumnName="GaraInfo_Address" />
-          <ScalarProperty Name="GaraInfo_Email" ColumnName="GaraInfo_Email" />
-          <ScalarProperty Name="GaraInfo_Phone" ColumnName="GaraInfo_Phone" />
+    <EntitySetMapping Name="GARA_INFO">
+      <EntityTypeMapping TypeName="GARAModel.GARA_INFO">
+        <MappingFragment StoreEntitySet="GARA_INFO">
+          <ScalarProperty Name="IsOverPay" ColumnName="IsOverPay" />
           <ScalarProperty Name="MaxCarReception" ColumnName="MaxCarReception" />
-          <ScalarProperty Name="MaxCar" ColumnName="MaxCar" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GaraInfo_Id" ColumnName="GaraInfo_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PAYs">
-      <EntityTypeMapping TypeName="GARAModel.PAY">
-        <MappingFragment StoreEntitySet="PAY">
-          <ScalarProperty Name="Pay_Price" ColumnName="Pay_Price" />
-          <ScalarProperty Name="Pay_Name" ColumnName="Pay_Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="IMPORT_GOODS">
+      <EntityTypeMapping TypeName="GARAModel.IMPORT_GOODS">
+        <MappingFragment StoreEntitySet="IMPORT_GOODS">
+          <ScalarProperty Name="IdSupplies" ColumnName="IdSupplies" />
+          <ScalarProperty Name="ImportGoods_Total" ColumnName="ImportGoods_Total" />
+          <ScalarProperty Name="ImportGoods_Price" ColumnName="ImportGoods_Price" />
+          <ScalarProperty Name="ImportGoods_Date" ColumnName="ImportGoods_Date" />
+          <ScalarProperty Name="ImportGoods_Amount" ColumnName="ImportGoods_Amount" />
+          <ScalarProperty Name="ImportGoods_Id" ColumnName="ImportGoods_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVENTORY_REPORT">
+      <EntityTypeMapping TypeName="GARAModel.INVENTORY_REPORT">
+        <MappingFragment StoreEntitySet="INVENTORY_REPORT">
+          <ScalarProperty Name="InventoryReport_Date" ColumnName="InventoryReport_Date" />
+          <ScalarProperty Name="InventoryReport_Id" ColumnName="InventoryReport_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVENTORY_REPORT_DETAIL">
+      <EntityTypeMapping TypeName="GARAModel.INVENTORY_REPORT_DETAIL">
+        <MappingFragment StoreEntitySet="INVENTORY_REPORT_DETAIL">
+          <ScalarProperty Name="TonCuoi" ColumnName="TonCuoi" />
+          <ScalarProperty Name="PhatSinh" ColumnName="PhatSinh" />
+          <ScalarProperty Name="TonDau" ColumnName="TonDau" />
+          <ScalarProperty Name="IdSupplies" ColumnName="IdSupplies" />
+          <ScalarProperty Name="IdInventoryReport" ColumnName="IdInventoryReport" />
+          <ScalarProperty Name="InventoryReportDetail_Id" ColumnName="InventoryReportDetail_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RECEIPTs">
       <EntityTypeMapping TypeName="GARAModel.RECEIPT">
         <MappingFragment StoreEntitySet="RECEIPT">
-          <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
-          <ScalarProperty Name="ReceptDate" ColumnName="ReceptDate" />
-          <ScalarProperty Name="IdGaraInfo" ColumnName="IdGaraInfo" />
-          <ScalarProperty Name="IdCarReception" ColumnName="IdCarReception" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdReception" ColumnName="IdReception" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MoneyReceived" ColumnName="MoneyReceived" />
+          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+          <ScalarProperty Name="Receipt_Id" ColumnName="Receipt_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="REPAIRFORMs">
-      <EntityTypeMapping TypeName="GARAModel.REPAIRFORM">
-        <MappingFragment StoreEntitySet="REPAIRFORM">
+    <EntitySetMapping Name="RECEPTIONs">
+      <EntityTypeMapping TypeName="GARAModel.RECEPTION">
+        <MappingFragment StoreEntitySet="RECEPTION">
+          <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+          <ScalarProperty Name="IdCarBrand" ColumnName="IdCarBrand" />
+          <ScalarProperty Name="ReceptionDate" ColumnName="ReceptionDate" />
+          <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
+          <ScalarProperty Name="Reception_Id" ColumnName="Reception_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REPAIRs">
+      <EntityTypeMapping TypeName="GARAModel.REPAIR">
+        <MappingFragment StoreEntitySet="REPAIR">
           <ScalarProperty Name="RepairDate" ColumnName="RepairDate" />
-          <ScalarProperty Name="IdCarReception" ColumnName="IdCarReception" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdReception" ColumnName="IdReception" />
+          <ScalarProperty Name="Repair_Id" ColumnName="Repair_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="REPAIRINFOes">
-      <EntityTypeMapping TypeName="GARAModel.REPAIRINFO">
-        <MappingFragment StoreEntitySet="REPAIRINFO">
-          <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
-          <ScalarProperty Name="IdPay" ColumnName="IdPay" />
+    <EntitySetMapping Name="REPAIR_DETAIL">
+      <EntityTypeMapping TypeName="GARAModel.REPAIR_DETAIL">
+        <MappingFragment StoreEntitySet="REPAIR_DETAIL">
+          <ScalarProperty Name="IdSupplies" ColumnName="IdSupplies" />
+          <ScalarProperty Name="IdRepair" ColumnName="IdRepair" />
+          <ScalarProperty Name="IdWage" ColumnName="IdWage" />
           <ScalarProperty Name="SuppliesAmount" ColumnName="SuppliesAmount" />
-          <ScalarProperty Name="IdSupply" ColumnName="IdSupply" />
+          <ScalarProperty Name="SuppliesPrice" ColumnName="SuppliesPrice" />
+          <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
           <ScalarProperty Name="Content" ColumnName="Content" />
-          <ScalarProperty Name="IdRepairForm" ColumnName="IdRepairForm" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RepairDetail_Id" ColumnName="RepairDetail_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -97,7 +117,47 @@
       <EntityTypeMapping TypeName="GARAModel.ROLE">
         <MappingFragment StoreEntitySet="ROLE">
           <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROLE_INFO">
+      <EntityTypeMapping TypeName="GARAModel.ROLE_INFO">
+        <MappingFragment StoreEntitySet="ROLE_INFO">
+          <ScalarProperty Name="AllowEditGaraInfo" ColumnName="AllowEditGaraInfo" />
+          <ScalarProperty Name="AllowAddWage" ColumnName="AllowAddWage" />
+          <ScalarProperty Name="AllowAddAccount" ColumnName="AllowAddAccount" />
+          <ScalarProperty Name="AllowAddCarBrand" ColumnName="AllowAddCarBrand" />
+          <ScalarProperty Name="AllowAddSupplies" ColumnName="AllowAddSupplies" />
+          <ScalarProperty Name="AccessInventory" ColumnName="AccessInventory" />
+          <ScalarProperty Name="AccessReport" ColumnName="AccessReport" />
+          <ScalarProperty Name="AccessSetting" ColumnName="AccessSetting" />
+          <ScalarProperty Name="AccessEmployee" ColumnName="AccessEmployee" />
+          <ScalarProperty Name="AccessService" ColumnName="AccessService" />
+          <ScalarProperty Name="AccessDashBoard" ColumnName="AccessDashBoard" />
+          <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+          <ScalarProperty Name="RoleInfo_Id" ColumnName="RoleInfo_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SALES_REPORT">
+      <EntityTypeMapping TypeName="GARAModel.SALES_REPORT">
+        <MappingFragment StoreEntitySet="SALES_REPORT">
+          <ScalarProperty Name="SalesReport_Date" ColumnName="SalesReport_Date" />
+          <ScalarProperty Name="SalesReport_Revenue" ColumnName="SalesReport_Revenue" />
+          <ScalarProperty Name="SalesReport_Id" ColumnName="SalesReport_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SALES_REPORT_DETAIL">
+      <EntityTypeMapping TypeName="GARAModel.SALES_REPORT_DETAIL">
+        <MappingFragment StoreEntitySet="SALES_REPORT_DETAIL">
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+          <ScalarProperty Name="AmountOfTurn" ColumnName="AmountOfTurn" />
+          <ScalarProperty Name="IdBrand" ColumnName="IdBrand" />
+          <ScalarProperty Name="IdSalesReport" ColumnName="IdSalesReport" />
+          <ScalarProperty Name="SalesReportDetail_Id" ColumnName="SalesReportDetail_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -107,31 +167,39 @@
           <ScalarProperty Name="Supplies_Amount" ColumnName="Supplies_Amount" />
           <ScalarProperty Name="Supplies_Price" ColumnName="Supplies_Price" />
           <ScalarProperty Name="Supplies_Name" ColumnName="Supplies_Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Supplies_Id" ColumnName="Supplies_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="USERINFOes">
-      <EntityTypeMapping TypeName="GARAModel.USERINFO">
-        <MappingFragment StoreEntitySet="USERINFO">
+    <EntitySetMapping Name="USER_INFO">
+      <EntityTypeMapping TypeName="GARAModel.USER_INFO">
+        <MappingFragment StoreEntitySet="USER_INFO">
           <ScalarProperty Name="UserInfo_CMND" ColumnName="UserInfo_CMND" />
           <ScalarProperty Name="UserInfo_Telephone" ColumnName="UserInfo_Telephone" />
           <ScalarProperty Name="UserInfo_BirthDate" ColumnName="UserInfo_BirthDate" />
           <ScalarProperty Name="UserInfo_Address" ColumnName="UserInfo_Address" />
           <ScalarProperty Name="UserInfo_Name" ColumnName="UserInfo_Name" />
           <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserInfo_Id" ColumnName="UserInfo_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="USERS">
       <EntityTypeMapping TypeName="GARAModel.USER">
         <MappingFragment StoreEntitySet="USERS">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="IdRole" ColumnName="IdRole" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Users_Id" ColumnName="Users_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WAGEs">
+      <EntityTypeMapping TypeName="GARAModel.WAGE">
+        <MappingFragment StoreEntitySet="WAGE">
+          <ScalarProperty Name="Wage_Value" ColumnName="Wage_Value" />
+          <ScalarProperty Name="Wage_Name" ColumnName="Wage_Name" />
+          <ScalarProperty Name="Wage_Id" ColumnName="Wage_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

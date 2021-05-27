@@ -20,9 +20,11 @@ namespace QuanLyGaraOto
     /// </summary>
     public partial class SettingWindow : UserControl
     {
+        public SettingViewModel SettingViewModel { get; set; }
         public SettingWindow()
         {
             InitializeComponent();
+            this.DataContext = (SettingViewModel = new SettingViewModel());
         }
     }
 }

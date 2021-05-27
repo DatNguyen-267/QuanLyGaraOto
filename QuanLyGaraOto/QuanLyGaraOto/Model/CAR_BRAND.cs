@@ -12,20 +12,21 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class REPAIRFORM
+    public partial class CAR_BRAND
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public REPAIRFORM()
+        public CAR_BRAND()
         {
-            this.REPAIRINFOes = new HashSet<REPAIRINFO>();
+            this.RECEPTIONs = new HashSet<RECEPTION>();
+            this.SALES_REPORT_DETAIL = new HashSet<SALES_REPORT_DETAIL>();
         }
     
-        public int Id { get; set; }
-        public int IdCarReception { get; set; }
-        public System.DateTime? RepairDate { get; set; }
+        public int CarBrand_Id { get; set; }
+        public string CarBrand_Name { get; set; }
     
-        public virtual CARRECEPTION CARRECEPTION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REPAIRINFO> REPAIRINFOes { get; set; }
+        public virtual ICollection<RECEPTION> RECEPTIONs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SALES_REPORT_DETAIL> SALES_REPORT_DETAIL { get; set; }
     }
 }

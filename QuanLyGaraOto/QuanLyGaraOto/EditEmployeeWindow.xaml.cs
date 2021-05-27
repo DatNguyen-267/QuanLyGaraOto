@@ -22,7 +22,7 @@ namespace QuanLyGaraOto
     public partial class EditEmployeeWindow : Window
     {
         EmployeeViewModel Viewmodel { get; set; }
-        public EditEmployeeWindow(USERINFO u)
+        public EditEmployeeWindow(USER_INFO u)
         {
             InitializeComponent();
             DataContext = Viewmodel = new EmployeeViewModel(u);
