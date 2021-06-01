@@ -117,7 +117,7 @@
                             Header="ID" 
                             Width="80"/>
                             <GridViewColumn
-                            DisplayMemberBinding="{Binding Name,Mode=TwoWay}"
+                            DisplayMemberBinding="{Binding Supplies_Name,Mode=TwoWay}"
                             Header="Tên"
                             Width="160"/>
                             <GridViewColumn
