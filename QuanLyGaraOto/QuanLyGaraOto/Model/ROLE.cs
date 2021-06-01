@@ -18,7 +18,7 @@ namespace QuanLyGaraOto.Model
         public ROLE()
         {
             this.USERS = new HashSet<USER>();
-            this.ROLE_INFO = new HashSet<ROLE_INFO>();
+            this.ROLE_DETAIL = new HashSet<ROLE_DETAIL>();
         }
     
         public int Role_Id { get; set; }
@@ -27,6 +27,6 @@ namespace QuanLyGaraOto.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USER> USERS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROLE_INFO> ROLE_INFO { get; set; }
+        public virtual ICollection<ROLE_DETAIL> ROLE_DETAIL { get; set; }
     }
 }

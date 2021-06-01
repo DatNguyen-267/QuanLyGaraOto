@@ -24,10 +24,10 @@ namespace QuanLyGaraOto.ViewModel
         public string Address { get => _Address; set { _Address = value; OnPropertyChanged(); } }
         private string _Phone { get; set; }
         public string Phone { get => _Phone; set { _Phone = value; OnPropertyChanged(); } }
-        private DateTime? _ReceptionDate { get; set; }
-        public DateTime? ReceptionDate { get => _ReceptionDate; set { _ReceptionDate = value; OnPropertyChanged(); } }
-        private DateTime? _RepairDate { get; set; }
-        public DateTime? RepairDate { get => _RepairDate; set { _RepairDate = value; OnPropertyChanged(); } }
+        private DateTime _ReceptionDate { get; set; }
+        public DateTime ReceptionDate { get => _ReceptionDate; set { _ReceptionDate = value; OnPropertyChanged(); } }
+        private DateTime _RepairDate { get; set; }
+        public DateTime RepairDate { get => _RepairDate; set { _RepairDate = value; OnPropertyChanged(); } }
         private CAR_BRAND _SelectedBrand { get; set; }
         public CAR_BRAND SelectedBrand { get => _SelectedBrand; set { _SelectedBrand = value; OnPropertyChanged(); } }
 

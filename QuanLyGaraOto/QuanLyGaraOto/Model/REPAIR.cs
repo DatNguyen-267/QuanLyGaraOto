@@ -22,7 +22,8 @@ namespace QuanLyGaraOto.Model
     
         public int Repair_Id { get; set; }
         public int IdReception { get; set; }
-        public System.DateTime? RepairDate { get; set; }
+        public System.DateTime RepairDate { get; set; }
+        public int Repair_TotalMoney { get; set; }
     
         public virtual RECEPTION RECEPTION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

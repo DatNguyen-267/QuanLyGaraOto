@@ -14,13 +14,17 @@ namespace QuanLyGaraOto.Model
     
     public partial class IMPORT_GOODS
     {
-        public int ImportGoods_Id { get; set; }
-        public int ImportGoods_Amount { get; set; }
-        public System.DateTime? ImportGoods_Date { get; set; }
-        public int ImportGoods_Price { get; set; }
-        public int ImportGoods_Total { get; set; }
-        public int IdSupplies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public IMPORT_GOODS()
+        {
+            this.IMPORT_GOODS_DETAIL = new HashSet<IMPORT_GOODS_DETAIL>();
+        }
     
-        public virtual SUPPLIES SUPPLIES { get; set; }
+        public int ImportGoods_Id { get; set; }
+        public System.DateTime ImportGoods_Date { get; set; }
+        public int ImportGoods_TotalMoney { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IMPORT_GOODS_DETAIL> IMPORT_GOODS_DETAIL { get; set; }
     }
 }

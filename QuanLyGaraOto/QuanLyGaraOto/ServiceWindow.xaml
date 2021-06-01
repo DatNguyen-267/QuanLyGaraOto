@@ -15,18 +15,23 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" 
+              Margin="15 0 15 10"
+              Background="#455A64"
+              >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="130"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <TextBlock 
-                   Text="{Binding Title}"
+                   Text="Dịch vụ"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Margin="5 0 5 0"            
-                    FontSize="24"
+                    HorizontalAlignment="Left"
+                    Margin="15 0 5 0"            
+                    FontSize="30"
+                    Foreground="White"
+                   FontWeight="Bold"
                     ></TextBlock>
             </Grid>
             <Grid Grid.Column="1">
@@ -36,6 +41,9 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Width="auto"
+                    
+                    Foreground="Black"
+                    Background="White"
                     Margin="10 5 20 5"
                     />
             </Grid>
@@ -46,10 +54,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                
+
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                
+
             </Grid>
             <Grid Grid.Column="1">
                 <DockPanel Width="300">
@@ -71,7 +79,7 @@
                     </Button>
                 </DockPanel>
             </Grid>
-            
+
         </Grid>
         <materialDesign:Card
             Margin="10 5 10 15"
@@ -80,15 +88,16 @@
                 <ListView ItemsSource="{Binding ListCar}" SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
                         <GridView>
-    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding CarReception.Id}"></GridViewColumn>
-    <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding CarReception.LicensePlate}"></GridViewColumn>
-    <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding CarReception.CARBRAND.CarBrand_Name}"></GridViewColumn>
-    <GridViewColumn Header="Chủ Xe" DisplayMemberBinding="{Binding CarReception.CUSTOMER.Customer_Name}"></GridViewColumn>
-    <GridViewColumn Header="Tiền nợ" DisplayMemberBinding="{Binding Debt}"></GridViewColumn>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding CarReception.Reception_Id}"></GridViewColumn>
+                            <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding CarReception.LicensePlate}"></GridViewColumn>
+                            <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></GridViewColumn>
+                            <GridViewColumn Header="Chủ Xe" DisplayMemberBinding="{Binding CarReception.CUSTOMER.Customer_Name}"></GridViewColumn>
+                            <GridViewColumn Header="Tiền nợ" DisplayMemberBinding="{Binding Debt}"></GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
             </ScrollViewer>
         </materialDesign:Card>
     </Grid>
+
 </UserControl>

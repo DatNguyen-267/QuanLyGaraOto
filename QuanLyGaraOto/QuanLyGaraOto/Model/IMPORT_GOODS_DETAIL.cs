@@ -12,15 +12,15 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class INVENTORY_REPORT_DETAIL
+    public partial class IMPORT_GOODS_DETAIL
     {
-        public int IdInventoryReport { get; set; }
+        public int IdImportGood { get; set; }
         public int IdSupplies { get; set; }
-        public int TonDau { get; set; }
-        public int PhatSinh { get; set; }
-        public int TonCuoi { get; set; }
+        public int Amount { get; set; }
+        public int Price { get; set; }
+        public int TotalMoney { get; set; }
     
-        public virtual INVENTORY_REPORT INVENTORY_REPORT { get; set; }
+        public virtual IMPORT_GOODS IMPORT_GOODS { get; set; }
         public virtual SUPPLIES SUPPLIES { get; set; }
     }
 }

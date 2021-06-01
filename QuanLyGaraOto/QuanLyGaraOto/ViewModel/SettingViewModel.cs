@@ -275,10 +275,10 @@ namespace QuanLyGaraOto.ViewModel
             });
 
             // Gara information
-            garaInfo = DataProvider.Ins.DB.GARA_INFO.SingleOrDefault(x => x.GaraInfo_Id == 1);
+            garaInfo = DataProvider.Ins.DB.GARA_INFO.First();
             if (garaInfo != null)
             {
-                MaxCarReception = garaInfo.MaxCarReception.Value;
+                MaxCarReception = garaInfo.MaxCarReception;
             }
 
             ChangeGaraInformation = new RelayCommand<object>(
@@ -302,7 +302,7 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    MaxCarReception = garaInfo.MaxCarReception.Value;
+                    MaxCarReception = garaInfo.MaxCarReception;
 
                     SetEnableStatusButtonInGaraInformation(false);
                 });

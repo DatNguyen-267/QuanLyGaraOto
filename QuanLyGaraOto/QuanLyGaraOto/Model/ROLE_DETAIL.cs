@@ -12,9 +12,14 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CAR_STATUS
+    public partial class ROLE_DETAIL
     {
-        public int CarStatus_Id { get; set; }
-        public string CarStatus_Name { get; set; }
+        public int RoleDetail_Id { get; set; }
+        public int IdRole { get; set; }
+        public int IdPermissionItem { get; set; }
+        public bool Permission { get; set; }
+    
+        public virtual PREMISSION_ITEM PREMISSION_ITEM { get; set; }
+        public virtual ROLE ROLE { get; set; }
     }
 }

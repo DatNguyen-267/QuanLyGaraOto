@@ -18,6 +18,7 @@ namespace QuanLyGaraOto.Model
         public System.DateTime ReceiptDate { get; set; }
         public int MoneyReceived { get; set; }
         public string Email { get; set; }
+        public string Phone { get; set; }
         public int IdReception { get; set; }
     
         public virtual RECEPTION RECEPTION { get; set; }

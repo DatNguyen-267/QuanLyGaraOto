@@ -20,7 +20,7 @@
             </i:InvokeCommandAction>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
+    <Grid Background="#3d4751">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" x:Name="WidthMenu"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -238,7 +238,11 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1" x:Name="Container">
+        <Grid Background="White" Grid.Column="1"></Grid>
+        <Grid Grid.Column="1" x:Name="Container"
+              Background="White"
+              Margin="15 15 10 15"
+              >
             <Grid 
                 Visibility="{Binding VisService, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <local:ServiceWindow 
@@ -272,5 +276,12 @@
             </Grid>
 
         </Grid>
+        <Rectangle Grid.Column="1"
+                   RadiusX="15"
+                   RadiusY="15"
+                   
+                   Stroke="White"
+                   StrokeThickness="15"
+                   ></Rectangle>
     </Grid>
 </Window>

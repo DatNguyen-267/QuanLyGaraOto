@@ -7,13 +7,6 @@
     <Property Name="CarBrand_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CarBrand_Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="CAR_STATUS">
-    <Key>
-      <PropertyRef Name="CarStatus_Id" />
-    </Key>
-    <Property Name="CarStatus_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CarStatus_Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-  </EntityType>
   <EntityType Name="CUSTOMER">
     <Key>
       <PropertyRef Name="Customer_Id" />
@@ -23,42 +16,59 @@
     <Property Name="Customer_Address" Type="nvarchar(max)" />
     <Property Name="Customer_Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="GARA_INFO">
     <Key>
-      <PropertyRef Name="GaraInfo_Id" />
+      <PropertyRef Name="MaxCarReception" />
+      <PropertyRef Name="IsOverPay" />
     </Key>
-    <Property Name="GaraInfo_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MaxCarReception" Type="int" />
-    <Property Name="IsOverPay" Type="bit" />
+    <Property Name="MaxCarReception" Type="int" Nullable="false" />
+    <Property Name="IsOverPay" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="IMPORT_GOODS">
     <Key>
       <PropertyRef Name="ImportGoods_Id" />
     </Key>
     <Property Name="ImportGoods_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ImportGoods_Amount" Type="int" Nullable="false" />
     <Property Name="ImportGoods_Date" Type="date" Nullable="false" />
-    <Property Name="ImportGoods_Price" Type="int" Nullable="false" />
-    <Property Name="ImportGoods_Total" Type="int" Nullable="false" />
+    <Property Name="ImportGoods_TotalMoney" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IMPORT_GOODS_DETAIL">
+    <Key>
+      <PropertyRef Name="IdImportGood" />
+      <PropertyRef Name="IdSupplies" />
+    </Key>
+    <Property Name="IdImportGood" Type="int" Nullable="false" />
     <Property Name="IdSupplies" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="TotalMoney" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="INVENTORY_REPORT">
     <Key>
       <PropertyRef Name="InventoryReport_Id" />
     </Key>
-    <Property Name="InventoryReport_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InventoryReport_Id" Type="int" Nullable="false" />
     <Property Name="InventoryReport_Date" Type="date" Nullable="false" />
   </EntityType>
   <EntityType Name="INVENTORY_REPORT_DETAIL">
     <Key>
-      <PropertyRef Name="InventoryReportDetail_Id" />
+      <PropertyRef Name="IdInventoryReport" />
+      <PropertyRef Name="IdSupplies" />
     </Key>
-    <Property Name="InventoryReportDetail_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdInventoryReport" Type="int" Nullable="false" />
     <Property Name="IdSupplies" Type="int" Nullable="false" />
     <Property Name="TonDau" Type="int" Nullable="false" />
     <Property Name="PhatSinh" Type="int" Nullable="false" />
     <Property Name="TonCuoi" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PREMISSION_ITEM">
+    <Key>
+      <PropertyRef Name="PermissionItem_Id" />
+    </Key>
+    <Property Name="PermissionItem_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PermissionItem_Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="RECEIPT">
     <Key>
@@ -68,6 +78,7 @@
     <Property Name="ReceiptDate" Type="date" Nullable="false" />
     <Property Name="MoneyReceived" Type="int" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
     <Property Name="IdReception" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RECEPTION">
@@ -77,6 +88,7 @@
     <Property Name="Reception_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="LicensePlate" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ReceptionDate" Type="date" Nullable="false" />
+    <Property Name="Debt" Type="int" Nullable="false" />
     <Property Name="IdCarBrand" Type="int" Nullable="false" />
     <Property Name="IdCustomer" Type="int" Nullable="false" />
   </EntityType>
@@ -87,6 +99,7 @@
     <Property Name="Repair_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdReception" Type="int" Nullable="false" />
     <Property Name="RepairDate" Type="date" Nullable="false" />
+    <Property Name="Repair_TotalMoney" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="REPAIR_DETAIL">
     <Key>
@@ -108,39 +121,30 @@
     <Property Name="Role_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Role_Name" Type="nvarchar(max)" />
   </EntityType>
-  <EntityType Name="ROLE_INFO">
+  <EntityType Name="ROLE_DETAIL">
     <Key>
-      <PropertyRef Name="RoleInfo_Id" />
+      <PropertyRef Name="RoleDetail_Id" />
     </Key>
-    <Property Name="RoleInfo_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleDetail_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdRole" Type="int" Nullable="false" />
-    <Property Name="AccessDashBoard" Type="bit" Nullable="false" />
-    <Property Name="AccessService" Type="bit" Nullable="false" />
-    <Property Name="AccessEmployee" Type="bit" Nullable="false" />
-    <Property Name="AccessSetting" Type="bit" Nullable="false" />
-    <Property Name="AccessReport" Type="bit" Nullable="false" />
-    <Property Name="AccessInventory" Type="bit" Nullable="false" />
-    <Property Name="AllowAddSupplies" Type="bit" Nullable="false" />
-    <Property Name="AllowAddCarBrand" Type="bit" Nullable="false" />
-    <Property Name="AllowAddAccount" Type="bit" Nullable="false" />
-    <Property Name="AllowAddWage" Type="bit" Nullable="false" />
-    <Property Name="AllowEditGaraInfo" Type="bit" Nullable="false" />
+    <Property Name="IdPermissionItem" Type="int" Nullable="false" />
+    <Property Name="Permission" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="SALES_REPORT">
     <Key>
       <PropertyRef Name="SalesReport_Id" />
     </Key>
     <Property Name="SalesReport_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SalesReport_Revenue" Type="int" Nullable="false" />
     <Property Name="SalesReport_Date" Type="date" Nullable="false" />
+    <Property Name="SalesReport_Revenue" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SALES_REPORT_DETAIL">
     <Key>
-      <PropertyRef Name="SalesReportDetail_Id" />
+      <PropertyRef Name="IdSalesReport" />
+      <PropertyRef Name="IdCarBrand" />
     </Key>
-    <Property Name="SalesReportDetail_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdSalesReport" Type="int" Nullable="false" />
-    <Property Name="IdBrand" Type="int" Nullable="false" />
+    <Property Name="IdCarBrand" Type="int" Nullable="false" />
     <Property Name="AmountOfTurn" Type="int" />
     <Property Name="TotalMoney" Type="int" />
     <Property Name="Rate" Type="float" />
@@ -183,7 +187,7 @@
     <Property Name="Wage_Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
     <Property Name="Wage_Value" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK__USERS__IdRole__5BE2A6F2">
+  <Association Name="FK__USERS__IdRole__5812160E">
     <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
     <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
     <ReferentialConstraint>
@@ -195,14 +199,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_IMPORTGOODS_SUPPLIES">
+  <Association Name="FK_IMPORTGOODSDETAIL_IMPORTGOODS">
+    <End Role="IMPORT_GOODS" Type="Self.IMPORT_GOODS" Multiplicity="1" />
+    <End Role="IMPORT_GOODS_DETAIL" Type="Self.IMPORT_GOODS_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IMPORT_GOODS">
+        <PropertyRef Name="ImportGoods_Id" />
+      </Principal>
+      <Dependent Role="IMPORT_GOODS_DETAIL">
+        <PropertyRef Name="IdImportGood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IMPORTGOODSDETAIL_SUPPLIES">
     <End Role="SUPPLIES" Type="Self.SUPPLIES" Multiplicity="1" />
-    <End Role="IMPORT_GOODS" Type="Self.IMPORT_GOODS" Multiplicity="*" />
+    <End Role="IMPORT_GOODS_DETAIL" Type="Self.IMPORT_GOODS_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SUPPLIES">
         <PropertyRef Name="Supplies_Id" />
       </Principal>
-      <Dependent Role="IMPORT_GOODS">
+      <Dependent Role="IMPORT_GOODS_DETAIL">
         <PropertyRef Name="IdSupplies" />
       </Dependent>
     </ReferentialConstraint>
@@ -315,14 +331,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ROLEINFO_ROLE">
+  <Association Name="FK_ROLEDETAIL_PREMISSIONITEM">
+    <End Role="PREMISSION_ITEM" Type="Self.PREMISSION_ITEM" Multiplicity="1" />
+    <End Role="ROLE_DETAIL" Type="Self.ROLE_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PREMISSION_ITEM">
+        <PropertyRef Name="PermissionItem_Id" />
+      </Principal>
+      <Dependent Role="ROLE_DETAIL">
+        <PropertyRef Name="IdPermissionItem" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ROLEDETAIL_ROLE">
     <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
-    <End Role="ROLE_INFO" Type="Self.ROLE_INFO" Multiplicity="*" />
+    <End Role="ROLE_DETAIL" Type="Self.ROLE_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ROLE">
         <PropertyRef Name="Role_Id" />
       </Principal>
-      <Dependent Role="ROLE_INFO">
+      <Dependent Role="ROLE_DETAIL">
         <PropertyRef Name="IdRole" />
       </Dependent>
     </ReferentialConstraint>
@@ -335,7 +363,7 @@
         <PropertyRef Name="CarBrand_Id" />
       </Principal>
       <Dependent Role="SALES_REPORT_DETAIL">
-        <PropertyRef Name="IdBrand" />
+        <PropertyRef Name="IdCarBrand" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -365,31 +393,41 @@
   </Association>
   <EntityContainer Name="GARAModelStoreContainer">
     <EntitySet Name="CAR_BRAND" EntityType="Self.CAR_BRAND" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CAR_STATUS" EntityType="Self.CAR_STATUS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="GARA_INFO" EntityType="Self.GARA_INFO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IMPORT_GOODS" EntityType="Self.IMPORT_GOODS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IMPORT_GOODS_DETAIL" EntityType="Self.IMPORT_GOODS_DETAIL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVENTORY_REPORT" EntityType="Self.INVENTORY_REPORT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INVENTORY_REPORT_DETAIL" EntityType="Self.INVENTORY_REPORT_DETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PREMISSION_ITEM" EntityType="Self.PREMISSION_ITEM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RECEIPT" EntityType="Self.RECEIPT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RECEPTION" EntityType="Self.RECEPTION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="REPAIR" EntityType="Self.REPAIR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="REPAIR_DETAIL" EntityType="Self.REPAIR_DETAIL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ROLE_INFO" EntityType="Self.ROLE_INFO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ROLE_DETAIL" EntityType="Self.ROLE_DETAIL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SALES_REPORT" EntityType="Self.SALES_REPORT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SALES_REPORT_DETAIL" EntityType="Self.SALES_REPORT_DETAIL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SUPPLIES" EntityType="Self.SUPPLIES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USER_INFO" EntityType="Self.USER_INFO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WAGE" EntityType="Self.WAGE" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__USERS__IdRole__5BE2A6F2" Association="Self.FK__USERS__IdRole__5BE2A6F2">
+    <EntitySet Name="GARA_INFO" EntityType="Self.GARA_INFO" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GARA_INFO].[MaxCarReception] AS [MaxCarReception], 
+    [GARA_INFO].[IsOverPay] AS [IsOverPay]
+    FROM [dbo].[GARA_INFO] AS [GARA_INFO]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__USERS__IdRole__5812160E" Association="Self.FK__USERS__IdRole__5812160E">
       <End Role="ROLE" EntitySet="ROLE" />
       <End Role="USERS" EntitySet="USERS" />
     </AssociationSet>
-    <AssociationSet Name="FK_IMPORTGOODS_SUPPLIES" Association="Self.FK_IMPORTGOODS_SUPPLIES">
-      <End Role="SUPPLIES" EntitySet="SUPPLIES" />
+    <AssociationSet Name="FK_IMPORTGOODSDETAIL_IMPORTGOODS" Association="Self.FK_IMPORTGOODSDETAIL_IMPORTGOODS">
       <End Role="IMPORT_GOODS" EntitySet="IMPORT_GOODS" />
+      <End Role="IMPORT_GOODS_DETAIL" EntitySet="IMPORT_GOODS_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IMPORTGOODSDETAIL_SUPPLIES" Association="Self.FK_IMPORTGOODSDETAIL_SUPPLIES">
+      <End Role="SUPPLIES" EntitySet="SUPPLIES" />
+      <End Role="IMPORT_GOODS_DETAIL" EntitySet="IMPORT_GOODS_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK_INVENTORYREPORTDETAIL_INVENTORYREPORT" Association="Self.FK_INVENTORYREPORTDETAIL_INVENTORYREPORT">
       <End Role="INVENTORY_REPORT" EntitySet="INVENTORY_REPORT" />
@@ -427,9 +465,13 @@
       <End Role="RECEPTION" EntitySet="RECEPTION" />
       <End Role="REPAIR" EntitySet="REPAIR" />
     </AssociationSet>
-    <AssociationSet Name="FK_ROLEINFO_ROLE" Association="Self.FK_ROLEINFO_ROLE">
+    <AssociationSet Name="FK_ROLEDETAIL_PREMISSIONITEM" Association="Self.FK_ROLEDETAIL_PREMISSIONITEM">
+      <End Role="PREMISSION_ITEM" EntitySet="PREMISSION_ITEM" />
+      <End Role="ROLE_DETAIL" EntitySet="ROLE_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ROLEDETAIL_ROLE" Association="Self.FK_ROLEDETAIL_ROLE">
       <End Role="ROLE" EntitySet="ROLE" />
-      <End Role="ROLE_INFO" EntitySet="ROLE_INFO" />
+      <End Role="ROLE_DETAIL" EntitySet="ROLE_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK_SALESREPORTDETAIL_CARBRAND" Association="Self.FK_SALESREPORTDETAIL_CARBRAND">
       <End Role="CAR_BRAND" EntitySet="CAR_BRAND" />

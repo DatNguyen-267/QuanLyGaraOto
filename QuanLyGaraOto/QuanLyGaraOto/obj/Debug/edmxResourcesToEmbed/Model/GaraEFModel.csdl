@@ -32,24 +32,25 @@
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
     <EntitySet Name="CAR_BRAND" EntityType="GARAModel.CAR_BRAND" />
-    <EntitySet Name="CAR_STATUS" EntityType="GARAModel.CAR_STATUS" />
     <EntitySet Name="CUSTOMERs" EntityType="GARAModel.CUSTOMER" />
-    <EntitySet Name="GARA_INFO" EntityType="GARAModel.GARA_INFO" />
     <EntitySet Name="IMPORT_GOODS" EntityType="GARAModel.IMPORT_GOODS" />
+    <EntitySet Name="IMPORT_GOODS_DETAIL" EntityType="GARAModel.IMPORT_GOODS_DETAIL" />
     <EntitySet Name="INVENTORY_REPORT" EntityType="GARAModel.INVENTORY_REPORT" />
     <EntitySet Name="INVENTORY_REPORT_DETAIL" EntityType="GARAModel.INVENTORY_REPORT_DETAIL" />
+    <EntitySet Name="PREMISSION_ITEM" EntityType="GARAModel.PREMISSION_ITEM" />
     <EntitySet Name="RECEIPTs" EntityType="GARAModel.RECEIPT" />
     <EntitySet Name="RECEPTIONs" EntityType="GARAModel.RECEPTION" />
     <EntitySet Name="REPAIRs" EntityType="GARAModel.REPAIR" />
     <EntitySet Name="REPAIR_DETAIL" EntityType="GARAModel.REPAIR_DETAIL" />
     <EntitySet Name="ROLEs" EntityType="GARAModel.ROLE" />
-    <EntitySet Name="ROLE_INFO" EntityType="GARAModel.ROLE_INFO" />
+    <EntitySet Name="ROLE_DETAIL" EntityType="GARAModel.ROLE_DETAIL" />
     <EntitySet Name="SALES_REPORT" EntityType="GARAModel.SALES_REPORT" />
     <EntitySet Name="SALES_REPORT_DETAIL" EntityType="GARAModel.SALES_REPORT_DETAIL" />
     <EntitySet Name="SUPPLIES" EntityType="GARAModel.SUPPLIES" />
     <EntitySet Name="USER_INFO" EntityType="GARAModel.USER_INFO" />
     <EntitySet Name="USERS" EntityType="GARAModel.USER" />
     <EntitySet Name="WAGEs" EntityType="GARAModel.WAGE" />
+    <EntitySet Name="GARA_INFO" EntityType="GARAModel.GARA_INFO" />
     <AssociationSet Name="FK_RECEPTION_CARBRAND" Association="GARAModel.FK_RECEPTION_CARBRAND">
       <End Role="CAR_BRAND" EntitySet="CAR_BRAND" />
       <End Role="RECEPTION" EntitySet="RECEPTIONs" />
@@ -62,9 +63,13 @@
       <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
       <End Role="RECEPTION" EntitySet="RECEPTIONs" />
     </AssociationSet>
-    <AssociationSet Name="FK_IMPORTGOODS_SUPPLIES" Association="GARAModel.FK_IMPORTGOODS_SUPPLIES">
-      <End Role="SUPPLy" EntitySet="SUPPLIES" />
+    <AssociationSet Name="FK_IMPORTGOODSDETAIL_IMPORTGOODS" Association="GARAModel.FK_IMPORTGOODSDETAIL_IMPORTGOODS">
       <End Role="IMPORT_GOODS" EntitySet="IMPORT_GOODS" />
+      <End Role="IMPORT_GOODS_DETAIL" EntitySet="IMPORT_GOODS_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IMPORTGOODSDETAIL_SUPPLIES" Association="GARAModel.FK_IMPORTGOODSDETAIL_SUPPLIES">
+      <End Role="SUPPLy" EntitySet="SUPPLIES" />
+      <End Role="IMPORT_GOODS_DETAIL" EntitySet="IMPORT_GOODS_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK_INVENTORYREPORTDETAIL_INVENTORYREPORT" Association="GARAModel.FK_INVENTORYREPORTDETAIL_INVENTORYREPORT">
       <End Role="INVENTORY_REPORT" EntitySet="INVENTORY_REPORT" />
@@ -73,6 +78,10 @@
     <AssociationSet Name="FK_INVENTORYREPORTDETAIL_SUPPLIES" Association="GARAModel.FK_INVENTORYREPORTDETAIL_SUPPLIES">
       <End Role="SUPPLy" EntitySet="SUPPLIES" />
       <End Role="INVENTORY_REPORT_DETAIL" EntitySet="INVENTORY_REPORT_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ROLEDETAIL_PREMISSIONITEM" Association="GARAModel.FK_ROLEDETAIL_PREMISSIONITEM">
+      <End Role="PREMISSION_ITEM" EntitySet="PREMISSION_ITEM" />
+      <End Role="ROLE_DETAIL" EntitySet="ROLE_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK_RECEIPT_CARRECEPTION" Association="GARAModel.FK_RECEIPT_CARRECEPTION">
       <End Role="RECEPTION" EntitySet="RECEPTIONs" />
@@ -94,13 +103,13 @@
       <End Role="WAGE" EntitySet="WAGEs" />
       <End Role="REPAIR_DETAIL" EntitySet="REPAIR_DETAIL" />
     </AssociationSet>
-    <AssociationSet Name="FK__USERS__IdRole__5BE2A6F2" Association="GARAModel.FK__USERS__IdRole__5BE2A6F2">
+    <AssociationSet Name="FK__USERS__IdRole__5812160E" Association="GARAModel.FK__USERS__IdRole__5812160E">
       <End Role="ROLE" EntitySet="ROLEs" />
       <End Role="USER" EntitySet="USERS" />
     </AssociationSet>
-    <AssociationSet Name="FK_ROLEINFO_ROLE" Association="GARAModel.FK_ROLEINFO_ROLE">
+    <AssociationSet Name="FK_ROLEDETAIL_ROLE" Association="GARAModel.FK_ROLEDETAIL_ROLE">
       <End Role="ROLE" EntitySet="ROLEs" />
-      <End Role="ROLE_INFO" EntitySet="ROLE_INFO" />
+      <End Role="ROLE_DETAIL" EntitySet="ROLE_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK_SALESREPORTDETAIL_SALESREPORT" Association="GARAModel.FK_SALESREPORTDETAIL_SALESREPORT">
       <End Role="SALES_REPORT" EntitySet="SALES_REPORT" />
@@ -131,13 +140,6 @@
     <NavigationProperty Name="RECEPTIONs" Relationship="GARAModel.FK_RECEPTION_CARBRAND" FromRole="CAR_BRAND" ToRole="RECEPTION" />
     <NavigationProperty Name="SALES_REPORT_DETAIL" Relationship="GARAModel.FK_SALESREPORTDETAIL_CARBRAND" FromRole="CAR_BRAND" ToRole="SALES_REPORT_DETAIL" />
   </EntityType>
-  <EntityType Name="CAR_STATUS">
-    <Key>
-      <PropertyRef Name="CarStatus_Id" />
-    </Key>
-    <Property Name="CarStatus_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CarStatus_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="CUSTOMER">
     <Key>
       <PropertyRef Name="Customer_Id" />
@@ -148,39 +150,41 @@
     <Property Name="Customer_Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="RECEPTIONs" Relationship="GARAModel.FK_RECEPTION_CUSTOMER" FromRole="CUSTOMER" ToRole="RECEPTION" />
   </EntityType>
-  <EntityType Name="GARA_INFO">
-    <Key>
-      <PropertyRef Name="GaraInfo_Id" />
-    </Key>
-    <Property Name="GaraInfo_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaxCarReception" Type="Int32" />
-    <Property Name="IsOverPay" Type="Boolean" />
-  </EntityType>
   <EntityType Name="IMPORT_GOODS">
     <Key>
       <PropertyRef Name="ImportGoods_Id" />
     </Key>
     <Property Name="ImportGoods_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ImportGoods_Amount" Type="Int32" Nullable="false" />
     <Property Name="ImportGoods_Date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="ImportGoods_Price" Type="Int32" Nullable="false" />
-    <Property Name="ImportGoods_Total" Type="Int32" Nullable="false" />
+    <Property Name="ImportGoods_TotalMoney" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="IMPORT_GOODS_DETAIL" Relationship="GARAModel.FK_IMPORTGOODSDETAIL_IMPORTGOODS" FromRole="IMPORT_GOODS" ToRole="IMPORT_GOODS_DETAIL" />
+  </EntityType>
+  <EntityType Name="IMPORT_GOODS_DETAIL">
+    <Key>
+      <PropertyRef Name="IdImportGood" />
+      <PropertyRef Name="IdSupplies" />
+    </Key>
+    <Property Name="IdImportGood" Type="Int32" Nullable="false" />
     <Property Name="IdSupplies" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="SUPPLIES" Relationship="GARAModel.FK_IMPORTGOODS_SUPPLIES" FromRole="IMPORT_GOODS" ToRole="SUPPLy" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="TotalMoney" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="IMPORT_GOODS" Relationship="GARAModel.FK_IMPORTGOODSDETAIL_IMPORTGOODS" FromRole="IMPORT_GOODS_DETAIL" ToRole="IMPORT_GOODS" />
+    <NavigationProperty Name="SUPPLIES" Relationship="GARAModel.FK_IMPORTGOODSDETAIL_SUPPLIES" FromRole="IMPORT_GOODS_DETAIL" ToRole="SUPPLy" />
   </EntityType>
   <EntityType Name="INVENTORY_REPORT">
     <Key>
       <PropertyRef Name="InventoryReport_Id" />
     </Key>
-    <Property Name="InventoryReport_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InventoryReport_Id" Type="Int32" Nullable="false" />
     <Property Name="InventoryReport_Date" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="INVENTORY_REPORT_DETAIL" Relationship="GARAModel.FK_INVENTORYREPORTDETAIL_INVENTORYREPORT" FromRole="INVENTORY_REPORT" ToRole="INVENTORY_REPORT_DETAIL" />
   </EntityType>
   <EntityType Name="INVENTORY_REPORT_DETAIL">
     <Key>
-      <PropertyRef Name="InventoryReportDetail_Id" />
+      <PropertyRef Name="IdInventoryReport" />
+      <PropertyRef Name="IdSupplies" />
     </Key>
-    <Property Name="InventoryReportDetail_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdInventoryReport" Type="Int32" Nullable="false" />
     <Property Name="IdSupplies" Type="Int32" Nullable="false" />
     <Property Name="TonDau" Type="Int32" Nullable="false" />
@@ -188,6 +192,14 @@
     <Property Name="TonCuoi" Type="Int32" Nullable="false" />
     <NavigationProperty Name="INVENTORY_REPORT" Relationship="GARAModel.FK_INVENTORYREPORTDETAIL_INVENTORYREPORT" FromRole="INVENTORY_REPORT_DETAIL" ToRole="INVENTORY_REPORT" />
     <NavigationProperty Name="SUPPLIES" Relationship="GARAModel.FK_INVENTORYREPORTDETAIL_SUPPLIES" FromRole="INVENTORY_REPORT_DETAIL" ToRole="SUPPLy" />
+  </EntityType>
+  <EntityType Name="PREMISSION_ITEM">
+    <Key>
+      <PropertyRef Name="PermissionItem_Id" />
+    </Key>
+    <Property Name="PermissionItem_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PermissionItem_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ROLE_DETAIL" Relationship="GARAModel.FK_ROLEDETAIL_PREMISSIONITEM" FromRole="PREMISSION_ITEM" ToRole="ROLE_DETAIL" />
   </EntityType>
   <EntityType Name="RECEIPT">
     <Key>
@@ -197,6 +209,7 @@
     <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="MoneyReceived" Type="Int32" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="IdReception" Type="Int32" Nullable="false" />
     <NavigationProperty Name="RECEPTION" Relationship="GARAModel.FK_RECEIPT_CARRECEPTION" FromRole="RECEIPT" ToRole="RECEPTION" />
   </EntityType>
@@ -207,6 +220,7 @@
     <Property Name="Reception_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="LicensePlate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ReceptionDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Debt" Type="Int32" Nullable="false" />
     <Property Name="IdCarBrand" Type="Int32" Nullable="false" />
     <Property Name="IdCustomer" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CAR_BRAND" Relationship="GARAModel.FK_RECEPTION_CARBRAND" FromRole="RECEPTION" ToRole="CAR_BRAND" />
@@ -221,6 +235,7 @@
     <Property Name="Repair_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdReception" Type="Int32" Nullable="false" />
     <Property Name="RepairDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Repair_TotalMoney" Type="Int32" Nullable="false" />
     <NavigationProperty Name="RECEPTION" Relationship="GARAModel.FK_REPAIRFORM_CARRECEPTION" FromRole="REPAIR" ToRole="RECEPTION" />
     <NavigationProperty Name="REPAIR_DETAIL" Relationship="GARAModel.FK_REPAIRDETAIL_REPAIR" FromRole="REPAIR" ToRole="REPAIR_DETAIL" />
   </EntityType>
@@ -246,44 +261,36 @@
     </Key>
     <Property Name="Role_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Role_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="USERS" Relationship="GARAModel.FK__USERS__IdRole__5BE2A6F2" FromRole="ROLE" ToRole="USER" />
-    <NavigationProperty Name="ROLE_INFO" Relationship="GARAModel.FK_ROLEINFO_ROLE" FromRole="ROLE" ToRole="ROLE_INFO" />
+    <NavigationProperty Name="USERS" Relationship="GARAModel.FK__USERS__IdRole__5812160E" FromRole="ROLE" ToRole="USER" />
+    <NavigationProperty Name="ROLE_DETAIL" Relationship="GARAModel.FK_ROLEDETAIL_ROLE" FromRole="ROLE" ToRole="ROLE_DETAIL" />
   </EntityType>
-  <EntityType Name="ROLE_INFO">
+  <EntityType Name="ROLE_DETAIL">
     <Key>
-      <PropertyRef Name="RoleInfo_Id" />
+      <PropertyRef Name="RoleDetail_Id" />
     </Key>
-    <Property Name="RoleInfo_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleDetail_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdRole" Type="Int32" Nullable="false" />
-    <Property Name="AccessDashBoard" Type="Boolean" Nullable="false" />
-    <Property Name="AccessService" Type="Boolean" Nullable="false" />
-    <Property Name="AccessEmployee" Type="Boolean" Nullable="false" />
-    <Property Name="AccessSetting" Type="Boolean" Nullable="false" />
-    <Property Name="AccessReport" Type="Boolean" Nullable="false" />
-    <Property Name="AccessInventory" Type="Boolean" Nullable="false" />
-    <Property Name="AllowAddSupplies" Type="Boolean" Nullable="false" />
-    <Property Name="AllowAddCarBrand" Type="Boolean" Nullable="false" />
-    <Property Name="AllowAddAccount" Type="Boolean" Nullable="false" />
-    <Property Name="AllowAddWage" Type="Boolean" Nullable="false" />
-    <Property Name="AllowEditGaraInfo" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="ROLE" Relationship="GARAModel.FK_ROLEINFO_ROLE" FromRole="ROLE_INFO" ToRole="ROLE" />
+    <Property Name="IdPermissionItem" Type="Int32" Nullable="false" />
+    <Property Name="Permission" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PREMISSION_ITEM" Relationship="GARAModel.FK_ROLEDETAIL_PREMISSIONITEM" FromRole="ROLE_DETAIL" ToRole="PREMISSION_ITEM" />
+    <NavigationProperty Name="ROLE" Relationship="GARAModel.FK_ROLEDETAIL_ROLE" FromRole="ROLE_DETAIL" ToRole="ROLE" />
   </EntityType>
   <EntityType Name="SALES_REPORT">
     <Key>
       <PropertyRef Name="SalesReport_Id" />
     </Key>
     <Property Name="SalesReport_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SalesReport_Revenue" Type="Int32" Nullable="false" />
     <Property Name="SalesReport_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SalesReport_Revenue" Type="Int32" Nullable="false" />
     <NavigationProperty Name="SALES_REPORT_DETAIL" Relationship="GARAModel.FK_SALESREPORTDETAIL_SALESREPORT" FromRole="SALES_REPORT" ToRole="SALES_REPORT_DETAIL" />
   </EntityType>
   <EntityType Name="SALES_REPORT_DETAIL">
     <Key>
-      <PropertyRef Name="SalesReportDetail_Id" />
+      <PropertyRef Name="IdSalesReport" />
+      <PropertyRef Name="IdCarBrand" />
     </Key>
-    <Property Name="SalesReportDetail_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdSalesReport" Type="Int32" Nullable="false" />
-    <Property Name="IdBrand" Type="Int32" Nullable="false" />
+    <Property Name="IdCarBrand" Type="Int32" Nullable="false" />
     <Property Name="AmountOfTurn" Type="Int32" />
     <Property Name="TotalMoney" Type="Int32" />
     <Property Name="Rate" Type="Double" />
@@ -298,7 +305,7 @@
     <Property Name="Supplies_Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="Supplies_Price" Type="Int32" />
     <Property Name="Supplies_Amount" Type="Int32" />
-    <NavigationProperty Name="IMPORT_GOODS" Relationship="GARAModel.FK_IMPORTGOODS_SUPPLIES" FromRole="SUPPLy" ToRole="IMPORT_GOODS" />
+    <NavigationProperty Name="IMPORT_GOODS_DETAIL" Relationship="GARAModel.FK_IMPORTGOODSDETAIL_SUPPLIES" FromRole="SUPPLy" ToRole="IMPORT_GOODS_DETAIL" />
     <NavigationProperty Name="INVENTORY_REPORT_DETAIL" Relationship="GARAModel.FK_INVENTORYREPORTDETAIL_SUPPLIES" FromRole="SUPPLy" ToRole="INVENTORY_REPORT_DETAIL" />
     <NavigationProperty Name="REPAIR_DETAIL" Relationship="GARAModel.FK_REPAIRDETAIL_SUPPLIES" FromRole="SUPPLy" ToRole="REPAIR_DETAIL" />
   </EntityType>
@@ -323,7 +330,7 @@
     <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="IdRole" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ROLE" Relationship="GARAModel.FK__USERS__IdRole__5BE2A6F2" FromRole="USER" ToRole="ROLE" />
+    <NavigationProperty Name="ROLE" Relationship="GARAModel.FK__USERS__IdRole__5812160E" FromRole="USER" ToRole="ROLE" />
     <NavigationProperty Name="USER_INFO" Relationship="GARAModel.FK_USERINFO_USERS" FromRole="USER" ToRole="USER_INFO" />
   </EntityType>
   <EntityType Name="WAGE">
@@ -334,6 +341,14 @@
     <Property Name="Wage_Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="Wage_Value" Type="Int32" Nullable="false" />
     <NavigationProperty Name="REPAIR_DETAIL" Relationship="GARAModel.FK_REPAIRDETAIL_WAGE" FromRole="WAGE" ToRole="REPAIR_DETAIL" />
+  </EntityType>
+  <EntityType Name="GARA_INFO">
+    <Key>
+      <PropertyRef Name="MaxCarReception" />
+      <PropertyRef Name="IsOverPay" />
+    </Key>
+    <Property Name="MaxCarReception" Type="Int32" Nullable="false" />
+    <Property Name="IsOverPay" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="FK_RECEPTION_CARBRAND">
     <End Type="GARAModel.CAR_BRAND" Role="CAR_BRAND" Multiplicity="1" />
@@ -355,7 +370,7 @@
         <PropertyRef Name="CarBrand_Id" />
       </Principal>
       <Dependent Role="SALES_REPORT_DETAIL">
-        <PropertyRef Name="IdBrand" />
+        <PropertyRef Name="IdCarBrand" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -371,14 +386,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_IMPORTGOODS_SUPPLIES">
+  <Association Name="FK_IMPORTGOODSDETAIL_IMPORTGOODS">
+    <End Type="GARAModel.IMPORT_GOODS" Role="IMPORT_GOODS" Multiplicity="1" />
+    <End Type="GARAModel.IMPORT_GOODS_DETAIL" Role="IMPORT_GOODS_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IMPORT_GOODS">
+        <PropertyRef Name="ImportGoods_Id" />
+      </Principal>
+      <Dependent Role="IMPORT_GOODS_DETAIL">
+        <PropertyRef Name="IdImportGood" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IMPORTGOODSDETAIL_SUPPLIES">
     <End Type="GARAModel.SUPPLIES" Role="SUPPLy" Multiplicity="1" />
-    <End Type="GARAModel.IMPORT_GOODS" Role="IMPORT_GOODS" Multiplicity="*" />
+    <End Type="GARAModel.IMPORT_GOODS_DETAIL" Role="IMPORT_GOODS_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SUPPLy">
         <PropertyRef Name="Supplies_Id" />
       </Principal>
-      <Dependent Role="IMPORT_GOODS">
+      <Dependent Role="IMPORT_GOODS_DETAIL">
         <PropertyRef Name="IdSupplies" />
       </Dependent>
     </ReferentialConstraint>
@@ -404,6 +431,18 @@
       </Principal>
       <Dependent Role="INVENTORY_REPORT_DETAIL">
         <PropertyRef Name="IdSupplies" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ROLEDETAIL_PREMISSIONITEM">
+    <End Type="GARAModel.PREMISSION_ITEM" Role="PREMISSION_ITEM" Multiplicity="1" />
+    <End Type="GARAModel.ROLE_DETAIL" Role="ROLE_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PREMISSION_ITEM">
+        <PropertyRef Name="PermissionItem_Id" />
+      </Principal>
+      <Dependent Role="ROLE_DETAIL">
+        <PropertyRef Name="IdPermissionItem" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -467,7 +506,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__USERS__IdRole__5BE2A6F2">
+  <Association Name="FK__USERS__IdRole__5812160E">
     <End Type="GARAModel.ROLE" Role="ROLE" Multiplicity="1" />
     <End Type="GARAModel.USER" Role="USER" Multiplicity="*" />
     <ReferentialConstraint>
@@ -479,14 +518,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ROLEINFO_ROLE">
+  <Association Name="FK_ROLEDETAIL_ROLE">
     <End Type="GARAModel.ROLE" Role="ROLE" Multiplicity="1" />
-    <End Type="GARAModel.ROLE_INFO" Role="ROLE_INFO" Multiplicity="*" />
+    <End Type="GARAModel.ROLE_DETAIL" Role="ROLE_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ROLE">
         <PropertyRef Name="Role_Id" />
       </Principal>
-      <Dependent Role="ROLE_INFO">
+      <Dependent Role="ROLE_DETAIL">
         <PropertyRef Name="IdRole" />
       </Dependent>
     </ReferentialConstraint>

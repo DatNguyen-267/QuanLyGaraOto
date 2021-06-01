@@ -14,9 +14,8 @@ namespace QuanLyGaraOto.Model
     
     public partial class SALES_REPORT_DETAIL
     {
-        public int SalesReportDetail_Id { get; set; }
         public int IdSalesReport { get; set; }
-        public int IdBrand { get; set; }
+        public int IdCarBrand { get; set; }
         public Nullable<int> AmountOfTurn { get; set; }
         public Nullable<int> TotalMoney { get; set; }
         public Nullable<double> Rate { get; set; }

@@ -12,18 +12,18 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class INVENTORY_REPORT
+    public partial class PREMISSION_ITEM
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public INVENTORY_REPORT()
+        public PREMISSION_ITEM()
         {
-            this.INVENTORY_REPORT_DETAIL = new HashSet<INVENTORY_REPORT_DETAIL>();
+            this.ROLE_DETAIL = new HashSet<ROLE_DETAIL>();
         }
     
-        public int InventoryReport_Id { get; set; }
-        public System.DateTime InventoryReport_Date { get; set; }
+        public int PermissionItem_Id { get; set; }
+        public string PermissionItem_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INVENTORY_REPORT_DETAIL> INVENTORY_REPORT_DETAIL { get; set; }
+        public virtual ICollection<ROLE_DETAIL> ROLE_DETAIL { get; set; }
     }
 }

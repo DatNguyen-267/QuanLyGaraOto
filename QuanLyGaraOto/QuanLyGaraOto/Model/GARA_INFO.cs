@@ -14,8 +14,7 @@ namespace QuanLyGaraOto.Model
     
     public partial class GARA_INFO
     {
-        public int GaraInfo_Id { get; set; }
-        public Nullable<int> MaxCarReception { get; set; }
-        public Nullable<bool> IsOverPay { get; set; }
+        public int MaxCarReception { get; set; }
+        public bool IsOverPay { get; set; }
     }
 }

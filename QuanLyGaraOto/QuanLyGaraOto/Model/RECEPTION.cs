@@ -23,7 +23,8 @@ namespace QuanLyGaraOto.Model
     
         public int Reception_Id { get; set; }
         public string LicensePlate { get; set; }
-        public System.DateTime? ReceptionDate { get; set; }
+        public System.DateTime ReceptionDate { get; set; }
+        public int Debt { get; set; }
         public int IdCarBrand { get; set; }
         public int IdCustomer { get; set; }
     

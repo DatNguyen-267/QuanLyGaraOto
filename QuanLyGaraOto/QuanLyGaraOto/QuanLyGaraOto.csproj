@@ -127,9 +127,6 @@
     <Compile Include="Model\CAR_BRAND.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CAR_STATUS.cs">
-      <DependentUpon>GaraEFModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\CUSTOMER.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -156,6 +153,9 @@
     <Compile Include="Model\IMPORT_GOODS.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\IMPORT_GOODS_DETAIL.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\INVENTORY_REPORT.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -163,6 +163,9 @@
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ListCar.cs" />
+    <Compile Include="Model\PREMISSION_ITEM.cs">
+      <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\RECEIPT.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -179,7 +182,7 @@
     <Compile Include="Model\ROLE.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ROLE_INFO.cs">
+    <Compile Include="Model\ROLE_DETAIL.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SALES_REPORT.cs">

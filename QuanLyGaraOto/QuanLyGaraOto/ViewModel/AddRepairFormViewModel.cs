@@ -12,8 +12,8 @@ namespace QuanLyGaraOto.ViewModel
     public class AddRepairFormViewModel : BaseViewModel
     {
         public bool IsSuccess { get; set; }
-        private DateTime? _RepairDate { get; set; }
-        public DateTime? RepairDate { get => _RepairDate; set { _RepairDate = value; OnPropertyChanged(); } }
+        private DateTime _RepairDate { get; set; }
+        public DateTime RepairDate { get => _RepairDate; set { _RepairDate = value; OnPropertyChanged(); } }
         public ICommand CloseCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
         private REPAIR _NewRepairForm { get; set; }
