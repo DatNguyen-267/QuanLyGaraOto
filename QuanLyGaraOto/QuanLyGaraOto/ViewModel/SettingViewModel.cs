@@ -24,17 +24,6 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
-        private bool _BrandSettingVis;
-        public bool BrandSettingVis
-        {
-            get => _BrandSettingVis;
-            set
-            {
-                _BrandSettingVis = value;
-                OnPropertyChanged();
-            }
-        }
-
         private bool _UserSettingVis;
         public bool UserSettingVis
         {
@@ -47,7 +36,6 @@ namespace QuanLyGaraOto.ViewModel
         }
 
         public ICommand ChangeAppSettingVis { get; set; }
-        public ICommand ChangeBrandSettingVis { get; set; }
         public ICommand ChangeUserSettingVis { get; set; }
 
         // IsEnable button setting in gara information
@@ -104,58 +92,18 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
-        private string _Telephone;
-        public string Telephone
+        private bool _IsOverPay;
+        public bool IsOverPay
         {
-            get => _Telephone;
-            set
+            get => _IsOverPay; set
             {
-                _Telephone = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _Email;
-        public string Email
-        {
-            get => _Email;
-            set
-            {
-                _Email = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _Address;
-        public string Address
-        {
-            get => _Address;
-            set
-            {
-                _Address = value;
+                _IsOverPay = value;
                 OnPropertyChanged();
             }
         }
 
         public ICommand ChangeGaraInformation { get; set; }
         public ICommand ResetGaraInformation { get; set; }
-
-        GARA_INFO garaInfo;
-
-        // Setting car brand
-        private ObservableCollection<CAR_BRAND> _ListBrands;
-        public ObservableCollection<CAR_BRAND> ListBrands
-        {
-            get => _ListBrands;
-            set { _ListBrands = value; OnPropertyChanged(); }
-        }
-
-        private CAR_BRAND _SelectedBrand;
-        public CAR_BRAND SelectedBrand
-        {
-            get => _SelectedBrand;
-            set { _SelectedBrand = value; OnPropertyChanged(); }
-        }
 
         // Is enable button in car brand setting
         private bool _IsEnableModifyButtonInBrandSetting;
@@ -250,95 +198,21 @@ namespace QuanLyGaraOto.ViewModel
         {
             // Visibility
             AppSettingVis = true;
-            BrandSettingVis = false;
             UserSettingVis = false;
 
             ChangeAppSettingVis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 AppSettingVis = true;
-                BrandSettingVis = false;
-                UserSettingVis = false;
-            });
-
-            ChangeBrandSettingVis = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                BrandSettingVis = true;
-                AppSettingVis = false;
                 UserSettingVis = false;
             });
 
             ChangeUserSettingVis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 UserSettingVis = true; ;
-                BrandSettingVis = false;
                 AppSettingVis = false;
             });
 
             // Gara information
-            garaInfo = DataProvider.Ins.DB.GARA_INFO.First();
-            if (garaInfo != null)
-            {
-                MaxCarReception = garaInfo.MaxCarReception;
-            }
-
-            ChangeGaraInformation = new RelayCommand<object>(
-                (p) =>
-                {
-                    if (garaInfo != null) return true;
-                    return false;
-                },
-                (p) =>
-                {
-                    garaInfo.MaxCarReception = _MaxCarReception;
-                    DataProvider.Ins.DB.SaveChanges();
-                    SetEnableStatusButtonInGaraInformation(false);
-                });
-
-            ResetGaraInformation = new RelayCommand<object>(
-                (p) =>
-                {
-                    if (garaInfo != null) return true;
-                    return false;
-                },
-                (p) =>
-                {
-                    MaxCarReception = garaInfo.MaxCarReception;
-
-                    SetEnableStatusButtonInGaraInformation(false);
-                });
-
-            // Car brands
-            ListBrands = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
-
-            IsEnableDeleteButtonInBrandSetting = false;
-            IsEnableModifyButtonInBrandSetting = false;
-
-            ChangeEnableButtonInCarBrandSetting = new RelayCommand<object>(
-                (p) =>
-                {
-                    if (_SelectedBrand == null) return false;
-                    return true;
-                },
-                (p) =>
-                {
-                    SetEnableStatusButotnInCarBrandSetting(true);
-                }
-            );
-
-            ModifyCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                // modify in database
-                SetEnableStatusButotnInCarBrandSetting(false);
-                SelectedBrand = null;
-            });
-
-            DeleteCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                // delete in database
-                SetEnableStatusButotnInCarBrandSetting(false);
-                SelectedBrand = null;
-            });
-
             // User information
             userInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == 1).FirstOrDefault();
             if (userInfo != null)
@@ -376,7 +250,7 @@ namespace QuanLyGaraOto.ViewModel
             IsEnableChangeButtonInUserInformation = false;
             IsEnableResetButtonInGaraInformation = false;
             IsEnableResetButtonInUserInformation = false;
-            
+
 
             // Change enable button
             ChangeEnableButtonInUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -398,11 +272,6 @@ namespace QuanLyGaraOto.ViewModel
         {
             IsEnableChangeButtonInUserInformation = b;
             IsEnableResetButtonInUserInformation = b;
-        }
-        private void SetEnableStatusButotnInCarBrandSetting(bool b)
-        {
-            IsEnableModifyButtonInBrandSetting = b;
-            IsEnableDeleteButtonInBrandSetting = b;
         }
     }
 }
