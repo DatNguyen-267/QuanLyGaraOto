@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
-        DataContext="{StaticResource MainVM}"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Name="mainWindow"
@@ -17,11 +16,11 @@
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
                                    CommandParameter="{Binding ElementName=mainWindow}"
                                    >
-                
+
             </i:InvokeCommandAction>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
+    <Grid Background="#3d4751">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" x:Name="WidthMenu"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -75,13 +74,17 @@
                     </Button>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <Button Command="{Binding DichVuCommand}"
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{Binding OpenService}"
                         Height="40" Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
                                 Padding="-4"
                           Style="{StaticResource MaterialDesignRaisedButton}"    
-                          ToolTip="Resource name: MaterialDesignRaisedButton">
+                          ToolTip="Resource name: MaterialDesignRaisedButton" Grid.ColumnSpan="2">
                         <Grid Width="180">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -101,7 +104,7 @@
                 </Grid>
                 <Grid Grid.Row="2">
                     <Button 
-                        Command="{Binding SupplyCommand}"
+                        Command="{Binding OpenBunk}"
                         Height="40" Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
@@ -128,7 +131,7 @@
                 </Grid>
                 <Grid Grid.Row="3">
                     <Button Height="40" 
-                            Command="{Binding NhanVienCommand}"
+                            Command="{Binding OpenEmployee}"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
@@ -154,7 +157,7 @@
                 </Grid>
                 <Grid Grid.Row="4">
                     <Button Height="40" 
-                            Command="{Binding ThongKeCommand}"
+                            Command="{Binding OpenReport}"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
@@ -184,7 +187,7 @@
                         <ColumnDefinition Width="69*"/>
                     </Grid.ColumnDefinitions>
                     <Button Height="40" 
-                            Command="{Binding CaiDatCommand}"
+                            Command="{Binding OpenSetting}"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0" 
@@ -235,14 +238,50 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Background="#ecf2f6">
-                
+        <Grid Background="White" Grid.Column="1"></Grid>
+        <Grid Grid.Column="1" x:Name="Container"
+              Background="White"
+              Margin="15 15 10 15"
+              >
+            <Grid 
+                Visibility="{Binding VisService, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <local:ServiceWindow 
+                    Width="{Binding ElementName=Container, Path=ActualWidth}"
+                    Height="{Binding ElementName=Container, Path=ActualHeight}"
+                ></local:ServiceWindow>
             </Grid>
+            <Grid
+                Visibility="{Binding VisBunk, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <local:BunkWindow 
+                    Width="{Binding ElementName=Container, Path=ActualWidth}"
+                    Height="{Binding ElementName=Container, Path=ActualHeight}"></local:BunkWindow>
+            </Grid>
+
+            <Grid 
+                Visibility="{Binding VisEmployee, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <local:Employee 
+                    Width="{Binding ElementName=Container, Path=ActualWidth}"
+                    Height="{Binding ElementName=Container, Path=ActualHeight}"></local:Employee>
+            </Grid>
+            <Grid
+                Visibility="{Binding VisReport, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <local:ReportWindow 
+                    Width="{Binding ElementName=Container, Path=ActualWidth}"
+                    Height="{Binding ElementName=Container, Path=ActualHeight}"></local:ReportWindow>
+            </Grid>
+            <Grid  Visibility="{Binding VisSetting, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <local:SettingWindow 
+                    Width="{Binding ElementName=Container, Path=ActualWidth}"
+                    Height="{Binding ElementName=Container, Path=ActualHeight}"></local:SettingWindow>
+            </Grid>
+
         </Grid>
+        <Rectangle Grid.Column="1"
+                   RadiusX="15"
+                   RadiusY="15"
+                   
+                   Stroke="White"
+                   StrokeThickness="15"
+                   ></Rectangle>
     </Grid>
 </Window>

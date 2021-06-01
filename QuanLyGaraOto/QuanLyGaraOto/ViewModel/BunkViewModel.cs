@@ -27,8 +27,8 @@ namespace QuanLyGaraOto.ViewModel
 
         public MainWindow MainWindow { get => _MainWindow; set { _MainWindow = value; } }
 
-        private ObservableCollection<Supply> _ListSupplies { get; set; }
-        public ObservableCollection<Supply> ListSupplies { get => _ListSupplies; set { _ListSupplies = value; OnPropertyChanged(); } }
+        private ObservableCollection<SUPPLIES> _ListSupplies { get; set; }
+        public ObservableCollection<SUPPLIES> ListSupplies { get => _ListSupplies; set { _ListSupplies = value; OnPropertyChanged(); } }
 
         private string _Name { get; set; }
 
@@ -42,8 +42,8 @@ namespace QuanLyGaraOto.ViewModel
 
         public string Amount { get => _Amount; set { _Amount = value; OnPropertyChanged(); } }
 
-        private Supply _SelectedItem { get; set; }
-        public Supply SelectedItem
+        private SUPPLIES _SelectedItem { get; set; }
+        public SUPPLIES SelectedItem
         {
             get => _SelectedItem;
             set
@@ -51,9 +51,9 @@ namespace QuanLyGaraOto.ViewModel
                 _SelectedItem = value;
                 if (_SelectedItem != null)
                 {
-                    Name = SelectedItem.Name;
-                    Price = SelectedItem.Price.ToString();
-                    Amount = SelectedItem.Amount.ToString();
+                    Name = SelectedItem.Supplies_Name;
+                    Price = SelectedItem.Supplies_Price.ToString();
+                    Amount = SelectedItem.Supplies_Amount.ToString();
                 }
                 OnPropertyChanged();
             }
@@ -62,7 +62,7 @@ namespace QuanLyGaraOto.ViewModel
 
         public BunkViewModel()
         {
-            ListSupplies = new ObservableCollection<Supply>(DataProvider.Ins.DB.Supplies);
+            ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
 
 
             OpenAddCommand = new RelayCommand<MainWindow>((p) => true, (p) => OpenAddWd(p));
@@ -70,7 +70,7 @@ namespace QuanLyGaraOto.ViewModel
             AddCommand = new RelayCommand<AddNewGoodWindow>(
                 (p) =>
                 {     
-                    var List = DataProvider.Ins.DB.Supplies.Where(x => x.Name == p.txbName.Text);
+                    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text);
                     if (List == null || List.Count() != 0) return false;
                     if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text))
                         return false;
@@ -79,8 +79,8 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    var supplier = new Supply() { Name = p.txbName.Text, Price = Int32.Parse(p.txbPrice.Text), Amount = 0 };
-                    DataProvider.Ins.DB.Supplies.Add(supplier);
+                    var supplier = new SUPPLIES() { Supplies_Name = p.txbName.Text, Supplies_Price = Int32.Parse(p.txbPrice.Text), Supplies_Amount = 0 };
+                    DataProvider.Ins.DB.SUPPLIES.Add(supplier);
                     DataProvider.Ins.DB.SaveChanges();
                     ListSupplies.Add(supplier);
                     p.Close();
@@ -96,9 +96,9 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    var List = DataProvider.Ins.DB.Supplies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                    List.Name = Name;
-                    List.Price = Int32.Parse(Price);
+                    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.Supplies_Id).SingleOrDefault();
+                    List.Supplies_Name = Name;
+                    List.Supplies_Price = Int32.Parse(Price);
                     DataProvider.Ins.DB.SaveChanges();
                     OnPropertyChanged("List");
 
@@ -113,8 +113,8 @@ namespace QuanLyGaraOto.ViewModel
                     },
                     (p) =>
                     {
-                        var List = DataProvider.Ins.DB.Supplies.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                        List.Amount += Int32.Parse(p.txbAmount.Text);
+                        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.Supplies_Id).SingleOrDefault();
+                        List.Supplies_Amount += Int32.Parse(p.txbAmount.Text);
                         DataProvider.Ins.DB.SaveChanges();
                         p.Close();
 

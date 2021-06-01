@@ -94,7 +94,7 @@
                                         <TextBox Grid.Column="2"
                                              
                                                  IsReadOnly="True"
-                                            Text="{Binding CarReception.Customer.Name}"
+                                            Text="{Binding CarReception.CUSTOMER.Customer_Name}"
                                      materialDesign:HintAssist.Hint="Tên chủ xe"
                                          Margin="0 0 0 10"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -129,7 +129,7 @@
                                                      Grid.Column="0"/>
                                         <TextBox 
                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                            Text="{Binding CarReception.CarBrand.Name}"
+                                            Text="{Binding CarReception.CAR_BRAND.CarBrand_Name}"
                                             Grid.Column="1"
                                             IsReadOnly="true"
                                             VerticalAlignment="Center"
@@ -148,7 +148,7 @@
                                                      Grid.Column="0"/>
                                         <TextBox 
                                            IsReadOnly="True"
-                                            Text="{Binding CarReception.Customer.Address}"
+                                            Text="{Binding CarReception.CUSTOMER.Customer_Address}"
                                             Grid.Column="2"
                                             materialDesign:HintAssist.Hint="Địa chỉ"
                                       
@@ -166,7 +166,7 @@
                                         <materialDesign:PackIcon Kind="Phone" 
                                                      Grid.Column="0"/>
                                         <TextBox 
-                                            Text="{Binding CarReception.Customer.Telephone}"
+                                            Text="{Binding CarReception.CUSTOMER.Customer_Phone}"
                                            IsReadOnly="True"
                                             Grid.Column="1"
                                      Margin="0 0 0 10"
@@ -282,7 +282,7 @@
                                 <ComboBox
                                     SelectedItem="{Binding SelectedSupply}"
                                     ItemsSource="{Binding ListSupply}"
-                                    DisplayMemberPath="Name"
+                                    DisplayMemberPath="Supplies_Name"
                                     Style="{StaticResource MaterialDesignFilledComboBox}"
                                     materialDesign:HintAssist.Hint="Vật tư"
                                     Margin="3 3 3 0"
@@ -328,7 +328,7 @@
                                 <ComboBox
                                     SelectedValue="{Binding SelectedPay}"
                                     ItemsSource="{Binding ListPay}"
-                                    DisplayMemberPath="Price"
+                                    DisplayMemberPath="Wage_Value"
                                     Style="{StaticResource MaterialDesignFilledComboBox}"
                                     materialDesign:HintAssist.Hint="Tiền công"
                                     Margin="3 3 3 0"
@@ -393,12 +393,12 @@
                                    HorizontalContentAlignment="Left">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="STT" DisplayMemberBinding="{Binding RepairInfo.Id}"></GridViewColumn>
+                                        <GridViewColumn Header="STT" DisplayMemberBinding="{Binding RepairInfo.RepairDetail_Id}"></GridViewColumn>
                                         <GridViewColumn Header="Nội dung" DisplayMemberBinding="{Binding RepairInfo.Content}"></GridViewColumn>
-                                        <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding RepairInfo.Supply.Name}"></GridViewColumn>
+                                        <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Name}"></GridViewColumn>
                                         <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding RepairInfo.SuppliesAmount}"></GridViewColumn>
                                         <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
-                                        <GridViewColumn Header="Tiền công" DisplayMemberBinding="{Binding RepairInfo.Pay.Price}"></GridViewColumn>
+                                        <GridViewColumn Header="Tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Value}"></GridViewColumn>
                                         <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding TotalMoney}"></GridViewColumn>
                                     </GridView>
                                 </ListView.View>

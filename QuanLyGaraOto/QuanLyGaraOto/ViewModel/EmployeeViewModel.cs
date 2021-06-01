@@ -28,9 +28,9 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand AddAccountCommand { get; set; }
         public ICommand DeleteEmployeeCommand { get; set; }
 
-        public ObservableCollection<UserInfo> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+        public ObservableCollection<USER_INFO> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
-        public UserInfo SelectedItem
+        public USER_INFO SelectedItem
         {
             get => _SelectedItem;
             set
@@ -39,21 +39,21 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    Name = SelectedItem.Name;
-                    BrithDate = SelectedItem.BirthDate;
-                    CMND = SelectedItem.CMND;
-                    Telephone = SelectedItem.Telephone;
-                    Address = SelectedItem.Address;
+                    Name = SelectedItem.UserInfo_Name;
+                    BrithDate = SelectedItem.UserInfo_BirthDate;
+                    CMND = SelectedItem.UserInfo_CMND;
+                    Telephone = SelectedItem.UserInfo_Telephone;
+                    Address = SelectedItem.UserInfo_Address;
                     if (SelectedItem.IdUser == null)
                     {
                         UserName = "Chưa có tài khoản";
                     }
                     else
                     {
-                        var Account = DataProvider.Ins.DB.Users.Where(x => x.Id == SelectedItem.IdUser).SingleOrDefault();
+                        var Account = DataProvider.Ins.DB.USERS.Where(x => x.Users_Id == SelectedItem.IdUser).SingleOrDefault();
                         UserName = Account.UserName.ToString();
                     }
-                    Id = SelectedItem.Id;
+                    Id = SelectedItem.UserInfo_Id;
                 }
             }
         }
@@ -70,9 +70,9 @@ namespace QuanLyGaraOto.ViewModel
 
         public int IdUser { get => _IdUser; set { _IdUser = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<UserInfo> _List;
+        private ObservableCollection<USER_INFO> _List;
 
-        private UserInfo _SelectedItem;
+        private USER_INFO _SelectedItem;
 
         private string _Name;
 
@@ -90,23 +90,23 @@ namespace QuanLyGaraOto.ViewModel
 
         private int _IdUser;
 
-        public EmployeeViewModel(UserInfo u)
+        public EmployeeViewModel(USER_INFO u)
         {
-            Name = u.Name;
-            Id = u.Id;
-            BrithDate = u.BirthDate;
-            CMND = u.CMND;
-            Telephone = u.Telephone;
-            Address = u.Address;
+            Name = u.UserInfo_Name;
+            Id = u.UserInfo_Id;
+            BrithDate = u.UserInfo_BirthDate;
+            CMND = u.UserInfo_CMND;
+            Telephone = u.UserInfo_Telephone;
+            Address = u.UserInfo_Address;
             if (u.IdUser == null)
             {
                 UserName = null;
             }
             else
             {
-                var Account = DataProvider.Ins.DB.Users.Where(x => x.Id == u.IdUser).SingleOrDefault();
+                var Account = DataProvider.Ins.DB.USERS.Where(x => x.Users_Id == u.IdUser).SingleOrDefault();
                 UserName = Account.UserName.ToString();
-                IdUser = Account.Id;
+                IdUser = Account.Users_Id;
             }
 
             //Nút sửa thông tin trên cửa sổ Edit
@@ -120,12 +120,12 @@ namespace QuanLyGaraOto.ViewModel
             }, (p) => {
                 if (MessageBox.Show("Bạn chắc chắn muốn sửa thông tin nhân viên này không?", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == System.Windows.MessageBoxResult.OK)
                 {
-                    var in4 = DataProvider.Ins.DB.UserInfoes.Where(x => x.Id == Id).SingleOrDefault();
-                    in4.Name = Name;
-                    in4.CMND = CMND;
-                    in4.BirthDate = BrithDate;
-                    in4.Telephone = Telephone;
-                    in4.Address = Address;
+                    var in4 = DataProvider.Ins.DB.USER_INFO.Where(x => x.UserInfo_Id == Id).SingleOrDefault();
+                    in4.UserInfo_Name = Name;
+                    in4.UserInfo_CMND = CMND;
+                    in4.UserInfo_BirthDate = BrithDate;
+                    in4.UserInfo_Telephone = Telephone;
+                    in4.UserInfo_Address = Address;
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     p.Close();
@@ -143,7 +143,7 @@ namespace QuanLyGaraOto.ViewModel
 
                 if (MessageBox.Show("Bạn chắc chắn muốn đặt lại mật khẩu không?", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == System.Windows.MessageBoxResult.OK)
                 {
-                    var Account = DataProvider.Ins.DB.Users.Where(x => x.Id == IdUser).SingleOrDefault();
+                    var Account = DataProvider.Ins.DB.USERS.Where(x => x.Users_Id == IdUser).SingleOrDefault();
                     Account.Password = "1";
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Đặt lại mật khẩu thành công!\nMật khẩu hiện tại: 1", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -160,7 +160,7 @@ namespace QuanLyGaraOto.ViewModel
                 if (String.IsNullOrEmpty(UserName))
                     return false;
 
-                var displayList = DataProvider.Ins.DB.Users.Where(x => x.UserName == UserName);
+                var displayList = DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName);
                 if (displayList == null || displayList.Count() != 0)
                     return false;
 
@@ -170,13 +170,13 @@ namespace QuanLyGaraOto.ViewModel
             {
                 if (MessageBox.Show("Bạn chắc chắn muốn tạo tài khoản không?", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == System.Windows.MessageBoxResult.OK)
                 {
-                    var account = new User() { UserName = UserName, Password = "1", IdRole = 2 };
-                    DataProvider.Ins.DB.Users.Add(account);
+                    var account = new USER() { UserName = UserName, Password = "1", IdRole = 2 };
+                    DataProvider.Ins.DB.USERS.Add(account);
                     DataProvider.Ins.DB.SaveChanges();
 
-                    var acc = DataProvider.Ins.DB.Users.Where(x => x.UserName == UserName).SingleOrDefault();
-                    var info = DataProvider.Ins.DB.UserInfoes.Where(x => x.Id == Id).SingleOrDefault();
-                    info.IdUser = acc.Id;
+                    var acc = DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName).SingleOrDefault();
+                    var info = DataProvider.Ins.DB.USER_INFO.Where(x => x.UserInfo_Id == Id).SingleOrDefault();
+                    info.IdUser = acc.Users_Id;
                     DataProvider.Ins.DB.SaveChanges();
 
                     MessageBox.Show("Thêm tài khoản thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -191,10 +191,10 @@ namespace QuanLyGaraOto.ViewModel
         public EmployeeViewModel()
         {
             //Thêm danh sách nhân viên vào List
-            List = new ObservableCollection<UserInfo>(DataProvider.Ins.DB.UserInfoes);
+            List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
 
             //Mở cửa số để thêm nhân viên
-            AddEmployeeCommand = new RelayCommand<object>((p) => { return true; }, (p) => { AddEmployee wd = new AddEmployee(); wd.ShowDialog(); List = new ObservableCollection<UserInfo>(DataProvider.Ins.DB.UserInfoes); });
+            AddEmployeeCommand = new RelayCommand<object>((p) => { return true; }, (p) => { AddEmployee wd = new AddEmployee(); wd.ShowDialog(); List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO); });
 
             //Tìm kiếm nhân viên
             LookUpCommand = new RelayCommand<Employee>((p) => { return true; }, (p) => { LoadUsersToView(p); });
@@ -213,7 +213,7 @@ namespace QuanLyGaraOto.ViewModel
                 if (MessageBox.Show("Bạn có chắc chắn muốn thêm nhân viên này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                 {
                     DateTime? date = BrithDate;
-                    DataProvider.Ins.DB.UserInfoes.Add(new UserInfo { Name = Name, BirthDate = date, CMND = CMND, Telephone = Telephone, Address = Address });
+                    DataProvider.Ins.DB.USER_INFO.Add(new USER_INFO { UserInfo_Name = Name, UserInfo_BirthDate = date, UserInfo_CMND = CMND, UserInfo_Telephone = Telephone, UserInfo_Address = Address });
                     DataProvider.Ins.DB.SaveChanges();
                     //var user = new UserInfoes { Name = Name, BirthDate = date, CMND = CMND, Telephone = Telephone, Address = Address };
 
@@ -232,7 +232,7 @@ namespace QuanLyGaraOto.ViewModel
             );
 
             //Mở cửa sổ chỉnh sửa thông tin nhân viên
-            EditWindowCommand = new RelayCommand<EditEmployeeWindow>((p) => { if (SelectedItem == null) return false; return true; }, (p) => { EditEmployeeWindow wd = new EditEmployeeWindow(SelectedItem); wd.ShowDialog(); List = new ObservableCollection<UserInfo>(DataProvider.Ins.DB.UserInfoes); });
+            EditWindowCommand = new RelayCommand<EditEmployeeWindow>((p) => { if (SelectedItem == null) return false; return true; }, (p) => { EditEmployeeWindow wd = new EditEmployeeWindow(SelectedItem); wd.ShowDialog(); List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO); });
 
             //Mở cửa sổ cho nút tài khoản
             AccountCommand = new RelayCommand<Window>(
@@ -270,18 +270,18 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     if (SelectedItem.IdUser == null)
                     {
-                        DataProvider.Ins.DB.UserInfoes.Remove(SelectedItem);
+                        DataProvider.Ins.DB.USER_INFO.Remove(SelectedItem);
                         DataProvider.Ins.DB.SaveChanges();
                     }
                     else
                     {
-                        User acc = DataProvider.Ins.DB.Users.Where(x => x.Id == SelectedItem.IdUser).SingleOrDefault();
-                        DataProvider.Ins.DB.UserInfoes.Remove(SelectedItem);
-                        DataProvider.Ins.DB.Users.Remove(acc);
+                        USER acc = DataProvider.Ins.DB.USERS.Where(x => x.Users_Id == SelectedItem.IdUser).SingleOrDefault();
+                        DataProvider.Ins.DB.USER_INFO.Remove(SelectedItem);
+                        DataProvider.Ins.DB.USERS.Remove(acc);
                         DataProvider.Ins.DB.SaveChanges();
                     }
                     MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                    List = new ObservableCollection<UserInfo>(DataProvider.Ins.DB.UserInfoes);
+                    List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
                 }
 
 
@@ -293,16 +293,16 @@ namespace QuanLyGaraOto.ViewModel
         {
             if (String.IsNullOrEmpty(p.txtLookUp.Text))
             {
-                List = new ObservableCollection<UserInfo>(DataProvider.Ins.DB.UserInfoes);
+                List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
                 p.lvUsers.ItemsSource = List;
             }
             else
             {
-                ObservableCollection<UserInfo> _ListTempt = new ObservableCollection<UserInfo>();
+                ObservableCollection<USER_INFO> _ListTempt = new ObservableCollection<USER_INFO>();
 
                 foreach (var item in List)
                 {
-                    if (item.Name.Contains(p.txtLookUp.Text.ToString()))
+                    if (item.UserInfo_Name.Contains(p.txtLookUp.Text.ToString()))
                     {
                         _ListTempt.Add(item);
                     }

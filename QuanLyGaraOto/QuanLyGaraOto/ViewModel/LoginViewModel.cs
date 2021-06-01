@@ -43,7 +43,7 @@ namespace QuanLyGaraOto.ViewModel
             }
 
             string passEncode = MD5Hash(Base64Encode(Password));
-            var accCount = DataProvider.Ins.DB.Users.Where(x => x.UserName == UserName && x.Password == passEncode).Count();
+            var accCount = DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName && x.Password == passEncode).Count();
 
             if (accCount > 0)
             {

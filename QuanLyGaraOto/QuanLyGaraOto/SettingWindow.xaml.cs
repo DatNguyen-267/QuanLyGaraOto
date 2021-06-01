@@ -18,11 +18,13 @@ namespace QuanLyGaraOto
     /// <summary>
     /// Interaction logic for SettingWindow.xaml
     /// </summary>
-    public partial class SettingWindow : Window
+    public partial class SettingWindow : UserControl
     {
+        public SettingViewModel SettingViewModel { get; set; }
         public SettingWindow()
         {
             InitializeComponent();
+            this.DataContext = (SettingViewModel = new SettingViewModel());
         }
     }
 }

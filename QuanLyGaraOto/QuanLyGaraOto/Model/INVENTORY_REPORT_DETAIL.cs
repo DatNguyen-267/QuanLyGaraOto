@@ -12,16 +12,15 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class UserInfo
+    public partial class INVENTORY_REPORT_DETAIL
     {
-        public int Id { get; set; }
-        public Nullable<int> IdUser { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public string Telephone { get; set; }
-        public string CMND { get; set; }
+        public int IdInventoryReport { get; set; }
+        public int IdSupplies { get; set; }
+        public int TonDau { get; set; }
+        public int PhatSinh { get; set; }
+        public int TonCuoi { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual INVENTORY_REPORT INVENTORY_REPORT { get; set; }
+        public virtual SUPPLIES SUPPLIES { get; set; }
     }
 }

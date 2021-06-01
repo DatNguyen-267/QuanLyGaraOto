@@ -27,19 +27,26 @@ namespace QuanLyGaraOto.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CarBrand> CarBrands { get; set; }
-        public virtual DbSet<CarReception> CarReceptions { get; set; }
-        public virtual DbSet<CarStatus> CarStatus1 { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<GaraInfo> GaraInfoes { get; set; }
-        public virtual DbSet<Pay> Pays { get; set; }
-        public virtual DbSet<Receipt> Receipts { get; set; }
-        public virtual DbSet<RepairForm> RepairForms { get; set; }
-        public virtual DbSet<RepairInfo> RepairInfoes { get; set; }
-        public virtual DbSet<Supply> Supplies { get; set; }
-        public virtual DbSet<UserInfo> UserInfoes { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<CAR_BRAND> CAR_BRAND { get; set; }
+        public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
+        public virtual DbSet<IMPORT_GOODS> IMPORT_GOODS { get; set; }
+        public virtual DbSet<IMPORT_GOODS_DETAIL> IMPORT_GOODS_DETAIL { get; set; }
+        public virtual DbSet<INVENTORY_REPORT> INVENTORY_REPORT { get; set; }
+        public virtual DbSet<INVENTORY_REPORT_DETAIL> INVENTORY_REPORT_DETAIL { get; set; }
+        public virtual DbSet<PREMISSION_ITEM> PREMISSION_ITEM { get; set; }
+        public virtual DbSet<RECEIPT> RECEIPTs { get; set; }
+        public virtual DbSet<RECEPTION> RECEPTIONs { get; set; }
+        public virtual DbSet<REPAIR> REPAIRs { get; set; }
+        public virtual DbSet<REPAIR_DETAIL> REPAIR_DETAIL { get; set; }
+        public virtual DbSet<ROLE> ROLEs { get; set; }
+        public virtual DbSet<ROLE_DETAIL> ROLE_DETAIL { get; set; }
+        public virtual DbSet<SALES_REPORT> SALES_REPORT { get; set; }
+        public virtual DbSet<SALES_REPORT_DETAIL> SALES_REPORT_DETAIL { get; set; }
+        public virtual DbSet<SUPPLIES> SUPPLIES { get; set; }
+        public virtual DbSet<USER_INFO> USER_INFO { get; set; }
+        public virtual DbSet<USER> USERS { get; set; }
+        public virtual DbSet<WAGE> WAGEs { get; set; }
+        public virtual DbSet<GARA_INFO> GARA_INFO { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

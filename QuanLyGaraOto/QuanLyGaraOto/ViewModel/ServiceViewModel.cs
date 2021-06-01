@@ -67,14 +67,14 @@ namespace QuanLyGaraOto.ViewModel
         public int GetDebt(int ID)
         {
             int Debt = 0;
-            if (DataProvider.Ins.DB.RepairForms.Where(x=>x.IdCarReception == ID).Count() > 0)
+            if (DataProvider.Ins.DB.REPAIRs.Where(x=>x.IdReception == ID).Count() > 0)
             {
-                RepairForm repairForm = DataProvider.Ins.DB.RepairForms.Where(x => x.IdCarReception == ID).SingleOrDefault();
+                REPAIR repairForm = DataProvider.Ins.DB.REPAIRs.Where(x => x.IdReception == ID).SingleOrDefault();
                 
-                if (DataProvider.Ins.DB.RepairInfoes.Where(x=> x.IdRepairForm == repairForm.Id).Count() > 0)
+                if (DataProvider.Ins.DB.REPAIR_DETAIL.Where(x=> x.IdRepair == repairForm.Repair_Id).Count() > 0)
                 {
-                    ObservableCollection<RepairInfo> listRepairInfo = new ObservableCollection<RepairInfo>
-                        (DataProvider.Ins.DB.RepairInfoes.Where(x=>x.IdRepairForm == repairForm.Id));
+                    ObservableCollection<REPAIR_DETAIL> listRepairInfo = new ObservableCollection<REPAIR_DETAIL>
+                        (DataProvider.Ins.DB.REPAIR_DETAIL.Where(x=>x.IdRepair == repairForm.Repair_Id));
                     foreach (var item in listRepairInfo)
                     {
                         Debt = Debt + item.TotalMoney;
@@ -85,13 +85,13 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void LoadListData()
         {
-            var ListReception = new ObservableCollection<CarReception>(DataProvider.Ins.DB.CarReceptions);
+            var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
             ListCar = new ObservableCollection<ListCar>();
             foreach (var item in ListReception)
             {
                 ListCar tempListCar = new ListCar();
                 tempListCar.CarReception = item;
-                tempListCar.Debt = GetDebt(item.Id);
+                tempListCar.Debt = GetDebt(item.Reception_Id);
                 ListCar.Add(tempListCar);
             }
         }

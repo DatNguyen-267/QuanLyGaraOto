@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyGaraOto.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace QuanLyGaraOto
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainViewModel mainViewModel { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = (mainViewModel = new MainViewModel());
         }
     }
 }

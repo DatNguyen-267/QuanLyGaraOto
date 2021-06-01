@@ -7,113 +7,163 @@ GO
 -- drop database GARA;
 ---------------------DON HANG CUA KHACH HANG-----------------------------------
 
--- Thiet lap danh sach cac hang xe
-create table CARBRAND
+create table CAR_BRAND
 (
-    Id int primary key not NULL IDENTITY(1, 1),
-    CarBrand_Name varchar(max) not NULL
+    CarBrand_Id int primary key not NULL IDENTITY(1, 1),
+    CarBrand_Name nvarchar(max) not NULL
 );
 GO
 
--- Thiet lap danh sach khach hang
 create table CUSTOMER
 (
-    Id int primary key not NULL IDENTITY(1, 1),
-    Customer_Name varchar(100) not NULL,
-    Customer_Address varchar(max),
-    Customer_Phone varchar(20) not NULL
+    Customer_Id int primary key not NULL IDENTITY(1, 1),
+    Customer_Name nvarchar(100) not NULL,
+    Customer_Address nvarchar(max),
+    Customer_Phone nvarchar(20) not NULL
 );
 GO
 
--- Thiet lap danh sach loai tien cong
-create table PAY
+create table WAGE
 (
-    Id int primary key not NULL IDENTITY(1, 1),
-    Pay_Name varchar(1000) not NULL,
-    Pay_Price int not NULL
+    Wage_Id int primary key not NULL IDENTITY(1, 1),
+    Wage_Name nvarchar(1000) not NULL,
+    Wage_Value int not NULL
 );
 GO
-
--- Thiet lap danh sach cac dich vu tai gara
-
--- Thiet lap danh sach vat tu, phu tung
 create table SUPPLIES
 (
-    Id int IDENTITY(1, 1) primary key not NULL,
-    Supply_Name varchar(1000) not NULL,
-    Supply_Price int,
-    Supply_Amount int
+    Supplies_Id int IDENTITY(1, 1) primary key not NULL,
+    Supplies_Name nvarchar(1000) not NULL,
+    Supplies_Price int,
+    Supplies_Amount int
+);
+GO
+create table IMPORT_GOODS
+(
+    ImportGoods_Id int IDENTITY(1, 1) primary key not NULL,
+	ImportGoods_Date date not null,
+	ImportGoods_TotalMoney int not null
+);
+GO
+create table IMPORT_GOODS_DETAIL
+(
+    IdImportGood int not NULL,
+	IdSupplies int not null,
+	Amount int not null,
+	Price int not null,
+	TotalMoney int not null,
+	constraint PR_IMPORTGOODS_SUPPLIES Primary key (IdImportGood,IdSupplies),
+	constraint FK_IMPORTGOODSDETAIL_SUPPLIES foreign key (IdSupplies) references SUPPLIES(Supplies_Id),
+	constraint FK_IMPORTGOODSDETAIL_IMPORTGOODS foreign key (IdImportGood) references IMPORT_GOODS(ImportGoods_Id)
 );
 GO
 
--- Thiet lap trang thai xe
-create table CARSTATUS
+create table INVENTORY_REPORT
 (
-    Id int primary key not NULL IDENTITY(1, 1),
-    Status_Name varchar(200) not NULL
+	InventoryReport_Id int primary key not null,
+	InventoryReport_Date date not null,
 );
 GO
 
--- Thiet lap phieu tiep nhan xe
-create table CARRECEPTION
+create table INVENTORY_REPORT_DETAIL
 (
-    Id int primary key not NULL IDENTITY(1, 1),
-    IdCustomer int not NULL,
-    LicensePlate varchar(50) not NULL,
-    IdBrand int not NULL,
+	IdInventoryReport int not null,
+	IdSupplies int not NULL,
+	TonDau int not null,
+	PhatSinh int not null,
+	TonCuoi int not null,
+	constraint PR_INVENTORYREPORT_SUPPLIES primary key(IdInventoryReport,IdSupplies),
+	constraint FK_INVENTORYREPORTDETAIL_INVENTORYREPORT foreign key (IdInventoryReport) references INVENTORY_REPORT(InventoryReport_Id),
+	constraint FK_INVENTORYREPORTDETAIL_SUPPLIES foreign key (IdSupplies) references SUPPLIES(Supplies_Id)
+);
+GO
+
+create table SALES_REPORT
+(
+	SalesReport_Id int IDENTITY(1, 1) primary key not NULL,
+	SalesReport_Date date not null,
+	SalesReport_Revenue int not null default('0'),
+);
+GO
+
+create table SALES_REPORT_DETAIL
+(
+	IdSalesReport int not null,
+    IdCarBrand int not NULL,
+    AmountOfTurn int,
+    TotalMoney int,
+    Rate float,
+	constraint PR_SALESREPORT_CARBRAND primary key(IdSalesReport,IdCarBrand) ,
+	constraint FK_SALESREPORTDETAIL_SALESREPORT foreign key (IdSalesReport) references SALES_REPORT(SalesReport_Id),
+	constraint FK_SALESREPORTDETAIL_CARBRAND foreign key (IdCarBrand) references CAR_BRAND(CarBrand_Id)
+);
+GO
+
+--create table CAR_STATUS
+--(
+--    CarStatus_Id int primary key not NULL IDENTITY(1, 1),
+--    CarStatus_Name nvarchar(200) not NULL
+--);
+--GO
+
+create table RECEPTION
+(
+    Reception_Id int primary key not NULL IDENTITY(1, 1),   
+	LicensePlate nvarchar(50) not NULL,
     ReceptionDate date not NULL,
-	IdStatus int not null,
-    constraint FK_CarReception_Customer foreign key (IdCustomer) references CUSTOMER(Id),
-    constraint FK_CarReception_CarBrand foreign key (IdBrand) references CARBRAND(Id),
-	constraint FK_CarReception_CarStatus foreign key (IdStatus) references CARSTATUS(Id)
+	Debt int not null Default('0'),
+	IdCarBrand int not NULL,
+	IdCustomer int not NULL,
+    constraint FK_RECEPTION_CUSTOMER foreign key (IdCustomer) references CUSTOMER(Customer_Id),
+    constraint FK_RECEPTION_CARBRAND foreign key (IdCarBrand) references CAR_BRAND(CarBrand_Id),
 );
 GO
 
--- Thiet lap phieu sua chua
-create table REPAIRFORM
+create table REPAIR
 (
-    Id int primary key not NULL IDENTITY(1, 1),
-    IdCarReception int not NULL,
+    Repair_Id int primary key not NULL IDENTITY(1, 1),
+    IdReception int not NULL,
     RepairDate date not NULL,
-	constraint FK_RepairForm_CarReception foreign key (IdCarReception) references CarReception(Id),
+	Repair_TotalMoney int not null default('0'),
+	constraint FK_REPAIRFORM_CARRECEPTION foreign key (IdReception) references RECEPTION(Reception_Id),
 );
 GO
--- Thiet lap danh sach noi dung sua chua
-create table REPAIRINFO 
+
+create table REPAIR_DETAIL 
 (
-	Id int identity(1,1) not null primary key,
-	IdRepairForm int not null,
-	Content varchar(max),
-    IdSupply int,
+	RepairDetail_Id int identity(1,1) not null primary key,
+	Content nvarchar(max),
+	TotalMoney int not NULL,
+	SuppliesPrice int,
     SuppliesAmount int,
-    IdPay int not NULL,
-    TotalMoney int not NULL,
-	constraint FK_RepairInfo_Supply foreign key (IdSupply) references Supplies(Id),
-    constraint FK_RepairInfo_Pay foreign key (IdPay) references Pay(Id),
-	constraint FK_RepairInfo_RepairForm foreign key (IdRepairForm) references RepairForm(Id)
+    IdWage int not NULL,
+	IdRepair int not null,
+	IdSupplies int,
+	constraint FK_REPAIRDETAIL_SUPPLIES foreign key (IdSupplies) references SUPPLIES(Supplies_Id),
+    constraint FK_REPAIRDETAIL_WAGE foreign key (IdWage) references WAGE(Wage_Id),
+	constraint FK_REPAIRDETAIL_REPAIR foreign key (IdRepair) references REPAIR(Repair_Id)
 )
 GO
 -- Thiet lap danh sach thong tin cua gara
-create table GARAINFO
+create table GARA_INFO
 (
-	Id int primary key identity (1,1) not null,
-	MaxCar int,
-	MaxCarReception int,
-	GaraInfo_Phone varchar(20),
-	GaraInfo_Email varchar(200),
-	GaraInfo_Address varchar(max),
+	MaxCarReception int not null,
+	IsOverPay bit not null,
+	--GaraInfo_Phone nvarchar(20),
+	--GaraInfo_Email nvarchar(200),
+	--GaraInfo_Address nvarchar(max),
 );
 Go
 -- Thiet lap danh sach cac hoa don -> doanh so cua thang
 create table RECEIPT
 (
-	Id int primary key identity(1,1) not null,
-    IdCarReception int not NULL,
-    IdGaraInfo int not null,
-    ReceptDate date not NULL,
-    TotalMoney int not NULL,
-    constraint FK_Receipt_CarReception foreign key (IdCarReception) references CarReception(Id),
-	constraint FK_Receipt_GaraInfo foreign key (IdGaraInfo) references GaraInfo(Id)
+	Receipt_Id int primary key identity(1,1) not null,
+    ReceiptDate date not NULL,
+    MoneyReceived int not NULL,
+	Email nvarchar(200),
+	Phone nvarchar(20),
+	IdReception int not NULL,
+    constraint FK_RECEIPT_CARRECEPTION foreign key (IdReception) references RECEPTION(Reception_Id),
 );
 GO
 
@@ -124,32 +174,47 @@ GO
 -- Thiet lap danh sach cac role bao gom staff va admin
 create table ROLE
 (
-	Id int identity(1,1) primary key,
+	Role_Id int identity(1,1) primary key,
 	Role_Name nvarchar(max),
+)
+go
+create table PREMISSION_ITEM
+(
+	PermissionItem_Id int identity(1,1) primary key,
+	PermissionItem_Name nvarchar(max) not null,
+)
+go
+create table ROLE_DETAIL
+(
+	RoleDetail_Id int identity(1,1) primary key,
+	IdRole int not null,
+	IdPermissionItem int not null,
+	Permission bit not null default('False'),
+	constraint FK_ROLEDETAIL_ROLE foreign key (IdRole) references ROLE(Role_Id),
+	constraint FK_ROLEDETAIL_PREMISSIONITEM foreign key (IdPermissionItem) references PREMISSION_ITEM(PermissionItem_Id)
 )
 go
 -- Thiet lap danh sach tai khoan cua nguoi dung
 create table USERS
 (
-    Id int primary key not NULL IDENTITY(1, 1),
-    UserName varchar(100) not NULL,
-    Password varchar(100) not NULL,
+    Users_Id int primary key not NULL IDENTITY(1, 1),
+    UserName nvarchar(100) not NULL,
+    Password nvarchar(100) not NULL,
     IdRole int not NULL,
-	IsActive int,
-	foreign key(IdRole) references ROLE(Id),
+	foreign key(IdRole) references ROLE(Role_Id),
 );
 GO
 -- Thiet lap thong tin cua nguoi dung
-create table USERINFO
+create table USER_INFO
 (
-    Id int primary key not NULL IDENTITY(1, 1),
+    UserInfo_Id int primary key not NULL IDENTITY(1, 1),
 	IdUser int,
-    UserInfo_Name varchar(200) not NULL,
-    UserInfo_Address varchar(max),
+    UserInfo_Name nvarchar(200) not NULL,
+    UserInfo_Address nvarchar(max),
     UserInfo_BirthDate date,
-    UserInfo_Telephone varchar(20) not NULL,
-    UserInfo_CMND varchar(100) not NULL,
-    constraint FK_UserInfo_Users foreign key (IdUser) references Users(Id)
+    UserInfo_Telephone nvarchar(20) not NULL,
+    UserInfo_CMND nvarchar(100) not NULL,
+    constraint FK_USERINFO_USERS foreign key (IdUser) references USERS(Users_Id)
 );
 
 insert into ROLE(Role_Name) values ('admin');

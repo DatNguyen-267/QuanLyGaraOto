@@ -12,18 +12,19 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CarStatus
+    public partial class IMPORT_GOODS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CarStatus()
+        public IMPORT_GOODS()
         {
-            this.CarReceptions = new HashSet<CarReception>();
+            this.IMPORT_GOODS_DETAIL = new HashSet<IMPORT_GOODS_DETAIL>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int ImportGoods_Id { get; set; }
+        public System.DateTime ImportGoods_Date { get; set; }
+        public int ImportGoods_TotalMoney { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarReception> CarReceptions { get; set; }
+        public virtual ICollection<IMPORT_GOODS_DETAIL> IMPORT_GOODS_DETAIL { get; set; }
     }
 }

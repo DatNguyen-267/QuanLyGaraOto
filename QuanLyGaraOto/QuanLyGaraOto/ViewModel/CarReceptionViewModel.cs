@@ -12,8 +12,8 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class CarReceptionViewModel :BaseViewModel
     {
-        private ObservableCollection<CarBrand> _ListBrand { get; set; }
-        public ObservableCollection<CarBrand> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
+        private ObservableCollection<CAR_BRAND> _ListBrand { get; set; }
+        public ObservableCollection<CAR_BRAND> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
         private bool _IsSuccess { get; set; }
         public bool IsSuccess { get => _IsSuccess; set { _IsSuccess = value; OnPropertyChanged(); } }
         public ICommand CloseCommand { get; set; }
@@ -26,16 +26,16 @@ namespace QuanLyGaraOto.ViewModel
         public string Address { get => _Address; set { _Address = value; OnPropertyChanged(); } }
         private string _Phone { get; set; }
         public string Phone { get => _Phone; set { _Phone = value; OnPropertyChanged(); } }
-        private DateTime? _ReceptionDate { get; set; }
-        public DateTime? ReceptionDate { get => _ReceptionDate; set { _ReceptionDate = value; OnPropertyChanged(); } }
-        private CarBrand _SelectedBrand { get; set; }
-        public CarBrand SelectedBrand { get => _SelectedBrand; set { _SelectedBrand = value; OnPropertyChanged(); } }
+        private DateTime _ReceptionDate { get; set; }
+        public DateTime ReceptionDate { get => _ReceptionDate; set { _ReceptionDate = value; OnPropertyChanged(); } }
+        private CAR_BRAND _SelectedBrand { get; set; }
+        public CAR_BRAND SelectedBrand { get => _SelectedBrand; set { _SelectedBrand = value; OnPropertyChanged(); } }
         private int _IdNew { get; set; }
         public int IdNew { get => _IdNew; set { _IdNew = value; OnPropertyChanged(); } }
         public CarReceptionViewModel()
         {
             IsSuccess = false;
-            ListBrand = new ObservableCollection<CarBrand>(DataProvider.Ins.DB.CarBrands);
+            ListBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
                 p.Close();
@@ -51,21 +51,20 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                Customer customer = new Customer() { Address = Address, Telephone = Phone, Name = Name };
-                DataProvider.Ins.DB.Customers.Add(customer);
+                CUSTOMER customer = new CUSTOMER() {Customer_Address = Address, Customer_Phone = Phone, Customer_Name = Name };
+                DataProvider.Ins.DB.CUSTOMERs.Add(customer);
                 DataProvider.Ins.DB.SaveChanges();
                   
-                CarReception carReception = new CarReception() { 
-                    IdCustomer = customer.Id,
-                    IdStatus = 1,
+                RECEPTION carReception = new RECEPTION() { 
+                    IdCustomer = customer.Customer_Id,
                     LicensePlate = LicensePlate,    
                     ReceptionDate = ReceptionDate,
-                    IdBrand = SelectedBrand.Id
+                    IdCarBrand = SelectedBrand.CarBrand_Id
                 };
-                DataProvider.Ins.DB.CarReceptions.Add(carReception);
+                DataProvider.Ins.DB.RECEPTIONs.Add(carReception);
                 DataProvider.Ins.DB.SaveChanges();
                 IsSuccess = true;
-                IdNew = carReception.Id;
+                IdNew = carReception.Reception_Id;
                 MessageBox.Show("Tiếp nhận xe thành công","Thông báo",MessageBoxButton.OK);
                 p.Close();
             });

@@ -11,17 +11,17 @@ namespace QuanLyGaraOto.ViewModel
     public class PayViewModel : BaseViewModel
     {
         public bool IsPay {get;set;}
-        private CarReception _CarReception { get; set; }
-        public CarReception CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
-        private RepairForm _RepairForm { get; set; }
-        public RepairForm RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
-        private ObservableCollection<RepairInfo> _ListRepair { get; set; }
-        public ObservableCollection<RepairInfo> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
+        private RECEPTION _CarReception { get; set; }
+        public RECEPTION CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
+        private REPAIR _RepairForm { get; set; }
+        public REPAIR RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
+        private ObservableCollection<REPAIR_DETAIL> _ListRepair { get; set; }
+        public ObservableCollection<REPAIR_DETAIL> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
         public PayViewModel()
         {
 
         }
-        public PayViewModel(CarReception carReception)
+        public PayViewModel(RECEPTION carReception)
         {
             InitData();
             this.CarReception = carReception;
@@ -29,9 +29,9 @@ namespace QuanLyGaraOto.ViewModel
         public void InitData()
         {
             IsPay = false;
-            RepairForm = DataProvider.Ins.DB.RepairForms.Where(x => x.IdCarReception == CarReception.Id).SingleOrDefault();
-            ListRepair = new ObservableCollection<RepairInfo>(DataProvider.Ins.DB.RepairInfoes.Where(
-                x => x.IdRepairForm == RepairForm.Id));
+            RepairForm = DataProvider.Ins.DB.REPAIRs.Where(x => x.IdReception == CarReception.Reception_Id).SingleOrDefault();
+            ListRepair = new ObservableCollection<REPAIR_DETAIL>(DataProvider.Ins.DB.REPAIR_DETAIL.Where(
+                x => x.IdRepair == RepairForm.Repair_Id));
         }
     }
 }
