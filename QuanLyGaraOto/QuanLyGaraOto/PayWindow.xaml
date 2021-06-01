@@ -53,17 +53,17 @@
                     Stroke="DarkGray"
                     StrokeThickness="1"
                     ></Rectangle>
-                <ListView
+                <ListView ItemsSource="{Binding ListRepair}"
                     Grid.Row="1"
                     Margin="20 10 10 20">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
-                            <GridViewColumn Header="Nội dung" DisplayMemberBinding="{Binding RepairInfo.Content}"></GridViewColumn>
-                            <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding RepairInfo.Supply.Name}"></GridViewColumn>
-                            <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding RepairInfo.SuppliesAmount}"></GridViewColumn>
+                            <GridViewColumn Header="Nội dung" DisplayMemberBinding="{Binding Content}"></GridViewColumn>
+                            <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding SUPPLIES.Name}"></GridViewColumn>
+                            <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding SuppliesAmount}"></GridViewColumn>
                             <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
-                            <GridViewColumn Header="Tiền công" DisplayMemberBinding="{Binding RepairInfo.Pay.Price}"></GridViewColumn>
+                            <GridViewColumn Header="Tiền công" DisplayMemberBinding="{Binding WAGE.Price}"></GridViewColumn>
                             <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding TotalMoney}"></GridViewColumn>
                         </GridView>
                     </ListView.View>
