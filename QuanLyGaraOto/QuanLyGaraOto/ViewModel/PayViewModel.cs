@@ -5,33 +5,101 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
 {
     public class PayViewModel : BaseViewModel
     {
         public bool IsPay {get;set;}
-        private RECEPTION _CarReception { get; set; }
-        public RECEPTION CarReception { get => _CarReception; set { _CarReception = value; OnPropertyChanged(); } }
-        private REPAIR _RepairForm { get; set; }
-        public REPAIR RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
-        private ObservableCollection<REPAIR_DETAIL> _ListRepair { get; set; }
-        public ObservableCollection<REPAIR_DETAIL> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
+        public bool RolReceivedMoney { get; set; }
+        public bool EnabledReceiptDate { get; set; }
+        public bool VisPay { get; set; }
+        private int _ReceivedMoney { get; set; }
+        public int ReceivedMoney { get => _ReceivedMoney; set { _ReceivedMoney = value; OnPropertyChanged(); } }
+        private int _TotalMoney { get; set; }
+        public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
+        private DateTime _SelectedDate { get; set; }
+        public DateTime SelectedDate { get => _SelectedDate; set { _SelectedDate = value; OnPropertyChanged(); } }
+        private RECEPTION _Reception { get; set; }
+        public RECEPTION Reception { get => _Reception; set { _Reception = value; OnPropertyChanged(); } }
+        private REPAIR _Repair { get; set; }
+        public REPAIR Repair { get => _Repair; set { _Repair = value; OnPropertyChanged(); } }
+        private ObservableCollection<ListRepair> _ListRepair { get; set; }
+        public ObservableCollection<ListRepair> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
+        public ICommand PayCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
         public PayViewModel()
         {
 
         }
-        public PayViewModel(RECEPTION carReception)
+        public PayViewModel(RECEPTION Reception)
         {
-            this.CarReception = carReception;
+            
+            TotalMoney = 0;
+            SelectedDate = DateTime.Now.Date;
+            this.Reception = Reception;
             InitData();
+            ReceivedMoney = TotalMoney;
+            Command();
+
+            if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).Count() > 0)
+            {
+                VisPay = false;
+                RolReceivedMoney = true;
+                EnabledReceiptDate = false;
+                SelectedDate = DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault().ReceiptDate;
+                ReceivedMoney = DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault().MoneyReceived;
+                
+            }
+        }
+        public void Command()
+        {
+            PayCommand = new RelayCommand<Window>((p) => {
+                if (SelectedDate == null || ReceivedMoney == 0)
+                {
+                    return false;
+                } 
+                return true; }, (p) =>
+            {
+                RECEIPT newReceipt = new RECEIPT();
+                newReceipt.ReceiptDate = SelectedDate;
+                newReceipt.MoneyReceived = ReceivedMoney;
+                newReceipt.Phone = Reception.CUSTOMER.Customer_Phone;
+                newReceipt.IdReception = Reception.Reception_Id;
+                DataProvider.Ins.DB.RECEIPTs.Add(newReceipt);
+                DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == Reception.Reception_Id).SingleOrDefault().Debt = 0;
+                DataProvider.Ins.DB.SaveChanges();
+                IsPay = true;
+                p.Close();
+            });
+            CloseCommand = new RelayCommand<Window>((p) => {
+                return true;
+            }, (p) =>
+            {
+                IsPay = false;
+                p.Close();
+            });
         }
         public void InitData()
         {
             IsPay = false;
-            RepairForm = DataProvider.Ins.DB.REPAIRs.Where(x => x.IdReception == CarReception.Reception_Id).SingleOrDefault();
-            ListRepair = new ObservableCollection<REPAIR_DETAIL>(DataProvider.Ins.DB.REPAIR_DETAIL.Where(
-                x => x.IdRepair == RepairForm.Repair_Id));
+            VisPay = true;
+            RolReceivedMoney = false;
+            EnabledReceiptDate = true;
+            Repair = DataProvider.Ins.DB.REPAIRs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault();
+            var repairDetail = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == Repair.Repair_Id);
+            ListRepair = new ObservableCollection<ListRepair>();
+            int i = 1;
+            foreach (var item in repairDetail)
+            {
+                ListRepair temp = new ListRepair();
+                temp.STT = i++;
+                temp.RepairDetail = item;
+                ListRepair.Add(temp);
+                TotalMoney = TotalMoney + temp.RepairDetail.TotalMoney;
+            }
         }
     }
 }

@@ -163,6 +163,7 @@
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ListCar.cs" />
+    <Compile Include="Model\ListRepair.cs" />
     <Compile Include="Model\PREMISSION_ITEM.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>

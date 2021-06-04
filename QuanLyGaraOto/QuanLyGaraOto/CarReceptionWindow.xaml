@@ -10,6 +10,9 @@
         Title="CarReceptionWindow" Height="600" Width="450"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
+         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:cmd ="http://www.galasoft.ch/mvvmlight"
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -95,7 +98,7 @@
                             <ComboBox 
                                ItemsSource="{Binding ListBrand, UpdateSourceTrigger=PropertyChanged}"
                                SelectedItem="{Binding SelectedBrand, Mode=TwoWay}"
-                                DisplayMemberPath="Name"
+                                DisplayMemberPath="CarBrand_Name"
                                 Grid.Column="1"
                                 Width="200"
                                 
@@ -133,13 +136,21 @@
                             <materialDesign:PackIcon Kind="Phone" 
                                                      Grid.Column="0"/>
                             <TextBox 
-                                Text="{Binding Phone}"
+                                x:Name="txtPhone"
+                                Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                 Grid.Column="1"
                                      Margin="0 0 0 10"
                             materialDesign:HintAssist.Hint="Số Điện thoại"
                                      Width="200"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewTextInput">
+                                        <ei:CallMethodAction TargetObject ="{Binding}" MethodName="ValidateNumber"></ei:CallMethodAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox> 
+                            
                         </Grid>
                     </Grid>
                     <Grid Margin="0 10 0 0" Height="70">

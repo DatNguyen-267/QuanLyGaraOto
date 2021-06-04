@@ -5,8 +5,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 namespace QuanLyGaraOto.ViewModel
 {
@@ -34,6 +36,7 @@ namespace QuanLyGaraOto.ViewModel
         public int IdNew { get => _IdNew; set { _IdNew = value; OnPropertyChanged(); } }
         public CarReceptionViewModel()
         {
+            ReceptionDate = DateTime.Now;
             IsSuccess = false;
             ListBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
@@ -68,6 +71,12 @@ namespace QuanLyGaraOto.ViewModel
                 MessageBox.Show("Tiếp nhận xe thành công","Thông báo",MessageBoxButton.OK);
                 p.Close();
             });
+            
+        }
+        public void ValidateNumber(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

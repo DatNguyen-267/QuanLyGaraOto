@@ -40,8 +40,8 @@
                     Content="Thêm xe"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
-                    Width="auto"
-                    
+                    Width="100"
+                    Height="50"
                     Foreground="Black"
                     Background="White"
                     Margin="10 5 20 5"
@@ -60,8 +60,17 @@
 
             </Grid>
             <Grid Grid.Column="1">
-                <DockPanel Width="300">
-                    <Button
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="400"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            HorizontalAlignment="Right"
                         Command="{Binding DeleteCommand}"
                         Width="100"
                                Background="#455A64"
@@ -69,15 +78,17 @@
                         Style="{StaticResource MaterialDesignRaisedButton}"
                     Content="Xóa">
                     </Button>
-                    <Button
+                    <Button Grid.Column="1"
+                            HorizontalAlignment="left"
                         Command="{Binding OpenCommand}"
                         Background="#455A64"
                         Width="100"
-                        Margin="10 0 10 0"
+                        Margin="20 0 10 0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                     Content="Chi Tiết">
                     </Button>
-                </DockPanel>
+                </Grid>
+                
             </Grid>
 
         </Grid>
@@ -92,7 +103,7 @@
                             <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding CarReception.LicensePlate}"></GridViewColumn>
                             <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></GridViewColumn>
                             <GridViewColumn Header="Chủ Xe" DisplayMemberBinding="{Binding CarReception.CUSTOMER.Customer_Name}"></GridViewColumn>
-                            <GridViewColumn Header="Tiền nợ" DisplayMemberBinding="{Binding Debt}"></GridViewColumn>
+                            <GridViewColumn Header="Tiền nợ" DisplayMemberBinding="{Binding CarReception.Debt}"></GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

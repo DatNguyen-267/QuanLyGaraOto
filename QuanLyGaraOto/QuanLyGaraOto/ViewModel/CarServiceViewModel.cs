@@ -6,6 +6,7 @@ using System.Data.Linq;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
@@ -13,6 +14,10 @@ namespace QuanLyGaraOto.ViewModel
     public class CarServiceViewModel:BaseViewModel
     {
         public bool IsRecepted { get; set; }
+        private bool _VisPay { get; set; }
+        public bool VisPay { get=>_VisPay; set { _VisPay = value; OnPropertyChanged(); } }
+        private bool _VisView { get; set; }
+        public bool VisView { get => _VisView; set { _VisView = value; OnPropertyChanged(); } }
         #region Visibility
         private bool _VisReceptionCard { get; set; }
         public bool VisReceptionCard { get => _VisReceptionCard; set { _VisReceptionCard = value; OnPropertyChanged(); } }
@@ -38,6 +43,8 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand UpdateValue { get; set; }
         public ICommand ChangeCarInfoCommand { get; set; }
         public ICommand ReceiptCommand { get; set; }
+        public ICommand ViewCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
         #endregion
 
         #region Data Reception
@@ -121,13 +128,14 @@ namespace QuanLyGaraOto.ViewModel
         public CarServiceViewModel()
         {
             GenaralFunction();
+            VisPay = false;
         }
         public CarServiceViewModel(RECEPTION carReception)
         {
             GenaralFunction();
             this.CarReception = DataProvider.Ins.DB.RECEPTIONs.Where(x=>x.Reception_Id == carReception.Reception_Id).SingleOrDefault();
             // base data
-
+            
             LoadCarInfo(this.CarReception.Reception_Id);
             // Load thông tin xe 
 
@@ -145,6 +153,13 @@ namespace QuanLyGaraOto.ViewModel
 
             UpdateTotal();
             // Tính tổng tiền
+
+            if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == CarReception.Reception_Id).Count() > 0)
+            {
+                VisPay = false;
+                VisView = true;
+            }
+
         }
         public void GenaralFunction()
         {
@@ -191,6 +206,7 @@ namespace QuanLyGaraOto.ViewModel
                     {
                         AddRepairForm(addRepairFormViewModel.NewRepairForm);
                         VisRepair(true);
+                        
                         RepairDate = addRepairFormViewModel.NewRepairForm.RepairDate;
                     }
                 });
@@ -219,6 +235,9 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.REPAIR_DETAIL.Add(repairInfo);
                     DataProvider.Ins.DB.SaveChanges();
                     UpdateTotal();
+                    DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
+                    DataProvider.Ins.DB.SaveChanges();
+                    if (VisPay == false) VisPay = true;
                 });
             EditCommand = new RelayCommand<Object>(
                 (p) => {
@@ -237,6 +256,8 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.SaveChanges();
                     SelectedItem.Price = Price;
                     SelectedItem.TotalMoney = TotalMoney;
+                    DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
+                    DataProvider.Ins.DB.SaveChanges();
                     UpdateTotal();
                 });
             DeleteCommand = new RelayCommand<Object>(
@@ -252,6 +273,8 @@ namespace QuanLyGaraOto.ViewModel
                     deleteModel.RepairInfo(SelectedItem.RepairInfo);
                     ListRepair.Remove(SelectedItem);
                     UpdateTotal();
+                    DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
+                    DataProvider.Ins.DB.SaveChanges();
                 });
             UpdateValue = new RelayCommand<Object>(
                 (p) => {
@@ -280,7 +303,8 @@ namespace QuanLyGaraOto.ViewModel
             ReceiptCommand = new RelayCommand<Object>(
                 (p) => {
                     if (RepairForm == null || CarReception == null) return false;
-                    return true;
+                    if (DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == RepairForm.Repair_Id).Count() > 0) return true;
+                        return true;
                 },
                 (p) =>
                 {
@@ -288,13 +312,30 @@ namespace QuanLyGaraOto.ViewModel
                 payWindow.ShowDialog();
 
                 PayViewModel payViewModel = (payWindow.DataContext as PayViewModel);
-
+                    VisPay = !payViewModel.IsPay;
+                    VisView = payViewModel.IsPay;
+                });
+            ViewCommand = new RelayCommand<Object>(
+                (p) => {
+                    return true;
+                },
+                (p) =>
+                {
+                    PayWindow payWindow = new PayWindow(CarReception);
+                    payWindow.ShowDialog();
+                });
+            CloseCommand = new RelayCommand<Window>(
+                (p) => {
+                    return true;
+                },
+                (p) =>
+                {
+                    p.Close();
                 });
         }
         public void Calculate()
         {
-            Price = (int)SelectedSupply.Supplies_Price * (int)SelectedAmount;
-            TotalMoney = (int)Price + (int)SelectedPay.Wage_Value;
+            TotalMoney = (int)SelectedSupply.Supplies_Price*(int)SelectedAmount + (int)SelectedPay.Wage_Value;
         }
         public void UpdateTotal()
         {
@@ -322,7 +363,10 @@ namespace QuanLyGaraOto.ViewModel
             VisReceptionCard = true;
             VisAddRepairCard = true;
             VisInfo = false;
-            VisRepairServiceCard = false;  
+            VisRepairServiceCard = false;
+            VisPay = true;
+            VisView = false;
+
         }
         public void EnableReceptionBtn(bool temp)
         {

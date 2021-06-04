@@ -21,6 +21,7 @@ namespace QuanLyGaraOto.ViewModel
         public AddRepairFormViewModel()
         {
             IsSuccess = false;
+            RepairDate = DateTime.Now;
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
                 p.Close();

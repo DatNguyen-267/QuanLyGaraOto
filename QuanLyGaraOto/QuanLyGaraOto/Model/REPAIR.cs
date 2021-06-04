@@ -9,10 +9,11 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class REPAIR
+    public partial class REPAIR : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public REPAIR()
@@ -21,11 +22,14 @@ namespace QuanLyGaraOto.Model
         }
     
         public int Repair_Id { get; set; }
-        public int IdReception { get; set; }
-        public System.DateTime RepairDate { get; set; }
-        public int Repair_TotalMoney { get; set; }
-    
-        public virtual RECEPTION RECEPTION { get; set; }
+        private int _IdReception { get; set; }
+        public int IdReception { get => _IdReception; set { _IdReception = value; OnPropertyChanged(); } }
+        private System.DateTime _RepairDate { get; set; }
+        public System.DateTime RepairDate { get => _RepairDate; set { _RepairDate = value; OnPropertyChanged(); } }
+        private int _Repair_TotalMoney { get; set; }
+        public int Repair_TotalMoney { get => _Repair_TotalMoney; set { _Repair_TotalMoney = value; OnPropertyChanged(); } }
+        private RECEPTION _RECEPTION { get; set; }
+        public virtual RECEPTION RECEPTION { get => _RECEPTION; set { _RECEPTION = value; OnPropertyChanged(); } }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REPAIR_DETAIL> REPAIR_DETAIL { get; set; }
     }
