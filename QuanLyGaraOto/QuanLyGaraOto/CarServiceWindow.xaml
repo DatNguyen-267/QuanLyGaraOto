@@ -265,92 +265,7 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition Height="50"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid
-                            Grid.Row="0">
-                            <StackPanel 
-                                Grid.Row="1"
-                                Margin="7 5 10 5"
-                                Orientation="Horizontal"
-                                HorizontalAlignment="Left">
-                                <TextBox
-                                    Text="{Binding Content}"  HorizontalAlignment="Left"
-                                    materialDesign:HintAssist.Hint="Nội dung"
-                                    Width="120"
-                                    Margin="3 3 3 0"
-                                    Style="{StaticResource MaterialDesignFilledTextBox}">
-                                </TextBox>
-                                <ComboBox
-                                    SelectedItem="{Binding SelectedSupply}"
-                                    ItemsSource="{Binding ListSupply}"
-                                    DisplayMemberPath="Supplies_Name"
-                                    Style="{StaticResource MaterialDesignFilledComboBox}"
-                                    materialDesign:HintAssist.Hint="Vật tư"
-                                    Margin="3 3 3 0"
-                                    Width="120">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction
-                                                Command="{Binding UpdateValue}"
-                                                ></i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </ComboBox>
-                                <ComboBox
-                                    SelectedItem="{Binding SelectedAmount}"
-                                    Text="{Binding SuppliesAmount}"
-                                    Margin="3 3 3 0"                 
-                                    Width="120"
-                                      materialDesign:HintAssist.Hint="Số lượng"
-                                      ItemsSource="{Binding ListAmount}"
-                                      Style="{StaticResource MaterialDesignFilledComboBox}">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction
-                                                Command="{Binding UpdateValue}"
-                                                ></i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                    <ComboBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel />
-                                        </ItemsPanelTemplate>
-                                    </ComboBox.ItemsPanel>
-                                </ComboBox>
-                                <TextBox
-                                    IsReadOnly="True"
-                                    Text="{Binding Price}"  HorizontalAlignment="Left"
-                                    materialDesign:HintAssist.Hint="Đơn giá"
-                                    Width="120"
-                                    Margin="3 3 3 0"
-                                    Style="{StaticResource MaterialDesignFilledTextBox}">
-                                    
-                                </TextBox>
-                                <ComboBox
-                                    SelectedValue="{Binding SelectedPay}"
-                                    ItemsSource="{Binding ListPay}"
-                                    DisplayMemberPath="Wage_Value"
-                                    Style="{StaticResource MaterialDesignFilledComboBox}"
-                                    materialDesign:HintAssist.Hint="Tiền công"
-                                    Margin="3 3 3 0"
-                                    Width="120">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction
-                                                Command="{Binding UpdateValue}"
-                                                ></i:InvokeCommandAction>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </ComboBox>
-                                <TextBox
-                                    Text="{Binding TotalMoney}"  HorizontalAlignment="Left"
-                                    materialDesign:HintAssist.Hint="Thành tiền"
-                                    Width="120"
-                                    Margin="3 3 3 0"
-                                    Style="{StaticResource MaterialDesignFilledTextBox}"
-                                    >
-                                </TextBox>
-                            </StackPanel>
-                        </Grid>
+                        
                         <StackPanel 
                             Grid.Row="1"
                             Orientation="Horizontal"
@@ -399,7 +314,7 @@
                                         <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding RepairInfo.SuppliesAmount}"></GridViewColumn>
                                         <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Price}"></GridViewColumn>
                                         <GridViewColumn Header="Tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Value}"></GridViewColumn>
-                                        <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding TotalMoney}"></GridViewColumn>
+                                        <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding RepairInfo.TotalMoney}"></GridViewColumn>
                                     </GridView>
                                 </ListView.View>
                             </ListView>

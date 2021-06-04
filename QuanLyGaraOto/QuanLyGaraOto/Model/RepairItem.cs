@@ -11,8 +11,6 @@ namespace QuanLyGaraOto.Model
     {
         private REPAIR_DETAIL _RepairInfo { get; set; }
         public REPAIR_DETAIL RepairInfo { get => _RepairInfo; set { _RepairInfo = value; OnPropertyChanged(); } }
-        private int _Price { get; set; }
-        public int Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
     }

@@ -69,3 +69,14 @@ C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGa
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.csproj.CopyComplete
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.exe
 C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\QuanLyGaraOto.pdb
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\Prism.dll
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\Prism.Wpf.dll
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\Prism.pdb
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\Prism.xml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\Prism.Wpf.pdb
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\bin\Debug\Prism.Wpf.xml
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\AddRepairDetailWindow.g.cs
+C:\Users\datng\OneDrive\Desktop\Git-Project\QuanLyGaraOto\QuanLyGaraOto\QuanLyGaraOto\obj\Debug\AddRepairDetailWindow.baml
