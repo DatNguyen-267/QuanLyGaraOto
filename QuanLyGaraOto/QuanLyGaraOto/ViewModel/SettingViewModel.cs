@@ -81,6 +81,8 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeEnableButtonInUserInformation { get; set; }
 
         // Setting gara information
+        private GARA_INFO GaraInfo;
+
         private int _MaxCarReception;
         public int MaxCarReception
         {
@@ -121,6 +123,28 @@ namespace QuanLyGaraOto.ViewModel
             get => _IsEnableDeleteButtonInBrandSetting; set
             {
                 _IsEnableDeleteButtonInBrandSetting = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Setting car brand
+
+        private ObservableCollection<CAR_BRAND> _ListCarBrand;
+        public ObservableCollection<CAR_BRAND> ListCarBrand
+        {
+            get => _ListCarBrand; set
+            {
+                _ListCarBrand = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private CAR_BRAND _SelectedBrandItem;
+        public CAR_BRAND SelectedBrandItem
+        {
+            get => _SelectedBrandItem; set
+            {
+                _SelectedBrandItem = value;
                 OnPropertyChanged();
             }
         }
@@ -205,7 +229,6 @@ namespace QuanLyGaraOto.ViewModel
                 AppSettingVis = true;
                 UserSettingVis = false;
             });
-
             ChangeUserSettingVis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 UserSettingVis = true; ;
@@ -213,6 +236,28 @@ namespace QuanLyGaraOto.ViewModel
             });
 
             // Gara information
+            GaraInfo = DataProvider.Ins.DB.GARA_INFO.First();
+            MaxCarReception = GaraInfo.MaxCarReception;
+            IsOverPay = GaraInfo.IsOverPay;
+
+            ChangeGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) => 
+            {
+                GaraInfo.MaxCarReception = _MaxCarReception;
+                GaraInfo.IsOverPay = _IsOverPay;
+                DataProvider.Ins.DB.SaveChanges();
+                SetEnableStatusButtonInGaraInformation(false);
+            });
+
+            ResetGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                MaxCarReception = GaraInfo.MaxCarReception;
+                IsOverPay = GaraInfo.IsOverPay;
+                SetEnableStatusButtonInGaraInformation(false);
+            });
+
+            // Car brand information
+            ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
+
             // User information
             userInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == 1).FirstOrDefault();
             if (userInfo != null)

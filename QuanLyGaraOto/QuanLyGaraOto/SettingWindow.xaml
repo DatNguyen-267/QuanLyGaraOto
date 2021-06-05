@@ -41,10 +41,11 @@
                         />
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="1" Visibility="Hidden">
+            <Grid Grid.Row="1" Visibility="Visible">
                 <!--Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="150" MaxWidth="300"/>
+                    <ColumnDefinition MinWidth="150" MaxWidth="400"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
@@ -69,7 +70,6 @@
                            Content="Thông tin Gara"
                            VerticalContentAlignment="Center"
                            HorizontalContentAlignment="Left"
-                           Margin="0 8 0 0"
                            FontSize="20" Grid.ColumnSpan="2" 
                            FontWeight="Bold"/>
                         <Grid Grid.Row="1" Margin="16 8 16 0" Grid.ColumnSpan="2">
@@ -122,7 +122,7 @@
                                 Margin="8,10,63,8"
                                 Content="Thay đổi"
                                 IsEnabled="{Binding IsEnableChangeButtonInGaraInformation}"
-                                Command="{Binding EditWindowCommand}"
+                                Command="{Binding ChangeGaraInformation}"
                                 Background="Black"
                                 BorderBrush="Black" Grid.ColumnSpan="2" />
                             <Button Grid.Column="1"
@@ -135,43 +135,98 @@
                                 IsEnabled="{Binding IsEnableResetButtonInGaraInformation}"
                                 Background="Black"
                                 BorderBrush="Black"
-                                Command="" Grid.ColumnSpan="2" />
+                                Command="{Binding ResetGaraInformation}" Grid.ColumnSpan="2" />
                         </Grid>
                     </Grid>
                 </Grid>
 
                 <Grid Grid.Column="1" Margin="5" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Margin="5 0 5 5">
-                        <Border BorderThickness="1" BorderBrush="Black" CornerRadius="4"></Border>
-                        <ListView x:Name="lvUsers" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                                    <GridViewColumn Header="Họ tên" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="4"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="250"/>
+                            <RowDefinition Height="75"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
 
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </Grid>
-                    <Grid Grid.Row="1" Margin="5 5 5 0">
-                        <Border BorderThickness="1" BorderBrush="Black" CornerRadius="4"></Border>
-                        <ListView x:Name="Wage" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                                    <GridViewColumn Header="Họ tên" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <Label Grid.Row="0"
+                                    Content="Danh sách hãng xe"
+                                    VerticalContentAlignment="Center"
+                                    HorizontalContentAlignment="Left"
+                                    FontSize="20"
+                                    FontWeight="Bold"/>
+
+                        <Grid Grid.Row="1">
+                            <ListView ItemsSource="{Binding ListCarBrand}" SelectedItem="{Binding SelectedBrandItem}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding CarBrand_Id}"></GridViewColumn>
+                                        <GridViewColumn Header="Hãng xe" DisplayMemberBinding="{Binding CarBrand_Name}"></GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="125"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Width="100"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Content="Sửa"
+                                        IsEnabled="False"
+                                        Command=""
+                                        Background="Black"
+                                        BorderBrush="Black" />
+
+                            <TextBox Grid.Column="1"
+                                        materialDesign:HintAssist.Hint="Hãng xe"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        VerticalAlignment="Center" 
+                                        Margin="5"
+                                        IsEnabled="True"/>
+                        </Grid>
+
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="125"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Width="100"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Content="Xóa"
+                                        IsEnabled="False"
+                                        Command=""
+                                        Background="Black"
+                                        BorderBrush="Black" 
+                                        Margin="5"/>
+
+                            <Button Grid.Column="1"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Width="100"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        Content="Thêm"
+                                        IsEnabled="False"
+                                        Command=""
+                                        Background="Black"
+                                        BorderBrush="Black" 
+                                        Margin="5"/>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
 
-            <Grid Grid.Row="1" Visibility="Visible">
+            <Grid Grid.Row="1" Visibility="Hidden">
                 <!--Visibility="{Binding UserSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="54*"/>
@@ -377,7 +432,8 @@
                                     materialDesign:TextFieldAssist.HasClearButton="True"
                                     materialDesign:HintAssist.HelperText="Tối thiểu 5 ký tự" 
                                     Margin="29,5,0,17" 
-                                    FontSize="14"/>
+                                    FontSize="14"
+                                    IsEnabled="True"/>
                             </Grid>
 
                             <Grid Grid.Column="1">
@@ -391,7 +447,7 @@
                                 Command=""
                                 Background="Black"
                                 BorderBrush="Black" 
-                                IsEnabled="{Binding IsEnableChangeButtonInUserInformation}"/>
+                                IsEnabled="True"/>
                             </Grid>
                         </Grid>
 
