@@ -18,6 +18,12 @@ namespace QuanLyGaraOto.ViewModel
         public bool VisPay { get=>_VisPay; set { _VisPay = value; OnPropertyChanged(); } }
         private bool _VisView { get; set; }
         public bool VisView { get => _VisView; set { _VisView = value; OnPropertyChanged(); } }
+        private bool _VisAdd { get; set; }
+        public bool VisAdd { get => _VisAdd; set { _VisAdd = value; OnPropertyChanged(); } }
+        private bool _VisEdit { get; set; }
+        public bool VisEdit { get => _VisEdit; set { _VisEdit = value; OnPropertyChanged(); } }
+        private bool _VisDelete { get; set; }
+        public bool VisDelete { get => _VisDelete; set { _VisDelete = value; OnPropertyChanged(); } }
         #region Visibility
         private bool _VisReceptionCard { get; set; }
         public bool VisReceptionCard { get => _VisReceptionCard; set { _VisReceptionCard = value; OnPropertyChanged(); } }
@@ -129,6 +135,9 @@ namespace QuanLyGaraOto.ViewModel
             {
                 VisPay = false;
                 VisView = true;
+                VisAdd = false;
+                VisEdit = false;
+                VisDelete = false;
             }
 
         }
@@ -314,6 +323,9 @@ namespace QuanLyGaraOto.ViewModel
             VisRepairServiceCard = false;
             VisPay = true;
             VisView = false;
+            VisAdd = true;
+            VisEdit = true;
+            VisDelete = true;
 
         }
         public void EnableReceptionBtn(bool temp)

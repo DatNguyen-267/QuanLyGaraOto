@@ -26,7 +26,7 @@ namespace QuanLyGaraOto.ViewModel
                 if (_SelectedSupply != null)
                 {
                     ListAmount = new List<int>();
-                    ListAmount = Enumerable.Range(0, (int)SelectedSupply.Supplies_Amount).ToList();
+                    ListAmount = Enumerable.Range(1, (int)SelectedSupply.Supplies_Amount).ToList();
                 }
                 OnPropertyChanged(); } }
         private WAGE _SelectedPay { get; set; }
@@ -72,6 +72,11 @@ namespace QuanLyGaraOto.ViewModel
             {
                 ListAmount.Add(i);
             }
+            if (RepairDetail!= null)
+            {
+                ListAmount = new List<int>();
+                ListAmount = Enumerable.Range(1, (int)RepairDetail.SUPPLIES.Supplies_Amount).ToList();
+            }
         }
         public void LoadRepairDetail()
         {
@@ -93,17 +98,7 @@ namespace QuanLyGaraOto.ViewModel
                {
                    Calculate();
                });
-            ResetNumner = new RelayCommand<Object>(
-               (p) => {
-                   return true;
-               },
-               (p) =>
-               {
-                   ListAmount = new List<int>();
-                   ListAmount = Enumerable.Range(0, (int)SelectedSupply.Supplies_Amount).ToList();
-                   if ( SelectedAmount != null && SelectedPay != null && SelectedSupply == null
-                   ) Calculate();
-               });
+            
             ConfirmCommand = new RelayCommand<Window>(
                (p) => {
                    if (TotalMoney == 0
@@ -112,10 +107,11 @@ namespace QuanLyGaraOto.ViewModel
                },
                 (p) =>
                 {
-                    MessageBoxResult rs = MessageBox.Show("Bạn đồng ý thêm","Thêm thông tin sửa chữa", MessageBoxButton.OKCancel);
-                    if (MessageBoxResult.OK == rs)
+
+                    if (IsAdd)
                     {
-                        if (IsAdd)
+                        MessageBoxResult rs = MessageBox.Show("Bạn đồng ý thêm", "Thêm thông tin sửa chữa", MessageBoxButton.OKCancel);
+                        if (MessageBoxResult.OK == rs)
                         {
                             ReturnRepairDetail = new REPAIR_DETAIL()
                             {
@@ -129,7 +125,12 @@ namespace QuanLyGaraOto.ViewModel
                             };
                             DataProvider.Ins.DB.REPAIR_DETAIL.Add(ReturnRepairDetail);
                             DataProvider.Ins.DB.SaveChanges();
-                        } else
+                        }
+                    }
+                    else
+                    {
+                        MessageBoxResult rs = MessageBox.Show("Bạn đồng ý sửa", "Sửa thông tin sửa chữa", MessageBoxButton.OKCancel);
+                        if (MessageBoxResult.OK == rs)
                         {
                             ReturnRepairDetail = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.RepairDetail_Id == RepairDetail.RepairDetail_Id).SingleOrDefault();
                             ReturnRepairDetail.Content = Content;

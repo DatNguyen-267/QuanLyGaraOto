@@ -56,8 +56,19 @@
                 <ColumnDefinition></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-
+            <Grid Grid.Column="0" Margin="15 0 15 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Text="{Binding ReceptionOfDay}"
+                           FontSize="16"
+                           FontWeight="DemiBold"
+                           Foreground="#FF1976D2"
+                           ></TextBlock>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>

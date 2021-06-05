@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
+        xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         mc:Ignorable="d"
         Name="PayWD"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -185,10 +186,19 @@
                             <Grid Grid.Column="1">
                                 <TextBox
                                     IsReadOnly="{Binding RolReceivedMoney}"
-                                    Text="{Binding ReceivedMoney}"
+                                    
                                     FontSize="16"          
                                     VerticalAlignment="Center" 
                                     >
+                                    <TextBox.Text>
+                                        <Binding Path="ReceivedMoney">
+                                            <Binding.ValidationRules>
+                                                <validation:NumberValidation ErrorMessage="Chỉ nhập số"
+                                                                              ErrorMessageNull="Vui lòng nhập số tiền trả"
+                                                                              ></validation:NumberValidation>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
                                 </TextBox>
                                 
                             </Grid>

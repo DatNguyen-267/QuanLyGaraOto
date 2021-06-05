@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
+        xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         mc:Ignorable="d"
         Name="CarReceptionWD"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -137,18 +138,29 @@
                                                      Grid.Column="0"/>
                             <TextBox 
                                 x:Name="txtPhone"
-                                Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                               
+                                
                                 Grid.Column="1"
                                      Margin="0 0 0 10"
                             materialDesign:HintAssist.Hint="Số Điện thoại"
                                      Width="200"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center">
-                                <i:Interaction.Triggers>
+                                <TextBox.Text>
+                                    <Binding Path="Phone">
+                                        <Binding.ValidationRules>
+                                            <validation:NumberValidation ErrorMessage="Chỉ được nhập số (0-9)"
+                                                                         ErrorMessageNull="Vui lòng nhập số điện thoại"
+                                                                         ></validation:NumberValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                                <!--<i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewTextInput">
+                                        
                                         <ei:CallMethodAction TargetObject ="{Binding}" MethodName="ValidateNumber"></ei:CallMethodAction>
                                     </i:EventTrigger>
-                                </i:Interaction.Triggers>
+                                </i:Interaction.Triggers>-->
                             </TextBox> 
                             
                         </Grid>
