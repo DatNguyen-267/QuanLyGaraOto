@@ -19,16 +19,19 @@
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal">
                     <Button
+                        Name="AppSetting"
                         Style="{StaticResource MaterialDesignFlatButton}"
                         ToolTip="MaterialDesignFlatButton" 
                         materialDesign:ButtonAssist.CornerRadius="10 10 0 0"
                         Width="150"
-                        Content="Ứng dụng" Background="White" FontWeight="Bold"
-                        Foreground="black"
+                        Content="Ứng dụng" Background="Black" FontWeight="Bold"
+                        Foreground="White"
                         FontSize="18"
+                        Click="AppSetting_Click"
                         Command="{Binding ChangeAppSettingVis}">
                     </Button>
                     <Button
+                        Name="UserSetting"
                         Style="{StaticResource MaterialDesignFlatButton}"
                         ToolTip="MaterialDesignFlatButton" 
                         materialDesign:ButtonAssist.CornerRadius="10 10 0 0"
@@ -37,11 +40,12 @@
                         Foreground="Black"
                         FontSize="18"
                         Margin="5 0 0 0"
+                        Click="UserSetting_Click"
                         Command="{Binding ChangeUserSettingVis}"
                         />
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="1" Visibility="Visible">
+            <Grid Grid.Row="1" Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <!--Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="150" MaxWidth="300"/>
@@ -179,8 +183,8 @@
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
                                         Content="Sửa"
-                                        IsEnabled="False"
-                                        Command=""
+                                        IsEnabled="{Binding IsEnableModifyButtonInBrandSetting}"
+                                        Command="{Binding ModifyCarBrand}"
                                         Background="Black"
                                         BorderBrush="Black" />
 
@@ -189,7 +193,15 @@
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         VerticalAlignment="Center" 
                                         Margin="5"
-                                        IsEnabled="True"/>
+                                        Text="{Binding SelectedBrandItem.CarBrand_Name}"
+                                        IsEnabled="{Binding IsEnableModifyFieldInBrandSetting}">
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInCarBrandSetting}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
                         </Grid>
 
                         <Grid Grid.Row="3">
@@ -204,8 +216,8 @@
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
                                         Content="Xóa"
-                                        IsEnabled="False"
-                                        Command=""
+                                        IsEnabled="{Binding IsEnableDeleteButtonInBrandSetting}"
+                                        Command="{Binding DeleteCarBrand}"
                                         Background="Black"
                                         BorderBrush="Black" 
                                         Margin="5"/>
@@ -216,7 +228,7 @@
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Left"
                                         Content="Thêm"
-                                        IsEnabled="False"
+                                        IsEnabled="True"
                                         Command=""
                                         Background="Black"
                                         BorderBrush="Black" 
@@ -224,9 +236,13 @@
                         </Grid>
                     </Grid>
                 </Grid>
+
+                <Grid Grid.Column="2" Margin="5">
+                    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="4"/>
+                </Grid>
             </Grid>
 
-            <Grid Grid.Row="1" Visibility="Hidden">
+            <Grid Grid.Row="1" Visibility="{Binding UserSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <!--Visibility="{Binding UserSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="54*"/>
@@ -400,7 +416,7 @@
 
                 <Grid Grid.Column="1" Margin="5">
                     <Border BorderThickness="1" BorderBrush="Black" CornerRadius="4" />
-                    <Grid>
+                    <Grid Margin="0,0,-0.4,-0.8">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="50"/>
@@ -430,7 +446,6 @@
                                 <PasswordBox
                                     materialDesign:HintAssist.Hint="Nhập mật khẩu cũ"
                                     materialDesign:TextFieldAssist.HasClearButton="True"
-                                    materialDesign:HintAssist.HelperText="Tối thiểu 5 ký tự" 
                                     Margin="29,5,0,17" 
                                     FontSize="14"
                                     IsEnabled="True"/>
@@ -468,6 +483,20 @@
                                     materialDesign:HintAssist.HelperText="Tối thiểu 5 ký tự" 
                                     Margin="29,5,0,17" 
                                     FontSize="14"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <Button Grid.Column="0"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="100"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="20,0,119,0"
+                                Content="Thay đổi"      
+                                Command=""
+                                Background="Black"
+                                BorderBrush="Black" 
+                                IsEnabled="True"/>
                             </Grid>
                         </Grid>
                     </Grid>
