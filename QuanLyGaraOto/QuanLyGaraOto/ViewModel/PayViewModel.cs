@@ -23,8 +23,8 @@ namespace QuanLyGaraOto.ViewModel
         }
         public PayViewModel(RECEPTION carReception)
         {
-            InitData();
             this.CarReception = carReception;
+            InitData();
         }
         public void InitData()
         {
