@@ -85,6 +85,9 @@
     <Compile Include="AddEmployee.xaml.cs">
       <DependentUpon>AddEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddImportWindow.xaml.cs">
+      <DependentUpon>AddImportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddNewGoodWindow.xaml.cs">
       <DependentUpon>AddNewGoodWindow.xaml</DependentUpon>
     </Compile>
@@ -243,6 +246,10 @@
     <Page Include="AddEmployee.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddImportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddNewGoodWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

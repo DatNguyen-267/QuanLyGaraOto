@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         x:Name="wdAddSupply"
         Title="Phụ tùng"
-        Height="420" Width="480"
+        Height="300" Width="430"
         DataContext="{StaticResource BunkVM}"
       Background="#ffffff"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -16,46 +16,11 @@
         <Grid
             Margin="16 16 16 0"
             VerticalAlignment="Top"
-            Height="280"
+            Height="240"
             >
+            
             <Grid
-                Margin="0"
-                VerticalAlignment="Top"
-                Height="40">
-                <Label
-                    Content="Loại phụ tùng"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    />
-                <Rectangle
-                    Margin="0"
-                    Height="40"
-                    Width="240"
-                    HorizontalAlignment="Right"
-                    RadiusX="4"
-                    RadiusY="4"
-                    Stroke="Black"
-                    />
-                <ComboBox
-                    x:Name="cbType"
-                    materialDesign:HintAssist.Hint="Chọn loại phụ tùng"
-                    Height="40" 
-                    FontSize="14" 
-                    Width="220"
-                    BorderThickness="0" 
-                    Padding="0" 
-                    Margin="0,0,10,0" 
-                    HorizontalAlignment="Right"
-                    VerticalContentAlignment="Center" 
-                    HorizontalContentAlignment="Left"
-                    FontWeight="SemiBold">
-                </ComboBox>
-            </Grid>
-            <Grid
-                Margin="0 60 0 0"
+                Margin="0 0 0 0"
                 VerticalAlignment="Top"
                 Height="40">
                 <Label
@@ -88,11 +53,11 @@
                     />
             </Grid>
             <Grid
-                Margin="0 120 0 0"
+                Margin="0 60 0 0"
                 VerticalAlignment="Top"
                 Height="40">
                 <Label
-                    Content="Giá nhập"
+                    Content="Giá"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     FontSize="16"
@@ -120,74 +85,8 @@
                     Foreground="Black"
                     />
             </Grid>
-            <Grid
-                Margin="0 180 0 0"
-                VerticalAlignment="Top"
-                Height="40">
-                <Label
-                    Content="Tiền công"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    />
-                <Rectangle
-                    Margin="0"
-                    Height="40"
-                    Width="240"
-                    HorizontalAlignment="Right"
-                    RadiusX="4"
-                    RadiusY="4"
-                    Stroke="Black"
-                    />
-                <TextBox
-                    x:Name="txbAmount"
-                    materialDesign:HintAssist.Hint="Chọn số lượng"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Width="220"
-                    Margin="0 0 10 0"
-                    Foreground="Black"
-                    />
-            </Grid>
-            <!--<Grid
-                Margin="0 240 0 0"
-                VerticalAlignment="Top"
-                Height="40">
-                <Label
-                    Content="Nhà cung cấp"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    />
-                <Rectangle
-                    Margin="0"
-                    Height="40"
-                    Width="240"
-                    HorizontalAlignment="Right"
-                    RadiusX="4"
-                    RadiusY="4"
-                    Stroke="Black"
-                    />
-                <ComboBox
-                    x:Name="cbProduce"
-                    materialDesign:HintAssist.Hint="Chọn nhà cung cấp"
-                    Height="40" 
-                    FontSize="14" 
-                    Width="220"
-                    BorderThickness="0" 
-                    Padding="0" 
-                    Margin="0,0,10,0" 
-                    HorizontalAlignment="Right"
-                    VerticalContentAlignment="Center" 
-                    HorizontalContentAlignment="Left"
-                    FontWeight="SemiBold">
-                </ComboBox>
-            </Grid>-->
+            
+            
         </Grid>
         <Grid
             Margin="0 0 16 16"
@@ -197,6 +96,7 @@
             VerticalAlignment="Bottom">
 
             <Button
+                x:Name="btnAdd"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Command="{Binding AddCommand}"
                 CommandParameter="{Binding ElementName=wdAddSupply}"
@@ -206,6 +106,7 @@
                 _Thêm
             </Button>
             <Button
+                x:Name="btnCancel"
                 Style="{StaticResource MaterialDesignRaisedLightButton}"
                 Width="100"
                 HorizontalAlignment="Right"
