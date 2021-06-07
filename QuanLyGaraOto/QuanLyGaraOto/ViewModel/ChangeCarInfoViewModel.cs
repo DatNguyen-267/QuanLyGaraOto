@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -52,16 +53,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void Command()
         {
-            ConfirmCommand = new RelayCommand<Window>(
+            ConfirmCommand = new RelayCommand<ChangeCarInfoWindow>(
                (p) => {
-                   if (Name == null
-                    || Phone == null
-                    || Address == null
-                    || SelectedBrand == null
-                    || ReceptionDate == null
-                    || LicensePlate == null
-                    || RepairDate == null
-                    ) return false;
+                   if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbAddress.Text) || 
+                   string.IsNullOrEmpty(p.txbLicensePlate.Text) || string.IsNullOrEmpty(p.txbPhone.Text) ||
+                   string.IsNullOrEmpty(p.cbbCarBrand.Text) || p.dpReceptionDate.SelectedDate == null ||
+                   p.dpRepairDate.SelectedDate == null) return false;
+
+                   Regex regex = new Regex(@"^[0-9]+$");
+                   if (!regex.IsMatch(p.txbPhone.Text)) return false;
+
                    return true;
                },
                (p) =>

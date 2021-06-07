@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
                     xmlns:viewmodel="clr-namespace:QuanLyGaraOto.ViewModel"
-                    xmlns:framework="clr-namespace:TimeRecorder.Framework;assembly=MyAssembly">
+                    xmlns:framework="clr-namespace:TimeRecorder.Framework;assembly=MyAssembly"
+                    xmlns:convert="clr-namespace:QuanLyGaraOto.Convert">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:ReportViewModel x:Key="ReportVM"></viewmodel:ReportViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
@@ -12,4 +13,5 @@
     <viewmodel:BunkViewModel x:Key="BunkVM"></viewmodel:BunkViewModel>
     <viewmodel:AddRepairFormViewModel x:Key="AddRepairFormVM"></viewmodel:AddRepairFormViewModel>
     <viewmodel:ChangeCarInfoViewModel x:Key="ChangeCarInfoVM"></viewmodel:ChangeCarInfoViewModel>
+    <convert:DateConvert x:Key="DateConvert"></convert:DateConvert>
 </ResourceDictionary>
