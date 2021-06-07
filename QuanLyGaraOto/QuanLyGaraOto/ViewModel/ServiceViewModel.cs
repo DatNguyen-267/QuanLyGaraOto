@@ -67,6 +67,7 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     DeleteModel deleteModel = new DeleteModel();
                     deleteModel.CarReception(SelectedItem.CarReception);
+                    ListCar.Remove(SelectedItem);
                     LoadReceptionAmount();
                 }
             );

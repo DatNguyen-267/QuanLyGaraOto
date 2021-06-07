@@ -16,6 +16,8 @@ namespace QuanLyGaraOto.ViewModel
         public bool IsRecepted { get; set; }
         private bool _VisPay { get; set; }
         public bool VisPay { get=>_VisPay; set { _VisPay = value; OnPropertyChanged(); } }
+        private bool _VisChangeCustomerInfo { get; set; }
+        public bool VisChangeCustomerInfo { get => _VisChangeCustomerInfo; set { _VisChangeCustomerInfo = value; OnPropertyChanged(); } }
         private bool _VisView { get; set; }
         public bool VisView { get => _VisView; set { _VisView = value; OnPropertyChanged(); } }
         private bool _VisAdd { get; set; }
@@ -138,6 +140,7 @@ namespace QuanLyGaraOto.ViewModel
                 VisAdd = false;
                 VisEdit = false;
                 VisDelete = false;
+                VisChangeCustomerInfo = false;
             }
 
         }
@@ -225,6 +228,7 @@ namespace QuanLyGaraOto.ViewModel
                     REPAIR_DETAIL returnRepairDetail = addRepairDetailViewModel.ReturnRepairDetail;
                     if (returnRepairDetail != null)
                     {
+                        SelectedItem.RepairInfo = returnRepairDetail;
                         UpdateTotal();
                         DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
                         DataProvider.Ins.DB.SaveChanges();
@@ -241,9 +245,15 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
+
+                    var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.RepairInfo.IdSupplies).SingleOrDefault();
+                    temp.Supplies_Amount = temp.Supplies_Amount + SelectedItem.RepairInfo.SuppliesAmount;
+                    DataProvider.Ins.DB.SaveChanges();
+
                     DeleteModel deleteModel = new DeleteModel();
                     deleteModel.RepairInfo(SelectedItem.RepairInfo);
                     ListRepair.Remove(SelectedItem);
+
                     UpdateTotal();
                     DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
                     DataProvider.Ins.DB.SaveChanges();
@@ -271,12 +281,16 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                PayWindow payWindow = new PayWindow(CarReception);
-                payWindow.ShowDialog();
+                    PayWindow payWindow = new PayWindow(CarReception);
+                    payWindow.ShowDialog();
 
-                PayViewModel payViewModel = (payWindow.DataContext as PayViewModel);
+                    PayViewModel payViewModel = (payWindow.DataContext as PayViewModel);
                     VisPay = !payViewModel.IsPay;
                     VisView = payViewModel.IsPay;
+                    VisAdd = !payViewModel.IsPay;
+                    VisEdit = !payViewModel.IsPay;
+                    VisDelete = !payViewModel.IsPay;
+                    VisChangeCustomerInfo = !payViewModel.IsPay;
                 });
             ViewCommand = new RelayCommand<Object>(
                 (p) => {
@@ -302,7 +316,7 @@ namespace QuanLyGaraOto.ViewModel
             Total = 0;
             foreach (var item in ListRepair)
             {
-                Total = Total + (int)item.TotalMoney;
+                Total = Total + (int)item.RepairInfo.TotalMoney;
             }
         }
         public void InitData()
@@ -326,7 +340,7 @@ namespace QuanLyGaraOto.ViewModel
             VisAdd = true;
             VisEdit = true;
             VisDelete = true;
-
+            VisChangeCustomerInfo = true;
         }
         public void EnableReceptionBtn(bool temp)
         {

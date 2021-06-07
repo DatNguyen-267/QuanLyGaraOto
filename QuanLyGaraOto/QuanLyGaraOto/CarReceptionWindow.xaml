@@ -138,16 +138,14 @@
                                                      Grid.Column="0"/>
                             <TextBox 
                                 x:Name="txtPhone"
-                               
-                                
                                 Grid.Column="1"
-                                     Margin="0 0 0 10"
-                            materialDesign:HintAssist.Hint="Số Điện thoại"
-                                     Width="200"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center">
+                                Margin="0 0 0 10"
+                                materialDesign:HintAssist.Hint="Số Điện thoại"
+                                Width="200"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                VerticalAlignment="Center">
                                 <TextBox.Text>
-                                    <Binding Path="Phone">
+                                    <Binding Path="Phone" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                         <Binding.ValidationRules>
                                             <validation:NumberValidation ErrorMessage="Chỉ được nhập số (0-9)"
                                                                          ErrorMessageNull="Vui lòng nhập số điện thoại"

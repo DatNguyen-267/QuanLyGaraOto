@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
+       
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         mc:Ignorable="d"
         Name="PayWD"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="PayWindow" Height="700" Width="1120">
     <Window.Resources>
@@ -173,44 +175,84 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Margin="10 5 10 5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="120"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Số tiền thu"
                                            FontSize="18"
-                                        Margin="0 15 0 0"
+                                        Margin="0 0 0 15"
                                            FontWeight="SemiBold"
                                                VerticalAlignment="Center"
                                        HorizontalAlignment="Stretch"
                                            ></TextBlock>
                             <Grid Grid.Column="1">
-                                <TextBox
-                                    IsReadOnly="{Binding RolReceivedMoney}"
-                                    
+                                <Border BorderThickness="1"
+                                        BorderBrush="DarkGray"
+                                        CornerRadius="3"
+                                        Height="50"
+                                        Margin="0 0 0 20"
+                                        
+                                        VerticalAlignment="Center">
+                                    <TextBox
+                                        x:Name="txtPay"
+                                    materialDesign:ValidationAssist.Background="white"
+                                     IsReadOnly="{Binding RolReceivedMoney}"
+                                    Margin="10 0 10 8"
                                     FontSize="16"          
                                     VerticalAlignment="Center" 
+                                        
                                     >
-                                    <TextBox.Text>
-                                        <Binding Path="ReceivedMoney">
-                                            <Binding.ValidationRules>
-                                                <validation:NumberValidation ErrorMessage="Chỉ nhập số"
-                                                                              ErrorMessageNull="Vui lòng nhập số tiền trả"
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsOverPay}" Value="false">
+                                                        <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBox.Style>
+                                        <TextBox.Text>
+                                            <Binding  Path="ReceivedMoney" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                                <Binding.ValidationRules>
+                                                    <validation:NumberValidation ErrorMessage="Chỉ nhập số"
+                                                                                 ErrorMessageNull="Vui lòng nhập số tiền trả"                   
                                                                               ></validation:NumberValidation>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="TextChanged">
+                                                <i:InvokeCommandAction Command="{Binding CheckIsOverPay}"
+                                                                       CommandParameter="{Binding ElementName=txtPay}"
+                                                                       ></i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                                </Border>
                                 
+                                
+                            </Grid>
+                            <Grid Grid.Column="1" Visibility="{Binding VisValidationPay, Converter={StaticResource BooleanToVisibilityConverter }}">
+                                <TextBlock Text="Số tiền thu không quá số tiền nợ"
+                                       TextWrapping="WrapWithOverflow"
+                                       Margin="10 0 10 10"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="10"
+                                       Foreground="Red"
+                                       Background="white"
+                                           Padding="3 0 3 0"
+                                       >
+                                </TextBlock>
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1" Margin="10 5 10 10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="120"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock Text="Ngày thu tiền"
-                                           Margin="0 15 0 0"
+                                           Margin="0 0 0 15"
                                            FontSize="18"
                                            FontWeight="SemiBold"
                                                VerticalAlignment="Center"
@@ -218,11 +260,21 @@
                                            ></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <DatePicker
+                                <Border BorderThickness="1"
+                                        BorderBrush="DarkGray"
+                                        CornerRadius="3"
+                                        Height="50"
+                                        Margin="0 0 0 20"
+                                        VerticalAlignment="Center">
+                                    <DatePicker
+                                        x:Name="DatePickerPay"
                                     IsEnabled="{Binding EnabledReceiptDate}"
                                     SelectedDate="{Binding SelectedDate}"
+                                        Margin="10 0 10 10"
                                   materialDesign:HintAssist.Hint="Ngày thu tiền"
-                                  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                  Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                                    </DatePicker>
+                                </Border>
                             </Grid>
                         </Grid>
                     </Grid>

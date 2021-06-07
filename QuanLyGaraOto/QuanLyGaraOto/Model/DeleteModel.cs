@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,24 +25,20 @@ namespace QuanLyGaraOto.Model
             // Xóa tất cả các item của RepairInfo thuộc RepairForm
             if (repairFormItem != null)
             {
-                while (true)
+                ObservableCollection<REPAIR_DETAIL> RepairDetails = new ObservableCollection<REPAIR_DETAIL>(DataProvider.Ins.DB.REPAIR_DETAIL.Where(
+                    x => x.IdRepair == repairFormItem.Repair_Id));
+                if (RepairDetails!= null)
                 {
-                    var repairInfoItem = DataProvider.Ins.DB.REPAIR_DETAIL.Where(
-                    x => x.IdRepair == repairFormItem.Repair_Id
-                    ).SingleOrDefault();
-                    if (repairInfoItem != null)
+                    foreach (var item in RepairDetails)
                     {
-                        DataProvider.Ins.DB.REPAIR_DETAIL.Remove(repairInfoItem);
+                        DataProvider.Ins.DB.REPAIR_DETAIL.Remove(item);
                         DataProvider.Ins.DB.SaveChanges();
                     }
-                    else break;
                 }
-
                 // Xóa bảng RepairForm
                 DataProvider.Ins.DB.REPAIRs.Remove(repairFormItem);
                 DataProvider.Ins.DB.SaveChanges();
             }
-
             DataProvider.Ins.DB.RECEPTIONs.Remove(itemDelete);
             DataProvider.Ins.DB.SaveChanges();
         }

@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Name="ChangeCarInfoWD"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="ChangeCarInfoWindow" Height="650" Width="400">
     <Grid>
@@ -55,13 +57,22 @@
                             <materialDesign:PackIcon Kind="Account" 
                                                      Grid.Column="0"/>
                             <TextBox 
-                                Text="{Binding Name}"
+                                x:Name="txbName"
                                 Grid.Column="2"
                                 materialDesign:HintAssist.Hint="Tên chủ xe"
                                 Width="200"
                                 Margin="0 0 0 10"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                VerticalAlignment="Center" />
+                                VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng nhập tên chủ xe"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 10 0 0">
@@ -72,14 +83,23 @@
                             </Grid.ColumnDefinitions>
                             <materialDesign:PackIcon Kind="ClipboardOutline" 
                                                      Grid.Column="0"/>
-                            <TextBox 
-                                Text="{Binding LicensePlate}"
+                            <TextBox   
+                                x:Name="txbLicensePlate"
                                 Grid.Column="1"
                                      Margin="0 0 0 10"
                             materialDesign:HintAssist.Hint="Biển số xe"
                                      Width="200"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="LicensePlate" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng nhập biển số xe"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 10 0 0">
@@ -91,9 +111,10 @@
                             <materialDesign:PackIcon Kind="Watermark" 
                                                      Grid.Column="0"/>
                             <ComboBox 
+                                x:Name="cbbCarBrand"
                                ItemsSource="{Binding ListBrand, UpdateSourceTrigger=PropertyChanged}"
                                SelectedItem="{Binding SelectedBrand, Mode=TwoWay}"
-                                DisplayMemberPath="Name"
+                                DisplayMemberPath="CarBrand_Name"
                                 Grid.Column="1"
                                 Width="200"
                                 VerticalAlignment="Center"
@@ -112,13 +133,22 @@
                             <materialDesign:PackIcon Kind="MapMarkerOutline" 
                                                      Grid.Column="0"/>
                             <TextBox 
-                                Text="{Binding Address}"
+                                x:Name="txbAddress"
                                 Grid.Column="2"
-                            materialDesign:HintAssist.Hint="Địa chỉ"
-                                     Width="200"
-                                         Margin="0 0 0 10"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                                materialDesign:HintAssist.Hint="Địa chỉ"
+                                Width="200"
+                                Margin="0 0 0 10"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="Address" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng nhập địa chỉ"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 10 0 0">
@@ -130,13 +160,23 @@
                             <materialDesign:PackIcon Kind="Phone" 
                                                      Grid.Column="0"/>
                             <TextBox 
-                                Text="{Binding Phone}"
-                                Grid.Column="1"
-                                     Margin="0 0 0 10"
-                            materialDesign:HintAssist.Hint="Số Điện thoại"
-                                     Width="200"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                                    x:Name="txbPhone"
+                                    Grid.Column="1"
+                                    Margin="0 0 0 10"
+                                    materialDesign:HintAssist.Hint="Số điện thoại"
+                                    Width="200"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="Phone" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NumberValidation ErrorMessage="Vui lòng nhập số (0-9)"
+                                                                        ErrorMessageNull="Vui lòng nhập Số điện thoại"
+                                                                       ></validation:NumberValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 10 0 0" Height="70">
@@ -148,13 +188,27 @@
                             <materialDesign:PackIcon Kind="DateRange" 
                                                      Grid.Column="0"/>
                             <DatePicker 
+                                x:Name="dpReceptionDate"
                                 SelectedDate="{Binding ReceptionDate}"
                                 Grid.Column="1"
                                Width="200"
                                         Height="auto"
                                 VerticalAlignment="Center"
                               materialDesign:HintAssist.Hint="Ngày tiếp nhận"
-                              Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                              Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                                <DatePicker.Text>
+                                    <Binding Path="ReceptionDate" StringFormat='dd-MMM-YYYY' 
+                                             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"
+                                             ValidatesOnNotifyDataErrors="False"
+                                             NotifyOnValidationError="False"
+                                             >
+                                        <Binding.ValidationRules>
+                                            <validation:DateValidate ErrorMessage="Vui lòng nhập ngày tiếp nhận"></validation:DateValidate>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.Text>
+                            </DatePicker>
+                            
                         </Grid>
                     </Grid>
                     <Grid Margin="0 0 0 0" Height="70">
@@ -166,6 +220,7 @@
                             <materialDesign:PackIcon Kind="CalendarEnd" 
                                                      Grid.Column="0"/>
                             <DatePicker 
+                                x:Name="dpRepairDate"
                                 SelectedDate="{Binding RepairDate}"
                                 Grid.Column="1"
                                Width="200"

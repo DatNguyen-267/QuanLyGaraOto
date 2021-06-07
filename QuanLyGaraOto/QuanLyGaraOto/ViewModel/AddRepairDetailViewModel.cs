@@ -21,22 +21,36 @@ namespace QuanLyGaraOto.ViewModel
         public List<int> ListAmount { get => _ListAmount; set { _ListAmount = value; OnPropertyChanged(); } }
         private string _Content { get; set; }
         public string Content { get => _Content; set { _Content = value; OnPropertyChanged(); } }
+        private SUPPLIES _TempSupplies { get; set; }
+        public SUPPLIES TempSupplies { get => _TempSupplies; set { _TempSupplies = value; } }
         private SUPPLIES _SelectedSupply { get; set; }
         public SUPPLIES SelectedSupply { get => _SelectedSupply; set { _SelectedSupply = value; 
                 if (_SelectedSupply != null)
                 {
                     ListAmount = new List<int>();
-                    ListAmount = Enumerable.Range(1, (int)SelectedSupply.Supplies_Amount).ToList();
+                    if (IsAdd)
+                    {
+                        ListAmount = Enumerable.Range(1, (int)SelectedSupply.Supplies_Amount).ToList();
+                    } else if (RepairDetail != null && TempSupplies.Supplies_Name == SelectedSupply.Supplies_Name)
+                    {
+                        ListAmount = Enumerable.Range(1, (int)SelectedSupply.Supplies_Amount + (int)TempSupplies.Supplies_Amount).ToList();
+                    } else
+                    {
+                        ListAmount = Enumerable.Range(1, (int)SelectedSupply.Supplies_Amount).ToList();
+                    }
+                    
                 }
                 OnPropertyChanged(); } }
         private WAGE _SelectedPay { get; set; }
         public WAGE SelectedPay { get => _SelectedPay; set { _SelectedPay = value; OnPropertyChanged(); } }
         private Nullable<int> _SelectedAmount { get; set; }
         public Nullable<int> SelectedAmount { get => _SelectedAmount; set { _SelectedAmount = value; OnPropertyChanged(); } }
+        private Nullable<int> _TempAmount { get; set; }
+        public Nullable<int> TempAmount { get => _TempAmount; set { _TempAmount = value; OnPropertyChanged(); } }
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
         private REPAIR_DETAIL _RepairDetail { get; set; }
-        public REPAIR_DETAIL RepairDetail { get => _RepairDetail; set { _RepairDetail = value; OnPropertyChanged(); } }
+        public REPAIR_DETAIL RepairDetail { get => _RepairDetail; set { _RepairDetail = value;} }
         private REPAIR _Repair { get; set; }
         public REPAIR Repair { get => _Repair; set { _Repair = value; OnPropertyChanged(); } }
 
@@ -50,7 +64,7 @@ namespace QuanLyGaraOto.ViewModel
         public bool IsAdd { get; set; }
         public AddRepairDetailViewModel(REPAIR_DETAIL repair_Detail)
         {
-            this.RepairDetail = repair_Detail;
+            this.RepairDetail = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x=>x.RepairDetail_Id == repair_Detail.RepairDetail_Id).SingleOrDefault();
             IsAdd = false;
             LoadRepairDetail();
             LoadData();
@@ -75,16 +89,21 @@ namespace QuanLyGaraOto.ViewModel
             if (RepairDetail!= null)
             {
                 ListAmount = new List<int>();
-                ListAmount = Enumerable.Range(1, (int)RepairDetail.SUPPLIES.Supplies_Amount).ToList();
+                ListAmount = Enumerable.Range(1, (int)RepairDetail.SUPPLIES.Supplies_Amount+(int)RepairDetail.SuppliesAmount).ToList();
             }
         }
         public void LoadRepairDetail()
         {
+            TempAmount = RepairDetail.SuppliesAmount;
+            TempSupplies = new SUPPLIES() { Supplies_Name = RepairDetail.SUPPLIES.Supplies_Name, Supplies_Amount = RepairDetail.SuppliesAmount };
+
             Content = RepairDetail.Content;
             SelectedSupply = RepairDetail.SUPPLIES;
             SelectedPay = RepairDetail.WAGE;
             SelectedAmount = RepairDetail.SuppliesAmount;
             TotalMoney = RepairDetail.TotalMoney;
+
+            
         }
         public void Command()
         {
@@ -124,7 +143,10 @@ namespace QuanLyGaraOto.ViewModel
                                 TotalMoney = TotalMoney
                             };
                             DataProvider.Ins.DB.REPAIR_DETAIL.Add(ReturnRepairDetail);
+                            var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == ReturnRepairDetail.IdSupplies).SingleOrDefault();
+                            temp.Supplies_Amount = temp.Supplies_Amount - ReturnRepairDetail.SuppliesAmount;
                             DataProvider.Ins.DB.SaveChanges();
+                            p.Close();
                         }
                     }
                     else
@@ -139,10 +161,25 @@ namespace QuanLyGaraOto.ViewModel
                             ReturnRepairDetail.IdWage = SelectedPay.Wage_Id;
                             ReturnRepairDetail.SuppliesAmount = SelectedAmount;
                             ReturnRepairDetail.TotalMoney = TotalMoney;
+
+                            if (DataProvider.Ins.DB.SUPPLIES.Where(x=> x.Supplies_Id == ReturnRepairDetail.IdSupplies).SingleOrDefault().Supplies_Name == TempSupplies.Supplies_Name)
+                            {
+                                var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == ReturnRepairDetail.IdSupplies).SingleOrDefault();
+                                temp.Supplies_Amount = temp.Supplies_Amount + TempSupplies.Supplies_Amount - ReturnRepairDetail.SuppliesAmount;
+                                DataProvider.Ins.DB.SaveChanges();
+                            } else
+                            {
+                                var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == ReturnRepairDetail.IdSupplies).SingleOrDefault();
+                                temp.Supplies_Amount = temp.Supplies_Amount - ReturnRepairDetail.SuppliesAmount;
+
+                                var temp2 = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == TempSupplies.Supplies_Name).SingleOrDefault();
+                                temp2.Supplies_Amount = temp2.Supplies_Amount + TempSupplies.Supplies_Amount;
+                                DataProvider.Ins.DB.SaveChanges();
+                            }
                             DataProvider.Ins.DB.SaveChanges();
+                            p.Close();
                         }
                     }
-                    p.Close();
                 });
             CloseCommand = new RelayCommand<Window>(
                (p) => { return true;},

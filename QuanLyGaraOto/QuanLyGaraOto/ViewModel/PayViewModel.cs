@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
@@ -13,11 +15,21 @@ namespace QuanLyGaraOto.ViewModel
     public class PayViewModel : BaseViewModel
     {
         public bool IsPay {get;set;}
+        
+        private bool _VisValidationPay { get; set; }
+        public bool VisValidationPay { get => _VisValidationPay; set {
+                _VisValidationPay = value;
+                    
+                    OnPropertyChanged(); } }
+        private bool _IsOverPay { get; set; }
+        public bool IsOverPay { get => _IsOverPay; set { _IsOverPay = value; OnPropertyChanged(); } }
         public bool RolReceivedMoney { get; set; }
         public bool EnabledReceiptDate { get; set; }
         public bool VisPay { get; set; }
-        private int _ReceivedMoney { get; set; }
-        public int ReceivedMoney { get => _ReceivedMoney; set { _ReceivedMoney = value; OnPropertyChanged(); } }
+        private string _ReceivedMoney { get; set; }
+        public string ReceivedMoney { get => _ReceivedMoney; set {
+                        _ReceivedMoney = value;
+                OnPropertyChanged(); } }
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
         private DateTime _SelectedDate { get; set; }
@@ -30,6 +42,7 @@ namespace QuanLyGaraOto.ViewModel
         public ObservableCollection<ListRepair> ListRepair { get => _ListRepair; set { _ListRepair = value; OnPropertyChanged(); } }
         public ICommand PayCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public ICommand CheckIsOverPay { get; set; }
         public PayViewModel()
         {
 
@@ -41,7 +54,7 @@ namespace QuanLyGaraOto.ViewModel
             SelectedDate = DateTime.Now.Date;
             this.Reception = Reception;
             InitData();
-            ReceivedMoney = TotalMoney;
+            ReceivedMoney = TotalMoney.ToString();
             Command();
 
             if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).Count() > 0)
@@ -50,22 +63,25 @@ namespace QuanLyGaraOto.ViewModel
                 RolReceivedMoney = true;
                 EnabledReceiptDate = false;
                 SelectedDate = DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault().ReceiptDate;
-                ReceivedMoney = DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault().MoneyReceived;
+                ReceivedMoney = DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault().MoneyReceived.ToString() ;
                 
             }
         }
         public void Command()
         {
-            PayCommand = new RelayCommand<Window>((p) => {
-                if (SelectedDate == null || ReceivedMoney == 0)
+            PayCommand = new RelayCommand<PayWindow>((p) => {
+                if (SelectedDate == null || p.txtPay.Text == null)
                 {
                     return false;
-                } 
+                }
+                Regex regex = new Regex(@"^[0-9]+$");
+                if (!regex.IsMatch(p.txtPay.Text.ToString())) return false;
+                if (int.Parse(ReceivedMoney) > Reception.Debt && !DataProvider.Ins.DB.GARA_INFO.FirstOrDefault().IsOverPay) return false;
                 return true; }, (p) =>
             {
                 RECEIPT newReceipt = new RECEIPT();
                 newReceipt.ReceiptDate = SelectedDate;
-                newReceipt.MoneyReceived = ReceivedMoney;
+                newReceipt.MoneyReceived = int.Parse(ReceivedMoney);
                 newReceipt.Phone = Reception.CUSTOMER.Customer_Phone;
                 newReceipt.IdReception = Reception.Reception_Id;
                 DataProvider.Ins.DB.RECEIPTs.Add(newReceipt);
@@ -81,11 +97,35 @@ namespace QuanLyGaraOto.ViewModel
                 IsPay = false;
                 p.Close();
             });
+            CheckIsOverPay = new RelayCommand<TextBox>((p) => {
+                return true;
+            }, (p) =>
+            {
+               
+                IsOverPay = true;
+                VisValidationPay = false;
+                try
+                {
+                    if (!(bool)DataProvider.Ins.DB.GARA_INFO.FirstOrDefault().IsOverPay && int.Parse(p.Text) > Reception.Debt)
+                    {
+                        IsOverPay = false;
+                        VisValidationPay = true;
+                    }
+                    else
+                    {
+                        IsOverPay = true;
+                        VisValidationPay = false;
+                    }
+                }catch { }
+                
+            });
         }
         public void InitData()
         {
             IsPay = false;
             VisPay = true;
+            IsOverPay = true;
+            VisValidationPay = false;
             RolReceivedMoney = false;
             EnabledReceiptDate = true;
             Repair = DataProvider.Ins.DB.REPAIRs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault();

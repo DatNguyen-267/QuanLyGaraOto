@@ -119,6 +119,7 @@
     <Compile Include="ChangeCarInfoWindow.xaml.cs">
       <DependentUpon>ChangeCarInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Convert\DateConvert.cs" />
     <Compile Include="EditAccountWindow.xaml.cs">
       <DependentUpon>EditAccountWindow.xaml</DependentUpon>
     </Compile>
@@ -237,6 +238,8 @@
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlGaraOto\TempUserControl.cs" />
+    <Compile Include="Validation\DateValidate.cs" />
+    <Compile Include="Validation\NullDataValidation.cs" />
     <Compile Include="Validation\NumberValidation.cs" />
     <Compile Include="Validation\PayOverValidation.cs" />
     <Compile Include="ViewModel\AddRepairDetailViewModel.cs" />
