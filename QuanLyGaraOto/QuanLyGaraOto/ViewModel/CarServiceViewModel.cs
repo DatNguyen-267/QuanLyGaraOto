@@ -6,6 +6,7 @@ using System.Data.Linq;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
@@ -13,6 +14,18 @@ namespace QuanLyGaraOto.ViewModel
     public class CarServiceViewModel:BaseViewModel
     {
         public bool IsRecepted { get; set; }
+        private bool _VisPay { get; set; }
+        public bool VisPay { get=>_VisPay; set { _VisPay = value; OnPropertyChanged(); } }
+        private bool _VisChangeCustomerInfo { get; set; }
+        public bool VisChangeCustomerInfo { get => _VisChangeCustomerInfo; set { _VisChangeCustomerInfo = value; OnPropertyChanged(); } }
+        private bool _VisView { get; set; }
+        public bool VisView { get => _VisView; set { _VisView = value; OnPropertyChanged(); } }
+        private bool _VisAdd { get; set; }
+        public bool VisAdd { get => _VisAdd; set { _VisAdd = value; OnPropertyChanged(); } }
+        private bool _VisEdit { get; set; }
+        public bool VisEdit { get => _VisEdit; set { _VisEdit = value; OnPropertyChanged(); } }
+        private bool _VisDelete { get; set; }
+        public bool VisDelete { get => _VisDelete; set { _VisDelete = value; OnPropertyChanged(); } }
         #region Visibility
         private bool _VisReceptionCard { get; set; }
         public bool VisReceptionCard { get => _VisReceptionCard; set { _VisReceptionCard = value; OnPropertyChanged(); } }
@@ -38,6 +51,8 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand UpdateValue { get; set; }
         public ICommand ChangeCarInfoCommand { get; set; }
         public ICommand ReceiptCommand { get; set; }
+        public ICommand ViewCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
         #endregion
 
         #region Data Reception
@@ -73,36 +88,7 @@ namespace QuanLyGaraOto.ViewModel
         public RepairItem SelectedItem { get => _SelectedItem; 
             set { 
                 _SelectedItem = value;
-                if (SelectedItem != null)
-                {
-                    Content = SelectedItem.RepairInfo.Content;
-                    SelectedSupply = SelectedItem.RepairInfo.SUPPLIES;
-                    SelectedPay = SelectedItem.RepairInfo.WAGE;
-                    SelectedAmount = SelectedItem.RepairInfo.SuppliesAmount;
-                    Price = SelectedItem.Price;
-                    TotalMoney = SelectedItem.TotalMoney;
-                } else
-                {
-                    Content = null;
-                    SelectedSupply = null;
-                    SelectedPay = null;
-                    SelectedAmount = 1;
-                    Price = 0;
-                    TotalMoney = 0;
-                }
                 OnPropertyChanged(); } }
-        private string _Content { get; set; }
-        public string Content { get => _Content; set { _Content = value; OnPropertyChanged(); } }
-        private SUPPLIES _SelectedSupply { get; set; }
-        public SUPPLIES SelectedSupply { get => _SelectedSupply; set { _SelectedSupply = value; OnPropertyChanged(); } }
-        private WAGE _SelectedPay { get; set; }
-        public WAGE SelectedPay { get => _SelectedPay; set { _SelectedPay = value; OnPropertyChanged(); } }
-        private Nullable<int> _SelectedAmount { get; set; }
-        public Nullable<int> SelectedAmount { get => _SelectedAmount; set { _SelectedAmount = value; OnPropertyChanged(); } }
-        private int _Price { get; set; }
-        public int Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
-        private int _TotalMoney { get; set; }
-        public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
         private DateTime? _RepairDate { get; set; }
         public DateTime? RepairDate { get => _RepairDate; set { _RepairDate = value; OnPropertyChanged(); } }
 
@@ -121,13 +107,14 @@ namespace QuanLyGaraOto.ViewModel
         public CarServiceViewModel()
         {
             GenaralFunction();
+            VisPay = false;
         }
         public CarServiceViewModel(RECEPTION carReception)
         {
             GenaralFunction();
             this.CarReception = DataProvider.Ins.DB.RECEPTIONs.Where(x=>x.Reception_Id == carReception.Reception_Id).SingleOrDefault();
             // base data
-
+            
             LoadCarInfo(this.CarReception.Reception_Id);
             // Load thông tin xe 
 
@@ -145,6 +132,17 @@ namespace QuanLyGaraOto.ViewModel
 
             UpdateTotal();
             // Tính tổng tiền
+
+            if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == CarReception.Reception_Id).Count() > 0)
+            {
+                VisPay = false;
+                VisView = true;
+                VisAdd = false;
+                VisEdit = false;
+                VisDelete = false;
+                VisChangeCustomerInfo = false;
+            }
+
         }
         public void GenaralFunction()
         {
@@ -196,48 +194,47 @@ namespace QuanLyGaraOto.ViewModel
                 });
             AddCommand = new RelayCommand<Object>(
                 (p) => {
-                    if (Content == null
-                    || SelectedSupply == null
-                    || SelectedPay == null
-                    || SelectedAmount == null
-                    ) return false;
                     return true;
                 },
                 (p) =>
                 {
-                    REPAIR_DETAIL repairInfo = new REPAIR_DETAIL()
+                    AddRepairDetailWindow addRepairDetailWindow = new AddRepairDetailWindow(RepairForm);
+                    addRepairDetailWindow.ShowDialog();
+                    AddRepairDetailViewModel addRepairDetailViewModel = (addRepairDetailWindow.DataContext as AddRepairDetailViewModel);
+
+                    REPAIR_DETAIL returnRepairDetail = addRepairDetailViewModel.ReturnRepairDetail;
+                    if (returnRepairDetail!=null)
                     {
-                        Content = Content,
-                        IdWage = SelectedPay.Wage_Id,
-                        IdRepair = RepairForm.Repair_Id
-                    ,
-                        IdSupplies = SelectedSupply.Supplies_Id,
-                        SuppliesAmount = SelectedAmount,
-                        TotalMoney = TotalMoney
-                    };
-                    ListRepair.Add(new RepairItem() { RepairInfo = repairInfo, Price = Price, TotalMoney = TotalMoney });
-                    DataProvider.Ins.DB.REPAIR_DETAIL.Add(repairInfo);
-                    DataProvider.Ins.DB.SaveChanges();
-                    UpdateTotal();
+                        ListRepair.Add(new RepairItem() { RepairInfo = returnRepairDetail, TotalMoney = returnRepairDetail.TotalMoney });
+
+                        UpdateTotal();
+                        DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
+                        DataProvider.Ins.DB.SaveChanges();
+
+                        if (VisPay == false) VisPay = true;
+                    }
                 });
             EditCommand = new RelayCommand<Object>(
                 (p) => {
                     if (SelectedItem == null) return false;
-                    if (Content == null || SelectedSupply == null || SelectedPay == null || SelectedAmount == null) return false;
                     return true;
                 },
                 (p) =>
                 {
-                    REPAIR_DETAIL temp = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.RepairDetail_Id == SelectedItem.RepairInfo.RepairDetail_Id).SingleOrDefault();
-                    temp.Content = Content;
-                    temp.IdSupplies = SelectedSupply.Supplies_Id;
-                    temp.IdWage = SelectedPay.Wage_Id;
-                    temp.SuppliesAmount = SelectedAmount;
-                    temp.TotalMoney = TotalMoney;
-                    DataProvider.Ins.DB.SaveChanges();
-                    SelectedItem.Price = Price;
-                    SelectedItem.TotalMoney = TotalMoney;
-                    UpdateTotal();
+                    AddRepairDetailWindow addRepairDetailWindow = new AddRepairDetailWindow(SelectedItem.RepairInfo);
+                    addRepairDetailWindow.ShowDialog();
+                    AddRepairDetailViewModel addRepairDetailViewModel = (addRepairDetailWindow.DataContext as AddRepairDetailViewModel);
+
+                    REPAIR_DETAIL returnRepairDetail = addRepairDetailViewModel.ReturnRepairDetail;
+                    if (returnRepairDetail != null)
+                    {
+                        SelectedItem.RepairInfo = returnRepairDetail;
+                        UpdateTotal();
+                        DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
+                        DataProvider.Ins.DB.SaveChanges();
+
+                        if (VisPay == false) VisPay = true;
+                    }
                 });
             DeleteCommand = new RelayCommand<Object>(
                 (p) => {
@@ -248,21 +245,20 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
+
+                    var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.RepairInfo.IdSupplies).SingleOrDefault();
+                    temp.Supplies_Amount = temp.Supplies_Amount + SelectedItem.RepairInfo.SuppliesAmount;
+                    DataProvider.Ins.DB.SaveChanges();
+
                     DeleteModel deleteModel = new DeleteModel();
                     deleteModel.RepairInfo(SelectedItem.RepairInfo);
                     ListRepair.Remove(SelectedItem);
+
                     UpdateTotal();
+                    DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
+                    DataProvider.Ins.DB.SaveChanges();
                 });
-            UpdateValue = new RelayCommand<Object>(
-                (p) => {
-                    if (SelectedSupply == null || SelectedAmount == null || SelectedPay == null
-                    ) return false;
-                    return true;
-                },
-                (p) =>
-                {
-                    Calculate();
-                });
+
             ChangeCarInfoCommand = new RelayCommand<Object>(
                 (p) => {
                     return true;
@@ -280,36 +276,52 @@ namespace QuanLyGaraOto.ViewModel
             ReceiptCommand = new RelayCommand<Object>(
                 (p) => {
                     if (RepairForm == null || CarReception == null) return false;
+                    if (DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == RepairForm.Repair_Id).Count() > 0) return true;
+                        return true;
+                },
+                (p) =>
+                {
+                    PayWindow payWindow = new PayWindow(CarReception);
+                    payWindow.ShowDialog();
+
+                    PayViewModel payViewModel = (payWindow.DataContext as PayViewModel);
+                    VisPay = !payViewModel.IsPay;
+                    VisView = payViewModel.IsPay;
+                    VisAdd = !payViewModel.IsPay;
+                    VisEdit = !payViewModel.IsPay;
+                    VisDelete = !payViewModel.IsPay;
+                    VisChangeCustomerInfo = !payViewModel.IsPay;
+                });
+            ViewCommand = new RelayCommand<Object>(
+                (p) => {
                     return true;
                 },
                 (p) =>
                 {
-                PayWindow payWindow = new PayWindow(CarReception);
-                payWindow.ShowDialog();
-
-                PayViewModel payViewModel = (payWindow.DataContext as PayViewModel);
-
+                    PayWindow payWindow = new PayWindow(CarReception);
+                    payWindow.ShowDialog();
+                });
+            CloseCommand = new RelayCommand<Window>(
+                (p) => {
+                    return true;
+                },
+                (p) =>
+                {
+                    p.Close();
                 });
         }
-        public void Calculate()
-        {
-            Price = (int)SelectedSupply.Supplies_Price * (int)SelectedAmount;
-            TotalMoney = (int)Price + (int)SelectedPay.Wage_Value;
-        }
+
         public void UpdateTotal()
         {
             Total = 0;
             foreach (var item in ListRepair)
             {
-                Total = Total + (int)item.TotalMoney;
+                Total = Total + (int)item.RepairInfo.TotalMoney;
             }
         }
         public void InitData()
         {
             IsRecepted = false;
-            SelectedAmount = 1;
-            Price = 0;
-            TotalMoney = 0;
             Total = 0;
         }
         public void InitBtn()
@@ -322,7 +334,13 @@ namespace QuanLyGaraOto.ViewModel
             VisReceptionCard = true;
             VisAddRepairCard = true;
             VisInfo = false;
-            VisRepairServiceCard = false;  
+            VisRepairServiceCard = false;
+            VisPay = true;
+            VisView = false;
+            VisAdd = true;
+            VisEdit = true;
+            VisDelete = true;
+            VisChangeCustomerInfo = true;
         }
         public void EnableReceptionBtn(bool temp)
         {
@@ -370,7 +388,6 @@ namespace QuanLyGaraOto.ViewModel
                 RepairItem repairItem = new RepairItem();
                 repairItem.RepairInfo = item;
                 repairItem.TotalMoney = item.TotalMoney;
-                repairItem.Price = (int)item.SUPPLIES.Supplies_Price * (int)item.SuppliesAmount;
                 ListRepair.Add(repairItem);
             }
         }

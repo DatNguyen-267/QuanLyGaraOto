@@ -138,7 +138,7 @@ create table REPAIR_DETAIL
     SuppliesAmount int,
     IdWage int not NULL,
 	IdRepair int not null,
-	IdSupplies int,
+	IdSupplies int nto null,
 	constraint FK_REPAIRDETAIL_SUPPLIES foreign key (IdSupplies) references SUPPLIES(Supplies_Id),
     constraint FK_REPAIRDETAIL_WAGE foreign key (IdWage) references WAGE(Wage_Id),
 	constraint FK_REPAIRDETAIL_REPAIR foreign key (IdRepair) references REPAIR(Repair_Id)
