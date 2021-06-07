@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace QuanLyGaraOto
 {
     /// <summary>
-    /// Interaction logic for ReportWindow.xaml
+    /// Interaction logic for ReportMonthWindow.xaml
     /// </summary>
-    public partial class ReportWindow : UserControl
+    public partial class ReportMonthWindow : Window
     {
-        public ReportWindow()
+        public ReportMonthWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -150,6 +150,7 @@
     <Compile Include="Model\GARA_INFO.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ImportTemp.cs" />
     <Compile Include="Model\IMPORT_GOODS.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -163,6 +164,7 @@
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ListCar.cs" />
+    <Compile Include="Model\ListSales.cs" />
     <Compile Include="Model\PREMISSION_ITEM.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -212,6 +214,9 @@
     </Compile>
     <Compile Include="PayWindow.xaml.cs">
       <DependentUpon>PayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportMonthWindow.xaml.cs">
+      <DependentUpon>ReportMonthWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
@@ -309,6 +314,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReportMonthWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

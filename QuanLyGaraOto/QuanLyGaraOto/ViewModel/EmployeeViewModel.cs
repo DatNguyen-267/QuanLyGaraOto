@@ -291,9 +291,10 @@ namespace QuanLyGaraOto.ViewModel
 
         public void LoadUsersToView(Employee p)
         {
+            List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
             if (String.IsNullOrEmpty(p.txtLookUp.Text))
             {
-                List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
+                
                 p.lvUsers.ItemsSource = List;
             }
             else
