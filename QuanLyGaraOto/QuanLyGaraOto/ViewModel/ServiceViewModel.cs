@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
@@ -18,22 +19,43 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand CarReceptionCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand OpenCommand { get; set; }
+        private string _ReceptionOfDay { get; set; }
+        public string ReceptionOfDay { get => _ReceptionOfDay; set { _ReceptionOfDay = value; OnPropertyChanged(); } }
+        private GARA_INFO _GaraInfo { get; set; }
+        public GARA_INFO GaraInfo { get => _GaraInfo; set { _GaraInfo = value; OnPropertyChanged(); } }
+        private int _ReceptionAmount { get; set; }
+        public int ReceptionAmount { get => _ReceptionAmount; set { _ReceptionAmount = value;
+                ReceptionOfDay = "Số xe đã tiếp nhận hôm nay: " + ReceptionAmount.ToString() + "/" + GaraInfo.MaxCarReception.ToString();
+                OnPropertyChanged(); } }
         public ServiceViewModel()
         {
-            
+            InitData();
             CarReceptionCommand = new RelayCommand<object>((p) => {
+                LoadReceptionAmount();
+               
                 return true;
             }, (p)=> {
-                CarServiceWindow carServiceWindow = new CarServiceWindow();
-                carServiceWindow.ShowDialog();
-
-                CarServiceViewModel carServiceViewModel = (carServiceWindow.DataContext as CarServiceViewModel);
-                if (carServiceViewModel.IsRecepted)
+                if (ReceptionAmount >= GaraInfo.MaxCarReception)
                 {
-                    ListCar tempListCar = new ListCar();
-                    tempListCar.CarReception = carServiceViewModel.CarReception;
-                    tempListCar.Debt = carServiceViewModel.Total;
-                    ListCar.Add(tempListCar);
+                    MessageBox.Show("Số xe tiếp nhận ngày hôm nay đã đạt tối đa "+ ReceptionAmount.ToString() + "/" +
+                        GaraInfo.MaxCarReception.ToString() + " không thể tiếp nhận thêm",
+                        "Thông báo số xe đã tiếp nhận tối đa",
+                        MessageBoxButton.OK,MessageBoxImage.Warning);
+                }
+                else
+                {
+                    CarServiceWindow carServiceWindow = new CarServiceWindow();
+                    carServiceWindow.ShowDialog();
+
+                    CarServiceViewModel carServiceViewModel = (carServiceWindow.DataContext as CarServiceViewModel);
+                    if (carServiceViewModel.IsRecepted)
+                    {
+                        ListCar tempListCar = new ListCar();
+                        tempListCar.CarReception = carServiceViewModel.CarReception;
+                        tempListCar.Debt = carServiceViewModel.Total;
+                        ListCar.Add(tempListCar);
+                        LoadReceptionAmount();
+                    }
                 }
             });
             DeleteCommand = new RelayCommand<object>
@@ -44,7 +66,9 @@ namespace QuanLyGaraOto.ViewModel
                 }, (p) =>
                 {
                     DeleteModel deleteModel = new DeleteModel();
-                    deleteModel.CarReception(SelectedItem.CarReception);                    
+                    deleteModel.CarReception(SelectedItem.CarReception);
+                    ListCar.Remove(SelectedItem);
+                    LoadReceptionAmount();
                 }
             );
             OpenCommand = new RelayCommand<object>
@@ -63,6 +87,25 @@ namespace QuanLyGaraOto.ViewModel
                 }
             );
             LoadListData();
+        }
+        public void LoadReceptionAmount()
+        {
+            ReceptionAmount = 0;
+            ObservableCollection<RECEPTION> list = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
+            foreach (var item in list)
+            {
+                if (item.ReceptionDate.Date.Day == DateTime.Now.Date.Day &&
+                    item.ReceptionDate.Date.Month == DateTime.Now.Date.Month &&
+                    item.ReceptionDate.Date.Year == DateTime.Now.Date.Year)
+                {
+                    ReceptionAmount++;
+                }
+            }
+        }
+        public void InitData()
+        {
+            GaraInfo = DataProvider.Ins.DB.GARA_INFO.FirstOrDefault();
+            LoadReceptionAmount();
         }
         public int GetDebt(int ID)
         {

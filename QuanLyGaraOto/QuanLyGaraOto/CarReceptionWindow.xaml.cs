@@ -26,5 +26,6 @@ namespace QuanLyGaraOto
             InitializeComponent();
             this.DataContext = (carReceptionViewModel = new CarReceptionViewModel());
         }
+
     }
 }
