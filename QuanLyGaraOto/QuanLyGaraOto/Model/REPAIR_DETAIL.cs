@@ -9,22 +9,32 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class REPAIR_DETAIL
+    public partial class REPAIR_DETAIL :BaseViewModel
     {
         public int RepairDetail_Id { get; set; }
-        public string Content { get; set; }
-        public int TotalMoney { get; set; }
-        public Nullable<int> SuppliesPrice { get; set; }
-        public Nullable<int> SuppliesAmount { get; set; }
-        public int IdWage { get; set; }
-        public int IdRepair { get; set; }
-        public Nullable<int> IdSupplies { get; set; }
-    
-        public virtual REPAIR REPAIR { get; set; }
-        public virtual SUPPLIES SUPPLIES { get; set; }
-        public virtual WAGE WAGE { get; set; }
+        private string _Content { get; set; }
+        public string Content { get => _Content; set { _Content = value; OnPropertyChanged(); } }
+        private int _TotalMoney { get; set; }
+        public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
+        private Nullable<int> _SuppliesPrice { get; set; }
+        public Nullable<int> SuppliesPrice { get => _SuppliesPrice; set { _SuppliesPrice = value; OnPropertyChanged(); } }
+        private Nullable<int> _SuppliesAmount { get; set; }
+        public Nullable<int> SuppliesAmount { get => _SuppliesAmount; set { _SuppliesAmount = value; OnPropertyChanged(); } }
+        private int _IdWage { get; set; }
+        public int IdWage { get => _IdWage; set { _IdWage = value; OnPropertyChanged(); } }
+        private int _IdRepair { get; set; }
+        public int IdRepair { get => _IdRepair; set { _IdRepair = value; OnPropertyChanged(); } }
+        private Nullable<int> _IdSupplies { get; set; }
+        public Nullable<int> IdSupplies { get => _IdSupplies; set { _IdSupplies = value; OnPropertyChanged(); } }
+        private REPAIR _REPAIR { get; set; }
+        public virtual REPAIR REPAIR { get => _REPAIR; set { _REPAIR = value; OnPropertyChanged(); } }
+        private SUPPLIES _SUPPLIES { get; set; }
+        public virtual SUPPLIES SUPPLIES { get => _SUPPLIES; set { _SUPPLIES = value; OnPropertyChanged(); } }
+        private WAGE _WAGE { get; set; }
+        public virtual WAGE WAGE { get => _WAGE; set { _WAGE = value; OnPropertyChanged(); } }
     }
 }

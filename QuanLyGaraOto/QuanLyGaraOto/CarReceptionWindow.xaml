@@ -4,12 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
+        xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         mc:Ignorable="d"
         Name="CarReceptionWD"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="CarReceptionWindow" Height="600" Width="450"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
+         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:cmd ="http://www.galasoft.ch/mvvmlight"
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -95,7 +99,7 @@
                             <ComboBox 
                                ItemsSource="{Binding ListBrand, UpdateSourceTrigger=PropertyChanged}"
                                SelectedItem="{Binding SelectedBrand, Mode=TwoWay}"
-                                DisplayMemberPath="Name"
+                                DisplayMemberPath="CarBrand_Name"
                                 Grid.Column="1"
                                 Width="200"
                                 
@@ -133,13 +137,30 @@
                             <materialDesign:PackIcon Kind="Phone" 
                                                      Grid.Column="0"/>
                             <TextBox 
-                                Text="{Binding Phone}"
+                                x:Name="txtPhone"
                                 Grid.Column="1"
-                                     Margin="0 0 0 10"
-                            materialDesign:HintAssist.Hint="Số Điện thoại"
-                                     Width="200"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                                Margin="0 0 0 10"
+                                materialDesign:HintAssist.Hint="Số Điện thoại"
+                                Width="200"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="Phone" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NumberValidation ErrorMessage="Chỉ được nhập số (0-9)"
+                                                                         ErrorMessageNull="Vui lòng nhập số điện thoại"
+                                                                         ></validation:NumberValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                                <!--<i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewTextInput">
+                                        
+                                        <ei:CallMethodAction TargetObject ="{Binding}" MethodName="ValidateNumber"></ei:CallMethodAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>-->
+                            </TextBox> 
+                            
                         </Grid>
                     </Grid>
                     <Grid Margin="0 10 0 0" Height="70">
