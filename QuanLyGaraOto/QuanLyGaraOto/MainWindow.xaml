@@ -30,9 +30,7 @@
                 <RowDefinition Height="100"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-
-            </Grid>
+            <Grid Grid.Row="0"/>
             <Grid Grid.Row="1">
                 <Grid.Resources>
                     <Style TargetType="Button">
@@ -237,6 +235,7 @@
                     </Button>
                 </Grid>
             </Grid>
+            
         </Grid>
         <Grid Background="White" Grid.Column="1"></Grid>
         <Grid Grid.Column="1" x:Name="Container"

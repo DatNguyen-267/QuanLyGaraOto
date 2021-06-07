@@ -203,7 +203,7 @@
                                              NotifyOnValidationError="False"
                                              >
                                         <Binding.ValidationRules>
-                                            <validation:DateValidate ErrorMessage="Vui lòng nhập ngày tiếp nhận"></validation:DateValidate>
+                                            <validation:DateValidation ErrorMessage="Vui lòng nhập ngày tiếp nhận"></validation:DateValidation>
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </DatePicker.Text>
