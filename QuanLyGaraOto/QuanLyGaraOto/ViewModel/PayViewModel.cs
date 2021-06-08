@@ -1,4 +1,5 @@
 ﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.Template;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,6 +44,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand PayCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand CheckIsOverPay { get; set; }
+        public ICommand PrintCommand { get; set; }
         public PayViewModel()
         {
 
@@ -88,7 +90,9 @@ namespace QuanLyGaraOto.ViewModel
                 DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == Reception.Reception_Id).SingleOrDefault().Debt = 0;
                 DataProvider.Ins.DB.SaveChanges();
                 IsPay = true;
-                p.Close();
+                VisPay = false;
+                p.txtPay.IsEnabled = false;
+                p.DatePickerPay.IsEnabled = false;
             });
             CloseCommand = new RelayCommand<Window>((p) => {
                 return true;
@@ -118,6 +122,22 @@ namespace QuanLyGaraOto.ViewModel
                     }
                 }catch { }
                 
+            });
+            PrintCommand = new RelayCommand<PayWindow>((p) => {
+                if (VisPay == true) return false;
+                return true;
+            }, (p) =>
+            {
+                BillTemplate billTemplate = new BillTemplate(Reception);
+                billTemplate.Show();
+                if (ListRepair.Count()>12)
+                {
+                    billTemplate.Height = billTemplate.Height + 35 * (ListRepair.Count() - 11);
+                }
+                PrintViewModel printViewModel = new PrintViewModel();
+                printViewModel.PrintBill(billTemplate);
+
+               
             });
         }
         public void InitData()

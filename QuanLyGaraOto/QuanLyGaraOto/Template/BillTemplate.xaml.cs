@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,11 @@ namespace QuanLyGaraOto.Template
     /// </summary>
     public partial class BillTemplate : Window
     {
-        public BillTemplate()
+        public BillViewModel billViewModel { get; set; }
+        public BillTemplate(RECEPTION reception)
         {
             InitializeComponent();
+            this.DataContext = (billViewModel = new BillViewModel(reception));
         }
     }
 }
