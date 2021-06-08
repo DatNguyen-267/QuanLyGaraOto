@@ -11,7 +11,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="PayWindow" Height="700" Width="1120">
+        Title="PayWindow" Height="800" Width="1120">
     <Window.Resources>
         
     </Window.Resources>
@@ -282,7 +282,7 @@
                 <Grid Grid.Row="3">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition Height="150"></RowDefinition>
+                        <RowDefinition Height="230"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -312,6 +312,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Button 
                             Command="{Binding PayCommand}"
@@ -326,17 +327,31 @@
                                 FontSize="20"
                             Background="#FF27AE60"></Button>
                         <Button 
+                            Command="{Binding PrintCommand}"
+                            CommandParameter="{Binding ElementName=PayWD}"
+                            Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Grid.Row="1" 
+                            BorderBrush="#FF27AE60"
+                            Content="In Hóa Đơn"
+                            Margin="30 0 30 0"
+                            FontWeight="Bold"
+                            Height="50"
+                                FontSize="20"
+                            Background="#FF27AE60">
+                        </Button>
+                        <Button 
                             Command="{Binding CloseCommand}"
                             CommandParameter="{Binding ElementName=PayWD}"
-                            Grid.Row="1"
+                            Grid.Row="2"
                             Margin="30 0 30 0"
                             FontWeight="Bold"
                             Content="Đóng"
-                            Foreground ="Black"
+                            Foreground ="White"
                             BorderBrush="White"
                                  Height="50"
                                 FontSize="20"
-                            Background="White"></Button>
+                        
+                            Background="#455A64"></Button>
                     </Grid>
                     
                 </Grid>
