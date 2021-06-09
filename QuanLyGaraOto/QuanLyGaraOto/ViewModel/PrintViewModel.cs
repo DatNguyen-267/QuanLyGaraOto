@@ -37,7 +37,7 @@ namespace QuanLyGaraOto.ViewModel
                
                 if (printDialog.ShowDialog() == true)
                 {
-                    printDialog.PrintVisual(p, "Bill");
+                    printDialog.PrintVisual(p.All, "Bill");
                     p.Close();
                 }
             }

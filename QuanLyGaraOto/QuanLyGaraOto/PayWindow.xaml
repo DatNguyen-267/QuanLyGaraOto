@@ -13,7 +13,13 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="PayWindow" Height="800" Width="1120">
     <Window.Resources>
-        
+        <Style TargetType="TextBlock" x:Key="txbInfo" BasedOn="{StaticResource MaterialDesignTextBlock}">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+        </Style>
+        <Style TargetType="TextBox" x:Key="txb" BasedOn="{StaticResource MaterialDesignTextBlock}">
+            <Setter Property="FontSize" Value="14"></Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -75,9 +81,10 @@
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="140"></RowDefinition>
-                    <RowDefinition Height="200"></RowDefinition>
+                    <RowDefinition Height="120"></RowDefinition>
+                    <RowDefinition Height="250"></RowDefinition>
                     <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="200"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Margin="15 5 0 0">
                     <TextBlock HorizontalAlignment="Left"
@@ -97,34 +104,30 @@
                     StrokeThickness="1">
                     </Rectangle>
                     <StackPanel>
-                        <Grid Margin="10 ">
+                        <Grid Margin="10 5 10 5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock Text="Tên Chủ Xe"
-                                           FontSize="16"
-                                           FontWeight="SemiBold"
-                                               
-                                           ></TextBlock>
+                                           Style="{StaticResource txbInfo}"></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
                                 <TextBlock Text="{Binding Reception.CUSTOMER.Customer_Name}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
-                                           FontSize="16"></TextBlock>
+                                           Style="{StaticResource txbInfo}"></TextBlock>
                             </Grid>
                         </Grid>
-                        <Grid Margin="10 ">
+                        <Grid Margin="10 5 10 5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock Text="Biển số xe"
-                                            FontSize="16"
-                                           FontWeight="SemiBold"
+                                           Style="{StaticResource txbInfo}"
                                                
                                            ></TextBlock>
                             </Grid>
@@ -132,19 +135,18 @@
                                 <TextBlock Text="{Binding Reception.LicensePlate}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
-                                           FontSize="16"
+                                           Style="{StaticResource txbInfo}"
                                            ></TextBlock>
                             </Grid>
                         </Grid>
-                        <Grid Margin="10 ">
+                        <Grid Margin="10 5 10 5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock Text="Điện Thoại"
-                                            FontSize="16"
-                                           FontWeight="SemiBold"
+                                           Style="{StaticResource txbInfo}"
                                                
                                            ></TextBlock>
                             </Grid>
@@ -152,7 +154,7 @@
                                 <TextBlock Text="{Binding Reception.CUSTOMER.Customer_Phone}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
-                                           FontSize="16"
+                                           Style="{StaticResource txbInfo}"
                                            ></TextBlock>
                             </Grid>
                         </Grid>
@@ -172,35 +174,31 @@
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Margin="10 5 10 5">
+                        <Grid Grid.Row="0" Margin="10 0 10 0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Số tiền thu"
-                                           FontSize="18"
-                                        Margin="0 0 0 15"
-                                           FontWeight="SemiBold"
-                                               VerticalAlignment="Center"
-                                       HorizontalAlignment="Stretch"
+                            <TextBlock  Text="Số tiền thu"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Stretch"
+                                        Style="{StaticResource txbInfo}"
                                            ></TextBlock>
                             <Grid Grid.Column="1">
                                 <Border BorderThickness="1"
                                         BorderBrush="DarkGray"
                                         CornerRadius="3"
                                         Height="50"
-                                        Margin="0 0 0 20"
-                                        
                                         VerticalAlignment="Center">
                                     <TextBox
                                         x:Name="txtPay"
-                                    materialDesign:ValidationAssist.Background="white"
-                                     IsReadOnly="{Binding RolReceivedMoney}"
-                                    Margin="10 0 10 8"
-                                    FontSize="16"          
-                                    VerticalAlignment="Center" 
-                                        
+                                        materialDesign:ValidationAssist.Background="white"
+                                        IsReadOnly="{Binding RolReceivedMoney}"
+                                        Margin="10 0 10 8"  
+                                        VerticalAlignment="Center" 
+                                        FontSize="14"
                                     >
                                         <TextBox.Style>
                                             <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
@@ -235,7 +233,7 @@
                             <Grid Grid.Column="1" Visibility="{Binding VisValidationPay, Converter={StaticResource BooleanToVisibilityConverter }}">
                                 <TextBlock Text="Số tiền thu không quá số tiền nợ"
                                        TextWrapping="WrapWithOverflow"
-                                       Margin="10 0 10 10"
+                                       Margin="10 0 10 0"
                                        VerticalAlignment="Bottom"
                                        FontSize="10"
                                        Foreground="Red"
@@ -245,16 +243,15 @@
                                 </TextBlock>
                             </Grid>
                         </Grid>
-                        <Grid Grid.Row="1" Margin="10 5 10 10">
+                        <Grid Grid.Row="1" Margin="10 0 10 0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock Text="Ngày thu tiền"
-                                           Margin="0 0 0 15"
-                                           FontSize="18"
-                                           FontWeight="SemiBold"
+                                           
+                                            Style="{StaticResource txbInfo}"
                                                VerticalAlignment="Center"
                                        HorizontalAlignment="Stretch"
                                            ></TextBlock>
@@ -264,7 +261,7 @@
                                         BorderBrush="DarkGray"
                                         CornerRadius="3"
                                         Height="50"
-                                        Margin="0 0 0 20"
+                                      
                                         VerticalAlignment="Center">
                                     <DatePicker
                                         x:Name="DatePickerPay"
@@ -277,16 +274,48 @@
                                 </Border>
                             </Grid>
                         </Grid>
+                        <Grid Grid.Row="2" Margin="10 5 10 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock  Text="Email"
+                                        Style="{StaticResource txbInfo}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Stretch"
+                                           ></TextBlock>
+                            <Grid Grid.Column="1">
+                                <Border BorderThickness="1"
+                                        BorderBrush="DarkGray"
+                                        CornerRadius="3"
+                                        Height="50"
+                                        Padding="3 0 3 0"
+                                        VerticalAlignment="Center">
+                                    <TextBox
+                                        x:Name="txbEmail"
+                                        materialDesign:ValidationAssist.Background="white"
+                                         IsReadOnly="{Binding RolEmail}"
+                                        Margin="10 0 10 0"
+                                        FontSize="14"        
+                                        VerticalAlignment="Center">
+                                        <TextBox.Text>
+                                            <Binding  Path="Email" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                                <Binding.ValidationRules>
+                                                    <validation:NullDataValidation ErrorMessage="Vui lòng nhập địa chỉ email"
+                                                                                               
+                                                                              ></validation:NullDataValidation>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                </Border>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="230"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="Tổng tiền"
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="Tổng tiền"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        Margin="0 0 10 0"
@@ -294,9 +323,9 @@
                                        FontWeight="ExtraBold"
                                       Foreground="#FF1976D2"
                                        >
-                                
-                            </TextBlock>
-                            <TextBlock Text="{Binding TotalMoney}"
+
+                        </TextBlock>
+                        <TextBlock Text="{Binding TotalMoney}"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        Margin="0 0 10 0"
@@ -304,29 +333,29 @@
                                         FontWeight="ExtraBold"
                                         Foreground="#FF1976D2"
                                        >
-                                
-                            </TextBlock>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Button 
+
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button 
                             Command="{Binding PayCommand}"
                             CommandParameter="{Binding ElementName=PayWD}"
                             Visibility="{Binding VisPay, Converter={StaticResource BooleanToVisibilityConverter}}"
                             Grid.Row="0" 
                             BorderBrush="#FF27AE60"
                             Content="Thanh Toán"
-                            Margin="30 0 30 0"
                             FontWeight="Bold"
-                            Height="50"
-                                FontSize="20"
+                            Height="40"
+                        Margin="30 0 30 0"
+                            FontSize="18"
                             Background="#FF27AE60"></Button>
-                        <Button 
+                    <Button 
                             Command="{Binding PrintCommand}"
                             CommandParameter="{Binding ElementName=PayWD}"
                             Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -335,11 +364,11 @@
                             Content="In Hóa Đơn"
                             Margin="30 0 30 0"
                             FontWeight="Bold"
-                            Height="50"
-                                FontSize="20"
+                            Height="40"
+                            FontSize="18"
                             Background="#FF27AE60">
-                        </Button>
-                        <Button 
+                    </Button>
+                    <Button 
                             Command="{Binding CloseCommand}"
                             CommandParameter="{Binding ElementName=PayWD}"
                             Grid.Row="2"
@@ -347,13 +376,11 @@
                             FontWeight="Bold"
                             Content="Đóng"
                             Foreground ="White"
-                            BorderBrush="White"
-                                 Height="50"
-                                FontSize="20"
-                        
+                            
+                            Height="40"
+                            FontSize="18"
+                            BorderBrush="#455A64"
                             Background="#455A64"></Button>
-                    </Grid>
-                    
                 </Grid>
             </Grid>
         </Grid>

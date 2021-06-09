@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
+        x:Name="ServiceWD"
         Height="450" Width="800"
         Background="White"  
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -13,6 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" 
@@ -105,7 +107,7 @@
         </Grid>
         <materialDesign:Card
             Margin="10 5 10 15"
-            Grid.Row="2">
+            Grid.Row="3">
             <ScrollViewer>
                 <ListView ItemsSource="{Binding ListCar}" SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
@@ -120,6 +122,75 @@
                 </ListView>
             </ScrollViewer>
         </materialDesign:Card>
+
+        <Grid Grid.Row="2" Margin="10 0 0 0">
+            <Grid.Resources>
+                <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                    <Setter Property="Width" Value="70"></Setter>
+                </Style>
+            </Grid.Resources>
+            <StackPanel Orientation="Horizontal">
+                <TextBox
+                        x:Name="txbID"
+                      materialDesign:HintAssist.Hint="ID"
+                      Style="{StaticResource txbSearch}"
+                      Width="50"
+                      Text="{Binding ID,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      VerticalAlignment="Center">
+                    
+                </TextBox>
+                <TextBox
+                    x:Name="txbLicensePlate"
+                      materialDesign:HintAssist.Hint="Biển số"
+                      Style="{StaticResource txbSearch}"
+                      Text="{Binding LicensePlate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      VerticalAlignment="Center">
+
+                </TextBox>
+                <ComboBox
+                    x:Name="cbBrand"
+                    ItemsSource="{Binding ListCarBrand}"
+                    DisplayMemberPath="CarBrand_Name"
+                    SelectedItem="{Binding SelectedBrand}"
+                      materialDesign:HintAssist.Hint="Hiệu xe"
+                        Margin="10 12 0 0"
+                    Width="70"
+                      VerticalAlignment="Center">
+
+                </ComboBox>
+                <TextBox
+                        x:Name="txbCustomerName"
+                      materialDesign:HintAssist.Hint="Chủ xe"
+                      Style="{StaticResource txbSearch}"
+                      Text="{Binding CustomerName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      VerticalAlignment="Center">
+                </TextBox>
+                <TextBox
+                        x:Name="txbDebt"
+                      materialDesign:HintAssist.Hint="Tiền nợ"
+                      Style="{StaticResource txbSearch}"
+                      Text="{Binding Debt,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                      VerticalAlignment="Center">
+
+                </TextBox>
+                <Button Content="Tìm"
+                        Margin="20 5 0 0"
+                         Width="100"
+                        Background="#455A64"
+                        Command="{Binding SearchCommand}"
+                        CommandParameter="{Binding ElementName=ServiceWD}">
+                </Button>
+                <Button Content="Làm mới"
+                        Margin="20 5 0 0"
+                         Width="100"
+                        Background="#455A64"
+                        Command="{Binding RefeshCommand}"
+                        CommandParameter="{Binding ElementName=ServiceWD}">
+
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 
 </UserControl>
