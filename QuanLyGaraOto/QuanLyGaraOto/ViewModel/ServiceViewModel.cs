@@ -117,9 +117,11 @@ namespace QuanLyGaraOto.ViewModel
             SearchCommand = new RelayCommand<ServiceWindow>
                 ((p) =>
                 {
-                    if (string.IsNullOrEmpty(p.txbID.Text) &&
-                    string.IsNullOrEmpty(p.txbDebt.Text) && 
-                    SelectedBrand == null && string.IsNullOrEmpty(CustomerName)
+                    if (string.IsNullOrEmpty(p.txbID.Text) 
+                    && string.IsNullOrEmpty(p.txbDebt.Text) 
+                    && string.IsNullOrEmpty(p.txbLicensePlate.Text) 
+                    && (SelectedBrand == null ||SelectedBrand.CarBrand_Name == null ) 
+                    && string.IsNullOrEmpty(CustomerName)
                     ) return false;
                     return true;
                 }, (p) =>
@@ -127,16 +129,23 @@ namespace QuanLyGaraOto.ViewModel
                     LoadListData();
                     UnicodeConvert uni = new UnicodeConvert();
                     TempListCar = new ObservableCollection<ListCar>();
+
+
                     foreach (var item in ListCar)
                     {
-                        if ( ((!string.IsNullOrEmpty(p.txbID.Text)&& item.CarReception.Reception_Id.ToString().Contains(ID.ToString()))
-                        ||(string.IsNullOrEmpty(p.txbID.Text))) 
-                        && ( (!string.IsNullOrEmpty(p.txbLicensePlate.Text) && !item.CarReception.LicensePlate.Contains(LicensePlate))
-                        ||(string.IsNullOrEmpty(p.txbLicensePlate.Text)))
-                        && ( (item.CarReception.CAR_BRAND.CarBrand_Name == SelectedBrand.CarBrand_Name) || (SelectedBrand == null)) 
-                        && ( (!string.IsNullOrEmpty(p.txbCustomerName.Text) && !item.CarReception.CUSTOMER.Customer_Name.Contains(CustomerName))
+                        if (((!string.IsNullOrEmpty(p.txbID.Text) && item.CarReception.Reception_Id.ToString().Contains(ID.ToString()))
+                        || (string.IsNullOrEmpty(p.txbID.Text)))
+
+                        && ((!string.IsNullOrEmpty(p.txbLicensePlate.Text) && uni.RemoveUnicode(item.CarReception.LicensePlate).ToLower().Contains(uni.RemoveUnicode(LicensePlate).ToLower()))
+                        || (string.IsNullOrEmpty(p.txbLicensePlate.Text)))
+
+                        && ((SelectedBrand == null || SelectedBrand.CarBrand_Name == null) || ((SelectedBrand != null ) && item.CarReception.CAR_BRAND.CarBrand_Name == SelectedBrand.CarBrand_Name)
+                         )
+
+                        && ((!string.IsNullOrEmpty(p.txbCustomerName.Text) && uni.RemoveUnicode(item.CarReception.CUSTOMER.Customer_Name).ToLower().Contains(uni.RemoveUnicode(CustomerName).ToLower()))
                         ||(string.IsNullOrEmpty(p.txbCustomerName.Text))) 
-                        && ( (!string.IsNullOrEmpty(p.txbDebt.Text) && !(item.CarReception.Debt.ToString() == Debt.ToString()))
+
+                        && ( (!string.IsNullOrEmpty(p.txbDebt.Text) && (item.CarReception.Debt.ToString() == Debt.ToString()))
                         ||(string.IsNullOrEmpty(p.txbDebt.Text)))) TempListCar.Add(item);
                     }
                     ListCar = TempListCar;
@@ -148,6 +157,11 @@ namespace QuanLyGaraOto.ViewModel
                     return true;
                 }, (p) =>
                 {
+                    ID = "";
+                    CustomerName = "";
+                    Debt = "";
+                    SelectedBrand = null;
+                    LicensePlate = "";
                     LoadListData();
                 }
             );

@@ -245,6 +245,7 @@
     <Compile Include="Validation\DateValidation.cs" />
     <Compile Include="Validation\NullDataValidation.cs" />
     <Compile Include="Validation\NumberValidation.cs" />
+    <Compile Include="Validation\OnlyNumberValidation.cs" />
     <Compile Include="Validation\PayOverValidation.cs" />
     <Compile Include="ViewModel\AddRepairDetailViewModel.cs" />
     <Compile Include="ViewModel\AddRepairFormViewModel.cs" />
