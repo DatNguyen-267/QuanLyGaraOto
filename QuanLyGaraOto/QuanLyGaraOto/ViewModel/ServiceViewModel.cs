@@ -1,4 +1,5 @@
-﻿using QuanLyGaraOto.Model;
+﻿using QuanLyGaraOto.Convert;
+using QuanLyGaraOto.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,13 +13,13 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class ServiceViewModel : BaseViewModel
     {
+        #region View Data
         private ObservableCollection<ListCar> _ListCar { get; set; }
         public ObservableCollection<ListCar> ListCar { get => _ListCar; set { _ListCar = value; OnPropertyChanged(); } }
+       
         private ListCar _SelectedItem { get; set; }
         public ListCar SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
-        public ICommand CarReceptionCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
-        public ICommand OpenCommand { get; set; }
+       
         private string _ReceptionOfDay { get; set; }
         public string ReceptionOfDay { get => _ReceptionOfDay; set { _ReceptionOfDay = value; OnPropertyChanged(); } }
         private GARA_INFO _GaraInfo { get; set; }
@@ -27,6 +28,33 @@ namespace QuanLyGaraOto.ViewModel
         public int ReceptionAmount { get => _ReceptionAmount; set { _ReceptionAmount = value;
                 ReceptionOfDay = "Số xe đã tiếp nhận hôm nay: " + ReceptionAmount.ToString() + "/" + GaraInfo.MaxCarReception.ToString();
                 OnPropertyChanged(); } }
+        #endregion
+
+        #region Search Data
+        private string _CustomerName { get; set; }
+        public string CustomerName { get => _CustomerName; set { _CustomerName = value; OnPropertyChanged(); } }
+        private string _LicensePlate { get; set; }
+        public string LicensePlate { get => _LicensePlate; set { _LicensePlate = value; OnPropertyChanged(); } }
+        private string _Debt { get; set; }
+        public string Debt { get => _Debt; set { _Debt = value; OnPropertyChanged(); } }
+        private string _ID { get; set; }
+        public string ID { get => _ID; set { _ID = value; OnPropertyChanged(); } }
+        private CAR_BRAND _SelectedBrand { get; set; }
+        public CAR_BRAND SelectedBrand { get => _SelectedBrand; set { _SelectedBrand = value; OnPropertyChanged(); } }
+        private ObservableCollection<CAR_BRAND> _ListCarBrand { get; set; }
+        public ObservableCollection<CAR_BRAND> ListCarBrand { get => _ListCarBrand; set { _ListCarBrand = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<ListCar> _TempListCar { get; set; }
+        public ObservableCollection<ListCar> TempListCar { get => _TempListCar; set { _TempListCar = value; OnPropertyChanged(); } }
+        #endregion
+
+        #region Command
+        public ICommand CarReceptionCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand OpenCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+        public ICommand RefeshCommand { get; set; }
+        #endregion
         public ServiceViewModel()
         {
             InitData();
@@ -86,8 +114,60 @@ namespace QuanLyGaraOto.ViewModel
                     SelectedItem.Debt = carServiceViewModel.Total;
                 }
             );
+            SearchCommand = new RelayCommand<ServiceWindow>
+                ((p) =>
+                {
+                    if (string.IsNullOrEmpty(p.txbID.Text) 
+                    && string.IsNullOrEmpty(p.txbDebt.Text) 
+                    && string.IsNullOrEmpty(p.txbLicensePlate.Text) 
+                    && (SelectedBrand == null ||SelectedBrand.CarBrand_Name == null ) 
+                    && string.IsNullOrEmpty(CustomerName)
+                    ) return false;
+                    return true;
+                }, (p) =>
+                {
+                    LoadListData();
+                    UnicodeConvert uni = new UnicodeConvert();
+                    TempListCar = new ObservableCollection<ListCar>();
+
+
+                    foreach (var item in ListCar)
+                    {
+                        if (((!string.IsNullOrEmpty(p.txbID.Text) && item.CarReception.Reception_Id.ToString().Contains(ID.ToString()))
+                        || (string.IsNullOrEmpty(p.txbID.Text)))
+
+                        && ((!string.IsNullOrEmpty(p.txbLicensePlate.Text) && uni.RemoveUnicode(item.CarReception.LicensePlate).ToLower().Contains(uni.RemoveUnicode(LicensePlate).ToLower()))
+                        || (string.IsNullOrEmpty(p.txbLicensePlate.Text)))
+
+                        && ((SelectedBrand == null || SelectedBrand.CarBrand_Name == null) || ((SelectedBrand != null ) && item.CarReception.CAR_BRAND.CarBrand_Name == SelectedBrand.CarBrand_Name)
+                         )
+
+                        && ((!string.IsNullOrEmpty(p.txbCustomerName.Text) && uni.RemoveUnicode(item.CarReception.CUSTOMER.Customer_Name).ToLower().Contains(uni.RemoveUnicode(CustomerName).ToLower()))
+                        ||(string.IsNullOrEmpty(p.txbCustomerName.Text))) 
+
+                        && ( (!string.IsNullOrEmpty(p.txbDebt.Text) && (item.CarReception.Debt.ToString() == Debt.ToString()))
+                        ||(string.IsNullOrEmpty(p.txbDebt.Text)))) TempListCar.Add(item);
+                    }
+                    ListCar = TempListCar;
+                }
+            );
+            RefeshCommand = new RelayCommand<ServiceWindow>
+                ((p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    ID = "";
+                    CustomerName = "";
+                    Debt = "";
+                    SelectedBrand = null;
+                    LicensePlate = "";
+                    LoadListData();
+                }
+            );
             LoadListData();
         }
+
         public void LoadReceptionAmount()
         {
             ReceptionAmount = 0;
@@ -105,6 +185,7 @@ namespace QuanLyGaraOto.ViewModel
         public void InitData()
         {
             GaraInfo = DataProvider.Ins.DB.GARA_INFO.FirstOrDefault();
+            ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
             LoadReceptionAmount();
         }
         public int GetDebt(int ID)

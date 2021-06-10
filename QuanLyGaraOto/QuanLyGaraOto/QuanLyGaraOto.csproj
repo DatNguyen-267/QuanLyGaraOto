@@ -120,6 +120,7 @@
       <DependentUpon>ChangeCarInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Convert\DateConvert.cs" />
+    <Compile Include="Convert\UnicodeConvert.cs" />
     <Compile Include="EditAccountWindow.xaml.cs">
       <DependentUpon>EditAccountWindow.xaml</DependentUpon>
     </Compile>
@@ -244,6 +245,7 @@
     <Compile Include="Validation\DateValidation.cs" />
     <Compile Include="Validation\NullDataValidation.cs" />
     <Compile Include="Validation\NumberValidation.cs" />
+    <Compile Include="Validation\OnlyNumberValidation.cs" />
     <Compile Include="Validation\PayOverValidation.cs" />
     <Compile Include="ViewModel\AddRepairDetailViewModel.cs" />
     <Compile Include="ViewModel\AddRepairFormViewModel.cs" />

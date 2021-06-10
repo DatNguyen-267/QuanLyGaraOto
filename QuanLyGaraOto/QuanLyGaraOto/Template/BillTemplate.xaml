@@ -22,7 +22,7 @@
             <Setter Property="FontSize" Value="13"></Setter>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="All">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
