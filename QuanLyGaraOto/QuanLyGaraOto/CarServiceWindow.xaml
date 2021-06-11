@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Name="CarServiceWD"
         Title="Dịch vụ và thông tin xe" 
-        Height="600" Width="1030"
+        Height="600" Width="1100"
         MinHeight="500"
         MinWidth="700"
         WindowStartupLocation="CenterScreen"
@@ -302,7 +302,7 @@
                             
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="0" Margin="10 10 10 10">
+                    <Grid Grid.Row="0" Margin="10 10 0 10">
                         <ScrollViewer >
                             <ListView 
                                 ItemsSource="{Binding ListRepair}" 
@@ -315,6 +315,7 @@
                                         <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Name}"></GridViewColumn>
                                         <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding RepairInfo.SuppliesAmount}"></GridViewColumn>
                                         <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Price}"></GridViewColumn>
+                                        <GridViewColumn Width="148" Header="Loại tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Name}"></GridViewColumn>
                                         <GridViewColumn Header="Tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Value}"></GridViewColumn>
                                         <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding RepairInfo.TotalMoney}"></GridViewColumn>
                                     </GridView>
@@ -379,6 +380,7 @@
                             HorizontalAlignment="Right">
                     </Button>
                     <Button Grid.Column="0"
+                            IsEnabled="{Binding IsEnabledReceipt}"
                         Command="{Binding ReceiptCommand}"
                         Visibility="{Binding VisPay, Converter={StaticResource BooleanToVisibilityConverter}}"
                         x:Name="BtnReceipt"

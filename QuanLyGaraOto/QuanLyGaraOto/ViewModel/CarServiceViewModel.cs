@@ -28,6 +28,9 @@ namespace QuanLyGaraOto.ViewModel
         public bool VisEdit { get => _VisEdit; set { _VisEdit = value; OnPropertyChanged(); } }
         private bool _VisDelete { get; set; }
         public bool VisDelete { get => _VisDelete; set { _VisDelete = value; OnPropertyChanged(); } }
+        private bool _IsEnabledReceipt { get; set; }
+        public bool IsEnabledReceipt { get => _IsEnabledReceipt; set { _IsEnabledReceipt = value; OnPropertyChanged(); } }
+        
         #region Visibility
         private bool _VisReceptionCard { get; set; }
         public bool VisReceptionCard { get => _VisReceptionCard; set { _VisReceptionCard = value; OnPropertyChanged(); } }
@@ -128,6 +131,10 @@ namespace QuanLyGaraOto.ViewModel
                 VisRepair(true);
                 LoadRepairInfo(this.CarReception.Reception_Id);
                 RepairDate = RepairForm.RepairDate;
+                if (DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == RepairForm.Repair_Id).Count() == 0)
+                {
+                    IsEnabledReceipt = false;
+                }
             }
             else EnableRepairBtn(true);
             // Kiểm tra bảng thông tin sửa chữa
@@ -145,6 +152,7 @@ namespace QuanLyGaraOto.ViewModel
                 VisChangeCustomerInfo = false;
                 VisOption = false;
             }
+            
 
         }
         public void GenaralFunction()
@@ -215,6 +223,7 @@ namespace QuanLyGaraOto.ViewModel
                         DataProvider.Ins.DB.SaveChanges();
 
                         if (VisPay == false) VisPay = true;
+                        IsEnabledReceipt = true;
                     }
                 });
             EditCommand = new RelayCommand<Object>(
@@ -237,6 +246,7 @@ namespace QuanLyGaraOto.ViewModel
                         DataProvider.Ins.DB.SaveChanges();
 
                         if (VisPay == false) VisPay = true;
+                        
                     }
                 });
             DeleteCommand = new RelayCommand<Object>(
@@ -260,6 +270,11 @@ namespace QuanLyGaraOto.ViewModel
                     UpdateTotal();
                     DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
                     DataProvider.Ins.DB.SaveChanges();
+
+                    if (ListRepair.Count() == 0)
+                    {
+                        IsEnabledReceipt = false;
+                    }
                 });
 
             ChangeCarInfoCommand = new RelayCommand<Object>(
@@ -335,6 +350,7 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void InitVis()
         {
+            IsEnabledReceipt = true;
             VisReceptionCard = true;
             VisAddRepairCard = true;
             VisInfo = false;
