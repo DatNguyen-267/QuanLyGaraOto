@@ -79,7 +79,7 @@ namespace QuanLyGaraOto.ViewModel
         public void Command()
         {
             PayCommand = new RelayCommand<PayWindow>((p) => {
-                if (SelectedDate == null || p.txtPay.Text == null ||p.txbEmail == null)
+                if (SelectedDate == null || string.IsNullOrEmpty(p.txtPay.Text) || string.IsNullOrEmpty(p.txbEmail.Text))
                 {
                     return false;
                 }
@@ -107,7 +107,7 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                IsPay = false;
+                
                 p.Close();
             });
             CheckIsOverPay = new RelayCommand<TextBox>((p) => {

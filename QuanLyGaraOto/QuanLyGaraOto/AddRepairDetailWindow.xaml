@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
          xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-        Title="AddRepairDetailWindow" Height="200" Width="900">
+        Title="Thêm thông tin sửa chữa" Height="200" Width="900">
     <Grid Margin="20 10 20 10" >
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>

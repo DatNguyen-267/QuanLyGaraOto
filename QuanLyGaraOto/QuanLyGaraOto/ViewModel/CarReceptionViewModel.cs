@@ -43,13 +43,15 @@ namespace QuanLyGaraOto.ViewModel
             {
                 p.Close();
             });
-            ConfirmCommand = new RelayCommand<Window>((p) => {
-                if (Name == null
-                    || Phone == null
-                    || Address == null
+            ConfirmCommand = new RelayCommand<CarReceptionWindow>((p) => {
+                Regex regex = new Regex(@"^[0-9]+$");
+               
+                if (string.IsNullOrEmpty(p.txbName.Text)
+                    || (string.IsNullOrEmpty(p.txtPhone.Text) || !regex.IsMatch(p.txtPhone.Text.ToString()))
+                    || string.IsNullOrEmpty(p.txbAddress.Text)
                     || SelectedBrand == null
                     || ReceptionDate == null
-                    || LicensePlate == null
+                    || string.IsNullOrEmpty(p.txbLicensePlate.Text)
                     ) return false;
                 return true;
             }, (p) =>

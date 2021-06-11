@@ -11,7 +11,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="PayWindow" Height="800" Width="1120">
+        Title="Hóa đơn thanh toán" Height="800" Width="1120">
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="txbInfo" BasedOn="{StaticResource MaterialDesignTextBlock}">
             <Setter Property="FontSize" Value="14"></Setter>
@@ -319,7 +319,7 @@
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        Margin="0 0 10 0"
-                                       FontSize="25"
+                                       FontSize="30"
                                        FontWeight="ExtraBold"
                                       Foreground="#FF1976D2"
                                        >
@@ -348,25 +348,25 @@
                             CommandParameter="{Binding ElementName=PayWD}"
                             Visibility="{Binding VisPay, Converter={StaticResource BooleanToVisibilityConverter}}"
                             Grid.Row="0" 
-                            BorderBrush="#FF27AE60"
+                            BorderBrush="#3366ff"
                             Content="Thanh Toán"
                             FontWeight="Bold"
                             Height="40"
                         Margin="30 0 30 0"
                             FontSize="18"
-                            Background="#FF27AE60"></Button>
+                            Background="#3366ff"></Button>
                     <Button 
                             Command="{Binding PrintCommand}"
                             CommandParameter="{Binding ElementName=PayWD}"
                             Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
                             Grid.Row="1" 
-                            BorderBrush="#FF27AE60"
+                            BorderBrush="#3366ff"
                             Content="In Hóa Đơn"
                             Margin="30 0 30 0"
                             FontWeight="Bold"
                             Height="40"
                             FontSize="18"
-                            Background="#FF27AE60">
+                            Background="#3366ff">
                     </Button>
                     <Button 
                             Command="{Binding CloseCommand}"

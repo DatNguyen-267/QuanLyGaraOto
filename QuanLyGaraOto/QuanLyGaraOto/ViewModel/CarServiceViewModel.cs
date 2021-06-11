@@ -16,6 +16,8 @@ namespace QuanLyGaraOto.ViewModel
         public bool IsRecepted { get; set; }
         private bool _VisPay { get; set; }
         public bool VisPay { get=>_VisPay; set { _VisPay = value; OnPropertyChanged(); } }
+        private bool _VisOption { get; set; }
+        public bool VisOption { get => _VisOption; set { _VisOption = value; OnPropertyChanged(); } }
         private bool _VisChangeCustomerInfo { get; set; }
         public bool VisChangeCustomerInfo { get => _VisChangeCustomerInfo; set { _VisChangeCustomerInfo = value; OnPropertyChanged(); } }
         private bool _VisView { get; set; }
@@ -141,6 +143,7 @@ namespace QuanLyGaraOto.ViewModel
                 VisEdit = false;
                 VisDelete = false;
                 VisChangeCustomerInfo = false;
+                VisOption = false;
             }
 
         }
@@ -291,6 +294,7 @@ namespace QuanLyGaraOto.ViewModel
                     VisEdit = !payViewModel.IsPay;
                     VisDelete = !payViewModel.IsPay;
                     VisChangeCustomerInfo = !payViewModel.IsPay;
+                    VisOption = !payViewModel.IsPay;
                 });
             ViewCommand = new RelayCommand<Object>(
                 (p) => {
@@ -341,6 +345,7 @@ namespace QuanLyGaraOto.ViewModel
             VisEdit = true;
             VisDelete = true;
             VisChangeCustomerInfo = true;
+            VisOption = true;
         }
         public void EnableReceptionBtn(bool temp)
         {
