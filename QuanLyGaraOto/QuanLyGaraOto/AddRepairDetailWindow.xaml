@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
          xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-        Title="AddRepairDetailWindow" Height="200" Width="900">
+        Title="Thêm thông tin sửa chữa" Height="200" Width="1100">
     <Grid Margin="20 10 20 10" >
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -19,25 +19,27 @@
         </Grid.RowDefinitions>
         <Grid Height="80" Grid.Row="0">
             <StackPanel 
-                                Grid.Row="1"
-                                Margin="7 5 10 5"
-                                Orientation="Horizontal"
-                                HorizontalAlignment="Left">
+                    Grid.Row="1"
+                    Margin="7 5 10 5"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left">
                 <TextBox
-                                    Text="{Binding Content}"  HorizontalAlignment="Left"
-                                    materialDesign:HintAssist.Hint="Nội dung"
-                                    Width="200"
-                                    Margin="3 3 3 0"
-                                    Style="{StaticResource MaterialDesignFilledTextBox}">
+                    x:Name="txbName"
+                    Text="{Binding Content}"  HorizontalAlignment="Left"
+                    materialDesign:HintAssist.Hint="Nội dung"
+                    Width="200"
+                    Margin="3 3 3 0"
+                    Style="{StaticResource MaterialDesignFilledTextBox}">
                 </TextBox>
                 <ComboBox
-                                    SelectedItem="{Binding SelectedSupply}"
-                                    ItemsSource="{Binding ListSupply}"
-                                    DisplayMemberPath="Supplies_Name"
-                                    Style="{StaticResource MaterialDesignFilledComboBox}"
-                                    materialDesign:HintAssist.Hint="Vật tư"
-                                    Margin="3 3 3 0"
-                                    Width="120">
+                    x:Name="cbSupplies"
+                    SelectedItem="{Binding SelectedSupply}"
+                    ItemsSource="{Binding ListSupply}"
+                    DisplayMemberPath="Supplies_Name"
+                    Style="{StaticResource MaterialDesignFilledComboBox}"
+                    materialDesign:HintAssist.Hint="Vật tư"
+                    Margin="3 3 3 0"
+                    Width="120">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction
@@ -47,14 +49,15 @@
                     </i:Interaction.Triggers>
                 </ComboBox>
                 <ComboBox
-                                    SelectedItem="{Binding SelectedAmount}"
-                                    Text="{Binding SuppliesAmount}"
-                                    
-                                    Margin="3 3 3 0"                 
-                                    Width="120"
-                                    materialDesign:HintAssist.Hint="Số lượng"
-                                    ItemsSource="{Binding ListAmount, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Style="{StaticResource MaterialDesignFilledComboBox}">
+                    x:Name="cbSuppliesAmount"       
+                    SelectedItem="{Binding SelectedAmount}"
+                    Text="{Binding SuppliesAmount}"
+                                              
+                    Margin="3 3 3 0"                 
+                    Width="120"
+                    materialDesign:HintAssist.Hint="Số lượng"
+                    ItemsSource="{Binding ListAmount, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource MaterialDesignFilledComboBox}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction
@@ -69,22 +72,25 @@
                     </ComboBox.ItemsPanel>
                 </ComboBox>
                 <TextBox
-                                    IsReadOnly="True"
-                                    Text="{Binding SelectedSupply.Supplies_Price}"  HorizontalAlignment="Left"
-                                    materialDesign:HintAssist.Hint="Đơn giá"
-                                    Width="120"
-                                    Margin="3 3 3 0"
-                                    Style="{StaticResource MaterialDesignFilledTextBox}">
+                    x:Name="txbPrice"
+                    IsReadOnly="True"
+                    Text="{Binding SelectedSupply.Supplies_Price}"  HorizontalAlignment="Left"
+                    materialDesign:HintAssist.Hint="Đơn giá"
+                    Width="120"
+                    Margin="3 3 3 0"
+                    Style="{StaticResource MaterialDesignFilledTextBox}">
 
                 </TextBox>
                 <ComboBox
-                                    SelectedValue="{Binding SelectedPay}"
-                                    ItemsSource="{Binding ListPay}"
-                                    DisplayMemberPath="Wage_Value"
-                                    Style="{StaticResource MaterialDesignFilledComboBox}"
-                                    materialDesign:HintAssist.Hint="Tiền công"
-                                    Margin="3 3 3 0"
-                                    Width="120">
+                    x:Name="cbWage"
+                    SelectedItem="{Binding SelectedPay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    ItemsSource="{Binding ListPay}"
+                    DisplayMemberPath="Wage_Name"
+                   
+                    Style="{StaticResource MaterialDesignFilledComboBox}"
+                    materialDesign:HintAssist.Hint="Loại tiền công"
+                    Margin="3 3 3 0"
+                    Width="120">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction
@@ -94,12 +100,23 @@
                     </i:Interaction.Triggers>
                 </ComboBox>
                 <TextBox
-                                    Text="{Binding TotalMoney}"  HorizontalAlignment="Left"
-                                    materialDesign:HintAssist.Hint="Thành tiền"
-                                    Width="120"
-                                    Margin="3 3 3 0"
-                                    Style="{StaticResource MaterialDesignFilledTextBox}"
-                                    >
+                    x:Name="txbWagePrice"
+                    IsReadOnly="True"
+                    Text="{Binding SelectedPay.Wage_Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  HorizontalAlignment="Left"
+                    materialDesign:HintAssist.Hint="Tiền công"
+                    Width="120"
+                    Margin="3 3 3 0"
+                    Style="{StaticResource MaterialDesignFilledTextBox}">
+
+                </TextBox>
+                <TextBox
+                    Text="{Binding TotalMoney}"  HorizontalAlignment="Left"
+                    materialDesign:HintAssist.Hint="Thành tiền"
+                    Width="120"
+                    Margin="3 3 3 0"
+                    IsReadOnly="True"
+                    Style="{StaticResource MaterialDesignFilledTextBox}"
+                    >
                 </TextBox>
             </StackPanel>
         </Grid>

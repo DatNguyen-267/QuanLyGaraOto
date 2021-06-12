@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Name="CarReceptionWD"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="CarReceptionWindow" Height="600" Width="450"
+        Title="Tiếp nhận xe" Height="600" Width="450"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
          xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -61,6 +61,7 @@
                             <materialDesign:PackIcon Kind="Account" 
                                                      Grid.Column="0"/>
                             <TextBox 
+                                x:Name="txbName"
                                 Text="{Binding Name}"
                                 Grid.Column="2"
                             materialDesign:HintAssist.Hint="Tên chủ xe"
@@ -79,6 +80,7 @@
                             <materialDesign:PackIcon Kind="ClipboardOutline" 
                                                      Grid.Column="0"/>
                             <TextBox 
+                                x:Name="txbLicensePlate"
                                 Text="{Binding LicensePlate}"
                                 Grid.Column="1"
                                      Margin="0 0 0 10"
@@ -119,6 +121,7 @@
                             <materialDesign:PackIcon Kind="MapMarkerOutline" 
                                                      Grid.Column="0"/>
                             <TextBox 
+                                x:Name="txbAddress"
                                 Text="{Binding Address}"
                                 Grid.Column="2"
                             materialDesign:HintAssist.Hint="Địa chỉ"
@@ -172,7 +175,7 @@
                             <materialDesign:PackIcon Kind="DateRange" 
                                                      Grid.Column="0"/>
                             <DatePicker 
-                                SelectedDate="{Binding ReceptionDate}"
+                                SelectedDate="{Binding ReceptionDate, UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}"
                                 Grid.Column="1"
                                Width="200"
                                         Height="auto"
