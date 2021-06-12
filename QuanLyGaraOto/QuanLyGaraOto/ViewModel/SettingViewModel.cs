@@ -275,37 +275,37 @@ namespace QuanLyGaraOto.ViewModel
             });
 
             // Gara information
-            garaInfo = DataProvider.Ins.DB.GARA_INFO.First();
-            if (garaInfo != null)
-            {
-                MaxCarReception = garaInfo.MaxCarReception;
-            }
+            //garaInfo = DataProvider.Ins.DB.GARA_INFO.First();
+            //if (garaInfo != null)
+            //{
+            //    MaxCarReception = garaInfo.MaxCarReception;
+            //}
 
-            ChangeGaraInformation = new RelayCommand<object>(
-                (p) =>
-                {
-                    if (garaInfo != null) return true;
-                    return false;
-                },
-                (p) =>
-                {
-                    garaInfo.MaxCarReception = _MaxCarReception;
-                    DataProvider.Ins.DB.SaveChanges();
-                    SetEnableStatusButtonInGaraInformation(false);
-                });
+            //ChangeGaraInformation = new RelayCommand<object>(
+            //    (p) =>
+            //    {
+            //        if (garaInfo != null) return true;
+            //        return false;
+            //    },
+            //    (p) =>
+            //    {
+            //        garaInfo.MaxCarReception = _MaxCarReception;
+            //        DataProvider.Ins.DB.SaveChanges();
+            //        SetEnableStatusButtonInGaraInformation(false);
+            //    });
 
-            ResetGaraInformation = new RelayCommand<object>(
-                (p) =>
-                {
-                    if (garaInfo != null) return true;
-                    return false;
-                },
-                (p) =>
-                {
-                    MaxCarReception = garaInfo.MaxCarReception;
+            //ResetGaraInformation = new RelayCommand<object>(
+            //    (p) =>
+            //    {
+            //        if (garaInfo != null) return true;
+            //        return false;
+            //    },
+            //    (p) =>
+            //    {
+            //        MaxCarReception = garaInfo.MaxCarReception;
 
-                    SetEnableStatusButtonInGaraInformation(false);
-                });
+            //        SetEnableStatusButtonInGaraInformation(false);
+            //    });
 
             // Car brands
             ListBrands = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);

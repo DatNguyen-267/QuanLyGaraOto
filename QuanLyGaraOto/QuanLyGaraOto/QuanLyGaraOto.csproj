@@ -95,6 +95,9 @@
     <Compile Include="AddEmployee.xaml.cs">
       <DependentUpon>AddEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddImportWindow.xaml.cs">
+      <DependentUpon>AddImportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddNewGoodWindow.xaml.cs">
       <DependentUpon>AddNewGoodWindow.xaml</DependentUpon>
     </Compile>
@@ -253,6 +256,7 @@
     <Compile Include="Validation\NumberValidation.cs" />
     <Compile Include="Validation\OnlyNumberValidation.cs" />
     <Compile Include="Validation\PayOverValidation.cs" />
+    <Compile Include="ViewModel\AddImportWindowViewModel.cs" />
     <Compile Include="ViewModel\AddRepairDetailViewModel.cs" />
     <Compile Include="ViewModel\AddRepairFormViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -262,6 +266,7 @@
     <Compile Include="ViewModel\CarServiceViewModel.cs" />
     <Compile Include="ViewModel\ChangeCarInfoViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\ImportGoodViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PayViewModel.cs" />
@@ -276,6 +281,10 @@
     <Page Include="AddEmployee.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddImportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddNewGoodWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

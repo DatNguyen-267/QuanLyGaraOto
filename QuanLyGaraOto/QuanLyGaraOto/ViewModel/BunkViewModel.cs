@@ -106,33 +106,34 @@ namespace QuanLyGaraOto.ViewModel
                 );
             //SearchCommand = new RelayCommand<BunkWindow>((parameter) => true, (parameter) => Search(parameter));
                 OpenImportCommand = new RelayCommand<MainWindow>((p) => true, (p) => OpenImportWd(p));
-                ImportCommand = new RelayCommand<ImportWindow>(
-                    (p) =>
-                    {
-                        return true;
-                    },
-                    (p) =>
-                    {
-                        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.Supplies_Id).SingleOrDefault();
-                        List.Supplies_Amount += Int32.Parse(p.txbAmount.Text);
-                        DataProvider.Ins.DB.SaveChanges();
-                        p.Close();
+                //ImportCommand = new RelayCommand<ImportWindow>(
+                //    (p) =>
+                //    {
+                //        return true;
+                //    },
+                //    (p) =>
+                //    {
+                //        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.Supplies_Id).SingleOrDefault();
+                //        List.Supplies_Amount += Int32.Parse(p.txbAmount.Text);
+                //        DataProvider.Ins.DB.SaveChanges();
+                //        p.Close();
 
-                    });
+                //    });
 
             SuppliesBillCommand = new RelayCommand<object>((p) => { return true; }, p => { GoodBillWindow wd = new GoodBillWindow(); wd.ShowDialog(); });
         }
 
         public void OpenImportWd(MainWindow wd)
         {
-            ImportWindow wdImport = new ImportWindow();
-            wdImport.ShowDialog();
+            AddImportWindow addImportWindow = new AddImportWindow();
+            addImportWindow.ShowDialog();
         }
         public void OpenAddWd(MainWindow wd)
         {
             AddNewGoodWindow wdAddGoods = new AddNewGoodWindow();
 
             wdAddGoods.txbName.Text = "";
+            wdAddGoods.btnAdd.Visibility = System.Windows.Visibility.Visible;
             wdAddGoods.txbPrice.Text = "";
             wdAddGoods.ShowDialog();
         }
