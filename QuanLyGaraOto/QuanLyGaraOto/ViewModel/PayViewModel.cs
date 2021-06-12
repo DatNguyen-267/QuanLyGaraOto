@@ -1,4 +1,5 @@
 ﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.Template;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,8 +24,12 @@ namespace QuanLyGaraOto.ViewModel
                     OnPropertyChanged(); } }
         private bool _IsOverPay { get; set; }
         public bool IsOverPay { get => _IsOverPay; set { _IsOverPay = value; OnPropertyChanged(); } }
-        public bool RolReceivedMoney { get; set; }
-        public bool EnabledReceiptDate { get; set; }
+        private bool _RolReceivedMoney { get; set; }
+        public bool RolReceivedMoney { get => _RolReceivedMoney; set { _RolReceivedMoney = value; OnPropertyChanged(); } }
+        private bool _RolEmail { get; set; }
+        public bool RolEmail { get => _RolEmail; set { _RolEmail = value; OnPropertyChanged(); } }
+        private bool _EnabledReceiptDate { get; set; }
+        public bool EnabledReceiptDate { get => _EnabledReceiptDate; set { _EnabledReceiptDate = value; OnPropertyChanged(); } }
         public bool VisPay { get; set; }
         private string _ReceivedMoney { get; set; }
         public string ReceivedMoney { get => _ReceivedMoney; set {
@@ -32,6 +37,8 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged(); } }
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
+        private string _Email { get; set; }
+        public string Email { get => _Email; set { _Email = value; OnPropertyChanged(); } }
         private DateTime _SelectedDate { get; set; }
         public DateTime SelectedDate { get => _SelectedDate; set { _SelectedDate = value; OnPropertyChanged(); } }
         private RECEPTION _Reception { get; set; }
@@ -43,6 +50,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand PayCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand CheckIsOverPay { get; set; }
+        public ICommand PrintCommand { get; set; }
         public PayViewModel()
         {
 
@@ -61,6 +69,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 VisPay = false;
                 RolReceivedMoney = true;
+                RolEmail = true;
                 EnabledReceiptDate = false;
                 SelectedDate = DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault().ReceiptDate;
                 ReceivedMoney = DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault().MoneyReceived.ToString() ;
@@ -70,7 +79,7 @@ namespace QuanLyGaraOto.ViewModel
         public void Command()
         {
             PayCommand = new RelayCommand<PayWindow>((p) => {
-                if (SelectedDate == null || p.txtPay.Text == null)
+                if (SelectedDate == null || p.txtPay.Text == null ||p.txbEmail == null)
                 {
                     return false;
                 }
@@ -84,11 +93,15 @@ namespace QuanLyGaraOto.ViewModel
                 newReceipt.MoneyReceived = int.Parse(ReceivedMoney);
                 newReceipt.Phone = Reception.CUSTOMER.Customer_Phone;
                 newReceipt.IdReception = Reception.Reception_Id;
+                newReceipt.Email = Email;
                 DataProvider.Ins.DB.RECEIPTs.Add(newReceipt);
                 DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == Reception.Reception_Id).SingleOrDefault().Debt = 0;
                 DataProvider.Ins.DB.SaveChanges();
                 IsPay = true;
-                p.Close();
+                VisPay = false;
+                EnabledReceiptDate = false;
+                RolReceivedMoney = true;
+                RolEmail = true;
             });
             CloseCommand = new RelayCommand<Window>((p) => {
                 return true;
@@ -119,6 +132,22 @@ namespace QuanLyGaraOto.ViewModel
                 }catch { }
                 
             });
+            PrintCommand = new RelayCommand<PayWindow>((p) => {
+                if (VisPay == true) return false;
+                return true;
+            }, (p) =>
+            {
+                BillTemplate billTemplate = new BillTemplate(Reception);
+                billTemplate.Show();
+                if (ListRepair.Count()>12)
+                {
+                    billTemplate.Height = billTemplate.Height + 35 * (ListRepair.Count() - 11);
+                }
+                PrintViewModel printViewModel = new PrintViewModel();
+                printViewModel.PrintBill(billTemplate);
+
+               
+            });
         }
         public void InitData()
         {
@@ -127,6 +156,7 @@ namespace QuanLyGaraOto.ViewModel
             IsOverPay = true;
             VisValidationPay = false;
             RolReceivedMoney = false;
+            RolEmail = false;
             EnabledReceiptDate = true;
             Repair = DataProvider.Ins.DB.REPAIRs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault();
             var repairDetail = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == Repair.Repair_Id);
