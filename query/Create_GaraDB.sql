@@ -1,4 +1,4 @@
--- Khoi tao database
+﻿-- Khoi tao database
 GO
 create database GARA;
 GO
@@ -138,7 +138,7 @@ create table REPAIR_DETAIL
     SuppliesAmount int,
     IdWage int not NULL,
 	IdRepair int not null,
-	IdSupplies int nto null,
+	IdSupplies int,
 	constraint FK_REPAIRDETAIL_SUPPLIES foreign key (IdSupplies) references SUPPLIES(Supplies_Id),
     constraint FK_REPAIRDETAIL_WAGE foreign key (IdWage) references WAGE(Wage_Id),
 	constraint FK_REPAIRDETAIL_REPAIR foreign key (IdRepair) references REPAIR(Repair_Id)
@@ -218,4 +218,24 @@ create table USER_INFO
 );
 
 insert into ROLE(Role_Name) values ('admin');
+
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Trang chủ');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Dịch vụ');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Kho hàng');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Nhân viên');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Thống kê');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Cài đặt tài khoản');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Cài đặt ứng dụng');
+
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,1,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,2,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,3,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,4,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,5,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,6,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,7,1)
+
 insert into USERS(UserName,Password,IdRole) values ('admin','db69fc039dcbd2962cb4d28f5891aae1',1);
+
+insert into USER_INFO(UserInfo_Name,UserInfo_Address,UserInfo_BirthDate,UserInfo_Telephone,UserInfo_CMND,IdUser)
+values (N'Admin',N'Địa chỉ','1/1/1','0','0',1)
