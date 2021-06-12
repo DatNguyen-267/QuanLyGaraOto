@@ -12,21 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace QuanLyGaraOto
+namespace QuanLyGaraOto.Template
 {
     /// <summary>
-    /// Interaction logic for ReportWindow.xaml
+    /// Interaction logic for ReportSalesTemplate.xaml
     /// </summary>
-    public partial class ReportWindow : UserControl
+    public partial class ReportSalesTemplate : Window
     {
-        public ReportWindow()
+        public ReportSalesTemplate()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

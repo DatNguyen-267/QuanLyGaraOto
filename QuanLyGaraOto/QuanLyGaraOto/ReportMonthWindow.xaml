@@ -1,0 +1,183 @@
+﻿<Window x:Class="QuanLyGaraOto.ReportMonthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+       
+        xmlns:local="clr-namespace:QuanLyGaraOto"
+        mc:Ignorable="d"
+        Name="wdReportMonth"
+        Title="Báo cáo tháng" 
+        Height="600" Width="1030"
+        MinHeight="500"
+        MinWidth="700"
+        WindowStartupLocation="CenterScreen"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        DataContext="{StaticResource ReportVM}"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#3d4751">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="Báo cáo kinh doanh"
+                       FontSize="26"
+                       Margin="0 10 0 10"
+                       Foreground="White"
+                       ></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="70"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <ComboBox
+                x:Name="cb_SelectYear"
+                materialDesign:HintAssist.Hint="Năm"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                FontSize="16"
+                FontWeight="Medium"
+                Margin="20,0,0,0"
+                Width="160"
+                
+                ItemsSource="{Binding ItemSource_Year}" 
+                SelectedItem="{Binding First_item_year}"
+                Text="{Binding First_item_year}">
+
+
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding Report_YearChangedCommand}" 
+                                               CommandParameter="{Binding ElementName=wdReportMonth}"/>
+                        </i:EventTrigger>
+
+                    </i:Interaction.Triggers>
+
+                </ComboBox>
+                <ComboBox
+                x:Name="cb_SelectMonth"
+                materialDesign:HintAssist.Hint="Tháng"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                FontSize="16"
+                FontWeight="Medium"
+                Margin="220,0,0,0"
+                Width="160"
+                ItemsSource="{Binding ItemSource_Month}"
+                SelectedItem="{Binding First_item_month}"
+                Text="{Binding First_item_month}"
+                
+                
+                >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding Report_MonthChangedCommand}" 
+                                               CommandParameter="{Binding ElementName=wdReportMonth}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </ComboBox>
+            </Grid>
+            <Grid Grid.Row="1">
+            <ScrollViewer Margin="10 10 10 0">
+                <ListView 
+                    
+                    x:Name="lvs_Report"
+                    ItemsSource="{Binding ListSales, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                
+                    FontSize="18">
+
+
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                            <GridViewColumn Header="Hiệu xe" DisplayMemberBinding="{Binding CarBrand_Name}"></GridViewColumn>
+                            <GridViewColumn Header="Số lượt sửa" DisplayMemberBinding="{Binding AmountOfTurn}"></GridViewColumn>
+                            <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding TotalMoney}"></GridViewColumn>
+                            <GridViewColumn Header="Tỉ lệ" DisplayMemberBinding="{Binding Rate}"></GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+            </Grid>
+            <Grid Grid.Row="2" >
+                
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right"
+                            >
+                    <TextBlock Text="Tổng doanh thu: "
+                           FontSize="30"
+                           FontWeight="ExtraBold"
+                           Opacity="0.7"
+                           Margin="0 0 0 0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           ></TextBlock>
+                    <TextBlock 
+                           FontSize="30" 
+                           Text="{Binding TotalMoney}"
+                           FontWeight="Bold"
+                           Opacity="0.7"
+                           Margin="0 0 10 0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           ></TextBlock>
+                </StackPanel>
+                
+            </Grid>
+
+
+        </Grid>
+        <Grid Grid.Row="2">
+           
+            
+            <StackPanel HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Grid.Column="2"
+                        Orientation="Horizontal">
+                
+                    <Button 
+                       Visibility="{Binding VisView, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Name="bt_Report"
+                        Width="150"
+                        Height="40"
+                        FontSize="24"
+                        Content="Báo cáo"
+                        Margin="10 0 40 0"
+                        VerticalAlignment="Center"
+                        Background="#455A64"
+                        HorizontalAlignment="Right"
+                        Command="{Binding ReportCommand}"
+                        CommandParameter="{Binding ElementName=wdReportMonth}">
+                    </Button>
+                    <Button 
+                        Width="150"
+                        Height="40"
+                        FontSize="24"
+                        Content="Thoát"
+                        Margin="10 0 20 0"
+                        Background="#455A64"                        
+                        VerticalAlignment="Center"                       
+                        HorizontalAlignment="Right"
+                        Command="{Binding CloseCommand}"
+                        CommandParameter="{Binding ElementName=wdReportMonth}">
+                    </Button>
+                    
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
