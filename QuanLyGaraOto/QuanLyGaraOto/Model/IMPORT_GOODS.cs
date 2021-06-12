@@ -10,9 +10,10 @@
 namespace QuanLyGaraOto.Model
 {
     using System;
+    using QuanLyGaraOto.ViewModel;
     using System.Collections.Generic;
     
-    public partial class IMPORT_GOODS
+    public partial class IMPORT_GOODS : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public IMPORT_GOODS()
@@ -20,9 +21,13 @@ namespace QuanLyGaraOto.Model
             this.IMPORT_GOODS_DETAIL = new HashSet<IMPORT_GOODS_DETAIL>();
         }
     
-        public int ImportGoods_Id { get; set; }
-        public System.DateTime ImportGoods_Date { get; set; }
-        public int ImportGoods_TotalMoney { get; set; }
+        private int ImportGoods_Id { get; set; }
+        private System.DateTime _ImportGoods_Date { get; set; }
+
+        public System.DateTime ImportGoods_Date { get => _ImportGoods_Date; set { _ImportGoods_Date = value; OnPropertyChanged(); } }
+        private int _ImportGoods_TotalMoney { get; set; }
+
+        public int ImportGoods_TotalMoney { get => _ImportGoods_TotalMoney; set { _ImportGoods_TotalMoney = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMPORT_GOODS_DETAIL> IMPORT_GOODS_DETAIL { get; set; }

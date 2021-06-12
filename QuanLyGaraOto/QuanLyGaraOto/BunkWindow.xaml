@@ -18,7 +18,7 @@
         <Grid Grid.Row="0" Background="#ffffff">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <TextBlock Text="Phụ Tùng" HorizontalAlignment="Center"
@@ -62,8 +62,8 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width ="500" x:Name ="table"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition Width="400"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" Background="#f1f1f1">
                 <Label
@@ -113,27 +113,29 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn
-                            DisplayMemberBinding="{Binding Id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            DisplayMemberBinding="{Binding Supplies_Id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                             Header="ID" 
                             Width="80"/>
                             <GridViewColumn
                             DisplayMemberBinding="{Binding Supplies_Name,Mode=TwoWay}"
                             Header="Tên"
-                            Width="160"/>
+                            Width="400"
+                            />
                             <GridViewColumn
-                            DisplayMemberBinding="{Binding Price,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            DisplayMemberBinding="{Binding Supplies_Price,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                             Header="Giá"
                             Width="120"/>
                             <GridViewColumn
-                            DisplayMemberBinding="{Binding Amount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            DisplayMemberBinding="{Binding Supplies_Amount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                             Header="Số lượng"
-                            Width="120"/>
+                            Width="120"
+                            />
                         </GridView>
                     </ListView.View>
                 </ListView>
 
             </Grid>
-            <Grid Grid.Column="1" Background="#ffffff">
+            <Grid Grid.Column="1"  Background="#ffffff">
                 <Grid
                     Margin="8 8 8 8">
                 <Label
@@ -145,8 +147,8 @@
                     VerticalAlignment="Top"
                     />
                     <Grid
-                    Margin="0 30 0 0"
-                    Height="24"
+                    Margin="0 40 0 0"
+                    Height="40"
                     VerticalAlignment="Top"
                     >
                         <Rectangle
@@ -158,7 +160,8 @@
                         <TextBox
                         x:Name="txbName"
                         Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
-                        FontSize="14"
+                        FontSize="16"
+                        
                         Margin="8 0 0 0"
                         Foreground="Black"
                         />
@@ -166,15 +169,15 @@
                     </Grid>
                     <Label
                     Content="Giá"
-                    Margin="0 60 0 0"
+                    Margin="0 80 0 0"
                     FontSize="14"
                     FontWeight="Bold"
                     Foreground="Black"
                     VerticalAlignment="Top"
                     />
                     <Grid
-                    Margin="0 90 0 0"
-                    Height="26"
+                    Margin="0 120 0 0"
+                    Height="40"
                     VerticalAlignment="Top"
                     >
                         <Rectangle
@@ -195,15 +198,15 @@
                     </Grid>
                     <Label
                     Content="Số Lượng"
-                    Margin="0 120 0 0"
+                    Margin="0 160 0 0"
                     FontSize="14"
                     FontWeight="Bold"
                     Foreground="Black"
                     VerticalAlignment="Top"
                     />
                 <Grid
-                    Margin="0 150 0 0"
-                    Height="26"
+                    Margin="0 200 0 0"
+                    Height="40"
                     VerticalAlignment="Top"
                     >
                     <Rectangle
@@ -222,33 +225,7 @@
                         />
 
                 </Grid>
-                <Label
-                    Content="Loại phụ tùng"
-                    Margin="0 180 0 0"
-                    FontSize="14"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    VerticalAlignment="Top"
-                    />
-                <Grid
-                    Margin="0 210 0 0"
-                    Height="26"
-                    VerticalAlignment="Top"
-                    >
-                    <Rectangle
-                    
-                        RadiusX="4"
-                        RadiusY="4"
-                        Stroke="Black"
-                        />
-                    <TextBox
-                        x:Name="txbType"
-                        FontSize="12"
-                        Margin="8 0 0 0"
-                        Foreground="Black"
-                        />
-
-                </Grid>
+                
                 </Grid>
                 <Grid
                     Margin="8 0 16 8"

@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
-             Background="White"
+        Background="White"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+     
         Name="reportWindow"
         DataContext="{StaticResource ReportVM}"
        Height="450" Width="800">
@@ -15,77 +18,113 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" >
+            <ComboBox
+                x:Name="cb_SelectYear"
+                materialDesign:HintAssist.Hint="Năm"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                FontSize="16"
+                FontWeight="Medium"
+                Margin="20,0,0,0"
+                Width="160"
+                
+                ItemsSource="{Binding ItemSource_Year}" 
+                SelectedItem="{Binding First_item_year}"
+                Text="{Binding First_item_year}">
+
+
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding YearChangedCommand}" 
+                                               CommandParameter="{Binding ElementName=reportWindow}"/>
+                    </i:EventTrigger>
+
+                    <i:EventTrigger EventName="Loaded">
+                        <i:InvokeCommandAction Command="{Binding LoadCbCommand}" 
+                                               CommandParameter="{Binding ElementName=reportWindow}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </ComboBox>
+            <ComboBox
+                x:Name="cb_SelectMonth"
+                materialDesign:HintAssist.Hint="Tháng"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                FontSize="16"
+                FontWeight="Medium"
+                Margin="220,0,0,0"
+                Width="160"
+                ItemsSource="{Binding ItemSource_Month}"
+                SelectedItem="{Binding First_item_month}"
+                Text="{Binding First_item_month}"
+                
+                
+                >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding MonthChangedCommand}" 
+                                               CommandParameter="{Binding ElementName=reportWindow}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </ComboBox>
+
+            <Button
+                          
+                Width="120"
+                BorderThickness="0"
+                Margin="0,0,170,9"             
+                Background="#455A64"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="Resource name: MaterialDesignRaisedButton"
+                Content="Doanh số"
+                Command="{Binding ReportSalesCommand }"
+                CommandParameter="{Binding ElementName=reportWindow}" Click="Button_Click"/>
+            <Button
+                Width="120"
+                BorderThickness="0"
+                Margin="0,0,21,0"
+                Background="#455A64"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="Resource name: MaterialDesignRaisedButton"
+                Content="Báo cáo tồn" 
+                Command="{Binding ReportInventoryCommand}"
+                CommandParameter="{Binding ElementName=reportWindow}" Click="Button_Click"/>
 
         </Grid>
         <Grid Grid.Row="1" Margin="10,10,10,10">
-            <TabControl  Margin="10,10,10,0" Height="329" VerticalAlignment="Top">
+            <TabControl  Margin="10,10,10,0"  VerticalAlignment="Top" >
                 <TabItem 
                    
-       
+                    
                     Header="Lịch sử kinh doanh"
                     FontSize="18"
                     FontWeight="SemiBold"
+                    Width="180" 
+                    Height="40" 
+                    Margin="-4,0,0,0"
                     >
                     <Grid>
-                        
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.6*"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="0.8*"/>
-                                <ColumnDefinition/>
-           
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
-                                Grid.Column="0"
-                                Text="Mã hóa đơn"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="18"
-                                FontWeight="SemiBold"
-                                />
-                            <TextBlock
-                                Grid.Column="1"
-                                Text="Nhân viên"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="18"
-                                FontWeight="SemiBold"
-                                />
-                            <TextBlock
-                                Grid.Column="2"
-                                Text="Thời gian"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="18"
-                                FontWeight="SemiBold"
-                                />
-                            <TextBlock
-                                Grid.Column="3"
-                                Text="Doanh thu"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="18"
-                                FontWeight="SemiBold"
-                                />
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <ScrollViewer
-                                HorizontalScrollBarVisibility="Disabled"
-                                VerticalScrollBarVisibility="Auto">
-                                <StackPanel>
-                                    
-                                </StackPanel>
-                            </ScrollViewer>
-                        </Grid>
+
+                        <ListView x:Name="lvs_Receipt" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã hóa đơn" Width="250"  DisplayMemberBinding="{Binding Receipt_Id}"></GridViewColumn>
+                                    <GridViewColumn Header="Thời gian" Width="300"  DisplayMemberBinding="{Binding ReceiptDate}"></GridViewColumn>
+                                    <GridViewColumn Header="Doanh thu" Width="250"  DisplayMemberBinding="{Binding MoneyReceived}"></GridViewColumn>
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
                     </Grid>
                 </TabItem>
 
@@ -95,67 +134,24 @@
                     Header="Lịch sử nhập hàng"
                     FontSize="18"
                     FontWeight="SemiBold"
+                    Width="180" 
+                    Height="40" 
+                    Margin="-4,0,0,0"
                     >
                     <Grid>
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.6*"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="0.8*"/>
-                                <ColumnDefinition/>
+                        <ListView x:Name="lvs_Import" ItemsSource="{Binding ListImport, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Vật tư " DisplayMemberBinding="{Binding Supplies_Name}"></GridViewColumn>
+                                    <GridViewColumn Header="Số lượng"   DisplayMemberBinding="{Binding ImportInfo.Amount }"></GridViewColumn>
+                                    <GridViewColumn Header="Đơn giá"   DisplayMemberBinding="{Binding ImportInfo.Price}"></GridViewColumn>
+                                    <GridViewColumn Header="Thời gian"   DisplayMemberBinding="{Binding ImportGoods_Date}"></GridViewColumn>
+                                    <GridViewColumn Header="Tổng chi phí"   DisplayMemberBinding="{Binding ImportInfo.TotalMoney}"></GridViewColumn>
 
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
-                                Grid.Column="0"
-                                Text="Mã hóa đơn"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="18"
-                                FontWeight="SemiBold"
-                                />
-                            <TextBlock
-                                Grid.Column="1"
-                                Text="Nhân viên"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="18"
-                                FontWeight="SemiBold"
-                                />
-                            <TextBlock
-                                Grid.Column="2"
-                                Text="Thời gian"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="18"
-                                FontWeight="SemiBold"
-                                />
-                            <TextBlock
-                                Grid.Column="3"
-                                Text="Tổng chi phí"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="18"
-                                FontWeight="SemiBold"
-                                />
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <ScrollViewer
-                                HorizontalScrollBarVisibility="Disabled"
-                                VerticalScrollBarVisibility="Auto">
-                                <StackPanel>
-
-                                </StackPanel>
-                            </ScrollViewer>
-                        </Grid>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
                     </Grid>
                 </TabItem>
 

@@ -3,11 +3,6 @@ use GARA;
 
 insert into GARA_INFO values(30,'False')
 
-insert into SUPPLIES values( N'Lốp', 300000, 10)
-insert into SUPPLIES values( N'Dầu nhớt', 300000, 100)
-insert into SUPPLIES values( N'Nước làm mát', 100000, 200)
-insert into SUPPLIES values( N'Nắp Capo', 1000000, 5)
-
 insert into CAR_BRAND values(N'BMW')
 insert into CAR_BRAND values(N'Mercedes')
 insert into CAR_BRAND values(N'Toyota')

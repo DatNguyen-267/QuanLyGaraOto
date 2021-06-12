@@ -9,10 +9,11 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class SUPPLIES
+    public partial class SUPPLIES : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SUPPLIES()
@@ -22,10 +23,18 @@ namespace QuanLyGaraOto.Model
             this.REPAIR_DETAIL = new HashSet<REPAIR_DETAIL>();
         }
     
-        public int Supplies_Id { get; set; }
-        public string Supplies_Name { get; set; }
-        public Nullable<int> Supplies_Price { get; set; }
-        public Nullable<int> Supplies_Amount { get; set; }
+        private int _Supplies_Id { get; set; }
+
+        public int Supplies_Id { get => _Supplies_Id; set { _Supplies_Id = value; OnPropertyChanged(); } }
+        private string _Supplies_Name { get; set; }
+
+        public string Supplies_Name { get => _Supplies_Name; set { _Supplies_Name = value; OnPropertyChanged(); } }
+        private Nullable<int> _Supplies_Price { get; set; }
+
+        public Nullable<int> Supplies_Price { get => _Supplies_Price ; set { _Supplies_Price = value; OnPropertyChanged(); } }
+        private Nullable<int> _Supplies_Amount { get; set; }
+
+        public Nullable<int> Supplies_Amount { get => _Supplies_Amount; set { _Supplies_Amount = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMPORT_GOODS_DETAIL> IMPORT_GOODS_DETAIL { get; set; }

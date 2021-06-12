@@ -208,7 +208,6 @@
                                     </Binding>
                                 </DatePicker.Text>
                             </DatePicker>
-                            
                         </Grid>
                     </Grid>
                     <Grid Margin="0 0 0 0" Height="70">

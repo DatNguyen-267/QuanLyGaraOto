@@ -26,5 +26,25 @@ namespace QuanLyGaraOto
             InitializeComponent();
             this.DataContext = (SettingViewModel = new SettingViewModel());
         }
+
+        private void AppSetting_Click(object sender, RoutedEventArgs e)
+        {
+            AppSetting.Background = Brushes.Black;
+            AppSetting.Foreground = Brushes.White;
+
+            UserSetting.Background = Brushes.White;
+            UserSetting.Foreground = Brushes.Black;
+        }
+
+        private void UserSetting_Click(object sender, RoutedEventArgs e)
+        {
+            AppSetting.Background = Brushes.White;
+            AppSetting.Foreground = Brushes.Black;
+
+            UserSetting.Background = Brushes.Black;
+            UserSetting.Foreground = Brushes.White;
+        }
+
+        
     }
 }

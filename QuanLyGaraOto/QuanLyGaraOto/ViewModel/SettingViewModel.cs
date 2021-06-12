@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
@@ -24,17 +26,6 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
-        private bool _BrandSettingVis;
-        public bool BrandSettingVis
-        {
-            get => _BrandSettingVis;
-            set
-            {
-                _BrandSettingVis = value;
-                OnPropertyChanged();
-            }
-        }
-
         private bool _UserSettingVis;
         public bool UserSettingVis
         {
@@ -47,7 +38,6 @@ namespace QuanLyGaraOto.ViewModel
         }
 
         public ICommand ChangeAppSettingVis { get; set; }
-        public ICommand ChangeBrandSettingVis { get; set; }
         public ICommand ChangeUserSettingVis { get; set; }
 
         // IsEnable button setting in gara information
@@ -93,6 +83,8 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeEnableButtonInUserInformation { get; set; }
 
         // Setting gara information
+        private GARA_INFO GaraInfo;
+
         private int _MaxCarReception;
         public int MaxCarReception
         {
@@ -104,58 +96,18 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
-        private string _Telephone;
-        public string Telephone
+        private bool _IsOverPay;
+        public bool IsOverPay
         {
-            get => _Telephone;
-            set
+            get => _IsOverPay; set
             {
-                _Telephone = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _Email;
-        public string Email
-        {
-            get => _Email;
-            set
-            {
-                _Email = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _Address;
-        public string Address
-        {
-            get => _Address;
-            set
-            {
-                _Address = value;
+                _IsOverPay = value;
                 OnPropertyChanged();
             }
         }
 
         public ICommand ChangeGaraInformation { get; set; }
         public ICommand ResetGaraInformation { get; set; }
-
-        GARA_INFO garaInfo;
-
-        // Setting car brand
-        private ObservableCollection<CAR_BRAND> _ListBrands;
-        public ObservableCollection<CAR_BRAND> ListBrands
-        {
-            get => _ListBrands;
-            set { _ListBrands = value; OnPropertyChanged(); }
-        }
-
-        private CAR_BRAND _SelectedBrand;
-        public CAR_BRAND SelectedBrand
-        {
-            get => _SelectedBrand;
-            set { _SelectedBrand = value; OnPropertyChanged(); }
-        }
 
         // Is enable button in car brand setting
         private bool _IsEnableModifyButtonInBrandSetting;
@@ -176,12 +128,48 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
+        private bool _IsEnableModifyFieldInBrandSetting;
+        public bool IsEnableModifyFieldInBrandSetting
+        {
+            get => _IsEnableModifyFieldInBrandSetting; set
+            {
+                _IsEnableModifyFieldInBrandSetting = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Setting car brand
+
+        private ObservableCollection<CAR_BRAND> _ListCarBrand;
+        public ObservableCollection<CAR_BRAND> ListCarBrand
+        {
+            get => _ListCarBrand; set
+            {
+                _ListCarBrand = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private CAR_BRAND _SelectedBrandItem;
+        public CAR_BRAND SelectedBrandItem
+        {
+            get => _SelectedBrandItem; set
+            {
+                _SelectedBrandItem = value;
+                OnPropertyChanged();
+                IsEnableDeleteButtonInBrandSetting = true;
+                IsEnableModifyFieldInBrandSetting = true;
+            }
+        }
 
         public ICommand ChangeEnableButtonInCarBrandSetting { get; set; }
         public ICommand ModifyCarBrand { get; set; }
         public ICommand DeleteCarBrand { get; set; }
 
         // Setting user information
+
+        USER_INFO userInfo;
+
         private string _UserName;
         public string UserName
         {
@@ -244,99 +232,91 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeUserInformation { get; set; }
         public ICommand ResetUserInformation { get; set; }
 
-        USER_INFO userInfo;
+
+        private string _OldPassword;
+        public string OldPassword
+        {
+            get => _OldPassword; set
+            {
+                _OldPassword = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _NewPassword;
+        public string NewPassword
+        {
+            get => _NewPassword; set
+            {
+                _NewPassword = value;
+                OnPropertyChanged();
+            }
+        }
 
         public SettingViewModel()
         {
             // Visibility
             AppSettingVis = true;
-            BrandSettingVis = false;
             UserSettingVis = false;
 
             ChangeAppSettingVis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 AppSettingVis = true;
-                BrandSettingVis = false;
                 UserSettingVis = false;
             });
-
-            ChangeBrandSettingVis = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                BrandSettingVis = true;
-                AppSettingVis = false;
-                UserSettingVis = false;
-            });
-
             ChangeUserSettingVis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 UserSettingVis = true; ;
-                BrandSettingVis = false;
                 AppSettingVis = false;
             });
 
             // Gara information
-            garaInfo = DataProvider.Ins.DB.GARA_INFO.First();
-            if (garaInfo != null)
+            GaraInfo = DataProvider.Ins.DB.GARA_INFO.First();
+            MaxCarReception = GaraInfo.MaxCarReception;
+            IsOverPay = GaraInfo.IsOverPay;
+
+            ChangeGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                MaxCarReception = garaInfo.MaxCarReception;
-            }
+                String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception
+                                        + "where MaxCarReception=" + GaraInfo.MaxCarReception.ToString();
+                SqlConnection connection = new SqlConnection("Data Source=PARACETAMOL;Initial Catalog=GARA;" +
+                                                                    "Integrated Security=True");
+                connection.Open();
 
-            ChangeGaraInformation = new RelayCommand<object>(
-                (p) =>
-                {
-                    if (garaInfo != null) return true;
-                    return false;
-                },
-                (p) =>
-                {
-                    garaInfo.MaxCarReception = _MaxCarReception;
-                    DataProvider.Ins.DB.SaveChanges();
-                    SetEnableStatusButtonInGaraInformation(false);
-                });
+                SqlCommand command = new SqlCommand(query_string, connection);
 
-            ResetGaraInformation = new RelayCommand<object>(
-                (p) =>
-                {
-                    if (garaInfo != null) return true;
-                    return false;
-                },
-                (p) =>
-                {
-                    MaxCarReception = garaInfo.MaxCarReception;
+                command.ExecuteNonQuery();
+                connection.Close();
 
-                    SetEnableStatusButtonInGaraInformation(false);
-                });
+                SetEnableStatusButtonInGaraInformation(false);
+            });
 
-            // Car brands
-            ListBrands = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
+            ResetGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                MaxCarReception = GaraInfo.MaxCarReception;
+                IsOverPay = GaraInfo.IsOverPay;
+                SetEnableStatusButtonInGaraInformation(false);
+            });
 
-            IsEnableDeleteButtonInBrandSetting = false;
-            IsEnableModifyButtonInBrandSetting = false;
-
-            ChangeEnableButtonInCarBrandSetting = new RelayCommand<object>(
-                (p) =>
-                {
-                    if (_SelectedBrand == null) return false;
-                    return true;
-                },
-                (p) =>
-                {
-                    SetEnableStatusButotnInCarBrandSetting(true);
-                }
-            );
+            // Car brand information
+            ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
 
             ModifyCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                // modify in database
-                SetEnableStatusButotnInCarBrandSetting(false);
-                SelectedBrand = null;
+                DataProvider.Ins.DB.SaveChanges();
+                SelectedBrandItem = null;
+                IsEnableModifyButtonInBrandSetting = false;
+                IsEnableModifyFieldInBrandSetting = false;
+                IsEnableDeleteButtonInBrandSetting = false;
             });
-
             DeleteCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                // delete in database
-                SetEnableStatusButotnInCarBrandSetting(false);
-                SelectedBrand = null;
+                DataProvider.Ins.DB.CAR_BRAND.Remove(SelectedBrandItem);
+                DataProvider.Ins.DB.SaveChanges();
+                ListCarBrand.Remove(SelectedBrandItem);
+                IsEnableModifyButtonInBrandSetting = false;
+                IsEnableModifyFieldInBrandSetting = false;
+                IsEnableDeleteButtonInBrandSetting = false;
             });
 
             // User information
@@ -372,11 +352,8 @@ namespace QuanLyGaraOto.ViewModel
             });
 
             // Set enable button to false
-            IsEnableChangeButtonInGaraInformation = false;
-            IsEnableChangeButtonInUserInformation = false;
-            IsEnableResetButtonInGaraInformation = false;
-            IsEnableResetButtonInUserInformation = false;
-            
+            SetEnableStatusButtonInGaraInformation(false);
+            SetEnableStatusButtonInUserInformation(false);
 
             // Change enable button
             ChangeEnableButtonInUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -386,6 +363,10 @@ namespace QuanLyGaraOto.ViewModel
             ChangeEnableButttonInGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SetEnableStatusButtonInGaraInformation(true);
+            });
+            ChangeEnableButtonInCarBrandSetting = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                IsEnableModifyButtonInBrandSetting = true;
             });
         }
 
@@ -398,11 +379,6 @@ namespace QuanLyGaraOto.ViewModel
         {
             IsEnableChangeButtonInUserInformation = b;
             IsEnableResetButtonInUserInformation = b;
-        }
-        private void SetEnableStatusButotnInCarBrandSetting(bool b)
-        {
-            IsEnableModifyButtonInBrandSetting = b;
-            IsEnableDeleteButtonInBrandSetting = b;
         }
     }
 }
