@@ -21,11 +21,11 @@ namespace QuanLyGaraOto.Model
             this.IMPORT_GOODS_DETAIL = new HashSet<IMPORT_GOODS_DETAIL>();
         }
     
-        private int ImportGoods_Id { get; set; }
-        private System.DateTime _ImportGoods_Date { get; set; }
+        public int ImportGoods_Id { get; set; }
+        public System.DateTime _ImportGoods_Date { get; set; }
 
         public System.DateTime ImportGoods_Date { get => _ImportGoods_Date; set { _ImportGoods_Date = value; OnPropertyChanged(); } }
-        private int _ImportGoods_TotalMoney { get; set; }
+        public int _ImportGoods_TotalMoney { get; set; }
 
         public int ImportGoods_TotalMoney { get => _ImportGoods_TotalMoney; set { _ImportGoods_TotalMoney = value; OnPropertyChanged(); } }
     
