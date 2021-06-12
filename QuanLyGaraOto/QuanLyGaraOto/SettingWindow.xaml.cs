@@ -44,5 +44,7 @@ namespace QuanLyGaraOto
             UserSetting.Background = Brushes.Black;
             UserSetting.Foreground = Brushes.White;
         }
+
+        
     }
 }

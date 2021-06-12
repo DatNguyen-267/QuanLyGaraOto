@@ -14,9 +14,7 @@ namespace QuanLyGaraOto.ViewModel
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
 
-
         public Func<ChartPoint, string> PointLabel { get; set; }
-
 
 
         public DashboardViewModel()

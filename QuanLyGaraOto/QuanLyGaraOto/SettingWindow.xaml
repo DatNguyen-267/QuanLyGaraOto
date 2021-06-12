@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         mc:Ignorable="d"
         DataContext="{StaticResource SettingVM}"
         Height="450" Width="800">
@@ -45,7 +47,7 @@
                         />
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="1" Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Grid.Row="1" Visibility="Collapsed">
                 <!--Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="150" MaxWidth="300"/>
@@ -84,8 +86,18 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     VerticalAlignment="Center" 
                                     Margin="31,0,0,2.2"
-                                    FontSize="14" Height="39.8"
-                                    Text="{Binding MaxCarReception}">
+                                    FontSize="14" Height="39.8">
+
+                                <TextBox.Text>
+                                    <Binding Path="MaxCarReception" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NumberValidation ErrorMessage="Vui lòng nhập số (0-9)"
+                                                                        ErrorMessageNull="Vui lòng không để trống"
+                                                                       ></validation:NumberValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
                                         <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
@@ -193,8 +205,16 @@
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         VerticalAlignment="Center" 
                                         Margin="5"
-                                        Text="{Binding SelectedBrandItem.CarBrand_Name}"
                                         IsEnabled="{Binding IsEnableModifyFieldInBrandSetting}">
+
+                                <TextBox.Text>
+                                    <Binding Path="SelectedBrandItem.CarBrand_Name" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
 
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
@@ -254,11 +274,11 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
-                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="52"></RowDefinition>
+                            <RowDefinition Height="52"></RowDefinition>
+                            <RowDefinition Height="52"></RowDefinition>
+                            <RowDefinition Height="52"></RowDefinition>
+                            <RowDefinition Height="52"></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition Height="65"></RowDefinition>
                         </Grid.RowDefinitions>
@@ -274,15 +294,21 @@
                                                  Width="20"
                                                  Height="20"
                                                  VerticalAlignment="Center"
-                                                 FontSize="16" />
+                                                 FontSize="16" Margin="0,14,0,10" />
                             <TextBox
                                     materialDesign:HintAssist.Hint="Tên"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     VerticalAlignment="Center" 
                                     Margin="31,0,0,2.2"
-                                    FontSize="14" Height="39.8" 
-                                    Text="{Binding UserName}">
-
+                                    FontSize="14" Height="39.8">
+                                <TextBox.Text>
+                                    <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
                                         <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
@@ -296,37 +322,50 @@
                                                  Width="20"
                                                  Height="20"
                                                  VerticalAlignment="Center"
+                                                 Margin="0,14,0,10"
                                                  FontSize="16" />
-                            <TextBox
-                                    materialDesign:HintAssist.Hint="Ngày sinh"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    VerticalAlignment="Center" 
-                                    Margin="31,0,0,2.2"
-                                    FontSize="14" Height="39.8"
-                                    Text="{Binding UserBirth, StringFormat='dd/MM/yyyy'}">
-
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="TextChanged">
-                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-
-                            </TextBox>
+                            <DatePicker 
+                                SelectedDate="{Binding UserBirth}"
+                                Grid.Column="1"
+                                Margin="31,0,0,2.2"
+                                Height="auto"
+                                VerticalAlignment="Center"
+                                materialDesign:HintAssist.Hint="Ngày sinh"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                                <DatePicker.Text>
+                                    <Binding Path="UserBirth" StringFormat='dd-MMM-YYYY' 
+                                             UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"
+                                             ValidatesOnNotifyDataErrors="False"
+                                             NotifyOnValidationError="False">
+                                        <Binding.ValidationRules>
+                                            <validation:DateValidation ErrorMessage="Vui lòng không để trống"></validation:DateValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.Text>
+                            </DatePicker>
                         </Grid>
                         <Grid Grid.Row="3" Margin="16 8 16 0">
                             <materialDesign:PackIcon Kind="AccountCircle" 
                                                  Width="20"
                                                  Height="20"
                                                  VerticalAlignment="Center"
+                                                     Margin="0,14,0,10"
                                                  FontSize="16" />
                             <TextBox
                                     materialDesign:HintAssist.Hint="CMND"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     VerticalAlignment="Center" 
                                     Margin="31,0,0,2.2"
-                                    FontSize="14" Height="39.8"
-                                    Text="{Binding UserCMND}">
-
+                                    FontSize="14" Height="39.8">
+                                <TextBox.Text>
+                                    <Binding Path="UserCMND" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NumberValidation ErrorMessage="Vui lòng nhập số (0-9)"
+                                                                        ErrorMessageNull="Vui lòng không để trống"
+                                                                       ></validation:NumberValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
                                         <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
@@ -340,6 +379,7 @@
                                                  Width="20"
                                                  Height="20"
                                                  VerticalAlignment="Center"
+                                                     Margin="0,14,0,10"
                                                  FontSize="16"
                                                  ></materialDesign:PackIcon>
                             <TextBox
@@ -347,8 +387,16 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     VerticalAlignment="Center" 
                                     Margin="31,0,0,2.2"
-                                    FontSize="14" Height="39.8" 
-                                    Text="{Binding UserTelephone}">
+                                    FontSize="14" Height="39.8">
+                                <TextBox.Text>
+                                    <Binding Path="UserTelephone" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NumberValidation ErrorMessage="Vui lòng nhập số (0-9)"
+                                                                        ErrorMessageNull="Vui lòng nhập Số điện thoại"
+                                                                       ></validation:NumberValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
 
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
@@ -363,6 +411,7 @@
                                                  Width="20"
                                                  Height="20"
                                                  VerticalAlignment="Center"
+                                                     Margin="0,14,0,10"
                                                  FontSize="16"
                                                  ></materialDesign:PackIcon>
                             <TextBox
@@ -370,9 +419,15 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     VerticalAlignment="Center" 
                                     Margin="31,0,0,2.2"
-                                    FontSize="14" Height="39.8"
-                                    Text="{Binding UserAddress}">
-
+                                    FontSize="14" Height="39.8">
+                                <TextBox.Text>
+                                    <Binding Path="UserAddress" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
                                         <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
@@ -448,7 +503,8 @@
                                     materialDesign:TextFieldAssist.HasClearButton="True"
                                     Margin="29,5,0,17" 
                                     FontSize="14"
-                                    IsEnabled="True"/>
+                                    IsEnabled="True">
+                                </PasswordBox>
                             </Grid>
 
                             <Grid Grid.Column="1">

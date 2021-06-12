@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
@@ -129,7 +131,7 @@ namespace QuanLyGaraOto.ViewModel
         private bool _IsEnableModifyFieldInBrandSetting;
         public bool IsEnableModifyFieldInBrandSetting
         {
-            get => _IsEnableModifyFieldInBrandSetting;set
+            get => _IsEnableModifyFieldInBrandSetting; set
             {
                 _IsEnableModifyFieldInBrandSetting = value;
                 OnPropertyChanged();
@@ -159,7 +161,7 @@ namespace QuanLyGaraOto.ViewModel
                 IsEnableModifyFieldInBrandSetting = true;
             }
         }
-        
+
         public ICommand ChangeEnableButtonInCarBrandSetting { get; set; }
         public ICommand ModifyCarBrand { get; set; }
         public ICommand DeleteCarBrand { get; set; }
@@ -234,7 +236,7 @@ namespace QuanLyGaraOto.ViewModel
         private string _OldPassword;
         public string OldPassword
         {
-            get => _OldPassword;set
+            get => _OldPassword; set
             {
                 _OldPassword = value;
                 OnPropertyChanged();
@@ -244,7 +246,7 @@ namespace QuanLyGaraOto.ViewModel
         private string _NewPassword;
         public string NewPassword
         {
-            get => _NewPassword;set
+            get => _NewPassword; set
             {
                 _NewPassword = value;
                 OnPropertyChanged();
@@ -273,11 +275,19 @@ namespace QuanLyGaraOto.ViewModel
             MaxCarReception = GaraInfo.MaxCarReception;
             IsOverPay = GaraInfo.IsOverPay;
 
-            ChangeGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) => 
+            ChangeGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                GaraInfo.MaxCarReception = _MaxCarReception;
-                GaraInfo.IsOverPay = _IsOverPay;
-                DataProvider.Ins.DB.SaveChanges();
+                String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception
+                                        + "where MaxCarReception=" + GaraInfo.MaxCarReception.ToString();
+                SqlConnection connection = new SqlConnection("Data Source=PARACETAMOL;Initial Catalog=GARA;" +
+                                                                    "Integrated Security=True");
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(query_string, connection);
+
+                command.ExecuteNonQuery();
+                connection.Close();
+
                 SetEnableStatusButtonInGaraInformation(false);
             });
 
@@ -342,11 +352,8 @@ namespace QuanLyGaraOto.ViewModel
             });
 
             // Set enable button to false
-            IsEnableChangeButtonInGaraInformation = false;
-            IsEnableChangeButtonInUserInformation = false;
-            IsEnableResetButtonInGaraInformation = false;
-            IsEnableResetButtonInUserInformation = false;
-
+            SetEnableStatusButtonInGaraInformation(false);
+            SetEnableStatusButtonInUserInformation(false);
 
             // Change enable button
             ChangeEnableButtonInUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>

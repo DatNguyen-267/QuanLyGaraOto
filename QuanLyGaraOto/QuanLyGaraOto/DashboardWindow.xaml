@@ -26,7 +26,7 @@
                 <Grid Grid.Column="0">
                     <materialDesign:Card
                     Margin="5"
-                    Background="CadetBlue"
+                    Background="OrangeRed"
                     Foreground="Black"
                     UniformCornerRadius="6">
                         <Grid>
@@ -56,10 +56,14 @@
                 <Grid Grid.Column="1">
                     <materialDesign:Card
                     Margin="5"
-                    Background="CadetBlue"
+                    Background="SeaGreen"
                     Foreground="Black"
                     UniformCornerRadius="6">
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="241*"/>
+                                <ColumnDefinition Width="13*"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -70,23 +74,21 @@
                             Text="Số xe trong tháng"
                             TextAlignment="Left"
                             FontSize="18"
-                            FontWeight="Bold"
-                        />
+                            FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,0,-0.6,37.8" Grid.RowSpan="2"/>
                             <Separator Grid.Row="1" 
-                                       Style="{StaticResource MaterialDesignLightSeparator}" />
+                                       Style="{StaticResource MaterialDesignLightSeparator}" Grid.ColumnSpan="2" Margin="0,11.6,0.4,10.8" />
                             <TextBlock Grid.Row="2"
                             Text="50"
                             TextAlignment="Left"
                             FontSize="16"
-                            FontWeight="Bold"
-                        />
+                            FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,0.2,-0.6,-0.8"/>
                         </Grid>
                     </materialDesign:Card>
                 </Grid>
                 <Grid Grid.Column="2">
                     <materialDesign:Card
                     Margin="5"
-                    Background="CadetBlue"
+                    Background="DeepSkyBlue"
                     Foreground="Black"
                     UniformCornerRadius="6">
                         <Grid>
@@ -100,8 +102,7 @@
                             Text="Số xe hiện tại / Tối đa"
                             TextAlignment="Left"
                             FontSize="18"
-                            FontWeight="Bold"
-                        />
+                            FontWeight="Bold"/>
                             <Separator Grid.Row="1" 
                                        Style="{StaticResource MaterialDesignLightSeparator}" />
                             <TextBlock Grid.Row="2"
@@ -109,7 +110,7 @@
                             TextAlignment="Left"
                             FontSize="16"
                             FontWeight="Bold"
-                        />
+    />
                         </Grid>
                     </materialDesign:Card>
                 </Grid>
@@ -135,7 +136,7 @@
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid>
-                        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left">
+                        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left" Margin="0,49,0,-0.4">
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis Title="Tháng" Labels="{Binding Labels}"></lvc:Axis>
                             </lvc:CartesianChart.AxisX>
