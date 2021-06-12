@@ -15,5 +15,6 @@
     <viewmodel:AddImportWindowViewModel x:Key="AddImportVM"></viewmodel:AddImportWindowViewModel>
     <viewmodel:AddRepairFormViewModel x:Key="AddRepairFormVM"></viewmodel:AddRepairFormViewModel>
     <viewmodel:ChangeCarInfoViewModel x:Key="ChangeCarInfoVM"></viewmodel:ChangeCarInfoViewModel>
+    <viewmodel:DashboardViewModel x:Key="DashboardVM"></viewmodel:DashboardViewModel>
     <convert:DateConvert x:Key="DateConvert"></convert:DateConvert>
 </ResourceDictionary>
