@@ -7,12 +7,11 @@
         mc:Ignorable="d"
         Title="Nhập phụ tùng"
         x:Name="wdImportSupply"
-      Height="500"
-      Width="1000"
-      Background="#ffffff"
-        ResizeMode="NoResize"
-        
-        DataContext="{StaticResource BunkVM}"
+        Height="500"
+        Width="1000"
+        Background="#ffffff"
+        ResizeMode="NoResize"   
+        DataContext="{StaticResource ImportVM}"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Grid>
@@ -95,14 +94,14 @@
                         RadiusX="4"
                         RadiusY="4"
                         Stroke="Black" Grid.ColumnSpan="2"
+                        
                         />
                     <TextBox
                         x:Name="txbPrice"
-                        materialDesign:HintAssist.Hint="Nhập giá sản phẩm"
+                        materialDesign:HintAssist.Hint="Nhập giá sản phẩm"                        
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         FontSize="14"
-                        IsReadOnly="True"
                         Width="220"
                         Margin="0,6,9.6,6"
                         Foreground="Black" Grid.ColumnSpan="2"
@@ -162,6 +161,7 @@
                     <TextBox
                         x:Name="txbCost"
                         materialDesign:HintAssist.Hint="0"
+                        Text="{Binding Total}"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         HorizontalContentAlignment="Right"
@@ -180,7 +180,7 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom">
                 <Button
-                    Command="{Binding ImportCommand}"
+                    Command="{Binding AddGoodCommand}"
                     CommandParameter="{Binding ElementName=wdImportSupply}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="100"
@@ -219,6 +219,32 @@
                     </ListView>
                 </ScrollViewer>
             </Grid>
+                <Grid Grid.Row="1">
+                    <Grid Margin="10 10 10 10"
+                          Width="240"
+                          Height="40"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Bottom"
+                          >
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="DateRange" 
+                                                     Grid.Column="0"/>
+                            <DatePicker 
+                                            IsEnabled="false"
+                                            x:Name="dtpImportDate"
+                                            Text="{Binding ImportDate}"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            materialDesign:HintAssist.Hint="Ngày nhập"
+                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            
         </Grid>
         </Grid>
         <Grid Grid.Row="1" Background="AliceBlue">
@@ -231,7 +257,7 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            ></TextBlock>
-                <TextBlock Text="{Binding Total}"
+                <TextBlock Text="{Binding TotalMoney}"
                            FontSize="30"
                            FontWeight="Bold"
                            Opacity="0.7"
@@ -253,14 +279,14 @@
                     Width="140"
                     HorizontalAlignment="Left"
                     ToolTip="Resource name: MaterialDesignRaisedButton">
-                    _Thêm
+                    _Nhập hàng
                 </Button>
                 <Button
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Width="140"
                     HorizontalAlignment="Right"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton">
-                    _Hủy
+                    _Đóng
                 </Button>
             </Grid>
         </Grid>

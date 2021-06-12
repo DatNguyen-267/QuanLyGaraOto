@@ -24,9 +24,15 @@ namespace QuanLyGaraOto.ViewModel
         private GARA_INFO _GaraInfo { get; set; }
         public GARA_INFO GaraInfo { get => _GaraInfo; set { _GaraInfo = value; OnPropertyChanged(); } }
         private int _ReceptionAmount { get; set; }
-        public int ReceptionAmount { get => _ReceptionAmount; set { _ReceptionAmount = value;
+        public int ReceptionAmount
+        {
+            get => _ReceptionAmount; set
+            {
+                _ReceptionAmount = value;
                 ReceptionOfDay = "Số xe đã tiếp nhận hôm nay: " + ReceptionAmount.ToString() + "/" + GaraInfo.MaxCarReception.ToString();
-                OnPropertyChanged(); } }
+                OnPropertyChanged();
+            }
+        }
         public ServiceViewModel()
         {
             InitData();

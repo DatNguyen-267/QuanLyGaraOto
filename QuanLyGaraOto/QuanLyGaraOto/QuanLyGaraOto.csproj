@@ -248,6 +248,7 @@
     <Compile Include="Validation\NullDataValidation.cs" />
     <Compile Include="Validation\NumberValidation.cs" />
     <Compile Include="Validation\PayOverValidation.cs" />
+    <Compile Include="ViewModel\AddImportWindowViewModel.cs" />
     <Compile Include="ViewModel\AddRepairDetailViewModel.cs" />
     <Compile Include="ViewModel\AddRepairFormViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="ViewModel\CarServiceViewModel.cs" />
     <Compile Include="ViewModel\ChangeCarInfoViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\ImportGoodViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PayViewModel.cs" />

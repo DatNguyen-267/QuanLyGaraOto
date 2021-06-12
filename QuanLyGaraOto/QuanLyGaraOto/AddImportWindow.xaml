@@ -11,6 +11,7 @@
         Title="AddImportWindow"
         WindowStartupLocation="CenterScreen"
         Name="AddImportWD"
+        DataContext="{StaticResource AddImportVM}"
         >
     <Grid>
         <Grid.RowDefinitions>
