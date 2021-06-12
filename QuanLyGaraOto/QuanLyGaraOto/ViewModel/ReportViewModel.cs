@@ -46,6 +46,8 @@ namespace QuanLyGaraOto.ViewModel
 
         private ObservableCollection<ListSales> _ListSales;
         public ObservableCollection<ListSales> ListSales { get => _ListSales; set { _ListSales = value; OnPropertyChanged(); } }
+        private bool _VisView { get; set; }
+        public bool VisView { get => _VisView; set { _VisView = value; OnPropertyChanged(); } }
 
         private int _TotalMoney;
 
@@ -61,13 +63,13 @@ namespace QuanLyGaraOto.ViewModel
         {
             load_firstItem();
 
-            Report_MonthChangedCommand = new RelayCommand<ReportMonthWindow>((p) => { return true; }, (p) => { Report_LoadToView(p); });
+            Report_MonthChangedCommand = new RelayCommand<ReportMonthWindow>((p) => { return true; }, (p) => { Report_LoadToView(p);VisButtonReport(p); });
 
-            Report_YearChangedCommand = new RelayCommand<ReportMonthWindow>((p) => { return true; }, (p) => { Report_LoadToView(p); });
+            Report_YearChangedCommand = new RelayCommand<ReportMonthWindow>((p) => { return true; }, (p) => { Report_LoadToView(p); VisButtonReport(p); });
 
             LoadCbCommand = new RelayCommand<ReportWindow>((p) => { return true; }, (p) => {  LoadComboBox(); });
 
-            ReportSalesCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ReportMonthWindow wd = new ReportMonthWindow(); wd.ShowDialog(); });
+            ReportSalesCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ReportMonthWindow wd = new ReportMonthWindow(); VisButtonReport(wd); wd.ShowDialog(); });
 
             MonthChangedCommand = new RelayCommand<ReportWindow>((p) => { return true; }, (p) => { LoadToView(p); });
 
@@ -84,6 +86,7 @@ namespace QuanLyGaraOto.ViewModel
             ItemSource_Year.Add(First_item_year);
             First_item_month = "Tháng " + DateTime.Now.Month;
             ItemSource_Month.Add(First_item_month);
+            
 
 
         }
@@ -236,19 +239,9 @@ namespace QuanLyGaraOto.ViewModel
        
         public void Report(ReportMonthWindow p)
         {
-            
-                string[] tmp = p.cb_SelectYear.SelectedValue.ToString().Split(' ');
-                int selectedYear = Int32.Parse(tmp[1]);
-                string[] tmp1 = p.cb_SelectMonth.SelectedValue.ToString().Split(' ');
-                int selectedMonth = Int32.Parse(tmp1[1]);
-   
-                DateTime date = DateTime.Now;
-              
-            if (!(date.Year < selectedYear || date.Year == selectedYear && date.Month <= selectedMonth))
-             
-            {
+
                
-                if(check())
+                if(check(p))
                 {
                     if (MessageBox.Show("Bạn có chắc chắn muốn lập báo cáo", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                     {
@@ -281,22 +274,41 @@ namespace QuanLyGaraOto.ViewModel
                         MessageBox.Show("Thêm thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                         p.Close();
                     }
-                }
+                
                
 
 
             }
 
         }
-        public bool check()
+        public bool check(ReportMonthWindow p)
         {
-            var sales_report = DataProvider.Ins.DB.SALES_REPORT;
-            foreach(var item in sales_report)
+            string[] tmp = p.cb_SelectYear.SelectedValue.ToString().Split(' ');
+            int selectedYear = Int32.Parse(tmp[1]);
+            string[] tmp1 = p.cb_SelectMonth.SelectedValue.ToString().Split(' ');
+            int selectedMonth = Int32.Parse(tmp1[1]);
+
+            DateTime date = DateTime.Now;
+            if (!(date.Year < selectedYear || date.Year == selectedYear && date.Month <= selectedMonth))
             {
-                if (DateTime.Now.Year == item.SalesReport_Date.Year && DateTime.Now.Month == item.SalesReport_Date.Month)
-                    return false;
+                return true;
             }
-            return true;
+                
+            return false;
+
+
+
+        }
+        public void VisButtonReport(ReportMonthWindow p)
+        {
+            if(check(p))
+            {
+                VisView = true;
+            }
+            else
+            {
+                VisView = false;
+            }
         }
 
     }

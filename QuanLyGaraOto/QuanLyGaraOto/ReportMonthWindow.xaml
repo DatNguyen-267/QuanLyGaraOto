@@ -150,7 +150,7 @@
                         Orientation="Horizontal">
                 
                     <Button 
-                        
+                       Visibility="{Binding VisView, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Name="bt_Report"
                         Width="150"
                         Height="40"

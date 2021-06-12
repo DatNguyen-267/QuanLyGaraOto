@@ -165,6 +165,7 @@
     <Compile Include="Model\GARA_INFO.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ImportTemp.cs" />
     <Compile Include="Model\IMPORT_GOODS.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -179,6 +180,7 @@
     </Compile>
     <Compile Include="Model\ListCar.cs" />
     <Compile Include="Model\ListRepair.cs" />
+    <Compile Include="Model\ListSales.cs" />
     <Compile Include="Model\PREMISSION_ITEM.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -229,6 +231,9 @@
     <Compile Include="PayWindow.xaml.cs">
       <DependentUpon>PayWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReportMonthWindow.xaml.cs">
+      <DependentUpon>ReportMonthWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
@@ -240,6 +245,12 @@
     </Compile>
     <Compile Include="Template\BillTemplate.xaml.cs">
       <DependentUpon>BillTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Template\InventoryReportTemplate.xaml.cs">
+      <DependentUpon>InventoryReportTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Template\ReportSalesTemplate.xaml.cs">
+      <DependentUpon>ReportSalesTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlGaraOto\TempUserControl.cs" />
     <Compile Include="Validation\DateValidation.cs" />
@@ -343,6 +354,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ReportMonthWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ReportWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -360,6 +375,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Template\BillTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Template\InventoryReportTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Template\ReportSalesTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
