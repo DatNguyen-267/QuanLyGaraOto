@@ -71,7 +71,7 @@
         <materialDesign:Card
             Margin="15 5 10 15"
             Grid.Row="3">
-            <!--<DataGrid ItemsSource="{Binding ListCar}" 
+            <DataGrid ItemsSource="{Binding ListCar}" 
                       SelectedItem="{Binding SelectedItem}"
                       SelectionMode="Single"
                       IsReadOnly="True"
@@ -79,15 +79,15 @@
                       AutoGenerateColumns="False"
                       CanUserDeleteRows="False"
                       CanUserReorderColumns="True">
-                --><!--<DataGrid.CellStyle>
-                    <Style TargetType="{x:Type DataGridCell}">
+                <!--<DataGrid.CellStyle>
+                    --><!--<Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
                             <Trigger Property="DataGridCell.IsSelected" Value="True">
                                 <Setter Property="Background" Value="DimGray" />
                             </Trigger>
                         </Style.Triggers>
-                    </Style>
-                </DataGrid.CellStyle>--><!--
+                    </Style>--><!--
+                </DataGrid.CellStyle>-->
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
                         <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
@@ -103,8 +103,8 @@
                     <materialDesign:DataGridTextColumn Header="Tiền nợ" Binding="{Binding Debt}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            -->
-            <ScrollViewer>
+            
+            <!--<ScrollViewer>
                 <ListView ItemsSource="{Binding ListCar}" SelectedItem="{Binding SelectedItem}">
                     
                     <ListView.View >
@@ -117,7 +117,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </ScrollViewer>
+            </ScrollViewer>-->
         </materialDesign:Card>
 
         <Grid Grid.Row="2" Margin="15 0 0 0">
