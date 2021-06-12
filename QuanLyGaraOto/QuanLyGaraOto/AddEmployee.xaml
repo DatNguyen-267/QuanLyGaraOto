@@ -16,10 +16,10 @@
         ResizeMode="NoResize"
         Name="wdAddEmployee"
         WindowStyle="None"
-       
+        xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         WindowStartupLocation="CenterScreen"
         
-        Title="AddEmployee" Height="550" Width="450">
+        Title="AddEmployee" Height="600" Width="450">
     <Grid Background="White">
         <Ellipse 
             Height="250"
@@ -34,7 +34,7 @@
             VerticalAlignment="Top"  
             StrokeThickness="80" Margin="165,265,-715.4,-714.6"></Ellipse>
 
-        <Grid Width="400" Height="500">
+        <Grid Width="400" Height="550">
             <materialDesign:Card>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -44,10 +44,55 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
-
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0"                   
-                    Margin="8 16 8 8"
+                        Margin="8 16 8 8"
+                        VerticalAlignment="Top"
+                        Height="40">
+                        <Label
+                            Content="Tên tài khoản"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            />
+                        <Rectangle
+                            Margin="0"
+                            Height="40"
+                            Width="240"
+                            HorizontalAlignment="Right"
+                            RadiusX="4"
+                            RadiusY="4"
+                            Stroke="Black"
+                            />
+                        <TextBox
+                            x:Name="userNameTxb"
+                          
+                            materialDesign:HintAssist.Hint="Nhập tên tài khoản"
+                            Height="40" 
+                            FontSize="14" 
+                            Width="220"
+                            BorderThickness="0" 
+                            Padding="0" 
+                            Margin="0,0,10,0" 
+                            HorizontalAlignment="Right"
+                            VerticalContentAlignment="Center" 
+                            HorizontalContentAlignment="Left"
+                            FontWeight="SemiBold">
+                            <TextBox.Text>
+                                <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <validation:NullDataValidation ErrorMessage="Vui lòng nhập tên tài khoản"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </Grid>
+                    <Grid Grid.Row="1"                   
+                    Margin="8 8 8 8"
                     VerticalAlignment="Top"
                     Height="40">
                         <Label
@@ -78,11 +123,55 @@
                         HorizontalAlignment="Right"
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
-                        FontWeight="SemiBold"
-                            Text="{Binding Name,UpdateSourceTrigger=PropertyChanged, Mode = TwoWay}">
+                        FontWeight="SemiBold">
+                            <TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <validation:NullDataValidation ErrorMessage="Vui lòng nhập họ và tên"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                         </TextBox>
                     </Grid>
-                    <Grid Grid.Row="1"                   
+                    <Grid Grid.Row="2"                   
+                        Margin="8 8 8 16"
+                        VerticalAlignment="Top"
+                        Height="40">
+                        <Label
+                            Content="Chức vụ"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            />
+                        <Rectangle
+                            Margin="0"
+                            Height="40"
+                            Width="240"
+                            HorizontalAlignment="Right"
+                            RadiusX="4"
+                            RadiusY="4"
+                            Stroke="Black"
+                            />
+                        <ComboBox
+                            ItemsSource="{Binding ListRoles, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            DisplayMemberPath="Role_Name"
+                            Text="{Binding RoleName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                           
+                            materialDesign:HintAssist.Hint="Nhập chức vụ"
+                            Height="40" 
+                            FontSize="14" 
+                            Width="220"
+                            BorderThickness="0" 
+                            Padding="0" 
+                            Margin="0,0,10,0" 
+                            HorizontalAlignment="Right"
+                            VerticalContentAlignment="Center" 
+                            HorizontalContentAlignment="Left"
+                            FontWeight="SemiBold">
+                        </ComboBox>
+                    </Grid>
+                    <Grid Grid.Row="3"                   
                         Margin="8"
                         VerticalAlignment="Top"
                         Height="40">
@@ -104,7 +193,7 @@
                         Stroke="Black"
                     />
                         <DatePicker
-                            Text="{Binding BrithDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='dd/MM/yyyy'}"
+                            
                         materialDesign:HintAssist.Hint="Nhập ngày sinh"
                         Height="40" 
                         FontSize="14" 
@@ -116,14 +205,22 @@
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
                         FontWeight="SemiBold" Cursor="No" IsTodayHighlighted="False">
+                            <DatePicker.Text>
+                                <Binding Path="BrithDate" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" StringFormat='dd/MM/yyyy'>
+                                    <Binding.ValidationRules>
+                                        <validation:NullDataValidation ErrorMessage="Vui lòng nhập ngày sinh"/>
+              
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </DatePicker.Text>
                         </DatePicker>
                     </Grid>
-                    <Grid Grid.Row="2"                   
+                    <Grid Grid.Row="4"                   
                         Margin="8"
                         VerticalAlignment="Top"
                         Height="40">
                         <Label
-                        Content="CMND"
+                        Content="CMND/CCCD"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         FontSize="16"
@@ -140,8 +237,8 @@
                         Stroke="Black"
                     />
                         <TextBox
-                            Text="{Binding CMND,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                        materialDesign:HintAssist.Hint="Nhập CMND"
+                            
+                        materialDesign:HintAssist.Hint="Nhập CMND/CCCD"
                         Height="40" 
                         FontSize="14" 
                         Width="220"
@@ -152,10 +249,16 @@
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
                         FontWeight="SemiBold">
+                        <TextBox.Text>
+                                <Binding Path="CMND" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <validation:NullDataValidation ErrorMessage="Vui lòng nhập CMND/CCCD"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                         </TextBox>
                     </Grid>
-
-                    <Grid Grid.Row="3"                   
+                    <Grid Grid.Row="5"                   
                     Margin="8"
                     VerticalAlignment="Top"
                     Height="40">
@@ -177,43 +280,52 @@
                     Stroke="Black"
                     />
                         <TextBox
-                            Text="{Binding Telephone,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    materialDesign:HintAssist.Hint="Nhập số điện thoại"
-                    Height="40" 
-                    FontSize="14" 
-                    Width="220"
-                    BorderThickness="0" 
-                    Padding="0" 
-                    Margin="0,0,10,0" 
-                    HorizontalAlignment="Right"
-                    VerticalContentAlignment="Center" 
-                    HorizontalContentAlignment="Left"
-                    FontWeight="SemiBold">
+                           
+                            materialDesign:HintAssist.Hint="Nhập số điện thoại"
+                            Height="40" 
+                            FontSize="14" 
+                            Width="220"
+                            BorderThickness="0" 
+                            Padding="0" 
+                            Margin="0,0,10,0" 
+                            HorizontalAlignment="Right"
+                            VerticalContentAlignment="Center" 
+                            HorizontalContentAlignment="Left"
+                            FontWeight="SemiBold">
+                            <TextBox.Text>
+                                <Binding Path="Telephone" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <validation:NumberValidation ErrorMessage="Chỉ được nhập số (0-9)"
+                                                                         ErrorMessageNull="Vui lòng nhập số điện thoại"
+                                                                         ></validation:NumberValidation>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                         </TextBox>
                     </Grid>
-                    <Grid Grid.Row="4"                   
-                    Margin="8 8 8 16"
-                    VerticalAlignment="Top"
-                    Height="40">
+                    <Grid Grid.Row="6"                   
+                        Margin="8 8 8 16"
+                        VerticalAlignment="Top"
+                        Height="40">
                         <Label
-                    Content="Địa chỉ"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    />
+                            Content="Địa chỉ"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            />
                         <Rectangle
-                    Margin="0"
-                    Height="40"
-                    Width="240"
-                    HorizontalAlignment="Right"
-                    RadiusX="4"
-                    RadiusY="4"
-                    Stroke="Black"
-                    />
+                            Margin="0"
+                            Height="40"
+                            Width="240"
+                            HorizontalAlignment="Right"
+                            RadiusX="4"
+                            RadiusY="4"
+                            Stroke="Black"
+                            />
                         <TextBox
-                            Text="{Binding Address,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                          
                             materialDesign:HintAssist.Hint="Nhập địa chỉ"
                             Height="40" 
                             FontSize="14" 
@@ -225,15 +337,22 @@
                             VerticalContentAlignment="Center" 
                             HorizontalContentAlignment="Left"
                             FontWeight="SemiBold">
+                            <TextBox.Text>
+                                <Binding Path="Address" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <validation:NullDataValidation ErrorMessage="Vui lòng nhập địa chỉ"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                         </TextBox>
                     </Grid>
-                    <Grid Grid.Row="5">
+                    <Grid Grid.Row="7">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0"
-                                Content="Lưu"
+                                Content="Thêm"
                                 Width="120"
                                 Height="35"
                                 Margin="0 0 20 0"

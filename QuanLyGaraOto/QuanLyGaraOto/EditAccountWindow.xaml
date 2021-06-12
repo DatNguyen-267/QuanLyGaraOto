@@ -35,16 +35,16 @@
                                  ></materialDesign:PackIcon>
             <Grid Grid.Row="1">
                 <Rectangle Width="250" Height="50" RadiusX="4" RadiusY="4" StrokeThickness="1" Stroke="Black"></Rectangle>
-                <TextBox Width="230"
+                <Label Width="230"
                      HorizontalAlignment="Center"
                      VerticalAlignment="Center"
                     
                      Padding="5"
                      materialDesign:HintAssist.Hint="Tên tài khoản"
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                     IsEnabled="False"
-                     ></TextBox>
+                     Style="{StaticResource MaterialDesignLabel}"
+                     Content="{Binding UserName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                     
+                     ></Label>
             </Grid>
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>

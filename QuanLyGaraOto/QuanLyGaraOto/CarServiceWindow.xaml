@@ -164,17 +164,15 @@
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
                                             <ColumnDefinition></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <materialDesign:PackIcon Kind="Phone" 
-                                                     Grid.Column="0"/>
+                                        <materialDesign:PackIcon Kind="Phone" Grid.Column="0"/>
                                         <TextBox 
                                             Text="{Binding CarReception.CUSTOMER.Customer_Phone}"
-                                           IsReadOnly="True"
+                                            IsReadOnly="True"
                                             Grid.Column="1"
-                                     Margin="0 0 0 10"
-                            materialDesign:HintAssist.Hint="Số Điện thoại"
-                             
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                                            Margin="0 0 0 10"
+                                            materialDesign:HintAssist.Hint="Số Điện thoại"
+                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            VerticalAlignment="Center" />   
                                     </Grid>
                                 </Grid>
                                 <Grid Margin="10 5 10 0">
