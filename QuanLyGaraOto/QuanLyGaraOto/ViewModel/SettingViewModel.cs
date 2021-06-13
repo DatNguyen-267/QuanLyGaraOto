@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,6 +15,9 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class SettingViewModel : BaseViewModel
     {
+        // login account
+        public USER user;
+
         // Setting visibility
         private bool _AppSettingVis;
         public bool AppSettingVis
@@ -378,17 +382,6 @@ namespace QuanLyGaraOto.ViewModel
                 ListCarBrand.Add(addCarBrandViewModel.br);
             });
 
-            // User information
-            userInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == 1).FirstOrDefault();
-            if (userInfo != null)
-            {
-                UserName = userInfo.UserInfo_Name;
-                UserAddress = userInfo.UserInfo_Address;
-                UserBirth = userInfo.UserInfo_BirthDate.Value;
-                UserTelephone = userInfo.UserInfo_Telephone;
-                UserCMND = userInfo.UserInfo_CMND;
-            }
-
             ChangeUserInformation = new RelayCommand<SettingWindow>((p) =>
             {
                 if (p == null || string.IsNullOrEmpty(p.txtAddress.Text)
@@ -430,7 +423,14 @@ namespace QuanLyGaraOto.ViewModel
             NewPasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { NewPassword = p.Password; });
             CheckPassword = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
             {
-                MessageBox.Show("Checked");
+
+                string encode = MD5Hash(Base64Encode(OldPassword));
+                if(encode != user.Password)
+                {
+                    MessageBox.Show("Sai mật khẩu!");
+                    return;
+                }
+
                 p.OldPasswordBox.Password = string.Empty;
                 IsEnableOldPasswordField = false;
                 IsEnableCheckButtonInChangePassword = false;
@@ -447,6 +447,10 @@ namespace QuanLyGaraOto.ViewModel
 
             }, (p) =>
             {
+                string encode = MD5Hash(Base64Encode(NewPassword));
+                user.Password = encode;
+                DataProvider.Ins.DB.SaveChanges();
+
                 p.NewPasswordBox.Password = string.Empty;
                 IsCorrectPassword = false;
                 IsEnableCheckButtonInChangePassword = true;
@@ -477,6 +481,20 @@ namespace QuanLyGaraOto.ViewModel
             // Set enable button to false
             SetEnableStatusButtonInGaraInformation(false);
         }
+        public SettingViewModel(string username) : this()
+        {
+            // User information
+            user = DataProvider.Ins.DB.USERS.Where(x => x.UserName == username).FirstOrDefault();
+            userInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == user.Users_Id).FirstOrDefault();
+            if (userInfo != null)
+            {
+                UserName = userInfo.UserInfo_Name;
+                UserAddress = userInfo.UserInfo_Address;
+                UserBirth = userInfo.UserInfo_BirthDate.Value;
+                UserTelephone = userInfo.UserInfo_Telephone;
+                UserCMND = userInfo.UserInfo_CMND;
+            }
+        }
 
         private void SetEnableStatusButtonInGaraInformation(bool b)
         {
@@ -487,6 +505,24 @@ namespace QuanLyGaraOto.ViewModel
         {
             IsEnableChangeButtonInUserInformation = b;
             IsEnableResetButtonInUserInformation = b;
+        }
+
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+        public static string MD5Hash(string input)
+        {
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
         }
     }
 }

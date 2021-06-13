@@ -78,10 +78,11 @@ namespace QuanLyGaraOto.ViewModel
                 VisReport = true;
 
             });
-            OpenSetting = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenSetting = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
             {
                 InitVis();
                 VisSetting = true;
+                p.DataContext = new SettingViewModel("admin");
             });
         }
         public void InitVis()
