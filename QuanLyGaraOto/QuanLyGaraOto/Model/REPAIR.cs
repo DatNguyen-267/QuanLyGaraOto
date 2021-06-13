@@ -20,7 +20,7 @@ namespace QuanLyGaraOto.Model
         {
             this.REPAIR_DETAIL = new HashSet<REPAIR_DETAIL>();
         }
-    
+
         public int Repair_Id { get; set; }
         private int _IdReception { get; set; }
         public int IdReception { get => _IdReception; set { _IdReception = value; OnPropertyChanged(); } }

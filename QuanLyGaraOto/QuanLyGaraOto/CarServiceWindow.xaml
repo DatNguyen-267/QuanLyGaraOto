@@ -308,14 +308,13 @@
                                    HorizontalContentAlignment="Left">
                                 <ListView.View>
                                     <GridView>
-
-                                        <GridViewColumn Header="Nội dung" DisplayMemberBinding="{Binding RepairInfo.Content}"></GridViewColumn>
-                                        <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Name}"></GridViewColumn>
-                                        <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding RepairInfo.SuppliesAmount}"></GridViewColumn>
-                                        <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Price}"></GridViewColumn>
-                                        <GridViewColumn Width="148" Header="Loại tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Name}"></GridViewColumn>
-                                        <GridViewColumn Header="Tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Value}"></GridViewColumn>
-                                        <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding RepairInfo.TotalMoney}"></GridViewColumn>
+                                        <GridViewColumn Width="200" Header="Nội dung" DisplayMemberBinding="{Binding RepairInfo.Content}"></GridViewColumn>
+                                        <GridViewColumn Width="250" Header="Vật tư" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Name}"></GridViewColumn>
+                                        <GridViewColumn Width="150" Header="Số lượng" DisplayMemberBinding="{Binding RepairInfo.SuppliesAmount}"></GridViewColumn>
+                                        <GridViewColumn Width="150" Header="Đơn giá" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Price}"></GridViewColumn>
+                                        <GridViewColumn Width="250" Header="Loại tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Name}"></GridViewColumn>
+                                        <GridViewColumn Width="150" Header="Tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Value}"></GridViewColumn>
+                                        <GridViewColumn Width="150" Header="Thành tiền" DisplayMemberBinding="{Binding RepairInfo.TotalMoney}"></GridViewColumn>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
