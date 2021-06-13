@@ -78,6 +78,25 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
+        // IsEnable button setting in change password
+        private bool _IsEnableCheckButtonInChangePassword;
+        public bool IsEnableCheckButtonInChangePassword
+        {
+            get => _IsEnableCheckButtonInChangePassword; set
+            {
+                _IsEnableCheckButtonInChangePassword = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _IsEnableChangeButtonInChangePassword;
+        public bool IsEnableChangeButtonInChangePassword
+        {
+            get => _IsEnableChangeButtonInChangePassword; set
+            {
+                _IsEnableChangeButtonInChangePassword = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ICommand ChangeEnableButttonInGaraInformation { get; set; }
         public ICommand ChangeEnableButtonInUserInformation { get; set; }
@@ -165,6 +184,22 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeEnableButtonInCarBrandSetting { get; set; }
         public ICommand ModifyCarBrand { get; set; }
         public ICommand DeleteCarBrand { get; set; }
+        public ICommand OpenAddCarBrandWindow { get; set; }
+
+        // Add brand window
+        private string _CarBrandInAdd;
+        public string CarBrandInAdd
+        {
+            get => _CarBrandInAdd; set
+            {
+                _CarBrandInAdd = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand CancelAddCarBrandWindow { get; set; }
+        public ICommand AddCarBrand { get; set; }
+
 
         // Setting user information
 
@@ -177,7 +212,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _UserName = value;
-                SetEnableStatusButtonInUserInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -189,7 +223,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _UserAddress = value;
-                SetEnableStatusButtonInUserInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -201,7 +234,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _UserBirth = value;
-                SetEnableStatusButtonInUserInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -213,7 +245,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _UserTelephone = value;
-                SetEnableStatusButtonInUserInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -232,7 +263,16 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeUserInformation { get; set; }
         public ICommand ResetUserInformation { get; set; }
 
-
+        // Change password
+        private bool _IsEnableOldPasswordField;
+        public bool IsEnableOldPasswordField
+        {
+            get => _IsEnableOldPasswordField; set
+            {
+                _IsEnableOldPasswordField = value;
+                OnPropertyChanged();
+            }
+        }
         private string _OldPassword;
         public string OldPassword
         {
@@ -242,7 +282,6 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
-
         private string _NewPassword;
         public string NewPassword
         {
@@ -252,6 +291,20 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private bool _IsCorrectPassword;
+        public bool IsCorrectPassword
+        {
+            get => _IsCorrectPassword; set
+            {
+                _IsCorrectPassword = value;
+                OnPropertyChanged();
+            }
+        }
+        public ICommand OldPasswordChangedCommand { get; set; }
+        public ICommand NewPasswordChangedCommand { get; set; }
+        public ICommand CheckPassword { get; set; }
+        public ICommand CancelChangePassword { get; set; }
 
         public SettingViewModel()
         {
@@ -266,7 +319,7 @@ namespace QuanLyGaraOto.ViewModel
             });
             ChangeUserSettingVis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                UserSettingVis = true; ;
+                UserSettingVis = true;
                 AppSettingVis = false;
             });
 
@@ -275,7 +328,14 @@ namespace QuanLyGaraOto.ViewModel
             MaxCarReception = GaraInfo.MaxCarReception;
             IsOverPay = GaraInfo.IsOverPay;
 
-            ChangeGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ChangeGaraInformation = new RelayCommand<SettingWindow>((p) =>
+            {
+                if (p == null || string.IsNullOrEmpty(p.txtMaxCarReception.Text))
+                {
+                    return false;
+                }
+                return true;
+            }, (p) =>
             {
                 String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception
                                         + "where MaxCarReception=" + GaraInfo.MaxCarReception.ToString();
@@ -290,7 +350,6 @@ namespace QuanLyGaraOto.ViewModel
 
                 SetEnableStatusButtonInGaraInformation(false);
             });
-
             ResetGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 MaxCarReception = GaraInfo.MaxCarReception;
@@ -318,6 +377,13 @@ namespace QuanLyGaraOto.ViewModel
                 IsEnableModifyFieldInBrandSetting = false;
                 IsEnableDeleteButtonInBrandSetting = false;
             });
+            OpenAddCarBrandWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                AddCarBrandWindow window = new AddCarBrandWindow();
+                window.ShowDialog();
+                AddCarBrandViewModel addCarBrandViewModel = window.DataContext as AddCarBrandViewModel;
+                ListCarBrand.Add(addCarBrandViewModel.br);
+            });
 
             // User information
             userInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == 1).FirstOrDefault();
@@ -330,7 +396,18 @@ namespace QuanLyGaraOto.ViewModel
                 UserCMND = userInfo.UserInfo_CMND;
             }
 
-            ChangeUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ChangeUserInformation = new RelayCommand<SettingWindow>((p) =>
+            {
+                if (p == null || string.IsNullOrEmpty(p.txtAddress.Text)
+                             || string.IsNullOrEmpty(p.txtName.Text)
+                             || DateTime.TryParse(p.dpBirth.Text, out DateTime time)
+                             || string.IsNullOrEmpty(p.txtTelephone.Text)
+                             || string.IsNullOrEmpty(p.txtCMND.Text))
+                {
+                    return false;
+                }
+                return true;
+            }, (p) =>
             {
                 userInfo.UserInfo_Name = _UserName;
                 userInfo.UserInfo_Address = _UserAddress;
@@ -340,7 +417,6 @@ namespace QuanLyGaraOto.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
                 SetEnableStatusButtonInUserInformation(false);
             });
-
             ResetUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 UserName = userInfo.UserInfo_Name;
@@ -351,9 +427,26 @@ namespace QuanLyGaraOto.ViewModel
                 SetEnableStatusButtonInUserInformation(false);
             });
 
-            // Set enable button to false
-            SetEnableStatusButtonInGaraInformation(false);
-            SetEnableStatusButtonInUserInformation(false);
+            // Change password
+            IsCorrectPassword = false;
+            IsEnableCheckButtonInChangePassword = true;
+            IsEnableOldPasswordField = true;
+            OldPasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { OldPassword = p.Password; });
+            NewPasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { NewPassword = p.Password; });
+            CheckPassword = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                MessageBox.Show("Checked");
+                IsEnableOldPasswordField = false;
+                IsEnableCheckButtonInChangePassword = false;
+                IsCorrectPassword = true;
+            });
+            CancelChangePassword = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                IsCorrectPassword = false;
+                IsEnableChangeButtonInChangePassword = false;
+                IsEnableCheckButtonInChangePassword = true;
+                IsEnableOldPasswordField = true;
+            });
 
             // Change enable button
             ChangeEnableButtonInUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -368,6 +461,19 @@ namespace QuanLyGaraOto.ViewModel
             {
                 IsEnableModifyButtonInBrandSetting = true;
             });
+
+            // Set enable button to false
+            SetEnableStatusButtonInGaraInformation(false);
+        }
+
+        private object Base64Encode(string oldPassword)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string MD5Hash(object p)
+        {
+            throw new NotImplementedException();
         }
 
         private void SetEnableStatusButtonInGaraInformation(bool b)

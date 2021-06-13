@@ -35,7 +35,6 @@ namespace QuanLyGaraOto
             UserSetting.Background = Brushes.White;
             UserSetting.Foreground = Brushes.Black;
         }
-
         private void UserSetting_Click(object sender, RoutedEventArgs e)
         {
             AppSetting.Background = Brushes.White;
@@ -44,7 +43,5 @@ namespace QuanLyGaraOto
             UserSetting.Background = Brushes.Black;
             UserSetting.Foreground = Brushes.White;
         }
-
-        
     }
 }
