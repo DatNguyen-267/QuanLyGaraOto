@@ -135,6 +135,7 @@
       <DependentUpon>ChangeCarInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Convert\DateConvert.cs" />
+    <Compile Include="Convert\HashConvert.cs" />
     <Compile Include="Convert\UnicodeConvert.cs" />
     <Compile Include="DashboardWindow.xaml.cs">
       <DependentUpon>DashboardWindow.xaml</DependentUpon>
