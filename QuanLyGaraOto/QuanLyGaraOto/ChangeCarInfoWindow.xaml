@@ -240,19 +240,15 @@
                     Command="{Binding ConfirmCommand}"
                     CommandParameter="{Binding ElementName=ChangeCarInfoWD}"
                     Grid.Column="0"
-                    Width="100"
-                    Background="#455A64"
-                  Style="{StaticResource MaterialDesignRaisedButton}"
-                  ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Style="{StaticResource FeatureButton}"
+                    Background="{StaticResource MainBlue}"
+                    BorderBrush="{StaticResource MainBlue}"
                   Content="Xác Nhận" />
                 <Button
                     Command="{Binding CloseCommand}"
                     CommandParameter="{Binding ElementName=ChangeCarInfoWD}"
                    Grid.Column="1"
-                      Width="100"
-                    Background="#455A64"
-                  Style="{StaticResource MaterialDesignRaisedButton}"
-                  ToolTip="Resource name: MaterialDesignRaisedButton"
+                     Style="{StaticResource FeatureButton}"
                   Content="Đóng" />
             </Grid>
         </Grid>

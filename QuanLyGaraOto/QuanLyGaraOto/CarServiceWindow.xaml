@@ -50,10 +50,9 @@
                         Command="{Binding ReceptionCommand}"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Height="auto"
                         Padding="20 10 20 10"
-                        FontSize="20"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        
+                        Style="{StaticResource MainButton}"
                         >
                 </Button>
             </materialDesign:Card>
@@ -211,16 +210,16 @@
                                 </Grid>
                             </StackPanel>
                         </ScrollViewer>
-                        <Grid Grid.Row="1"  Margin="10 5 0 15">
+                        <Grid Grid.Row="1"  Margin="0 5 0 15">
                             <Button
                                 Command="{Binding ChangeCarInfoCommand}"
                                 Visibility="{Binding VisChangeCustomerInfo, Converter={StaticResource BooleanToVisibilityConverter}}"
                                 Margin="0 0 0 0"
                                 Grid.Column="0"
                                 VerticalAlignment="Center"
-                                Background="{StaticResource MainColor}"
                                 HorizontalAlignment="Center"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Style="{StaticResource FeatureButton}"
+                                Width="190"
                                 ToolTip="Resource name: MaterialDesignRaisedButton"
                                 Content="Thay đổi thông tin" />
                         </Grid>
@@ -241,10 +240,11 @@
                         IsEnabled="{Binding IsEnabledBtnAddRepair}"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Height="auto"
+                      
                         Padding="20 10 20 10"
-                        FontSize="20"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
+                       
+                        Style="{StaticResource MainButton}"
+                        Width="auto"
                         >
                 </Button>
             </materialDesign:Card>
@@ -270,32 +270,26 @@
                             <Button 
                                 Command="{Binding AddCommand}"
                                 Visibility="{Binding VisAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Width="100"
+                                Style="{StaticResource FeatureButton}"
                                 Content="Thêm"
-                                Background="{StaticResource MainColor}"
                                 Margin="10 0 10 0"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Right">
+                                >
                             </Button>
                             <Button 
                                 Command="{Binding EditCommand}"
                                 Visibility="{Binding VisEdit, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Width="100"
+                                Style="{StaticResource FeatureButton}"
                                 Content="Sửa"
                                 Margin="10 0 10 0"
-                                VerticalAlignment="Center"
-                                Background="{StaticResource MainColor}"
-                                HorizontalAlignment="Right">
+                                >
                             </Button>
                             <Button 
                                 Command="{Binding DeleteCommand}"
                                 Visibility="{Binding VisDelete, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Width="100"
+                                Style="{StaticResource FeatureButton}"
                                 Content="Xóa"
                                 Margin="10 0 10 0"
-                                Background="{StaticResource MainColor}"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Right">
+                               >
                             </Button>
                             
                         </StackPanel>
@@ -365,14 +359,8 @@
                         Command="{Binding ViewCommand}"
                         Visibility="{Binding VisView, Converter={StaticResource BooleanToVisibilityConverter}}"
                             Content="Xem Hóa đơn"
-                            Width="150"
-                            Height="50"
+                             Style="{StaticResource MainButton}"
                             Margin="10 0 10 0"
-                             Background="{StaticResource MainBlue}"
-                            BorderBrush="{StaticResource MainBlue}"
-                            Foreground="White"
-                            FontSize="18"
-                            FontWeight="Bold"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right">
                     </Button>
@@ -382,26 +370,20 @@
                         Visibility="{Binding VisPay, Converter={StaticResource BooleanToVisibilityConverter}}"
                         x:Name="BtnReceipt"
                             Content="Thanh toán"
-                            Width="150"
-                            FontSize="16"
-                            Height="50"
+                            Style="{StaticResource MainButton}"
                             Margin="10 0 10 0"
                             Background="{StaticResource MainBlue}"
                             BorderBrush="{StaticResource MainBlue}"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Right">
+                            >
                     </Button>
                     <Button Grid.Column="1"
                         Command="{Binding CloseCommand}"
                             CommandParameter="{Binding ElementName=CarServiceWD}"
                             Margin="10 0 10 0"
-                            Width="150"
-                            FontSize="16"
-                            Height="50"
+                             Style="{StaticResource MainButton}"
                             Content="Đóng"
                             Background="{StaticResource MainColor}"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Right">
+                            >
                     </Button>
                 </Grid>
                 
