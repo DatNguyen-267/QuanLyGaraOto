@@ -79,7 +79,6 @@
                        
                         materialDesign:HintAssist.Hint="Mật khẩu"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
- 
                         VerticalAlignment="Center">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PasswordChanged">
