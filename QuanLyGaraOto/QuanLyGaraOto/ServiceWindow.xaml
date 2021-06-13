@@ -66,7 +66,9 @@
                       CanUserAddRows="False"
                       AutoGenerateColumns="False"
                       CanUserDeleteRows="False"
-                      CanUserReorderColumns="True">
+                      CanUserReorderColumns="True"
+                      FontSize="16"
+                      >
                 <!--<DataGrid.CellStyle>
                     --><!--<Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
