@@ -33,17 +33,19 @@ namespace QuanLyGaraOto.ViewModel
         public bool VisReport { get => _VisReport; set { _VisReport = value; OnPropertyChanged(); } }
         public bool _VisSetting { get; set; }
         public bool VisSetting { get => _VisSetting; set { _VisSetting = value; OnPropertyChanged(); } }
-
         public bool _CurrentWindow { get; set; }
         public bool CurrentWindow { get => _CurrentWindow; set { _CurrentWindow = value; OnPropertyChanged(); } }
+
+        private USER _User;
+        public USER User { get => _User; set { _User = value; OnPropertyChanged(); } }
+
         public MainViewModel()
         {
             InitVis();
-            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
-                Container = (p as MainWindow).Container;
-                
-                LoadLoginWindow();
+                Container = (p).Container;
+                LoadLoginWindow(p);
             });
             OpenService = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -83,26 +85,26 @@ namespace QuanLyGaraOto.ViewModel
             VisEmployee = false;
             VisSetting = false;
         }
-        public void LoadLoginWindow()
+        public void LoadLoginWindow(MainWindow p)
         {
-            //IsLoaded = true;
-            //if (p == null)
-            //    return;
-            //p.Hide();
-            //LoginWindow loginWindow = new LoginWindow();
-            //loginWindow.ShowDialog();
-            //if (loginWindow.DataContext == null)
-            //    return;
-            //var loginVM = loginWindow.DataContext as LoginViewModel;
-            //if (loginVM.IsLogin)
-            //{
-            //    p.Show();
-            //}
-            //else
-            //{
-
-            //    p.Close();
-            //}
+            IsLoaded = true;
+            if (p == null)
+                return;
+            p.Hide();
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.ShowDialog();
+            if (loginWindow.DataContext == null)
+                return;
+            var loginVM = loginWindow.DataContext as LoginViewModel;
+            if (loginVM.IsLogin)
+            {
+                p.Show();
+                User = loginVM.User;
+            }
+            else
+            {
+                p.Close();
+            }
         }
     }
 }
