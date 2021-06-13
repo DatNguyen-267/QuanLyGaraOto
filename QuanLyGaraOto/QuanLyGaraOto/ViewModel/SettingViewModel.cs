@@ -88,15 +88,6 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
-        private bool _IsEnableChangeButtonInChangePassword;
-        public bool IsEnableChangeButtonInChangePassword
-        {
-            get => _IsEnableChangeButtonInChangePassword; set
-            {
-                _IsEnableChangeButtonInChangePassword = value;
-                OnPropertyChanged();
-            }
-        }
 
         public ICommand ChangeEnableButttonInGaraInformation { get; set; }
         public ICommand ChangeEnableButtonInUserInformation { get; set; }
@@ -304,6 +295,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand OldPasswordChangedCommand { get; set; }
         public ICommand NewPasswordChangedCommand { get; set; }
         public ICommand CheckPassword { get; set; }
+        public ICommand ChangePassword { get; set; }
         public ICommand CancelChangePassword { get; set; }
 
         public SettingViewModel()
@@ -330,7 +322,8 @@ namespace QuanLyGaraOto.ViewModel
 
             ChangeGaraInformation = new RelayCommand<SettingWindow>((p) =>
             {
-                if (p == null || string.IsNullOrEmpty(p.txtMaxCarReception.Text))
+                if (p == null || string.IsNullOrEmpty(p.txtMaxCarReception.Text)
+                               || p.txtMaxCarReception.Text.Any(x => char.IsLetter(x)))
                 {
                     return false;
                 }
@@ -400,9 +393,10 @@ namespace QuanLyGaraOto.ViewModel
             {
                 if (p == null || string.IsNullOrEmpty(p.txtAddress.Text)
                              || string.IsNullOrEmpty(p.txtName.Text)
-                             || DateTime.TryParse(p.dpBirth.Text, out DateTime time)
-                             || string.IsNullOrEmpty(p.txtTelephone.Text)
-                             || string.IsNullOrEmpty(p.txtCMND.Text))
+                             || string.IsNullOrEmpty(p.dpBirth.DisplayDate.ToShortDateString())
+                             || !DateTime.TryParse(p.dpBirth.DisplayDate.ToShortDateString(), out var value)
+                                 || string.IsNullOrEmpty(p.txtTelephone.Text) || p.txtTelephone.Text.Any(x => char.IsLetter(x))
+                                 || string.IsNullOrEmpty(p.txtCMND.Text))
                 {
                     return false;
                 }
@@ -431,19 +425,37 @@ namespace QuanLyGaraOto.ViewModel
             IsCorrectPassword = false;
             IsEnableCheckButtonInChangePassword = true;
             IsEnableOldPasswordField = true;
+
             OldPasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { OldPassword = p.Password; });
             NewPasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { NewPassword = p.Password; });
-            CheckPassword = new RelayCommand<object>((p) => { return true; }, (p) =>
+            CheckPassword = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
             {
                 MessageBox.Show("Checked");
+                p.OldPasswordBox.Password = string.Empty;
                 IsEnableOldPasswordField = false;
                 IsEnableCheckButtonInChangePassword = false;
                 IsCorrectPassword = true;
             });
-            CancelChangePassword = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ChangePassword = new RelayCommand<SettingWindow>((p) =>
             {
+                if (p == null || string.IsNullOrEmpty(p.NewPasswordBox.Password)
+                            || p.NewPasswordBox.Password.Length < 5)
+                {
+                    return false;
+                }
+                return true;
+
+            }, (p) =>
+            {
+                p.NewPasswordBox.Password = string.Empty;
                 IsCorrectPassword = false;
-                IsEnableChangeButtonInChangePassword = false;
+                IsEnableCheckButtonInChangePassword = true;
+                IsEnableOldPasswordField = true;
+            });
+            CancelChangePassword = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
+            {
+                p.NewPasswordBox.Password = string.Empty;
+                IsCorrectPassword = false;
                 IsEnableCheckButtonInChangePassword = true;
                 IsEnableOldPasswordField = true;
             });
@@ -464,16 +476,6 @@ namespace QuanLyGaraOto.ViewModel
 
             // Set enable button to false
             SetEnableStatusButtonInGaraInformation(false);
-        }
-
-        private object Base64Encode(string oldPassword)
-        {
-            throw new NotImplementedException();
-        }
-
-        private string MD5Hash(object p)
-        {
-            throw new NotImplementedException();
         }
 
         private void SetEnableStatusButtonInGaraInformation(bool b)

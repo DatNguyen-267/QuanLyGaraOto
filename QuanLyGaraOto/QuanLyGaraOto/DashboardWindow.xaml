@@ -146,7 +146,13 @@
                         FontSize="16"
                         FontWeight="Medium"
                         Margin="20,0,0,0"
-                        Width="160"/>
+                        Width="160"
+                        
+                        ItemsSource="{Binding ItemSource_Year}"
+                        SelectedIndex="{Binding SelectedYear}">
+                        
+                        
+                    </ComboBox>
                 </Grid>
                 <Grid Grid.Row="1">
                     <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left" Margin="0,20,0,0">

@@ -347,6 +347,12 @@
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </DatePicker.Text>
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateChanged">
+                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </DatePicker>
                         </Grid>
                         <Grid Grid.Row="3" Margin="16 8 16 0">
@@ -366,9 +372,8 @@
                                 <TextBox.Text>
                                     <Binding Path="UserCMND" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                         <Binding.ValidationRules>
-                                            <validation:NumberValidation ErrorMessage="Vui lòng nhập số (0-9)"
-                                                                        ErrorMessageNull="Vui lòng không để trống"
-                                                                       ></validation:NumberValidation>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"   
+                                                                       ></validation:NullDataValidation>
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
@@ -536,6 +541,7 @@
                                 Margin="20,0,119,0"
                                 Content="Kiểm tra"      
                                 Command="{Binding CheckPassword}"
+                                CommandParameter="{Binding ElementName=wdSetting}"
                                 Background="Black"
                                 BorderBrush="Black" 
                                 IsEnabled="{Binding IsEnableCheckButtonInChangePassword}"/>
@@ -559,8 +565,7 @@
                                     materialDesign:TextFieldAssist.HasClearButton="True"
                                     materialDesign:HintAssist.HelperText="Tối thiểu 5 ký tự" 
                                     Margin="29,5,0,17" 
-                                    FontSize="14"
-                                    >
+                                    FontSize="14">
 
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
@@ -578,16 +583,17 @@
                     
                         <StackPanel Grid.Row="3" Margin="5" VerticalAlignment="Center"
                                     Orientation="Horizontal" Visibility="{Binding IsCorrectPassword, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Button 
+                            <Button
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
                                 HorizontalAlignment="Left"
                                 Margin="20 0 0 0 "
                                 Content="Thay đổi"      
-                                Command=""
+                                Command="{Binding ChangePassword}"
+                                CommandParameter="{Binding ElementName=wdSetting}"
                                 Background="Black"
                                 BorderBrush="Black" 
-                                IsEnabled="{Binding IsEnableChangeButtonInChangePassword}"/>
+                                IsEnabled="True"/>
 
                             <Button 
                                 Style="{StaticResource MaterialDesignRaisedButton}"
@@ -596,6 +602,7 @@
                                 Margin="30 0 0 0 "
                                 Content="Hủy bỏ"      
                                 Command="{Binding CancelChangePassword}"
+                                CommandParameter="{Binding ElementName=wdSetting}"
                                 Background="Black"
                                 BorderBrush="Black" 
                                 IsEnabled="True"/>

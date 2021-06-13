@@ -49,6 +49,28 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
+        private ObservableCollection<string> _ItemSource_Year { get; set; }
+        public ObservableCollection<string> ItemSource_Year
+        {
+            get => _ItemSource_Year; set
+            {
+                _ItemSource_Year = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int firstYear;
+
+        private int _SelectedYear { get; set; }
+        public int SelectedYear
+        {
+            get => _SelectedYear; set
+            {
+                _SelectedYear = value;
+                OnPropertyChanged();
+            }
+        }
+
         public SeriesCollection SeriesCollection { get; set; }
         public List<string> Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
@@ -59,6 +81,7 @@ namespace QuanLyGaraOto.ViewModel
         public DashboardViewModel()
         {
             Labels = new List<string>();
+            ItemSource_Year = new ObservableCollection<string>();
             LoadDataToChart(DateTime.Now.Year);
 
             Formatter = value => value.ToString();
@@ -78,6 +101,18 @@ namespace QuanLyGaraOto.ViewModel
             foreach(var receipt in DataProvider.Ins.DB.RECEIPTs.Where(x => x.ReceiptDate.Month == time.Month))
             {
                 Revenue += receipt.MoneyReceived;
+            }
+
+            ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
+                (DataProvider.Ins.DB.RECEIPTs);
+            ItemSource_Year.Clear();
+            firstYear = receipts.First().ReceiptDate.Date.Year;
+            ItemSource_Year.Add("Năm " + firstYear.ToString());
+
+            foreach(var receipt in receipts)
+            {
+                if (receipt.ReceiptDate.Date.Year <= firstYear + ItemSource_Year.Count - 1) continue;
+                ItemSource_Year.Add("Năm " + receipt.ReceiptDate.Date.Year);
             }
         }
 
