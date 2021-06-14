@@ -186,7 +186,7 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="1" Margin="100 0 100 0">
+            <Grid Grid.Row="1" Margin="70 0 70 0">
                 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -204,7 +204,7 @@
                     Command="{Binding CloseCommand}"
                     CommandParameter="{Binding ElementName=CarReceptionWD}"
                    Grid.Column="1"
-                   Style="{StaticResource FeatureButton}"
+                   Style="{StaticResource CloseButton}"
                   Content="Đóng" />
             </Grid>
         </Grid>

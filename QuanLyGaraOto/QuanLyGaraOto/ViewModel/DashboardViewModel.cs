@@ -115,19 +115,26 @@ namespace QuanLyGaraOto.ViewModel
             {
                 Revenue += (long) receipt.MoneyReceived;
             }
-
-            ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
-                (DataProvider.Ins.DB.RECEIPTs.OrderBy(x => x.ReceiptDate));
-            
-            ItemSource_Year.Clear();
-            firstYear = receipts.First().ReceiptDate.Date.Year;
-            ItemSource_Year.Add("Năm " + firstYear.ToString());
-
-            foreach(var receipt in receipts)
+            try
             {
-                if (receipt.ReceiptDate.Date.Year <= firstYear + ItemSource_Year.Count - 1) continue;
-                ItemSource_Year.Add("Năm " + receipt.ReceiptDate.Date.Year);
+                ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
+                               (DataProvider.Ins.DB.RECEIPTs.OrderBy(x => x.ReceiptDate));
+
+                ItemSource_Year.Clear();
+                firstYear = receipts.First().ReceiptDate.Date.Year;
+                ItemSource_Year.Add("Năm " + firstYear.ToString());
+
+                foreach (var receipt in receipts)
+                {
+                    if (receipt.ReceiptDate.Date.Year <= firstYear + ItemSource_Year.Count - 1) continue;
+                    ItemSource_Year.Add("Năm " + receipt.ReceiptDate.Date.Year);
+                }
             }
+            catch
+            {
+
+            }
+           
         }
 
         public void LoadDataToChart(int year)

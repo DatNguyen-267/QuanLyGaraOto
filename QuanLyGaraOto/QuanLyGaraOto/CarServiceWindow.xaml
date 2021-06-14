@@ -171,7 +171,7 @@
                                             Margin="0 0 0 10"
                                             materialDesign:HintAssist.Hint="Số Điện thoại"
                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                            VerticalAlignment="Center" />   
+                                            VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
                                 <Grid Margin="10 5 10 0">
@@ -250,7 +250,7 @@
             </materialDesign:Card>
             <materialDesign:Card 
                 materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                materialDesign:ShadowAssist.ShadowEdges="Top,Bottom"
+                materialDesign:ShadowAssist.ShadowEdges="All"
                 Visibility="{Binding VisRepairServiceCard,
                 Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Column="1"
@@ -291,11 +291,53 @@
                                 Margin="10 0 10 0"
                                >
                             </Button>
-                            
+
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="0" Margin="10 10 0 10">
-                        <ScrollViewer >
+                    <Grid Grid.Row="0" Margin="0 0 0 10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="17*"/>
+                            <RowDefinition Height="150*"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid  ItemsSource="{Binding ListRepair}" 
+                                SelectedItem="{Binding SelectedItem}"
+                      SelectionMode="Single"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="True"
+                      FontSize="16" Grid.RowSpan="2"
+                      >
+                            <!--<DataGrid.CellStyle>
+                    -->
+                            <!--<Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="Background" Value="DimGray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>-->
+                            <!--
+                </DataGrid.CellStyle>-->
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                    <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                    <Setter Property="Foreground" Value="White"></Setter>
+                                    <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            <DataGrid.Columns>
+                                <materialDesign:DataGridTextColumn Header="Nội dung" Binding="{Binding RepairInfo.Content}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Vật tư" Binding="{Binding RepairInfo.SUPPLIES.Supplies_Name}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding RepairInfo.SuppliesAmount}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Đơn giá" Binding="{Binding RepairInfo.SUPPLIES.Supplies_Price}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Loại tiền công" Binding="{Binding RepairInfo.WAGE.Wage_Name}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Tiền công" Binding="{Binding RepairInfo.WAGE.Wage_Value}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Thành tiền" Binding="{Binding RepairInfo.TotalMoney}"></materialDesign:DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <!--<ScrollViewer >
                             <ListView 
                                 ItemsSource="{Binding ListRepair}" 
                                 SelectedItem="{Binding SelectedItem}"
@@ -312,7 +354,7 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                        </ScrollViewer>
+                        </ScrollViewer>-->
                     </Grid>
                 </Grid>
             </materialDesign:Card>
@@ -321,7 +363,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                
+
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Tổng Tiền: "
@@ -352,9 +394,9 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                           
 
-                    
+
+
                     <Button Grid.Column="0"
                         Command="{Binding ViewCommand}"
                         Visibility="{Binding VisView, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -380,13 +422,15 @@
                         Command="{Binding CloseCommand}"
                             CommandParameter="{Binding ElementName=CarServiceWD}"
                             Margin="10 0 10 0"
-                             Style="{StaticResource MainButton}"
+                             Style="{StaticResource CloseButton}"
                             Content="Đóng"
+                            Width="150"
+                            Height="50"
                             Background="{StaticResource MainColor}"
                             >
                     </Button>
                 </Grid>
-                
+
             </StackPanel>
         </Grid>
     </Grid>

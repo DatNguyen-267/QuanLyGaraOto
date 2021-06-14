@@ -72,7 +72,7 @@
                     Command="{Binding CloseCommand}"
                     CommandParameter="{Binding ElementName=CarReceptionWD}"
                    Grid.Column="1"
-                      Style="{StaticResource FeatureButton}"
+                      Style="{StaticResource CloseButton}"
                   Content="Đóng" />
         </Grid>
     </Grid>

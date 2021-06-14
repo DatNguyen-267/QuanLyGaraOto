@@ -116,9 +116,6 @@
     <Compile Include="AddRepairFormWindow.xaml.cs">
       <DependentUpon>AddRepairFormWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddRepairInfoWindow.xaml.cs">
-      <DependentUpon>AddRepairInfoWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddRoleWindow.xaml.cs">
       <DependentUpon>AddRoleWindow.xaml</DependentUpon>
     </Compile>
@@ -328,10 +325,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddRepairInfoWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AddRoleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -413,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\ColorResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceXAML\GenaralStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

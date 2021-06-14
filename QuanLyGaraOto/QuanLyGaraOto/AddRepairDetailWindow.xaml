@@ -137,8 +137,8 @@
                     Command="{Binding CloseCommand}"
                     CommandParameter="{Binding ElementName=AddRepairDetailWD}"
                     Margin="0 0 40 0"
-                    Style="{StaticResource FeatureButton}"
-                        
+                    Style="{StaticResource CloseButton}"
+                    
                   Content="Đóng" />
             </StackPanel>
         </Grid>

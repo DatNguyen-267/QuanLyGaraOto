@@ -2,7 +2,28 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:QuanLyGaraOto.ResourceXAML">
     <SolidColorBrush x:Key="MainColor" Color="#3d4751"></SolidColorBrush>
-    <SolidColorBrush x:Key="MainBlue" Color="#3366ff"></SolidColorBrush>
+    <SolidColorBrush x:Key="MainBlue" Color="#176ec6"></SolidColorBrush>
     <SolidColorBrush x:Key="FocusColor" Color="#5c656d"></SolidColorBrush>
-    
+    <SolidColorBrush x:Key="Dark" Color="Black"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="Green0" Color="#009900"></SolidColorBrush>
+    <SolidColorBrush x:Key="Green1" Color="#008000"></SolidColorBrush>
+    <SolidColorBrush x:Key="Green2" Color="#006600"></SolidColorBrush>
+    <SolidColorBrush x:Key="Green3" Color="#004d00"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="Blue0" Color="#3333ff"></SolidColorBrush>
+    <SolidColorBrush x:Key="Blue1" Color="#0000ff"></SolidColorBrush>
+    <SolidColorBrush x:Key="Blue2" Color="#0000cc"></SolidColorBrush>
+    <SolidColorBrush x:Key="Blue3" Color="#000099"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="Red0" Color="#ff3333"></SolidColorBrush>
+    <SolidColorBrush x:Key="Red1" Color="#ff0000"></SolidColorBrush>
+    <SolidColorBrush x:Key="Red2" Color="#cc0000"></SolidColorBrush>
+    <SolidColorBrush x:Key="Red3" Color="#990000"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="Dark0" Color="#999999"></SolidColorBrush>
+    <SolidColorBrush x:Key="Dark1" Color="#808080"></SolidColorBrush>
+    <SolidColorBrush x:Key="Dark2" Color="#666666"></SolidColorBrush>
+    <SolidColorBrush x:Key="Dark3" Color="#4d4d4d"></SolidColorBrush>
+
 </ResourceDictionary>
