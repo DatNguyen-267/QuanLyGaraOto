@@ -259,10 +259,12 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-
-                    var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.RepairInfo.IdSupplies).SingleOrDefault();
-                    temp.Supplies_Amount = temp.Supplies_Amount + SelectedItem.RepairInfo.SuppliesAmount;
-                    DataProvider.Ins.DB.SaveChanges();
+                    if (SelectedItem.RepairInfo.IdSupplies != null)
+                    {
+                        var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.RepairInfo.IdSupplies).SingleOrDefault();
+                        temp.Supplies_Amount = temp.Supplies_Amount + SelectedItem.RepairInfo.SuppliesAmount;
+                        DataProvider.Ins.DB.SaveChanges();
+                    }
 
                     DeleteModel deleteModel = new DeleteModel();
                     deleteModel.RepairInfo(SelectedItem.RepairInfo);

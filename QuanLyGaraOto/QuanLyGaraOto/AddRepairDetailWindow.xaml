@@ -127,23 +127,18 @@
                 <Button
                     Command="{Binding ConfirmCommand}"
                     CommandParameter="{Binding ElementName=AddRepairDetailWD}"
-                    Width="100"
-                    Height="40"
+                    Style="{StaticResource FeatureButton}"
+                    Background="{StaticResource MainBlue}"
+                    BorderBrush="{StaticResource MainBlue}"
                     Margin="0 0 40 0"
-                    Background="#455A64"
-                  Style="{StaticResource MaterialDesignRaisedButton}"
-                  ToolTip="Resource name: MaterialDesignRaisedButton"
                   Content="Xác Nhận" />
                 
                 <Button
                     Command="{Binding CloseCommand}"
                     CommandParameter="{Binding ElementName=AddRepairDetailWD}"
-                    Width="100"
-                    Height="40"
                     Margin="0 0 40 0"
-                    Background="#455A64"
-                  Style="{StaticResource MaterialDesignRaisedButton}"
-                  ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Style="{StaticResource FeatureButton}"
+                        
                   Content="Đóng" />
             </StackPanel>
         </Grid>

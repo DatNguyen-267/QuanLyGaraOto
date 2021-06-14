@@ -98,6 +98,9 @@
     <Compile Include="AddAccountWindow.xaml.cs">
       <DependentUpon>AddAccountWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddCarBrandWindow.xaml.cs">
+      <DependentUpon>AddCarBrandWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddEmployee.xaml.cs">
       <DependentUpon>AddEmployee.xaml</DependentUpon>
     </Compile>
@@ -119,6 +122,9 @@
     <Compile Include="AddRoleWindow.xaml.cs">
       <DependentUpon>AddRoleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddWageWindow.xaml.cs">
+      <DependentUpon>AddWageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BunkWindow.xaml.cs">
       <DependentUpon>BunkWindow.xaml</DependentUpon>
     </Compile>
@@ -132,6 +138,7 @@
       <DependentUpon>ChangeCarInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Convert\DateConvert.cs" />
+    <Compile Include="Convert\HashConvert.cs" />
     <Compile Include="Convert\UnicodeConvert.cs" />
     <Compile Include="DashboardWindow.xaml.cs">
       <DependentUpon>DashboardWindow.xaml</DependentUpon>
@@ -276,9 +283,11 @@
     <Compile Include="Validation\NumberValidation.cs" />
     <Compile Include="Validation\OnlyNumberValidation.cs" />
     <Compile Include="Validation\PayOverValidation.cs" />
+    <Compile Include="ViewModel\AddCarBrandViewModel.cs" />
     <Compile Include="ViewModel\AddImportWindowViewModel.cs" />
     <Compile Include="ViewModel\AddRepairDetailViewModel.cs" />
     <Compile Include="ViewModel\AddRepairFormViewModel.cs" />
+    <Compile Include="ViewModel\AddWageViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="ViewModel\BunkViewModel.cs" />
@@ -298,6 +307,10 @@
     <Page Include="AddAccountWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddCarBrandWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddEmployee.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -324,6 +337,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddRoleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddWageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -398,6 +415,10 @@
     <Page Include="ReportWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ResourceXAML\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\ColorResource.xaml">
       <SubType>Designer</SubType>

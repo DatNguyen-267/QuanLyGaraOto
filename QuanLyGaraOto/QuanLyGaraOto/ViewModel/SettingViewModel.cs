@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,6 +15,9 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class SettingViewModel : BaseViewModel
     {
+        // login account
+        public USER user;
+
         // Setting visibility
         private bool _AppSettingVis;
         public bool AppSettingVis
@@ -75,6 +79,16 @@ namespace QuanLyGaraOto.ViewModel
             get => _IsEnableResetButtonInUserInformation; set
             {
                 _IsEnableResetButtonInUserInformation = value;
+                OnPropertyChanged();
+            }
+        }
+        // IsEnable button setting in change password
+        private bool _IsEnableCheckButtonInChangePassword;
+        public bool IsEnableCheckButtonInChangePassword
+        {
+            get => _IsEnableCheckButtonInChangePassword; set
+            {
+                _IsEnableCheckButtonInChangePassword = value;
                 OnPropertyChanged();
             }
         }
@@ -165,6 +179,85 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeEnableButtonInCarBrandSetting { get; set; }
         public ICommand ModifyCarBrand { get; set; }
         public ICommand DeleteCarBrand { get; set; }
+        public ICommand OpenAddCarBrandWindow { get; set; }
+
+        // Add brand window
+        private string _CarBrandInAdd;
+        public string CarBrandInAdd
+        {
+            get => _CarBrandInAdd; set
+            {
+                _CarBrandInAdd = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand CancelAddCarBrandWindow { get; set; }
+        public ICommand AddCarBrand { get; set; }
+
+
+        // Is enable button in wage setting
+
+        private bool _IsEnableModifyButtonInWageSetting;
+        public bool IsEnableModifyButtonInWageSetting
+        {
+            get => _IsEnableModifyButtonInWageSetting; set
+            {
+                _IsEnableModifyButtonInWageSetting = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _IsEnableDeleteButtonInWageSetting;
+        public bool IsEnableDeleteButtonInWageSetting
+        {
+            get => _IsEnableDeleteButtonInWageSetting; set
+            {
+                _IsEnableDeleteButtonInWageSetting = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _IsEnableModifyFieldInWageSetting;
+        public bool IsEnableModifyFieldInWageSetting
+        {
+            get => _IsEnableModifyFieldInWageSetting; set
+            {
+                _IsEnableModifyFieldInWageSetting = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // setting wage information
+
+        private ObservableCollection<WAGE> _ListWage;
+        public ObservableCollection<WAGE> ListWage
+        {
+            get => _ListWage; set
+            {
+                _ListWage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private WAGE _SelectedWageItem;
+        public WAGE SelectedWageItem
+        {
+            get => _SelectedWageItem; set
+            {
+                _SelectedWageItem = value;
+                OnPropertyChanged();
+                IsEnableDeleteButtonInWageSetting = true;
+                IsEnableModifyFieldInWageSetting = true;
+            }
+        }
+
+        public ICommand ChangeEnableButtonInWageBrandSetting { get; set; }
+        public ICommand ModifyWage { get; set; }
+        public ICommand DeleteWage { get; set; }
+        public ICommand OpenAddWageWindow { get; set; }
+
+        // Add wage window
+        public ICommand CancelAddWageWindow { get; set; }
+        public ICommand AddWage { get; set; }
 
         // Setting user information
 
@@ -177,7 +270,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _UserName = value;
-                SetEnableStatusButtonInUserInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -189,7 +281,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _UserAddress = value;
-                SetEnableStatusButtonInUserInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -201,7 +292,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _UserBirth = value;
-                SetEnableStatusButtonInUserInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -213,7 +303,6 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _UserTelephone = value;
-                SetEnableStatusButtonInUserInformation(true);
                 OnPropertyChanged();
             }
         }
@@ -232,7 +321,16 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeUserInformation { get; set; }
         public ICommand ResetUserInformation { get; set; }
 
-
+        // Change password
+        private bool _IsEnableOldPasswordField;
+        public bool IsEnableOldPasswordField
+        {
+            get => _IsEnableOldPasswordField; set
+            {
+                _IsEnableOldPasswordField = value;
+                OnPropertyChanged();
+            }
+        }
         private string _OldPassword;
         public string OldPassword
         {
@@ -242,7 +340,6 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
-
         private string _NewPassword;
         public string NewPassword
         {
@@ -252,6 +349,21 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private bool _IsCorrectPassword;
+        public bool IsCorrectPassword
+        {
+            get => _IsCorrectPassword; set
+            {
+                _IsCorrectPassword = value;
+                OnPropertyChanged();
+            }
+        }
+        public ICommand OldPasswordChangedCommand { get; set; }
+        public ICommand NewPasswordChangedCommand { get; set; }
+        public ICommand CheckPassword { get; set; }
+        public ICommand ChangePassword { get; set; }
+        public ICommand CancelChangePassword { get; set; }
 
         public SettingViewModel()
         {
@@ -266,7 +378,7 @@ namespace QuanLyGaraOto.ViewModel
             });
             ChangeUserSettingVis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                UserSettingVis = true; ;
+                UserSettingVis = true;
                 AppSettingVis = false;
             });
 
@@ -275,7 +387,15 @@ namespace QuanLyGaraOto.ViewModel
             MaxCarReception = GaraInfo.MaxCarReception;
             IsOverPay = GaraInfo.IsOverPay;
 
-            ChangeGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ChangeGaraInformation = new RelayCommand<SettingWindow>((p) =>
+            {
+                if (p == null || string.IsNullOrEmpty(p.txtMaxCarReception.Text)
+                               || p.txtMaxCarReception.Text.Any(x => char.IsLetter(x)))
+                {
+                    return false;
+                }
+                return true;
+            }, (p) =>
             {
                 String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception
                                         + "where MaxCarReception=" + GaraInfo.MaxCarReception.ToString();
@@ -290,7 +410,6 @@ namespace QuanLyGaraOto.ViewModel
 
                 SetEnableStatusButtonInGaraInformation(false);
             });
-
             ResetGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 MaxCarReception = GaraInfo.MaxCarReception;
@@ -318,19 +437,56 @@ namespace QuanLyGaraOto.ViewModel
                 IsEnableModifyFieldInBrandSetting = false;
                 IsEnableDeleteButtonInBrandSetting = false;
             });
+            OpenAddCarBrandWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                AddCarBrandWindow window = new AddCarBrandWindow();
+                window.ShowDialog();
+                AddCarBrandViewModel addCarBrandViewModel = window.DataContext as AddCarBrandViewModel;
+                ListCarBrand.Add(addCarBrandViewModel.br);
+            });
+
+            // Wage information
+            ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
+
+            ModifyWage = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                DataProvider.Ins.DB.SaveChanges();
+                SelectedWageItem = null;
+                IsEnableModifyButtonInWageSetting = false;
+                IsEnableModifyFieldInWageSetting = false;
+                IsEnableDeleteButtonInWageSetting = false;
+            });
+            DeleteWage = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                DataProvider.Ins.DB.WAGEs.Remove(SelectedWageItem);
+                DataProvider.Ins.DB.SaveChanges();
+                ListWage.Remove(SelectedWageItem);
+                IsEnableModifyButtonInWageSetting = false;
+                IsEnableModifyFieldInWageSetting = false;
+                IsEnableDeleteButtonInWageSetting = false;
+            });
+            OpenAddWageWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                AddWageWindow window = new AddWageWindow();
+                window.ShowDialog();
+                AddWageViewModel addWageViewModel = window.DataContext as AddWageViewModel;
+                ListWage.Add(addWageViewModel.wage);
+            });
 
             // User information
-            userInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == 1).FirstOrDefault();
-            if (userInfo != null)
+            ChangeUserInformation = new RelayCommand<SettingWindow>((p) =>
             {
-                UserName = userInfo.UserInfo_Name;
-                UserAddress = userInfo.UserInfo_Address;
-                UserBirth = userInfo.UserInfo_BirthDate.Value;
-                UserTelephone = userInfo.UserInfo_Telephone;
-                UserCMND = userInfo.UserInfo_CMND;
-            }
-
-            ChangeUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
+                if (p == null || string.IsNullOrEmpty(p.txtAddress.Text)
+                             || string.IsNullOrEmpty(p.txtName.Text)
+                             || string.IsNullOrEmpty(p.dpBirth.DisplayDate.ToShortDateString())
+                             || !DateTime.TryParse(p.dpBirth.DisplayDate.ToShortDateString(), out var value)
+                                 || string.IsNullOrEmpty(p.txtTelephone.Text) || p.txtTelephone.Text.Any(x => char.IsLetter(x))
+                                 || string.IsNullOrEmpty(p.txtCMND.Text))
+                {
+                    return false;
+                }
+                return true;
+            }, (p) =>
             {
                 userInfo.UserInfo_Name = _UserName;
                 userInfo.UserInfo_Address = _UserAddress;
@@ -340,7 +496,6 @@ namespace QuanLyGaraOto.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
                 SetEnableStatusButtonInUserInformation(false);
             });
-
             ResetUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 UserName = userInfo.UserInfo_Name;
@@ -351,9 +506,56 @@ namespace QuanLyGaraOto.ViewModel
                 SetEnableStatusButtonInUserInformation(false);
             });
 
-            // Set enable button to false
-            SetEnableStatusButtonInGaraInformation(false);
-            SetEnableStatusButtonInUserInformation(false);
+            // Change password
+            IsCorrectPassword = false;
+            IsEnableCheckButtonInChangePassword = true;
+            IsEnableOldPasswordField = true;
+
+            OldPasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { OldPassword = p.Password; });
+            NewPasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { NewPassword = p.Password; });
+            CheckPassword = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
+            {
+
+                string encode = MD5Hash(Base64Encode(OldPassword));
+                if(encode != user.Password)
+                {
+                    MessageBox.Show("Sai mật khẩu!");
+                    return;
+                }
+
+                p.OldPasswordBox.Password = string.Empty;
+                IsEnableOldPasswordField = false;
+                IsEnableCheckButtonInChangePassword = false;
+                IsCorrectPassword = true;
+            });
+            ChangePassword = new RelayCommand<SettingWindow>((p) =>
+            {
+                if (p == null || string.IsNullOrEmpty(p.NewPasswordBox.Password)
+                            || p.NewPasswordBox.Password.Length < 5)
+                {
+                    return false;
+                }
+                return true;
+
+            }, (p) =>
+            {
+                string encode = MD5Hash(Base64Encode(NewPassword));
+                user.Password = encode;
+                DataProvider.Ins.DB.SaveChanges();
+                MessageBox.Show("Đổi mật khẩu thành công");
+
+                p.NewPasswordBox.Password = string.Empty;
+                IsCorrectPassword = false;
+                IsEnableCheckButtonInChangePassword = true;
+                IsEnableOldPasswordField = true;
+            });
+            CancelChangePassword = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
+            {
+                p.NewPasswordBox.Password = string.Empty;
+                IsCorrectPassword = false;
+                IsEnableCheckButtonInChangePassword = true;
+                IsEnableOldPasswordField = true;
+            });
 
             // Change enable button
             ChangeEnableButtonInUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -368,6 +570,27 @@ namespace QuanLyGaraOto.ViewModel
             {
                 IsEnableModifyButtonInBrandSetting = true;
             });
+            ChangeEnableButtonInWageBrandSetting = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                IsEnableModifyButtonInWageSetting = true;
+            });
+
+            // Set enable button to false
+            SetEnableStatusButtonInGaraInformation(false);
+        }
+        public SettingViewModel(string username) : this()
+        {
+            // User information
+            user = DataProvider.Ins.DB.USERS.Where(x => x.UserName == username).FirstOrDefault();
+            userInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == user.Users_Id).FirstOrDefault();
+            if (userInfo != null)
+            {
+                UserName = userInfo.UserInfo_Name;
+                UserAddress = userInfo.UserInfo_Address;
+                UserBirth = userInfo.UserInfo_BirthDate.Value;
+                UserTelephone = userInfo.UserInfo_Telephone;
+                UserCMND = userInfo.UserInfo_CMND;
+            }
         }
 
         private void SetEnableStatusButtonInGaraInformation(bool b)
@@ -379,6 +602,24 @@ namespace QuanLyGaraOto.ViewModel
         {
             IsEnableChangeButtonInUserInformation = b;
             IsEnableResetButtonInUserInformation = b;
+        }
+
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+        public static string MD5Hash(string input)
+        {
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
         }
     }
 }

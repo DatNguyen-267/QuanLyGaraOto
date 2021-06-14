@@ -60,6 +60,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" >
                         <TextBox
+                            Text="{Binding UserName}"
                         FontSize="20"
                         Foreground="#3d4751"
                         materialDesign:HintAssist.Foreground="#3d4751"
@@ -78,7 +79,6 @@
                        
                         materialDesign:HintAssist.Hint="Mật khẩu"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
- 
                         VerticalAlignment="Center">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="PasswordChanged">
