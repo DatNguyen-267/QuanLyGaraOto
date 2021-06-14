@@ -4,6 +4,7 @@ using System.Linq;
 using QuanLyGaraOto.Model;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 
@@ -11,7 +12,6 @@ namespace QuanLyGaraOto.ViewModel
 {
     class ImportGoodViewModel : BaseViewModel
     {
-        public ICommand AddImportCommand { get; set; }
 
         public ICommand CalculateTotal { get; set; }
         public ICommand ImportCommand { get; set; }
@@ -44,46 +44,40 @@ namespace QuanLyGaraOto.ViewModel
             ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
 
             //Command
-            AddImportCommand = new RelayCommand<object>(
-                (p) => { return true; },
-                (p) => {
-                    AddImportWindow addImportWindow = new AddImportWindow();
-                    addImportWindow.ShowDialog();
-                    AddImportWindowViewModel addRepairFormViewModel = (addImportWindow.DataContext as AddImportWindowViewModel);
-                    if (addRepairFormViewModel.IsSuccess)
-                    {
-                        
-                    }
-                }
-                );
-            CalculateTotal = new RelayCommand<ImportWindow>(
-                (p) => {
-                    if (string.IsNullOrEmpty(p.txbPrice.Text) || string.IsNullOrEmpty(p.txbAmount.Text)) return false;
-                    return true; },
-                (p) =>
-                {
-                    p.txbCost.Text = (Int32.Parse(p.txbPrice.Text) * Int32.Parse(p.txbAmount.Text)).ToString();
-                }
-                );
+
             AddGoodCommand = new RelayCommand<ImportWindow>(
                 (p) =>
                 {
-                    if (SelectedSupply != null)
-                    {
-                        if (string.IsNullOrEmpty(p.txbPrice.Text) || string.IsNullOrEmpty(p.txbAmount.Text)) return false;
-                        return true;
-                    }
-                    return false;
+                    //if (Total != 0) return false;
+                    if (string.IsNullOrEmpty(p.txbPrice.Text) || string.IsNullOrEmpty(p.txbAmount.Text)) return false;
+                    return true;
                 },
                 (p) =>
                 {
                     var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedSupply.Supplies_Id).SingleOrDefault();
-                     List.Supplies_Amount += Int32.Parse(p.txbAmount.Text);
+                    List.Supplies_Amount += Int32.Parse(p.txbAmount.Text);
                     DataProvider.Ins.DB.SaveChanges();
                 }
                 );
+            CalculateTotal = new RelayCommand<ImportWindow>(
+                (p) =>
+                {
+                    if (SelectedSupply == null) return false;
+                    
+                    if (string.IsNullOrEmpty(p.txbPrice.Text) || string.IsNullOrEmpty(p.txbAmount.Text)) return false;
+                    return true;
+                },
+                (p) =>
+                {
+                    Total = Int32.Parse(p.txbAmount.Text) * Int32.Parse(p.txbPrice.Text);
+                });
+            CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
+            {
+                p.Close();
+            });
 
         }
+
 
         
 

@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
         Title="Nhập phụ tùng"
+         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         x:Name="wdImportSupply"
         Height="500"
         Width="1000"
         Background="#ffffff"
         ResizeMode="NoResize"   
-        DataContext="{StaticResource ImportVM}"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Grid>
@@ -54,7 +54,7 @@
                         />
                     <ComboBox
                         x:Name="cbType"
-                        SelectedItem="{Binding SelectedItem}"
+                        SelectedItem="{Binding SelectedSupply}"
                         ItemsSource="{Binding ListSupplies}"
                         DisplayMemberPath="Supplies_Name"
                         materialDesign:HintAssist.Hint="Chọn phụ tùng"
@@ -67,8 +67,17 @@
                         HorizontalAlignment="Right"
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
-                        FontWeight="SemiBold">
-                    </ComboBox>
+                        FontWeight="SemiBold"
+                        >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding CalculateTotal}"
+                                        CommandParameter="{Binding ElementName=wdImportSupply}"></i:InvokeCommandAction>
+                                    
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
                 </Grid>
                 <Grid
                     Margin="0 60 0 0"
@@ -96,7 +105,7 @@
                         Stroke="Black" Grid.ColumnSpan="2"
                         
                         />
-                    <TextBox
+                        <TextBox
                         x:Name="txbPrice"
                         materialDesign:HintAssist.Hint="Nhập giá sản phẩm"                        
                         HorizontalAlignment="Right"
@@ -105,7 +114,16 @@
                         Width="220"
                         Margin="0,6,9.6,6"
                         Foreground="Black" Grid.ColumnSpan="2"
-                        />
+                        >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding CalculateTotal}"
+                                        CommandParameter="{Binding ElementName=wdImportSupply}"></i:InvokeCommandAction>
+
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                 </Grid>
                 <Grid
                     Margin="0 120 0 0"
@@ -128,7 +146,7 @@
                         RadiusY="4"
                         Stroke="Black"
                         />
-                    <TextBox
+                        <TextBox
                         x:Name="txbAmount"
                         materialDesign:HintAssist.Hint="Chọn số lượng"
                         HorizontalAlignment="Right"
@@ -137,7 +155,16 @@
                         Width="220"
                         Margin="0 0 10 0"
                         Foreground="Black"
-                        />
+                        >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding CalculateTotal}"
+                                        CommandParameter="{Binding ElementName=wdImportSupply}"></i:InvokeCommandAction>
+
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                 </Grid>
             
                 
@@ -283,6 +310,8 @@
                 </Button>
                 <Button
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{Binding ElementName=wdImportSupply}"
                     Width="140"
                     HorizontalAlignment="Right"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton">
