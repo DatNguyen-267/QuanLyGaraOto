@@ -51,7 +51,8 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
-        public ICommand YearChangedCommand { get; set; }
+        public ICommand YearChangedCommand_Revenue { get; set; }
+        public ICommand YearChangedCommand_Car { get; set; }
 
         private ObservableCollection<string> _ItemSource_Year { get; set; }
         public ObservableCollection<string> ItemSource_Year
@@ -66,41 +67,66 @@ namespace QuanLyGaraOto.ViewModel
 
         private int firstYear;
 
-        private int _SelectedYear { get; set; }
-        public int SelectedYear
+        private int _SelectedYear_Revenue { get; set; }
+        public int SelectedYear_Revenue
         {
-            get => _SelectedYear; set
+            get => _SelectedYear_Revenue; set
             {
-                _SelectedYear = value;
+                _SelectedYear_Revenue = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _SelecteYear_Car { get; set; }
+        public int SelectedYear_Car
+        {
+            get => _SelecteYear_Car; set
+            {
+                _SelecteYear_Car = value;
                 OnPropertyChanged();
             }
         }
 
-        public SeriesCollection SeriesCollection { get; set; }
-        public List<string> Labels { get; set; }
-        public Func<double, string> Formatter { get; set; }
+        public SeriesCollection SeriesCollection_Revenue { get; set; }
+        public List<string> Labels_Revenue { get; set; }
+        public Func<double, string> Formatter_Revenue { get; set; }
 
-        public Func<ChartPoint, string> PointLabel { get; set; }
+        public Func<ChartPoint, string> PointLabel_Revenue { get; set; }
 
+        public SeriesCollection SeriesCollection_Car { get; set; }
+        public List<string> Labels_Car { get; set; }
+        public Func<double, string> Formatter_Car { get; set; }
+
+        public Func<ChartPoint, string> PointLabel_Car { get; set; }
 
         public DashboardViewModel()
         {
-            Labels = new List<string>();
+            Labels_Revenue = new List<string>();
+            Labels_Car = new List<string>();
             ItemSource_Year = new ObservableCollection<string>();
-            LoadDataToChart(DateTime.Now.Year);
+
+            LoadDataToChart_Revenue(DateTime.Now.Year);
+            LoadDataToChart_Car(DateTime.Now.Year);
             LoadData();
 
-            SelectedYear = DateTime.Now.Year - firstYear;
+            SelectedYear_Revenue = DateTime.Now.Year - firstYear;
 
-            Formatter = value => value.ToString();
-            PointLabel = ChartPoint =>
+            Formatter_Revenue = value => value.ToString();
+            PointLabel_Revenue = ChartPoint =>
                     string.Format("{0} ({1:P})", ChartPoint.Y, ChartPoint.Participation);
 
-            
-            YearChangedCommand = new RelayCommand<DashboardWindow>((p) => { return true; }, (p) =>
+            Formatter_Car = value => value.ToString();
+            PointLabel_Car = ChartPoint =>
+                    string.Format("{0} ({1:P})", ChartPoint.Y, ChartPoint.Participation);
+
+
+            YearChangedCommand_Revenue = new RelayCommand<DashboardWindow>((p) => { return true; }, (p) =>
             {
-                LoadDataToChart(firstYear + p.cbSelectYear.SelectedIndex);
-                p.liveCharts.Series = SeriesCollection;
+                LoadDataToChart_Revenue(firstYear + p.cbSelectYear_Revenue.SelectedIndex);
+                p.liveChart_Revenue.Series = SeriesCollection_Revenue;
+            });
+            YearChangedCommand_Car = new RelayCommand<DashboardWindow>((p) => { return true; }, (p) =>
+            {
+                LoadDataToChart_Car(firstYear + p.cbSelectedYear_Car.SelectedIndex);
             });
         }
 
@@ -131,23 +157,28 @@ namespace QuanLyGaraOto.ViewModel
                     if (receipt.ReceiptDate.Date.Year <= firstYear + ItemSource_Year.Count - 1) continue;
                     ItemSource_Year.Add("Năm " + receipt.ReceiptDate.Date.Year);
                 }
-            } catch(Exception ex)
+            } catch(Exception)
             {
 
             }
         }
 
-        public void LoadDataToChart(int year)
+        public void LoadDataToChart_Revenue(int year)
         {
             ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
                 (DataProvider.Ins.DB.RECEIPTs.Where(x => x.ReceiptDate.Year == year).OrderBy(x => x.ReceiptDate));
-            Labels.Clear();
+            Labels_Revenue.Clear();
             ChartValues<long> values = new ChartValues<long>();
             for(int i = 1; i <= 12; i++)
             {
-                if (receipts.Count == 0) break;
-                if (i < receipts.First().ReceiptDate.Month) continue;
-                Labels.Add(i.ToString());
+                if (receipts.Count == 0 || i < receipts.First().ReceiptDate.Month)
+                {
+                    values.Add(0);
+                    Labels_Revenue.Add(i.ToString());
+                    continue;
+                }
+
+                Labels_Revenue.Add(i.ToString());
                 long totalMoney = 0;
 
                 while(receipts.Count > 0 && i == receipts.First().ReceiptDate.Month)
@@ -159,12 +190,43 @@ namespace QuanLyGaraOto.ViewModel
                 values.Add(totalMoney);
             }
 
-            SeriesCollection = new SeriesCollection
+            SeriesCollection_Revenue = new SeriesCollection
             {
                 new ColumnSeries
                 {
                     Title = "Doanh thu",
-                    Values = values
+                    Values = values,
+                    DataLabels = true
+                }
+            };
+        }
+
+        public void LoadDataToChart_Car(int year)
+        {
+            ObservableCollection<RECEPTION> receptions = new ObservableCollection<RECEPTION>
+                (DataProvider.Ins.DB.RECEPTIONs.Where(x => x.ReceptionDate.Year == year).OrderBy(x => x.ReceptionDate));
+            Labels_Car.Clear();
+            ChartValues<long> values = new ChartValues<long>();
+
+            for(int i = 1; i <= 12; i++)
+            {
+                Labels_Car.Add(i.ToString());
+                if (receptions.Count == 0 || i < receptions.First().ReceptionDate.Month)
+                {
+                    values.Add(0);
+                    continue;
+                }
+
+                values.Add(receptions.Where(x => x.ReceptionDate.Month == i).LongCount());
+            }
+
+            SeriesCollection_Car = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Xe",
+                    Values = values,
+                    DataLabels = true
                 }
             };
         }
