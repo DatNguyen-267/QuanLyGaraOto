@@ -47,7 +47,9 @@ namespace QuanLyGaraOto.ViewModel
                 Container = (p).Container;
                 LoadLoginWindow(p);
             });
-            OpenService = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenService = new RelayCommand<object>((p) => { return true; 
+            
+            }, (p) =>
             {
                 InitVis();
                 VisService = true;

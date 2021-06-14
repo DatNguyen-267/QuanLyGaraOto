@@ -375,7 +375,10 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="16 0 8 16">
                             <materialDesign:Card>
-                                <ListView x:Name="lvRoles" ItemsSource="{Binding ListRoles, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItemRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ListView 
+                                    FontSize="16"
+                                    FontWeight="Normal"
+                                    x:Name="lvRoles" ItemsSource="{Binding ListRoles, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItemRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Role_Id}"></GridViewColumn>
