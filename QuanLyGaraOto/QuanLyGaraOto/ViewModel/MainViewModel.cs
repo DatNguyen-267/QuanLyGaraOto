@@ -49,7 +49,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 Container = (p as MainWindow).Container;
 
-                LoadLoginWindow();
+                LoadLoginWindow(p);
             });
             OpenDashboard = new RelayCommand<DashboardWindow>((p) => { return true; }, (p) =>
             {
@@ -85,7 +85,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 InitVis();
                 VisSetting = true;
-                p.DataContext = new SettingViewModel("admin");
+                p.DataContext = new SettingViewModel(User.UserName);
             });
         }
         public void InitVis()

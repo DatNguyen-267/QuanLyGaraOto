@@ -450,6 +450,7 @@ namespace QuanLyGaraOto.ViewModel
                 string encode = MD5Hash(Base64Encode(NewPassword));
                 user.Password = encode;
                 DataProvider.Ins.DB.SaveChanges();
+                MessageBox.Show("Đổi mật khẩu thành công");
 
                 p.NewPasswordBox.Password = string.Empty;
                 IsCorrectPassword = false;

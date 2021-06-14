@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -49,6 +51,8 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
+        public ICommand YearChangedCommand { get; set; }
+
         private ObservableCollection<string> _ItemSource_Year { get; set; }
         public ObservableCollection<string> ItemSource_Year
         {
@@ -58,6 +62,7 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
+
 
         private int firstYear;
 
@@ -83,28 +88,37 @@ namespace QuanLyGaraOto.ViewModel
             Labels = new List<string>();
             ItemSource_Year = new ObservableCollection<string>();
             LoadDataToChart(DateTime.Now.Year);
+            LoadData();
+
+            SelectedYear = DateTime.Now.Year - firstYear;
 
             Formatter = value => value.ToString();
-
             PointLabel = ChartPoint =>
                     string.Format("{0} ({1:P})", ChartPoint.Y, ChartPoint.Participation);
 
-            LoadData();
+            
+            YearChangedCommand = new RelayCommand<DashboardWindow>((p) => { return true; }, (p) =>
+            {
+                LoadDataToChart(firstYear + p.cbSelectYear.SelectedIndex);
+                p.liveCharts.Series = SeriesCollection;
+            });
         }
 
         public void LoadData()
         {
+            Revenue = 0;
             DateTime time = DateTime.Now;
             info = DataProvider.Ins.DB.GARA_INFO.First();
             CurrentNumber = DataProvider.Ins.DB.RECEPTIONs.Where(x => x.ReceptionDate.Day == time.Day).Count();
             TotalCarInMonth = DataProvider.Ins.DB.RECEPTIONs.Where(x => x.ReceptionDate.Month == time.Month).Count();
             foreach(var receipt in DataProvider.Ins.DB.RECEIPTs.Where(x => x.ReceiptDate.Month == time.Month))
             {
-                Revenue += receipt.MoneyReceived;
+                Revenue += (long) receipt.MoneyReceived;
             }
 
             ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
-                (DataProvider.Ins.DB.RECEIPTs);
+                (DataProvider.Ins.DB.RECEIPTs.OrderBy(x => x.ReceiptDate));
+            
             ItemSource_Year.Clear();
             firstYear = receipts.First().ReceiptDate.Date.Year;
             ItemSource_Year.Add("Năm " + firstYear.ToString());
@@ -119,7 +133,7 @@ namespace QuanLyGaraOto.ViewModel
         public void LoadDataToChart(int year)
         {
             ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
-                (DataProvider.Ins.DB.RECEIPTs.Where(x => x.ReceiptDate.Year == year));
+                (DataProvider.Ins.DB.RECEIPTs.Where(x => x.ReceiptDate.Year == year).OrderBy(x => x.ReceiptDate));
             Labels.Clear();
             ChartValues<long> values = new ChartValues<long>();
             for(int i = 1; i <= 12; i++)
