@@ -6,8 +6,10 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
         <Setter Property="FontSize" Value="20"></Setter>
-        <Setter Property="FontWeight" Value="Bold"></Setter>
+        <Setter Property="FontWeight" Value="DemiBold"></Setter>
         <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
         <Setter Property="Height" Value="50"></Setter>
     </Style>
+
+
 </ResourceDictionary>

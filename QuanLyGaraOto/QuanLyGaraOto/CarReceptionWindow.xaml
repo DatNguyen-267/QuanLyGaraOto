@@ -17,7 +17,7 @@
         >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#3d4751">
@@ -25,7 +25,8 @@
                        VerticalAlignment="Center"
                        Text="Tiếp Nhận Xe"
                        FontSize="30"
-                       Margin="0 20 0 20"
+                       FontWeight="DemiBold"
+                       
                        Foreground="White"
                        ></TextBlock>
         </Grid>

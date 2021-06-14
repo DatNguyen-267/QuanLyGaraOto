@@ -8,7 +8,7 @@
         Name="CarServiceWD"
         Title="Dịch vụ và thông tin xe" 
         Height="600" Width="1100"
-        MinHeight="500"
+        MinHeight="800"
         MinWidth="700"
         WindowStartupLocation="CenterScreen"
         
@@ -34,7 +34,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="230"></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <materialDesign:Card  
@@ -43,7 +43,7 @@
                 Visibility="{Binding VisReceptionCard,
                 Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Column="0" x:Name="ReceptionCard"
-                                 Margin="7 20 5 10"
+                                 Margin="7 20 10 10"
                                  Height="auto">
                 <Button Content="Tiếp nhận xe"
                         IsEnabled="{Binding IsEnableReceptionBtn}"
@@ -64,25 +64,38 @@
                 <materialDesign:Card 
                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                     materialDesign:ShadowAssist.ShadowEdges="Right,Bottom"
-                    Margin="7 20 5 10"
+                    Margin="7 20 10 10"
                     Height="auto">
                     <Grid>
                         <Grid.Resources>
                             <Style TargetType="materialDesign:PackIcon">
-                                <Setter Property="Width" Value="30"></Setter>
-                                <Setter Property="Height" Value="30"></Setter>
+                                <Setter Property="Width" Value="40"></Setter>
+                                <Setter Property="Height" Value="40"></Setter>
                                 <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                 <Setter Property="HorizontalAlignment" Value="Right"></Setter>
-                                <Setter Property="Margin" Value="0 0 10 0"></Setter>
+                                <Setter Property="Margin" Value="0 15 10 0"></Setter>
+                            </Style>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                <Setter Property="FontSize" Value="16"></Setter>
+                            </Style> 
+                                <Style TargetType="DatePicker" BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+
                             </Style>
                         </Grid.Resources>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <ScrollViewer Grid.Row="0">
+                        <Label Grid.Row="0"
+                               Style="{StaticResource Title}"
+                               Content="Thông tin chung"
+                               Height="40"
+                               
+                               ></Label>
+                        <ScrollViewer Grid.Row="1">
                             <StackPanel>
-                                <Grid  Margin="10 10 10 0" Height="45">
+                                <Grid  Margin="10 5 10 5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -92,16 +105,14 @@
                                             Kind="Account" 
                                             Grid.Column="0"/>
                                         <TextBox Grid.Column="2"
-                                             
                                                  IsReadOnly="True"
-                                            Text="{Binding CarReception.CUSTOMER.Customer_Name}"
-                                     materialDesign:HintAssist.Hint="Tên chủ xe"
-                                         Margin="0 0 0 10"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        VerticalAlignment="Center" />
+                                                
+                                                Text="{Binding CarReception.CUSTOMER.Customer_Name}"
+                                                materialDesign:HintAssist.Hint="Tên chủ xe"
+                                                VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
-                                <Grid  Margin="10 5 10 0">
+                                <Grid  Margin="10 5 10 5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -113,13 +124,13 @@
                                             Text="{Binding CarReception.LicensePlate}"
                                             Grid.Column="1"
                                            IsReadOnly="True"
-                                            Margin="0 0 0 10"
+                                           
                                             materialDesign:HintAssist.Hint="Biển số xe"
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            
                                             VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
-                                <Grid Margin="10 5 10 0">
+                                <Grid Margin="10 5 10 5">
                                     <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -128,7 +139,7 @@
                                         <materialDesign:PackIcon Kind="Watermark" 
                                                      Grid.Column="0"/>
                                         <TextBox 
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            
                                             Text="{Binding CarReception.CAR_BRAND.CarBrand_Name}"
                                             Grid.Column="1"
                                             IsReadOnly="true"
@@ -138,7 +149,7 @@
                                         </TextBox>
                                     </Grid>
                                 </Grid>
-                                <Grid  Margin="10 5 10 0">
+                                <Grid  Margin="10 5 10 5">
                                     <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -152,12 +163,12 @@
                                             Grid.Column="2"
                                             materialDesign:HintAssist.Hint="Địa chỉ"
                                       
-                                            Margin="0 0 0 10"
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                          
+                                            
                                             VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
-                                <Grid Margin="10 5 10 0">
+                                <Grid Margin="10 5 10 5">
                                     <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -168,13 +179,13 @@
                                             Text="{Binding CarReception.CUSTOMER.Customer_Phone}"
                                             IsReadOnly="True"
                                             Grid.Column="1"
-                                            Margin="0 0 0 10"
+                                          
                                             materialDesign:HintAssist.Hint="Số Điện thoại"
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            
                                             VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
-                                <Grid Margin="10 5 10 0">
+                                <Grid Margin="10 5 10 5">
                                     <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -188,7 +199,7 @@
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
                                             materialDesign:HintAssist.Hint="Ngày tiếp nhận"
-                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                           ></DatePicker>
                                     </Grid>
                                 </Grid>
                                 <Grid Margin="10 5 10 0">
@@ -205,12 +216,12 @@
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
                                             materialDesign:HintAssist.Hint="Ngày sửa chữa"
-                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                           />
                                     </Grid>
                                 </Grid>
                             </StackPanel>
                         </ScrollViewer>
-                        <Grid Grid.Row="1"  Margin="0 5 0 15">
+                        <Grid Grid.Row="2"  Margin="0 5 0 15">
                             <Button
                                 Command="{Binding ChangeCarInfoCommand}"
                                 Visibility="{Binding VisChangeCustomerInfo, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -295,10 +306,6 @@
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="0" Margin="0 0 0 10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="17*"/>
-                            <RowDefinition Height="150*"/>
-                        </Grid.RowDefinitions>
                         <DataGrid  ItemsSource="{Binding ListRepair}" 
                                 SelectedItem="{Binding SelectedItem}"
                       SelectionMode="Single"
@@ -307,7 +314,7 @@
                       AutoGenerateColumns="False"
                       CanUserDeleteRows="False"
                       CanUserReorderColumns="True"
-                      FontSize="16" Grid.RowSpan="2"
+                      FontSize="16"
                       >
                             <!--<DataGrid.CellStyle>
                     -->
