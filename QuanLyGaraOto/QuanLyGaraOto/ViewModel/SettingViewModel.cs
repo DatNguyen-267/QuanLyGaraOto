@@ -196,6 +196,69 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand AddCarBrand { get; set; }
 
 
+        // Is enable button in wage setting
+
+        private bool _IsEnableModifyButtonInWageSetting;
+        public bool IsEnableModifyButtonInWageSetting
+        {
+            get => _IsEnableModifyButtonInWageSetting; set
+            {
+                _IsEnableModifyButtonInWageSetting = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _IsEnableDeleteButtonInWageSetting;
+        public bool IsEnableDeleteButtonInWageSetting
+        {
+            get => _IsEnableDeleteButtonInWageSetting; set
+            {
+                _IsEnableDeleteButtonInWageSetting = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _IsEnableModifyFieldInWageSetting;
+        public bool IsEnableModifyFieldInWageSetting
+        {
+            get => _IsEnableModifyFieldInWageSetting; set
+            {
+                _IsEnableModifyFieldInWageSetting = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // setting wage information
+
+        private ObservableCollection<WAGE> _ListWage;
+        public ObservableCollection<WAGE> ListWage
+        {
+            get => _ListWage; set
+            {
+                _ListWage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private WAGE _SelectedWageItem;
+        public WAGE SelectedWageItem
+        {
+            get => _SelectedWageItem; set
+            {
+                _SelectedWageItem = value;
+                OnPropertyChanged();
+                IsEnableDeleteButtonInWageSetting = true;
+                IsEnableModifyFieldInWageSetting = true;
+            }
+        }
+
+        public ICommand ChangeEnableButtonInWageBrandSetting { get; set; }
+        public ICommand ModifyWage { get; set; }
+        public ICommand DeleteWage { get; set; }
+        public ICommand OpenAddWageWindow { get; set; }
+
+        // Add wage window
+        public ICommand CancelAddWageWindow { get; set; }
+        public ICommand AddWage { get; set; }
+
         // Setting user information
 
         USER_INFO userInfo;
@@ -382,6 +445,35 @@ namespace QuanLyGaraOto.ViewModel
                 ListCarBrand.Add(addCarBrandViewModel.br);
             });
 
+            // Wage information
+            ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
+
+            ModifyWage = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                DataProvider.Ins.DB.SaveChanges();
+                SelectedWageItem = null;
+                IsEnableModifyButtonInWageSetting = false;
+                IsEnableModifyFieldInWageSetting = false;
+                IsEnableDeleteButtonInWageSetting = false;
+            });
+            DeleteWage = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                DataProvider.Ins.DB.WAGEs.Remove(SelectedWageItem);
+                DataProvider.Ins.DB.SaveChanges();
+                ListWage.Remove(SelectedWageItem);
+                IsEnableModifyButtonInWageSetting = false;
+                IsEnableModifyFieldInWageSetting = false;
+                IsEnableDeleteButtonInWageSetting = false;
+            });
+            OpenAddWageWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                AddWageWindow window = new AddWageWindow();
+                window.ShowDialog();
+                AddWageViewModel addWageViewModel = window.DataContext as AddWageViewModel;
+                ListWage.Add(addWageViewModel.wage);
+            });
+
+            // User information
             ChangeUserInformation = new RelayCommand<SettingWindow>((p) =>
             {
                 if (p == null || string.IsNullOrEmpty(p.txtAddress.Text)
@@ -477,6 +569,10 @@ namespace QuanLyGaraOto.ViewModel
             ChangeEnableButtonInCarBrandSetting = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 IsEnableModifyButtonInBrandSetting = true;
+            });
+            ChangeEnableButtonInWageBrandSetting = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                IsEnableModifyButtonInWageSetting = true;
             });
 
             // Set enable button to false

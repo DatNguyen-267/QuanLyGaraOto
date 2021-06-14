@@ -4,5 +4,5 @@
     <SolidColorBrush x:Key="MainColor" Color="#3d4751"></SolidColorBrush>
     <SolidColorBrush x:Key="MainBlue" Color="#3366ff"></SolidColorBrush>
     <SolidColorBrush x:Key="FocusColor" Color="#5c656d"></SolidColorBrush>
-    
+    <SolidColorBrush x:Key="Dark" Color="Black"></SolidColorBrush>
 </ResourceDictionary>
