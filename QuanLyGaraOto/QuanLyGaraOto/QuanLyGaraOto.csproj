@@ -119,6 +119,9 @@
     <Compile Include="AddRoleWindow.xaml.cs">
       <DependentUpon>AddRoleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddWageWindow.xaml.cs">
+      <DependentUpon>AddWageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BunkWindow.xaml.cs">
       <DependentUpon>BunkWindow.xaml</DependentUpon>
     </Compile>
@@ -281,6 +284,7 @@
     <Compile Include="ViewModel\AddImportWindowViewModel.cs" />
     <Compile Include="ViewModel\AddRepairDetailViewModel.cs" />
     <Compile Include="ViewModel\AddRepairFormViewModel.cs" />
+    <Compile Include="ViewModel\AddWageViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="ViewModel\BunkViewModel.cs" />
@@ -326,6 +330,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddRoleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddWageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

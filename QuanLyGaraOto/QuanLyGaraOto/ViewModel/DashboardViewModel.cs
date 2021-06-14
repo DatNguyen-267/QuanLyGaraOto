@@ -120,6 +120,12 @@ namespace QuanLyGaraOto.ViewModel
                 ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
                                (DataProvider.Ins.DB.RECEIPTs.OrderBy(x => x.ReceiptDate));
 
+            try
+            {
+                ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
+                    (DataProvider.Ins.DB.RECEIPTs.OrderBy(x => x.ReceiptDate));
+
+
                 ItemSource_Year.Clear();
                 firstYear = receipts.First().ReceiptDate.Date.Year;
                 ItemSource_Year.Add("Năm " + firstYear.ToString());
@@ -129,8 +135,7 @@ namespace QuanLyGaraOto.ViewModel
                     if (receipt.ReceiptDate.Date.Year <= firstYear + ItemSource_Year.Count - 1) continue;
                     ItemSource_Year.Add("Năm " + receipt.ReceiptDate.Date.Year);
                 }
-            }
-            catch
+            } catch(Exception ex)
             {
 
             }

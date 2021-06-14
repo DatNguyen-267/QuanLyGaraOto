@@ -200,7 +200,7 @@
                                         Content="Sửa"
                                         IsEnabled="{Binding IsEnableModifyButtonInBrandSetting}"
                                         Command="{Binding ModifyCarBrand}"
-                                        Background="Black"
+                                        Background="{StaticResource Dark}"
                                         BorderBrush="Black" />
 
                             <TextBox Grid.Column="1"
@@ -241,7 +241,7 @@
                                         Content="Xóa"
                                         IsEnabled="{Binding IsEnableDeleteButtonInBrandSetting}"
                                         Command="{Binding DeleteCarBrand}"
-                                        Background="Black"
+                                        Background="{StaticResource Dark}"
                                         BorderBrush="Black" 
                                         Margin="5"/>
 
@@ -252,7 +252,7 @@
                                         HorizontalAlignment="Left"
                                         Content="Thêm"
                                         IsEnabled="True"
-                                        Background="Black"
+                                        Background="{StaticResource Dark}"
                                         BorderBrush="Black" 
                                         Margin="5"
                                         Command="{Binding OpenAddCarBrandWindow}"/>
@@ -260,8 +260,130 @@
                     </Grid>
                 </Grid>
 
-                <Grid Grid.Column="2" Margin="5">
+                <Grid Grid.Column="2" Margin="5" >
                     <Border BorderThickness="1" BorderBrush="Black" CornerRadius="4"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="75"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                                    Content="Tiền công"
+                                    VerticalContentAlignment="Center"
+                                    HorizontalContentAlignment="Left"
+                                    FontSize="20"
+                                    FontWeight="Bold"/>
+
+                        <Grid Grid.Row="1">
+                            <ListView ItemsSource="{Binding ListWage}" SelectedItem="{Binding SelectedWageItem}" >
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding Wage_Id}"></GridViewColumn>
+                                        <GridViewColumn Header="Loại" DisplayMemberBinding="{Binding Wage_Name}"></GridViewColumn>
+                                        <GridViewColumn Header="Giá trị" DisplayMemberBinding="{Binding Wage_Value}"></GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="125"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Width="100"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Content="Sửa"
+                                        IsEnabled="{Binding IsEnableModifyButtonInWageSetting}"
+                                        Command="{Binding ModifyWage}"
+                                        Background="{StaticResource Dark}"
+                                        BorderBrush="Black" />
+
+                            <TextBox Grid.Column="1"
+                                        materialDesign:HintAssist.Hint="Loại tiền công"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        VerticalAlignment="Center" 
+                                        Margin="5"
+                                        IsEnabled="{Binding IsEnableModifyFieldInWageSetting}">
+
+                                <TextBox.Text>
+                                    <Binding Path="SelectedWageItem.Wage_Name" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInWageBrandSetting}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
+
+                            <TextBox Grid.Column="2"
+                                        materialDesign:HintAssist.Hint="Giá trị"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        VerticalAlignment="Center" 
+                                        Margin="5"
+                                        IsEnabled="{Binding IsEnableModifyFieldInWageSetting}">
+
+                                <TextBox.Text>
+                                    <Binding Path="SelectedWageItem.Wage_Value" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInWageBrandSetting}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
+                        </Grid>
+
+                        <Grid Grid.Row="3" Margin="0 0 0 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="125"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Width="100"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Content="Xóa"
+                                        IsEnabled="{Binding IsEnableDeleteButtonInWageSetting}"
+                                        Command="{Binding DeleteWage}"
+                                        Background="{StaticResource Dark}"
+                                        BorderBrush="Black" 
+                                        Margin="5"/>
+
+                            <Button Grid.Column="1"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Width="100"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        Content="Thêm"
+                                        IsEnabled="True"
+                                        Background="{StaticResource Dark}"
+                                        BorderBrush="Black" 
+                                        Margin="5"
+                                        Command="{Binding OpenAddWageWindow}"/>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
 
