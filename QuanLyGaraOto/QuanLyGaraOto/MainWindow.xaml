@@ -69,7 +69,8 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition ></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Command="{Binding TrangChuCommand}" Grid.Row="0">
+                <Button Command="{Binding OpenDashboard}" CommandParameter="{Binding ElementName=wdDashboard}" 
+                        Grid.Row="0">
                     <StackPanel>
                         <materialDesign:PackIcon  
                                 Grid.Column="0" 
@@ -120,7 +121,8 @@
                     </StackPanel>
                 </Button>
                 <Button Grid.Row="5"
-                            Command="{Binding OpenSetting}">
+                            Command="{Binding OpenSetting}"
+                            CommandParameter="{Binding ElementName=wdSetting}">
                     <StackPanel >
                         <materialDesign:PackIcon  Grid.Column="0"      
                                                     Kind="Cog" />
@@ -174,11 +176,17 @@
                     Height="{Binding ElementName=Container, Path=ActualHeight}"></local:ReportWindow>
             </Grid>
             <Grid  Visibility="{Binding VisSetting, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <local:SettingWindow 
+                <local:SettingWindow x:Name="wdSetting"
                     Width="{Binding ElementName=Container, Path=ActualWidth}"
                     Height="{Binding ElementName=Container, Path=ActualHeight}"></local:SettingWindow>
             </Grid>
-
+            <Grid 
+                Visibility="{Binding VisDashboard, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <local:DashboardWindow x:Name="wdDashboard"
+                    Width="{Binding ElementName=Container, Path=ActualWidth}"
+                    Height="{Binding ElementName=Container, Path=ActualHeight}">
+                </local:DashboardWindow>
+            </Grid>
         </Grid>
         <Rectangle Grid.Column="1"
                    RadiusX="15"
