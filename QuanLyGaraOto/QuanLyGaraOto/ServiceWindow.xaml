@@ -7,14 +7,12 @@
         xmlns:validation ="clr-namespace:QuanLyGaraOto.Validation"
         mc:Ignorable="d"
         x:Name="ServiceWD"
-        Height="450" Width="1000"
+        Height="450" Width="1200"
         Background="White"  
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         >
     <UserControl.Resources>
-        <!--<Style TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-        </Style>-->
+        <Style TargetType="Button" BasedOn="{StaticResource FeatureButton}"></Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -29,7 +27,7 @@
               >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="130"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <TextBlock 
@@ -43,17 +41,7 @@
                     ></TextBlock>
             </Grid>
             <Grid Grid.Column="1">
-                <Button
-                    Command="{Binding CarReceptionCommand}"
-                    Content="Thêm xe"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                    Width="100"
-                    Height="50"
-                    Foreground="Black"
-                    Background="White"
-                    Margin="10 5 20 5"
-                    />
+                
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
@@ -78,7 +66,9 @@
                       CanUserAddRows="False"
                       AutoGenerateColumns="False"
                       CanUserDeleteRows="False"
-                      CanUserReorderColumns="True">
+                      CanUserReorderColumns="True"
+                      FontSize="16"
+                      >
                 <!--<DataGrid.CellStyle>
                     --><!--<Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
@@ -121,13 +111,17 @@
         </materialDesign:Card>
 
         <Grid Grid.Row="2" Margin="15 0 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Grid.Resources>
                 <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <Setter Property="Margin" Value="10 0 0 0"></Setter>
-                    <Setter Property="Width" Value="70"></Setter>
-                </Style>
+                    <Setter Property="Width" Value="100"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter></Style>
             </Grid.Resources>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Width="auto">
                 <TextBox
                         x:Name="txbID"
                       materialDesign:HintAssist.Hint="ID"
@@ -156,8 +150,9 @@
                     DisplayMemberPath="CarBrand_Name"
                     SelectedItem="{Binding SelectedBrand}"
                       materialDesign:HintAssist.Hint="Hiệu xe"
-                        Margin="10 12 0 0"
-                    Width="70"
+                        Margin="10 18 0 0"
+                    Width="100"
+                    FontSize="18"
                       VerticalAlignment="Center">
 
                 </ComboBox>
@@ -183,35 +178,35 @@
                 </TextBox>
                 <Button Content="Tìm"
                         Margin="20 5 0 0"
-                        Width="100"
-                        Background="{StaticResource MainColor}"
                         Command="{Binding SearchCommand}"
                         CommandParameter="{Binding ElementName=ServiceWD}">
                 </Button>
                 <Button Content="Làm mới"
                         Margin="20 5 0 0"
-                        Width="100"
-                        Background="{StaticResource MainColor}"
                         Command="{Binding RefeshCommand}"
                         CommandParameter="{Binding ElementName=ServiceWD}">
 
                 </Button>
                 <Button 
                         Command="{Binding DeleteCommand}"
-                        Width="100"
-                        Background="{StaticResource MainColor}"
                         Margin="20 5 0 0"
-                        
                     Content="Xóa">
                 </Button>
                 <Button 
-                        Command="{Binding OpenCommand}"
-                        Background="{StaticResource MainColor}"
-                        Width="100"
+                        Command="{Binding OpenCommand}" 
                         Margin="20 5 0 0"
                         Content="Chi Tiết">
                 </Button>
+               
             </StackPanel>
+            <Button Grid.Column="1"
+                    Command="{Binding CarReceptionCommand}"
+                    Content="Thêm xe"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource MainButton}"
+                    Margin="10 5 20 5"
+                    />
         </Grid>
     </Grid>
 

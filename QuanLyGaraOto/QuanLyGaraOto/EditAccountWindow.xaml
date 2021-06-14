@@ -5,20 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
-        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Name="wdEditAccount"
         
         mc:Ignorable="d"
-        Title="AddAccountWindow" Height="300" Width="300">
+        Title="Đặt lại mật khẩu" Height="400" Width="300">
     <materialDesign:Card>
         <Grid>
             <Grid.RowDefinitions>
@@ -38,7 +31,7 @@
                 <Label Width="230"
                      HorizontalAlignment="Center"
                      VerticalAlignment="Center"
-                    
+                        FontSize="20"
                      Padding="5"
                      materialDesign:HintAssist.Hint="Tên tài khoản"
                      Style="{StaticResource MaterialDesignLabel}"
@@ -52,23 +45,22 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Grid.Row="0"
-                Background="Black"
+                
                 Width="250"
-                BorderBrush="Black"
-                Style="{StaticResource MaterialDesignRaisedButton}"
+               
+                Style="{StaticResource MainButton}"
                 Content="Đặt lại mật khẩu"
                
                     Command="{Binding ResetPasswordCommand}"
                     CommandParameter="{Binding ElementName=wdEditAccount}"
                 ></Button>
                 <Button Grid.Row="1"
-                Background="Gray"
-                    BorderBrush="Gray"
+                Background="{StaticResource MainColor}"
+                    BorderBrush="{StaticResource MainColor}"
                 Width="250"
               
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Content="Thoát"
-              
+                Style="{StaticResource MainButton}"
+                Content="Đóng"
                     Command="{Binding ExitCommand}"
                     CommandParameter="{Binding ElementName=wdEditAccount}"
                     VerticalAlignment="Top"
