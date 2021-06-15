@@ -11,7 +11,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Hóa đơn thanh toán" Height="800" Width="1120">
+        Title="Hóa đơn thanh toán" Height="800" Width="1200">
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="txbInfo" BasedOn="{StaticResource MaterialDesignTextBlock}">
             <Setter Property="FontSize" Value="14"></Setter>
@@ -49,19 +49,56 @@
                                VerticalAlignment="Top"
                                Text="Thông Tin Sửa Chữa"
                                FontWeight="Bold"
-                               Foreground="#FF1976D2"
+                               Foreground="{StaticResource MainBlue}"
                                FontSize="16"
                                ></TextBlock>
                 </Grid>
-                <Rectangle
-                    Grid.Row="1"
-                    Margin="10 5 0 10"
-                    RadiusX="6"
-                    RadiusY="6"
-                    Stroke="DarkGray"
-                    StrokeThickness="1"
-                    ></Rectangle>
-                <ListView ItemsSource="{Binding ListRepair}"
+                <materialDesign:Card
+                      Margin="15 5 30 30"
+                    Grid.Row="1">
+                    <DataGrid 
+                    ItemsSource="{Binding ListRepair}"
+                      SelectionMode="Single"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="True"
+                      FontSize="16"
+                      >
+                        <!--<DataGrid.CellStyle>
+                    -->
+                        <!--<Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="Background" Value="DimGray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>-->
+                        <!--
+                </DataGrid.CellStyle>-->
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                <Setter Property="Foreground" Value="White"></Setter>
+                                <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                        <DataGrid.Columns>
+                            <materialDesign:DataGridTextColumn Header="STT" Binding="{Binding STT}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Nội dung" Binding="{Binding RepairDetail.Content}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Vật tư" Binding="{Binding RepairDetail.SUPPLIES.Supplies_Name}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding RepairDetail.SuppliesAmount}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Đơn giá" Binding="{Binding RepairDetail.SUPPLIES.Supplies_Price}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Tiền công" Binding="{Binding RepairDetail.WAGE.Wage_Value}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Thành tiền" Binding="{Binding RepairDetail.TotalMoney}"></materialDesign:DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </materialDesign:Card>
+               
+                <!--<ListView ItemsSource="{Binding ListRepair}"
+                          FontSize="16"
+                          FontWeight="Normal"
                     Grid.Row="1"
                     Margin="20 10 10 20">
                     <ListView.View>
@@ -75,7 +112,7 @@
                             <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding RepairDetail.TotalMoney}"></GridViewColumn>
                         </GridView>
                     </ListView.View>
-                </ListView>
+                </ListView>-->
             </Grid>
 
             <Grid Grid.Column="2">
@@ -91,7 +128,7 @@
                                VerticalAlignment="Top"
                                Text="Thông Tin Khách Hàng"
                                FontWeight="Bold"
-                               Foreground="#FF1976D2"
+                               Foreground="{StaticResource MainBlue}"
                                FontSize="16"
                                ></TextBlock>
                 </Grid>
@@ -321,7 +358,7 @@
                                        Margin="0 0 10 0"
                                        FontSize="30"
                                        FontWeight="ExtraBold"
-                                      Foreground="#FF1976D2"
+                                      Foreground="{StaticResource MainBlue}"
                                        >
 
                         </TextBlock>
@@ -348,25 +385,25 @@
                             CommandParameter="{Binding ElementName=PayWD}"
                             Visibility="{Binding VisPay, Converter={StaticResource BooleanToVisibilityConverter}}"
                             Grid.Row="0" 
-                            BorderBrush="#3366ff"
+                            Style="{StaticResource MainButton}"
+                             Width="auto"
                             Content="Thanh Toán"
                             FontWeight="Bold"
                             Height="40"
                         Margin="30 0 30 0"
-                            FontSize="18"
-                            Background="#3366ff"></Button>
+                            FontSize="18"></Button>
                     <Button 
                             Command="{Binding PrintCommand}"
                             CommandParameter="{Binding ElementName=PayWD}"
                             Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
                             Grid.Row="1" 
-                            BorderBrush="#3366ff"
+                            BorderBrush="{StaticResource Green0}"
                             Content="In Hóa Đơn"
                             Margin="30 0 30 0"
                             FontWeight="Bold"
                             Height="40"
                             FontSize="18"
-                            Background="#3366ff">
+                            Background="{StaticResource Green0}">
                     </Button>
                     <Button 
                             Command="{Binding CloseCommand}"
@@ -379,8 +416,8 @@
                             
                             Height="40"
                             FontSize="18"
-                            BorderBrush="#455A64"
-                            Background="#455A64"></Button>
+                            BorderBrush="{StaticResource MainColor}"
+                            Background="{StaticResource MainColor}"></Button>
                 </Grid>
             </Grid>
         </Grid>

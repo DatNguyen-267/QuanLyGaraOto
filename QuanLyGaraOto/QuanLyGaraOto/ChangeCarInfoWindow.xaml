@@ -243,12 +243,13 @@
                     Style="{StaticResource FeatureButton}"
                     Background="{StaticResource MainBlue}"
                     BorderBrush="{StaticResource MainBlue}"
+                    
                   Content="Xác Nhận" />
                 <Button
                     Command="{Binding CloseCommand}"
                     CommandParameter="{Binding ElementName=ChangeCarInfoWD}"
                    Grid.Column="1"
-                     Style="{StaticResource FeatureButton}"
+                     Style="{StaticResource CloseButton}"
                   Content="Đóng" />
             </Grid>
         </Grid>

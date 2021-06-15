@@ -364,9 +364,9 @@
                         ></Button>
                 <Button Grid.Column="1"
                             Content="Thoát"
-                            Style="{StaticResource MainButton}"
-                            Background="{StaticResource MainColor}"
-                            BorderBrush="{StaticResource MainColor}"
+                            Style="{StaticResource CloseButton}"
+                            Width="150"
+                        Height="50"
                                 Command="{Binding ExitCommand}"
                                 CommandParameter="{Binding ElementName=wdEditEmployee}"
                         ></Button>

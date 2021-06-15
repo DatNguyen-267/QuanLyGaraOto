@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using QuanLyGaraOto.Convert;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -365,6 +366,25 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangePassword { get; set; }
         public ICommand CancelChangePassword { get; set; }
 
+        // Search Wage
+
+        private string _WageName { get; set; }
+        public string WageName { get => _WageName; set { _WageName = value; OnPropertyChanged(); } }
+        private string _WageValue { get; set; }
+        public string WageValue { get => _WageValue; set { _WageValue = value; OnPropertyChanged(); } }
+        private ObservableCollection<WAGE> _TempListWage { get; set; }
+        public ObservableCollection<WAGE> TempListWage { get => _TempListWage; set { _TempListWage = value; OnPropertyChanged(); } }
+        public ICommand SearchWageCommand { get; set; }
+        public ICommand RefeshWageCommand { get; set; }
+
+        // Search Brand
+        private string _BrandName { get; set; }
+        public string BrandName { get => _BrandName; set { _BrandName = value; OnPropertyChanged(); } }
+        private ObservableCollection<CAR_BRAND> _TempListBrand { get; set; }
+        public ObservableCollection<CAR_BRAND> TempListBrand { get => _TempListBrand; set { _TempListBrand = value; OnPropertyChanged(); } }
+        public ICommand SearchBrandCommand { get; set; }
+        public ICommand RefeshBrandCommand { get; set; }
+
         public SettingViewModel()
         {
             // Visibility
@@ -381,7 +401,64 @@ namespace QuanLyGaraOto.ViewModel
                 UserSettingVis = true;
                 AppSettingVis = false;
             });
+            // Search Brand
+            SearchBrandCommand = new RelayCommand<SettingWindow>((p) => {
+                if (p == null) return false;
+                if (string.IsNullOrEmpty(p.txtBrand.Text))
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
+                UnicodeConvert uni = new UnicodeConvert();
+                TempListBrand = new ObservableCollection<CAR_BRAND>();
 
+                foreach (var item in ListCarBrand)
+                {
+                    if ((!string.IsNullOrEmpty(p.txtBrand.Text)
+                    && uni.RemoveUnicode(item.CarBrand_Name).ToLower().Contains(uni.RemoveUnicode(p.txtBrand.Text).ToLower())))
+                        TempListBrand.Add(item);
+                }
+                ListCarBrand = TempListBrand;
+            });
+            RefeshBrandCommand = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
+            {
+                BrandName = "";
+                ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
+            });
+            // Search Wage
+            SearchWageCommand = new RelayCommand<SettingWindow>((p) => {
+                if (p == null) return false;
+                if (string.IsNullOrEmpty(p.txbWageName.Text)
+                    && string.IsNullOrEmpty(p.txbWageValue.Text))
+                    return false;
+                return true;
+            }, (p) => 
+            {
+                ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
+                UnicodeConvert uni = new UnicodeConvert();
+                TempListWage = new ObservableCollection<WAGE>();
+
+                foreach (var item in ListWage)
+                {
+                if (((!string.IsNullOrEmpty(p.txbWageName.Text)
+                && uni.RemoveUnicode(item.Wage_Name).ToLower().Contains(uni.RemoveUnicode(p.txbWageName.Text).ToLower()))
+                || (string.IsNullOrEmpty(p.txbWageName.Text)))
+                &&
+                (((!string.IsNullOrEmpty(p.txbWageValue.Text)
+                && uni.RemoveUnicode(item.Wage_Value.ToString()).Contains(uni.RemoveUnicode(p.txbWageValue.Text)))
+                    || (string.IsNullOrEmpty(p.txbWageValue.Text))))) 
+                        
+                TempListWage.Add(item);
+                }
+                ListWage = TempListWage;
+            });
+            RefeshWageCommand = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
+            {
+                WageName = "";
+                WageValue = "";
+                ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
+            });
             // Gara information
             GaraInfo = DataProvider.Ins.DB.GARA_INFO.First();
             MaxCarReception = GaraInfo.MaxCarReception;

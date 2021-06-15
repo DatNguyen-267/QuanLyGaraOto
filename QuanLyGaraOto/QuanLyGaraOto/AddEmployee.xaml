@@ -30,7 +30,7 @@
                        HorizontalAlignment="Center"></TextBlock>
         </Grid>
         <Grid Width="400" Grid.Row="1">
-            <materialDesign:Card>
+            <Grid>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -342,7 +342,7 @@
                         </TextBox>
                     </Grid>
                 </Grid>
-            </materialDesign:Card>
+            </Grid>
 
         </Grid>
         <Grid Grid.Row="2">

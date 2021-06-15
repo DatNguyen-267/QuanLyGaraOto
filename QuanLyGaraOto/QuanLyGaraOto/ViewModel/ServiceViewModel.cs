@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
@@ -16,7 +17,9 @@ namespace QuanLyGaraOto.ViewModel
         #region View Data
         private ObservableCollection<ListCar> _ListCar { get; set; }
         public ObservableCollection<ListCar> ListCar { get => _ListCar; set { _ListCar = value; OnPropertyChanged(); } }
-       
+        private ObservableCollection<ListCar> _Temp { get; set; }
+        public ObservableCollection<ListCar> Temp { get => _Temp; set { _Temp = value; OnPropertyChanged(); } }
+
         private ListCar _SelectedItem { get; set; }
         public ListCar SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
        
@@ -58,6 +61,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand OpenCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
+        public ICommand SelectionChanged { get; set; }
         #endregion
         public ServiceViewModel()
         {
@@ -97,9 +101,12 @@ namespace QuanLyGaraOto.ViewModel
                     return true;
                 }, (p) =>
                 {
-                    DeleteModel deleteModel = new DeleteModel();
-                    deleteModel.CarReception(SelectedItem.CarReception);
-                    ListCar.Remove(SelectedItem);
+                    foreach (var item in Temp)
+                    {
+                        DeleteModel deleteModel = new DeleteModel();
+                        deleteModel.CarReception(item.CarReception);
+                        ListCar.Remove(item);
+                    }
                     LoadReceptionAmount();
                 }
             );
@@ -110,12 +117,20 @@ namespace QuanLyGaraOto.ViewModel
                     return true;
                 }, (p) =>
                 {
-                    CarServiceWindow carServiceWindow = new CarServiceWindow(SelectedItem.CarReception);
-                    carServiceWindow.ShowDialog();
+                    if (Temp.Count()>1)
+                    {
+                        MessageBox.Show("Vui lòng chỉ chọn 1 dòng để xem thông tin", "Lỗi chọn nhiều dữ liệu cùng lúc", MessageBoxButton.OK);
+                    }
+                    else
+                    {
+                        CarServiceWindow carServiceWindow = new CarServiceWindow(SelectedItem.CarReception);
+                        carServiceWindow.ShowDialog();
 
-                    CarServiceViewModel carServiceViewModel = (carServiceWindow.DataContext as CarServiceViewModel);
-                    SelectedItem.CarReception = carServiceViewModel.CarReception;
-                    SelectedItem.Debt = carServiceViewModel.Total;
+                        CarServiceViewModel carServiceViewModel = (carServiceWindow.DataContext as CarServiceViewModel);
+                        SelectedItem.CarReception = carServiceViewModel.CarReception;
+                        SelectedItem.Debt = carServiceViewModel.Total;
+                    }
+                   
                 }
             );
             SearchCommand = new RelayCommand<ServiceWindow>
@@ -170,6 +185,15 @@ namespace QuanLyGaraOto.ViewModel
                 }
             );
             LoadListData();
+            SelectionChanged = new RelayCommand<DataGrid>
+                ((p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    Temp = new ObservableCollection<ListCar>(p.SelectedItems.Cast<ListCar>().ToList()) ;
+                }
+            );
         }
 
         public void LoadReceptionAmount()
@@ -221,6 +245,16 @@ namespace QuanLyGaraOto.ViewModel
                 tempListCar.CarReception = item;
                 tempListCar.Debt = GetDebt(item.Reception_Id);
                 ListCar.Add(tempListCar);
+            }
+        }
+        public void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Temp = new ObservableCollection<ListCar>();
+            
+            foreach (var item in e.AddedItems)
+                
+            {
+                Temp.Add(item as ListCar);
             }
         }
     }

@@ -111,32 +111,30 @@ namespace QuanLyGaraOto.ViewModel
             info = DataProvider.Ins.DB.GARA_INFO.First();
             CurrentNumber = DataProvider.Ins.DB.RECEPTIONs.Where(x => x.ReceptionDate.Day == time.Day).Count();
             TotalCarInMonth = DataProvider.Ins.DB.RECEPTIONs.Where(x => x.ReceptionDate.Month == time.Month).Count();
-            foreach(var receipt in DataProvider.Ins.DB.RECEIPTs.Where(x => x.ReceiptDate.Month == time.Month))
+            foreach (var receipt in DataProvider.Ins.DB.RECEIPTs.Where(x => x.ReceiptDate.Month == time.Month))
             {
-                Revenue += (long) receipt.MoneyReceived;
+                Revenue += (long)receipt.MoneyReceived;
             }
-
-            try
-            {
-                ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
-                    (DataProvider.Ins.DB.RECEIPTs.OrderBy(x => x.ReceiptDate));
-
-
-                ItemSource_Year.Clear();
-                firstYear = receipts.First().ReceiptDate.Date.Year;
-                ItemSource_Year.Add("Năm " + firstYear.ToString());
-
-                foreach (var receipt in receipts)
+                try
                 {
-                    if (receipt.ReceiptDate.Date.Year <= firstYear + ItemSource_Year.Count - 1) continue;
-                    ItemSource_Year.Add("Năm " + receipt.ReceiptDate.Date.Year);
+                    ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
+                        (DataProvider.Ins.DB.RECEIPTs.OrderBy(x => x.ReceiptDate));
+
+
+                    ItemSource_Year.Clear();
+                    firstYear = receipts.First().ReceiptDate.Date.Year;
+                    ItemSource_Year.Add("Năm " + firstYear.ToString());
+
+                    foreach (var receipt in receipts)
+                    {
+                        if (receipt.ReceiptDate.Date.Year <= firstYear + ItemSource_Year.Count - 1) continue;
+                        ItemSource_Year.Add("Năm " + receipt.ReceiptDate.Date.Year);
+                    }
+                } catch (Exception ex)
+                {
+
                 }
-            } catch(Exception ex)
-            {
-
-            }
         }
-
         public void LoadDataToChart(int year)
         {
             ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
