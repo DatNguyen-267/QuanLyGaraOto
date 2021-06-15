@@ -42,8 +42,30 @@ namespace QuanLyGaraOto.ViewModel
         private USER _User;
         public USER User { get => _User; set { _User = value; OnPropertyChanged(); } }
 
+        bool _isDashboard = false;
+        public bool isDashboard { get => _isDashboard; set { _isDashboard = value; OnPropertyChanged(); } }
+
+        bool _isService = false;
+        public bool isService { get => _isService; set { _isService = value; OnPropertyChanged(); } }
+
+        bool _isBunk = false;
+        public bool isBunk { get => _isBunk; set { _isBunk = value; OnPropertyChanged(); } }
+
+        bool _isEmployee = false;
+        public bool isEmployee { get => _isEmployee; set { _isEmployee = value; OnPropertyChanged(); } }
+
+        bool _isReport = false;
+        public bool isReport { get => _isReport; set { _isReport = value; OnPropertyChanged(); } }
+
+        bool _isSettingAccount = false;
+        public bool isSettingAccount { get => _isSettingAccount; set { _isSettingAccount = value; OnPropertyChanged(); } }
+
+        bool _isSettingApp = false;
+        public bool isSettingApp { get => _isSettingApp; set { _isSettingApp = value; OnPropertyChanged(); } }
+
         public MainViewModel()
         {
+           
             InitVis();
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
@@ -57,25 +79,49 @@ namespace QuanLyGaraOto.ViewModel
                 VisDashboard = true;
                 p.DataContext = new DashboardViewModel();
             });
-            OpenService = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenService = new RelayCommand<object>((p) => 
+            {
+                if (isService == false)
+                    return false;
+                return true; 
+            }, 
+            (p) =>
             {
                 InitVis();
                 VisService = true;
 
             });
-            OpenEmployee = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenEmployee = new RelayCommand<object>((p) => 
+            {
+                if (isEmployee == false)
+                    return false;
+                return true; 
+            }, 
+            (p) =>
             {
                 InitVis();
                 VisEmployee = true;
 
             });
-            OpenBunk = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenBunk = new RelayCommand<object>((p) => 
+            {
+                if (isBunk == false)
+                    return false;
+                return true; 
+            }, 
+            (p) =>
             {
                 InitVis();
                 VisBunk = true;
 
             });
-            OpenReport = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenReport = new RelayCommand<object>((p) => 
+            {
+                if (isReport == false)
+                    return false;
+                return true; 
+            },
+            (p) =>
             {
                 InitVis();
                 VisReport = true;
@@ -112,6 +158,27 @@ namespace QuanLyGaraOto.ViewModel
             {
                 p.Show();
                 User = loginVM.User;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 1).SingleOrDefault().Permission == true)
+                    isDashboard = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 2).SingleOrDefault().Permission == true)
+                    isService = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 3).SingleOrDefault().Permission == true)
+                    isBunk = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 4).SingleOrDefault().Permission == true)
+                    isEmployee = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 5).SingleOrDefault().Permission == true)
+                    isReport = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 6).SingleOrDefault().Permission == true)
+                    isSettingAccount = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 7).SingleOrDefault().Permission == true)
+                    isSettingApp = true;
             }
             else
             {

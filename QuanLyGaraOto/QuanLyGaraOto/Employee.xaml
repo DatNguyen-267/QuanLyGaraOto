@@ -422,7 +422,7 @@
                                            Margin="40 0 0 0"
                                            FontSize="14"
                                            ></Label>
-                                    <CheckBox IsChecked="{Binding isBunk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    <CheckBox IsChecked="{Binding isService, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
                                             Background="{StaticResource MainColor}"
                                               Foreground="White"
@@ -434,7 +434,7 @@
                                            Margin="40 0 0 0"
                                            FontSize="14"
                                            ></Label>
-                                    <CheckBox IsChecked="{Binding isService, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    <CheckBox IsChecked="{Binding isBunk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
                                              Background="{StaticResource MainColor}"
                                               Foreground="White"
