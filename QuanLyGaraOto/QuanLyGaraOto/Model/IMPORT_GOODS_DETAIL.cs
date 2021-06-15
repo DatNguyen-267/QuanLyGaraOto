@@ -25,7 +25,7 @@ namespace QuanLyGaraOto.Model
         public int Amount { get => _Amount; set { _Amount = value; OnPropertyChanged(); } }
 
         private int _Price { get; set; }
-        public int Price { get => _Price; set { _Amount = value; OnPropertyChanged(); } }
+        public int Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
     
