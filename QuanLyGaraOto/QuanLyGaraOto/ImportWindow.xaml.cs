@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuanLyGaraOto.ViewModel;
+using QuanLyGaraOto.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,17 @@ namespace QuanLyGaraOto
     /// </summary>
     public partial class ImportWindow : Window
     {
+        private ImportGoodViewModel importGoodViewModel { get; set; }
         public ImportWindow()
         {
             InitializeComponent();
+            this.DataContext = (importGoodViewModel = new ImportGoodViewModel());
         }
+        public ImportWindow(IMPORT_GOODS import)
+        {
+            InitializeComponent();
+            this.DataContext = (importGoodViewModel = new ImportGoodViewModel(import));
+        }
+
     }
 }

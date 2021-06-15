@@ -41,10 +41,9 @@ namespace QuanLyGaraOto.ViewModel
                 NewImport.ImportGoods_Date = ImportDate;
                 
                 IsSuccess = true;
-                p.Close();
-                ImportWindow importWD = new ImportWindow();
-                importWD.dtpImportDate.SelectedDate = ImportDate;
-                importWD.ShowDialog();
+                ImportWindow importWindow = new ImportWindow(NewImport);
+                importWindow.ShowDialog();
+                p.Close();                
             });
 
         }
