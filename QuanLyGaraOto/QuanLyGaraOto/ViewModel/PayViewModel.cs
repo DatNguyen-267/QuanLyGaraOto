@@ -67,13 +67,13 @@ namespace QuanLyGaraOto.ViewModel
 
             if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).Count() > 0)
             {
+                Email = DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault().Email;
                 VisPay = false;
                 RolReceivedMoney = true;
                 RolEmail = true;
                 EnabledReceiptDate = false;
                 SelectedDate = DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault().ReceiptDate;
                 ReceivedMoney = DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == Reception.Reception_Id).SingleOrDefault().MoneyReceived.ToString() ;
-                
             }
         }
         public void Command()

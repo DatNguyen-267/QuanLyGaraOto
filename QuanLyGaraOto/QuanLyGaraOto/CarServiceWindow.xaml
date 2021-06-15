@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Name="CarServiceWD"
         Title="Dịch vụ và thông tin xe" 
-        Height="600" Width="1100"
+        Height="600" Width="1200"
         MinHeight="800"
         MinWidth="700"
         WindowStartupLocation="CenterScreen"
@@ -281,9 +281,11 @@
                             <Button 
                                 Command="{Binding AddCommand}"
                                 Visibility="{Binding VisAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Style="{StaticResource FeatureButton}"
+                                Style="{StaticResource AddButton}"
                                 Content="Thêm"
                                 Margin="10 0 10 0"
+                               
+                    BorderBrush="{StaticResource MainBlue}"
                                 >
                             </Button>
                             <Button 
@@ -297,18 +299,19 @@
                             <Button 
                                 Command="{Binding DeleteCommand}"
                                 Visibility="{Binding VisDelete, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Style="{StaticResource FeatureButton}"
+                                Style="{StaticResource DeleteButton}"
                                 Content="Xóa"
                                 Margin="10 0 10 0"
+                                
                                >
                             </Button>
 
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="0" Margin="0 0 0 10">
-                        <DataGrid  ItemsSource="{Binding ListRepair}" 
+                        <!--<DataGrid  ItemsSource="{Binding ListRepair}" 
                                 SelectedItem="{Binding SelectedItem}"
-                      SelectionMode="Single"
+                      SelectionMode="Extended"
                       IsReadOnly="True"
                       CanUserAddRows="False"
                       AutoGenerateColumns="False"
@@ -316,7 +319,7 @@
                       CanUserReorderColumns="True"
                       FontSize="16"
                       >
-                            <!--<DataGrid.CellStyle>
+                            --><!--<DataGrid.CellStyle>
                     -->
                             <!--<Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
@@ -326,7 +329,7 @@
                         </Style.Triggers>
                     </Style>-->
                             <!--
-                </DataGrid.CellStyle>-->
+                </DataGrid.CellStyle>--><!--
                             <DataGrid.ColumnHeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
                                     <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
@@ -343,11 +346,12 @@
                                 <materialDesign:DataGridTextColumn Header="Tiền công" Binding="{Binding RepairInfo.WAGE.Wage_Value}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn Header="Thành tiền" Binding="{Binding RepairInfo.TotalMoney}"></materialDesign:DataGridTextColumn>
                             </DataGrid.Columns>
-                        </DataGrid>
-                        <!--<ScrollViewer >
+                        </DataGrid>-->
+                        <ScrollViewer >
                             <ListView 
                                 ItemsSource="{Binding ListRepair}" 
                                 SelectedItem="{Binding SelectedItem}"
+                                SelectionMode="Multiple"
                                    HorizontalContentAlignment="Left">
                                 <ListView.View>
                                     <GridView>
@@ -361,7 +365,7 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                        </ScrollViewer>-->
+                        </ScrollViewer>
                     </Grid>
                 </Grid>
             </materialDesign:Card>

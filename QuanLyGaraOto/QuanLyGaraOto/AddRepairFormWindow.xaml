@@ -69,7 +69,7 @@
                   Content="Xác Nhận" />
             <Button
                     Command="{Binding CloseCommand}"
-                    CommandParameter="{Binding ElementName=CarReceptionWD}"
+                    CommandParameter="{Binding ElementName=AddRepairFormWD}"
                    Grid.Column="1"
                       Style="{StaticResource CloseButton}"
                   Content="Đóng" />

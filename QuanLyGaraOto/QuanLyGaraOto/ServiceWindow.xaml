@@ -9,6 +9,8 @@
         x:Name="ServiceWD"
         Height="450" Width="1200"
         Background="White"  
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         >
     <UserControl.Resources>
@@ -61,23 +63,43 @@
             Grid.Row="3">
             <DataGrid ItemsSource="{Binding ListCar}" 
                       SelectedItem="{Binding SelectedItem}"
-                      SelectionMode="Single"
+                      SelectionMode="Extended"
                       IsReadOnly="True"
                       CanUserAddRows="False"
                       AutoGenerateColumns="False"
                       CanUserDeleteRows="False"
                       CanUserReorderColumns="True"
                       FontSize="16"
+                      Name="dataGrid"
                       >
-                <!--<DataGrid.CellStyle>
-                    --><!--<Style TargetType="{x:Type DataGridCell}">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
                         <Style.Triggers>
-                            <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                <Setter Property="Background" Value="DimGray" />
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Gainsboro" />
                             </Trigger>
                         </Style.Triggers>
-                    </Style>--><!--
-                </DataGrid.CellStyle>-->
+                    </Style>
+                </DataGrid.Resources>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                    
+                </i:Interaction.Triggers>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="DemiBold" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="Foreground" Value="Black"></Setter>
+                            </Trigger>
+                            
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
                         <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
@@ -85,6 +107,7 @@
                         <Setter Property="FontWeight" Value="DemiBold"></Setter>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
+
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding CarReception.Reception_Id}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Header="Biển Số" Binding="{Binding CarReception.LicensePlate}"></materialDesign:DataGridTextColumn>
@@ -95,10 +118,19 @@
             </DataGrid>
             
             <!--<ScrollViewer>
-                <ListView ItemsSource="{Binding ListCar}" SelectedItem="{Binding SelectedItem}">
-                    
+                <ListView x:Name="listview"
+                    SelectionMode="Extended"
+                    ItemsSource="{Binding ListCar}" 
+                    SelectedItem="{Binding SelectedItem}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=listview}"></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <ListView.View >
                         <GridView>
+                            
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding CarReception.Reception_Id}"></GridViewColumn>
                             <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding CarReception.LicensePlate}"></GridViewColumn>
                             <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></GridViewColumn>
@@ -190,6 +222,7 @@
                 <Button 
                         Command="{Binding DeleteCommand}"
                         Margin="20 5 0 0"
+                        Style="{StaticResource DeleteButton}"
                     Content="Xóa">
                 </Button>
                 <Button 
