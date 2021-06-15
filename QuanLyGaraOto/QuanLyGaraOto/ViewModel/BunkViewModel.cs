@@ -15,6 +15,8 @@ namespace QuanLyGaraOto.ViewModel
     {
         public ICommand OpenAddCommand { get; set; }
 
+        public ICommand OpendEditCommand { get; set; }
+
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
 
@@ -23,9 +25,9 @@ namespace QuanLyGaraOto.ViewModel
 
         public ICommand SuppliesBillCommand { get; set; }
         public ICommand SearchCommand { get; set; }
-        private MainWindow _MainWindow;
+        private BunkWindow _MainWindow;
 
-        public MainWindow MainWindow { get => _MainWindow; set { _MainWindow = value; } }
+        public BunkWindow MainWindow { get => _MainWindow; set { _MainWindow = value; } }
 
         private ObservableCollection<SUPPLIES> _ListSupplies { get; set; }
         public ObservableCollection<SUPPLIES> ListSupplies { get => _ListSupplies; set { _ListSupplies = value; OnPropertyChanged(); } }
@@ -66,10 +68,9 @@ namespace QuanLyGaraOto.ViewModel
 
 
             OpenAddCommand = new RelayCommand<MainWindow>((p) => true, (p) => OpenAddWd(p));
-            //OpenAddCommand = new RelayCommand<object>((p) => { return true; }, p => { AddNewGoodWindow wd = new AddNewGoodWindow();wd.txbName = null; wd.txbPrice = null; wd.ShowDialog(); });
             AddCommand = new RelayCommand<AddNewGoodWindow>(
                 (p) =>
-                {     
+                {
                     var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text);
                     if (List == null || List.Count() != 0) return false;
                     if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text))
@@ -81,8 +82,8 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     var supplier = new SUPPLIES() { Supplies_Name = p.txbName.Text, Supplies_Price = Int32.Parse(p.txbPrice.Text), Supplies_Amount = 0 };
                     DataProvider.Ins.DB.SUPPLIES.Add(supplier);
-                    DataProvider.Ins.DB.SaveChanges();
                     ListSupplies.Add(supplier);
+                    DataProvider.Ins.DB.SaveChanges();
                     p.Close();
                 });
             EditCommand = new RelayCommand<BunkWindow>(
@@ -104,21 +105,7 @@ namespace QuanLyGaraOto.ViewModel
 
                 }
                 );
-            //SearchCommand = new RelayCommand<BunkWindow>((parameter) => true, (parameter) => Search(parameter));
-                OpenImportCommand = new RelayCommand<MainWindow>((p) => true, (p) => OpenImportWd(p));
-                //ImportCommand = new RelayCommand<ImportWindow>(
-                //    (p) =>
-                //    {
-                //        return true;
-                //    },
-                //    (p) =>
-                //    {
-                //        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.Supplies_Id).SingleOrDefault();
-                //        List.Supplies_Amount += Int32.Parse(p.txbAmount.Text);
-                //        DataProvider.Ins.DB.SaveChanges();
-                //        p.Close();
-
-                //    });
+            OpenImportCommand = new RelayCommand<MainWindow>((p) => true, (p) => OpenImportWd(p));
 
             SuppliesBillCommand = new RelayCommand<object>((p) => { return true; }, p => { GoodBillWindow wd = new GoodBillWindow(); wd.ShowDialog(); });
         }

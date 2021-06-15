@@ -187,6 +187,7 @@
     <Compile Include="Model\GARA_INFO.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ImportItem.cs" />
     <Compile Include="Model\ImportTemp.cs" />
     <Compile Include="Model\IMPORT_GOODS.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>

@@ -20,11 +20,11 @@ namespace QuanLyGaraOto
     /// </summary>
     public partial class AddImportWindow : Window
     {
-        
+        private AddImportWindowViewModel addImportWindowViewModel { get; set; }
         public AddImportWindow()
         {
             InitializeComponent();
-            
+            this.DataContext = (addImportWindowViewModel = new AddImportWindowViewModel());
         }
     }
 }
