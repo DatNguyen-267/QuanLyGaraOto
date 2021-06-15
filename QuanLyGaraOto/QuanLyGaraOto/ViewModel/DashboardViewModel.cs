@@ -158,15 +158,9 @@ namespace QuanLyGaraOto.ViewModel
                     }
                 } catch (Exception ex)
                 {
-                    if (receipt.ReceiptDate.Date.Year <= firstYear + ItemSource_Year.Count - 1) continue;
-                    ItemSource_Year.Add("Năm " + receipt.ReceiptDate.Date.Year);
+                    
                 }
-            } catch(Exception)
-            {
-
-            }
         }
-
         public void LoadDataToChart_Revenue(int year)
         {
             ObservableCollection<RECEIPT> receipts = new ObservableCollection<RECEIPT>
