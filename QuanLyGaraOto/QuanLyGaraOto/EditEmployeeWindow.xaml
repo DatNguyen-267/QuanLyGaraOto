@@ -68,7 +68,7 @@
                             Stroke="Black"
                             />
                         <TextBox
-                           
+                           x:Name="txtUserName"          
                             materialDesign:HintAssist.Hint="Nhập tên tài khoản"
                             Height="40" 
                             FontSize="14" 
@@ -156,7 +156,7 @@
                             Stroke="Black"
                             />
                         <ComboBox
-                            Name="cbxListRoles"
+                            Name='cbxRoleName'
                             ItemsSource="{Binding ListRoles, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             DisplayMemberPath="Role_Name"
                             Text="{Binding RoleName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                           
@@ -195,7 +195,7 @@
                         Stroke="Black"
                     />
                         <DatePicker
-                        Name="dpBirthday"
+                        Name="dpkBrithDate"
                        
                         materialDesign:HintAssist.Hint="Nhập ngày sinh"
                         Height="40" 
@@ -285,7 +285,7 @@
                     Stroke="Black"
                     />
                         <TextBox
-                            x:Name="txtTelephone"
+                           x:Name="txtTelephone"
                          
                     materialDesign:HintAssist.Hint="Nhập số điện thoại"
                     Height="40" 

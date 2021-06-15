@@ -69,8 +69,7 @@
                             Stroke="Black"
                             />
                         <TextBox
-                            x:Name="userNameTxb"
-                          
+                            x:Name="txtUserName"                          
                             materialDesign:HintAssist.Hint="Nhập tên tài khoản"
                             Height="40" 
                             FontSize="14" 
@@ -113,6 +112,7 @@
                         Stroke="Black"
                     />
                         <TextBox
+                            Name="txtName"
                         materialDesign:HintAssist.Hint="Nhập họ và tên"
                         Height="40" 
                         FontSize="14" 
@@ -155,6 +155,7 @@
                             Stroke="Black"
                             />
                         <ComboBox
+                            Name='cbxRoleName'
                             ItemsSource="{Binding ListRoles, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             DisplayMemberPath="Role_Name"
                             Text="{Binding RoleName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                           
@@ -193,7 +194,7 @@
                         Stroke="Black"
                     />
                         <DatePicker
-                            
+                            Name="dpkBrithDate"
                         materialDesign:HintAssist.Hint="Nhập ngày sinh"
                         Height="40" 
                         FontSize="14" 
@@ -237,7 +238,7 @@
                         Stroke="Black"
                     />
                         <TextBox
-                            
+                            x:Name="txtCMND"
                         materialDesign:HintAssist.Hint="Nhập CMND/CCCD"
                         Height="40" 
                         FontSize="14" 
@@ -280,7 +281,7 @@
                     Stroke="Black"
                     />
                         <TextBox
-                           
+                           x:Name="txtTelephone"
                             materialDesign:HintAssist.Hint="Nhập số điện thoại"
                             Height="40" 
                             FontSize="14" 
@@ -325,7 +326,7 @@
                             Stroke="Black"
                             />
                         <TextBox
-                          
+                          x:Name="txtAddress"
                             materialDesign:HintAssist.Hint="Nhập địa chỉ"
                             Height="40" 
                             FontSize="14" 

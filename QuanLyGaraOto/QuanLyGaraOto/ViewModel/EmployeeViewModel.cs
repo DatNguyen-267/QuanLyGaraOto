@@ -153,7 +153,7 @@ namespace QuanLyGaraOto.ViewModel
 
             // Sửa chức vụ
             EditRoleCommand = new RelayCommand<EditRoleWindow>((p) => {
-                if (String.IsNullOrEmpty(RoleName))
+                if (String.IsNullOrEmpty(p.txtRoleName.Text))
                     return false;
 
                 var displayList = DataProvider.Ins.DB.ROLEs.Where(x => x.Role_Name == RoleName).Where(x => x.Role_Name != oldName);
@@ -226,9 +226,9 @@ namespace QuanLyGaraOto.ViewModel
             RoleName = DataProvider.Ins.DB.ROLEs.Where(x => x.Role_Id == RoleId).SingleOrDefault().Role_Name.ToString();
 
             //Nút sửa thông tin trên cửa sổ Edit
-            EditEmployeeCommand = new RelayCommand<Window>((p) =>
+            EditEmployeeCommand = new RelayCommand<EditEmployeeWindow>((p) =>
             {
-                if (String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(BrithDate.ToString()) || String.IsNullOrEmpty(CMND) || String.IsNullOrEmpty(Telephone) || String.IsNullOrEmpty(Address) || String.IsNullOrEmpty(RoleName))
+                if (String.IsNullOrEmpty(p.txtName.Text) || String.IsNullOrEmpty(p.dpkBrithDate.Text) || String.IsNullOrEmpty(p.txtCMND.Text) || String.IsNullOrEmpty(p.txtTelephone.Text) || String.IsNullOrEmpty(p.txtAddress.Text) || String.IsNullOrEmpty(p.cbxRoleName.Text))
                 {
                     return false;
                 }
@@ -274,39 +274,6 @@ namespace QuanLyGaraOto.ViewModel
             }
             );
 
-            //Thêm tài khoản
-            AddAccountCommand = new RelayCommand<Window>(
-            (p) =>
-            {
-                if (String.IsNullOrEmpty(UserName))
-                    return false;
-
-                var displayList = DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName);
-                if (displayList == null || displayList.Count() != 0)
-                    return false;
-
-                return true;
-            },
-            (p) =>
-            {
-                if (MessageBox.Show("Bạn chắc chắn muốn tạo tài khoản không?", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == System.Windows.MessageBoxResult.OK)
-                {
-                    var account = new USER() { UserName = UserName, Password = "1", IdRole = 2 };
-                    DataProvider.Ins.DB.USERS.Add(account);
-                    DataProvider.Ins.DB.SaveChanges();
-
-                    var acc = DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName).SingleOrDefault();
-                    var info = DataProvider.Ins.DB.USER_INFO.Where(x => x.UserInfo_Id == Id).SingleOrDefault();
-                    info.IdUser = acc.Users_Id;
-                    DataProvider.Ins.DB.SaveChanges();
-
-                    MessageBox.Show("Thêm tài khoản thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                    p.Close();
-                }
-
-
-            });
-
         }
 
         public EmployeeViewModel()
@@ -329,7 +296,7 @@ namespace QuanLyGaraOto.ViewModel
             //Nút thêm nhân viên trên AddEmployee
             AddCommand = new RelayCommand<AddEmployee>((p) =>
             {
-                if (String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(BrithDate.ToString()) || String.IsNullOrEmpty(CMND) || String.IsNullOrEmpty(Telephone) || String.IsNullOrEmpty(Address) || String.IsNullOrEmpty(RoleName) || String.IsNullOrEmpty(UserName))
+                if (String.IsNullOrEmpty(p.txtName.Text) || String.IsNullOrEmpty(p.dpkBrithDate.Text) || String.IsNullOrEmpty(p.txtCMND.Text) || String.IsNullOrEmpty(p.txtTelephone.Text) || String.IsNullOrEmpty(p.txtAddress.Text) || String.IsNullOrEmpty(p.cbxRoleName.Text) || String.IsNullOrEmpty(p.txtUserName.Text))
                 {
                     return false;
                 }
@@ -381,7 +348,7 @@ namespace QuanLyGaraOto.ViewModel
                 EditEmployeeWindow wd = new EditEmployeeWindow(SelectedItem);
                 if (SelectedItem.USER.UserName == "admin")
                 {
-                    wd.cbxListRoles.IsEnabled = false;
+                    wd.cbxRoleName.IsEnabled = false;
                 }
                 wd.ShowDialog();
                 List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
@@ -431,7 +398,7 @@ namespace QuanLyGaraOto.ViewModel
             //Nút thêm chức vụ trên AddRoleWindow
             AddRoleCommand = new RelayCommand<AddRoleWindow>((p) =>
             {
-                if (String.IsNullOrEmpty(RoleName))
+                if (String.IsNullOrEmpty(p.txtRoleName.Text))
                 {
                     return false;
                 }
@@ -491,7 +458,8 @@ namespace QuanLyGaraOto.ViewModel
                 if (SelectedItemRole.Role_Name == "admin")
                     return false;
                 return true;
-            }, (p) => {
+            }, 
+            (p) => {
                 EditRoleWindow wd = new EditRoleWindow(SelectedItemRole);
                 wd.ShowDialog();
                 ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
