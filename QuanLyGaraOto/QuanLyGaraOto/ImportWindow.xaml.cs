@@ -27,6 +27,11 @@ namespace QuanLyGaraOto
             InitializeComponent();
             this.DataContext = (importGoodViewModel = new ImportGoodViewModel());
         }
-        
+        public ImportWindow(IMPORT_GOODS import)
+        {
+            InitializeComponent();
+            this.DataContext = (importGoodViewModel = new ImportGoodViewModel(import));
+        }
+
     }
 }

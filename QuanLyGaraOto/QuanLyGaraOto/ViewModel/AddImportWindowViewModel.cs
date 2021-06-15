@@ -41,7 +41,7 @@ namespace QuanLyGaraOto.ViewModel
                 NewImport.ImportGoods_Date = ImportDate;
                 
                 IsSuccess = true;
-                ImportWindow importWindow = new ImportWindow();
+                ImportWindow importWindow = new ImportWindow(NewImport);
                 importWindow.ShowDialog();
                 p.Close();                
             });

@@ -25,45 +25,108 @@ namespace QuanLyGaraOto.ViewModel
         private ObservableCollection<SUPPLIES> _ListSupplies { get; set; }
         public ObservableCollection<SUPPLIES> ListSupplies { get => _ListSupplies; set { _ListSupplies = value; OnPropertyChanged(); } }
 
+        private ObservableCollection<ImportItem> _ListImport { get; set; }
+        public ObservableCollection<ImportItem> ListImport { get => _ListImport; set { _ListImport = value; OnPropertyChanged(); } }
+
+
+        private int _ImportPrice { get; set; }
+        public int ImportPrice { get => _ImportPrice; set { _ImportPrice = value; OnPropertyChanged(); } }
+
+        private int _ImportAmount{ get; set; }
+
+        public int ImportAmount { get => _ImportAmount; set { _ImportAmount = value; OnPropertyChanged(); } }
         private int _Total { get; set; }
         public int Total { get => _Total; set { _Total = value; OnPropertyChanged(); } }
 
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
 
+        private DateTime _ImportDate { get; set; }
+        public DateTime ImportDate { get => _ImportDate; set { _ImportDate = value; OnPropertyChanged(); } }
+
         private SUPPLIES _SelectedSupply { get; set; }
-        public SUPPLIES SelectedSupply { get => _SelectedSupply; set { _SelectedSupply = value;OnPropertyChanged();
-                
-            } }
+        public SUPPLIES SelectedSupply { get => _SelectedSupply; set { _SelectedSupply = value;OnPropertyChanged(); } }
 
+        private ImportItem _SelectedItem { get; set; }
 
+        public ImportItem SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
+
+        private IMPORT_GOODS _ImportGoods { get; set; }
+
+        public IMPORT_GOODS ImportGoods { get => _ImportGoods; set { _ImportGoods = value; OnPropertyChanged(); } }
+
+        private IMPORT_GOODS_DETAIL _ImportDetail { get; set; }
+        public IMPORT_GOODS_DETAIL ImportDetail { get => _ImportDetail; set { _ImportDetail = value; OnPropertyChanged(); } }
        
         public ImportGoodViewModel()
             
         {
             ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
 
-            //Command
+            Command();
 
+
+
+        }
+        public ImportGoodViewModel(IMPORT_GOODS import)
+        {
+            ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
+            ListImport = new ObservableCollection<ImportItem>();
+            ImportDate = import.ImportGoods_Date;
+
+            ImportGoods = new IMPORT_GOODS() { ImportGoods_Date = ImportDate, ImportGoods_TotalMoney = 0 };
+            DataProvider.Ins.DB.IMPORT_GOODS.Add(ImportGoods);
+           
+            DataProvider.Ins.DB.SaveChanges();
+
+            Command();
+        }
+        public void Command()
+        {
             AddGoodCommand = new RelayCommand<ImportWindow>(
                 (p) =>
                 {
-                    //if (Total != 0) return false;
+                    if (Total == 0) return false;
                     if (string.IsNullOrEmpty(p.txbPrice.Text) || string.IsNullOrEmpty(p.txbAmount.Text)) return false;
                     return true;
                 },
                 (p) =>
                 {
+                    IMPORT_GOODS_DETAIL item = new IMPORT_GOODS_DETAIL() {IdImportGood = ImportGoods.ImportGoods_Id,IdSupplies = SelectedSupply.Supplies_Id,Price = Int32.Parse(p.txbPrice.Text), Amount = Int32.Parse(p.txbAmount.Text),TotalMoney = Total };
                     var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedSupply.Supplies_Id).SingleOrDefault();
+                    ListImport.Add(new ImportItem() { ImportInfo = item, TotalMoney = Total});
+                    UpdateTotalMoney();
+                    DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Add(item);
                     List.Supplies_Amount += Int32.Parse(p.txbAmount.Text);
-                    DataProvider.Ins.DB.SaveChanges();
+                    
+                }
+                );
+            DeleteCommand = new RelayCommand<ImportWindow>(
+                (p) =>
+                {
+                    if (SelectedItem == null) return false;
+                    return true;
+                },
+                (p) =>
+                {
+                    if(SelectedItem.ImportInfo.IdSupplies != null)
+                    {
+                        var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.ImportInfo.IdSupplies).SingleOrDefault();
+                        temp.Supplies_Amount = temp.Supplies_Amount - SelectedItem.ImportInfo.Amount;
+                        //DataProvider.Ins.DB.SaveChanges();
+                    }    
+                    DeleteModel delete = new DeleteModel();
+                    delete.ImportInfo(SelectedItem.ImportInfo);
+                    ListImport.Remove(SelectedItem);
+                    UpdateTotalMoney();
+
                 }
                 );
             CalculateTotal = new RelayCommand<ImportWindow>(
                 (p) =>
                 {
                     if (SelectedSupply == null) return false;
-                    
+
                     if (string.IsNullOrEmpty(p.txbPrice.Text) || string.IsNullOrEmpty(p.txbAmount.Text)) return false;
                     return true;
                 },
@@ -71,11 +134,33 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     Total = Int32.Parse(p.txbAmount.Text) * Int32.Parse(p.txbPrice.Text);
                 });
-            CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
+            ImportCommand = new RelayCommand<Window>((p) => {
+                if (ListImport.Count == 0) return false;
+                return true;
+            
+            }, (p) =>
             {
+                ImportGoods.ImportGoods_TotalMoney = TotalMoney;
+                DataProvider.Ins.DB.SaveChanges();
                 p.Close();
             });
-
+            CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
+            {
+                MessageBoxResult rs = MessageBox.Show("Bạn đồng ý thoát", "Thoát", MessageBoxButton.OKCancel);
+                if (MessageBoxResult.OK == rs)
+                {
+                    DataProvider.Ins.DB.IMPORT_GOODS.Remove(ImportGoods);
+                    p.Close();
+                }
+            });
+        }
+        public void UpdateTotalMoney()
+        {
+            TotalMoney = 0;
+            foreach (var item in ListImport)
+            {
+                TotalMoney += (int)item.ImportInfo.TotalMoney;
+            }
         }
 
 

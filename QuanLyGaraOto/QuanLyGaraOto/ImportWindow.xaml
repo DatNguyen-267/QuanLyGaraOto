@@ -97,6 +97,7 @@
                         />
                     <Rectangle
                         Margin="0,0,-0.4,0"
+                        
                         Height="40"
                         Width="240"
                         HorizontalAlignment="Right"
@@ -147,7 +148,7 @@
                         Stroke="Black"
                         />
                         <TextBox
-                        x:Name="txbAmount"
+                        x:Name="txbAmount"                        
                         materialDesign:HintAssist.Hint="Chọn số lượng"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
@@ -216,6 +217,8 @@
                     _Thêm
                 </Button>
                 <Button
+                    Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding ElementName=wdImportSupply}"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Width="100"
                     HorizontalAlignment="Right"
@@ -237,10 +240,10 @@
                                    HorizontalContentAlignment="Left">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding RepairInfo.RepairDetail_Id}" Width="100"></GridViewColumn>
-                                <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Name}" Width="220"></GridViewColumn>
-                                <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding RepairInfo.SuppliesAmount}" Width="120"></GridViewColumn>
-                                <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding ImportInfo.SUPPLIES.Supplies_Name}" Width="220"></GridViewColumn>
+                                <GridViewColumn Header="Giá nhập" DisplayMemberBinding="{Binding ImportInfo.Price}" Width="120"></GridViewColumn>
+                                <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding ImportInfo.Amount}" Width="120"></GridViewColumn>
+                                <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding ImportInfo.TotalMoney}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>

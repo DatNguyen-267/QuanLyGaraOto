@@ -53,5 +53,10 @@ namespace QuanLyGaraOto.Model
                 DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.RepairDetail_Id == ID).SingleOrDefault());
             DataProvider.Ins.DB.SaveChanges();
         }
+        public void ImportInfo(IMPORT_GOODS_DETAIL itemDelete)
+        {
+            DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Remove(itemDelete);
+            DataProvider.Ins.DB.SaveChanges();
+        }
     }
 }
