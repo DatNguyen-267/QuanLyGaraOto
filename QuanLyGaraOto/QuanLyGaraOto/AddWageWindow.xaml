@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
         Name="wdWage"
-        Title="AddWageWindow" Height="160" Width="280">
+        Title="Thêm tiền công" Height="160" Width="280">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -83,7 +83,7 @@
                 Content="Hủy"      
                 Background="Black"
                 BorderBrush="Black"
-                Command="{Binding CancelAddWageWindow}"
+                Command="{Binding CancelAddWage}"
                 CommandParameter="{Binding ElementName=wdWage}"/>
         </Grid>
     </Grid>

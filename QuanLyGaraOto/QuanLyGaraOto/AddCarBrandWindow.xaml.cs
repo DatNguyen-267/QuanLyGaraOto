@@ -1,4 +1,5 @@
-﻿using QuanLyGaraOto.ViewModel;
+﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

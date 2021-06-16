@@ -31,12 +31,12 @@ namespace QuanLyGaraOto.ViewModel
         }
         public WAGE wage;
 
-        public ICommand CancelAddWageWindow { get; set; }
+        public ICommand CancelAddWage { get; set; }
         public ICommand AddWage { get; set; }
 
         public AddWageViewModel()
         {
-            CancelAddWageWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            CancelAddWage = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Close();
             });

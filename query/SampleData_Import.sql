@@ -17,7 +17,3 @@ insert into Customer values(N'Hung' , N'TPHCM', '091923921')
 --insert into CAR_STATUS values(N'Đang sửa chữa')
 --insert into CAR_STATUS values(N'Đã sửa chữa xong')
 --insert into CAR_STATUS values(N'Hoàn Thành')
-
-insert into WAGE values(N'Rửa xe', 50000)
-insert into WAGE values(N'Thay phụ tùng', 30000)
-insert into WAGE values(N'Thay nhớt', 10000)

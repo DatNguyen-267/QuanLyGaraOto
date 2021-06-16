@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
         Name="wdAddCarBrand"
-        Title="AddCarBrandWindow" Height="160" Width="250">
+        Title="Thêm hãng xe" Height="160" Width="250">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -61,7 +61,7 @@
                 Content="Hủy"      
                 Background="Black"
                 BorderBrush="Black"
-                Command="{Binding CancelAddCarBrandWindow}"
+                Command="{Binding CancelAddCarBrand}"
                 CommandParameter="{Binding ElementName=wdAddCarBrand}"/>
         </Grid>
     </Grid>

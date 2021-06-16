@@ -173,12 +173,12 @@ namespace QuanLyGaraOto.ViewModel
                 _SelectedBrandItem = value;
                 OnPropertyChanged();
                 IsEnableDeleteButtonInBrandSetting = true;
-                IsEnableModifyFieldInBrandSetting = true;
+                IsEnableModifyButtonInBrandSetting = true;
             }
         }
 
         public ICommand ChangeEnableButtonInCarBrandSetting { get; set; }
-        public ICommand ModifyCarBrand { get; set; }
+        public ICommand OpenModifyCarBrandWindow { get; set; }
         public ICommand DeleteCarBrand { get; set; }
         public ICommand OpenAddCarBrandWindow { get; set; }
 
@@ -247,12 +247,12 @@ namespace QuanLyGaraOto.ViewModel
                 _SelectedWageItem = value;
                 OnPropertyChanged();
                 IsEnableDeleteButtonInWageSetting = true;
-                IsEnableModifyFieldInWageSetting = true;
+                IsEnableModifyButtonInWageSetting = true;
             }
         }
 
         public ICommand ChangeEnableButtonInWageBrandSetting { get; set; }
-        public ICommand ModifyWage { get; set; }
+        public ICommand OpenModifyWageWindow { get; set; }
         public ICommand DeleteWage { get; set; }
         public ICommand OpenAddWageWindow { get; set; }
 
@@ -497,13 +497,15 @@ namespace QuanLyGaraOto.ViewModel
             // Car brand information
             ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
 
-            ModifyCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenModifyCarBrandWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                DataProvider.Ins.DB.SaveChanges();
+                ModifyCarBrandWindow window = new ModifyCarBrandWindow(SelectedBrandItem);
+                window.ShowDialog();
                 SelectedBrandItem = null;
                 IsEnableModifyButtonInBrandSetting = false;
                 IsEnableModifyFieldInBrandSetting = false;
                 IsEnableDeleteButtonInBrandSetting = false;
+                ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
             });
             DeleteCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -525,19 +527,22 @@ namespace QuanLyGaraOto.ViewModel
             // Wage information
             ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
 
-            ModifyWage = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenModifyWageWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                DataProvider.Ins.DB.SaveChanges();
+                ModifyWageWindow window = new ModifyWageWindow(SelectedWageItem);
+                window.ShowDialog();
                 SelectedWageItem = null;
                 IsEnableModifyButtonInWageSetting = false;
                 IsEnableModifyFieldInWageSetting = false;
                 IsEnableDeleteButtonInWageSetting = false;
+                ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
             });
             DeleteWage = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 DataProvider.Ins.DB.WAGEs.Remove(SelectedWageItem);
                 DataProvider.Ins.DB.SaveChanges();
                 ListWage.Remove(SelectedWageItem);
+                SelectedWageItem = null;
                 IsEnableModifyButtonInWageSetting = false;
                 IsEnableModifyFieldInWageSetting = false;
                 IsEnableDeleteButtonInWageSetting = false;

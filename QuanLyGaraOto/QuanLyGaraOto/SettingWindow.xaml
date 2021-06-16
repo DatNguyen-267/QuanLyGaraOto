@@ -274,7 +274,7 @@
                                         <Button
                                             Content="Sửa"
                                             IsEnabled="{Binding IsEnableModifyButtonInBrandSetting}"
-                                            Command="{Binding ModifyCarBrand}"
+                                            Command="{Binding OpenModifyCarBrandWindow}"
                                          />
                                         <Button
                                             Content="Xóa"
@@ -431,7 +431,7 @@
                                         Style="{StaticResource FeatureButton}"
                                         Content="Sửa"
                                         IsEnabled="{Binding IsEnableModifyButtonInWageSetting}"
-                                        Command="{Binding ModifyWage}"
+                                        Command="{Binding OpenModifyWageWindow}"
                                         />
                                 <Button
                                         
