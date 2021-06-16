@@ -24,17 +24,24 @@ namespace QuanLyGaraOto.ViewModel
             RepairDate = DateTime.Now;
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    p.Close();
+                }
             });
             ConfirmCommand = new RelayCommand<Window>((p) => {
                 if (RepairDate == null) return false;
                 return true;
             }, (p) =>
             {
-                NewRepairForm = new REPAIR();
-                NewRepairForm.RepairDate = RepairDate;
-                IsSuccess = true;
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn đồng ý thêm phiếu sửa chữa", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    NewRepairForm = new REPAIR();
+                    NewRepairForm.RepairDate = RepairDate;
+                    IsSuccess = true;
+                    p.Close();
+                }
+                
             });
         }
     }

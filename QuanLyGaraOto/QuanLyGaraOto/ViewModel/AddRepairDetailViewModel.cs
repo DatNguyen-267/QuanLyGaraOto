@@ -72,8 +72,11 @@ namespace QuanLyGaraOto.ViewModel
         public REPAIR_DETAIL ReturnRepairDetail { get => _ReturnRepairDetail; set { _ReturnRepairDetail = value; OnPropertyChanged(); } }
 
         public bool IsAdd { get; set; }
+        private string _Title { get; set; }
+        public string Title { get => _Title; set { _Title = value; OnPropertyChanged(); } }
         public AddRepairDetailViewModel(REPAIR_DETAIL repair_Detail)
         {
+            Title = "Thay đổi thông tin sửa chữa";
             this.RepairDetail = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x=>x.RepairDetail_Id == repair_Detail.RepairDetail_Id).SingleOrDefault();
             IsAdd = false;
             LoadRepairDetail();
@@ -82,6 +85,7 @@ namespace QuanLyGaraOto.ViewModel
         }
         public AddRepairDetailViewModel(REPAIR Repair)
         {
+            Title = "Thêm thông tin sửa chữa";
             this.Repair = Repair;
             IsAdd = true;
             LoadData();
@@ -111,21 +115,25 @@ namespace QuanLyGaraOto.ViewModel
             if (RepairDetail!= null)
             {
                 ListAmount = new List<int>();
-                ListAmount = Enumerable.Range(1, (int)RepairDetail.SUPPLIES.Supplies_Amount+(int)RepairDetail.SuppliesAmount).ToList();
+                if (RepairDetail.SuppliesAmount != null)
+                {
+                    ListAmount = Enumerable.Range(1, (int)RepairDetail.SUPPLIES.Supplies_Amount + (int)RepairDetail.SuppliesAmount).ToList();
+                } 
+                
             }
         }
         public void LoadRepairDetail()
         {
             TempAmount = RepairDetail.SuppliesAmount;
-            TempSupplies = new SUPPLIES() { Supplies_Name = RepairDetail.SUPPLIES.Supplies_Name, Supplies_Amount = RepairDetail.SuppliesAmount };
+            TempSupplies = new SUPPLIES();
+            if (RepairDetail.IdSupplies != null) TempSupplies.Supplies_Name = RepairDetail.SUPPLIES.Supplies_Name;
+            if (RepairDetail.SuppliesAmount != null) TempSupplies.Supplies_Amount = RepairDetail.SuppliesAmount;
 
-            Content = RepairDetail.Content;
-            SelectedSupply = RepairDetail.SUPPLIES;
-            SelectedPay = RepairDetail.WAGE;
-            SelectedAmount = RepairDetail.SuppliesAmount;
+            if (RepairDetail.Content != null) Content = RepairDetail.Content;
+            if (RepairDetail.SUPPLIES != null) SelectedSupply = RepairDetail.SUPPLIES;
+            if (RepairDetail.WAGE != null) SelectedPay = RepairDetail.WAGE;
+            if (RepairDetail.SuppliesAmount != null) SelectedAmount = RepairDetail.SuppliesAmount;
             TotalMoney = RepairDetail.TotalMoney;
-
-            
         }
         public void Command()
         {
@@ -142,7 +150,7 @@ namespace QuanLyGaraOto.ViewModel
             
             ConfirmCommand = new RelayCommand<Window>(
                (p) => {
-                   if (TotalMoney == 0
+                   if (TotalMoney == 0 || SelectedSupply == null || SelectedAmount == null || SelectedPay == null
                    ) return false;
                    return true;
                },
@@ -187,45 +195,74 @@ namespace QuanLyGaraOto.ViewModel
                         {
                             ReturnRepairDetail = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.RepairDetail_Id == RepairDetail.RepairDetail_Id).SingleOrDefault();
                             if (Content != null) ReturnRepairDetail.Content = Content;
+                            else ReturnRepairDetail.Content = null;
                             if (SelectedPay != null && SelectedPay.Wage_Name != "Không có")
                             {
                                 ReturnRepairDetail.WagePrice = SelectedPay.Wage_Value;
                                 ReturnRepairDetail.IdWage = SelectedPay.Wage_Id;
                             }
-                            if (Repair != null) ReturnRepairDetail.IdRepair = Repair.Repair_Id;
+                            else
+                            {
+                                ReturnRepairDetail.WagePrice = null;
+                                ReturnRepairDetail.IdWage = null;
+                            }
+                          
                             if (SelectedSupply != null && SelectedSupply.Supplies_Name != "Không có")
                             {
                                 ReturnRepairDetail.IdSupplies = SelectedSupply.Supplies_Id;
                                 ReturnRepairDetail.SuppliesPrice = SelectedSupply.Supplies_Price;
                                 ReturnRepairDetail.SuppliesAmount = SelectedAmount;
                             }
-                            ReturnRepairDetail.TotalMoney = TotalMoney;
-                            if (SelectedSupply.Supplies_Name != "Không có" && SelectedSupply != null)
+                            else
                             {
-                                if (DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == ReturnRepairDetail.IdSupplies).SingleOrDefault().Supplies_Name == TempSupplies.Supplies_Name)
+                                ReturnRepairDetail.IdSupplies = null;
+                                ReturnRepairDetail.SuppliesPrice = null;
+                                ReturnRepairDetail.SuppliesAmount = null;
+                            }
+                            ReturnRepairDetail.TotalMoney = TotalMoney;
+                            if ( ReturnRepairDetail.IdSupplies == null && TempSupplies.Supplies_Name == null
+                            || (ReturnRepairDetail.IdSupplies != null) && (DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == ReturnRepairDetail.IdSupplies).SingleOrDefault().Supplies_Name 
+                                                                                    == TempSupplies.Supplies_Name))
+                            {
+                                if (SelectedSupply.Supplies_Name != "Không có")
                                 {
                                     var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == ReturnRepairDetail.IdSupplies).SingleOrDefault();
                                     temp.Supplies_Amount = temp.Supplies_Amount + TempSupplies.Supplies_Amount - ReturnRepairDetail.SuppliesAmount;
                                     DataProvider.Ins.DB.SaveChanges();
-                                }
-                                else
+                                }    
+                            }
+                            else
+                            {
+                                if (SelectedSupply.Supplies_Name != "Không có")
                                 {
                                     var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == ReturnRepairDetail.IdSupplies).SingleOrDefault();
                                     temp.Supplies_Amount = temp.Supplies_Amount - ReturnRepairDetail.SuppliesAmount;
-
+                                    if (TempSupplies.Supplies_Name != null)
+                                    {
+                                        var temp2 = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == TempSupplies.Supplies_Name).SingleOrDefault();
+                                        temp2.Supplies_Amount = temp2.Supplies_Amount + TempSupplies.Supplies_Amount;
+                                    }
+                                }
+                                else
+                                {
                                     var temp2 = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == TempSupplies.Supplies_Name).SingleOrDefault();
                                     temp2.Supplies_Amount = temp2.Supplies_Amount + TempSupplies.Supplies_Amount;
-                                    DataProvider.Ins.DB.SaveChanges();
                                 }
                                 DataProvider.Ins.DB.SaveChanges();
                             }
+                            DataProvider.Ins.DB.SaveChanges();
                             p.Close();
                         }
                     }
                 });
             CloseCommand = new RelayCommand<Window>(
                (p) => { return true;},
-               (p) => {   p.Close(); });
+               (p) => {
+                   if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                   {
+                       p.Close();
+                   }
+               });
         }
         public void Calculate()
         {

@@ -88,27 +88,32 @@ namespace QuanLyGaraOto.ViewModel
                 if (int.Parse(ReceivedMoney) > Reception.Debt && !DataProvider.Ins.DB.GARA_INFO.FirstOrDefault().IsOverPay) return false;
                 return true; }, (p) =>
             {
-                RECEIPT newReceipt = new RECEIPT();
-                newReceipt.ReceiptDate = SelectedDate;
-                newReceipt.MoneyReceived = int.Parse(ReceivedMoney);
-                newReceipt.Phone = Reception.CUSTOMER.Customer_Phone;
-                newReceipt.IdReception = Reception.Reception_Id;
-                newReceipt.Email = Email;
-                DataProvider.Ins.DB.RECEIPTs.Add(newReceipt);
-                DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == Reception.Reception_Id).SingleOrDefault().Debt = 0;
-                DataProvider.Ins.DB.SaveChanges();
-                IsPay = true;
-                VisPay = false;
-                EnabledReceiptDate = false;
-                RolReceivedMoney = true;
-                RolEmail = true;
+                if (MessageBox.Show("Bạn chắc chắn đồng ý thanh toán", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    RECEIPT newReceipt = new RECEIPT();
+                    newReceipt.ReceiptDate = SelectedDate;
+                    newReceipt.MoneyReceived = int.Parse(ReceivedMoney);
+                    newReceipt.Phone = Reception.CUSTOMER.Customer_Phone;
+                    newReceipt.IdReception = Reception.Reception_Id;
+                    newReceipt.Email = Email;
+                    DataProvider.Ins.DB.RECEIPTs.Add(newReceipt);
+                    DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == Reception.Reception_Id).SingleOrDefault().Debt = 0;
+                    DataProvider.Ins.DB.SaveChanges();
+                    IsPay = true;
+                    VisPay = false;
+                    EnabledReceiptDate = false;
+                    RolReceivedMoney = true;
+                    RolEmail = true;
+                }
             });
             CloseCommand = new RelayCommand<Window>((p) => {
                 return true;
             }, (p) =>
             {
-                
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    p.Close();
+                }
             });
             CheckIsOverPay = new RelayCommand<TextBox>((p) => {
                 return true;

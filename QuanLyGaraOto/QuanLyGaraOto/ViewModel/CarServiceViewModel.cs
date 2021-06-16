@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
@@ -58,6 +59,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ReceiptCommand { get; set; }
         public ICommand ViewCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public ICommand SelectionChanged { get; set; }
         #endregion
 
         #region Data Reception
@@ -87,6 +89,8 @@ namespace QuanLyGaraOto.ViewModel
         public ObservableCollection<WAGE> ListPay { get => _ListPay; set { _ListPay = value; OnPropertyChanged(); } }
         private ObservableCollection<int> _ListAmount { get; set; }
         public ObservableCollection<int> ListAmount { get => _ListAmount; set { _ListAmount = value; OnPropertyChanged(); } }
+        private ObservableCollection<RepairItem> _Temp { get; set; }
+        public ObservableCollection<RepairItem> Temp { get => _Temp; set { _Temp = value; OnPropertyChanged(); } }
         // Danh sach cac List
 
         private RepairItem _SelectedItem { get; set; }
@@ -217,7 +221,11 @@ namespace QuanLyGaraOto.ViewModel
                     REPAIR_DETAIL returnRepairDetail = addRepairDetailViewModel.ReturnRepairDetail;
                     if (returnRepairDetail!=null)
                     {
-                        ListRepair.Add(new RepairItem() { RepairInfo = returnRepairDetail, TotalMoney = returnRepairDetail.TotalMoney });
+                        ListRepair.Add(new RepairItem() { RepairInfo = returnRepairDetail,
+                            TotalMoney = returnRepairDetail.TotalMoney ,
+                            STT = ListRepair.Count()+1 ,
+
+                        });
 
                         UpdateTotal();
                         DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
@@ -259,24 +267,30 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    if (SelectedItem.RepairInfo.IdSupplies != null)
+                    if (MessageBox.Show("Bạn chắc chắn muốn xóa những dữ liệu bạn đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
-                        var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.RepairInfo.IdSupplies).SingleOrDefault();
-                        temp.Supplies_Amount = temp.Supplies_Amount + SelectedItem.RepairInfo.SuppliesAmount;
-                        DataProvider.Ins.DB.SaveChanges();
-                    }
+                        foreach (var item in Temp)
+                        {
+                            if (item.RepairInfo.IdSupplies != null)
+                            {
+                                var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.RepairInfo.IdSupplies).SingleOrDefault();
+                                temp.Supplies_Amount = temp.Supplies_Amount + item.RepairInfo.SuppliesAmount;
+                                DataProvider.Ins.DB.SaveChanges();
+                            }
 
-                    DeleteModel deleteModel = new DeleteModel();
-                    deleteModel.RepairInfo(SelectedItem.RepairInfo);
-                    ListRepair.Remove(SelectedItem);
+                            DeleteModel deleteModel = new DeleteModel();
+                            deleteModel.RepairInfo(item.RepairInfo);
 
-                    UpdateTotal();
-                    DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
-                    DataProvider.Ins.DB.SaveChanges();
+                            LoadRepairInfo();
+                            UpdateTotal();
+                            DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault().Debt = Total;
+                            DataProvider.Ins.DB.SaveChanges();
 
-                    if (ListRepair.Count() == 0)
-                    {
-                        IsEnabledReceipt = false;
+                            if (ListRepair.Count() == 0)
+                            {
+                                IsEnabledReceipt = false;
+                            }
+                        }
                     }
                 });
 
@@ -331,6 +345,15 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     p.Close();
                 });
+            SelectionChanged = new RelayCommand<DataGrid>
+                ((p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    Temp = new ObservableCollection<RepairItem>(p.SelectedItems.Cast<RepairItem>().ToList());
+                }
+            );
         }
 
         public void UpdateTotal()
@@ -407,9 +430,27 @@ namespace QuanLyGaraOto.ViewModel
         {
             RepairForm = DataProvider.Ins.DB.REPAIRs.Where(x=> x.IdReception == ID).SingleOrDefault();
             var repairInfo = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == RepairForm.Repair_Id);
+            int i = 1;
             foreach (var item in repairInfo)
             {
+               
                 RepairItem repairItem = new RepairItem();
+                repairItem.STT = i++;
+                repairItem.RepairInfo = item;
+                repairItem.TotalMoney = item.TotalMoney;
+                ListRepair.Add(repairItem);
+            }
+        }
+        public void LoadRepairInfo()
+        {
+            ListRepair = new ObservableCollection<RepairItem>();
+            var repairInfo = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == RepairForm.Repair_Id);
+            int i = 1;
+            foreach (var item in repairInfo)
+            {
+
+                RepairItem repairItem = new RepairItem();
+                repairItem.STT = i++;
                 repairItem.RepairInfo = item;
                 repairItem.TotalMoney = item.TotalMoney;
                 ListRepair.Add(repairItem);
