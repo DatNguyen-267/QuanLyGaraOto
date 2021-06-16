@@ -60,6 +60,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button
+                IsDefault="True"
                     Command="{Binding ConfirmCommand}"
                     CommandParameter="{Binding ElementName=AddRepairFormWD}"
                     Grid.Column="0"
@@ -68,6 +69,7 @@
                     BorderBrush="{StaticResource MainBlue}"
                   Content="Xác Nhận" />
             <Button
+                IsCancel="True"
                     Command="{Binding CloseCommand}"
                     CommandParameter="{Binding ElementName=AddRepairFormWD}"
                    Grid.Column="1"

@@ -194,6 +194,7 @@
                         CommandParameter="{Binding ElementName=wdReportMonth}">
                 </Button>
                 <Button 
+                    IsCancel="True"
                         Width="150"
                         Height="40"
                         FontSize="24"

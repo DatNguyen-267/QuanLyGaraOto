@@ -66,17 +66,16 @@
                       CanUserReorderColumns="True"
                       FontSize="16"
                       >
-                        <!--<DataGrid.CellStyle>
-                    -->
-                        <!--<Style TargetType="{x:Type DataGridCell}">
-                        <Style.Triggers>
-                            <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                <Setter Property="Background" Value="DimGray" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>-->
-                        <!--
-                </DataGrid.CellStyle>-->
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Gainsboro" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                        </DataGrid.Resources>
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
                                 <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
@@ -406,6 +405,7 @@
                             Background="{StaticResource Green0}">
                     </Button>
                     <Button 
+                        IsCancel="True"
                             Command="{Binding CloseCommand}"
                             CommandParameter="{Binding ElementName=PayWD}"
                             Grid.Row="2"

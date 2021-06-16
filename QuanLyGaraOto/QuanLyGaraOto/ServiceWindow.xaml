@@ -69,7 +69,7 @@
                       AutoGenerateColumns="False"
                       CanUserDeleteRows="False"
                       CanUserReorderColumns="True"
-                      FontSize="16"
+                      FontSize="18"
                       Name="dataGrid"
                       >
                 <DataGrid.Resources>
@@ -80,6 +80,7 @@
                             </Trigger>
                         </Style.Triggers>
                     </Style>
+                   
                 </DataGrid.Resources>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
@@ -93,11 +94,11 @@
                         <Style.Triggers>
                             <Trigger Property="DataGridCell.IsSelected" Value="True">
                                 <Setter Property="FontWeight" Value="DemiBold" />
-                                <Setter Property="FontSize" Value="17" />
-                                <Setter Property="Foreground" Value="Black"></Setter>
+                                <Setter Property="FontSize" Value="19" />
+                                
                             </Trigger>
-                            
                         </Style.Triggers>
+                       
                     </Style>
                 </DataGrid.CellStyle>
                 <DataGrid.ColumnHeaderStyle>
@@ -105,6 +106,7 @@
                         <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
                         <Setter Property="Foreground" Value="White"></Setter>
                         <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                       
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
 

@@ -43,6 +43,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0"
+                    IsDefault="True"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Width="100"
                 VerticalAlignment="Center"
@@ -54,6 +55,7 @@
                 CommandParameter="{Binding ElementName=wdAddCarBrand}"/>
 
             <Button Grid.Column="1"
+                    IsCancel="True"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Width="100"
                 VerticalAlignment="Center"

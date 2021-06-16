@@ -356,6 +356,7 @@
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <Button Grid.Column="0"
+                        IsDefault="True"
                                 Content="Xác nhận"
                                 Margin="0 0 70 0"
                                 Style="{StaticResource MainButton}"
@@ -363,6 +364,7 @@
                                 CommandParameter="{Binding ElementName=wdEditEmployee}"
                         ></Button>
                 <Button Grid.Column="1"
+                        IsCancel="True"
                             Content="Thoát"
                             Style="{StaticResource CloseButton}"
                             Width="150"

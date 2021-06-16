@@ -96,6 +96,7 @@
             VerticalAlignment="Bottom">
 
             <Button
+                IsDefault="True"
                 x:Name="btnAdd"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Command="{Binding AddCommand}"
@@ -106,6 +107,7 @@
                 _Thêm
             </Button>
             <Button
+                IsCancel="True"
                 x:Name="btnCancel"
                 Style="{StaticResource MaterialDesignRaisedLightButton}"
                 Width="100"

@@ -67,18 +67,21 @@ namespace QuanLyGaraOto.ViewModel
                },
                (p) =>
                {
-                   var carReceptionTemp = DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault();
-                   carReceptionTemp.CUSTOMER.Customer_Name = Name;
-                   carReceptionTemp.CUSTOMER.Customer_Phone = Phone;
-                   carReceptionTemp.CUSTOMER.Customer_Address = Address;
-                   carReceptionTemp.CAR_BRAND = SelectedBrand;
-                   carReceptionTemp.ReceptionDate = ReceptionDate;
-                   carReceptionTemp.LicensePlate = LicensePlate;
-                   var repairFormTemp = DataProvider.Ins.DB.REPAIRs.Where(x => x.IdReception == CarReception.Reception_Id).SingleOrDefault();
-                   if (repairFormTemp != null) repairFormTemp.RepairDate = RepairDate;
+                   if (MessageBox.Show("Bạn chắc chắn đồng ý thay đổi thông tin", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                   {
+                       var carReceptionTemp = DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == CarReception.Reception_Id).SingleOrDefault();
+                       carReceptionTemp.CUSTOMER.Customer_Name = Name;
+                       carReceptionTemp.CUSTOMER.Customer_Phone = Phone;
+                       carReceptionTemp.CUSTOMER.Customer_Address = Address;
+                       carReceptionTemp.CAR_BRAND = SelectedBrand;
+                       carReceptionTemp.ReceptionDate = ReceptionDate;
+                       carReceptionTemp.LicensePlate = LicensePlate;
+                       var repairFormTemp = DataProvider.Ins.DB.REPAIRs.Where(x => x.IdReception == CarReception.Reception_Id).SingleOrDefault();
+                       if (repairFormTemp != null) repairFormTemp.RepairDate = RepairDate;
 
-                   DataProvider.Ins.DB.SaveChanges();
-                   p.Close();
+                       DataProvider.Ins.DB.SaveChanges();
+                       p.Close();
+                   }
                });
             CloseCommand = new RelayCommand<Window>(
                 (p) => {
@@ -86,7 +89,10 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    p.Close();
+                    if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        p.Close();
+                    }
                 });
         }
         public void InitData()
