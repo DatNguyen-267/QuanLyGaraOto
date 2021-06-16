@@ -257,6 +257,7 @@
                   Content="Xác Nhận" />
                 <Button
                     TabIndex="8"
+                    IsCancel="True"
                     Command="{Binding CloseCommand}"
                     CommandParameter="{Binding ElementName=ChangeCarInfoWD}"
                    Grid.Column="1"

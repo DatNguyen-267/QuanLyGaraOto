@@ -13,7 +13,7 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class SUPPLIES :BaseViewModel
+    public partial class SUPPLIES : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SUPPLIES()
@@ -35,7 +35,6 @@ namespace QuanLyGaraOto.Model
         private Nullable<int> _Supplies_Amount { get; set; }
 
         public Nullable<int> Supplies_Amount { get => _Supplies_Amount; set { _Supplies_Amount = value; OnPropertyChanged(); } }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMPORT_GOODS_DETAIL> IMPORT_GOODS_DETAIL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

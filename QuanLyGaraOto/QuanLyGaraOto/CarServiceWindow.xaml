@@ -454,6 +454,7 @@
                             Content="Đóng"
                             Width="150"
                             Height="50"
+                            IsCancel="True"
                             Background="{StaticResource MainColor}"
                             >
                     </Button>

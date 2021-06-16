@@ -60,7 +60,7 @@ GO
 
 create table INVENTORY_REPORT
 (
-	InventoryReport_Id int primary key not null,
+	InventoryReport_Id  int IDENTITY(1, 1) primary key not null,
 	InventoryReport_Date date not null,
 );
 GO

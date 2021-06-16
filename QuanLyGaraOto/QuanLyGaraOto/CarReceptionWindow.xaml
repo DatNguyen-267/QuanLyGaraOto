@@ -201,6 +201,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button
+                   
                     TabIndex="6"
                     Command="{Binding ConfirmCommand}"
                     CommandParameter="{Binding ElementName=CarReceptionWD}"

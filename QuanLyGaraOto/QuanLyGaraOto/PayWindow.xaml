@@ -405,6 +405,7 @@
                             Background="{StaticResource Green0}">
                     </Button>
                     <Button 
+                        IsCancel="True"
                             Command="{Binding CloseCommand}"
                             CommandParameter="{Binding ElementName=PayWD}"
                             Grid.Row="2"

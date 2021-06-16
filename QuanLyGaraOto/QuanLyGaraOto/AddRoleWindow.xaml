@@ -167,6 +167,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0"
+                    IsDefault="True"
                     Margin="10 0 10 0"
                     Content="Xác nhận"
                     
@@ -174,6 +175,7 @@
                     Command="{Binding AddRoleCommand}"
                      CommandParameter="{Binding ElementName=wdAddRole}"/>
             <Button Grid.Column="1"
+                    IsCancel="True"
                     Margin="10 0 10 0"
                     Command="{Binding ExitCommand}"
                    Style="{StaticResource MainButton}"

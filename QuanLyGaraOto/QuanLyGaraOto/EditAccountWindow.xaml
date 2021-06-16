@@ -45,7 +45,7 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Grid.Row="0"
-                
+                IsDefault="True"
                 Width="250"
                
                 Style="{StaticResource MainButton}"
@@ -55,6 +55,7 @@
                     CommandParameter="{Binding ElementName=wdEditAccount}"
                 ></Button>
                 <Button Grid.Row="1"
+                        IsCancel="True"
                 Background="{StaticResource MainColor}"
                     BorderBrush="{StaticResource MainColor}"
                 Width="250"

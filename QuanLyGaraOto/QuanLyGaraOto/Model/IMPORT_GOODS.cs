@@ -20,7 +20,7 @@ namespace QuanLyGaraOto.Model
         {
             this.IMPORT_GOODS_DETAIL = new HashSet<IMPORT_GOODS_DETAIL>();
         }
-    
+
         public int ImportGoods_Id { get; set; }
         private System.DateTime _ImportGoods_Date { get; set; }
 

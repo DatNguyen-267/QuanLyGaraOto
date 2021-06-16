@@ -152,6 +152,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button 
+                IsDefault="True"
                 Style="{StaticResource MainButton}"
                 Grid.Column="0"
                     Margin="10 0 10 0"
@@ -160,6 +161,7 @@
                         
                      CommandParameter="{Binding ElementName=wdEditRole}"/>
             <Button Grid.Column="1"
+                    IsCancel="True"
                     Margin="10 0 10 0"
                     Style="{StaticResource CloseButton}"
                     Width="150"
