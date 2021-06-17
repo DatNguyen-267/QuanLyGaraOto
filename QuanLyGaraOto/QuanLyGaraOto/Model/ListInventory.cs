@@ -11,8 +11,10 @@ namespace QuanLyGaraOto.Model
     {
         private int _STT { get; set; }
         public int STT { get => _STT; set { _STT = value; OnPropertyChanged(); } }
-        
-        
+
+        private int _IdSupplies { get; set; }
+        public int IdSupplies { get => _IdSupplies; set { _IdSupplies = value; OnPropertyChanged(); } }
+
         private string _Supplies_Name { get; set; }
         public string Supplies_Name { get => _Supplies_Name; set { _Supplies_Name = value; OnPropertyChanged(); } }
 

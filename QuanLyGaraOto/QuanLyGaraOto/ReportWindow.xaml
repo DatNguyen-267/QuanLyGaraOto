@@ -41,10 +41,10 @@
                                                CommandParameter="{Binding ElementName=reportWindow}"/>
                     </i:EventTrigger>
 
-                    <i:EventTrigger EventName="Loaded">
+                    <!--<i:EventTrigger EventName="Loaded">
                         <i:InvokeCommandAction Command="{Binding LoadCbCommand}" 
                                                CommandParameter="{Binding ElementName=reportWindow}"/>
-                    </i:EventTrigger>
+                    </i:EventTrigger>-->
                 </i:Interaction.Triggers>
 
             </ComboBox>
