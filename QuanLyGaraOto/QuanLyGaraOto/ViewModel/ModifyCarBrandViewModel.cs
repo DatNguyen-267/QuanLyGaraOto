@@ -29,6 +29,10 @@ namespace QuanLyGaraOto.ViewModel
         {
             CarBrandInModify = brand.CarBrand_Name;
 
+            CancelModifyCarBrand = new RelayCommand<ModifyCarBrandWindow>((p) => { return true; }, (p) =>
+            {
+                p.Close();
+            });
             ModifyCarBrand = new RelayCommand<ModifyCarBrandWindow>((p) =>
             {
                 if (p == null || string.IsNullOrEmpty(p.txtBrand.Text.Trim()))

@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
         Name="wdModifyWage"
-        Title="Sửa tiền công" Height="160" Width="280">
+        Title="Sửa tiền công" Height="160" Width="360">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

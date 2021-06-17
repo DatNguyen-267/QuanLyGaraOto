@@ -38,7 +38,7 @@ namespace QuanLyGaraOto.ViewModel
             WageInModify = wage.Wage_Name;
             ValueInModify = wage.Wage_Value;
 
-            CancelModifyWage = new RelayCommand<Window>((p) => { return true; }, (p) => 
+            CancelModifyWage = new RelayCommand<ModifyWageWindow>((p) => { return true; }, (p) => 
             {
                 p.Close();
             });
