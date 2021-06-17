@@ -82,6 +82,7 @@
             <TabItem Header="Thông tin ứng dụng" 
                      Foreground="{StaticResource MainColor}"
                      FontWeight="Bold"
+                     IsEnabled="{Binding isSettingApp}"
                      FontSize="18">
                 <Grid Grid.Row="1" Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <!--Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->

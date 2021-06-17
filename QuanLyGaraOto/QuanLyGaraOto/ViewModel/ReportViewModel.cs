@@ -65,6 +65,14 @@ namespace QuanLyGaraOto.ViewModel
         private string _ReportName { get; set; }
         public string ReportName { get => _ReportName; set { _ReportName = value; OnPropertyChanged(); } }
 
+        bool _isReport = false;
+        public bool isReport { get => _isReport; set { _isReport = value; OnPropertyChanged(); } }
+
+        public ReportViewModel(bool role) : this()
+        {
+            isReport = role;
+        }
+
 
         public ReportViewModel(ObservableCollection<string> itemsource_Year, ObservableCollection<string> itemsource_Month)
         {
