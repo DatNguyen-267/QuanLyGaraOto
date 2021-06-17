@@ -22,12 +22,12 @@ namespace QuanLyGaraOto.ViewModel
         }
         public CAR_BRAND br;
 
-        public ICommand CancelAddCarBrandWindow { get; set; }
+        public ICommand CancelAddCarBrand { get; set; }
         public ICommand AddCarBrand { get; set; }
 
         public AddCarBrandViewModel()
         {
-            CancelAddCarBrandWindow = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            CancelAddCarBrand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Close();
             });

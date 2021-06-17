@@ -35,12 +35,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition Height="70"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
                 <ComboBox
-                x:Name="cb_SelectYear"
+                x:Name="Rpcb_SelectYear"
                 materialDesign:HintAssist.Hint="Năm"
                 HorizontalAlignment="Left"
                 HorizontalContentAlignment="Left"
@@ -50,7 +49,7 @@
                 Margin="20,0,0,0"
                 Width="160"
                 
-                ItemsSource="{Binding ItemSource_Year}" 
+                ItemsSource="{Binding RpItemSource_Year}" 
                 SelectedItem="{Binding First_item_year}"
                 Text="{Binding First_item_year}">
 
@@ -66,7 +65,7 @@
 
                 </ComboBox>
                 <ComboBox
-                x:Name="cb_SelectMonth"
+                x:Name="Rpcb_SelectMonth"
                 materialDesign:HintAssist.Hint="Tháng"
                 HorizontalAlignment="Left"
                 HorizontalContentAlignment="Left"
@@ -75,7 +74,7 @@
                 FontWeight="Medium"
                 Margin="220,0,0,0"
                 Width="160"
-                ItemsSource="{Binding ItemSource_Month}"
+                ItemsSource="{Binding RpItemSource_Month}"
                 SelectedItem="{Binding First_item_month}"
                 Text="{Binding First_item_month}"
                 
@@ -91,38 +90,11 @@
                 </ComboBox>
             </Grid>
             <Grid Grid.Row="1" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="54*"/>
-                    <ColumnDefinition Width="457*"/>
-                </Grid.ColumnDefinitions>
-
-                <ScrollViewer 
-                    Margin="10 10 10 0" 
-                    Visibility="{Binding VisListView_Sales, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.ColumnSpan="2">
-                    <ListView 
-                    
-                    x:Name="lvs_Report_Sales"
-                    ItemsSource="{Binding ListSales, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                
-                    FontSize="18">
-
-
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
-                                <GridViewColumn Header="Hiệu xe" DisplayMemberBinding="{Binding CarBrand_Name}"></GridViewColumn>
-                                <GridViewColumn Header="Số lượt sửa" DisplayMemberBinding="{Binding AmountOfTurn}"></GridViewColumn>
-                                <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding TotalMoney}"></GridViewColumn>
-                                <GridViewColumn Header="Tỉ lệ" DisplayMemberBinding="{Binding Rate}"></GridViewColumn>
-
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </ScrollViewer>
-                <ScrollViewer 
-                    Margin="10 10 10 0"
-                    Visibility="{Binding VisListView_Inventory, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.ColumnSpan="2">
-                    <ListView 
+                <Grid
+                   Visibility="{Binding VisListView_Inventory, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.ColumnSpan="2">
+                    <ScrollViewer 
+                    Margin="10 10 10 0">
+                        <ListView 
                     
                     x:Name="lvs_Report_Inventory"
                     ItemsSource="{Binding ListInventory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -130,25 +102,53 @@
                     FontSize="18">
 
 
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
-                                <GridViewColumn Header="Vật tư phụ tùng" DisplayMemberBinding="{Binding Supplies_Name}"></GridViewColumn>
-                                <GridViewColumn Header="Tồn đầu" DisplayMemberBinding="{Binding TonDau}"></GridViewColumn>
-                                <GridViewColumn Header="Phát sinh" DisplayMemberBinding="{Binding PhatSinh}"></GridViewColumn>
-                                <GridViewColumn Header="Tồn cuối" DisplayMemberBinding="{Binding TonCuoi}"></GridViewColumn>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                    <GridViewColumn Header="Vật tư phụ tùng" DisplayMemberBinding="{Binding Supplies_Name}"></GridViewColumn>
+                                    <GridViewColumn Header="Tồn đầu" DisplayMemberBinding="{Binding TonDau}"></GridViewColumn>
+                                    <GridViewColumn Header="Phát sinh" DisplayMemberBinding="{Binding PhatSinh}"></GridViewColumn>
+                                    <GridViewColumn Header="Tồn cuối" DisplayMemberBinding="{Binding TonCuoi}"></GridViewColumn>
 
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </ScrollViewer>
-            </Grid>
-            <Grid Grid.Row="2" >
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+                <Grid
+                     Visibility="{Binding VisListView_Sales, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer 
+                    Margin="10 10 10 0" >
+                        <ListView 
+                    
+                    x:Name="lvs_Report_Sales"
+                    ItemsSource="{Binding ListSales, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                
+                    FontSize="18">
 
-                <StackPanel Orientation="Horizontal" 
+
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                    <GridViewColumn Header="Hiệu xe" DisplayMemberBinding="{Binding CarBrand_Name}"></GridViewColumn>
+                                    <GridViewColumn Header="Số lượt sửa" DisplayMemberBinding="{Binding AmountOfTurn}"></GridViewColumn>
+                                    <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding TotalMoney}"></GridViewColumn>
+                                    <GridViewColumn Header="Tỉ lệ" DisplayMemberBinding="{Binding Rate}"></GridViewColumn>
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                    <Grid Grid.Row="1" >
+
+                        <StackPanel Orientation="Horizontal" 
                             HorizontalAlignment="Right"
                             >
-                    <TextBlock Text="Tổng doanh thu: "
+                            <TextBlock Text="Tổng doanh thu: "
                            FontSize="30"
                            FontWeight="ExtraBold"
                            Opacity="0.7"
@@ -156,7 +156,7 @@
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            ></TextBlock>
-                    <TextBlock 
+                            <TextBlock 
                            FontSize="30" 
                            Text="{Binding TotalMoney}"
                            FontWeight="Bold"
@@ -165,35 +165,68 @@
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            ></TextBlock>
-                </StackPanel>
+                        </StackPanel>
 
+                    </Grid>
+                </Grid>
+                    
             </Grid>
+           
 
 
         </Grid>
         <Grid Grid.Row="2">
 
+            <Grid
+                VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-            <StackPanel HorizontalAlignment="Right"
+                <Button Grid.Column="0"
+                       Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Name="bt_Print"
+                        Width="150"
+                        Height="40"
+                        FontSize="24"
+                        Content="In báo cáo"
+                        Margin="10 0 40 0"
                         VerticalAlignment="Center"
-                        Grid.Column="2"
-                        Orientation="Horizontal">
-
-                <Button 
+                        Background="#455A64"
+                        HorizontalAlignment="Left"
+                        Command="{Binding PrintReportCommand}"
+                        CommandParameter="{Binding ElementName=wdReportMonth}">
+                </Button>
+                <Button Grid.Column="1"
+                   Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Name="bt_ViewReport"
+                        Width="180"
+                        Height="40"
+                        FontSize="24"
+                        Content="Xem báo cáo"
+                        Margin="10 0 220 0"
+                        VerticalAlignment="Center"
+                        Background="#455A64"
+                        HorizontalAlignment="Right"
+                        Command="{Binding ViewReportCommand}"
+                        CommandParameter="{Binding ElementName=wdReportMonth}">
+                </Button>
+                <Button Grid.Column="1"
                        Visibility="{Binding VisView, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Name="bt_Report"
                         Width="150"
                         Height="40"
                         FontSize="24"
                         Content="Báo cáo"
-                        Margin="10 0 40 0"
+                        Margin="10 0 220 0"
                         VerticalAlignment="Center"
                         Background="#455A64"
                         HorizontalAlignment="Right"
                         Command="{Binding ReportCommand}"
                         CommandParameter="{Binding ElementName=wdReportMonth}">
                 </Button>
-                <Button 
+                <Button Grid.Column="1"
                     IsCancel="True"
                         Width="150"
                         Height="40"
@@ -206,9 +239,9 @@
                         Command="{Binding CloseCommand}"
                         CommandParameter="{Binding ElementName=wdReportMonth}">
                 </Button>
+            </Grid>
 
-
-            </StackPanel>
+          
         </Grid>
     </Grid>
 </Window>

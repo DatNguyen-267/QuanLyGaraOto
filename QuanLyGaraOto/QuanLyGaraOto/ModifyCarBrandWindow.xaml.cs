@@ -17,15 +17,15 @@ using System.Windows.Shapes;
 namespace QuanLyGaraOto
 {
     /// <summary>
-    /// Interaction logic for AddCarBrandWindow.xaml
+    /// Interaction logic for ModifyCarBrandWindow.xaml
     /// </summary>
-    public partial class AddCarBrandWindow : Window
+    public partial class ModifyCarBrandWindow : Window
     {
-        public AddCarBrandViewModel ViewModel { get; set; }
-        public AddCarBrandWindow()
+        public ModifyCarBrandViewModel ViewModel { get; set; }
+        public ModifyCarBrandWindow(CAR_BRAND brand)
         {
             InitializeComponent();
-            DataContext = ViewModel = new AddCarBrandViewModel();
+            DataContext = ViewModel = new ModifyCarBrandViewModel(brand);
         }
     }
 }
