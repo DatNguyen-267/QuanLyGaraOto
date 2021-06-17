@@ -8,7 +8,7 @@
         x:Name="BunkWD"
         Height="500" Width="800"
         DataContext="{StaticResource BunkVM}"
-                xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Grid>
         <Grid.RowDefinitions>
@@ -35,6 +35,7 @@
                   Width="330"
                   HorizontalAlignment="Right">
                 <Button
+                    IsEnabled="{Binding isImportBunk}"                  
                     Command="{Binding OpenImportCommand}"
                     x:Name="btnAddGood"
                     HorizontalAlignment="Left"
@@ -47,6 +48,7 @@
                     Nhập hàng
                 </Button>
                 <Button
+                    IsEnabled="{Binding isImportBunk}"  
                     Command="{Binding SuppliesBillCommand}"
                     x:Name="btnImportView"
                     HorizontalAlignment="Right"

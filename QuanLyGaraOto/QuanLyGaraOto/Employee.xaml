@@ -140,7 +140,7 @@
 
                         </Grid>
                         <Button Grid.Column="1"
-                  
+                        IsEnabled="{Binding roleInfo}"
                     Style="{DynamicResource MainButton}"
                                 Width="200"
                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
@@ -270,6 +270,7 @@
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Button Grid.Column="0"
+                                            IsEnabled="{Binding roleInfo}"
                                 Style="{StaticResource FeatureButton}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
@@ -279,6 +280,7 @@
                                 
                                 ></Button>
                                     <Button Grid.Column="1"
+                                            IsEnabled="{Binding roleInfo}"
                                 Style="{StaticResource FeatureButton}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
@@ -287,6 +289,7 @@
                                 Command="{Binding AccountCommand}"
                                 ></Button>
                                     <Button Grid.Column="2"
+                                            IsEnabled="{Binding roleInfo}"
                                 Style="{StaticResource FeatureButton}"
                                 
                                 VerticalAlignment="Center"
@@ -350,7 +353,7 @@
 
                         </Grid>
                         <Button Grid.Column="1"
-
+                            IsEnabled="{Binding roleRole}"
                             Style="{DynamicResource MainButton}"
                              Width="200"
                             materialDesign:ShadowAssist.ShadowDepth="Depth1"
@@ -396,49 +399,51 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 
-                                    <Label Grid.Row="0"
+                                <Label Grid.Row="0"
                                    Content="Chi tiết quyền hạn"
                                    Style="{StaticResource Title}"
                                     ></Label>
                               
                                 <Grid Grid.Row="1" Margin="16 8 16 0">
-                                    <Label Content="Truy cập trang chủ"
-                                           VerticalAlignment="Center"
-                                           Margin="40 0 0 0"
-                                           FontSize="14"
-                                           ></Label>
-             
-                                    <CheckBox IsChecked="{Binding isDashboard, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                              HorizontalAlignment="Left"
-                                              Background="{StaticResource MainColor}"
-                                              Foreground="White"
-                                              Style="{StaticResource MaterialDesignActionLightCheckBox}"/>
-                                </Grid>
-                                <Grid Grid.Row="2" Margin="16 8 16 0">
                                     <Label Content="Truy cập dịch vụ"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
                                            FontSize="14"
                                            ></Label>
-                                    <CheckBox IsChecked="{Binding isService, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+             
+                                    <CheckBox IsChecked="{Binding isServiceWindow, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                               HorizontalAlignment="Left"
-                                            Background="{StaticResource MainColor}"
+                                              Background="{StaticResource MainColor}"
                                               Foreground="White"
-                                              Style="{StaticResource MaterialDesignActionLightCheckBox}"/>
+                                              />
                                 </Grid>
-                                <Grid Grid.Row="3" Margin="16 8 16 0">
+                                <Grid Grid.Row="2" Margin="16 8 16 0">
                                     <Label Content="Truy cập kho hàng"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
                                            FontSize="14"
                                            ></Label>
-                                    <CheckBox IsChecked="{Binding isBunk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    <CheckBox IsChecked="{Binding isBunkWindow, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                              HorizontalAlignment="Left"
+                                            Background="{StaticResource MainColor}"
+                                              Foreground="White"
+                                              />
+                                </Grid>
+                                <Grid Grid.Row="3" Margin="64 8 16 0">
+                                    <Label Content="Quyền nhập hàng"
+                                           VerticalAlignment="Center"
+                                           Margin="40 0 0 0"
+                                           FontSize="14"
+                                           ></Label>
+                                    <CheckBox IsChecked="{Binding isImportBunk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
                                              Background="{StaticResource MainColor}"
                                               Foreground="White"
-                                              Style="{StaticResource MaterialDesignActionLightCheckBox}"/>
+                                              />
                                 </Grid>
                                 <Grid Grid.Row="4" Margin="16 8 16 0">
                                     <Label Content="Truy cập nhân viên"
@@ -446,37 +451,61 @@
                                            Margin="40 0 0 0"
                                            FontSize="14"
                                            ></Label>
-                                    <CheckBox IsChecked="{Binding isEmployee, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    <CheckBox IsChecked="{Binding isEmployeeWindow, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
                                              Background="{StaticResource MainColor}"
                                               Foreground="White"
-                                              Style="{StaticResource MaterialDesignActionLightCheckBox}"/>
+                                              />
                                 </Grid>
-                                <Grid Grid.Row="5" Margin="16 8 16 0">
+                                <Grid Grid.Row="5" Margin="64 8 16 0">
+                                    <Label Content="Quyền thêm/xóa/sửa nhân viên"
+                                           VerticalAlignment="Center"
+                                           Margin="40 0 0 0"
+                                           FontSize="14"
+                                           ></Label>
+                                    <CheckBox IsChecked="{Binding isEmployeeInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                              HorizontalAlignment="Left"
+                                             Background="{StaticResource MainColor}"
+                                              Foreground="White"
+                                              />
+                                </Grid>
+                                <Grid Grid.Row="6" Margin="64 8 16 0">
+                                    <Label Content="Quyền thêm/xóa/sửa chức vụ"
+                                           VerticalAlignment="Center"
+                                           Margin="40 0 0 0"
+                                           FontSize="14"
+                                           ></Label>
+                                    <CheckBox IsChecked="{Binding isEmployeeRole, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                              HorizontalAlignment="Left"
+                                              Background="{StaticResource MainColor}"
+                                              Foreground="White"
+                                              />
+                                </Grid>
+                                <Grid Grid.Row="7" Margin="16 8 16 0">
                                     <Label Content="Truy cập thống kê"
+                                           VerticalAlignment="Center"
+                                           Margin="40 0 0 0"
+                                           FontSize="14"
+                                           ></Label>
+                                    <CheckBox IsChecked="{Binding isReportWindow, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                              HorizontalAlignment="Left"
+                                              Background="{StaticResource MainColor}"
+                                              Foreground="White"
+                                              />
+                                </Grid>
+                                <Grid Grid.Row="8" Margin="64 8 16 0">
+                                    <Label Content="Quyền báo cáo"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
                                            FontSize="14"
                                            ></Label>
                                     <CheckBox IsChecked="{Binding isReport, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
-                                             Background="{StaticResource MainColor}"
-                                              Foreground="White"
-                                              Style="{StaticResource MaterialDesignActionLightCheckBox}"/>
-                                </Grid>
-                                <Grid Grid.Row="6" Margin="16 8 16 0">
-                                    <Label Content="Truy cập cài đặt tài khoản"
-                                           VerticalAlignment="Center"
-                                           Margin="40 0 0 0"
-                                           FontSize="14"
-                                           ></Label>
-                                    <CheckBox IsChecked="{Binding isSettingAccount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                              HorizontalAlignment="Left"
                                               Background="{StaticResource MainColor}"
                                               Foreground="White"
-                                              Style="{StaticResource MaterialDesignActionLightCheckBox}"/>
+                                              />
                                 </Grid>
-                                <Grid Grid.Row="7" Margin="16 8 16 0">
+                                <Grid Grid.Row="9" Margin="16 8 16 0">
                                     <Label Content="Truy cập cài đặt ứng dụng"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -486,28 +515,27 @@
                                               HorizontalAlignment="Left"
                                               Background="{StaticResource MainColor}"
                                               Foreground="White"
-                                              Style="{StaticResource MaterialDesignActionLightCheckBox}"/>
+                                              />
                                 </Grid>
-                                <Grid Grid.Row="8" Margin="16 0 16 0">
+                                <Grid Grid.Row="10" Margin="16 0 16 0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
 
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Button Grid.Column="0"
+                                            IsEnabled="{Binding roleRole}"
                                         Style="{StaticResource FeatureButton}"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
                                         Margin="0 0 0 0"
                                         Content="Sửa"      
                                         Command="{Binding EditRoleWindowCommand}"
-
-  
                                 ></Button>
 
                                     <Button Grid.Column="1"
                                 Style="{StaticResource FeatureButton}"
-                               
+                               IsEnabled="{Binding roleRole}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 Margin="0 0 0 0"

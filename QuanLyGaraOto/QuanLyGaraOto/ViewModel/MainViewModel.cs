@@ -42,23 +42,29 @@ namespace QuanLyGaraOto.ViewModel
         private USER _User;
         public USER User { get => _User; set { _User = value; OnPropertyChanged(); } }
 
-        bool _isDashboard = false;
-        public bool isDashboard { get => _isDashboard; set { _isDashboard = value; OnPropertyChanged(); } }
+        bool _isServiceWindow = false;
+        public bool isServiceWindow { get => _isServiceWindow; set { _isServiceWindow = value; OnPropertyChanged(); } }
 
-        bool _isService = false;
-        public bool isService { get => _isService; set { _isService = value; OnPropertyChanged(); } }
+        bool _isBunkWindow = false;
+        public bool isBunkWindow { get => _isBunkWindow; set { _isBunkWindow = value; OnPropertyChanged(); } }
 
-        bool _isBunk = false;
-        public bool isBunk { get => _isBunk; set { _isBunk = value; OnPropertyChanged(); } }
+        bool _isImportBunk = false;
+        public bool isImportBunk { get => _isImportBunk; set { _isImportBunk = value; OnPropertyChanged(); } }
 
-        bool _isEmployee = false;
-        public bool isEmployee { get => _isEmployee; set { _isEmployee = value; OnPropertyChanged(); } }
+        bool _isEmployeeWindow = false;
+        public bool isEmployeeWindow { get => _isEmployeeWindow; set { _isEmployeeWindow = value; OnPropertyChanged(); } }
+
+        bool _isAddEmployee = false;
+        public bool isAddEmployee { get => _isAddEmployee; set { _isAddEmployee = value; OnPropertyChanged(); } }
+
+        bool _isAddRole = false;
+        public bool isAddRole { get => _isAddRole; set { _isAddRole = value; OnPropertyChanged(); } }
+
+        bool _isReportWindow = false;
+        public bool isReportWindow { get => _isReportWindow; set { _isReportWindow = value; OnPropertyChanged(); } }
 
         bool _isReport = false;
         public bool isReport { get => _isReport; set { _isReport = value; OnPropertyChanged(); } }
-
-        bool _isSettingAccount = false;
-        public bool isSettingAccount { get => _isSettingAccount; set { _isSettingAccount = value; OnPropertyChanged(); } }
 
         bool _isSettingApp = false;
         public bool isSettingApp { get => _isSettingApp; set { _isSettingApp = value; OnPropertyChanged(); } }
@@ -81,7 +87,7 @@ namespace QuanLyGaraOto.ViewModel
             });
             OpenService = new RelayCommand<object>((p) => 
             {
-                if (isService == false)
+                if (isServiceWindow == false)
                     return false;
                 return true; 
             }, 
@@ -91,9 +97,9 @@ namespace QuanLyGaraOto.ViewModel
                 VisService = true;
 
             });
-            OpenEmployee = new RelayCommand<object>((p) => 
+            OpenEmployee = new RelayCommand<Employee>((p) => 
             {
-                if (isEmployee == false)
+                if (isEmployeeWindow == false)
                     return false;
                 return true; 
             }, 
@@ -101,11 +107,12 @@ namespace QuanLyGaraOto.ViewModel
             {
                 InitVis();
                 VisEmployee = true;
+                p.DataContext = new EmployeeViewModel(isAddEmployee, isAddRole,User.UserName);
 
             });
-            OpenBunk = new RelayCommand<object>((p) => 
+            OpenBunk = new RelayCommand<BunkWindow>((p) => 
             {
-                if (isBunk == false)
+                if (isBunkWindow == false)
                     return false;
                 return true; 
             }, 
@@ -113,11 +120,12 @@ namespace QuanLyGaraOto.ViewModel
             {
                 InitVis();
                 VisBunk = true;
+                p.DataContext = new BunkViewModel(isImportBunk);
 
             });
-            OpenReport = new RelayCommand<object>((p) => 
+            OpenReport = new RelayCommand<ReportWindow>((p) => 
             {
-                if (isReport == false)
+                if (isReportWindow == false)
                     return false;
                 return true; 
             },
@@ -125,13 +133,14 @@ namespace QuanLyGaraOto.ViewModel
             {
                 InitVis();
                 VisReport = true;
+                p.DataContext = new ReportViewModel(isReport);
 
             });
             OpenSetting = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
             {
                 InitVis();
                 VisSetting = true;
-                p.DataContext = new SettingViewModel(User.UserName);
+                p.DataContext = new SettingViewModel(User.UserName,isSettingApp);
             });
         }
         public void InitVis()
@@ -160,24 +169,30 @@ namespace QuanLyGaraOto.ViewModel
                 User = loginVM.User;
 
                 if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 1).SingleOrDefault().Permission == true)
-                    isDashboard = true;
+                    isServiceWindow = true;
 
                 if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 2).SingleOrDefault().Permission == true)
-                    isService = true;
+                    isBunkWindow = true;
 
                 if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 3).SingleOrDefault().Permission == true)
-                    isBunk = true;
+                    isImportBunk = true;
 
                 if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 4).SingleOrDefault().Permission == true)
-                    isEmployee = true;
+                    isEmployeeWindow = true;
 
                 if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 5).SingleOrDefault().Permission == true)
-                    isReport = true;
+                    isAddEmployee = true;
 
                 if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 6).SingleOrDefault().Permission == true)
-                    isSettingAccount = true;
+                    isAddRole = true;
 
                 if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 7).SingleOrDefault().Permission == true)
+                    isReportWindow = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 8).SingleOrDefault().Permission == true)
+                    isReport = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 9).SingleOrDefault().Permission == true)
                     isSettingApp = true;
             }
             else

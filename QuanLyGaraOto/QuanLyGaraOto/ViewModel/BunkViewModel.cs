@@ -61,6 +61,14 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
+        bool _isImportBunk = false;
+        public bool isImportBunk { get => _isImportBunk; set { _isImportBunk = value; OnPropertyChanged(); } }
+
+        public BunkViewModel(bool role) : this()
+        {
+            isImportBunk = role;
+        }
+
 
         public BunkViewModel()
         {
