@@ -177,19 +177,49 @@
                         <Grid Style="{DynamicResource ResourceKey=GridWidth400}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <materialDesign:PackIcon Kind="DateRange" 
                                                      Grid.Column="0"/>
                             <DatePicker 
+                                x:Name="DatePicker"
                                 TabIndex="5"
                                 SelectedDate="{Binding ReceptionDate, UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}"
                                 Grid.Column="1"
                                Width="200"
                                         Height="auto"
                                 VerticalAlignment="Center"
-                              materialDesign:HintAssist.Hint="Ngày tiếp nhận"
-                              Style="{StaticResource MaterialDesignFloatingHintDatePicker}" /> 
+                              materialDesign:HintAssist.Hint="Ngày tiếp nhận">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateChanged">
+                                        <i:InvokeCommandAction Command="{Binding CheckDate}"
+                                                                       CommandParameter="{Binding ElementName=DatePicker}"
+                                                                       ></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <DatePicker.Style>
+                                    <Style TargetType="DatePicker"  BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding VisOverDate}" Value="True">
+                                                <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                                            </DataTrigger>
+                                          
+                                        </Style.Triggers>
+                                    </Style>
+                                </DatePicker.Style>
+                            </DatePicker>
+                            <Grid Grid.Column="1" Visibility="{Binding VisOverDate, Converter={StaticResource BooleanToVisibilityConverter }}"
+                                  Margin="0 0 0 0">
+                                <TextBlock Text="Ngày hóa đơn không được quá ngày hiện tại"
+                                       TextWrapping="WrapWithOverflow"
+                                       Margin="0 0 0 -30"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="13"
+                                       Foreground="Red"
+                                       Background="white"
+                                       >
+                                </TextBlock>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </StackPanel>

@@ -24,6 +24,12 @@ namespace QuanLyGaraOto.ViewModel
                     OnPropertyChanged(); } }
         private bool _IsOverPay { get; set; }
         public bool IsOverPay { get => _IsOverPay; set { _IsOverPay = value; OnPropertyChanged(); } }
+
+        private bool _VisOverDate { get; set; }
+        public bool VisOverDate { get => _VisOverDate; set { _VisOverDate = value; OnPropertyChanged(); } }
+        private bool _VisErrorDate { get; set; }
+        public bool VisErrorDate { get => _VisErrorDate; set { _VisErrorDate = value; OnPropertyChanged(); } }
+
         private bool _RolReceivedMoney { get; set; }
         public bool RolReceivedMoney { get => _RolReceivedMoney; set { _RolReceivedMoney = value; OnPropertyChanged(); } }
         private bool _RolEmail { get; set; }
@@ -51,6 +57,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand CloseCommand { get; set; }
         public ICommand CheckIsOverPay { get; set; }
         public ICommand PrintCommand { get; set; }
+        public ICommand CheckDate { get; set; }
         public PayViewModel()
         {
 
@@ -83,11 +90,13 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     return false;
                 }
+                if (VisErrorDate == true || VisOverDate == true) return false;
                 Regex regex = new Regex(@"^[0-9]+$");
                 if (!regex.IsMatch(p.txtPay.Text.ToString())) return false;
                 if (int.Parse(ReceivedMoney) > Reception.Debt && !DataProvider.Ins.DB.GARA_INFO.FirstOrDefault().IsOverPay) return false;
                 return true; }, (p) =>
             {
+
                 if (MessageBox.Show("Bạn chắc chắn đồng ý thanh toán", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     RECEIPT newReceipt = new RECEIPT();
@@ -110,10 +119,7 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
                     p.Close();
-                }
             });
             CheckIsOverPay = new RelayCommand<TextBox>((p) => {
                 return true;
@@ -137,6 +143,22 @@ namespace QuanLyGaraOto.ViewModel
                 }catch { }
                 
             });
+            CheckDate = new RelayCommand<DatePicker>((p) => {
+                return true;
+            }, (p) =>
+            {
+                VisErrorDate = false;
+                VisOverDate = false;
+                
+                if (p.SelectedDate < Repair.RepairDate)
+                {
+                    VisErrorDate = true;
+                } 
+                else if (p.SelectedDate > DateTime.Now.Date)
+                {
+                    VisOverDate = true;
+                }
+            });
             PrintCommand = new RelayCommand<PayWindow>((p) => {
                 if (VisPay == true) return false;
                 return true;
@@ -156,6 +178,8 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void InitData()
         {
+            VisErrorDate = false;
+            VisOverDate = false;
             IsPay = false;
             VisPay = true;
             IsOverPay = true;

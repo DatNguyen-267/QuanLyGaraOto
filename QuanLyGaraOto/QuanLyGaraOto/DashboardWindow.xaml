@@ -9,13 +9,24 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         x:Name="wdDashboard"
-             Background="Gainsboro"
+             Background="White"
         DataContext="{StaticResource DashboardVM}"
         Height="450" Width="800">
-    <Border Background="White" BorderThickness="1" >
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock" x:Key="TextBlockValueStyle">
+                <Setter Property="FontSize" Value="35"></Setter>
+                <Setter Property="FontWeight" Value="DemiBold"></Setter>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="TextBlockTitleStyle">
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                <Setter Property="Margin" Value="0 5 0 0"></Setter>
+            </Style>
+        </Grid.Resources>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="125"/>
+                <RowDefinition Height="130"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -26,108 +37,102 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 
-                <Grid Grid.Column="0" Margin="5">
+                <Grid Grid.Column="0" Margin="10">
                     <materialDesign:Card
-                    Margin="5"
+                   
                     Background="#f24f7c"
                     Foreground="White"
                     UniformCornerRadius="6">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
-                            Text="Doanh thu trong tháng"
-                            TextAlignment="Left"
-                            FontSize="18"
-                            FontWeight="Bold"/>
+                                       Style="{StaticResource TextBlockTitleStyle}"
+                                    Text="Doanh thu trong tháng"
+                                    
+                                    HorizontalAlignment="Center"
+                                        />
                             <Separator Grid.Row="1" 
                                        Style="{StaticResource MaterialDesignLightSeparator}" />
-                            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                            <StackPanel Grid.Row="2" Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
                                 <TextBlock
+                                    Style="{StaticResource TextBlockValueStyle}"
                                     Text="{Binding Revenue}"
-                                    TextAlignment="Left"
-                                    FontSize="16"
-                                    FontWeight="Bold"/>
+                                   />
                                 <TextBlock
+                                    Style="{StaticResource TextBlockValueStyle}"
                                     Text="đ"
-                                    TextAlignment="Left"
-                                    FontSize="16"
-                                    FontWeight="Bold"/>
+
+                                   />
                             </StackPanel>
                         </Grid>
                     </materialDesign:Card>
                 </Grid>
-                <Grid Grid.Column="1" Margin="5">
+                <Grid Grid.Column="1" Margin="10">
                     <materialDesign:Card
-                    Margin="5"
                     Background="#716cb0"
                     Foreground="White"
                     UniformCornerRadius="6">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="241*"/>
-                                <ColumnDefinition Width="13*"/>
-                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
-                            Text="Số xe trong tháng"
-                            TextAlignment="Center"
-                            HorizontalAlignment="Center"
-                            FontSize="18"
-                            FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,0,-0.6,37.8" Grid.RowSpan="2"/>
+                                        Style="{StaticResource TextBlockTitleStyle}"
+                                        Text="Số xe tiếp nhận trong tháng"
+                                        HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
                             <Separator Grid.Row="1" 
-                                       Style="{StaticResource MaterialDesignLightSeparator}" Grid.ColumnSpan="2" Margin="0,11.6,0.4,10.8" />
+                                       Style="{StaticResource MaterialDesignLightSeparator}"/>
                             <TextBlock Grid.Row="2"
-                            Text="{Binding TotalCarInMonth}"
-                            TextAlignment="Left"
-                            FontSize="16"
-                            FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,0.2,-0.6,-0.8"/>
+                                        VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                        Text="{Binding TotalCarInMonth}"
+                                        Style="{StaticResource TextBlockValueStyle}"
+                            />
                         </Grid>
                     </materialDesign:Card>
                 </Grid>
-                <Grid Grid.Column="2" Margin="5">
+                <Grid Grid.Column="2" Margin="10">
                     <materialDesign:Card
-                    Margin="5"
+                    
                     Background="#33b0e0"
                     Foreground="White"
                     UniformCornerRadius="6">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                            <StackPanel Grid.Row="2" Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                         VerticalAlignment="Center">
                                 <TextBlock
                                     Text="{Binding CurrentNumber}"
-                                    TextAlignment="Left"
-                                    FontSize="16"
-                                    FontWeight="Bold"/>
+                                    Style="{StaticResource TextBlockValueStyle}"/>
                                 <TextBlock
-                                    Text="/"
-                                    TextAlignment="Left"
-                                    FontSize="16"
-                                    FontWeight="Bold"/>
+                                    Text="/" 
+                                    Style="{StaticResource TextBlockValueStyle}"/>
                                 <TextBlock
                                     Text="{Binding info.MaxCarReception}"
-                                    TextAlignment="Left"
-                                    FontSize="16"
-                                    FontWeight="Bold"/>
+                                    Style="{StaticResource TextBlockValueStyle}"/>
                             </StackPanel>
                             <TextBlock Grid.Row="0"
-                            Text="Số xe hiện tại / Tối đa"
-                            TextAlignment="Left"
-                            FontSize="18"
-                            FontWeight="Bold"/>
+                                        Style="{StaticResource TextBlockTitleStyle}"
+                                    Text="Số xe hiện tại / Tối đa"
+                                    TextAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    />
                             <Separator Grid.Row="1" 
                                        Style="{StaticResource MaterialDesignLightSeparator}" />
                             
@@ -141,16 +146,16 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal"
+                <Grid Grid.Column="0" Margin="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal"
                                 Margin="15 0 0 0">
-                            <ComboBox
+                                <ComboBox
                         x:Name="cbSelectYear_Revenue"
                         materialDesign:HintAssist.Hint="Năm"
                         HorizontalAlignment="Left"
@@ -164,37 +169,44 @@
                         ItemsSource="{Binding ItemSource_Year}"
                         SelectedIndex="{Binding SelectedYear_Revenue}">
 
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding YearChangedCommand_Revenue}"
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding YearChangedCommand_Revenue}"
                                                 CommandParameter="{Binding ElementName=wdDashboard}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </ComboBox>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Row="1">
-                        <lvc:CartesianChart x:Name="liveChart_Revenue" 
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="5 20 0 0">
+                            <lvc:CartesianChart x:Name="liveChart_Revenue" 
                                             Series="{Binding SeriesCollection_Revenue}" LegendLocation="Left" Margin="0,0,10,0">
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Title="Tháng" Labels="{Binding Labels_Revenue}"></lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="VND" LabelFormatter="{Binding Formatter_Revenue}"></lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                        </lvc:CartesianChart>
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis Title="Tháng" 
+                                               FontSize="14"
+                                              Labels="{Binding Labels_Revenue}"></lvc:Axis>
+                                </lvc:CartesianChart.AxisX>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis 
+                                         FontSize="14"
+   
+                                        Title="VND" LabelFormatter="{Binding Formatter_Revenue}"></lvc:Axis>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                        </Grid>
                     </Grid>
                 </Grid>
 
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal"
+                <Grid Grid.Column="1" Margin="10" >
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal"
                                 Margin="15 0 0 0">
-                            <ComboBox
+                                <ComboBox
                         x:Name="cbSelectedYear_Car"
                         materialDesign:HintAssist.Hint="Năm"
                         HorizontalAlignment="Left"
@@ -208,27 +220,36 @@
                         ItemsSource="{Binding ItemSource_Year}"
                         SelectedIndex="{Binding SelectedYear_Car}">
 
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding YearChangedCommand_Car}"
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding YearChangedCommand_Car}"
                                                 CommandParameter="{Binding ElementName=wdDashboard}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </ComboBox>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Row="1">
-                        <lvc:CartesianChart x:Name="liveChart_Car" Series="{Binding SeriesCollection_Car}" LegendLocation="Left" Margin="10,0,0,0">
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Title="Tháng" Labels="{Binding Labels_Car}"></lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Chiếc" LabelFormatter="{Binding Formatter_Car}"></lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                        </lvc:CartesianChart>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="5 20 0 0">
+                            <lvc:CartesianChart x:Name="liveChart_Car" Series="{Binding SeriesCollection_Car}" LegendLocation="Left" Margin="10,0,0,0">
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis 
+                                        FontSize="14"
+                                      
+                                        Title="Tháng" 
+                                        Labels="{Binding Labels_Car}"></lvc:Axis>
+                                </lvc:CartesianChart.AxisX>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis Title="Chiếc" 
+                                               FontSize="14"
+                                   
+                                              LabelFormatter="{Binding Formatter_Car}"></lvc:Axis>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                        </Grid>
                     </Grid>
                 </Grid>
+              
             </Grid>
         </Grid>
-    </Border>
+    </Grid>
 </UserControl>
