@@ -173,14 +173,17 @@ namespace QuanLyGaraOto.ViewModel
                 _SelectedBrandItem = value;
                 OnPropertyChanged();
                 IsEnableDeleteButtonInBrandSetting = true;
-                IsEnableModifyFieldInBrandSetting = true;
+                IsEnableModifyButtonInBrandSetting = true;
             }
         }
 
+        public ObservableCollection<CAR_BRAND> SelectedBrandItems { get; set; }
+
         public ICommand ChangeEnableButtonInCarBrandSetting { get; set; }
-        public ICommand ModifyCarBrand { get; set; }
+        public ICommand OpenModifyCarBrandWindow { get; set; }
         public ICommand DeleteCarBrand { get; set; }
         public ICommand OpenAddCarBrandWindow { get; set; }
+        public ICommand BrandSelectionChanged { get; set; }
 
         // Add brand window
         private string _CarBrandInAdd;
@@ -247,14 +250,17 @@ namespace QuanLyGaraOto.ViewModel
                 _SelectedWageItem = value;
                 OnPropertyChanged();
                 IsEnableDeleteButtonInWageSetting = true;
-                IsEnableModifyFieldInWageSetting = true;
+                IsEnableModifyButtonInWageSetting = true;
             }
         }
 
+        public ObservableCollection<WAGE> SelectedWageItems { get; set; }
+
         public ICommand ChangeEnableButtonInWageBrandSetting { get; set; }
-        public ICommand ModifyWage { get; set; }
+        public ICommand OpenModifyWageWindow { get; set; }
         public ICommand DeleteWage { get; set; }
         public ICommand OpenAddWageWindow { get; set; }
+        public ICommand WageSelectionChanged { get; set; }
 
         // Add wage window
         public ICommand CancelAddWageWindow { get; set; }
@@ -501,22 +507,45 @@ namespace QuanLyGaraOto.ViewModel
             // Car brand information
             ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
 
-            ModifyCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            BrandSelectionChanged = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
-                DataProvider.Ins.DB.SaveChanges();
+                SelectedBrandItems = new ObservableCollection<CAR_BRAND>(p.SelectedItems.Cast<CAR_BRAND>().ToList());
+            });
+            OpenModifyCarBrandWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if(SelectedBrandItems.Count > 1)
+                {
+                    MessageBox.Show("Vui lòng chỉ chọn một hàng dữ liệu");
+                    return;
+                }
+                ModifyCarBrandWindow window = new ModifyCarBrandWindow(SelectedBrandItem);
+                window.ShowDialog();
                 SelectedBrandItem = null;
                 IsEnableModifyButtonInBrandSetting = false;
                 IsEnableModifyFieldInBrandSetting = false;
                 IsEnableDeleteButtonInBrandSetting = false;
+                ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
             });
             DeleteCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                DataProvider.Ins.DB.CAR_BRAND.Remove(SelectedBrandItem);
-                DataProvider.Ins.DB.SaveChanges();
-                ListCarBrand.Remove(SelectedBrandItem);
-                IsEnableModifyButtonInBrandSetting = false;
-                IsEnableModifyFieldInBrandSetting = false;
-                IsEnableDeleteButtonInBrandSetting = false;
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    ObservableCollection<RECEPTION> receptions = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
+                    foreach (var item in SelectedBrandItems)
+                    {
+                        if(receptions.Any(x => x.IdCarBrand == item.CarBrand_Id))
+                        {
+                            MessageBox.Show("Không thể xóa hãng xe " + item.CarBrand_Name + " vì tồn tại trong tiếp nhận xe!");
+                            continue;
+                        }
+                        DataProvider.Ins.DB.CAR_BRAND.Remove(item);
+                        ListCarBrand.Remove(item);
+                    }
+                    DataProvider.Ins.DB.SaveChanges();
+                    IsEnableModifyButtonInBrandSetting = false;
+                    IsEnableModifyFieldInBrandSetting = false;
+                    IsEnableDeleteButtonInBrandSetting = false;
+                }
             });
             OpenAddCarBrandWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -529,22 +558,53 @@ namespace QuanLyGaraOto.ViewModel
             // Wage information
             ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
 
-            ModifyWage = new RelayCommand<object>((p) => { return true; }, (p) =>
+            WageSelectionChanged = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
-                DataProvider.Ins.DB.SaveChanges();
+                SelectedWageItems = new ObservableCollection<WAGE>(p.SelectedItems.Cast<WAGE>().ToList());
+            });
+            OpenModifyWageWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if(SelectedWageItems.Count > 1)
+                {
+                    MessageBox.Show("Vui lòng chỉ chọn một hàng dữ liệu");
+                    return; 
+                }
+                ModifyWageWindow window = new ModifyWageWindow(SelectedWageItem);
+                window.ShowDialog();
                 SelectedWageItem = null;
                 IsEnableModifyButtonInWageSetting = false;
                 IsEnableModifyFieldInWageSetting = false;
                 IsEnableDeleteButtonInWageSetting = false;
+                ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
             });
-            DeleteWage = new RelayCommand<object>((p) => { return true; }, (p) =>
+            DeleteWage = new RelayCommand<object>((p) => 
+            { 
+                if(SelectedWageItem == null)
+                {
+                    return false;
+                }
+                return true;
+            }, (p) =>
             {
-                DataProvider.Ins.DB.WAGEs.Remove(SelectedWageItem);
-                DataProvider.Ins.DB.SaveChanges();
-                ListWage.Remove(SelectedWageItem);
-                IsEnableModifyButtonInWageSetting = false;
-                IsEnableModifyFieldInWageSetting = false;
-                IsEnableDeleteButtonInWageSetting = false;
+                if(MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    ObservableCollection<REPAIR_DETAIL> details = new ObservableCollection<REPAIR_DETAIL>(DataProvider.Ins.DB.REPAIR_DETAIL);
+                    foreach(var item in SelectedWageItems)
+                    {
+                        if(details.Any(x => x.IdWage == item.Wage_Id))
+                        {
+                            MessageBox.Show("Không thể xóa loại tiền công " + item.Wage_Name + " vì tồn tại trong chi tiết sửa chữa!");
+                            continue;
+                        }
+                        DataProvider.Ins.DB.WAGEs.Remove(item);
+                        ListWage.Remove(item);
+                    }
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    IsEnableModifyButtonInWageSetting = false;
+                    IsEnableModifyFieldInWageSetting = false;
+                    IsEnableDeleteButtonInWageSetting = false;
+                }
             });
             OpenAddWageWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

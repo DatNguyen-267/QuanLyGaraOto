@@ -252,6 +252,12 @@
     <Compile Include="Model\WAGE.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModifyCarBrandWindow.xaml.cs">
+      <DependentUpon>ModifyCarBrandWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModifyWageWindow.xaml.cs">
+      <DependentUpon>ModifyWageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PayWindow.xaml.cs">
       <DependentUpon>PayWindow.xaml</DependentUpon>
     </Compile>
@@ -299,6 +305,8 @@
     <Compile Include="ViewModel\ImportGoodViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ModifyCarBrandViewModel.cs" />
+    <Compile Include="ViewModel\ModifyWageViewModel.cs" />
     <Compile Include="ViewModel\PayViewModel.cs" />
     <Compile Include="ViewModel\PrintViewModel.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
@@ -400,6 +408,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModifyCarBrandWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModifyWageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
