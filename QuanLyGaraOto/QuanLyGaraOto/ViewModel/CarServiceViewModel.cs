@@ -196,10 +196,8 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    AddRepairFormWindow addRepairFormWindow = new AddRepairFormWindow();
-
+                    AddRepairFormWindow addRepairFormWindow = new AddRepairFormWindow(CarReception);
                     addRepairFormWindow.ShowDialog();
-
                     AddRepairFormViewModel addRepairFormViewModel = (addRepairFormWindow.DataContext as AddRepairFormViewModel);
                     if (addRepairFormViewModel.IsSuccess)
                     {

@@ -38,9 +38,24 @@ namespace QuanLyGaraOto.ViewModel
         private REPAIR _RepairForm { get; set; }
         public REPAIR RepairForm { get => _RepairForm; set { _RepairForm = value; OnPropertyChanged(); } }
 
+
+        private bool _VisOverDate1 { get; set; }
+        public bool VisOverDate1 { get => _VisOverDate1; set { _VisOverDate1 = value; OnPropertyChanged(); } }
+
+        private bool _VisOverDate2 { get; set; }
+        public bool VisOverDate2 { get => _VisOverDate2; set { _VisOverDate2 = value; OnPropertyChanged(); } }
+        private bool _VisErrorDate2 { get; set; }
+        public bool VisErrorDate2 { get => _VisErrorDate2; set { _VisErrorDate2 = value; OnPropertyChanged(); } }
+
+        public ICommand CheckDate1 { get; set; }
+        public ICommand CheckDate2 { get; set; }
+
         public ChangeCarInfoViewModel() { }
         public ChangeCarInfoViewModel(RECEPTION carReception)
         {
+            VisErrorDate2 = false;
+            VisOverDate1 = false;
+            VisOverDate2 = false;
             this.CarReception = carReception;
             if (DataProvider.Ins.DB.REPAIRs.Where(x=> x.IdReception == CarReception.Reception_Id).Count() > 0)
             {
@@ -94,6 +109,32 @@ namespace QuanLyGaraOto.ViewModel
                         p.Close();
                     }
                 });
+            CheckDate1 = new RelayCommand<ChangeCarInfoWindow>((p) => {
+                return true;
+            }, (p) =>
+            {    
+                VisOverDate1 = false;
+                if (p.dpReceptionDate.SelectedDate.Value.Date > DateTime.Now.Date)
+                {
+                    VisOverDate1 = true;
+                }
+            });
+            CheckDate2 = new RelayCommand<ChangeCarInfoWindow>((p) => {
+                return true;
+            }, (p) =>
+            {
+                VisOverDate2 = false;
+                VisErrorDate2 = false;
+                if (p.dpReceptionDate.SelectedDate != null)
+                {
+                    if (p.dpReceptionDate.SelectedDate.Value.Date > p.dpRepairDate.SelectedDate.Value.Date)
+                    {
+                        VisErrorDate2 = true;
+                    }
+                    else if (p.dpRepairDate.SelectedDate.Value.Date > DateTime.Now.Date) VisOverDate2 = true;
+                }
+               
+            });
         }
         public void InitData()
         {

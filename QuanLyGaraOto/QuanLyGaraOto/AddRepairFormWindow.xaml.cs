@@ -1,4 +1,5 @@
-﻿using QuanLyGaraOto.ViewModel;
+﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,10 @@ namespace QuanLyGaraOto
     public partial class AddRepairFormWindow : Window
     {
         public AddRepairFormViewModel addRepairFormViewModel { get; set; }
-        public AddRepairFormWindow()
+        public AddRepairFormWindow(RECEPTION reception)
         {
             InitializeComponent();
-            this.DataContext = (addRepairFormViewModel = new AddRepairFormViewModel());
+            this.DataContext = (addRepairFormViewModel = new AddRepairFormViewModel(reception));
         }
     }
 }

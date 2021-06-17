@@ -94,7 +94,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </materialDesign:Card>
-               
+
                 <!--<ListView ItemsSource="{Binding ListRepair}"
                           FontSize="16"
                           FontWeight="Normal"
@@ -263,8 +263,8 @@
                                         </i:Interaction.Triggers>
                                     </TextBox>
                                 </Border>
-                                
-                                
+
+
                             </Grid>
                             <Grid Grid.Column="1" Visibility="{Binding VisValidationPay, Converter={StaticResource BooleanToVisibilityConverter }}">
                                 <TextBlock Text="Số tiền thu không quá số tiền nợ"
@@ -300,14 +300,58 @@
                                       
                                         VerticalAlignment="Center">
                                     <DatePicker
-                                        x:Name="DatePickerPay"
-                                    IsEnabled="{Binding EnabledReceiptDate}"
-                                    SelectedDate="{Binding SelectedDate}"
-                                        Margin="10 0 10 10"
-                                  materialDesign:HintAssist.Hint="Ngày thu tiền"
-                                  Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                                            x:Name="DatePickerPay"
+                                            IsEnabled="{Binding EnabledReceiptDate}"
+                                            SelectedDate="{Binding SelectedDate}"
+                                            Margin="10,0,10,11"
+                                            materialDesign:HintAssist.Hint="Ngày thu tiền" VerticalAlignment="Bottom"
+                                            >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectedDateChanged">
+                                                <i:InvokeCommandAction Command="{Binding CheckDate}"
+                                                                       CommandParameter="{Binding ElementName=DatePickerPay}"
+                                                                       ></i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <DatePicker.Style>
+                                            <Style TargetType="DatePicker"  BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding VisOverDate}" Value="True">
+                                                        <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding VisErrorDate}" Value="True">
+                                                        <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DatePicker.Style>
+
                                     </DatePicker>
                                 </Border>
+                            </Grid>
+                            <Grid Grid.Column="1" Visibility="{Binding VisOverDate, Converter={StaticResource BooleanToVisibilityConverter }}">
+                                <TextBlock Text="Ngày hóa đơn không được quá ngày hiện tại"
+                                       TextWrapping="WrapWithOverflow"
+                                       Margin="10 0 10 -3"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="10"
+                                       Foreground="Red"
+                                       Background="white"
+                                       Padding="3 0 3 0"
+                                       >
+                                </TextBlock>
+                            </Grid>
+                            <Grid Grid.Column="1" Visibility="{Binding VisErrorDate, Converter={StaticResource BooleanToVisibilityConverter }}">
+                                <TextBlock Text="Ngày hóa đơn không được nhỏ hơn ngày sửa chữa"
+                                       TextWrapping="WrapWithOverflow"
+                                       Margin="10 0 10 -3"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="10"
+                                       Foreground="Red"
+                                       Background="white"
+                                       Padding="3 0 3 0"
+                                       >
+                                </TextBlock>
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="2" Margin="10 5 10 5">
@@ -325,7 +369,7 @@
                                         BorderBrush="DarkGray"
                                         CornerRadius="3"
                                         Height="50"
-                                        Padding="3 0 3 0"
+                                       
                                         VerticalAlignment="Center">
                                     <TextBox
                                         x:Name="txbEmail"
@@ -337,15 +381,15 @@
                                         <TextBox.Text>
                                             <Binding  Path="Email" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                                 <Binding.ValidationRules>
-                                                    <validation:NullDataValidation ErrorMessage="Vui lòng nhập địa chỉ email"
-                                                                                               
-                                                                              ></validation:NullDataValidation>
+                                                    <validation:NonFocusValidation ErrorMessage="Vui lòng nhập địa chỉ email"></validation:NonFocusValidation>
                                                 </Binding.ValidationRules>
                                             </Binding>
                                         </TextBox.Text>
+
                                     </TextBox>
                                 </Border>
                             </Grid>
+
                         </Grid>
                     </Grid>
                 </Grid>

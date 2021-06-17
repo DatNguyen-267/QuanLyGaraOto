@@ -19,8 +19,7 @@ namespace QuanLyGaraOto.ViewModel
         public ObservableCollection<CAR_BRAND> ListBrand { get => _ListBrand; set { _ListBrand = value; OnPropertyChanged(); } }
         private bool _IsSuccess { get; set; }
         public bool IsSuccess { get => _IsSuccess; set { _IsSuccess = value; OnPropertyChanged(); } }
-        public ICommand CloseCommand { get; set; }
-        public ICommand ConfirmCommand { get; set; }
+       
         private string _Name { get; set; }
         public string Name { get => _Name; set { _Name = value; OnPropertyChanged(); } }
         private string _LicensePlate { get; set; }
@@ -35,8 +34,17 @@ namespace QuanLyGaraOto.ViewModel
         public CAR_BRAND SelectedBrand { get => _SelectedBrand; set { _SelectedBrand = value; OnPropertyChanged(); } }
         private int _IdNew { get; set; }
         public int IdNew { get => _IdNew; set { _IdNew = value; OnPropertyChanged(); } }
+
+        private bool _VisOverDate { get; set; }
+        public bool VisOverDate { get => _VisOverDate; set { _VisOverDate = value; OnPropertyChanged(); } }
+     
+        public ICommand CloseCommand { get; set; }
+        public ICommand ConfirmCommand { get; set; }
+        public ICommand CheckDate { get; set; }
+
         public CarReceptionViewModel()
         {
+            VisOverDate = false;
             ReceptionDate = DateTime.Now;
             IsSuccess = false;
             ListBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
@@ -47,7 +55,7 @@ namespace QuanLyGaraOto.ViewModel
             });
             ConfirmCommand = new RelayCommand<CarReceptionWindow>((p) => {
                 Regex regex = new Regex(@"^[0-9]+$");
-               
+                if (VisOverDate == true) return false;
                 if (string.IsNullOrEmpty(p.txbName.Text)
                     || (string.IsNullOrEmpty(p.txtPhone.Text) || !regex.IsMatch(p.txtPhone.Text.ToString()))
                     || string.IsNullOrEmpty(p.txbAddress.Text)
@@ -55,31 +63,46 @@ namespace QuanLyGaraOto.ViewModel
                     || ReceptionDate == null
                     || string.IsNullOrEmpty(p.txbLicensePlate.Text)
                     ) return false;
+
                 return true;
             }, (p) =>
             {
-                if (MessageBox.Show("Bạn chắc chắn đồng ý tiếp nhận xe này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (ReceptionDate.Date > DateTime.Now.Date) MessageBox.Show("Ngày tiếp nhận không thể vượt quá ngày hiện tại", "Thông báo lỗi nhập liệu",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                else
                 {
-                    CUSTOMER customer = new CUSTOMER() { Customer_Address = Address, Customer_Phone = Phone, Customer_Name = Name };
-                    DataProvider.Ins.DB.CUSTOMERs.Add(customer);
-                    DataProvider.Ins.DB.SaveChanges();
-
-                    RECEPTION carReception = new RECEPTION()
+                    if (MessageBox.Show("Bạn chắc chắn đồng ý tiếp nhận xe này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
-                        IdCustomer = customer.Customer_Id,
-                        LicensePlate = LicensePlate,
-                        ReceptionDate = ReceptionDate,
-                        IdCarBrand = SelectedBrand.CarBrand_Id
-                    };
-                    DataProvider.Ins.DB.RECEPTIONs.Add(carReception);
-                    DataProvider.Ins.DB.SaveChanges();
-                    IsSuccess = true;
-                    IdNew = carReception.Reception_Id;
-                    MessageBox.Show("Tiếp nhận xe thành công", "Thông báo", MessageBoxButton.OK);
-                    p.Close();
+                        CUSTOMER customer = new CUSTOMER() { Customer_Address = Address, Customer_Phone = Phone, Customer_Name = Name };
+                        DataProvider.Ins.DB.CUSTOMERs.Add(customer);
+                        DataProvider.Ins.DB.SaveChanges();
+
+                        RECEPTION carReception = new RECEPTION()
+                        {
+                            IdCustomer = customer.Customer_Id,
+                            LicensePlate = LicensePlate,
+                            ReceptionDate = ReceptionDate,
+                            IdCarBrand = SelectedBrand.CarBrand_Id
+                        };
+                        DataProvider.Ins.DB.RECEPTIONs.Add(carReception);
+                        DataProvider.Ins.DB.SaveChanges();
+                        IsSuccess = true;
+                        IdNew = carReception.Reception_Id;
+                        MessageBox.Show("Tiếp nhận xe thành công", "Thông báo", MessageBoxButton.OK);
+                        p.Close();
+                    }
                 }
             });
-            
+            CheckDate = new RelayCommand<DatePicker>((p) => {
+                return true;
+            }, (p) =>
+            { 
+                VisOverDate = false;
+                if (p.SelectedDate > DateTime.Now.Date)
+                {
+                    VisOverDate = true;
+                }
+            });
         }
         public void ValidateNumber(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {

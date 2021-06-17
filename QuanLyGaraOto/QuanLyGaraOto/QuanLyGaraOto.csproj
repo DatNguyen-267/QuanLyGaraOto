@@ -278,6 +278,7 @@
     </Compile>
     <Compile Include="UserControlGaraOto\TempUserControl.cs" />
     <Compile Include="Validation\DateValidation.cs" />
+    <Compile Include="Validation\NonFocusValidation.cs" />
     <Compile Include="Validation\NullDataValidation.cs" />
     <Compile Include="Validation\NumberValidation.cs" />
     <Compile Include="Validation\OnlyNumberValidation.cs" />

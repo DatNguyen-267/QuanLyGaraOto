@@ -12,7 +12,7 @@
         xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Thay đổi thông tin" Height="700" Width="400">
+        Title="Thay đổi thông tin" Height="750" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
@@ -45,8 +45,8 @@
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel>
@@ -203,7 +203,7 @@
                                         Height="auto"
                                 VerticalAlignment="Center"
                               materialDesign:HintAssist.Hint="Ngày tiếp nhận"
-                              Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                              >
                                 <DatePicker.Text>
                                     <Binding Path="ReceptionDate" StringFormat='dd-MMM-YYYY' 
                                              UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"
@@ -215,7 +215,35 @@
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </DatePicker.Text>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateChanged">
+                                        <i:InvokeCommandAction Command="{Binding CheckDate1}"
+                                                                       CommandParameter="{Binding ElementName=ChangeCarInfoWD}"
+                                                                       ></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <DatePicker.Style>
+                                    <Style TargetType="DatePicker"  BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding VisOverDate1}" Value="True">
+                                                <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DatePicker.Style>
                             </DatePicker>
+                            <Grid Grid.Column="1" Visibility="{Binding VisOverDate1, Converter={StaticResource BooleanToVisibilityConverter }}">
+                                <TextBlock Text="Ngày tiếp nhận không được quá ngày hiện tại"
+                                       TextWrapping="WrapWithOverflow"
+                                       Margin="0 0 10 -20"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="10"
+                                       Foreground="Red"
+                                       Background="white"
+                                       Padding="3 0 3 0"
+                                       >
+                                </TextBlock>
+                            </Grid>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 0 0 0" Height="70">
@@ -227,6 +255,7 @@
                             <materialDesign:PackIcon Kind="CalendarEnd" 
                                                      Grid.Column="0"/>
                             <DatePicker 
+                               
                                 TabIndex="6"
                                 x:Name="dpRepairDate"
                                 SelectedDate="{Binding RepairDate}"
@@ -234,8 +263,52 @@
                                Width="200"
                                         Height="auto"
                                 VerticalAlignment="Center"
-                              materialDesign:HintAssist.Hint="Ngày sửa chữa"
-                              Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                              materialDesign:HintAssist.Hint="Ngày sửa chữa">
+                             
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedDateChanged">
+                                        <i:InvokeCommandAction Command="{Binding CheckDate2}"
+                                                                           CommandParameter="{Binding ElementName=ChangeCarInfoWD}"
+                                                                           ></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <DatePicker.Style>
+                                    <Style TargetType="DatePicker"  BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding VisOverDate2}" Value="True">
+                                                <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding VisErrorDate2}" Value="True">
+                                                <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DatePicker.Style>
+                            </DatePicker>
+                            <Grid Grid.Column="1" Visibility="{Binding VisOverDate2, Converter={StaticResource BooleanToVisibilityConverter }}">
+                                <TextBlock Text="Ngày sửa chữa không được quá ngày hiện tại"
+                                       TextWrapping="WrapWithOverflow"
+                                       Margin=" 0 0 10 -20"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="10"
+                                       Foreground="Red"
+                                       Background="white"
+                                       Padding="3 0 3 0"
+                                       >
+                                </TextBlock>
+                            </Grid>
+                            <Grid Grid.Column="1" Visibility="{Binding VisErrorDate2, Converter={StaticResource BooleanToVisibilityConverter }}">
+                                <TextBlock Text="Ngày sửa chữa không được nhỏ hơn ngày tiếp nhận"
+                                       TextWrapping="WrapWithOverflow"
+                                       Margin=" 0 0 10 -20"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="10"
+                                       Foreground="Red"
+                                       Background="white"
+                                       Padding="3 0 3 0"
+                                       >
+                                </TextBlock>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </StackPanel>
