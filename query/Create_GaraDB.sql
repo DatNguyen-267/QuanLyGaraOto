@@ -60,7 +60,7 @@ GO
 
 create table INVENTORY_REPORT
 (
-	InventoryReport_Id int primary key not null,
+	InventoryReport_Id  int IDENTITY(1, 1) primary key not null,
 	InventoryReport_Date date not null,
 );
 GO
@@ -136,7 +136,8 @@ create table REPAIR_DETAIL
 	TotalMoney int not NULL,
 	SuppliesPrice int,
     SuppliesAmount int,
-    IdWage int not NULL,
+	WagePrice int,
+    IdWage int,
 	IdRepair int not null,
 	IdSupplies int,
 	constraint FK_REPAIRDETAIL_SUPPLIES foreign key (IdSupplies) references SUPPLIES(Supplies_Id),

@@ -54,7 +54,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Key>
             <PropertyRef Name="InventoryReport_Id" />
           </Key>
-          <Property Name="InventoryReport_Id" Type="int" Nullable="false" />
+          <Property Name="InventoryReport_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InventoryReport_Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="INVENTORY_REPORT_DETAIL">
@@ -115,7 +115,8 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="TotalMoney" Type="int" Nullable="false" />
           <Property Name="SuppliesPrice" Type="int" />
           <Property Name="SuppliesAmount" Type="int" />
-          <Property Name="IdWage" Type="int" Nullable="false" />
+          <Property Name="WagePrice" Type="int" />
+          <Property Name="IdWage" Type="int" />
           <Property Name="IdRepair" Type="int" Nullable="false" />
           <Property Name="IdSupplies" Type="int" />
         </EntityType>
@@ -313,7 +314,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_REPAIRDETAIL_WAGE">
-          <End Role="WAGE" Type="Self.WAGE" Multiplicity="1" />
+          <End Role="WAGE" Type="Self.WAGE" Multiplicity="0..1" />
           <End Role="REPAIR_DETAIL" Type="Self.REPAIR_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WAGE">
@@ -671,7 +672,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Key>
             <PropertyRef Name="InventoryReport_Id" />
           </Key>
-          <Property Name="InventoryReport_Id" Type="Int32" Nullable="false" />
+          <Property Name="InventoryReport_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InventoryReport_Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="INVENTORY_REPORT_DETAIL" Relationship="GARAModel.FK_INVENTORYREPORTDETAIL_INVENTORYREPORT" FromRole="INVENTORY_REPORT" ToRole="INVENTORY_REPORT_DETAIL" />
         </EntityType>
@@ -743,7 +744,8 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="TotalMoney" Type="Int32" Nullable="false" />
           <Property Name="SuppliesPrice" Type="Int32" />
           <Property Name="SuppliesAmount" Type="Int32" />
-          <Property Name="IdWage" Type="Int32" Nullable="false" />
+          <Property Name="WagePrice" Type="Int32" />
+          <Property Name="IdWage" Type="Int32" />
           <Property Name="IdRepair" Type="Int32" Nullable="false" />
           <Property Name="IdSupplies" Type="Int32" />
           <NavigationProperty Name="REPAIR" Relationship="GARAModel.FK_REPAIRDETAIL_REPAIR" FromRole="REPAIR_DETAIL" ToRole="REPAIR" />
@@ -990,7 +992,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_REPAIRDETAIL_WAGE">
-          <End Type="GARAModel.WAGE" Role="WAGE" Multiplicity="1" />
+          <End Type="GARAModel.WAGE" Role="WAGE" Multiplicity="0..1" />
           <End Type="GARAModel.REPAIR_DETAIL" Role="REPAIR_DETAIL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WAGE">
@@ -1160,6 +1162,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
                 <ScalarProperty Name="IdSupplies" ColumnName="IdSupplies" />
                 <ScalarProperty Name="IdRepair" ColumnName="IdRepair" />
                 <ScalarProperty Name="IdWage" ColumnName="IdWage" />
+                <ScalarProperty Name="WagePrice" ColumnName="WagePrice" />
                 <ScalarProperty Name="SuppliesAmount" ColumnName="SuppliesAmount" />
                 <ScalarProperty Name="SuppliesPrice" ColumnName="SuppliesPrice" />
                 <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />

@@ -11,7 +11,7 @@
         WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="BillTemplate" Height="auto" Width="600">
+        Title="BillTemplate" Height="auto" Width="800">
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="TitleTextBlock">
             <Setter Property="FontSize" Value="15"></Setter>
@@ -105,13 +105,11 @@
                         AutoGenerateColumns="False"
                         CanUserDeleteRows="False"
                         CanUserReorderColumns="True"
-                        
                 IsReadOnly="True"
+                FontSize="12"
                         >
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                        <Setter Property="FontSize"  Value="12" />
-                       
                         <Setter Property="Foreground" Value="White"></Setter>
                         <Setter Property="Background" Value="#FF1976D2"></Setter>
                     </Style>
@@ -120,8 +118,6 @@
                     <DataGridTextColumn
                           Binding="{Binding STT}"
                           Header="STT"
-                          
-                           FontSize="12"
                           ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
                     </DataGridTextColumn>
@@ -135,7 +131,7 @@
                     </materialDesign:DataGridTextColumn>
                     <!-- set a max length to get an indicator in the editor -->
                     <DataGridTextColumn
-                        Width="90"
+                       
                         Binding="{Binding RepairDetail.SUPPLIES.Supplies_Name}"
                         Header="Vật tư"
                         ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
@@ -145,17 +141,17 @@
                     <materialDesign:DataGridTextColumn
                         Binding="{Binding RepairDetail.SuppliesAmount}"
                         Header="Số lượng"
-                        Width="90"
+                      
                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"> 
                     </materialDesign:DataGridTextColumn>
                     <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
                     <materialDesign:DataGridTextColumn
                           Header="Đơn giá"
                             Binding="{Binding RepairDetail.SuppliesPrice}"
-                          Width="100">
+                          >
                     </materialDesign:DataGridTextColumn>
                     <DataGridTextColumn
-                        Width="90"
+                       
                         Header="Tiền công"
                         Binding="{Binding RepairDetail.TotalMoney}"
                         ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"

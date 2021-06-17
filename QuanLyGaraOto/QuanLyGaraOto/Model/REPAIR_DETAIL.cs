@@ -20,12 +20,14 @@ namespace QuanLyGaraOto.Model
         public string Content { get => _Content; set { _Content = value; OnPropertyChanged(); } }
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
+        private Nullable<int> _WagePrice { get; set; }
+        public Nullable<int> WagePrice { get => _WagePrice; set { _WagePrice = value; OnPropertyChanged(); } }
         private Nullable<int> _SuppliesPrice { get; set; }
         public Nullable<int> SuppliesPrice { get => _SuppliesPrice; set { _SuppliesPrice = value; OnPropertyChanged(); } }
         private Nullable<int> _SuppliesAmount { get; set; }
         public Nullable<int> SuppliesAmount { get => _SuppliesAmount; set { _SuppliesAmount = value; OnPropertyChanged(); } }
-        private int _IdWage { get; set; }
-        public int IdWage { get => _IdWage; set { _IdWage = value; OnPropertyChanged(); } }
+        private Nullable<int> _IdWage { get; set; }
+        public Nullable<int> IdWage { get => _IdWage; set { _IdWage = value; OnPropertyChanged(); } }
         private int _IdRepair { get; set; }
         public int IdRepair { get => _IdRepair; set { _IdRepair = value; OnPropertyChanged(); } }
         private Nullable<int> _IdSupplies { get; set; }

@@ -1,0 +1,70 @@
+﻿<Window x:Class="QuanLyGaraOto.AddCarBrandWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
+        xmlns:local="clr-namespace:QuanLyGaraOto"
+        mc:Ignorable="d"
+        WindowStyle="SingleBorderWindow"
+        Name="wdAddCarBrand"
+        Title="AddCarBrandWindow" Height="160" Width="250">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBox
+                x:Name="txtBrand"
+                materialDesign:HintAssist.Hint="Tên hãng xe"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                VerticalAlignment="Center" 
+                Margin="5"
+                FontSize="14" Height="40">
+
+                <TextBox.Text>
+                    <Binding Path="CarBrandInAdd" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
+                                                                       ></validation:NullDataValidation>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    IsDefault="True"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Width="100"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="Thêm"      
+                Background="Black"
+                BorderBrush="Black"
+                Command="{Binding AddCarBrand}"
+                CommandParameter="{Binding ElementName=wdAddCarBrand}"/>
+
+            <Button Grid.Column="1"
+                    IsCancel="True"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Width="100"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="Hủy"      
+                Background="Black"
+                BorderBrush="Black"
+                Command="{Binding CancelAddCarBrandWindow}"
+                CommandParameter="{Binding ElementName=wdAddCarBrand}"/>
+        </Grid>
+    </Grid>
+</Window>

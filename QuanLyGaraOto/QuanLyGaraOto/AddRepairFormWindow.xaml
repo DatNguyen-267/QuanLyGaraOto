@@ -13,7 +13,7 @@
         >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -22,7 +22,6 @@
                        VerticalAlignment="Center"
                        Text="Lập phiếu sửa chữa"
                        FontSize="30"
-                       Margin="0 20 0 20"
                        Foreground="White"
                        ></TextBlock>
         </Grid>
@@ -55,28 +54,26 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="2"
-              Margin="30 0 30 0">
+              Margin="10 0 10 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button
+                IsDefault="True"
                     Command="{Binding ConfirmCommand}"
                     CommandParameter="{Binding ElementName=AddRepairFormWD}"
                     Grid.Column="0"
-                    Width="100"
-                    Background="#455A64"
-                  Style="{StaticResource MaterialDesignRaisedButton}"
-                  ToolTip="Resource name: MaterialDesignRaisedButton"
+                   Style="{StaticResource FeatureButton}"
+                    Background="{StaticResource MainBlue}"
+                    BorderBrush="{StaticResource MainBlue}"
                   Content="Xác Nhận" />
             <Button
+                IsCancel="True"
                     Command="{Binding CloseCommand}"
-                    CommandParameter="{Binding ElementName=CarReceptionWD}"
+                    CommandParameter="{Binding ElementName=AddRepairFormWD}"
                    Grid.Column="1"
-                      Width="100"
-                    Background="#455A64"
-                  Style="{StaticResource MaterialDesignRaisedButton}"
-                  ToolTip="Resource name: MaterialDesignRaisedButton"
+                      Style="{StaticResource CloseButton}"
                   Content="Đóng" />
         </Grid>
     </Grid>

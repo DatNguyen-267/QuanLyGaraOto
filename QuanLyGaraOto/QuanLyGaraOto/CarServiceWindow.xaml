@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Name="CarServiceWD"
         Title="Dịch vụ và thông tin xe" 
-        Height="600" Width="1100"
-        MinHeight="500"
+        Height="600" Width="1200"
+        MinHeight="800"
         MinWidth="700"
         WindowStartupLocation="CenterScreen"
         
@@ -27,14 +27,15 @@
             <TextBlock HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Text="Dịch vụ và thông tin xe"
-                       FontSize="26"
+                       FontSize="30"
                        Margin="0 10 0 10"
+                       FontWeight="DemiBold"
                        Foreground="White"
                        ></TextBlock>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="230"></ColumnDefinition>
+                <ColumnDefinition Width="250"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <materialDesign:Card  
@@ -43,17 +44,16 @@
                 Visibility="{Binding VisReceptionCard,
                 Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Column="0" x:Name="ReceptionCard"
-                                 Margin="7 20 5 10"
+                                 Margin="7 20 10 10"
                                  Height="auto">
                 <Button Content="Tiếp nhận xe"
                         IsEnabled="{Binding IsEnableReceptionBtn}"
                         Command="{Binding ReceptionCommand}"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Height="auto"
                         Padding="20 10 20 10"
-                        FontSize="20"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        
+                        Style="{StaticResource MainButton}"
                         >
                 </Button>
             </materialDesign:Card>
@@ -65,25 +65,38 @@
                 <materialDesign:Card 
                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                     materialDesign:ShadowAssist.ShadowEdges="Right,Bottom"
-                    Margin="7 20 5 10"
+                    Margin="7 20 10 10"
                     Height="auto">
                     <Grid>
                         <Grid.Resources>
                             <Style TargetType="materialDesign:PackIcon">
-                                <Setter Property="Width" Value="30"></Setter>
-                                <Setter Property="Height" Value="30"></Setter>
+                                <Setter Property="Width" Value="40"></Setter>
+                                <Setter Property="Height" Value="40"></Setter>
                                 <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                 <Setter Property="HorizontalAlignment" Value="Right"></Setter>
-                                <Setter Property="Margin" Value="0 0 10 0"></Setter>
+                                <Setter Property="Margin" Value="0 15 10 0"></Setter>
+                            </Style>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                <Setter Property="FontSize" Value="16"></Setter>
+                            </Style> 
+                                <Style TargetType="DatePicker" BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+
                             </Style>
                         </Grid.Resources>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <ScrollViewer Grid.Row="0">
+                        <Label Grid.Row="0"
+                               Style="{StaticResource Title}"
+                               Content="Thông tin chung"
+                               Height="48"
+                               
+                               ></Label>
+                        <ScrollViewer Grid.Row="1">
                             <StackPanel>
-                                <Grid  Margin="10 10 10 0" Height="45">
+                                <Grid  Margin="10 5 10 5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -93,16 +106,14 @@
                                             Kind="Account" 
                                             Grid.Column="0"/>
                                         <TextBox Grid.Column="2"
-                                             
                                                  IsReadOnly="True"
-                                            Text="{Binding CarReception.CUSTOMER.Customer_Name}"
-                                     materialDesign:HintAssist.Hint="Tên chủ xe"
-                                         Margin="0 0 0 10"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        VerticalAlignment="Center" />
+                                                
+                                                Text="{Binding CarReception.CUSTOMER.Customer_Name}"
+                                                materialDesign:HintAssist.Hint="Tên chủ xe"
+                                                VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
-                                <Grid  Margin="10 5 10 0">
+                                <Grid  Margin="10 5 10 5">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -114,13 +125,13 @@
                                             Text="{Binding CarReception.LicensePlate}"
                                             Grid.Column="1"
                                            IsReadOnly="True"
-                                            Margin="0 0 0 10"
+                                           
                                             materialDesign:HintAssist.Hint="Biển số xe"
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            
                                             VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
-                                <Grid Margin="10 5 10 0">
+                                <Grid Margin="10 5 10 5">
                                     <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -129,7 +140,7 @@
                                         <materialDesign:PackIcon Kind="Watermark" 
                                                      Grid.Column="0"/>
                                         <TextBox 
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            
                                             Text="{Binding CarReception.CAR_BRAND.CarBrand_Name}"
                                             Grid.Column="1"
                                             IsReadOnly="true"
@@ -139,7 +150,7 @@
                                         </TextBox>
                                     </Grid>
                                 </Grid>
-                                <Grid  Margin="10 5 10 0">
+                                <Grid  Margin="10 5 10 5">
                                     <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -153,12 +164,12 @@
                                             Grid.Column="2"
                                             materialDesign:HintAssist.Hint="Địa chỉ"
                                       
-                                            Margin="0 0 0 10"
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                          
+                                            
                                             VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
-                                <Grid Margin="10 5 10 0">
+                                <Grid Margin="10 5 10 5">
                                     <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -169,13 +180,13 @@
                                             Text="{Binding CarReception.CUSTOMER.Customer_Phone}"
                                             IsReadOnly="True"
                                             Grid.Column="1"
-                                            Margin="0 0 0 10"
+                                          
                                             materialDesign:HintAssist.Hint="Số Điện thoại"
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                            VerticalAlignment="Center" />   
+                                            
+                                            VerticalAlignment="Center" />
                                     </Grid>
                                 </Grid>
-                                <Grid Margin="10 5 10 0">
+                                <Grid Margin="10 5 10 5">
                                     <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -189,7 +200,7 @@
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
                                             materialDesign:HintAssist.Hint="Ngày tiếp nhận"
-                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                           ></DatePicker>
                                     </Grid>
                                 </Grid>
                                 <Grid Margin="10 5 10 0">
@@ -206,21 +217,21 @@
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
                                             materialDesign:HintAssist.Hint="Ngày sửa chữa"
-                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                           />
                                     </Grid>
                                 </Grid>
                             </StackPanel>
                         </ScrollViewer>
-                        <Grid Grid.Row="1"  Margin="10 5 0 15">
+                        <Grid Grid.Row="2"  Margin="0 5 0 15">
                             <Button
                                 Command="{Binding ChangeCarInfoCommand}"
                                 Visibility="{Binding VisChangeCustomerInfo, Converter={StaticResource BooleanToVisibilityConverter}}"
                                 Margin="0 0 0 0"
                                 Grid.Column="0"
                                 VerticalAlignment="Center"
-                                Background="{StaticResource MainColor}"
                                 HorizontalAlignment="Center"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Style="{StaticResource FeatureButton}"
+                                Width="190"
                                 ToolTip="Resource name: MaterialDesignRaisedButton"
                                 Content="Thay đổi thông tin" />
                         </Grid>
@@ -241,16 +252,17 @@
                         IsEnabled="{Binding IsEnabledBtnAddRepair}"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Height="auto"
+                      
                         Padding="20 10 20 10"
-                        FontSize="20"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
+                       
+                        Style="{StaticResource MainButton}"
+                        Width="auto"
                         >
                 </Button>
             </materialDesign:Card>
             <materialDesign:Card 
                 materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                materialDesign:ShadowAssist.ShadowEdges="Top,Bottom"
+                materialDesign:ShadowAssist.ShadowEdges="All"
                 Visibility="{Binding VisRepairServiceCard,
                 Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Column="1"
@@ -270,56 +282,107 @@
                             <Button 
                                 Command="{Binding AddCommand}"
                                 Visibility="{Binding VisAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Width="100"
+                                Style="{StaticResource AddButton}"
                                 Content="Thêm"
-                                Background="{StaticResource MainColor}"
                                 Margin="10 0 10 0"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Right">
+                               
+                    BorderBrush="{StaticResource MainBlue}"
+                                >
                             </Button>
                             <Button 
                                 Command="{Binding EditCommand}"
                                 Visibility="{Binding VisEdit, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Width="100"
+                                Style="{StaticResource FeatureButton}"
                                 Content="Sửa"
                                 Margin="10 0 10 0"
-                                VerticalAlignment="Center"
-                                Background="{StaticResource MainColor}"
-                                HorizontalAlignment="Right">
+                                >
                             </Button>
                             <Button 
                                 Command="{Binding DeleteCommand}"
                                 Visibility="{Binding VisDelete, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Width="100"
+                                Style="{StaticResource DeleteButton}"
                                 Content="Xóa"
                                 Margin="10 0 10 0"
-                                Background="{StaticResource MainColor}"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Right">
+                                
+                               >
                             </Button>
-                            
+
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="0" Margin="10 10 0 10">
-                        <ScrollViewer >
+                    <Grid Grid.Row="0" Margin="0 0 0 10">
+                        <DataGrid  ItemsSource="{Binding ListRepair}" 
+                                    SelectedItem="{Binding SelectedItem}"
+                                    SelectionMode="Extended"
+                                    IsReadOnly="True"
+                                    CanUserAddRows="False"
+                                    AutoGenerateColumns="False"
+                                    CanUserDeleteRows="False"
+                                    CanUserReorderColumns="True"
+                                    x:Name="datagrid"
+                                    FontSize="16">
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gainsboro" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.Resources>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=datagrid}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                           </i:Interaction.Triggers>
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                            <Setter Property="FontWeight" Value="DemiBold" />
+                                            <Setter Property="FontSize" Value="17" />
+                                            
+                                        </Trigger>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                    <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                    <Setter Property="Foreground" Value="White"></Setter>
+                                    <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            <DataGrid.Columns>
+                                <materialDesign:DataGridTextColumn Header="STT" Binding="{Binding STT}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Nội dung" Binding="{Binding RepairInfo.Content}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Vật tư" Binding="{Binding RepairInfo.SUPPLIES.Supplies_Name}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding RepairInfo.SuppliesAmount}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Đơn giá" Binding="{Binding RepairInfo.SUPPLIES.Supplies_Price}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Loại tiền công" Binding="{Binding RepairInfo.WAGE.Wage_Name}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Tiền công" Binding="{Binding RepairInfo.WAGE.Wage_Value}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Thành tiền" Binding="{Binding RepairInfo.TotalMoney}"></materialDesign:DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <!--<ScrollViewer >
                             <ListView 
                                 ItemsSource="{Binding ListRepair}" 
                                 SelectedItem="{Binding SelectedItem}"
                                    HorizontalContentAlignment="Left">
                                 <ListView.View>
                                     <GridView>
-
-                                        <GridViewColumn Header="Nội dung" DisplayMemberBinding="{Binding RepairInfo.Content}"></GridViewColumn>
-                                        <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Name}"></GridViewColumn>
-                                        <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding RepairInfo.SuppliesAmount}"></GridViewColumn>
-                                        <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Price}"></GridViewColumn>
-                                        <GridViewColumn Width="148" Header="Loại tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Name}"></GridViewColumn>
-                                        <GridViewColumn Header="Tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Value}"></GridViewColumn>
-                                        <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding RepairInfo.TotalMoney}"></GridViewColumn>
+                                        <GridViewColumn Width="200" Header="Nội dung" DisplayMemberBinding="{Binding RepairInfo.Content}"></GridViewColumn>
+                                        <GridViewColumn Width="250" Header="Vật tư" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Name}"></GridViewColumn>
+                                        <GridViewColumn Width="150" Header="Số lượng" DisplayMemberBinding="{Binding RepairInfo.SuppliesAmount}"></GridViewColumn>
+                                        <GridViewColumn Width="150" Header="Đơn giá" DisplayMemberBinding="{Binding RepairInfo.SUPPLIES.Supplies_Price}"></GridViewColumn>
+                                        <GridViewColumn Width="250" Header="Loại tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Name}"></GridViewColumn>
+                                        <GridViewColumn Width="150" Header="Tiền công" DisplayMemberBinding="{Binding RepairInfo.WAGE.Wage_Value}"></GridViewColumn>
+                                        <GridViewColumn Width="150" Header="Thành tiền" DisplayMemberBinding="{Binding RepairInfo.TotalMoney}"></GridViewColumn>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                        </ScrollViewer>
+                        </ScrollViewer>-->
                     </Grid>
                 </Grid>
             </materialDesign:Card>
@@ -328,7 +391,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                
+
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Tổng Tiền: "
@@ -359,21 +422,15 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                           
 
-                    
+
+
                     <Button Grid.Column="0"
                         Command="{Binding ViewCommand}"
                         Visibility="{Binding VisView, Converter={StaticResource BooleanToVisibilityConverter}}"
                             Content="Xem Hóa đơn"
-                            Width="150"
-                            Height="50"
+                             Style="{StaticResource MainButton}"
                             Margin="10 0 10 0"
-                             Background="{StaticResource MainBlue}"
-                            BorderBrush="{StaticResource MainBlue}"
-                            Foreground="White"
-                            FontSize="18"
-                            FontWeight="Bold"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right">
                     </Button>
@@ -383,29 +440,26 @@
                         Visibility="{Binding VisPay, Converter={StaticResource BooleanToVisibilityConverter}}"
                         x:Name="BtnReceipt"
                             Content="Thanh toán"
-                            Width="150"
-                            FontSize="16"
-                            Height="50"
+                            Style="{StaticResource MainButton}"
                             Margin="10 0 10 0"
                             Background="{StaticResource MainBlue}"
                             BorderBrush="{StaticResource MainBlue}"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Right">
+                            >
                     </Button>
                     <Button Grid.Column="1"
                         Command="{Binding CloseCommand}"
                             CommandParameter="{Binding ElementName=CarServiceWD}"
                             Margin="10 0 10 0"
-                            Width="150"
-                            FontSize="16"
-                            Height="50"
+                             Style="{StaticResource CloseButton}"
                             Content="Đóng"
+                            Width="150"
+                            Height="50"
+                            IsCancel="True"
                             Background="{StaticResource MainColor}"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Right">
+                            >
                     </Button>
                 </Grid>
-                
+
             </StackPanel>
         </Grid>
     </Grid>

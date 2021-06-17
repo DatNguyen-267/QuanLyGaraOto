@@ -6,36 +6,31 @@
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
+        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
         Name="wdAddEmployee"
-        WindowStyle="None"
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         WindowStartupLocation="CenterScreen"
         
-        Title="AddEmployee" Height="600" Width="450">
+        Title="Thêm nhân viên" Height="750" Width="450">
     <Grid Background="White">
-        <Ellipse 
-            Height="250"
-            Width="250"
-            Stroke="Black" 
-            VerticalAlignment="Bottom"  
-            StrokeThickness="30" Margin="-115,-125,314.6,425.4"/>
-        <Ellipse HorizontalAlignment="Left" 
-            Height="1000" 
-            Width="1000"
-            Stroke="Black" 
-            VerticalAlignment="Top"  
-            StrokeThickness="80" Margin="165,265,-715.4,-714.6"></Ellipse>
-
-        <Grid Width="400" Height="550">
-            <materialDesign:Card>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{StaticResource MainColor}">
+            <TextBlock Text="Thêm nhân viên"
+                       FontSize="30"
+                       FontWeight="DemiBold"
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"></TextBlock>
+        </Grid>
+        <Grid Width="400" Grid.Row="1">
+            <Grid>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -45,7 +40,7 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                      
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0"                   
                         Margin="8 16 8 8"
@@ -69,8 +64,7 @@
                             Stroke="Black"
                             />
                         <TextBox
-                            x:Name="userNameTxb"
-                          
+                            x:Name="txtUserName"                          
                             materialDesign:HintAssist.Hint="Nhập tên tài khoản"
                             Height="40" 
                             FontSize="14" 
@@ -113,6 +107,7 @@
                         Stroke="Black"
                     />
                         <TextBox
+                            Name="txtName"
                         materialDesign:HintAssist.Hint="Nhập họ và tên"
                         Height="40" 
                         FontSize="14" 
@@ -155,6 +150,7 @@
                             Stroke="Black"
                             />
                         <ComboBox
+                            Name='cbxRoleName'
                             ItemsSource="{Binding ListRoles, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             DisplayMemberPath="Role_Name"
                             Text="{Binding RoleName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                           
@@ -193,7 +189,7 @@
                         Stroke="Black"
                     />
                         <DatePicker
-                            
+                            Name="dpkBrithDate"
                         materialDesign:HintAssist.Hint="Nhập ngày sinh"
                         Height="40" 
                         FontSize="14" 
@@ -237,7 +233,7 @@
                         Stroke="Black"
                     />
                         <TextBox
-                            
+                            x:Name="txtCMND"
                         materialDesign:HintAssist.Hint="Nhập CMND/CCCD"
                         Height="40" 
                         FontSize="14" 
@@ -280,7 +276,7 @@
                     Stroke="Black"
                     />
                         <TextBox
-                           
+                           x:Name="txtTelephone"
                             materialDesign:HintAssist.Hint="Nhập số điện thoại"
                             Height="40" 
                             FontSize="14" 
@@ -325,7 +321,7 @@
                             Stroke="Black"
                             />
                         <TextBox
-                          
+                          x:Name="txtAddress"
                             materialDesign:HintAssist.Hint="Nhập địa chỉ"
                             Height="40" 
                             FontSize="14" 
@@ -346,41 +342,35 @@
                             </TextBox.Text>
                         </TextBox>
                     </Grid>
-                    <Grid Grid.Row="7">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0"
-                                Content="Thêm"
-                                Width="120"
-                                Height="35"
-                                Margin="0 0 20 0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
+                </Grid>
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Button Grid.Column="0"
+                        IsDefault="True"
+                                Content="Xác nhận"
+                                Margin="0 0 70 0"
+                                Style="{StaticResource MainButton}"
                                 Command="{Binding AddCommand}"
                                 CommandParameter="{Binding ElementName=wdAddEmployee}"
-                                Background="Black"
-                                BorderBrush="Black"
                         ></Button>
-                        <Button Grid.Column="1"
-                            Content="Thoát"
-                            Width="120"
-                            Height="35"
+                <Button Grid.Column="1"
+                        IsCancel="True"
+                            Content="Đóng"
                             Margin="0 0 16 0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Style="{StaticResource MaterialDesignRaisedButton}"
-                            Background="Gray"
-                            BorderBrush="Gray"
+                            Style="{StaticResource MainButton}"
+                            Background="{StaticResource MainColor}"
+                            BorderBrush="{StaticResource MainColor}"
                                 Command="{Binding ExitCommand}"
                                 CommandParameter="{Binding ElementName=wdAddEmployee}"
                         ></Button>
-                    </Grid>
-                </Grid>
-            </materialDesign:Card>
-
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

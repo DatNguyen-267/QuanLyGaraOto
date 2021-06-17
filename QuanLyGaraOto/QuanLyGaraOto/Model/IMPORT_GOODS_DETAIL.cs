@@ -9,11 +9,11 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using System;
     using QuanLyGaraOto.ViewModel;
+    using System;
     using System.Collections.Generic;
     
-    public partial class IMPORT_GOODS_DETAIL : BaseViewModel
+    public partial class IMPORT_GOODS_DETAIL :BaseViewModel
     {
         private int _IdImportGood { get; set; }
 
@@ -28,7 +28,7 @@ namespace QuanLyGaraOto.Model
         public int Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
-    
+
         public virtual IMPORT_GOODS IMPORT_GOODS { get; set; }
         public virtual SUPPLIES SUPPLIES { get; set; }
     }

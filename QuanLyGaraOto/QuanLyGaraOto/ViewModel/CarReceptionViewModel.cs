@@ -1,4 +1,5 @@
-﻿using QuanLyGaraOto.Model;
+﻿using Prism.Services.Dialogs;
+using QuanLyGaraOto.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,7 +42,8 @@ namespace QuanLyGaraOto.ViewModel
             ListBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    p.Close();
             });
             ConfirmCommand = new RelayCommand<CarReceptionWindow>((p) => {
                 Regex regex = new Regex(@"^[0-9]+$");
@@ -56,22 +58,26 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                CUSTOMER customer = new CUSTOMER() {Customer_Address = Address, Customer_Phone = Phone, Customer_Name = Name };
-                DataProvider.Ins.DB.CUSTOMERs.Add(customer);
-                DataProvider.Ins.DB.SaveChanges();
-                  
-                RECEPTION carReception = new RECEPTION() { 
-                    IdCustomer = customer.Customer_Id,
-                    LicensePlate = LicensePlate,    
-                    ReceptionDate = ReceptionDate,
-                    IdCarBrand = SelectedBrand.CarBrand_Id
-                };
-                DataProvider.Ins.DB.RECEPTIONs.Add(carReception);
-                DataProvider.Ins.DB.SaveChanges();
-                IsSuccess = true;
-                IdNew = carReception.Reception_Id;
-                MessageBox.Show("Tiếp nhận xe thành công","Thông báo",MessageBoxButton.OK);
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn đồng ý tiếp nhận xe này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    CUSTOMER customer = new CUSTOMER() { Customer_Address = Address, Customer_Phone = Phone, Customer_Name = Name };
+                    DataProvider.Ins.DB.CUSTOMERs.Add(customer);
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    RECEPTION carReception = new RECEPTION()
+                    {
+                        IdCustomer = customer.Customer_Id,
+                        LicensePlate = LicensePlate,
+                        ReceptionDate = ReceptionDate,
+                        IdCarBrand = SelectedBrand.CarBrand_Id
+                    };
+                    DataProvider.Ins.DB.RECEPTIONs.Add(carReception);
+                    DataProvider.Ins.DB.SaveChanges();
+                    IsSuccess = true;
+                    IdNew = carReception.Reception_Id;
+                    MessageBox.Show("Tiếp nhận xe thành công", "Thông báo", MessageBoxButton.OK);
+                    p.Close();
+                }
             });
             
         }

@@ -20,7 +20,7 @@ namespace QuanLyGaraOto.Model
         {
             this.REPAIR_DETAIL = new HashSet<REPAIR_DETAIL>();
         }
-    
+
         public int Repair_Id { get; set; }
         private int _IdReception { get; set; }
         public int IdReception { get => _IdReception; set { _IdReception = value; OnPropertyChanged(); } }
@@ -30,6 +30,7 @@ namespace QuanLyGaraOto.Model
         public int Repair_TotalMoney { get => _Repair_TotalMoney; set { _Repair_TotalMoney = value; OnPropertyChanged(); } }
         private RECEPTION _RECEPTION { get; set; }
         public virtual RECEPTION RECEPTION { get => _RECEPTION; set { _RECEPTION = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REPAIR_DETAIL> REPAIR_DETAIL { get; set; }
     }

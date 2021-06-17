@@ -11,7 +11,6 @@
         Title="AddImportWindow"
         WindowStartupLocation="CenterScreen"
         Name="AddImportWD"
-        DataContext="{StaticResource AddImportVM}"
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -63,6 +62,8 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button
+                IsDefault="True"
+                
                     Command="{Binding ConfirmCommand}"
                     CommandParameter="{Binding ElementName=AddImportWD}"
                     Grid.Column="0"
@@ -72,8 +73,9 @@
                   ToolTip="Resource name: MaterialDesignRaisedButton"
                   Content="Xác Nhận" />
             <Button
+                IsCancel="True"
                     Command="{Binding CloseCommand}"
-                    CommandParameter="{Binding ElementName=BunkWD}"
+                    CommandParameter="{Binding ElementName=AddImportWD}"
                    Grid.Column="1"
                       Width="100"
                     Background="#455A64"

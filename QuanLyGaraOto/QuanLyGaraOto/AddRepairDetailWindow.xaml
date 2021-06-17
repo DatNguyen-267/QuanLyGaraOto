@@ -8,38 +8,62 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         ResizeMode="NoResize"
         Name="AddRepairDetailWD"
+        FontSize="16"
+        FontWeight="Medium"
         WindowStartupLocation="CenterScreen"
          xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-        Title="Thêm thông tin sửa chữa" Height="200" Width="1100">
-    <Grid Margin="20 10 20 10" >
+        Title="Thông tin sửa chữa" Height="300" Width="1200">
+    <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Height="80" Grid.Row="0">
-            <StackPanel 
-                    Grid.Row="1"
-                    Margin="7 5 10 5"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Left">
-                <TextBox
+        <Grid Grid.Row="0" Background="#3d4751">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="{Binding Title}"
+                       FontSize="30"
+                       Foreground="White"
+                       FontWeight="DemiBold"
+                       ></TextBlock>
+        </Grid>
+        <Grid Height="80" Grid.Row="1" Margin="20 10 20 20">
+            <Grid.Resources>
+                <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <Setter Property="Margin" Value="0 10 20 0"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                </Style>
+                <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+                    <Setter Property="Margin" Value="0 25 20 0"></Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     TabIndex="0"
                     x:Name="txbName"
-                    Text="{Binding Content}"  HorizontalAlignment="Left"
-                    materialDesign:HintAssist.Hint="Nội dung"
-                    Width="200"
-                    Margin="3 3 3 0"
-                    Style="{StaticResource MaterialDesignFilledTextBox}">
+                     AllowDrop="True"
+                    Text="{Binding Content}" 
+                    materialDesign:HintAssist.Hint="Nội dung">
                 </TextBox>
-                <ComboBox
+            <ComboBox Grid.Column="1"
+                      TabIndex="1"
                     x:Name="cbSupplies"
                     SelectedItem="{Binding SelectedSupply}"
                     ItemsSource="{Binding ListSupply}"
                     DisplayMemberPath="Supplies_Name"
-                    Style="{StaticResource MaterialDesignFilledComboBox}"
+                 
                     materialDesign:HintAssist.Hint="Vật tư"
-                    Margin="3 3 3 0"
-                    Width="120">
+                    >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction
@@ -48,102 +72,82 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <ComboBox
-                    x:Name="cbSuppliesAmount"       
-                    SelectedItem="{Binding SelectedAmount}"
-                    Text="{Binding SuppliesAmount}"
-                                              
-                    Margin="3 3 3 0"                 
-                    Width="120"
-                    materialDesign:HintAssist.Hint="Số lượng"
-                    ItemsSource="{Binding ListAmount, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                    Style="{StaticResource MaterialDesignFilledComboBox}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction
-                                                Command="{Binding UpdateValue}"
-                                                ></i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <ComboBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel />
-                        </ItemsPanelTemplate>
-                    </ComboBox.ItemsPanel>
-                </ComboBox>
-                <TextBox
+            <ComboBox Grid.Column="2"
+                      TabIndex="2"
+                        x:Name="cbSuppliesAmount"       
+                        SelectedItem="{Binding SelectedAmount}"
+                        Text="{Binding SuppliesAmount}"
+                        materialDesign:HintAssist.Hint="Số lượng"
+                        ItemsSource="{Binding ListAmount, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction
+                                                    Command="{Binding UpdateValue}"
+                                                    ></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <TextBox Grid.Column="3"
                     x:Name="txbPrice"
+                     TabIndex="3"
                     IsReadOnly="True"
-                    Text="{Binding SelectedSupply.Supplies_Price}"  HorizontalAlignment="Left"
+                    Text="{Binding SelectedSupply.Supplies_Price}"  
                     materialDesign:HintAssist.Hint="Đơn giá"
-                    Width="120"
-                    Margin="3 3 3 0"
-                    Style="{StaticResource MaterialDesignFilledTextBox}">
+                    >
 
                 </TextBox>
-                <ComboBox
+            <ComboBox Grid.Column="4"
                     x:Name="cbWage"
+                      TabIndex="4"
                     SelectedItem="{Binding SelectedPay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     ItemsSource="{Binding ListPay}"
                     DisplayMemberPath="Wage_Name"
-                   
-                    Style="{StaticResource MaterialDesignFilledComboBox}"
-                    materialDesign:HintAssist.Hint="Loại tiền công"
-                    Margin="3 3 3 0"
-                    Width="120">
+                    materialDesign:HintAssist.Hint="Loại tiền công">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction
-                                                Command="{Binding UpdateValue}"
-                                                ></i:InvokeCommandAction>
-                        </i:EventTrigger>
+                        <i:InvokeCommandAction
+                            Command="{Binding UpdateValue}"
+                            ></i:InvokeCommandAction>
+                    </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </ComboBox>
-                <TextBox
+            </ComboBox>
+            <TextBox Grid.Column="5"
                     x:Name="txbWagePrice"
                     IsReadOnly="True"
-                    Text="{Binding SelectedPay.Wage_Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  HorizontalAlignment="Left"
-                    materialDesign:HintAssist.Hint="Tiền công"
-                    Width="120"
-                    Margin="3 3 3 0"
-                    Style="{StaticResource MaterialDesignFilledTextBox}">
-
-                </TextBox>
-                <TextBox
-                    Text="{Binding TotalMoney}"  HorizontalAlignment="Left"
+                     TabIndex="5"
+                    Text="{Binding SelectedPay.Wage_Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                     
+                    materialDesign:HintAssist.Hint="Tiền công">
+            </TextBox>
+            <TextBox Grid.Column="6"
+                    Text="{Binding TotalMoney}"  
                     materialDesign:HintAssist.Hint="Thành tiền"
-                    Width="120"
-                    Margin="3 3 3 0"
                     IsReadOnly="True"
-                    Style="{StaticResource MaterialDesignFilledTextBox}"
+                     Margin="0 10 0 0"
+                     TabIndex="6"
                     >
-                </TextBox>
-            </StackPanel>
+            </TextBox>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
                         VerticalAlignment="Center">
                 <Button
                     Command="{Binding ConfirmCommand}"
                     CommandParameter="{Binding ElementName=AddRepairDetailWD}"
-                    Width="100"
-                    Height="40"
+                    Style="{StaticResource MainButton}"
                     Margin="0 0 40 0"
-                    Background="#455A64"
-                  Style="{StaticResource MaterialDesignRaisedButton}"
-                  ToolTip="Resource name: MaterialDesignRaisedButton"
+                    IsDefault="True"
                   Content="Xác Nhận" />
                 
                 <Button
+                    IsCancel="True"
                     Command="{Binding CloseCommand}"
                     CommandParameter="{Binding ElementName=AddRepairDetailWD}"
-                    Width="100"
-                    Height="40"
                     Margin="0 0 40 0"
-                    Background="#455A64"
-                  Style="{StaticResource MaterialDesignRaisedButton}"
-                  ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Style="{StaticResource CloseButton}"
+                    Width="150"
+                    Height="50"
                   Content="Đóng" />
             </StackPanel>
         </Grid>

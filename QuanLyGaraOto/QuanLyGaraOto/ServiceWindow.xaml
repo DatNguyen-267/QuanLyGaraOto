@@ -7,14 +7,14 @@
         xmlns:validation ="clr-namespace:QuanLyGaraOto.Validation"
         mc:Ignorable="d"
         x:Name="ServiceWD"
-        Height="450" Width="1000"
+        Height="450" Width="1200"
         Background="White"  
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         >
     <UserControl.Resources>
-        <!--<Style TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-        </Style>-->
+        <Style TargetType="Button" BasedOn="{StaticResource FeatureButton}"></Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -29,7 +29,7 @@
               >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="130"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <TextBlock 
@@ -43,17 +43,7 @@
                     ></TextBlock>
             </Grid>
             <Grid Grid.Column="1">
-                <Button
-                    Command="{Binding CarReceptionCommand}"
-                    Content="Thêm xe"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                    Width="100"
-                    Height="50"
-                    Foreground="Black"
-                    Background="White"
-                    Margin="10 5 20 5"
-                    />
+                
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
@@ -71,30 +61,55 @@
         <materialDesign:Card
             Margin="15 5 10 15"
             Grid.Row="3">
-            <!--<DataGrid ItemsSource="{Binding ListCar}" 
+            <DataGrid ItemsSource="{Binding ListCar}" 
                       SelectedItem="{Binding SelectedItem}"
-                      SelectionMode="Single"
+                      SelectionMode="Extended"
                       IsReadOnly="True"
                       CanUserAddRows="False"
                       AutoGenerateColumns="False"
                       CanUserDeleteRows="False"
-                      CanUserReorderColumns="True">
-                --><!--<DataGrid.CellStyle>
-                    <Style TargetType="{x:Type DataGridCell}">
+                      CanUserReorderColumns="True"
+                      FontSize="18"
+                      Name="dataGrid"
+                      >
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
                         <Style.Triggers>
-                            <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                <Setter Property="Background" Value="DimGray" />
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Gainsboro" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>
-                </DataGrid.CellStyle>--><!--
+                   
+                </DataGrid.Resources>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                    
+                </i:Interaction.Triggers>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="DemiBold" />
+                                <Setter Property="FontSize" Value="19" />
+                                
+                            </Trigger>
+                        </Style.Triggers>
+                       
+                    </Style>
+                </DataGrid.CellStyle>
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
                         <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
                         <Setter Property="Foreground" Value="White"></Setter>
                         <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                       
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
+
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding CarReception.Reception_Id}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Header="Biển Số" Binding="{Binding CarReception.LicensePlate}"></materialDesign:DataGridTextColumn>
@@ -103,12 +118,21 @@
                     <materialDesign:DataGridTextColumn Header="Tiền nợ" Binding="{Binding Debt}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            -->
-            <ScrollViewer>
-                <ListView ItemsSource="{Binding ListCar}" SelectedItem="{Binding SelectedItem}">
-                    
+            
+            <!--<ScrollViewer>
+                <ListView x:Name="listview"
+                    SelectionMode="Extended"
+                    ItemsSource="{Binding ListCar}" 
+                    SelectedItem="{Binding SelectedItem}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=listview}"></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <ListView.View >
                         <GridView>
+                            
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding CarReception.Reception_Id}"></GridViewColumn>
                             <GridViewColumn Header="Biển Số" DisplayMemberBinding="{Binding CarReception.LicensePlate}"></GridViewColumn>
                             <GridViewColumn Header="Hiệu Xe" DisplayMemberBinding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></GridViewColumn>
@@ -117,17 +141,21 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </ScrollViewer>
+            </ScrollViewer>-->
         </materialDesign:Card>
 
         <Grid Grid.Row="2" Margin="15 0 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Grid.Resources>
                 <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <Setter Property="Margin" Value="10 0 0 0"></Setter>
-                    <Setter Property="Width" Value="70"></Setter>
-                </Style>
+                    <Setter Property="Width" Value="100"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter></Style>
             </Grid.Resources>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Width="auto">
                 <TextBox
                         x:Name="txbID"
                       materialDesign:HintAssist.Hint="ID"
@@ -156,8 +184,9 @@
                     DisplayMemberPath="CarBrand_Name"
                     SelectedItem="{Binding SelectedBrand}"
                       materialDesign:HintAssist.Hint="Hiệu xe"
-                        Margin="10 12 0 0"
-                    Width="70"
+                        Margin="10 18 0 0"
+                    Width="100"
+                    FontSize="18"
                       VerticalAlignment="Center">
 
                 </ComboBox>
@@ -183,35 +212,36 @@
                 </TextBox>
                 <Button Content="Tìm"
                         Margin="20 5 0 0"
-                        Width="100"
-                        Background="{StaticResource MainColor}"
                         Command="{Binding SearchCommand}"
                         CommandParameter="{Binding ElementName=ServiceWD}">
                 </Button>
                 <Button Content="Làm mới"
                         Margin="20 5 0 0"
-                        Width="100"
-                        Background="{StaticResource MainColor}"
                         Command="{Binding RefeshCommand}"
                         CommandParameter="{Binding ElementName=ServiceWD}">
 
                 </Button>
                 <Button 
                         Command="{Binding DeleteCommand}"
-                        Width="100"
-                        Background="{StaticResource MainColor}"
                         Margin="20 5 0 0"
-                        
+                        Style="{StaticResource DeleteButton}"
                     Content="Xóa">
                 </Button>
                 <Button 
-                        Command="{Binding OpenCommand}"
-                        Background="{StaticResource MainColor}"
-                        Width="100"
+                        Command="{Binding OpenCommand}" 
                         Margin="20 5 0 0"
                         Content="Chi Tiết">
                 </Button>
+               
             </StackPanel>
+            <Button Grid.Column="1"
+                    Command="{Binding CarReceptionCommand}"
+                    Content="Thêm xe"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource MainButton}"
+                    Margin="10 5 20 5"
+                    />
         </Grid>
     </Grid>
 
