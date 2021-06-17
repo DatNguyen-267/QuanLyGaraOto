@@ -90,7 +90,8 @@
                     </StackPanel>
                 </Button>
                 <Button Grid.Row="2"
-                            Command="{Binding OpenBunk}">
+                            Command="{Binding OpenBunk}"
+                        CommandParameter="{Binding ElementName=BunkWD}">
                     <StackPanel>
                         <materialDesign:PackIcon  Grid.Column="0"
                                                    
@@ -101,7 +102,8 @@
                     </StackPanel>
                 </Button>
                 <Button Grid.Row="3"
-                            Command="{Binding OpenEmployee}">
+                            Command="{Binding OpenEmployee}"
+                        CommandParameter="{Binding ElementName=wdEmployee}">
                     <StackPanel>
                         <materialDesign:PackIcon
                                     Kind="CardAccountDetails" />
@@ -110,7 +112,8 @@
                     </StackPanel>
                 </Button>
                 <Button Grid.Row="4"
-                            Command="{Binding OpenReport}">
+                            Command="{Binding OpenReport}"
+                        CommandParameter="{Binding ElementName=wdReport}">
                     <StackPanel >
                         <materialDesign:PackIcon  Grid.Column="0"
                               
@@ -152,13 +155,14 @@
             <Grid 
                 Visibility="{Binding VisService, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <local:ServiceWindow 
+                    x:Name="wdService"
                     Width="{Binding ElementName=Container, Path=ActualWidth}"
                     Height="{Binding ElementName=Container, Path=ActualHeight}"
                 ></local:ServiceWindow>
             </Grid>
             <Grid
                 Visibility="{Binding VisBunk, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <local:BunkWindow 
+                <local:BunkWindow x:Name="BunkWD"
                     Width="{Binding ElementName=Container, Path=ActualWidth}"
                     Height="{Binding ElementName=Container, Path=ActualHeight}"></local:BunkWindow>
             </Grid>
@@ -166,12 +170,14 @@
             <Grid 
                 Visibility="{Binding VisEmployee, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <local:Employee 
+                    x:Name="wdEmployee"
                     Width="{Binding ElementName=Container, Path=ActualWidth}"
                     Height="{Binding ElementName=Container, Path=ActualHeight}"></local:Employee>
             </Grid>
             <Grid
                 Visibility="{Binding VisReport, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <local:ReportWindow 
+                    x:Name="wdReport"
                     Width="{Binding ElementName=Container, Path=ActualWidth}"
                     Height="{Binding ElementName=Container, Path=ActualHeight}"></local:ReportWindow>
             </Grid>

@@ -385,6 +385,10 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand SearchBrandCommand { get; set; }
         public ICommand RefeshBrandCommand { get; set; }
 
+        //Role
+        bool _isSettingApp = false;
+        public bool isSettingApp { get => _isSettingApp; set { _isSettingApp = value; OnPropertyChanged(); } }
+
         public SettingViewModel()
         {
             // Visibility
@@ -655,7 +659,7 @@ namespace QuanLyGaraOto.ViewModel
             // Set enable button to false
             SetEnableStatusButtonInGaraInformation(false);
         }
-        public SettingViewModel(string username) : this()
+        public SettingViewModel(string username, bool role) : this()
         {
             // User information
             user = DataProvider.Ins.DB.USERS.Where(x => x.UserName == username).FirstOrDefault();
@@ -668,6 +672,9 @@ namespace QuanLyGaraOto.ViewModel
                 UserTelephone = userInfo.UserInfo_Telephone;
                 UserCMND = userInfo.UserInfo_CMND;
             }
+
+            //Set role
+            isSettingApp = role;
         }
 
         private void SetEnableStatusButtonInGaraInformation(bool b)

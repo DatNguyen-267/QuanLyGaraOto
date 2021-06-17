@@ -220,13 +220,15 @@ create table USER_INFO
 
 insert into ROLE(Role_Name) values ('admin');
 
-insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Trang chủ');
-insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Dịch vụ');
-insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Kho hàng');
-insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Nhân viên');
-insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Thống kê');
-insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Cài đặt tài khoản');
-insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Cài đặt ứng dụng');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Truy cập dịch vụ');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Truy cập kho hàng');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền nhập hàng');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Truy cập nhân viên');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền thêm nhân viên');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền thêm chức vụ');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Truy cập thống kê');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền báo cáo');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Truy cập cài đặt ứng dụng');
 
 insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,1,1)
 insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,2,1)
@@ -235,6 +237,8 @@ insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,4,1)
 insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,5,1)
 insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,6,1)
 insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,7,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,8,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,9,1)
 
 insert into USERS(UserName,Password,IdRole) values ('admin','db69fc039dcbd2962cb4d28f5891aae1',1);
 

@@ -74,7 +74,7 @@
             </ComboBox>
 
             <Button
-                          
+                IsEnabled="{Binding isReport}"        
                 Width="120"
                 BorderThickness="0"
                 Margin="0,0,170,9"             
@@ -87,6 +87,7 @@
                 Command="{Binding ReportSalesCommand }"
                 CommandParameter="{Binding ElementName=reportWindow}" Click="Button_Click"/>
             <Button
+                IsEnabled="{Binding isReport}"   
                 Width="120"
                 BorderThickness="0"
                 Margin="0,0,21,0"
