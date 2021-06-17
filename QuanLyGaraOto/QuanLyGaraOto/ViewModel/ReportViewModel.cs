@@ -1,4 +1,5 @@
 ﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.Template;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +25,9 @@ namespace QuanLyGaraOto.ViewModel
 
         public ICommand Report_YearChangedCommand { get; set; }
         public ICommand Report_MonthChangedCommand { get; set; }
-        
+
+        public ICommand ViewReportCommand { get; set; }
+        public ICommand PrintReportCommand { get; set; }
 
         private string first_item_year { get; set; }
         public string First_item_year { get => first_item_year; set { first_item_year = value; OnPropertyChanged(); } }
@@ -36,6 +39,13 @@ namespace QuanLyGaraOto.ViewModel
 
         private ObservableCollection<string> itemSource_Month = new ObservableCollection<string>();
         public ObservableCollection<string> ItemSource_Month { get => itemSource_Month; set { itemSource_Month = value; OnPropertyChanged(); } }
+     
+        private ObservableCollection<string> _RpitemSource_Year = new ObservableCollection<string>();
+        public ObservableCollection<string> RpItemSource_Year { get => _RpitemSource_Year; set { _RpitemSource_Year = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<string> RpitemSource_Month = new ObservableCollection<string>();
+        public ObservableCollection<string> RpItemSource_Month { get => RpitemSource_Month; set { RpitemSource_Month = value; OnPropertyChanged(); } }
+
 
 
         private ObservableCollection<RECEIPT> _List;
@@ -52,6 +62,10 @@ namespace QuanLyGaraOto.ViewModel
         private bool _VisView { get; set; }
         public bool VisView { get => _VisView; set { _VisView = value; OnPropertyChanged(); } }
 
+        private bool _VisViewReport { get; set; }
+        public bool VisViewReport { get => _VisViewReport; set { _VisViewReport = value; OnPropertyChanged(); } }
+        private bool _VisPrint { get; set; }
+        public bool VisPrint { get => _VisPrint; set { _VisPrint = value; OnPropertyChanged(); } }
         private bool _VisListView_Sales { get; set; }
         public bool VisListView_Sales { get => _VisListView_Sales; set { _VisListView_Sales = value; OnPropertyChanged(); } }
 
@@ -66,46 +80,127 @@ namespace QuanLyGaraOto.ViewModel
         public string ReportName { get => _ReportName; set { _ReportName = value; OnPropertyChanged(); } }
 
 
-        public ReportViewModel(ObservableCollection<string> itemsource_Year, ObservableCollection<string> itemsource_Month)
-        {
-            ItemSource_Year = itemsource_Year;
-            
-        }
 
         public ReportViewModel()
         {
             load_firstItem();
+            VisListView_Inventory = false;
+            VisListView_Sales = false;
 
-            Report_MonthChangedCommand = new RelayCommand<ReportMonthWindow>((p) => { return true; }, (p) => { Report_LoadToView(p);VisButtonReport(p); });
+            Report_MonthChangedCommand = new RelayCommand<ReportMonthWindow>(
+                (p) => { return true; }, 
+                (p) => 
+                {
+                    VisButtonPrint(p);
+                    VisButtonReport(p);
+                    Report_LoadToView(p);
 
-            Report_YearChangedCommand = new RelayCommand<ReportMonthWindow>((p) => { return true; }, (p) => { Report_LoadToView(p); VisButtonReport(p); });
+                });
 
-            LoadCbCommand = new RelayCommand<ReportWindow>((p) => { return true; }, (p) => {  LoadComboBox(); });
+            Report_YearChangedCommand = new RelayCommand<ReportMonthWindow>(
+                (p) => { return true; }, 
+                (p) => 
+                {
+                    VisButtonPrint(p);
+                    VisButtonReport(p);
+                    Report_LoadToView(p);
+                });
 
-            ReportSalesCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ReportMonthWindow wd = new ReportMonthWindow(); VisButtonReport(wd);VisReport(true) ; wd.ShowDialog(); });
+            LoadCbCommand = new RelayCommand<ReportWindow>(
+                (p) => { return true; },
+                (p) =>
+                {
+                    LoadComboBox();
+                });
 
-            ReportInventoryCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ReportMonthWindow wd = new ReportMonthWindow(); VisButtonReport(wd); VisReport(false); wd.ShowDialog(); });
+            ReportSalesCommand = new RelayCommand<object>(
+                (p) => { return true; }, 
+                (p) => 
+                {
+                    ReportMonthWindow wd = new ReportMonthWindow();
+                    VisReport(true);
+                    VisButtonReport(wd);
+                    VisButtonPrint(wd);
+                    Report_LoadToView(wd);
+                    wd.ShowDialog();
+                });
 
-            MonthChangedCommand = new RelayCommand<ReportWindow>((p) => { return true; }, (p) => { LoadToView(p); });
+            ReportInventoryCommand = new RelayCommand<object>(
+                (p) => { return true; }, 
+                (p) => 
+                { 
+                    ReportMonthWindow wd = new ReportMonthWindow();
+                    VisReport(false);
+                    VisButtonPrint(wd);
+                    VisButtonReport(wd);
+                    Report_LoadToView(wd);
+                    wd.ShowDialog();
+                });
 
-            YearChangedCommand = new RelayCommand<ReportWindow>((p) => { return true; }, (p) => { LoadToView(p); });
+            MonthChangedCommand = new RelayCommand<ReportWindow>(
+                (p) => { return true; },
+                (p) => 
+                { 
+                    LoadToView(p);
+                });
 
-            CloseCommand=new RelayCommand<ReportMonthWindow>((p) => { return true; }, (p) => { CloseWd(p); });
+            YearChangedCommand = new RelayCommand<ReportWindow>(
+                (p) => { return true; },
+                (p) => 
+                { 
+                    LoadToView(p); 
+                });
+
+            CloseCommand=new RelayCommand<ReportMonthWindow>(
+                (p) => { return true; },
+                (p) => 
+                {
+                    VisListView_Sales = false;
+                    VisListView_Inventory = false;
+                    CloseWd(p);
+                });
 
             //Phân biệt báo cáo kinh doanh hay tồn
-            //ReportCommand= new RelayCommand<ReportMonthWindow>((p) => { return true; }, (p) => { Report_Sales(p); });
+            ReportCommand= new RelayCommand<ReportMonthWindow>(
+                (p) => { return true; }, 
+                (p) =>
+                {
+                    if (VisListView_Inventory)
+                        Report_Inventory(p);
+                    if (VisListView_Sales)
+                        Report_Sales(p);
+                });
+            ViewReportCommand=new RelayCommand<ReportMonthWindow>(
+                (p) => { return true; },
+                (p) =>
+                {
+                    if(VisListView_Inventory)
+                    {
+                        InventoryReportTemplate wd = new InventoryReportTemplate();
+                        wd.ShowDialog();
+                    }
+                    if(VisListView_Sales)
+                    {
+                        ReportSalesTemplate wd = new ReportSalesTemplate();
+                        wd.ShowDialog();
+                    }
+                   
+                    
+                    
+                });
         }
 
+        //Load combobox-selected item khi khởi tạo
         public void load_firstItem()
         {
             First_item_year = "Năm " + DateTime.Now.Year;
             ItemSource_Year.Add(First_item_year);
+            RpItemSource_Year.Add(First_item_year);
             First_item_month = "Tháng " + DateTime.Now.Month;
             ItemSource_Month.Add(First_item_month);
-            
-
-
+            RpitemSource_Month.Add(First_item_month);
         }
+        //Load ListView doanh thu-nhập kho
         public void LoadToView(ReportWindow p)
         {
 
@@ -119,6 +214,7 @@ namespace QuanLyGaraOto.ViewModel
             
         }
 
+        //Thêm dữ liệu vào list kinh doanh
         public void Load_KinhDoanh(string selectedYear,string selectedMonth)
         {
             List = new ObservableCollection<RECEIPT>(DataProvider.Ins.DB.RECEIPTs);
@@ -133,6 +229,8 @@ namespace QuanLyGaraOto.ViewModel
             List = temp;
 
         }
+
+        //Thêm dữ liệu vào list nhập kho
         public void Load_NhapKho(string selectedYear, string selectedMonth)
         {
             ListImport = new ObservableCollection<ImportTemp>();
@@ -158,7 +256,7 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
-        
+        //Load combobox
         public void LoadComboBox()
         {
 
@@ -173,26 +271,37 @@ namespace QuanLyGaraOto.ViewModel
             foreach (var item in temp)
             {
                 if(item.ReceiptDate.Year!=DateTime.Now.Year)
-                    ItemSource_Year.Add("Năm "+item.ReceiptDate.Year.ToString());       
+                {
+                    ItemSource_Year.Add("Năm " + item.ReceiptDate.Year.ToString());
+                    RpItemSource_Year.Add("Năm " + item.ReceiptDate.Year.ToString());
+                }
+                           
             }
             for(int i=1;i<13;i++)
                 if (DateTime.Now.Month!=i)
-                     ItemSource_Month.Add("Tháng " + i);
-           
+                {
+                    ItemSource_Month.Add("Tháng " + i);
+                    RpItemSource_Month.Add("Tháng " + i);
+                }
+
+
         }
-        
+
+        //Load listview Doanh số-Báo cáo tồn
         public void Report_LoadToView(ReportMonthWindow p)
         {
             
-            string[] tmp = p.cb_SelectYear.SelectedValue.ToString().Split(' ');
+            string[] tmp = p.Rpcb_SelectYear.SelectedValue.ToString().Split(' ');
             string selectedYear = tmp[1];
-            string[] tmp1 = p.cb_SelectMonth.SelectedValue.ToString().Split(' ');
+            string[] tmp1 = p.Rpcb_SelectMonth.SelectedValue.ToString().Split(' ');
             string selectedMonth = tmp1[1];
             if(VisListView_Sales)
                 ReportSales_LoadToView(selectedYear, selectedMonth);
             if (VisListView_Inventory)
                 ReportInventory_LoadToView(selectedYear, selectedMonth);
         }
+
+        //Thêm dữ liệu vào list Doanh số
         public void ReportSales_LoadToView(string selectedYear,string selectedMonth)
         {
             ListSales = new ObservableCollection<ListSales>();
@@ -282,9 +391,9 @@ namespace QuanLyGaraOto.ViewModel
                             {
                                 foreach (var item1 in import_Good)
                                 {
-                                    var import_Good_Detail = DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Where(x => x.IdImportGood == item1.ImportGoods_Id && x.IdSupplies == item.Supplies_Id);
+                                    var import_Good_Detail = DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Where(x => x.IdImportGood == item1.ImportGoods_Id && x.IdSupplies == item.Supplies_Id).SingleOrDefault();
                                     if (import_Good_Detail != null)
-                                        PhatSinh += (int)import_Good_Detail.Sum(x => x.Amount);
+                                        PhatSinh += (int)import_Good_Detail.Amount;
                                 }
                             }
                            
@@ -293,9 +402,9 @@ namespace QuanLyGaraOto.ViewModel
                             {
                                 foreach (var item2 in repair)
                                 {
-                                    var repair_Detail = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == item2.Repair_Id && x.IdSupplies == item.Supplies_Id);
+                                    var repair_Detail = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == item2.Repair_Id && x.IdSupplies == item.Supplies_Id).SingleOrDefault();
                                     if (repair_Detail != null)
-                                        Sudung += (int)repair_Detail.Sum(x => (int)x.SuppliesAmount);
+                                        Sudung += (int)repair_Detail.SuppliesAmount;
                                 }
                             }
                             Tondau = TonCuoi - PhatSinh + Sudung;
@@ -304,6 +413,7 @@ namespace QuanLyGaraOto.ViewModel
                     }
                     listInventory.STT = i;
                     listInventory.Supplies_Name = item.Supplies_Name;
+                    listInventory.IdSupplies = item.Supplies_Id;
                     listInventory.TonDau = Tondau;
                     listInventory.TonCuoi = TonCuoi;
                     listInventory.PhatSinh = PhatSinh;
@@ -315,19 +425,22 @@ namespace QuanLyGaraOto.ViewModel
            
         }
 
+
+        //Đóng wd
         public void CloseWd(ReportMonthWindow p)
         {
             p.Close();
         }
-       
+
+        //Lập báo cáo Doanh số
         public void Report_Sales(ReportMonthWindow p)
         {
 
-                    if (MessageBox.Show("Bạn có chắc chắn muốn lập báo cáo", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                    if (MessageBox.Show("Bạn có chắc chắn muốn lập báo cáo Doanh số", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                     {
-                        string[] tmp = p.cb_SelectYear.SelectedValue.ToString().Split(' ');
+                        string[] tmp = p.Rpcb_SelectYear.SelectedValue.ToString().Split(' ');
                         int selectedYear = Int32.Parse(tmp[1]);
-                        string[] tmp1 = p.cb_SelectMonth.SelectedValue.ToString().Split(' ');
+                        string[] tmp1 = p.Rpcb_SelectMonth.SelectedValue.ToString().Split(' ');
                         int selectedMonth = Int32.Parse(tmp1[1]);
 
                         DateTime date=new DateTime(selectedYear,selectedMonth,1);
@@ -358,32 +471,88 @@ namespace QuanLyGaraOto.ViewModel
 
                         }
 
-                        MessageBox.Show("Thêm thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Lập báo cáo thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                         p.Close();
                     }
                
 
         }
-        public bool check(ReportMonthWindow p)
+        //Lập báo cáo Tồn
+        public void Report_Inventory(ReportMonthWindow p)
         {
-            string[] tmp = p.cb_SelectYear.SelectedValue.ToString().Split(' ');
+
+            if (MessageBox.Show("Bạn có chắc chắn muốn lập báo cáo Tồn", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+            {
+                string[] tmp = p.Rpcb_SelectYear.SelectedValue.ToString().Split(' ');
+                int selectedYear = Int32.Parse(tmp[1]);
+                string[] tmp1 = p.Rpcb_SelectMonth.SelectedValue.ToString().Split(' ');
+                int selectedMonth = Int32.Parse(tmp1[1]);
+
+                DateTime date = new DateTime(selectedYear, selectedMonth, 1);
+
+
+                DataProvider.Ins.DB.INVENTORY_REPORT.Add(new INVENTORY_REPORT { InventoryReport_Date = date });
+                DataProvider.Ins.DB.SaveChanges();
+                int i = 0;
+                var inventoryReport = DataProvider.Ins.DB.INVENTORY_REPORT;
+                foreach (var item in inventoryReport)
+                {
+                    if (item.InventoryReport_Id > i)
+                        i = item.InventoryReport_Id;
+                }
+
+                foreach (var item in ListInventory)
+                {
+                    INVENTORY_REPORT_DETAIL inventoryReportDetail = new INVENTORY_REPORT_DETAIL();
+                    inventoryReportDetail.IdInventoryReport = i;
+                    inventoryReportDetail.IdSupplies = item.IdSupplies;
+                    inventoryReportDetail.TonDau = item.TonDau;
+                    inventoryReportDetail.TonCuoi = item.TonCuoi;
+                    inventoryReportDetail.PhatSinh = item.PhatSinh;
+                    DataProvider.Ins.DB.INVENTORY_REPORT_DETAIL.Add(inventoryReportDetail);
+                    DataProvider.Ins.DB.SaveChanges();
+
+                }
+
+                MessageBox.Show("Lập báo cáo thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                p.Close();
+            }
+
+
+        }
+        public bool check_Report(ReportMonthWindow p)
+        {
+            string[] tmp = p.Rpcb_SelectYear.SelectedValue.ToString().Split(' ');
             int selectedYear = Int32.Parse(tmp[1]);
-            string[] tmp1 = p.cb_SelectMonth.SelectedValue.ToString().Split(' ');
+            string[] tmp1 = p.Rpcb_SelectMonth.SelectedValue.ToString().Split(' ');
             int selectedMonth = Int32.Parse(tmp1[1]);
 
-            var a = DataProvider.Ins.DB.SALES_REPORT.Where(x => x.SalesReport_Date.Year== selectedYear&& x.SalesReport_Date.Month == selectedMonth);
-           
-            if (DateTime.Now.Year > selectedYear || DateTime.Now.Year == selectedYear && DateTime.Now.Month > selectedMonth)
+            var a = DataProvider.Ins.DB.SALES_REPORT.Where(x => x.SalesReport_Date.Year == selectedYear && x.SalesReport_Date.Month == selectedMonth);
+            var b = DataProvider.Ins.DB.INVENTORY_REPORT.Where(x => x.InventoryReport_Date.Year == selectedYear && x.InventoryReport_Date.Month == selectedMonth);
+
+            if (VisListView_Inventory)
             {
-                if(a.Count()==0)
-                    return true;
+                if (DateTime.Now.Year > selectedYear || DateTime.Now.Year == selectedYear && DateTime.Now.Month > selectedMonth)
+                {
+                    if (b.Count() == 0)
+                        return true;
+                }
             }
-                
+            if (VisListView_Sales)
+            {
+                if (DateTime.Now.Year > selectedYear || DateTime.Now.Year == selectedYear && DateTime.Now.Month > selectedMonth)
+                {
+                    if (a.Count() == 0)
+                        return true;
+                }
+            }
+
+
             return false;
         }
         public void VisButtonReport(ReportMonthWindow p)
         {
-            if(check(p))
+            if(check_Report(p))
             {
                 VisView = true;
             }
@@ -392,6 +561,45 @@ namespace QuanLyGaraOto.ViewModel
                 VisView = false;
             }
         }
+
+        public bool check_Print(ReportMonthWindow p)
+        {
+            string[] tmp = p.Rpcb_SelectYear.SelectedValue.ToString().Split(' ');
+            int selectedYear = Int32.Parse(tmp[1]);
+            string[] tmp1 = p.Rpcb_SelectMonth.SelectedValue.ToString().Split(' ');
+            int selectedMonth = Int32.Parse(tmp1[1]);
+
+            var a = DataProvider.Ins.DB.SALES_REPORT.Where(x => x.SalesReport_Date.Year == selectedYear && x.SalesReport_Date.Month == selectedMonth);
+            var b = DataProvider.Ins.DB.INVENTORY_REPORT.Where(x => x.InventoryReport_Date.Year == selectedYear && x.InventoryReport_Date.Month == selectedMonth);
+
+            if (VisListView_Inventory)
+            {
+                if (b.Count() != 0)
+                    return true;
+            }
+            if (VisListView_Sales)
+            {
+                if (a.Count() != 0)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public void VisButtonPrint(ReportMonthWindow p)
+        {
+            if (check_Print(p))
+            {
+                VisPrint = true;
+                VisViewReport = true;
+            }
+            else
+            {
+                VisPrint = false;
+                VisViewReport = false;
+            }
+        }
+
         public void VisReport(bool check)
         {
             if(check)
