@@ -101,13 +101,16 @@ namespace QuanLyGaraOto.ViewModel
                     return true;
                 }, (p) =>
                 {
-                    foreach (var item in Temp)
+                    if (MessageBox.Show("Bạn chắc chắn muốn xóa những xe bạn đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
-                        DeleteModel deleteModel = new DeleteModel();
-                        deleteModel.CarReception(item.CarReception);
-                        ListCar.Remove(item);
-                    }
-                    LoadReceptionAmount();
+                        foreach (var item in Temp)
+                        {
+                            DeleteModel deleteModel = new DeleteModel();
+                            deleteModel.CarReception(item.CarReception);
+                            ListCar.Remove(item);
+                        }
+                        LoadReceptionAmount();
+                    } 
                 }
             );
             OpenCommand = new RelayCommand<object>

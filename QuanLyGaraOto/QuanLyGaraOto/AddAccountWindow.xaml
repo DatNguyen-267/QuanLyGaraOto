@@ -5,20 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Name="wdAddAccount"
         
         mc:Ignorable="d"
-        Title="AddAccountWindow" Height="300" Width="300">
+        Title="AddAccountWindow" Height="350" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
@@ -50,19 +45,19 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Button Grid.Row="0"
-                    Background="Black"
-                    BorderBrush="Black"
+                    IsDefault="True"
+                    Style="{StaticResource MainButton}"
                     Width="250"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
                     Content="Thêm tài khoản"
                     Command="{Binding AddAccountCommand}"
                     CommandParameter="{Binding ElementName=wdAddAccount}"
                 ></Button>
             <Button Grid.Row="1"
-                    Background="Gray"
-                    BorderBrush="Gray"
+                    Background="{StaticResource MainColor}"
+                    BorderBrush="{StaticResource MainColor}"
                     Width="250"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    IsCancel="true"
+                    Style="{StaticResource MainButton}"
                     Content="Thoát"
                     Command="{Binding ExitCommand}"
                     CommandParameter="{Binding ElementName=wdAddAccount}"

@@ -9,6 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         x:Name="wdDashboard"
+             Background="Gainsboro"
         DataContext="{StaticResource DashboardVM}"
         Height="450" Width="800">
     <Border Background="White" BorderThickness="1" >
@@ -28,8 +29,8 @@
                 <Grid Grid.Column="0" Margin="5">
                     <materialDesign:Card
                     Margin="5"
-                    Background="Red"
-                    Foreground="Black"
+                    Background="#f24f7c"
+                    Foreground="White"
                     UniformCornerRadius="6">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -63,8 +64,8 @@
                 <Grid Grid.Column="1" Margin="5">
                     <materialDesign:Card
                     Margin="5"
-                    Background="SeaGreen"
-                    Foreground="Black"
+                    Background="#716cb0"
+                    Foreground="White"
                     UniformCornerRadius="6">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -79,7 +80,8 @@
 
                             <TextBlock Grid.Row="0"
                             Text="Số xe trong tháng"
-                            TextAlignment="Left"
+                            TextAlignment="Center"
+                            HorizontalAlignment="Center"
                             FontSize="18"
                             FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,0,-0.6,37.8" Grid.RowSpan="2"/>
                             <Separator Grid.Row="1" 
@@ -95,8 +97,8 @@
                 <Grid Grid.Column="2" Margin="5">
                     <materialDesign:Card
                     Margin="5"
-                    Background="DeepSkyBlue"
-                    Foreground="Black"
+                    Background="#33b0e0"
+                    Foreground="White"
                     UniformCornerRadius="6">
                         <Grid>
                             <Grid.RowDefinitions>

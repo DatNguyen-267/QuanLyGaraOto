@@ -21,6 +21,7 @@ namespace QuanLyGaraOto.Model
             this.RECEIPTs = new HashSet<RECEIPT>();
             this.REPAIRs = new HashSet<REPAIR>();
         }
+
         private int _Reception_Id { get; set; }
         public int Reception_Id { get => _Reception_Id; set { _Reception_Id = value; OnPropertyChanged(); } }
         private string _LicensePlate { get; set; }

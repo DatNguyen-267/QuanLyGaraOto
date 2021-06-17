@@ -54,7 +54,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Key>
             <PropertyRef Name="InventoryReport_Id" />
           </Key>
-          <Property Name="InventoryReport_Id" Type="int" Nullable="false" />
+          <Property Name="InventoryReport_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InventoryReport_Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="INVENTORY_REPORT_DETAIL">
@@ -672,7 +672,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Key>
             <PropertyRef Name="InventoryReport_Id" />
           </Key>
-          <Property Name="InventoryReport_Id" Type="Int32" Nullable="false" />
+          <Property Name="InventoryReport_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InventoryReport_Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="INVENTORY_REPORT_DETAIL" Relationship="GARAModel.FK_INVENTORYREPORTDETAIL_INVENTORYREPORT" FromRole="INVENTORY_REPORT" ToRole="INVENTORY_REPORT_DETAIL" />
         </EntityType>
