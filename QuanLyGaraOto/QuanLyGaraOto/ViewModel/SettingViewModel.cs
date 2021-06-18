@@ -552,7 +552,8 @@ namespace QuanLyGaraOto.ViewModel
                 AddCarBrandWindow window = new AddCarBrandWindow();
                 window.ShowDialog();
                 AddCarBrandViewModel addCarBrandViewModel = window.DataContext as AddCarBrandViewModel;
-                ListCarBrand.Add(addCarBrandViewModel.br);
+                if (addCarBrandViewModel.br != null)
+                    ListCarBrand.Add(addCarBrandViewModel.br);
             });
 
             // Wage information
@@ -611,6 +612,7 @@ namespace QuanLyGaraOto.ViewModel
                 AddWageWindow window = new AddWageWindow();
                 window.ShowDialog();
                 AddWageViewModel addWageViewModel = window.DataContext as AddWageViewModel;
+                if (addWageViewModel.wage !=null) 
                 ListWage.Add(addWageViewModel.wage);
             });
 

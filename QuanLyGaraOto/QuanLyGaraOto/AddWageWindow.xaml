@@ -9,17 +9,28 @@
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
         Name="wdWage"
-        Title="Thêm tiền công" Height="160" Width="280">
+        WindowStartupLocation="CenterScreen"
+        Title="Thêm tiền công" Height="300" Width="600">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Background="{StaticResource MainColor}">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="Thêm tiền công"
+                       FontSize="30"
+                       FontWeight="DemiBold"
+                       
+                       Foreground="White"
+                       ></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Margin="20 0 20 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
                 x:Name="txtWage"
@@ -58,7 +69,7 @@
             </TextBox>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -66,25 +77,21 @@
 
             <Button Grid.Column="0"
                     IsDefault="True"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="100"
+                Style="{StaticResource SubAddButton}"
+               
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Content="Thêm"      
-                Background="Black"
-                BorderBrush="Black"
                 Command="{Binding AddWage}"
                 CommandParameter="{Binding ElementName=wdWage}"/>
 
             <Button Grid.Column="1"
                     IsCancel="True"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="100"
+                Style="{StaticResource CloseButton}"
+                
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Content="Hủy"      
-                Background="Black"
-                BorderBrush="Black"
                 Command="{Binding CancelAddWage}"
                 CommandParameter="{Binding ElementName=wdWage}"/>
         </Grid>

@@ -134,7 +134,6 @@ namespace QuanLyGaraOto.ViewModel
                 InitVis();
                 VisReport = true;
                 p.DataContext = new ReportViewModel(isReport);
-
             });
             OpenSetting = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
             {

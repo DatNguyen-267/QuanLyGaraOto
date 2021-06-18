@@ -14,10 +14,31 @@
        Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" >
+        <Grid Grid.Row="0" 
+              Margin="15 0 15 10"
+              Background="{StaticResource MainColor}"
+              >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TextBlock 
+                   Text="Báo Cáo"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="15 0 5 0"            
+                    FontSize="30"
+                    Foreground="White"
+                   FontWeight="Bold"
+                    ></TextBlock>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" >
             <ComboBox
                 x:Name="cb_SelectYear"
                 materialDesign:HintAssist.Hint="Năm"
@@ -72,49 +93,76 @@
                 </i:Interaction.Triggers>
 
             </ComboBox>
-
-            <Button
-                IsEnabled="{Binding isReport}"        
-                Width="120"
-                BorderThickness="0"
-                Margin="0,0,170,9"             
-                Background="#455A64"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Style="{StaticResource MaterialDesignRaisedButton}"
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Center"
+                        Margin="0 0 20 0">
+                <Button
+                    Margin="0 0 30 0"
+                    IsEnabled="{Binding isReport}"        
+                Style="{StaticResource MainButton}"
                 ToolTip="Resource name: MaterialDesignRaisedButton"
                 Content="Doanh số"
                 Command="{Binding ReportSalesCommand }"
-                CommandParameter="{Binding ElementName=reportWindow}" Click="Button_Click"/>
-            <Button
+                CommandParameter="{Binding ElementName=reportWindow}"/>
+                <Button
                 IsEnabled="{Binding isReport}"   
-                Width="120"
-                BorderThickness="0"
-                Margin="0,0,21,0"
-                Background="#455A64"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Style="{StaticResource MaterialDesignRaisedButton}"
+                Style="{StaticResource MainButton}"
                 ToolTip="Resource name: MaterialDesignRaisedButton"
                 Content="Báo cáo tồn" 
                 Command="{Binding ReportInventoryCommand}"
-                CommandParameter="{Binding ElementName=reportWindow}" Click="Button_Click"/>
-
+                CommandParameter="{Binding ElementName=reportWindow}"/>
+            </StackPanel>
         </Grid>
-        <Grid Grid.Row="1" Margin="10,10,10,10">
-            <TabControl  Margin="10,10,10,0"  VerticalAlignment="Top" >
-                <TabItem 
-                   
-                    
-                    Header="Lịch sử kinh doanh"
-                    FontSize="18"
-                    FontWeight="SemiBold"
-                    Width="180" 
-                    Height="40" 
-                    Margin="-4,0,0,0"
-                    >
-                    <Grid>
+        <Grid Grid.Row="2" Margin="10,10,10,10">
+            <TabControl>
+                <TabControl.Resources>
+                    <Style TargetType="{x:Type TabItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TabItem}">
+                                    <Grid Width="250" 
+                                      Margin="-2 0 3 -1" 
+                                      x:Name="ContainX"
+                                      >
+                                        <Border Height="40" 
+                                            Name="Border"
+                                            BorderThickness="1,1,1,0" CornerRadius="5,5,0,0"
+                                            Padding="25,5,25,5" Margin="0,0,0,0"
+                                            Background="White"
+                                            BorderBrush="DarkGray">
+                                            <ContentPresenter x:Name="ContentSite" 
+                                                              ContentSource="Header" 
+                                                              HorizontalAlignment="Center" 
+                                                              VerticalAlignment="Center"
+                                                          
+                                                          >
+                                            </ContentPresenter>
+                                        </Border>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter TargetName="Border" Property="Background" Value="white"/>
+                                            <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="{StaticResource MainColor}"></Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="False">
+                                            <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
+                                            <Setter TargetName="Border" Property="Background" Value="{StaticResource MainColor}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
 
+                    </Style>
+                </TabControl.Resources>
+                <TabItem 
+                    Header="Lịch sử kinh doanh"
+                    Foreground="{StaticResource MainColor}"
+                    FontWeight="Bold"
+                    FontSize="18">
+                    <Grid>
                         <ListView x:Name="lvs_Receipt" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
                             <ListView.View>
                                 <GridView>
@@ -125,20 +173,14 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-
                     </Grid>
                 </TabItem>
 
                 <TabItem 
-                   
-       
                     Header="Lịch sử nhập hàng"
-                    FontSize="18"
-                    FontWeight="SemiBold"
-                    Width="180" 
-                    Height="40" 
-                    Margin="-4,0,0,0"
-                    >
+                    Foreground="{StaticResource MainColor}"
+                    FontWeight="Bold"
+                    FontSize="18">
                     <Grid>
 
                         <ListView x:Name="lvs_Import" ItemsSource="{Binding ListImport, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >

@@ -87,8 +87,6 @@ namespace QuanLyGaraOto.ViewModel
             isReport = role;
         }
 
-
-
         public ReportViewModel()
         {
             load_firstItem();

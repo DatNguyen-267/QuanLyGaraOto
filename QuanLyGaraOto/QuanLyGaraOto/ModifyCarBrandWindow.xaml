@@ -7,22 +7,33 @@
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         x:Name="wdModifyCarBrand"
-        Title="Sửa hãng xe" Height="160" Width="250">
+        Title="Sửa hãng xe" Height="300" Width="400">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Background="{StaticResource MainColor}">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="Sửa hãng xe"
+                       FontSize="30"
+                       FontWeight="DemiBold"
+                       
+                       Foreground="White"
+                       ></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1">
             <TextBox
                 x:Name="txtBrand"
                 materialDesign:HintAssist.Hint="Tên hãng xe"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center" 
-                Margin="5"
-                FontSize="14" Height="40">
+                Margin="20 0 20 0"
+                FontSize="16">
 
                 <TextBox.Text>
                     <Binding Path="CarBrandInModify" UpdateSourceTrigger="PropertyChanged">
@@ -35,31 +46,28 @@
             </TextBox>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="100"
+                Style="{StaticResource SubAddButton}"
+           
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Content="Sửa"      
-                Background="Black"
-                BorderBrush="Black"
+              
                 Command="{Binding ModifyCarBrand}"
                 CommandParameter="{Binding ElementName=wdModifyCarBrand}"/>
-
             <Button Grid.Column="1"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="100"
+                Style="{StaticResource CloseButton}"
+
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Content="Hủy"      
-                Background="Black"
-                BorderBrush="Black"
+            
                 Command="{Binding CancelModifyCarBrand}"
                 CommandParameter="{Binding ElementName=wdModifyCarBrand}"/>
         </Grid>

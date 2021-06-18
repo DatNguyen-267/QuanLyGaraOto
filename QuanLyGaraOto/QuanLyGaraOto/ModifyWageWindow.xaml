@@ -8,25 +8,37 @@
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
         Name="wdModifyWage"
-        Title="Sửa tiền công" Height="160" Width="360">
+        WindowStartupLocation="CenterScreen"
+        Title="Sửa tiền công" Height="300" Width="600">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{StaticResource MainColor}">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="Sửa tiền công"
+                       FontSize="30"
+                       FontWeight="DemiBold"
+                       
+                       Foreground="White"
+                       ></TextBlock>
+        </Grid>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="1"   Margin="20 0 20 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
+                   Margin=" 0 0 20 0"
                 x:Name="txtWage"
                 materialDesign:HintAssist.Hint="Loại tiền công"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center" 
-                Margin="5"
-                FontSize="14" Height="40">
+                FontSize="16">
 
                 <TextBox.Text>
                     <Binding Path="WageInModify" UpdateSourceTrigger="PropertyChanged">
@@ -40,11 +52,12 @@
 
             <TextBox Grid.Column="1"
                 x:Name="txtValue"
+                     
                 materialDesign:HintAssist.Hint="Giá trị"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center" 
-                Margin="5"
-                FontSize="14" Height="40">
+                Margin="0 0 20 0"
+                FontSize="16">
 
                 <TextBox.Text>
                     <Binding Path="ValueInModify" UpdateSourceTrigger="PropertyChanged">
@@ -57,31 +70,24 @@
             </TextBox>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="100"
+                Style="{StaticResource SubAddButton}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Content="Sửa"      
-                Background="Black"
-                BorderBrush="Black"
                 Command="{Binding ModifyWage}"
                 CommandParameter="{Binding ElementName=wdModifyWage}"/>
-
             <Button Grid.Column="1"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="100"
+                Style="{StaticResource CloseButton}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Content="Hủy"      
-                Background="Black"
-                BorderBrush="Black"
                 Command="{Binding CancelModifyWage}"
                 CommandParameter="{Binding ElementName=wdModifyWage}"/>
         </Grid>

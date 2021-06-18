@@ -7,23 +7,34 @@
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow"
         Name="wdAddCarBrand"
-        Title="Thêm hãng xe" Height="160" Width="250">
-    <Grid>
+        Title="Thêm hãng xe" Height="300" Width="400">
+    <Grid >
         <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Background="{StaticResource MainColor}">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="Thêm hãng xe"
+                       FontSize="30"
+                       FontWeight="DemiBold"
+                       
+                       Foreground="White"
+                       ></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Margin="20 0 20 0">
             <TextBox
                 x:Name="txtBrand"
                 materialDesign:HintAssist.Hint="Tên hãng xe"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center" 
-                Margin="5"
-                FontSize="14" Height="40">
+                Margin="10"
+                FontSize="20" >
 
                 <TextBox.Text>
                     <Binding Path="CarBrandInAdd" UpdateSourceTrigger="PropertyChanged">
@@ -36,7 +47,7 @@
             </TextBox>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -44,25 +55,21 @@
 
             <Button Grid.Column="0"
                     IsDefault="True"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="100"
+                Style="{StaticResource SubAddButton}"
+               
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Content="Thêm"      
-                Background="Black"
-                BorderBrush="Black"
                 Command="{Binding AddCarBrand}"
                 CommandParameter="{Binding ElementName=wdAddCarBrand}"/>
 
             <Button Grid.Column="1"
                     IsCancel="True"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Width="100"
+                Style="{StaticResource CloseButton}"
+               
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Content="Hủy"      
-                Background="Black"
-                BorderBrush="Black"
                 Command="{Binding CancelAddCarBrand}"
                 CommandParameter="{Binding ElementName=wdAddCarBrand}"/>
         </Grid>
