@@ -12,11 +12,16 @@ namespace QuanLyGaraOto.ViewModel
     public class PrintViewModel: BaseViewModel
     {
         public ICommand PrintBillCommand { get; set; }
+        public ICommand PrintInventoryReportCommand { get; set; }
+
+        public ICommand PrintSalesReportCommand { get; set; }
         public ICommand PrintStockReceiptCommand { get; set; }
         public ICommand PrintSalaryRecordCommand { get; set; }
 
         public PrintViewModel()
         {
+            PrintInventoryReportCommand = new RelayCommand<InventoryReportTemplate>((p) => true, (p) => PrintInventoryReport(p));
+            PrintSalesReportCommand = new RelayCommand<ReportSalesTemplate>((p)=>true,(p)=>PrintSalesReport(p));
             PrintBillCommand = new RelayCommand<BillTemplate>((p) => true, (p) => PrintBill(p));
             PrintStockReceiptCommand = new RelayCommand<Object>((p) => true, (p) => PrintStockReceipt());
             PrintSalaryRecordCommand = new RelayCommand<Object>((p) => true, (p) => PrintSalaryRecord());
@@ -44,5 +49,34 @@ namespace QuanLyGaraOto.ViewModel
             catch { }
 
         }
+        public void PrintSalesReport(ReportSalesTemplate p)
+        {
+            try
+            {
+                PrintDialog printDialog = new PrintDialog();
+
+                if (printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(p.grdPrint, "SalesReport");
+                    p.Close();
+                }
+            }
+            catch { }
+        }
+        public void PrintInventoryReport(InventoryReportTemplate p)
+        {
+            try
+            {
+                PrintDialog printDialog = new PrintDialog();
+
+                if (printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(p.grdPrint, "InventoryReport");
+                    p.Close();
+                }
+            }
+            catch { }
+        }
+
     }
 }

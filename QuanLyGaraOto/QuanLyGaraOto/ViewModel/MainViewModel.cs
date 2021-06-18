@@ -76,7 +76,6 @@ namespace QuanLyGaraOto.ViewModel
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
                 Container = (p as MainWindow).Container;
-
                 LoadLoginWindow(p);
             });
             OpenDashboard = new RelayCommand<DashboardWindow>((p) => { return true; }, (p) =>
@@ -133,7 +132,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 InitVis();
                 VisReport = true;
-                p.DataContext = new ReportViewModel(isReport);
+                p.DataContext = new ReportViewModel(isReport,User);
 
             });
             OpenSetting = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,15 @@ namespace QuanLyGaraOto
     /// </summary>
     public partial class ReportMonthWindow : Window
     {
+        public ReportMonthViewModel reportMonthViewModel { get; set; }
         public ReportMonthWindow()
         {
+            InitializeComponent();           
+        }
+        public ReportMonthWindow(bool check,USER User)
+        {
             InitializeComponent();
+            this.DataContext = (reportMonthViewModel = new ReportMonthViewModel(check,User));
         }
     }
 }
