@@ -195,6 +195,7 @@
     <Compile Include="Model\IMPORT_GOODS_DETAIL.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\InventoryReport.cs" />
     <Compile Include="Model\INVENTORY_REPORT.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -227,6 +228,7 @@
     <Compile Include="Model\ROLE_DETAIL.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SalesReport.cs" />
     <Compile Include="Model\SALES_REPORT.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -303,13 +305,16 @@
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\ImportGoodViewModel.cs" />
+    <Compile Include="ViewModel\InventoryReportViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ModifyCarBrandViewModel.cs" />
     <Compile Include="ViewModel\ModifyWageViewModel.cs" />
     <Compile Include="ViewModel\PayViewModel.cs" />
     <Compile Include="ViewModel\PrintViewModel.cs" />
+    <Compile Include="ViewModel\ReportMonthViewModel.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
+    <Compile Include="ViewModel\SalesReportViewModel.cs" />
     <Compile Include="ViewModel\ServiceViewModel.cs" />
     <Compile Include="ViewModel\SettingViewModel.cs" />
     <Page Include="AddAccountWindow.xaml">

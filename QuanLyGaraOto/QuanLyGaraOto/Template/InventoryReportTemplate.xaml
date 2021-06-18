@@ -6,14 +6,17 @@
         xmlns:local="clr-namespace:QuanLyGaraOto.Template"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Name="wdInventoryReportTemplate"
-        Title="InventoryReportTemplate" Height="600" Width="800">
+        Title="InventoryReportTemplate" Height="600" Width="850">
     <Grid 
         x:Name="grdPrint">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="350"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" 
               Margin="0 0 0 5"
@@ -46,7 +49,7 @@
                     <TextBlock 
                         x:Name="txbIdStockReceipt"
                         TextWrapping="Wrap" 
-                        Text="{Binding a}" 
+                        Text="{Binding InventoryReport.IdReport}" 
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
@@ -57,7 +60,7 @@
                     Margin="0,5,0,0">
                     <TextBlock 
                         TextWrapping="Wrap" 
-                        Text="Ngày:" 
+                        Text="Tháng:" 
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
@@ -67,7 +70,7 @@
                     <TextBlock 
                         x:Name="txbDate"
                         TextWrapping="Wrap" 
-                        Text="{Binding a}"  
+                        Text="{Binding InventoryReport.ReportDate}"  
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
@@ -76,6 +79,10 @@
                 </Grid>
                 <Grid
                     Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="47*"/>
+                        <ColumnDefinition Width="73*"/>
+                    </Grid.ColumnDefinitions>
                     <TextBlock 
                         TextWrapping="Wrap" 
                         Text="Nhân viên:" 
@@ -88,20 +95,20 @@
                     <TextBlock 
                         x:Name="txbEmployeeName"
                         TextWrapping="Wrap" 
-                        Text="{Binding a}" 
+                        Text="{Binding  InventoryReport.uSER_INFO.UserInfo_Name}" 
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
                         HorizontalAlignment="Right"
-                        FontSize="14"/>
+                        FontSize="14" Grid.Column="1"/>
                 </Grid>
             </StackPanel>
         </Grid>
         <Grid 
             Grid.Row="2">
             <DataGrid
-                        Margin="20,0,20,0"
-                        ItemsSource="{Binding ListSales}"
+                        Margin="20,0,20,20"
+                        ItemsSource="{Binding InventoryReport.ListInventory}"
                         CanUserAddRows="False"
                         AutoGenerateColumns="False"
                         CanUserDeleteRows="False"
@@ -130,7 +137,7 @@
                     <materialDesign:DataGridTextColumn
                         Header="Vật tư phụ tùng"
                         Width="280"
-                        Binding="{Binding Lis.Content}"
+                        Binding="{Binding Supplies_Name}"
                         ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
 
@@ -138,15 +145,14 @@
                     <!-- set a max length to get an indicator in the editor -->
                     <DataGridTextColumn
                         Width="120"
-                        Binding="{Binding RepairDetail.SUPPLIES.Supplies_Name}"
-                        Header="Tồn đầu"
-                       
+                        Binding="{Binding TonDau}"
+                        Header="Tồn đầu"                     
                         ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
 
                     </DataGridTextColumn>
                     <materialDesign:DataGridTextColumn
-                        Binding="{Binding RepairDetail.SuppliesAmount}"
+                        Binding="{Binding PhatSinh}"
                         Header="Phát sinh"
                         Width="120"
                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
@@ -154,13 +160,13 @@
                     <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
                     <materialDesign:DataGridTextColumn
                           Header="Tồn cuối"
-                            Binding="{Binding RepairDetail.SuppliesPrice}"
+                          Binding="{Binding TonCuoi}"
                           Width="120">
                     </materialDesign:DataGridTextColumn>
 
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        
+
     </Grid>
 </Window>

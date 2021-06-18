@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,13 @@ namespace QuanLyGaraOto.Template
     /// </summary>
     public partial class ReportSalesTemplate : Window
     {
-        public ReportSalesTemplate()
+     
+        SalesReportViewModel salesReportViewModel { get; set; }
+        public ReportSalesTemplate(SalesReport salesReport)
         {
             InitializeComponent();
+            this.DataContext = (salesReportViewModel = new SalesReportViewModel(salesReport));
         }
+
     }
 }

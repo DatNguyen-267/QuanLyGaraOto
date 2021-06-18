@@ -6,8 +6,11 @@
         xmlns:local="clr-namespace:QuanLyGaraOto.Template"
         mc:Ignorable="d"
         Name="wdReportSalesTemplate"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Title="ReportSalesTemplate" Height="600" Width="800">
+        Title="ReportSalesTemplate" Height="600" Width="850">
     <Grid 
         x:Name="grdPrint">
         <Grid.RowDefinitions>
@@ -47,7 +50,7 @@
                     <TextBlock 
                         x:Name="txbIdStockReceipt"
                         TextWrapping="Wrap" 
-                        Text="{Binding a}" 
+                        Text="{Binding  SalesReport.IdReport}" 
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
@@ -68,7 +71,7 @@
                     <TextBlock 
                         x:Name="txbDate"
                         TextWrapping="Wrap" 
-                        Text="{Binding a}"  
+                        Text="{Binding ReportDate}"  
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
@@ -89,7 +92,7 @@
                     <TextBlock 
                         x:Name="txbEmployeeName"
                         TextWrapping="Wrap" 
-                        Text="{Binding a}" 
+                        Text="{Binding uSER_INFO.UserInfo_Name}" 
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
@@ -131,7 +134,7 @@
                     <materialDesign:DataGridTextColumn
                         Header="Hiệu xe"
                         Width="200"
-                        Binding="{Binding Lis.Content}"
+                        Binding="{Binding CarBrand_Name}"
                         ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
 
@@ -139,7 +142,7 @@
                     <!-- set a max length to get an indicator in the editor -->
                     <DataGridTextColumn
                         Width="150"
-                        Binding="{Binding RepairDetail.SUPPLIES.Supplies_Name}"
+                        Binding="{Binding AmountOfTurn}"
                         Header="Số lượt sửa"
                        
                         ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
@@ -147,7 +150,7 @@
 
                     </DataGridTextColumn>
                     <materialDesign:DataGridTextColumn
-                        Binding="{Binding RepairDetail.SuppliesAmount}"
+                        Binding="{Binding TotalMoney}"
                         Header="Thành tiền"
                         Width="200"
                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
@@ -155,7 +158,7 @@
                     <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
                     <materialDesign:DataGridTextColumn
                           Header="Tỉ lệ"
-                            Binding="{Binding RepairDetail.SuppliesPrice}"
+                            Binding="{Binding Rate}"
                           Width="100">
                     </materialDesign:DataGridTextColumn>
                     
@@ -181,7 +184,7 @@
                 <TextBlock 
                     x:Name="txbTotal"
                     TextWrapping="Wrap" 
-                    Text="{Binding a}" 
+                    Text="{Binding SalesReport.TotalMoney}" 
                     FontWeight="SemiBold"
                     Margin="0,0,10,0" 
                     Foreground="#455A64"
