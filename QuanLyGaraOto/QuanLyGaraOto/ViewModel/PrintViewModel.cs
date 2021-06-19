@@ -1,4 +1,4 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿
 using Microsoft.Win32;
 using QuanLyGaraOto.Model;
 using QuanLyGaraOto.Template;
@@ -70,8 +70,8 @@ namespace QuanLyGaraOto.ViewModel
             IStyle tableHeader = workbook.Styles.Add("TableHeaderStyle");
             // này là tạo style 1 cái là header 1 cái là header của cái table
 
-            pageHeader.Color = System.Drawing.Color.FromArgb(69, 90, 100);
-            pageHeader.Font.RGBColor = System.Drawing.Color.White;
+            pageHeader.Color = Syncfusion.Drawing.Color.FromArgb(69, 90, 100);
+            pageHeader.Font.RGBColor = Syncfusion.Drawing.Color.White;
             pageHeader.Font.FontName = "Calibri";
             pageHeader.Font.Size = 18;
             pageHeader.Font.Bold = true;
@@ -136,8 +136,8 @@ namespace QuanLyGaraOto.ViewModel
             IStyle tableHeader = workbook.Styles.Add("TableHeaderStyle");
            
 
-            pageHeader.Color = System.Drawing.Color.FromArgb(69, 90, 100);
-            pageHeader.Font.RGBColor = System.Drawing.Color.White;
+            pageHeader.Color = Syncfusion.Drawing.Color.FromArgb(69, 90, 100);
+            pageHeader.Font.RGBColor = Syncfusion.Drawing.Color.White;
             pageHeader.Font.FontName = "Calibri";
             pageHeader.Font.Size = 18;
             pageHeader.Font.Bold = true;

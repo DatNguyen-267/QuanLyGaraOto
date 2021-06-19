@@ -464,7 +464,7 @@ namespace QuanLyGaraOto.ViewModel
                 DateTime date = new DateTime(selectedYear, selectedMonth, 1);
 
 
-                DataProvider.Ins.DB.INVENTORY_REPORT.Add(new INVENTORY_REPORT { InventoryReport_Date = date });
+                DataProvider.Ins.DB.INVENTORY_REPORT.Add(new INVENTORY_REPORT { InventoryReport_Date = date , IdUser = 1, InventoryReport_UserName = "dsada" });
                 DataProvider.Ins.DB.SaveChanges();
                 int i = 0;
                 var inventoryReport = DataProvider.Ins.DB.INVENTORY_REPORT;
