@@ -1,4 +1,5 @@
 ﻿using QuanLyGaraOto.Model;
+using QuanLyGaraOto.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,10 +23,16 @@ namespace QuanLyGaraOto
     /// </summary>
     public partial class AddNewGoodWindow : Window
     {
+        public AddNewGoodViewModel addNewGoodViewModel { get; set; }
         public AddNewGoodWindow()
         {
             InitializeComponent();
-            
+            this.DataContext = (addNewGoodViewModel = new AddNewGoodViewModel());
+        }
+        public AddNewGoodWindow(SUPPLIES supplies)
+        {
+            InitializeComponent();
+            this.DataContext = (addNewGoodViewModel = new AddNewGoodViewModel(supplies));
         }
     }
 }

@@ -29,7 +29,9 @@ namespace QuanLyGaraOto.Model
         private int _TotalMoney { get; set; }
         public int TotalMoney { get => _TotalMoney; set { _TotalMoney = value; OnPropertyChanged(); } }
 
-        public virtual IMPORT_GOODS IMPORT_GOODS { get; set; }
-        public virtual SUPPLIES SUPPLIES { get; set; }
+        private IMPORT_GOODS _IMPORT_GOODS { get; set; }
+        public virtual IMPORT_GOODS IMPORT_GOODS { get=> _IMPORT_GOODS; set { _IMPORT_GOODS = value; OnPropertyChanged(); } }
+        private SUPPLIES _SUPPLIES { get; set; }
+        public virtual SUPPLIES SUPPLIES { get => _SUPPLIES; set { _SUPPLIES = value; OnPropertyChanged(); } }
     }
 }

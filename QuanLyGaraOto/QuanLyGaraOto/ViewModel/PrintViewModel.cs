@@ -14,12 +14,14 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand PrintBillCommand { get; set; }
         public ICommand PrintStockReceiptCommand { get; set; }
         public ICommand PrintSalaryRecordCommand { get; set; }
+        public ICommand PrintImportBillCommand { get; set; }
 
         public PrintViewModel()
         {
             PrintBillCommand = new RelayCommand<BillTemplate>((p) => true, (p) => PrintBill(p));
             PrintStockReceiptCommand = new RelayCommand<Object>((p) => true, (p) => PrintStockReceipt());
             PrintSalaryRecordCommand = new RelayCommand<Object>((p) => true, (p) => PrintSalaryRecord());
+            PrintImportBillCommand = new RelayCommand<ImportBillTemplate>((p) => true, (p)=> PrintImportBill(p)) ;
         }
         public void PrintStockReceipt()
         {
@@ -43,6 +45,20 @@ namespace QuanLyGaraOto.ViewModel
             }
             catch { }
 
+        }
+        public void PrintImportBill(ImportBillTemplate p)
+        {
+            try
+            {
+                PrintDialog printDialog = new PrintDialog();
+
+                if (printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(p.All, "Bill");
+                    p.Close();
+                }
+            }
+            catch { }
         }
     }
 }

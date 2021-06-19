@@ -155,6 +155,9 @@
     <Compile Include="GoodBillPage.xaml.cs">
       <DependentUpon>GoodBillPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImportPayWindow.xaml.cs">
+      <DependentUpon>ImportPayWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,7 @@
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ListCar.cs" />
+    <Compile Include="Model\ListImport.cs" />
     <Compile Include="Model\ListInventory.cs" />
     <Compile Include="Model\ListRepair.cs" />
     <Compile Include="Model\ListSales.cs" />
@@ -270,6 +274,9 @@
     <Compile Include="Template\BillTemplate.xaml.cs">
       <DependentUpon>BillTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Template\ImportBillTemplate.xaml.cs">
+      <DependentUpon>ImportBillTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Template\InventoryReportTemplate.xaml.cs">
       <DependentUpon>InventoryReportTemplate.xaml</DependentUpon>
     </Compile>
@@ -284,6 +291,7 @@
     <Compile Include="Validation\PayOverValidation.cs" />
     <Compile Include="ViewModel\AddCarBrandViewModel.cs" />
     <Compile Include="ViewModel\AddImportWindowViewModel.cs" />
+    <Compile Include="ViewModel\AddNewGoodViewModel.cs" />
     <Compile Include="ViewModel\AddRepairDetailViewModel.cs" />
     <Compile Include="ViewModel\AddRepairFormViewModel.cs" />
     <Compile Include="ViewModel\AddWageViewModel.cs" />
@@ -295,7 +303,10 @@
     <Compile Include="ViewModel\ChangeCarInfoViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\GoodBillWindowViewModel.cs" />
+    <Compile Include="ViewModel\ImportBillViewModel.cs" />
     <Compile Include="ViewModel\ImportGoodViewModel.cs" />
+    <Compile Include="ViewModel\ImportPayViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PayViewModel.cs" />
@@ -376,8 +387,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GoodBillPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImportPayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImportWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -436,6 +451,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Template\BillTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Template\ImportBillTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

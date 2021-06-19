@@ -1,0 +1,174 @@
+﻿<Window x:Class="QuanLyGaraOto.Template.ImportBillTemplate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyGaraOto.Template"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="BillTemplate" Height="auto" Width="800">
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="TitleTextBlock">
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="FontWeight" Value="DemiBold"></Setter>
+            <Setter Property="Foreground" Value="#FF1976D2"></Setter>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="ItemTextBlock">
+            <Setter Property="FontSize" Value="13"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="All">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" 
+              Margin="0 0 0 5"
+               Background="#455A64">
+            <TextBlock Text="Hóa Đơn nhập hàng" VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="23"
+                       FontWeight="DemiBold"
+                       Foreground="White"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--Thông tin khách hàng -->
+            <StackPanel Grid.Column="0"
+                        Margin="10 0 0 0">
+                <StackPanel>
+                    <TextBlock Text="Thông tin nhập hàng"
+                           Style="{StaticResource TitleTextBlock}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Mã đơn nhập "
+                           Style="{StaticResource ItemTextBlock}"></TextBlock>
+                    <TextBlock Text="{Binding Import.ImportGoods_Id}"
+                           Style="{StaticResource ItemTextBlock}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Ngày nhập "
+                           Style="{StaticResource ItemTextBlock}"></TextBlock>
+                    <TextBlock Text="{Binding Import.ImportGoods_Date}"
+                           Style="{StaticResource ItemTextBlock}"></TextBlock>
+                </StackPanel>
+
+            </StackPanel>
+            <!-- THÔNG TIN HÓA ĐƠN -->
+
+
+        </Grid>
+        <Grid Grid.Row="2" Margin="10 10 10 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="42*"/>
+                <ColumnDefinition Width="731*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid
+                        ItemsSource="{Binding List}"
+                        CanUserAddRows="False"
+                        AutoGenerateColumns="False"
+                        CanUserDeleteRows="False"
+                        CanUserReorderColumns="True"
+                IsReadOnly="True"
+                FontSize="12" Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4"
+                        >
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="Background" Value="#FF1976D2"></Setter>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                          Binding="{Binding STT}"
+                          Header="STT"
+                          ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                          EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                    </DataGridTextColumn>
+                    <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
+                    <materialDesign:DataGridTextColumn
+                        Header="Phụ tùng"
+                        Binding="{Binding ImportDetail.SUPPLIES.Supplies_Name}"
+                        ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+
+                    </materialDesign:DataGridTextColumn>
+                    <!-- set a max length to get an indicator in the editor -->
+                    <DataGridTextColumn
+                       
+                        Binding="{Binding ImportDetail.Price}"
+                        Header="Giá nhập"
+                        ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+
+                    </DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn
+                        Binding="{Binding ImportDetail.Amount}"
+                        Header="Số lượng"
+                      
+                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+                    </materialDesign:DataGridTextColumn>
+                    <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+                    <materialDesign:DataGridTextColumn
+                          Header="Đơn giá"
+                            Binding="{Binding ImportDetail.TotalMoney}"
+                          >
+                    </materialDesign:DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="13"></Setter>
+                    <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                </Style>
+            </Grid.Resources>
+            <StackPanel  VerticalAlignment="Center"
+                         HorizontalAlignment="Right"
+                         Height="80"
+                         Width="300"
+                         Margin="0 10 10 0">
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 10">
+                    <TextBlock Text="Tổng cộng: "
+                               Margin="0 0 83 0"
+                               
+                               Padding="10 0 0 0"></TextBlock>
+                    <TextBlock Text="{Binding Import.ImportGoods_TotalMoney}" 
+                      ></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" 
+                            Background="#FF1976D2"
+                            Height="30"
+                            >
+                    <TextBlock Text="Thực thanh toán: " 
+                                Margin="0 0 50 0"
+                                Padding="10 0 0 0"
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               ></TextBlock>
+
+                    <TextBlock Text="{Binding Import.ImportGoods_TotalMoney}" 
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                                ></TextBlock>
+                </StackPanel>
+            </StackPanel>
+
+
+        </Grid>
+
+    </Grid>
+</Window>

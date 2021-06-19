@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         x:Name="wdAddSupply"
         Title="Phụ tùng"
-        Height="300" Width="430"
-        DataContext="{StaticResource BunkVM}"
+        Height="300" Width="520"
+        WindowStartupLocation="CenterScreen"
       Background="#ffffff"
+        xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         >
     <Grid>
@@ -34,7 +35,7 @@
                 <Rectangle
                     Margin="0"
                     Height="40"
-                    Width="240"
+                    Width="320"
                     HorizontalAlignment="Right"
                     RadiusX="4"
                     RadiusY="4"
@@ -47,10 +48,18 @@
                     VerticalAlignment="Center"
                     FontSize="14"
                     IsReadOnly="False"
-                    Width="220"
+                    Width="300"
                     Margin="0 0 10 0"
                     Foreground="Black"
-                    />
+                    >
+                    <TextBox.Text>
+                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validation:NullDataValidation ErrorMessage="Vui lòng nhập teeb phụ tùng"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
             <Grid
                 Margin="0 60 0 0"
@@ -67,7 +76,7 @@
                 <Rectangle
                     Margin="0"
                     Height="40"
-                    Width="240"
+                    Width="320"
                     HorizontalAlignment="Right"
                     RadiusX="4"
                     RadiusY="4"
@@ -80,17 +89,27 @@
                     VerticalAlignment="Center"
                     FontSize="14"
                     IsReadOnly="False"
-                    Width="220"
+                    Width="300"
                     Margin="0 0 10 0"
                     Foreground="Black"
-                    />
+                    >
+                    <TextBox.Text>
+                        <Binding Path="Price" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validation:NumberValidation ErrorMessage="Chỉ được nhập số (0-9)"
+                                                                         ErrorMessageNull="Vui lòng nhập giá"
+                                                                         ></validation:NumberValidation>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
 
 
         </Grid>
         <Grid
             Margin="0 0 16 16"
-            Width="240"
+            Width="320"
             Height="40"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom">
@@ -100,15 +119,28 @@
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Command="{Binding AddCommand}"
                 CommandParameter="{Binding ElementName=wdAddSupply}"
-                Width="100"
+                Width="140"
                 HorizontalAlignment="Left"
                 ToolTip="Resource name: MaterialDesignRaisedButton">
                 _Thêm
             </Button>
             <Button
+                x:Name="btnEdit"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Command="{Binding EditCommand}"
+                CommandParameter="{Binding ElementName=wdAddSupply}"
+                Width="140"
+                Visibility="Hidden"
+                HorizontalAlignment="Left"
+                ToolTip="Resource name: MaterialDesignRaisedButton">
+                _Sửa
+            </Button>
+            <Button
                 x:Name="btnCancel"
                 Style="{StaticResource MaterialDesignRaisedLightButton}"
-                Width="100"
+                Command="{Binding CloseCommand}"
+                CommandParameter="{Binding ElementName=wdAddSupply}"
+                Width="140"
                 HorizontalAlignment="Right"
                 ToolTip="Resource name: MaterialDesignRaisedLightButton">
                 _Hủy

@@ -1,4 +1,5 @@
 ﻿using Prism.Services.Dialogs;
+using Prism.Services.Dialogs;
 using QuanLyGaraOto.Model;
 using System;
 using System.Collections.Generic;
@@ -177,6 +178,7 @@ namespace QuanLyGaraOto.ViewModel
                                 temp.Supplies_Amount = temp.Supplies_Amount - ReturnRepairDetail.SuppliesAmount;
                             }
                             DataProvider.Ins.DB.SaveChanges();
+
                             p.Close();
                         }
                     }

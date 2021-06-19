@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -15,19 +16,23 @@ namespace QuanLyGaraOto.ViewModel
     {
         public ICommand OpenAddCommand { get; set; }
 
-        public ICommand OpendEditCommand { get; set; }
+        public ICommand OpenEditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
-        public ICommand AddCommand { get; set; }
-        public ICommand EditCommand { get; set; }
+        public ICommand CloseAddCommand { get; set; }
 
         public ICommand OpenImportCommand { get; set; }
         public ICommand ImportCommand { get; set; }
 
         public ICommand SuppliesBillCommand { get; set; }
         public ICommand SearchCommand { get; set; }
+        public ICommand SelectionChanged { get; set; }
         private BunkWindow _MainWindow;
 
         public BunkWindow MainWindow { get => _MainWindow; set { _MainWindow = value; } }
+
+        private ObservableCollection<SUPPLIES> _Temp { get; set; }
+        public ObservableCollection<SUPPLIES> Temp { get => _Temp; set { _Temp = value; OnPropertyChanged(); } }
 
         private ObservableCollection<SUPPLIES> _ListSupplies { get; set; }
         public ObservableCollection<SUPPLIES> ListSupplies { get => _ListSupplies; set { _ListSupplies = value; OnPropertyChanged(); } }
@@ -64,50 +69,72 @@ namespace QuanLyGaraOto.ViewModel
 
         public BunkViewModel()
         {
-            ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
+            LoadSupplies();
 
 
-            OpenAddCommand = new RelayCommand<MainWindow>((p) => true, (p) => OpenAddWd(p));
-            AddCommand = new RelayCommand<AddNewGoodWindow>(
-                (p) =>
+            OpenAddCommand = new RelayCommand<MainWindow>((p) => true, (p) => 
+            {
+                AddNewGoodWindow wdAddGoods = new AddNewGoodWindow();
+
+                wdAddGoods.txbName.Text = "";
+                wdAddGoods.btnAdd.Visibility = System.Windows.Visibility.Visible;
+                wdAddGoods.txbPrice.Text = "";
+                wdAddGoods.ShowDialog();
+                AddNewGoodViewModel add = wdAddGoods.DataContext as AddNewGoodViewModel;
+                ListSupplies.Add(add.Supplies);
+            });
+
+            OpenEditCommand = new RelayCommand<MainWindow>((p) => {
+                if (SelectedItem == null) return false;
+                if (Temp.Count > 1) return false;
+                return true;
+            }, (p) =>
+            {
+                AddNewGoodWindow wdAddGoods = new AddNewGoodWindow(SelectedItem);
+
+                wdAddGoods.txbName.Text = SelectedItem.Supplies_Name;
+                wdAddGoods.btnAdd.Visibility = System.Windows.Visibility.Hidden;
+                wdAddGoods.btnEdit.Visibility = System.Windows.Visibility.Visible;
+                wdAddGoods.txbPrice.Text = SelectedItem.Supplies_Price.ToString();
+                wdAddGoods.ShowDialog();
+            });
+
+            CloseAddCommand = new RelayCommand<AddNewGoodWindow>(
+                (p)=>
+                { return true; },
+                (p)=>
                 {
-                    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text);
-                    if (List == null || List.Count() != 0) return false;
-                    if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text))
-                        return false;
-                    return true;
-
-                },
-                (p) =>
-                {
-                    var supplier = new SUPPLIES() { Supplies_Name = p.txbName.Text, Supplies_Price = Int32.Parse(p.txbPrice.Text), Supplies_Amount = 0 };
-                    DataProvider.Ins.DB.SUPPLIES.Add(supplier);
-                    ListSupplies.Add(supplier);
-                    DataProvider.Ins.DB.SaveChanges();
                     p.Close();
-                });
-            EditCommand = new RelayCommand<BunkWindow>(
-                (p) =>
-                {
-                    if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Price))
-                        return false;
-                    if (SelectedItem == null) return false;
-                    return true;
-
-                },
-                (p) =>
-                {
-                    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.Supplies_Id).SingleOrDefault();
-                    List.Supplies_Name = Name;
-                    List.Supplies_Price = Int32.Parse(Price);
-                    DataProvider.Ins.DB.SaveChanges();
-                    OnPropertyChanged("List");
-
                 }
                 );
             OpenImportCommand = new RelayCommand<MainWindow>((p) => true, (p) => OpenImportWd(p));
 
+            DeleteCommand = new RelayCommand<MainWindow>((p) => {
+                if (SelectedItem == null) return false;
+                return true; }, (p) => 
+                {
+                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa loại phụ tùng đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) ;
+                    foreach(var item in Temp)
+                    {
+                        DeleteModel delete = new DeleteModel();
+                        delete.SUPPLIES(item);
+                        ListSupplies.Remove(item);
+                    }
+                    LoadSupplies();
+                });
+
             SuppliesBillCommand = new RelayCommand<object>((p) => { return true; }, p => { GoodBillWindow wd = new GoodBillWindow(); wd.ShowDialog(); });
+
+            SelectionChanged = new RelayCommand<DataGrid>(
+                (p)=>
+                {
+                    return true;
+                },
+                (p)=>
+                {
+                    Temp = new ObservableCollection<SUPPLIES>(p.SelectedItems.Cast<SUPPLIES>().ToList());
+                }
+                );
         }
 
         public void OpenImportWd(MainWindow wd)
@@ -115,26 +142,11 @@ namespace QuanLyGaraOto.ViewModel
             AddImportWindow addImportWindow = new AddImportWindow();
             addImportWindow.ShowDialog();
         }
-        public void OpenAddWd(MainWindow wd)
+    
+        void LoadSupplies()
         {
-            AddNewGoodWindow wdAddGoods = new AddNewGoodWindow();
-
-            wdAddGoods.txbName.Text = "";
-            wdAddGoods.btnAdd.Visibility = System.Windows.Visibility.Visible;
-            wdAddGoods.txbPrice.Text = "";
-            wdAddGoods.ShowDialog();
+            ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
         }
-        //public void AddNewGood(AddNewGoodWindow parameter)
-        //{
-        //    {
-        //        if (string.IsNullOrEmpty(parameter.txbName.Text) || string.IsNullOrEmpty(parameter.txbPrice.Text))
-        //            return;
-        //        if (SelectedItem == null) return;
-        //        var supplier = new Supply() { Name = parameter.txbName.Text, Price = Int32.Parse(parameter.txbPrice.Text), Amount = 0 };
-        //        DataProvider.Ins.DB.Supplies.Add(supplier);
-        //        DataProvider.Ins.DB.SaveChanges();
-        //        ListSupplies.Add(supplier);
-        //    }
-        //}
+
     }
 }
