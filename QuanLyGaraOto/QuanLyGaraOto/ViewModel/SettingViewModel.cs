@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using QuanLyGaraOto.Convert;
+using System.Configuration;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -484,18 +485,30 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception
-                                        + "where MaxCarReception=" + GaraInfo.MaxCarReception.ToString();
-                SqlConnection connection = new SqlConnection("Data Source=PARACETAMOL;Initial Catalog=GARA;" +
-                                                                    "Integrated Security=True");
-                connection.Open();
+                if (MessageBox.Show("Bạn có chắc chắn muốn thay đổi?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception
+                                            + "where MaxCarReception=" + GaraInfo.MaxCarReception.ToString();
 
-                SqlCommand command = new SqlCommand(query_string, connection);
+                    string connectionString = ConfigurationManager.ConnectionStrings["GARAEntities"].ConnectionString;
+                    if (connectionString.ToLower().StartsWith("metadata="))
+                    {
+                        System.Data.Entity.Core.EntityClient.EntityConnectionStringBuilder efBuilder 
+                        = new System.Data.Entity.Core.EntityClient.EntityConnectionStringBuilder(connectionString);
 
-                command.ExecuteNonQuery();
-                connection.Close();
+                        connectionString = efBuilder.ProviderConnectionString;
+                    }
 
-                SetEnableStatusButtonInGaraInformation(false);
+                    SqlConnection connection = new SqlConnection(connectionString);
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand(query_string, connection);
+
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+                    SetEnableStatusButtonInGaraInformation(false);
+                }
             });
             ResetGaraInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -631,13 +644,16 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                userInfo.UserInfo_Name = _UserName;
-                userInfo.UserInfo_Address = _UserAddress;
-                userInfo.UserInfo_BirthDate = _UserBirth;
-                userInfo.UserInfo_Telephone = UserTelephone;
-                userInfo.UserInfo_CMND = UserCMND;
-                DataProvider.Ins.DB.SaveChanges();
-                SetEnableStatusButtonInUserInformation(false);
+                if (MessageBox.Show("Bạn có chắc chắn muốn thay đổi?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    userInfo.UserInfo_Name = _UserName;
+                    userInfo.UserInfo_Address = _UserAddress;
+                    userInfo.UserInfo_BirthDate = _UserBirth;
+                    userInfo.UserInfo_Telephone = UserTelephone;
+                    userInfo.UserInfo_CMND = UserCMND;
+                    DataProvider.Ins.DB.SaveChanges();
+                    SetEnableStatusButtonInUserInformation(false);
+                }
             });
             ResetUserInformation = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -682,15 +698,18 @@ namespace QuanLyGaraOto.ViewModel
 
             }, (p) =>
             {
-                string encode = MD5Hash(Base64Encode(NewPassword));
-                user.Password = encode;
-                DataProvider.Ins.DB.SaveChanges();
-                MessageBox.Show("Đổi mật khẩu thành công");
+                if (MessageBox.Show("Bạn có chắc chắn muốn thay đổi?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    string encode = MD5Hash(Base64Encode(NewPassword));
+                    user.Password = encode;
+                    DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show("Đổi mật khẩu thành công");
 
-                p.NewPasswordBox.Password = string.Empty;
-                IsCorrectPassword = false;
-                IsEnableCheckButtonInChangePassword = true;
-                IsEnableOldPasswordField = true;
+                    p.NewPasswordBox.Password = string.Empty;
+                    IsCorrectPassword = false;
+                    IsEnableCheckButtonInChangePassword = true;
+                    IsEnableOldPasswordField = true;
+                }
             });
             CancelChangePassword = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
             {
