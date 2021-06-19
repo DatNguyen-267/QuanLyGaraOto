@@ -352,7 +352,7 @@
                         VerticalAlignment="Center">
                 <Button Grid.Column="0"
                         IsDefault="True"
-                                Content="Xác nhận"
+                                Content="Thêm"
                                 Margin="0 0 70 0"
                                 Style="{StaticResource MainButton}"
                                 Command="{Binding AddCommand}"

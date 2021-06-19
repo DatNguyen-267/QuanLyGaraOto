@@ -357,7 +357,7 @@
                         HorizontalAlignment="Center">
                 <Button Grid.Column="0"
                         IsDefault="True"
-                                Content="Xác nhận"
+                                Content="Sửa"
                                 Margin="0 0 70 0"
                                 Style="{StaticResource MainButton}"
                                 Command="{Binding EditEmployeeCommand}"
@@ -365,7 +365,7 @@
                         ></Button>
                 <Button Grid.Column="1"
                         IsCancel="True"
-                            Content="Thoát"
+
                             Style="{StaticResource CloseButton}"
                             Width="150"
                         Height="50"

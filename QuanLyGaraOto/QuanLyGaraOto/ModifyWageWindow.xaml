@@ -87,7 +87,7 @@
                 Style="{StaticResource CloseButton}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Content="Hủy"      
+              
                 Command="{Binding CancelModifyWage}"
                 CommandParameter="{Binding ElementName=wdModifyWage}"/>
         </Grid>

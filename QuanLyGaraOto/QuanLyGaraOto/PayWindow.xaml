@@ -54,7 +54,7 @@
                                ></TextBlock>
                 </Grid>
                 <materialDesign:Card
-                      Margin="15 5 30 30"
+                      Margin="15 5 30 20"
                     Grid.Row="1">
                     <DataGrid 
                     ItemsSource="{Binding ListRepair}"
@@ -399,7 +399,7 @@
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        Margin="0 0 10 0"
-                                       FontSize="30"
+                                       FontSize="20"
                                        FontWeight="ExtraBold"
                                       Foreground="{StaticResource MainBlue}"
                                        >
@@ -409,7 +409,7 @@
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        Margin="0 0 10 0"
-                                       FontSize="30"
+                                       FontSize="20"
                                         FontWeight="ExtraBold"
                                         Foreground="#FF1976D2"
                                        >
@@ -417,7 +417,7 @@
                         </TextBlock>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="4">
+                <Grid Grid.Row="4" Margin="0 0 0 10">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>

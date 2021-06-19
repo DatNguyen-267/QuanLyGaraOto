@@ -9,6 +9,8 @@
         WindowState="Maximized"
         Name="mainWindow"
          Title="Quản lý gara ôtô" Height="700" Width="800"
+        MinHeight="800"
+        MinWidth="1000"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <i:Interaction.Triggers>

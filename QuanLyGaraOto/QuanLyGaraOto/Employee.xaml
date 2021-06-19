@@ -158,7 +158,52 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="16 0 8 10">
                             <materialDesign:Card>
-                                <ListView FontSize="16" FontWeight="Normal" x:Name="lvUsers" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid x:Name="lvUsers" 
+                                          ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                          SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            SelectionMode="Extended"
+                                          IsReadOnly="True"
+                                          CanUserAddRows="False"
+                                          CanUserDeleteRows="False"
+                                          AutoGenerateColumns="False"
+                                          CanUserReorderColumns="True"
+                                          FontSize="16"
+                                              FontWeight="Normal">
+                                    <DataGrid.Resources>
+                                        <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gainsboro" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGrid.Resources>
+
+                                    <DataGrid.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                            <Style.Triggers>
+                                                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                    <Setter Property="FontWeight" Value="DemiBold" />
+                                                    <Setter Property="FontSize" Value="17" />
+
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGrid.CellStyle>
+
+                                    <DataGrid.ColumnHeaderStyle>
+                                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+                                        </Style>
+                                    </DataGrid.ColumnHeaderStyle>
+                                    <DataGrid.Columns>
+                                        <materialDesign:DataGridTextColumn  Width="100" Header="ID" Binding="{Binding UserInfo_Id}"></materialDesign:DataGridTextColumn>
+                                        <materialDesign:DataGridTextColumn  Width="200" Header="Họ tên" Binding="{Binding UserInfo_Name}"></materialDesign:DataGridTextColumn>
+                                        <materialDesign:DataGridTextColumn  Width="200" Header="Chức vụ" Binding="{Binding USER.ROLE.Role_Name}"></materialDesign:DataGridTextColumn>
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+                                <!--<ListView FontSize="16" FontWeight="Normal" x:Name="lvUsers" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListView.View>
                                         <GridView >
                                            
@@ -167,7 +212,7 @@
                                             <GridViewColumn Width="200" Header="Chức vụ" DisplayMemberBinding="{Binding USER.ROLE.Role_Name}"></GridViewColumn>
                                         </GridView>
                                     </ListView.View>
-                                </ListView>
+                                </ListView>-->
                             </materialDesign:Card>
                             <!--<Border BorderThickness="1" BorderBrush="Black" CornerRadius="4"></Border>-->
                             
@@ -178,14 +223,21 @@
                                     <Style TargetType="materialDesign:PackIcon" >
                                         <Setter Property="Width" Value="40"></Setter>
                                         <Setter Property="Height" Value="40"></Setter>
+                                        <Setter Property="Margin" Value="0 15 0 0"></Setter>
                                     </Style>
                                     <Style TargetType="Grid">
-                                        <Setter Property="Margin" Value="10 10 10 10"></Setter>
+                                        <Setter Property="Margin" Value="10 5 10 5"></Setter>
                                     </Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="FontSize" Value="16"></Setter>
                                         <Setter Property="Margin" Value="50 0 0 0"></Setter>
                                         <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+                                    </Style>
+                                    <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                        <Setter Property="FontSize" Value="14"></Setter>
+                                        <Setter Property="Margin" Value="60 0 20 0"></Setter>
+                                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                                        
                                     </Style>
                                 </Grid.Resources>
                                 <Grid.RowDefinitions>
@@ -204,19 +256,22 @@
                                         <materialDesign:PackIcon Kind="Account" 
                                                  VerticalAlignment="Center"
                                                  ></materialDesign:PackIcon>
-                                        <TextBlock Text="{Binding Name,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                        <TextBox Text="{Binding Name,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                VerticalAlignment="Center"
-                                               
-                                               ></TextBlock>
+                                                 
+                                                 materialDesign:HintAssist.Hint="Họ và tên"
+                                                 >
+                                        </TextBox>
                                     </Grid>
                                     <Grid>
                                         <materialDesign:PackIcon Kind="BirthdayCake" 
                                                  VerticalAlignment="Center"
                                                  ></materialDesign:PackIcon>
-                                        <TextBlock Text="{Binding BrithDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='dd/MM/yyyy'}"
+                                        <TextBox Text="{Binding BrithDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='dd/MM/yyyy'}"
                                                VerticalAlignment="Center"
-                                               
-                                               ></TextBlock>
+                                                 materialDesign:HintAssist.Hint="Ngày sinh">
+                                            
+                                        </TextBox>
                                     </Grid>
                                     <Grid >
                                         <materialDesign:PackIcon Kind="CardAccountDetails" 
@@ -224,10 +279,10 @@
                                                  VerticalAlignment="Center"
                                                
                                                  ></materialDesign:PackIcon>
-                                        <TextBlock Text="{Binding CMND, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                        <TextBox Text="{Binding CMND, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                            VerticalAlignment="Center"
-                                           
-                                           ></TextBlock>
+                                           materialDesign:HintAssist.Hint="CMND/CCCD"
+                                           ></TextBox>
                                     </Grid>
                                     <Grid >
                                         <materialDesign:PackIcon Kind="AccountCircle" 
@@ -235,10 +290,10 @@
                                                  VerticalAlignment="Center"
                                                
                                                  ></materialDesign:PackIcon>
-                                        <TextBlock Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                        <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                            VerticalAlignment="Center"
-                                          
-                               ></TextBlock>
+                                         materialDesign:HintAssist.Hint="Tên tài khoản"
+                               ></TextBox>
                                     </Grid>
                                     <Grid >
                                         <materialDesign:PackIcon Kind="Phone" 
@@ -246,10 +301,10 @@
                                                  VerticalAlignment="Center"
                                                 
                                                  ></materialDesign:PackIcon>
-                                        <TextBlock Text="{Binding Telephone, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                        <TextBox Text="{Binding Telephone, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                VerticalAlignment="Center"
-                                               
-                                               ></TextBlock>
+                                                        materialDesign:HintAssist.Hint="Số điện thoại"
+                                               ></TextBox>
                                     </Grid>
                                     <Grid >
                                         <materialDesign:PackIcon Kind="AddressMarker" 
@@ -257,10 +312,10 @@
                                                  VerticalAlignment="Center"
                                                  
                                                  ></materialDesign:PackIcon>
-                                        <TextBlock Text="{Binding Address, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                        <TextBox Text="{Binding Address, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                VerticalAlignment="Center"
-                                               
-                                               ></TextBlock>
+                                               materialDesign:HintAssist.Hint="Địa chỉ"
+                                               ></TextBox>
                                     </Grid>
                                 </StackPanel>
                                 <Grid Grid.Row="7" Margin="5 0 5 20">
@@ -378,7 +433,52 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="16 0 8 10">
                             <materialDesign:Card>
-                                <ListView 
+                                <DataGrid  x:Name="lvRoles" 
+                                           ItemsSource="{Binding ListRoles, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                           SelectedItem="{Binding SelectedItemRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            SelectionMode="Extended"
+                                          IsReadOnly="True"
+                                          CanUserAddRows="False"
+                                          CanUserDeleteRows="False"
+                                          AutoGenerateColumns="False"
+                                          CanUserReorderColumns="True"
+                                          FontSize="16"
+                                              FontWeight="Normal">
+                                    <DataGrid.Resources>
+                                        <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gainsboro" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGrid.Resources>
+
+                                    <DataGrid.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                            <Style.Triggers>
+                                                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                    <Setter Property="FontWeight" Value="DemiBold" />
+                                                    <Setter Property="FontSize" Value="17" />
+
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGrid.CellStyle>
+
+                                    <DataGrid.ColumnHeaderStyle>
+                                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+                                        </Style>
+                                    </DataGrid.ColumnHeaderStyle>
+                                    <DataGrid.Columns>
+                                        <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding Role_Id}"></materialDesign:DataGridTextColumn>
+                                        <materialDesign:DataGridTextColumn  Header="Chức vụ" Binding="{Binding Role_Name}"></materialDesign:DataGridTextColumn>
+
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+                                <!--<ListView 
                                     FontSize="16"
                                     FontWeight="Normal"
                                     x:Name="lvRoles" ItemsSource="{Binding ListRoles, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItemRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -388,7 +488,7 @@
                                             <GridViewColumn  Header="Chức vụ" DisplayMemberBinding="{Binding Role_Name}"></GridViewColumn>
                                         </GridView>
                                     </ListView.View>
-                                </ListView>
+                                </ListView>-->
                             </materialDesign:Card>
                             
                         </Grid>

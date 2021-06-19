@@ -58,7 +58,7 @@
                     Width="250"
                     IsCancel="true"
                     Style="{StaticResource MainButton}"
-                    Content="Thoát"
+                    Content="Đóng"
                     Command="{Binding ExitCommand}"
                     CommandParameter="{Binding ElementName=wdAddAccount}"
                     VerticalAlignment="Top"

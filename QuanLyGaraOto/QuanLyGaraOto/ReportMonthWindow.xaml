@@ -226,10 +226,11 @@
                 </Button>
                 <Button Grid.Column="1"
                     IsCancel="True"
+                        Style="{StaticResource CloseButton}"
                         Width="150"
                         Height="40"
                         FontSize="24"
-                        Content="Thoát"
+                       
                         Margin="10 0 20 0"
                         Background="#455A64"                        
                         VerticalAlignment="Center"                       

@@ -163,16 +163,63 @@
                     FontWeight="Bold"
                     FontSize="18">
                     <Grid>
-                        <ListView x:Name="lvs_Receipt" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
-                            <ListView.View>
+                        <DataGrid x:Name="lvs_Receipt" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                  SelectionMode="Extended"
+                                          IsReadOnly="True"
+                                          CanUserAddRows="False"
+                                          CanUserDeleteRows="False"
+                                          AutoGenerateColumns="False"
+                                          CanUserReorderColumns="True"
+                                          FontSize="16"
+                                              FontWeight="Normal">
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gainsboro" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.Resources>
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding BrandSelectionChanged}" 
+                                                                   CommandParameter="{Binding ElementName=dataGrid_brand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                            <Setter Property="FontWeight" Value="DemiBold" />
+                                            <Setter Property="FontSize" Value="17" />
+
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            <DataGrid.Columns>
+                                <materialDesign:DataGridTextColumn Header="Mã hóa đơn" Width="150"  Binding="{Binding Receipt_Id}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Thời gian" Width="300"  Binding="{Binding ReceiptDate , StringFormat='dd/MM/yyyy'}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Doanh thu" Width="250"  Binding="{Binding MoneyReceived}"></materialDesign:DataGridTextColumn>
+                            </DataGrid.Columns>
+                            <!--<ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Mã hóa đơn" Width="250"  DisplayMemberBinding="{Binding Receipt_Id}"></GridViewColumn>
-                                    <GridViewColumn Header="Thời gian" Width="300"  DisplayMemberBinding="{Binding ReceiptDate}"></GridViewColumn>
+                                    <GridViewColumn Header="Thời gian" Width="300"  DisplayMemberBinding="{Binding ReceiptDate , StringFormat='dd/MM/YYYY'}"></GridViewColumn>
                                     <GridViewColumn Header="Doanh thu" Width="250"  DisplayMemberBinding="{Binding MoneyReceived}"></GridViewColumn>
 
                                 </GridView>
-                            </ListView.View>
-                        </ListView>
+                            </ListView.View>-->
+                        </DataGrid>
                     </Grid>
                 </TabItem>
 
@@ -182,8 +229,54 @@
                     FontWeight="Bold"
                     FontSize="18">
                     <Grid>
+                        <DataGrid x:Name="lvs_Import" ItemsSource="{Binding ListImport, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                  SelectionMode="Extended"
+                                          IsReadOnly="True"
+                                          CanUserAddRows="False"
+                                          CanUserDeleteRows="False"
+                                          AutoGenerateColumns="False"
+                                          CanUserReorderColumns="True"
+                                          FontSize="16"
+                                              FontWeight="Normal">
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gainsboro" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.Resources>
 
-                        <ListView x:Name="lvs_Import" ItemsSource="{Binding ListImport, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                            <Setter Property="FontWeight" Value="DemiBold" />
+                                            <Setter Property="FontSize" Value="17" />
+
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            <DataGrid.Columns>
+                                <materialDesign:DataGridTextColumn  Width="150" Header="Vật tư " Binding="{Binding Supplies_Name}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn  Width="100" Header="Số lượng"   Binding="{Binding ImportInfo.Amount }"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn  Width="150" Header="Đơn giá"   Binding="{Binding ImportInfo.Price}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn  Width="150" Header="Thời gian"   Binding="{Binding ImportGoods_Date}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn  Header="Tổng chi phí"   Binding="{Binding ImportInfo.TotalMoney}"></materialDesign:DataGridTextColumn>
+                              
+                                
+                            </DataGrid.Columns>
+                            
+                        </DataGrid>
+                        <!--<ListView x:Name="lvs_Import" ItemsSource="{Binding ListImport, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Vật tư " DisplayMemberBinding="{Binding Supplies_Name}"></GridViewColumn>
@@ -194,7 +287,7 @@
 
                                 </GridView>
                             </ListView.View>
-                        </ListView>
+                        </ListView>-->
                     </Grid>
                 </TabItem>
 

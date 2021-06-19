@@ -7,11 +7,10 @@
         mc:Ignorable="d"
         Name="CarServiceWD"
         Title="Dịch vụ và thông tin xe" 
-        Height="600" Width="1200"
-        MinHeight="800"
+        Height="700" Width="1400"
+        MinHeight="500"
         MinWidth="700"
         WindowStartupLocation="CenterScreen"
-        
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -91,7 +90,7 @@
                         <Label Grid.Row="0"
                                Style="{StaticResource Title}"
                                Content="Thông tin chung"
-                               Height="48"
+                               Height="40"
                                
                                ></Label>
                         <ScrollViewer Grid.Row="1">

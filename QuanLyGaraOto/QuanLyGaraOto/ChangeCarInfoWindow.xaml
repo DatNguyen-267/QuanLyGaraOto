@@ -21,7 +21,7 @@
         <Grid Grid.Row="0" Background="#3d4751">
             <TextBlock HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Text="Thay đổi thông tin"
+                       Text="Sửa đổi thông tin"
                        FontSize="30"
                       FontWeight="DemiBold"
                        Foreground="White"
@@ -327,7 +327,7 @@
                     Background="{StaticResource MainBlue}"
                     BorderBrush="{StaticResource MainBlue}"
                     IsDefault="True"
-                  Content="Xác Nhận" />
+                  Content="Sửa" />
                 <Button
                     TabIndex="8"
                     IsCancel="True"

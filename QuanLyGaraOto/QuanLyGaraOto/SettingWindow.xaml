@@ -266,7 +266,7 @@
                                           CanUserDeleteRows="False"
                                           AutoGenerateColumns="False"
                                           CanUserReorderColumns="True"
-                                          FontSize="18"
+                                          FontSize="16"
                                               FontWeight="Normal"
                                           Name="dataGrid_brand">
                                         <DataGrid.Resources>
@@ -291,7 +291,7 @@
                                                 <Style.Triggers>
                                                     <Trigger Property="DataGridCell.IsSelected" Value="True">
                                                         <Setter Property="FontWeight" Value="DemiBold" />
-                                                        <Setter Property="FontSize" Value="19" />
+                                                        <Setter Property="FontSize" Value="17" />
 
                                                     </Trigger>
                                                 </Style.Triggers>
@@ -305,7 +305,7 @@
                                         </DataGrid.ColumnHeaderStyle>
 
                                         <DataGrid.Columns>
-                                            <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding CarBrand_Id}"/>
+                                            <materialDesign:DataGridTextColumn  Width="100" Header="ID" Binding="{Binding CarBrand_Id}"/>
                                             <materialDesign:DataGridTextColumn Header="Loại tiền công" Binding="{Binding CarBrand_Name}"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
@@ -424,7 +424,7 @@
                                           CanUserDeleteRows="False"
                                           AutoGenerateColumns="False"
                                           CanUserReorderColumns="True"
-                                          FontSize="18"
+                                          FontSize="16"
                                           FontWeight="Normal"
                                           materialDesign:ScrollViewerAssist.IgnorePadding="True"
                                           Name="dataGrid_wage">
@@ -450,7 +450,7 @@
                                             <Style.Triggers>
                                                 <Trigger Property="DataGridCell.IsSelected" Value="True">
                                                     <Setter Property="FontWeight" Value="DemiBold" />
-                                                    <Setter Property="FontSize" Value="19" />
+                                                    <Setter Property="FontSize" Value="17" />
 
                                                 </Trigger>
                                             </Style.Triggers>
@@ -464,8 +464,8 @@
                                     </DataGrid.ColumnHeaderStyle>
 
                                     <DataGrid.Columns>
-                                        <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding Wage_Id}"/>
-                                        <materialDesign:DataGridTextColumn Header="Loại tiền công" Binding="{Binding Wage_Name}"/>
+                                        <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding Wage_Id}"/>
+                                        <materialDesign:DataGridTextColumn Width="200" Header="Loại tiền công" Binding="{Binding Wage_Name}"/>
                                         <materialDesign:DataGridTextColumn Header="Giá trị" Binding="{Binding Wage_Value}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>

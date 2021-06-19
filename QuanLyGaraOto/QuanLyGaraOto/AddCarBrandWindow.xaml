@@ -69,7 +69,7 @@
                
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Content="Hủy"      
+    
                 Command="{Binding CancelAddCarBrand}"
                 CommandParameter="{Binding ElementName=wdAddCarBrand}"/>
         </Grid>

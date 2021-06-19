@@ -91,7 +91,7 @@
                 
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Content="Hủy"      
+               
                 Command="{Binding CancelAddWage}"
                 CommandParameter="{Binding ElementName=wdWage}"/>
         </Grid>

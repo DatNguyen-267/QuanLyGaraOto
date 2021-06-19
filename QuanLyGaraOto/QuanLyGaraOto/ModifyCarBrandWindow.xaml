@@ -66,7 +66,7 @@
 
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Content="Hủy"      
+               
             
                 Command="{Binding CancelModifyCarBrand}"
                 CommandParameter="{Binding ElementName=wdModifyCarBrand}"/>

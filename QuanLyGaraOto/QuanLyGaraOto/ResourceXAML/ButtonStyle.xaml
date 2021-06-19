@@ -24,6 +24,7 @@
     
     <Style x:Key="CloseButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Setter Property="Width" Value="110"></Setter>
+        <Setter Property="Content" Value="Đóng"></Setter>
         <Setter Property="Height" Value="43"></Setter>
         <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource MainColor}"></Setter>

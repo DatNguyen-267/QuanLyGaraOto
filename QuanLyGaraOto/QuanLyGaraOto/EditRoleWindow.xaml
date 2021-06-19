@@ -232,7 +232,7 @@
                 Style="{StaticResource MainButton}"
                 Grid.Column="0"
                     Margin="10 0 10 0"
-                    Content="Xác nhận"
+                    Content="Sửa"
                     Command="{Binding EditRoleCommand}"
                         
                      CommandParameter="{Binding ElementName=wdEditRole}"/>
@@ -244,7 +244,7 @@
                     Height="50"
                     Command="{Binding ExitCommand}"
                     CommandParameter="{Binding ElementName=wdEditRole}"
-                    Content="Thoát"/>
+                    />
         </Grid>
     </Grid>
 </Window>
