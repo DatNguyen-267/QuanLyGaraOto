@@ -6,7 +6,46 @@ use GARA;
 GO
 -- drop database GARA;
 ---------------------DON HANG CUA KHACH HANG-----------------------------------
-
+create table ROLE
+(
+	Role_Id int identity(1,1) primary key,
+	Role_Name nvarchar(max),
+)
+go
+create table PREMISSION_ITEM
+(
+	PermissionItem_Id int identity(1,1) primary key,
+	PermissionItem_Name nvarchar(max) not null,
+)
+go
+create table ROLE_DETAIL
+(
+	RoleDetail_Id int identity(1,1) primary key,
+	IdRole int not null,
+	IdPermissionItem int not null,
+	Permission bit not null default('False'),
+	constraint FK_ROLEDETAIL_ROLE foreign key (IdRole) references ROLE(Role_Id),
+	constraint FK_ROLEDETAIL_PREMISSIONITEM foreign key (IdPermissionItem) references PREMISSION_ITEM(PermissionItem_Id)
+)
+go
+-- Thiet lap danh sach tai khoan cua nguoi dung
+create table USERS
+(
+    Users_Id int primary key not NULL IDENTITY(1, 1),
+    UserName nvarchar(100) not NULL,
+    Password nvarchar(100) not NULL,
+    IdRole int not NULL,
+	foreign key(IdRole) references ROLE(Role_Id),
+);
+GO
+create table SUPPLIER
+(
+    Supplier_Id int primary key not NULL IDENTITY(1, 1),
+    Supplier_Name nvarchar(max) not NULL,
+	Supplier_Phone nvarchar(20) not NULL,
+	Supplier_Email nvarchar(max) not NULL
+);
+GO
 create table CAR_BRAND
 (
     CarBrand_Id int primary key not NULL IDENTITY(1, 1),
@@ -62,6 +101,9 @@ create table INVENTORY_REPORT
 (
 	InventoryReport_Id  int IDENTITY(1, 1) primary key not null,
 	InventoryReport_Date date not null,
+	InventoryReport_Name nvarchar(max) not null,
+	IdUser int not null,
+	constraint FK_INVENTORYREPORT_USERS foreign key (IdUser) references USERS(Users_Id)
 );
 GO
 
@@ -83,6 +125,8 @@ create table SALES_REPORT
 	SalesReport_Id int IDENTITY(1, 1) primary key not NULL,
 	SalesReport_Date date not null,
 	SalesReport_Revenue int not null default('0'),
+	IdUser int not null,
+	constraint FK_SALESREPORT_USERS foreign key (IdUser) references USERS(Users_Id)
 );
 GO
 
@@ -173,38 +217,7 @@ GO
 --------------------NHAN SU CUA GARA--------------------------------
 
 -- Thiet lap danh sach cac role bao gom staff va admin
-create table ROLE
-(
-	Role_Id int identity(1,1) primary key,
-	Role_Name nvarchar(max),
-)
-go
-create table PREMISSION_ITEM
-(
-	PermissionItem_Id int identity(1,1) primary key,
-	PermissionItem_Name nvarchar(max) not null,
-)
-go
-create table ROLE_DETAIL
-(
-	RoleDetail_Id int identity(1,1) primary key,
-	IdRole int not null,
-	IdPermissionItem int not null,
-	Permission bit not null default('False'),
-	constraint FK_ROLEDETAIL_ROLE foreign key (IdRole) references ROLE(Role_Id),
-	constraint FK_ROLEDETAIL_PREMISSIONITEM foreign key (IdPermissionItem) references PREMISSION_ITEM(PermissionItem_Id)
-)
-go
--- Thiet lap danh sach tai khoan cua nguoi dung
-create table USERS
-(
-    Users_Id int primary key not NULL IDENTITY(1, 1),
-    UserName nvarchar(100) not NULL,
-    Password nvarchar(100) not NULL,
-    IdRole int not NULL,
-	foreign key(IdRole) references ROLE(Role_Id),
-);
-GO
+
 -- Thiet lap thong tin cua nguoi dung
 create table USER_INFO
 (

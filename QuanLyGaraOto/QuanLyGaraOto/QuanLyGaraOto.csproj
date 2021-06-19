@@ -58,6 +58,10 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
@@ -198,6 +202,7 @@
     <Compile Include="Model\IMPORT_GOODS_DETAIL.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\InventoryReport.cs" />
     <Compile Include="Model\INVENTORY_REPORT.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -231,6 +236,7 @@
     <Compile Include="Model\ROLE_DETAIL.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SalesReport.cs" />
     <Compile Include="Model\SALES_REPORT.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
@@ -255,6 +261,12 @@
     </Compile>
     <Compile Include="Model\WAGE.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModifyCarBrandWindow.xaml.cs">
+      <DependentUpon>ModifyCarBrandWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModifyWageWindow.xaml.cs">
+      <DependentUpon>ModifyWageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="PayWindow.xaml.cs">
       <DependentUpon>PayWindow.xaml</DependentUpon>
@@ -283,8 +295,12 @@
     <Compile Include="Template\ReportSalesTemplate.xaml.cs">
       <DependentUpon>ReportSalesTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Template\SubBillTemplate.xaml.cs">
+      <DependentUpon>SubBillTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlGaraOto\TempUserControl.cs" />
     <Compile Include="Validation\DateValidation.cs" />
+    <Compile Include="Validation\NonFocusValidation.cs" />
     <Compile Include="Validation\NullDataValidation.cs" />
     <Compile Include="Validation\NumberValidation.cs" />
     <Compile Include="Validation\OnlyNumberValidation.cs" />
@@ -307,13 +323,19 @@
     <Compile Include="ViewModel\ImportBillViewModel.cs" />
     <Compile Include="ViewModel\ImportGoodViewModel.cs" />
     <Compile Include="ViewModel\ImportPayViewModel.cs" />
+    <Compile Include="ViewModel\InventoryReportViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ModifyCarBrandViewModel.cs" />
+    <Compile Include="ViewModel\ModifyWageViewModel.cs" />
     <Compile Include="ViewModel\PayViewModel.cs" />
     <Compile Include="ViewModel\PrintViewModel.cs" />
+    <Compile Include="ViewModel\ReportMonthViewModel.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
+    <Compile Include="ViewModel\SalesReportViewModel.cs" />
     <Compile Include="ViewModel\ServiceViewModel.cs" />
     <Compile Include="ViewModel\SettingViewModel.cs" />
+    <Compile Include="ViewModel\SubBillViewModel.cs" />
     <Page Include="AddAccountWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -414,6 +436,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModifyCarBrandWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ModifyWageWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -466,6 +496,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Template\SubBillTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -516,7 +550,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\EditView\" />
+    <Folder Include="View\InputView\" />
+    <Folder Include="View\MainView\" />
+    <Folder Include="View\SubView\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
