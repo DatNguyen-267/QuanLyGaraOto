@@ -13,22 +13,24 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class IMPORT_GOODS :BaseViewModel
+    public partial class IMPORT_GOODS : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public IMPORT_GOODS()
         {
             this.IMPORT_GOODS_DETAIL = new HashSet<IMPORT_GOODS_DETAIL>();
         }
-
+    
         public int ImportGoods_Id { get; set; }
-        private System.DateTime _ImportGoods_Date { get; set; }
-
-        public System.DateTime ImportGoods_Date { get => _ImportGoods_Date; set { _ImportGoods_Date = value; OnPropertyChanged(); } }
-        public int _ImportGoods_TotalMoney { get; set; }
-
-        public int ImportGoods_TotalMoney { get => _ImportGoods_TotalMoney; set { _ImportGoods_TotalMoney = value; OnPropertyChanged(); } }
-
+        public System.DateTime ImportGoods_Date { get; set; }
+        public int ImportGoods_TotalMoney { get; set; }
+        public string ImportGoods_Supplier { get; set; }
+        public string ImportGoods_UserName { get; set; }
+        public int IdUser { get; set; }
+        public int IdSupplier { get; set; }
+    
+        public virtual SUPPLIER SUPPLIER { get; set; }
+        public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMPORT_GOODS_DETAIL> IMPORT_GOODS_DETAIL { get; set; }
     }

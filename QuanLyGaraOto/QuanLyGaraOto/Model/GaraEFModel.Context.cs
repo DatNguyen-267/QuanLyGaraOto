@@ -42,6 +42,7 @@ namespace QuanLyGaraOto.Model
         public virtual DbSet<ROLE_DETAIL> ROLE_DETAIL { get; set; }
         public virtual DbSet<SALES_REPORT> SALES_REPORT { get; set; }
         public virtual DbSet<SALES_REPORT_DETAIL> SALES_REPORT_DETAIL { get; set; }
+        public virtual DbSet<SUPPLIER> SUPPLIERs { get; set; }
         public virtual DbSet<SUPPLIES> SUPPLIES { get; set; }
         public virtual DbSet<USER_INFO> USER_INFO { get; set; }
         public virtual DbSet<USER> USERS { get; set; }

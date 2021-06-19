@@ -9,10 +9,11 @@
 
 namespace QuanLyGaraOto.Model
 {
+    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class SALES_REPORT
+    public partial class SALES_REPORT : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SALES_REPORT()
@@ -23,7 +24,10 @@ namespace QuanLyGaraOto.Model
         public int SalesReport_Id { get; set; }
         public System.DateTime SalesReport_Date { get; set; }
         public int SalesReport_Revenue { get; set; }
+        public string SalesReport_UserName { get; set; }
+        public int IdUser { get; set; }
     
+        public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SALES_REPORT_DETAIL> SALES_REPORT_DETAIL { get; set; }
     }

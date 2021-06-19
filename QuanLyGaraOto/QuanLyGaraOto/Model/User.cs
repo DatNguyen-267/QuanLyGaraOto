@@ -17,6 +17,9 @@ namespace QuanLyGaraOto.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public USER()
         {
+            this.IMPORT_GOODS = new HashSet<IMPORT_GOODS>();
+            this.INVENTORY_REPORT = new HashSet<INVENTORY_REPORT>();
+            this.SALES_REPORT = new HashSet<SALES_REPORT>();
             this.USER_INFO = new HashSet<USER_INFO>();
         }
     
@@ -25,7 +28,13 @@ namespace QuanLyGaraOto.Model
         public string Password { get; set; }
         public int IdRole { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IMPORT_GOODS> IMPORT_GOODS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<INVENTORY_REPORT> INVENTORY_REPORT { get; set; }
         public virtual ROLE ROLE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SALES_REPORT> SALES_REPORT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USER_INFO> USER_INFO { get; set; }
     }

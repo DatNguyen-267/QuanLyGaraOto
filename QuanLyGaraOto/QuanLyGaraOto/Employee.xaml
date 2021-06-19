@@ -158,7 +158,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="16 0 8 10">
                             <materialDesign:Card>
-                                <DataGrid x:Name="lvUsers" 
+                                <DataGrid x:Name="datagridUser" 
                                           ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                           SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             SelectionMode="Extended"
@@ -433,7 +433,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="16 0 8 10">
                             <materialDesign:Card>
-                                <DataGrid  x:Name="lvRoles" 
+                                <DataGrid  x:Name="datagrid" 
                                            ItemsSource="{Binding ListRoles, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                            SelectedItem="{Binding SelectedItemRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             SelectionMode="Extended"

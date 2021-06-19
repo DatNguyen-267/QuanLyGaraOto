@@ -9,25 +9,23 @@
 
 namespace QuanLyGaraOto.Model
 {
-    using QuanLyGaraOto.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class INVENTORY_REPORT : BaseViewModel
+    public partial class SUPPLIER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public INVENTORY_REPORT() 
+        public SUPPLIER()
         {
-            this.INVENTORY_REPORT_DETAIL = new HashSet<INVENTORY_REPORT_DETAIL>();
+            this.IMPORT_GOODS = new HashSet<IMPORT_GOODS>();
         }
     
-        public int InventoryReport_Id { get; set; }
-        public System.DateTime InventoryReport_Date { get; set; }
-        public string InventoryReport_UserName { get; set; }
-        public int IdUser { get; set; }
+        public int Supplier_Id { get; set; }
+        public string Supplier_Name { get; set; }
+        public string Supplier_Phone { get; set; }
+        public string Supplier_Email { get; set; }
     
-        public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INVENTORY_REPORT_DETAIL> INVENTORY_REPORT_DETAIL { get; set; }
+        public virtual ICollection<IMPORT_GOODS> IMPORT_GOODS { get; set; }
     }
 }

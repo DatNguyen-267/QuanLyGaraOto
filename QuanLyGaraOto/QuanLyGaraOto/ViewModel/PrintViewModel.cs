@@ -2,14 +2,12 @@
 using Microsoft.Win32;
 using QuanLyGaraOto.Model;
 using QuanLyGaraOto.Template;
-using Syncfusion.UI.Xaml.Grid.Converter;
 using Syncfusion.XlsIO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +17,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using IStyle = Syncfusion.XlsIO.IStyle;
 using Size = System.Windows.Size;
 
 namespace QuanLyGaraOto.ViewModel

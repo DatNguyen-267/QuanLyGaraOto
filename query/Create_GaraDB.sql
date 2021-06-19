@@ -81,7 +81,13 @@ create table IMPORT_GOODS
 (
     ImportGoods_Id int IDENTITY(1, 1) primary key not NULL,
 	ImportGoods_Date date not null,
-	ImportGoods_TotalMoney int not null
+	ImportGoods_TotalMoney int not null,
+	ImportGoods_Supplier nvarchar not null,
+	ImportGoods_UserName nvarchar not null,
+	IdUser int not null,
+	IdSupplier int not null,
+	constraint FK_IMPORTGOODS_SUPPLIER foreign key (IdSupplier) references SUPPLIER(Supplier_Id),
+	constraint FK_IMPORTGOODS_USERS foreign key (IdUser) references USERS(Users_Id)
 );
 GO
 create table IMPORT_GOODS_DETAIL
@@ -101,7 +107,7 @@ create table INVENTORY_REPORT
 (
 	InventoryReport_Id  int IDENTITY(1, 1) primary key not null,
 	InventoryReport_Date date not null,
-	InventoryReport_Name nvarchar(max) not null,
+	InventoryReport_UserName nvarchar(max) not null,
 	IdUser int not null,
 	constraint FK_INVENTORYREPORT_USERS foreign key (IdUser) references USERS(Users_Id)
 );
@@ -125,6 +131,7 @@ create table SALES_REPORT
 	SalesReport_Id int IDENTITY(1, 1) primary key not NULL,
 	SalesReport_Date date not null,
 	SalesReport_Revenue int not null default('0'),
+	SalesReport_UserName nvarchar(max) not null,
 	IdUser int not null,
 	constraint FK_SALESREPORT_USERS foreign key (IdUser) references USERS(Users_Id)
 );

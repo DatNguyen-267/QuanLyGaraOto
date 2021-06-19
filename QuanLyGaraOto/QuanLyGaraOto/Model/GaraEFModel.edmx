@@ -38,6 +38,10 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="ImportGoods_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ImportGoods_Date" Type="date" Nullable="false" />
           <Property Name="ImportGoods_TotalMoney" Type="int" Nullable="false" />
+          <Property Name="ImportGoods_Supplier" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="ImportGoods_UserName" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="IdSupplier" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="IMPORT_GOODS_DETAIL">
           <Key>
@@ -56,6 +60,8 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           </Key>
           <Property Name="InventoryReport_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InventoryReport_Date" Type="date" Nullable="false" />
+          <Property Name="InventoryReport_UserName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="INVENTORY_REPORT_DETAIL">
           <Key>
@@ -143,6 +149,8 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="SalesReport_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SalesReport_Date" Type="date" Nullable="false" />
           <Property Name="SalesReport_Revenue" Type="int" Nullable="false" />
+          <Property Name="SalesReport_UserName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SALES_REPORT_DETAIL">
           <Key>
@@ -154,6 +162,15 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="AmountOfTurn" Type="int" />
           <Property Name="TotalMoney" Type="int" />
           <Property Name="Rate" Type="float" />
+        </EntityType>
+        <EntityType Name="SUPPLIER">
+          <Key>
+            <PropertyRef Name="Supplier_Id" />
+          </Key>
+          <Property Name="Supplier_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supplier_Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Supplier_Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Supplier_Email" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="SUPPLIES">
           <Key>
@@ -193,7 +210,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="Wage_Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="Wage_Value" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__USERS__IdRole__5812160E">
+        <Association Name="FK__USERS__IdRole__2D27B809">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
           <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -202,6 +219,30 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
             </Principal>
             <Dependent Role="USERS">
               <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMPORTGOODS_SUPPLIER">
+          <End Role="SUPPLIER" Type="Self.SUPPLIER" Multiplicity="1" />
+          <End Role="IMPORT_GOODS" Type="Self.IMPORT_GOODS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPPLIER">
+              <PropertyRef Name="Supplier_Id" />
+            </Principal>
+            <Dependent Role="IMPORT_GOODS">
+              <PropertyRef Name="IdSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMPORTGOODS_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="IMPORT_GOODS" Type="Self.IMPORT_GOODS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="Users_Id" />
+            </Principal>
+            <Dependent Role="IMPORT_GOODS">
+              <PropertyRef Name="IdUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -226,6 +267,18 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
             </Principal>
             <Dependent Role="IMPORT_GOODS_DETAIL">
               <PropertyRef Name="IdSupplies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVENTORYREPORT_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="INVENTORY_REPORT" Type="Self.INVENTORY_REPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="Users_Id" />
+            </Principal>
+            <Dependent Role="INVENTORY_REPORT">
+              <PropertyRef Name="IdUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -361,6 +414,18 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SALESREPORT_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="SALES_REPORT" Type="Self.SALES_REPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="Users_Id" />
+            </Principal>
+            <Dependent Role="SALES_REPORT">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SALESREPORTDETAIL_CARBRAND">
           <End Role="CAR_BRAND" Type="Self.CAR_BRAND" Multiplicity="1" />
           <End Role="SALES_REPORT_DETAIL" Type="Self.SALES_REPORT_DETAIL" Multiplicity="*" />
@@ -413,6 +478,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <EntitySet Name="ROLE_DETAIL" EntityType="Self.ROLE_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SALES_REPORT" EntityType="Self.SALES_REPORT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SALES_REPORT_DETAIL" EntityType="Self.SALES_REPORT_DETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUPPLIER" EntityType="Self.SUPPLIER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SUPPLIES" EntityType="Self.SUPPLIES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_INFO" EntityType="Self.USER_INFO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
@@ -423,9 +489,17 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
     [GARA_INFO].[IsOverPay] AS [IsOverPay]
     FROM [dbo].[GARA_INFO] AS [GARA_INFO]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__USERS__IdRole__5812160E" Association="Self.FK__USERS__IdRole__5812160E">
+          <AssociationSet Name="FK__USERS__IdRole__2D27B809" Association="Self.FK__USERS__IdRole__2D27B809">
             <End Role="ROLE" EntitySet="ROLE" />
             <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMPORTGOODS_SUPPLIER" Association="Self.FK_IMPORTGOODS_SUPPLIER">
+            <End Role="SUPPLIER" EntitySet="SUPPLIER" />
+            <End Role="IMPORT_GOODS" EntitySet="IMPORT_GOODS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMPORTGOODS_USERS" Association="Self.FK_IMPORTGOODS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="IMPORT_GOODS" EntitySet="IMPORT_GOODS" />
           </AssociationSet>
           <AssociationSet Name="FK_IMPORTGOODSDETAIL_IMPORTGOODS" Association="Self.FK_IMPORTGOODSDETAIL_IMPORTGOODS">
             <End Role="IMPORT_GOODS" EntitySet="IMPORT_GOODS" />
@@ -434,6 +508,10 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <AssociationSet Name="FK_IMPORTGOODSDETAIL_SUPPLIES" Association="Self.FK_IMPORTGOODSDETAIL_SUPPLIES">
             <End Role="SUPPLIES" EntitySet="SUPPLIES" />
             <End Role="IMPORT_GOODS_DETAIL" EntitySet="IMPORT_GOODS_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVENTORYREPORT_USERS" Association="Self.FK_INVENTORYREPORT_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="INVENTORY_REPORT" EntitySet="INVENTORY_REPORT" />
           </AssociationSet>
           <AssociationSet Name="FK_INVENTORYREPORTDETAIL_INVENTORYREPORT" Association="Self.FK_INVENTORYREPORTDETAIL_INVENTORYREPORT">
             <End Role="INVENTORY_REPORT" EntitySet="INVENTORY_REPORT" />
@@ -478,6 +556,10 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <AssociationSet Name="FK_ROLEDETAIL_ROLE" Association="Self.FK_ROLEDETAIL_ROLE">
             <End Role="ROLE" EntitySet="ROLE" />
             <End Role="ROLE_DETAIL" EntitySet="ROLE_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SALESREPORT_USERS" Association="Self.FK_SALESREPORT_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="SALES_REPORT" EntitySet="SALES_REPORT" />
           </AssociationSet>
           <AssociationSet Name="FK_SALESREPORTDETAIL_CARBRAND" Association="Self.FK_SALESREPORTDETAIL_CARBRAND">
             <End Role="CAR_BRAND" EntitySet="CAR_BRAND" />
@@ -542,6 +624,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <EntitySet Name="ROLE_DETAIL" EntityType="GARAModel.ROLE_DETAIL" />
           <EntitySet Name="SALES_REPORT" EntityType="GARAModel.SALES_REPORT" />
           <EntitySet Name="SALES_REPORT_DETAIL" EntityType="GARAModel.SALES_REPORT_DETAIL" />
+          <EntitySet Name="SUPPLIERs" EntityType="GARAModel.SUPPLIER" />
           <EntitySet Name="SUPPLIES" EntityType="GARAModel.SUPPLIES" />
           <EntitySet Name="USER_INFO" EntityType="GARAModel.USER_INFO" />
           <EntitySet Name="USERS" EntityType="GARAModel.USER" />
@@ -559,6 +642,14 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
             <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
             <End Role="RECEPTION" EntitySet="RECEPTIONs" />
           </AssociationSet>
+          <AssociationSet Name="FK_IMPORTGOODS_SUPPLIER" Association="GARAModel.FK_IMPORTGOODS_SUPPLIER">
+            <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
+            <End Role="IMPORT_GOODS" EntitySet="IMPORT_GOODS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMPORTGOODS_USERS" Association="GARAModel.FK_IMPORTGOODS_USERS">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="IMPORT_GOODS" EntitySet="IMPORT_GOODS" />
+          </AssociationSet>
           <AssociationSet Name="FK_IMPORTGOODSDETAIL_IMPORTGOODS" Association="GARAModel.FK_IMPORTGOODSDETAIL_IMPORTGOODS">
             <End Role="IMPORT_GOODS" EntitySet="IMPORT_GOODS" />
             <End Role="IMPORT_GOODS_DETAIL" EntitySet="IMPORT_GOODS_DETAIL" />
@@ -566,6 +657,10 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <AssociationSet Name="FK_IMPORTGOODSDETAIL_SUPPLIES" Association="GARAModel.FK_IMPORTGOODSDETAIL_SUPPLIES">
             <End Role="SUPPLy" EntitySet="SUPPLIES" />
             <End Role="IMPORT_GOODS_DETAIL" EntitySet="IMPORT_GOODS_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVENTORYREPORT_USERS" Association="GARAModel.FK_INVENTORYREPORT_USERS">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="INVENTORY_REPORT" EntitySet="INVENTORY_REPORT" />
           </AssociationSet>
           <AssociationSet Name="FK_INVENTORYREPORTDETAIL_INVENTORYREPORT" Association="GARAModel.FK_INVENTORYREPORTDETAIL_INVENTORYREPORT">
             <End Role="INVENTORY_REPORT" EntitySet="INVENTORY_REPORT" />
@@ -599,13 +694,17 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
             <End Role="WAGE" EntitySet="WAGEs" />
             <End Role="REPAIR_DETAIL" EntitySet="REPAIR_DETAIL" />
           </AssociationSet>
-          <AssociationSet Name="FK__USERS__IdRole__5812160E" Association="GARAModel.FK__USERS__IdRole__5812160E">
+          <AssociationSet Name="FK__USERS__IdRole__2D27B809" Association="GARAModel.FK__USERS__IdRole__2D27B809">
             <End Role="ROLE" EntitySet="ROLEs" />
             <End Role="USER" EntitySet="USERS" />
           </AssociationSet>
           <AssociationSet Name="FK_ROLEDETAIL_ROLE" Association="GARAModel.FK_ROLEDETAIL_ROLE">
             <End Role="ROLE" EntitySet="ROLEs" />
             <End Role="ROLE_DETAIL" EntitySet="ROLE_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SALESREPORT_USERS" Association="GARAModel.FK_SALESREPORT_USERS">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="SALES_REPORT" EntitySet="SALES_REPORT" />
           </AssociationSet>
           <AssociationSet Name="FK_SALESREPORTDETAIL_SALESREPORT" Association="GARAModel.FK_SALESREPORTDETAIL_SALESREPORT">
             <End Role="SALES_REPORT" EntitySet="SALES_REPORT" />
@@ -653,6 +752,12 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="ImportGoods_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImportGoods_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ImportGoods_TotalMoney" Type="Int32" Nullable="false" />
+          <Property Name="ImportGoods_Supplier" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ImportGoods_UserName" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="IdSupplier" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SUPPLIER" Relationship="GARAModel.FK_IMPORTGOODS_SUPPLIER" FromRole="IMPORT_GOODS" ToRole="SUPPLIER" />
+          <NavigationProperty Name="USER" Relationship="GARAModel.FK_IMPORTGOODS_USERS" FromRole="IMPORT_GOODS" ToRole="USER" />
           <NavigationProperty Name="IMPORT_GOODS_DETAIL" Relationship="GARAModel.FK_IMPORTGOODSDETAIL_IMPORTGOODS" FromRole="IMPORT_GOODS" ToRole="IMPORT_GOODS_DETAIL" />
         </EntityType>
         <EntityType Name="IMPORT_GOODS_DETAIL">
@@ -674,6 +779,9 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           </Key>
           <Property Name="InventoryReport_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InventoryReport_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="InventoryReport_UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="USER" Relationship="GARAModel.FK_INVENTORYREPORT_USERS" FromRole="INVENTORY_REPORT" ToRole="USER" />
           <NavigationProperty Name="INVENTORY_REPORT_DETAIL" Relationship="GARAModel.FK_INVENTORYREPORTDETAIL_INVENTORYREPORT" FromRole="INVENTORY_REPORT" ToRole="INVENTORY_REPORT_DETAIL" />
         </EntityType>
         <EntityType Name="INVENTORY_REPORT_DETAIL">
@@ -758,7 +866,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           </Key>
           <Property Name="Role_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Role_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="USERS" Relationship="GARAModel.FK__USERS__IdRole__5812160E" FromRole="ROLE" ToRole="USER" />
+          <NavigationProperty Name="USERS" Relationship="GARAModel.FK__USERS__IdRole__2D27B809" FromRole="ROLE" ToRole="USER" />
           <NavigationProperty Name="ROLE_DETAIL" Relationship="GARAModel.FK_ROLEDETAIL_ROLE" FromRole="ROLE" ToRole="ROLE_DETAIL" />
         </EntityType>
         <EntityType Name="ROLE_DETAIL">
@@ -779,6 +887,9 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="SalesReport_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SalesReport_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="SalesReport_Revenue" Type="Int32" Nullable="false" />
+          <Property Name="SalesReport_UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="USER" Relationship="GARAModel.FK_SALESREPORT_USERS" FromRole="SALES_REPORT" ToRole="USER" />
           <NavigationProperty Name="SALES_REPORT_DETAIL" Relationship="GARAModel.FK_SALESREPORTDETAIL_SALESREPORT" FromRole="SALES_REPORT" ToRole="SALES_REPORT_DETAIL" />
         </EntityType>
         <EntityType Name="SALES_REPORT_DETAIL">
@@ -793,6 +904,16 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="Rate" Type="Double" />
           <NavigationProperty Name="CAR_BRAND" Relationship="GARAModel.FK_SALESREPORTDETAIL_CARBRAND" FromRole="SALES_REPORT_DETAIL" ToRole="CAR_BRAND" />
           <NavigationProperty Name="SALES_REPORT" Relationship="GARAModel.FK_SALESREPORTDETAIL_SALESREPORT" FromRole="SALES_REPORT_DETAIL" ToRole="SALES_REPORT" />
+        </EntityType>
+        <EntityType Name="SUPPLIER">
+          <Key>
+            <PropertyRef Name="Supplier_Id" />
+          </Key>
+          <Property Name="Supplier_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supplier_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IMPORT_GOODS" Relationship="GARAModel.FK_IMPORTGOODS_SUPPLIER" FromRole="SUPPLIER" ToRole="IMPORT_GOODS" />
         </EntityType>
         <EntityType Name="SUPPLIES">
           <Key>
@@ -827,7 +948,10 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ROLE" Relationship="GARAModel.FK__USERS__IdRole__5812160E" FromRole="USER" ToRole="ROLE" />
+          <NavigationProperty Name="IMPORT_GOODS" Relationship="GARAModel.FK_IMPORTGOODS_USERS" FromRole="USER" ToRole="IMPORT_GOODS" />
+          <NavigationProperty Name="INVENTORY_REPORT" Relationship="GARAModel.FK_INVENTORYREPORT_USERS" FromRole="USER" ToRole="INVENTORY_REPORT" />
+          <NavigationProperty Name="ROLE" Relationship="GARAModel.FK__USERS__IdRole__2D27B809" FromRole="USER" ToRole="ROLE" />
+          <NavigationProperty Name="SALES_REPORT" Relationship="GARAModel.FK_SALESREPORT_USERS" FromRole="USER" ToRole="SALES_REPORT" />
           <NavigationProperty Name="USER_INFO" Relationship="GARAModel.FK_USERINFO_USERS" FromRole="USER" ToRole="USER_INFO" />
         </EntityType>
         <EntityType Name="WAGE">
@@ -883,6 +1007,30 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IMPORTGOODS_SUPPLIER">
+          <End Type="GARAModel.SUPPLIER" Role="SUPPLIER" Multiplicity="1" />
+          <End Type="GARAModel.IMPORT_GOODS" Role="IMPORT_GOODS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPPLIER">
+              <PropertyRef Name="Supplier_Id" />
+            </Principal>
+            <Dependent Role="IMPORT_GOODS">
+              <PropertyRef Name="IdSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMPORTGOODS_USERS">
+          <End Type="GARAModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="GARAModel.IMPORT_GOODS" Role="IMPORT_GOODS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="Users_Id" />
+            </Principal>
+            <Dependent Role="IMPORT_GOODS">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IMPORTGOODSDETAIL_IMPORTGOODS">
           <End Type="GARAModel.IMPORT_GOODS" Role="IMPORT_GOODS" Multiplicity="1" />
           <End Type="GARAModel.IMPORT_GOODS_DETAIL" Role="IMPORT_GOODS_DETAIL" Multiplicity="*" />
@@ -904,6 +1052,18 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
             </Principal>
             <Dependent Role="IMPORT_GOODS_DETAIL">
               <PropertyRef Name="IdSupplies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVENTORYREPORT_USERS">
+          <End Type="GARAModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="GARAModel.INVENTORY_REPORT" Role="INVENTORY_REPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="Users_Id" />
+            </Principal>
+            <Dependent Role="INVENTORY_REPORT">
+              <PropertyRef Name="IdUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1003,7 +1163,7 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USERS__IdRole__5812160E">
+        <Association Name="FK__USERS__IdRole__2D27B809">
           <End Type="GARAModel.ROLE" Role="ROLE" Multiplicity="1" />
           <End Type="GARAModel.USER" Role="USER" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1024,6 +1184,18 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
             </Principal>
             <Dependent Role="ROLE_DETAIL">
               <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SALESREPORT_USERS">
+          <End Type="GARAModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="GARAModel.SALES_REPORT" Role="SALES_REPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="Users_Id" />
+            </Principal>
+            <Dependent Role="SALES_REPORT">
+              <PropertyRef Name="IdUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1078,6 +1250,10 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <EntitySetMapping Name="IMPORT_GOODS">
             <EntityTypeMapping TypeName="GARAModel.IMPORT_GOODS">
               <MappingFragment StoreEntitySet="IMPORT_GOODS">
+                <ScalarProperty Name="IdSupplier" ColumnName="IdSupplier" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="ImportGoods_UserName" ColumnName="ImportGoods_UserName" />
+                <ScalarProperty Name="ImportGoods_Supplier" ColumnName="ImportGoods_Supplier" />
                 <ScalarProperty Name="ImportGoods_TotalMoney" ColumnName="ImportGoods_TotalMoney" />
                 <ScalarProperty Name="ImportGoods_Date" ColumnName="ImportGoods_Date" />
                 <ScalarProperty Name="ImportGoods_Id" ColumnName="ImportGoods_Id" />
@@ -1098,6 +1274,8 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <EntitySetMapping Name="INVENTORY_REPORT">
             <EntityTypeMapping TypeName="GARAModel.INVENTORY_REPORT">
               <MappingFragment StoreEntitySet="INVENTORY_REPORT">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="InventoryReport_UserName" ColumnName="InventoryReport_UserName" />
                 <ScalarProperty Name="InventoryReport_Date" ColumnName="InventoryReport_Date" />
                 <ScalarProperty Name="InventoryReport_Id" ColumnName="InventoryReport_Id" />
               </MappingFragment>
@@ -1192,6 +1370,8 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <EntitySetMapping Name="SALES_REPORT">
             <EntityTypeMapping TypeName="GARAModel.SALES_REPORT">
               <MappingFragment StoreEntitySet="SALES_REPORT">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="SalesReport_UserName" ColumnName="SalesReport_UserName" />
                 <ScalarProperty Name="SalesReport_Revenue" ColumnName="SalesReport_Revenue" />
                 <ScalarProperty Name="SalesReport_Date" ColumnName="SalesReport_Date" />
                 <ScalarProperty Name="SalesReport_Id" ColumnName="SalesReport_Id" />
@@ -1206,6 +1386,16 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
                 <ScalarProperty Name="AmountOfTurn" ColumnName="AmountOfTurn" />
                 <ScalarProperty Name="IdCarBrand" ColumnName="IdCarBrand" />
                 <ScalarProperty Name="IdSalesReport" ColumnName="IdSalesReport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUPPLIERs">
+            <EntityTypeMapping TypeName="GARAModel.SUPPLIER">
+              <MappingFragment StoreEntitySet="SUPPLIER">
+                <ScalarProperty Name="Supplier_Email" ColumnName="Supplier_Email" />
+                <ScalarProperty Name="Supplier_Phone" ColumnName="Supplier_Phone" />
+                <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
