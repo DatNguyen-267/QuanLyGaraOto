@@ -62,9 +62,12 @@ namespace QuanLyGaraOto.ViewModel
 
         public void StyleExcel(IWorkbook workbook, IWorksheet sheet)
         {
+
+            // THIẾT LẬP CÁI FILE EXCEL NÓ RA SAO
             IStyle pageHeader = workbook.Styles.Add("PageHeaderStyle");
             IStyle tableHeader = workbook.Styles.Add("TableHeaderStyle");
-            //System.Drawing.Color.FromArgb(69, 90, 100);
+            // này là tạo style 1 cái là header 1 cái là header của cái table
+
             pageHeader.Color = System.Drawing.Color.FromArgb(69, 90, 100);
             pageHeader.Font.RGBColor = System.Drawing.Color.White;
             pageHeader.Font.FontName = "Calibri";
@@ -72,6 +75,7 @@ namespace QuanLyGaraOto.ViewModel
             pageHeader.Font.Bold = true;
             pageHeader.HorizontalAlignment = ExcelHAlign.HAlignCenter;
             pageHeader.VerticalAlignment = ExcelVAlign.VAlignCenter;
+            // thiết lập cho header (copy) 
 
             tableHeader.Font.Color = ExcelKnownColors.Black;
             tableHeader.Font.Bold = true;
@@ -84,7 +88,7 @@ namespace QuanLyGaraOto.ViewModel
             tableHeader.Borders[ExcelBordersIndex.EdgeRight].LineStyle = ExcelLineStyle.Thin;
             tableHeader.Borders[ExcelBordersIndex.EdgeTop].LineStyle = ExcelLineStyle.Thin;
             tableHeader.Borders[ExcelBordersIndex.EdgeBottom].LineStyle = ExcelLineStyle.Thin;
-
+            // cho table (copy)
 
             //Apply style to the header
            
@@ -104,9 +108,11 @@ namespace QuanLyGaraOto.ViewModel
             sheet["A4"].Text = "Nhân viên";
             sheet["A4"].CellStyle.Font.Bold = false;
             sheet["A4"].CellStyle.Font.Size = 12;
+            // này là gán dữ liệu vào mấy cái ô
+
 
             sheet["A1:E1"].Merge();
-
+            // này là hợp nhất mấy cái ô từ đâu đến đâu
 
             sheet["A5"].Text = "STT";
             sheet["B5"].Text = "Vật tư phụ tùng";
@@ -114,9 +120,11 @@ namespace QuanLyGaraOto.ViewModel
             sheet["D5"].Text = "Phát sinh";
             sheet["E5"].Text = "Tồn cuối";
             sheet["A5:E5"].CellStyle = tableHeader;
+            // này cũng là gán chữ
 
             sheet.AutofitColumn(1);
             sheet.UsedRange.AutofitColumns();
+            // copy
         }
         public void PrintSalesReport(ReportSalesTemplate p)
         {
@@ -139,12 +147,15 @@ namespace QuanLyGaraOto.ViewModel
                 IApplication application = excelEngine.Excel;
                 IWorkbook workbook = application.Workbooks.Create(1);
                 IWorksheet worksheet = workbook.Worksheets[0];
+                // Copy
 
                 StyleExcel(workbook, worksheet);
+                // này tự m tạo 1 cái hàm khác như trên
 
                 worksheet["B2"].Text = inventoryReport.IdReport.ToString();
                 worksheet["B3"].Text = inventoryReport.ReportDate.ToString();
                 worksheet["B4"].Text = inventoryReport.uSER_INFO.UserInfo_Name.ToString();
+                //gán dữ liệu vô mấy cái ô trên
 
                 int i = 6;
                 foreach (var item in inventoryReport.ListInventory)
@@ -154,12 +165,15 @@ namespace QuanLyGaraOto.ViewModel
                     worksheet.InsertRow(i, 1, ExcelInsertOptions.FormatDefault);
                     worksheet.ImportArray(list, i, 1, false);
                     i++;
-
                 }
+                // tạo từng dòng rồi load cái list vô
+
                 worksheet.Columns[1].ColumnWidth = 30;
                 worksheet.Columns[2].ColumnWidth = 20;
                 worksheet.Columns[3].ColumnWidth = 20;
                 worksheet.Columns[4].ColumnWidth = 20;
+                // này là set chiều rộng column
+
 
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.Filter = "excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
@@ -172,7 +186,7 @@ namespace QuanLyGaraOto.ViewModel
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
                 }
-
+                // này là save. copy y chang vô
            }
         }
 
