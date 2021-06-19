@@ -12,19 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using QuanLyGaraOto.ViewModel;
+using QuanLyGaraOto.Model;
 
 namespace QuanLyGaraOto
 {
     /// <summary>
-    /// Interaction logic for GoodBillWindow.xaml
+    /// Interaction logic for ImportPayWindow.xaml
     /// </summary>
-    public partial class GoodBillWindow : Window
+    public partial class ImportPayWindow : Window
     {
-        public GoodBillWindowViewModel goodBillWindowViewModel { get; set; }
-        public GoodBillWindow()
+        public ImportPayViewModel importPayViewModel { get; set; }
+
+        public ImportPayWindow()
         {
             InitializeComponent();
-            this.DataContext = (goodBillWindowViewModel = new GoodBillWindowViewModel());
+        }
+        public ImportPayWindow(IMPORT_GOODS import)
+        {
+            InitializeComponent();
+            this.DataContext = (importPayViewModel = new ImportPayViewModel(import));
         }
     }
 }

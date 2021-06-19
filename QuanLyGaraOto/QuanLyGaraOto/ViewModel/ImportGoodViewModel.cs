@@ -13,8 +13,17 @@ namespace QuanLyGaraOto.ViewModel
     class ImportGoodViewModel : BaseViewModel
     {
 
+        private bool _IsPay { get; set; }
+
+        public bool Ispay { get => _IsPay; set { _IsPay = value; OnPropertyChanged(); } }
+
+        private bool _IsImport { get; set; }
+        public bool IsImport { get=> _IsImport; set { _IsImport = value; OnPropertyChanged(); } }
+
         public ICommand CalculateTotal { get; set; }
         public ICommand ImportCommand { get; set; }
+
+        public ICommand PayCommand { get; set; }
 
         public ICommand AddGoodCommand { get; set; }
 
@@ -62,7 +71,8 @@ namespace QuanLyGaraOto.ViewModel
             
         {
             ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
-
+            IsImport = false;
+            IsImport = false;
             Command();
 
 
@@ -70,6 +80,8 @@ namespace QuanLyGaraOto.ViewModel
         }
         public ImportGoodViewModel(IMPORT_GOODS import)
         {
+            IsImport = false;
+            IsImport = false;
             ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
             ListImport = new ObservableCollection<ImportItem>();
             ImportDate = import.ImportGoods_Date;
@@ -93,11 +105,9 @@ namespace QuanLyGaraOto.ViewModel
                 (p) =>
                 {
                     IMPORT_GOODS_DETAIL item = new IMPORT_GOODS_DETAIL() {IdImportGood = ImportGoods.ImportGoods_Id,IdSupplies = SelectedSupply.Supplies_Id,Price = Int32.Parse(p.txbPrice.Text), Amount = Int32.Parse(p.txbAmount.Text),TotalMoney = Total };
-                    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedSupply.Supplies_Id).SingleOrDefault();
                     ListImport.Add(new ImportItem() { ImportInfo = item, TotalMoney = Total});
                     UpdateTotalMoney();
                     DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Add(item);
-                    List.Supplies_Amount += Int32.Parse(p.txbAmount.Text);
                     
                 }
                 );
@@ -113,7 +123,6 @@ namespace QuanLyGaraOto.ViewModel
                     {
                         var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.ImportInfo.IdSupplies).SingleOrDefault();
                         temp.Supplies_Amount = temp.Supplies_Amount - SelectedItem.ImportInfo.Amount;
-                        //DataProvider.Ins.DB.SaveChanges();
                     }    
                     DeleteModel delete = new DeleteModel();
                     delete.ImportInfo(SelectedItem.ImportInfo);
@@ -131,19 +140,42 @@ namespace QuanLyGaraOto.ViewModel
                     return true;
                 },
                 (p) =>
-                {
+                {   
                     Total = Int32.Parse(p.txbAmount.Text) * Int32.Parse(p.txbPrice.Text);
                 });
-            ImportCommand = new RelayCommand<Window>((p) => {
+            ImportCommand = new RelayCommand<ImportWindow>((p) => {
                 if (ListImport.Count == 0) return false;
                 return true;
             
             }, (p) =>
             {
-                ImportGoods.ImportGoods_TotalMoney = TotalMoney;
+                foreach (var item in ListImport)
+                {
+                    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.ImportInfo.IdSupplies).SingleOrDefault();
+                    List.Supplies_Amount += item.ImportInfo.Amount;
+                }
+                IsImport = true;
                 DataProvider.Ins.DB.SaveChanges();
-                p.Close();
+                p.btnImport.IsEnabled = false;
             });
+            PayCommand = new RelayCommand<ImportWindow>(
+                (p) =>
+                {
+                    if (ImportGoods.ImportGoods_TotalMoney != 0) return false;
+                        if (ListImport.Count == 0) return false;
+                    return true;
+                },
+                (p) =>
+                {
+                    ImportPayWindow wd = new ImportPayWindow(ImportGoods);
+                    if(ImportGoods.ImportGoods_TotalMoney != 0)
+                    {
+                        wd.btnPay.Visibility = Visibility.Hidden;
+                    }    
+                    wd.ShowDialog();
+
+                }
+                );
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
                 MessageBoxResult rs = MessageBox.Show("Bạn đồng ý thoát", "Thoát", MessageBoxButton.OKCancel);

@@ -12,6 +12,7 @@
         Width="1000"
         Background="#ffffff"
         ResizeMode="NoResize"   
+         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Grid>
@@ -62,6 +63,7 @@
                         FontSize="14" 
                         Width="220"
                         BorderThickness="0" 
+                        
                         Padding="0" 
                         Margin="0,0,10,0" 
                         HorizontalAlignment="Right"
@@ -124,7 +126,17 @@
 
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
+                            <TextBox.Text>
+                                <Binding Path="ImportPrice" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <validation:NumberValidation ErrorMessage="Chỉ được nhập số (0-9)"
+                                                                         ErrorMessageNull="Vui lòng nhập giá phụ tùng"
+                                                                         ></validation:NumberValidation>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                         </TextBox>
+                        
                 </Grid>
                 <Grid
                     Margin="0 120 0 0"
@@ -165,6 +177,15 @@
 
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
+                            <TextBox.Text>
+                                <Binding Path="ImportAmount" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                    <Binding.ValidationRules>
+                                        <validation:NumberValidation ErrorMessage="Chỉ được nhập số (0-9)"
+                                                                         ErrorMessageNull="Vui lòng nhập số lượng"
+                                                                         ></validation:NumberValidation>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                         </TextBox>
                 </Grid>
             
@@ -278,38 +299,33 @@
         </Grid>
         </Grid>
         <Grid Grid.Row="1" Background="AliceBlue">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="TOTAL: "
-                           FontSize="30"
-                           FontWeight="ExtraBold"
-                           Opacity="0.7"
-                           Margin="20 0 0 0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           ></TextBlock>
-                <TextBlock Text="{Binding TotalMoney}"
-                           FontSize="30"
-                           FontWeight="Bold"
-                           Opacity="0.7"
-                           Margin="5 0 0 0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           ></TextBlock>
-            </StackPanel>
+            
             <Grid
                 Margin="0 0 16 0"
-                Width="320"
+                Width="480"
                 Height="40"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center">
                 <Button
+                    x:Name="btnImport"
                     Command="{Binding ImportCommand}"
                     CommandParameter="{Binding ElementName=wdImportSupply}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="140"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     ToolTip="Resource name: MaterialDesignRaisedButton">
                     _Nhập hàng
+                </Button>
+                <Button
+                    x:Name="btnPay"
+                    Command="{Binding PayCommand}"
+                    CommandParameter="{Binding ElementName=wdImportSupply}"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="140"
+                    
+                    HorizontalAlignment="Left"
+                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                    _Thanh toán
                 </Button>
                 <Button
                     Style="{StaticResource MaterialDesignRaisedLightButton}"

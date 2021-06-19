@@ -11,6 +11,7 @@
     <viewmodel:CarServiceViewModel x:Key="CarServiceVM"></viewmodel:CarServiceViewModel>
     <viewmodel:SettingViewModel x:Key="SettingVM"></viewmodel:SettingViewModel>
     <viewmodel:BunkViewModel x:Key="BunkVM"></viewmodel:BunkViewModel>
+    <viewmodel:AddNewGoodViewModel x:Key="ImportBillsWD"></viewmodel:AddNewGoodViewModel>
     <viewmodel:ImportGoodViewModel x:Key="ImportVM"></viewmodel:ImportGoodViewModel>
     <viewmodel:AddImportWindowViewModel x:Key="AddImportVM"></viewmodel:AddImportWindowViewModel>
     <viewmodel:AddRepairFormViewModel x:Key="AddRepairFormVM"></viewmodel:AddRepairFormViewModel>

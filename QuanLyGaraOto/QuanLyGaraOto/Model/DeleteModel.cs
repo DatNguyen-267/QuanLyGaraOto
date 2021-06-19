@@ -58,5 +58,10 @@ namespace QuanLyGaraOto.Model
             DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Remove(itemDelete);
             DataProvider.Ins.DB.SaveChanges();
         }
+        public void SUPPLIES(SUPPLIES itemDelete)
+        {
+            DataProvider.Ins.DB.SUPPLIES.Remove(itemDelete);
+            DataProvider.Ins.DB.SaveChanges();
+        }
     }
 }

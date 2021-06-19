@@ -8,7 +8,8 @@
         x:Name="BunkWD"
         Height="500" Width="800"
         DataContext="{StaticResource BunkVM}"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Grid>
         <Grid.RowDefinitions>
@@ -35,7 +36,6 @@
                   Width="330"
                   HorizontalAlignment="Right">
                 <Button
-                    IsEnabled="{Binding isImportBunk}"                  
                     Command="{Binding OpenImportCommand}"
                     x:Name="btnAddGood"
                     HorizontalAlignment="Left"
@@ -48,7 +48,6 @@
                     Nhập hàng
                 </Button>
                 <Button
-                    IsEnabled="{Binding isImportBunk}"  
                     Command="{Binding SuppliesBillCommand}"
                     x:Name="btnImportView"
                     HorizontalAlignment="Right"
@@ -95,46 +94,64 @@
                         />
 
                 </Grid>
-                <Border
-                    CornerRadius="2"
-                    Margin="16 40 8 8"
-                    BorderBrush="Black"
-                    BorderThickness="2"
+                <materialDesign:Card
+                    Margin="16 40 8 8">
+                    <DataGrid
+                        ItemsSource="{Binding ListSupplies}" 
+                      SelectedItem="{Binding SelectedItem}"
+                      SelectionMode="Extended"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="True"
+                      FontSize="16"
+                      Name="dataGrid">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Gainsboro" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
 
-                    >
-                </Border>
-                <ListView
-                ItemsSource="{Binding ListSupplies}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                    Margin="18 40 10 8"
-                    >
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="Background" Value="#ffffff" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn
-                            DisplayMemberBinding="{Binding Supplies_Id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                            Header="ID" 
-                            Width="80"/>
-                            <GridViewColumn
-                            DisplayMemberBinding="{Binding Supplies_Name,Mode=TwoWay}"
-                            Header="Tên"
-                            Width="400"
-                            />
-                            <GridViewColumn
-                            DisplayMemberBinding="{Binding Supplies_Price,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                            Header="Giá"
-                            Width="120"/>
-                            <GridViewColumn
-                            DisplayMemberBinding="{Binding Supplies_Amount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                            Header="Số lượng"
-                            Width="120"
-                            />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                        </i:Interaction.Triggers>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                        <Setter Property="FontWeight" Value="DemiBold" />
+                                        <Setter Property="FontSize" Value="17" />
+                                        <Setter Property="Foreground" Value="Black"></Setter>
+                                    </Trigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                <Setter Property="Foreground" Value="White"></Setter>
+                                <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+
+                        <DataGrid.Columns>
+                            <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding Supplies_Id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Tên" Binding="{Binding Supplies_Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Giá" Binding="{Binding Supplies_Price,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding Supplies_Amount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                            
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </materialDesign:Card>
 
             </Grid>
             <Grid Grid.Column="1"  Background="#ffffff">
@@ -247,6 +264,7 @@
                          Width="24" />
                     </Button>
                     <ToggleButton
+                        Command="{Binding DeleteCommand}"
                         Style="{StaticResource MaterialDesignActionToggleButton}"
                         ToolTip="MaterialDesignActionLightToggleButton"
                         HorizontalAlignment="Right"
@@ -266,7 +284,7 @@
                         </materialDesign:ToggleButtonAssist.OnContent>
                     </ToggleButton>
                     <Button
-                        Command="{Binding EditCommand}"
+                        Command="{Binding OpenEditCommand}"
                          Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
                          ToolTip="MaterialDesignFloatingActionMiniLightButton"
                          HorizontalAlignment="Center">
