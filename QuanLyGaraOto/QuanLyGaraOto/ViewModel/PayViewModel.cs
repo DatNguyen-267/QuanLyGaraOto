@@ -165,15 +165,23 @@ namespace QuanLyGaraOto.ViewModel
             }, (p) =>
             {
                 BillTemplate billTemplate = new BillTemplate(Reception);
-                billTemplate.Show();
-                if (ListRepair.Count()>12)
-                {
-                    billTemplate.Height = billTemplate.Height + 35 * (ListRepair.Count() - 11);
-                }
                 PrintViewModel printViewModel = new PrintViewModel();
+                billTemplate.Show();
+                billTemplate.Close();
                 printViewModel.PrintBill(billTemplate);
 
-               
+                //for (int i = 10; i < ListRepair.Count(); i = i + 30)
+                //{
+                //    ObservableCollection<ListRepair> newlist = new ObservableCollection<ListRepair>();
+                //    for (int j = i ; j < i + 30 ; j++)
+                //    {
+                //        newlist.Add(ListRepair[j]);
+                //    }
+                //    SubBillTemplate subBillTemplate = new SubBillTemplate(newlist);
+                //    PrintViewModel subPrint = new PrintViewModel();
+                //    subPrint.PrintSubBill(subBillTemplate);
+
+                //}
             });
         }
         public void InitData()

@@ -161,14 +161,8 @@ namespace QuanLyGaraOto.ViewModel
                         InventoryReport.IdReport = inventoryReport.InventoryReport_Id;
                         InventoryReport.ListInventory = ListInventory;
 
-                        InventoryReportTemplate  inventoryReportTemplate= new InventoryReportTemplate(InventoryReport);
-                        inventoryReportTemplate.Show();
-                        if (InventoryReport.ListInventory.Count() > 9)
-                        {
-                            inventoryReportTemplate.Height = inventoryReportTemplate.Height + 35 * (InventoryReport.ListInventory.Count() - 9);
-                        }
                         PrintViewModel printViewModel = new PrintViewModel();
-                        printViewModel.PrintInventoryReport(inventoryReportTemplate);
+                        printViewModel.PrintInventoryReport(InventoryReport);
                     }
                     if (VisListView_Sales)
                     {
@@ -343,9 +337,12 @@ namespace QuanLyGaraOto.ViewModel
                             {
                                 foreach (var item2 in repair)
                                 {
-                                    var repair_Detail = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == item2.Repair_Id && x.IdSupplies == item.Supplies_Id).SingleOrDefault();
-                                    if (repair_Detail != null)
-                                        Sudung += (int)repair_Detail.SuppliesAmount;
+                                    foreach (var item3 in DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == item2.Repair_Id && x.IdSupplies == item.Supplies_Id))
+                                    {
+                                         if (item3 != null)
+                                            Sudung += (int)item3.SuppliesAmount;
+                                    } 
+                                    
                                 }
                             }
                             Tondau = TonCuoi - PhatSinh + Sudung;
