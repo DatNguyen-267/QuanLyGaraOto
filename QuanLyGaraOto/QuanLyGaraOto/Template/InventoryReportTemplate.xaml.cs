@@ -22,10 +22,10 @@ namespace QuanLyGaraOto.Template
     public partial class InventoryReportTemplate : Window
     {
         InventoryReportViewModel inventoryReportViewModel { get; set; }
-        public InventoryReportTemplate(InventoryReport inventoryReport)
+        public InventoryReportTemplate(DateTime date)
         {
             InitializeComponent();
-            this.DataContext = (inventoryReportViewModel = new InventoryReportViewModel(inventoryReport));
+            this.DataContext = (inventoryReportViewModel = new InventoryReportViewModel(date));
 
         }
     }
