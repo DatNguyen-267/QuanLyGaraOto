@@ -157,7 +157,7 @@
                             <ColumnDefinition Width="400"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="16 0 8 10">
-                            <materialDesign:Card>
+                            <!--<materialDesign:Card>
                                 <ListView FontSize="16" FontWeight="Normal" x:Name="lvUsers" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <ListView.View>
                                         <GridView >
@@ -168,9 +168,59 @@
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
-                            </materialDesign:Card>
+                            </materialDesign:Card>-->
                             <!--<Border BorderThickness="1" BorderBrush="Black" CornerRadius="4"></Border>-->
-                            
+                            <DataGrid
+                                    ItemsSource="{Binding List}" 
+                                    SelectedItem="{Binding SelectedItem}"
+                                    SelectionMode="Extended"
+                                    IsReadOnly="True"
+                                    CanUserAddRows="False"
+                                    AutoGenerateColumns="False"
+                                    CanUserDeleteRows="False"
+                                    CanUserReorderColumns="True"
+                                    x:Name="datagridUser"
+                                    FontSize="16">
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gainsboro" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectionChangedUser}" 
+                                                   CommandParameter="{Binding ElementName=datagridUser}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                        <Style.Triggers>
+                                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                <Setter Property="FontWeight" Value="DemiBold" />
+                                                <Setter Property="FontSize" Value="17" />
+
+                                            </Trigger>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                        <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                        <Setter Property="Foreground" Value="White"></Setter>
+                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                                <DataGrid.Columns>
+                                    <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding UserInfo_Id}"></materialDesign:DataGridTextColumn>
+                                    <materialDesign:DataGridTextColumn Header="Họ tên" Binding="{Binding UserInfo_Name}"></materialDesign:DataGridTextColumn>
+                                    <materialDesign:DataGridTextColumn Header="Chức vụ" Binding="{Binding USER.ROLE.Role_Name}"></materialDesign:DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </Grid>
                         <materialDesign:Card Grid.Column="1" Margin="5 0 16 10">
                             <Grid Margin ="0 0 0 0">
@@ -372,7 +422,7 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="16 0 8 16">
-                            <materialDesign:Card>
+                            <!--<materialDesign:Card>
                                 <ListView 
                                     FontSize="16"
                                     FontWeight="Normal"
@@ -384,7 +434,58 @@
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
-                            </materialDesign:Card>
+                            </materialDesign:Card>-->
+                            <DataGrid 
+                                    
+                                    ItemsSource="{Binding ListRoles}" 
+                                    SelectedItem="{Binding SelectedItemRole}"
+                                    SelectionMode="Extended"
+                                    IsReadOnly="True"
+                                    CanUserAddRows="False"
+                                    AutoGenerateColumns="False"
+                                    CanUserDeleteRows="False"
+                                    CanUserReorderColumns="True"
+                                    x:Name="datagrid"
+                                    FontSize="16">
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gainsboro" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectionChangedRole}" 
+                                                   CommandParameter="{Binding ElementName=datagrid}"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                        <Style.Triggers>
+                                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                <Setter Property="FontWeight" Value="DemiBold" />
+                                                <Setter Property="FontSize" Value="17" />
+
+                                            </Trigger>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                        <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                        <Setter Property="Foreground" Value="White"></Setter>
+                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                                <DataGrid.Columns>
+                                    <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding Role_Id}"></materialDesign:DataGridTextColumn>
+                                    <materialDesign:DataGridTextColumn Header="Chức vụ" Binding="{Binding Role_Name}"></materialDesign:DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
                             
                         </Grid>
                         <materialDesign:Card Grid.Column="1" Width="400" Margin="8 0 16 16">
@@ -419,6 +520,7 @@
                                               HorizontalAlignment="Left"
                                               Background="{StaticResource MainColor}"
                                               Foreground="White"
+                                        
                                               />
                                 </Grid>
                                 <Grid Grid.Row="2" Margin="16 8 16 0">

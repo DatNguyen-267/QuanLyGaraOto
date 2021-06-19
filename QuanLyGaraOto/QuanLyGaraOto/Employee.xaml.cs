@@ -27,5 +27,15 @@ namespace QuanLyGaraOto
             InitializeComponent();
             DataContext = Viewmodel = new EmployeeViewModel();
         }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CheckBox_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
