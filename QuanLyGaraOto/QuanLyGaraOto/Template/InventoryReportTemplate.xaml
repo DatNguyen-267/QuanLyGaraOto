@@ -49,7 +49,7 @@
                     <TextBlock 
                         x:Name="txbIdStockReceipt"
                         TextWrapping="Wrap" 
-                        Text="{Binding InventoryReport.IdReport}" 
+                        Text="{Binding IdReport}" 
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
@@ -70,14 +70,14 @@
                     <TextBlock 
                         x:Name="txbDate"
                         TextWrapping="Wrap" 
-                        Text="{Binding InventoryReport.ReportDate}"  
+                        Text="{Binding Date}"  
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
                         HorizontalAlignment="Right"
                         FontSize="14"/>
                 </Grid>
-                <Grid
+                <!--<Grid
                     Margin="0,5,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="47*"/>
@@ -101,14 +101,14 @@
                         Foreground="#455A64" 
                         HorizontalAlignment="Right"
                         FontSize="14" Grid.Column="1"/>
-                </Grid>
+                </Grid>-->
             </StackPanel>
         </Grid>
         <Grid 
             Grid.Row="2">
             <DataGrid
                         Margin="20,0,20,20"
-                        ItemsSource="{Binding InventoryReport.ListInventory}"
+                        ItemsSource="{Binding ListInventory}"
                         CanUserAddRows="False"
                         AutoGenerateColumns="False"
                         CanUserDeleteRows="False"

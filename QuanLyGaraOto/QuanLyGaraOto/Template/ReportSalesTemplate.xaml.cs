@@ -23,10 +23,10 @@ namespace QuanLyGaraOto.Template
     {
      
         SalesReportViewModel salesReportViewModel { get; set; }
-        public ReportSalesTemplate(SalesReport salesReport)
+        public ReportSalesTemplate(DateTime date)
         {
             InitializeComponent();
-            this.DataContext = (salesReportViewModel = new SalesReportViewModel(salesReport));
+            this.DataContext = (salesReportViewModel = new SalesReportViewModel(date));
         }
 
     }

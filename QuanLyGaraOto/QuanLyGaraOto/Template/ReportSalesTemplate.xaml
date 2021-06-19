@@ -50,7 +50,7 @@
                     <TextBlock 
                         x:Name="txbIdStockReceipt"
                         TextWrapping="Wrap" 
-                        Text="{Binding  SalesReport.IdReport}" 
+                        Text="{Binding  IdReport}" 
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
@@ -71,14 +71,14 @@
                     <TextBlock 
                         x:Name="txbDate"
                         TextWrapping="Wrap" 
-                        Text="{Binding ReportDate}"  
+                        Text="{Binding Date}"  
                         FontWeight="SemiBold"
                         Margin="0" 
                         Foreground="#455A64" 
                         HorizontalAlignment="Right"
                         FontSize="14"/>
                 </Grid>
-                <Grid
+                <!--<Grid
                     Margin="0,5,0,0">
                     <TextBlock 
                         TextWrapping="Wrap" 
@@ -98,7 +98,7 @@
                         Foreground="#455A64" 
                         HorizontalAlignment="Right"
                         FontSize="14"/>
-                </Grid>
+                </Grid>-->
             </StackPanel>
         </Grid>
         <Grid 

@@ -34,7 +34,7 @@ namespace QuanLyGaraOto.ViewModel
         public PrintViewModel()
         {
             PrintInventoryReportCommand = new RelayCommand<InventoryReport>((p) => true, (p) => PrintInventoryReport(p));
-            PrintSalesReportCommand = new RelayCommand<ReportSalesTemplate>((p)=>true,(p)=>PrintSalesReport(p));
+            PrintSalesReportCommand = new RelayCommand<SalesReport>((p)=>true,(p)=>PrintSalesReport(p));
             PrintBillCommand = new RelayCommand<BillTemplate>((p) => true, (p) => PrintBill(p));
             PrintStockReceiptCommand = new RelayCommand<Object>((p) => true, (p) => PrintStockReceipt());
             PrintSalaryRecordCommand = new RelayCommand<Object>((p) => true, (p) => PrintSalaryRecord());
@@ -60,7 +60,7 @@ namespace QuanLyGaraOto.ViewModel
 
         }
 
-        public void StyleExcel(IWorkbook workbook, IWorksheet sheet)
+        public void StyleExcel_Inventory(IWorkbook workbook, IWorksheet sheet)
         {
 
             // THIẾT LẬP CÁI FILE EXCEL NÓ RA SAO
@@ -126,21 +126,121 @@ namespace QuanLyGaraOto.ViewModel
             sheet.UsedRange.AutofitColumns();
             // copy
         }
-        public void PrintSalesReport(ReportSalesTemplate p)
+        public void StyleExcel_Sales(IWorkbook workbook, IWorksheet sheet)
         {
-            try
-            {
-                PrintDialog printDialog = new PrintDialog();
 
-                if (printDialog.ShowDialog() == true)
-                {
-                    printDialog.PrintVisual(p.grdPrint, "SalesReport");
-                    p.Close();
-                }
-            }
-            catch { }
+            
+            IStyle pageHeader = workbook.Styles.Add("PageHeaderStyle");
+            IStyle tableHeader = workbook.Styles.Add("TableHeaderStyle");
+           
+
+            pageHeader.Color = System.Drawing.Color.FromArgb(69, 90, 100);
+            pageHeader.Font.RGBColor = System.Drawing.Color.White;
+            pageHeader.Font.FontName = "Calibri";
+            pageHeader.Font.Size = 18;
+            pageHeader.Font.Bold = true;
+            pageHeader.HorizontalAlignment = ExcelHAlign.HAlignCenter;
+            pageHeader.VerticalAlignment = ExcelVAlign.VAlignCenter;
+            
+
+            tableHeader.Font.Color = ExcelKnownColors.Black;
+            tableHeader.Font.Bold = true;
+            tableHeader.Font.Size = 12;
+            tableHeader.Font.FontName = "Calibri";
+            tableHeader.HorizontalAlignment = ExcelHAlign.HAlignCenter;
+            tableHeader.VerticalAlignment = ExcelVAlign.VAlignCenter;
+
+            tableHeader.Borders[ExcelBordersIndex.EdgeLeft].LineStyle = ExcelLineStyle.Thin;
+            tableHeader.Borders[ExcelBordersIndex.EdgeRight].LineStyle = ExcelLineStyle.Thin;
+            tableHeader.Borders[ExcelBordersIndex.EdgeTop].LineStyle = ExcelLineStyle.Thin;
+            tableHeader.Borders[ExcelBordersIndex.EdgeBottom].LineStyle = ExcelLineStyle.Thin;
+            
+
+
+
+            sheet["A1"].Text = "Báo cáo Doanh số";
+            sheet["A1"].CellStyle = pageHeader;
+
+            sheet["A2"].Text = "Mã báo cáo";
+            sheet["A2"].CellStyle.Font.Bold = false;
+            sheet["A2"].CellStyle.Font.Size = 12;
+
+            sheet["A3"].Text = "Tháng";
+            sheet["A3"].CellStyle.Font.Bold = false;
+            sheet["A3"].CellStyle.Font.Size = 12;
+
+            sheet["A4"].Text = "Nhân viên";
+            sheet["A4"].CellStyle.Font.Bold = false;
+            sheet["A4"].CellStyle.Font.Size = 12;
+          
+
+
+            sheet["A1:E1"].Merge();
+            
+
+            sheet["A5"].Text = "STT";
+            sheet["B5"].Text = "Hiệu xe";
+            sheet["C5"].Text = "Số lượt sửa";
+            sheet["D5"].Text = "Thành tiền";
+            sheet["E5"].Text = "Tỉ lệ";
+            sheet["A5:E5"].CellStyle = tableHeader;
+            
+
+            sheet.AutofitColumn(1);
+            sheet.UsedRange.AutofitColumns();
+            
         }
-        public void PrintInventoryReport(InventoryReport inventoryReport)
+        public void PrintSalesReport(SalesReport salesReport)
+        {
+            using (ExcelEngine excelEngine = new ExcelEngine())
+            {
+                IApplication application = excelEngine.Excel;
+                IWorkbook workbook = application.Workbooks.Create(1);
+                IWorksheet worksheet = workbook.Worksheets[0];
+                
+
+                StyleExcel_Sales(workbook, worksheet);
+                
+
+                worksheet["B2"].Text = salesReport.IdReport.ToString();
+                worksheet["B3"].Text = salesReport.ReportDate.ToString();
+                worksheet["B4"].Text = salesReport.uSER_INFO.UserInfo_Name.ToString();
+               
+
+                int i = 6;
+                foreach (var item in salesReport.ListSales)
+                {
+                    Object[] list = new object[] { item.STT.ToString() , item.CarBrand_Name, item.AmountOfTurn, item.TotalMoney
+                    , item.Rate};
+                    worksheet.InsertRow(i, 1, ExcelInsertOptions.FormatDefault);
+                    worksheet.ImportArray(list, i, 1, false);
+                    i++;
+                }
+               
+
+                worksheet.Columns[1].ColumnWidth = 30;
+                worksheet.Columns[2].ColumnWidth = 20;
+                worksheet.Columns[3].ColumnWidth = 20;
+                worksheet.Columns[4].ColumnWidth = 20;
+                
+
+
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                saveFileDialog1.FilterIndex = 2;
+                saveFileDialog1.RestoreDirectory = true;
+                saveFileDialog1.ShowDialog();
+                if (saveFileDialog1.FileName != null)
+                {
+                    Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    workbook.SaveAs(excelStream);
+                    excelStream.Dispose();
+                }
+                
+            }
+        }
+
+            public void PrintInventoryReport(InventoryReport inventoryReport)
         {
             using (ExcelEngine excelEngine = new ExcelEngine())
             {
@@ -149,7 +249,7 @@ namespace QuanLyGaraOto.ViewModel
                 IWorksheet worksheet = workbook.Worksheets[0];
                 // Copy
 
-                StyleExcel(workbook, worksheet);
+                StyleExcel_Inventory(workbook, worksheet);
                 // này tự m tạo 1 cái hàm khác như trên
 
                 worksheet["B2"].Text = inventoryReport.IdReport.ToString();
