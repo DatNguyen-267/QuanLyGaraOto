@@ -11,6 +11,7 @@ using QuanLyGaraOto.Properties;
 using System.Data;
 using System.Windows;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -37,7 +38,9 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand CheckBunk { get; set; }
         public ICommand CheckEmployee { get; set; }
         public ICommand CheckReport { get; set; }
-        public ICommand CheckParentRole { get; set; }        
+        public ICommand CheckParentRole { get; set; }
+        public ICommand SelectionChangedRole { get; set; }
+        public ICommand SelectionChangedUser { get; set; }
 
         public ObservableCollection<USER_INFO> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
@@ -155,6 +158,13 @@ namespace QuanLyGaraOto.ViewModel
 
         String _currentUserName;
         public String currentUserName { get => _currentUserName; set { _currentUserName = value; OnPropertyChanged(); } }
+
+        //Danh sách tạm
+        private ObservableCollection<ROLE> _TempRole { get; set; }
+        public ObservableCollection<ROLE> TempRole { get => _TempRole; set { _TempRole = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<USER_INFO> _TempUser { get; set; }
+        public ObservableCollection<USER_INFO> TempUser { get => _TempUser; set { _TempUser = value; OnPropertyChanged(); } }
 
         public EmployeeViewModel(bool role1, bool role2, String username) : this()
         {
@@ -476,21 +486,56 @@ namespace QuanLyGaraOto.ViewModel
             {
                 if (MessageBox.Show("Bạn chắc chắn muốn xóa nhân viên này không?", "Cảnh báo", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == System.Windows.MessageBoxResult.OK)
                 {
-                    if (UserName != currentUserName)
-                    {
-                        USER acc = DataProvider.Ins.DB.USERS.Where(x => x.Users_Id == SelectedItem.IdUser).SingleOrDefault();
-                        DataProvider.Ins.DB.USER_INFO.Remove(SelectedItem);
-                        DataProvider.Ins.DB.USERS.Remove(acc);
-                        DataProvider.Ins.DB.SaveChanges();
+                    int deleteSuccess = 0;
+                    bool deleteCurrent = false;
 
-                        MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                        List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
+                    foreach (var item in TempUser)
+                    {
+                        if (item.USER.UserName != currentUserName)
+                        {
+                            USER acc = DataProvider.Ins.DB.USERS.Where(x => x.Users_Id == item.IdUser).SingleOrDefault();
+                            DataProvider.Ins.DB.USER_INFO.Remove(item);
+                            DataProvider.Ins.DB.USERS.Remove(acc);
+                            DataProvider.Ins.DB.SaveChanges();
+
+                            deleteSuccess++;
+                            //MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            
+                        }
+                        else
+                        {
+                            deleteCurrent = true;
+                            //MessageBox.Show("Không thể xóa người dùng đang đăng nhập!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                     }
+
+                    if (deleteCurrent == true)
+                    {
+                        if (deleteSuccess == 0)
+                        {
+                            MessageBox.Show("Không thể xóa người dùng đang đăng nhập!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                        else
+                        {
+                            MessageBox.Show(deleteSuccess.ToString() + " nhân viên đã được xóa thành công!"
+                                + "\n \nNgười dùng có tên tài khoản '" + currentUserName + "' không thể xóa do đang đăng nhập", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }    
+                    }    
                     else
                     {
-                        MessageBox.Show("Không thể xóa người dùng đang đăng nhập!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                   
+                        if (deleteSuccess == 1)
+                        {
+                            MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }    
+                        else
+                        {
+                            MessageBox.Show(deleteSuccess.ToString() + " nhân viên đã được xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }    
+                    }    
+                        
+
+                    List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
+
                 }
 
 
@@ -588,39 +633,89 @@ namespace QuanLyGaraOto.ViewModel
             {
                 if (MessageBox.Show("Bạn chắc chắn muốn xóa chức vụ này không?", "Cảnh báo", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == System.Windows.MessageBoxResult.OK)
                 {
-                    var displayList = DataProvider.Ins.DB.USERS.Where(x => x.IdRole == RoleId);
-                    if (displayList == null || displayList.Count() != 0)
+                    int deleteSuccess = 0;
+                    int deleteFail = 0;
+                    string listUsernameFail = "";         
+
+                    foreach (var item in TempRole)
                     {
-                        MessageBox.Show("Chức vụ này đang được sử dụng \nKhông thể xóa", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
+                        var displayList = DataProvider.Ins.DB.USERS.Where(x => x.IdRole == item.Role_Id);
+                        if (displayList == null || displayList.Count() != 0)
+                        {
+                            listUsernameFail += "\n  - " + item.Role_Name;
+                            deleteFail++;
+                          
+                            //MessageBox.Show("Chức vụ này đang được sử dụng \nKhông thể xóa", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                        else
+                        {
+                            var dt1 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 1).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt1);
+
+                            var dt2 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 2).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt2);
+
+                            var dt3 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 3).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt3);
+
+                            var dt4 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 4).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt4);
+
+                            var dt5 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 5).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt5);
+
+                            var dt6 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 6).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt6);
+
+                            var dt7 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 7).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt7);
+
+                            var dt8 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 8).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt8);
+
+                            var dt9 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 9).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt9);
+
+                            DataProvider.Ins.DB.ROLEs.Remove(item);
+                            DataProvider.Ins.DB.SaveChanges();
+
+                            //MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            deleteSuccess++;
+                        }
+                    }  
+                    
+                    if (deleteFail == 0)
+                    {
+                        if (deleteSuccess == 1)
+                        {
+                            MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }   
+                        else
+                        {
+                            MessageBox.Show(deleteSuccess.ToString() + " chức vụ đã được xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }    
+                    }    
                     else
                     {
-                        var dt1 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 1).SingleOrDefault();
-                        DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt1);
-
-                        var dt2 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 2).SingleOrDefault();
-                        DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt2);
-
-                        var dt3 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 3).SingleOrDefault();
-                        DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt3);
-
-                        var dt4 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 4).SingleOrDefault();
-                        DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt4);
-
-                        var dt5 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 5).SingleOrDefault();
-                        DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt5);
-
-                        var dt6 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 6).SingleOrDefault();
-                        DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt6);
-
-                        var dt7 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 7).SingleOrDefault();
-                        DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt7);
-
-                        DataProvider.Ins.DB.ROLEs.Remove(SelectedItemRole);
-                        DataProvider.Ins.DB.SaveChanges();
-
-                        MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                        if (deleteFail == 1)
+                        {
+                            if (deleteSuccess == 0)
+                            {
+                                MessageBox.Show("Chức vụ này đang được sử dụng \nKhông thể xóa", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }    
+                            else
+                            {
+                                MessageBox.Show(deleteSuccess.ToString() + " chức vụ đã được xóa thành công!\n\n"
+                                + deleteFail.ToString() + "chức vụ không thể xóa do đang được sử dụng" + listUsernameFail, "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }    
+                        }    
+                       else
+                        {
+                            MessageBox.Show(deleteSuccess.ToString() + " chức vụ đã được xóa thành công!\n\n"
+                            + deleteFail.ToString() + "chức vụ không thể xóa do đang được sử dụng" + listUsernameFail, "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }    
+                    }    
+                    
 
                     ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
                 }
@@ -683,6 +778,26 @@ namespace QuanLyGaraOto.ViewModel
                 }
             });
 
+            // Danh sách chức vụ tạm
+            SelectionChangedRole = new RelayCommand<DataGrid>
+                ((p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    TempRole = new ObservableCollection<ROLE>(p.SelectedItems.Cast<ROLE>().ToList());
+                });
+
+            // Danh sách nhân viên tạm
+            SelectionChangedUser = new RelayCommand<DataGrid>
+                ((p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    TempUser = new ObservableCollection<USER_INFO>(p.SelectedItems.Cast<USER_INFO>().ToList());
+                });
+
         }
 
         public void LoadUsersToView(Employee p)
@@ -691,7 +806,7 @@ namespace QuanLyGaraOto.ViewModel
             if (String.IsNullOrEmpty(p.txtLookUp.Text))
             {
                 
-                p.lvUsers.ItemsSource = List;
+                p.datagridUser.ItemsSource = List;
             }
             else
             {
@@ -716,7 +831,7 @@ namespace QuanLyGaraOto.ViewModel
             if (String.IsNullOrEmpty(p.txtLookUpRole.Text))
             {
                 ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
-                p.lvRoles.ItemsSource = ListRoles;
+                p.datagrid.ItemsSource = ListRoles;
             }
             else
             {
