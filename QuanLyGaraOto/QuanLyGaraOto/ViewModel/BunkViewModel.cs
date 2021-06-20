@@ -27,6 +27,8 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand RefeshSuppliesCommand { get; set; }
         public ICommand SelectionChanged { get; set; }
 
+        public ICommand ExportCommand { get; set; }
+
         private BunkWindow _MainWindow;
 
         public BunkWindow MainWindow { get => _MainWindow; set { _MainWindow = value; } }
@@ -186,7 +188,11 @@ namespace QuanLyGaraOto.ViewModel
                 p.txbSuppliesPrice.Text = "";
                 ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
             });
-
+            ExportCommand = new RelayCommand<BunkWindow>((p) => { return true; }, (p) =>
+              {
+                  PrintViewModel printViewModel = new PrintViewModel();
+                  printViewModel.Print_DanhSachVatTu(ListSupplies);
+              });
         }
 
         public void OpenImportWd(MainWindow wd)
