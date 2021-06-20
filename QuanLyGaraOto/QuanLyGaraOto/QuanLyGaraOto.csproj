@@ -129,6 +129,9 @@
     <Compile Include="AddRoleWindow.xaml.cs">
       <DependentUpon>AddRoleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddSupplierWindow.xaml.cs">
+      <DependentUpon>AddSupplierWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddWageWindow.xaml.cs">
       <DependentUpon>AddWageWindow.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,9 @@
     </Compile>
     <Compile Include="EditRoleWindow.xaml.cs">
       <DependentUpon>EditRoleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditSupplierWindow.xaml.cs">
+      <DependentUpon>EditSupplierWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Employee.xaml.cs">
       <DependentUpon>Employee.xaml</DependentUpon>
@@ -218,6 +224,7 @@
     <Compile Include="Model\ListCar.cs" />
     <Compile Include="Model\ListImport.cs" />
     <Compile Include="Model\ListInventory.cs" />
+    <Compile Include="Model\ListReceipt.cs" />
     <Compile Include="Model\ListRepair.cs" />
     <Compile Include="Model\ListSales.cs" />
     <Compile Include="Model\PREMISSION_ITEM.cs">
@@ -319,6 +326,7 @@
     <Compile Include="ViewModel\AddNewGoodViewModel.cs" />
     <Compile Include="ViewModel\AddRepairDetailViewModel.cs" />
     <Compile Include="ViewModel\AddRepairFormViewModel.cs" />
+    <Compile Include="ViewModel\AddSupplierViewModel.cs" />
     <Compile Include="ViewModel\AddWageViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
@@ -327,6 +335,7 @@
     <Compile Include="ViewModel\CarServiceViewModel.cs" />
     <Compile Include="ViewModel\ChangeCarInfoViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\EditSupplierViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\GoodBillWindowViewModel.cs" />
     <Compile Include="ViewModel\ImportBillViewModel.cs" />
@@ -377,6 +386,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddSupplierWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddWageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -410,6 +423,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="EditRoleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditSupplierWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

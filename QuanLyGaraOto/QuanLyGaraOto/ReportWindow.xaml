@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <TextBlock 
-                   Text="Báo Cáo"
+                   Text="Thống Kê"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Margin="15 0 5 0"            
@@ -207,9 +207,11 @@
                                 </Style>
                             </DataGrid.ColumnHeaderStyle>
                             <DataGrid.Columns>
-                                <materialDesign:DataGridTextColumn Header="Mã hóa đơn" Width="150"  Binding="{Binding Receipt_Id}"></materialDesign:DataGridTextColumn>
-                                <materialDesign:DataGridTextColumn Header="Thời gian" Width="300"  Binding="{Binding ReceiptDate , StringFormat='dd/MM/yyyy'}"></materialDesign:DataGridTextColumn>
-                                <materialDesign:DataGridTextColumn Header="Doanh thu" Width="250"  Binding="{Binding MoneyReceived}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Mã hóa đơn" Width="140"  Binding="{Binding Receipt.Receipt_Id}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Khách hàng" Width="140"  Binding="{Binding Customer_Name}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Biển số xe" Width="140"  Binding="{Binding LicensePlate}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Ngày thanh toán" Width="180"  Binding="{Binding Receipt.ReceiptDate , StringFormat='dd/MM/yyyy'}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Doanh thu" Width="180"  Binding="{Binding Receipt.MoneyReceived}"></materialDesign:DataGridTextColumn>
                             </DataGrid.Columns>
                             <!--<ListView.View>
                                 <GridView>

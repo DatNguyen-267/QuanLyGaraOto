@@ -12,6 +12,8 @@ namespace QuanLyGaraOto.ViewModel
     {
         private string _Date;
         public string Date { get => _Date; set { _Date = value; OnPropertyChanged(); } }
+        private string _UserName { get; set; }
+        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
 
         private int _IdReport;
         public int IdReport { get => _IdReport; set { _IdReport = value; OnPropertyChanged(); } }
@@ -26,7 +28,7 @@ namespace QuanLyGaraOto.ViewModel
             Date = date.Month.ToString() + "/" + date.Year.ToString();
             var InventoryReport = DataProvider.Ins.DB.INVENTORY_REPORT.Where(x => x.InventoryReport_Date.Year == date.Year && x.InventoryReport_Date.Month == date.Month).SingleOrDefault();
             var InventoryReportDetail = DataProvider.Ins.DB.INVENTORY_REPORT_DETAIL.Where(x => x.IdInventoryReport == InventoryReport.InventoryReport_Id);
-
+            UserName = InventoryReport.InventoryReport_UserName;
             IdReport = InventoryReport.InventoryReport_Id;
             int i = 1;
             foreach (var item in InventoryReportDetail)

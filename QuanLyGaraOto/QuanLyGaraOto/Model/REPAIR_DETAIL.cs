@@ -13,7 +13,7 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class REPAIR_DETAIL : BaseViewModel
+    public partial class REPAIR_DETAIL :BaseViewModel
     {
         public int RepairDetail_Id { get; set; }
         private string _Content { get; set; }

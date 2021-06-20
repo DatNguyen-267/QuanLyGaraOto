@@ -61,7 +61,10 @@ namespace QuanLyGaraOto.ViewModel
             }
 
         }
+        public void GenaralStyleExcel (IWorkbook workbook, IWorksheet sheet)
+        {
 
+        }
         public void StyleExcel_Inventory(IWorkbook workbook, IWorksheet sheet)
         {
 
@@ -206,7 +209,7 @@ namespace QuanLyGaraOto.ViewModel
 
                 worksheet["B2"].Text = salesReport.IdReport.ToString();
                 worksheet["B3"].Text = salesReport.ReportDate.ToString();
-                worksheet["B4"].Text = salesReport.uSER_INFO.UserInfo_Name.ToString();
+                worksheet["B4"].Text = salesReport.UserName;
                
 
                 int i = 6;
@@ -218,7 +221,8 @@ namespace QuanLyGaraOto.ViewModel
                     worksheet.ImportArray(list, i, 1, false);
                     i++;
                 }
-               
+                worksheet["D" + i].Text = "Tổng doanh thu: " + salesReport.TotalMoney;
+                worksheet["D" + i + ":" + "E" + i].Merge();
 
                 worksheet.Columns[1].ColumnWidth = 30;
                 worksheet.Columns[2].ColumnWidth = 20;
@@ -237,12 +241,11 @@ namespace QuanLyGaraOto.ViewModel
                     Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
-                }
-                
+                } 
             }
         }
 
-            public void PrintInventoryReport(InventoryReport inventoryReport)
+        public void PrintInventoryReport(InventoryReport inventoryReport)
         {
             using (ExcelEngine excelEngine = new ExcelEngine())
             {
@@ -256,7 +259,7 @@ namespace QuanLyGaraOto.ViewModel
 
                 worksheet["B2"].Text = inventoryReport.IdReport.ToString();
                 worksheet["B3"].Text = inventoryReport.ReportDate.ToString();
-                worksheet["B4"].Text = inventoryReport.uSER_INFO.UserInfo_Name.ToString();
+                worksheet["B4"].Text = inventoryReport.UserName;
                 //gán dữ liệu vô mấy cái ô trên
 
                 int i = 6;

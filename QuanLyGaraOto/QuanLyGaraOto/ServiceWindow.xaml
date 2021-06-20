@@ -19,7 +19,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
@@ -33,7 +33,7 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <TextBlock 
-                   Text="Dịch vụ"
+                   Text="Dịch Vụ"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Margin="15 0 5 0"            
@@ -56,6 +56,14 @@
                            FontWeight="DemiBold"
                            Foreground="{StaticResource MainBlue}"
                            ></TextBlock>
+                <Button Grid.Column="1"
+                    Command="{Binding CarReceptionCommand}"
+                    Content="Thêm xe"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource MainButton}"
+                    Margin="10 5 20 5"
+                    />
             </Grid>
         </Grid>
         <materialDesign:Card
@@ -234,14 +242,7 @@
                 </Button>
                
             </StackPanel>
-            <Button Grid.Column="1"
-                    Command="{Binding CarReceptionCommand}"
-                    Content="Thêm xe"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                    Style="{StaticResource MainButton}"
-                    Margin="10 5 20 5"
-                    />
+            
         </Grid>
     </Grid>
 

@@ -29,14 +29,22 @@ namespace QuanLyGaraOto.ViewModel
         private ObservableCollection<string> itemSource_Month = new ObservableCollection<string>();
         public ObservableCollection<string> ItemSource_Month { get => itemSource_Month; set { itemSource_Month = value; OnPropertyChanged(); } }
      
-        private ObservableCollection<RECEIPT> _List;
-        public ObservableCollection<RECEIPT> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+        private ObservableCollection<ListReceipt> _List;
+        public ObservableCollection<ListReceipt> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
         private ObservableCollection<ImportTemp> _ListImport;
         public ObservableCollection<ImportTemp> ListImport { get => _ListImport; set { _ListImport = value; OnPropertyChanged(); } }
 
         bool _isReport = false;
         public bool isReport { get => _isReport; set { _isReport = value; OnPropertyChanged(); } }
+
+
+        private string _LicensePlate { get; set; }
+        public string LicensePlate { get => _LicensePlate; set { _LicensePlate = value; OnPropertyChanged(); } }
+
+        private string _Customer_Name { get; set; }
+        public string Customer_Name { get => _Customer_Name; set { _Customer_Name = value; OnPropertyChanged(); } }
+
         private USER _User { get; set; }
         public USER User { get => _User; set { _User = value; OnPropertyChanged(); } }
         public ReportViewModel(bool role, USER u) : this()
@@ -112,16 +120,24 @@ namespace QuanLyGaraOto.ViewModel
         //Thêm dữ liệu vào list kinh doanh
         public void Load_KinhDoanh(string selectedYear,string selectedMonth)
         {
-            List = new ObservableCollection<RECEIPT>(DataProvider.Ins.DB.RECEIPTs);
-            ObservableCollection<RECEIPT> temp = new ObservableCollection<RECEIPT>();
-            foreach (var item in List)
+            List = new ObservableCollection<ListReceipt>();
+            
+            var receipt = DataProvider.Ins.DB.RECEIPTs.Where(x => x.ReceiptDate.Year.ToString() == selectedYear && x.ReceiptDate.Month.ToString() == selectedMonth);
+            foreach (var item in receipt)
             {
+                ListReceipt temp = new ListReceipt();
+                var reception = DataProvider.Ins.DB.RECEPTIONs.Where(x => x.Reception_Id == item.IdReception).SingleOrDefault();
 
-                if (item.ReceiptDate.Year.ToString() == selectedYear && item.ReceiptDate.Month.ToString() == selectedMonth)
-                    temp.Add(item);
+                var customer = DataProvider.Ins.DB.CUSTOMERs.Where(x => x.Customer_Id == reception.IdCustomer).SingleOrDefault();
+
+                temp.Customer_Name = customer.Customer_Name;
+                temp.LicensePlate = reception.LicensePlate;
+                temp.Receipt = item;
+
+                List.Add(temp);
             }
 
-            List = temp;
+            
         }
 
         //Thêm dữ liệu vào list nhập kho

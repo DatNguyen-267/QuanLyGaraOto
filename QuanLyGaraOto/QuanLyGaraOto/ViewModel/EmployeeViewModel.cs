@@ -17,7 +17,18 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class EmployeeViewModel : BaseViewModel
     {
-
+        public ICommand CheckExistAddRoleName { get; set; }
+        public ICommand CheckExistEditRoleName { get; set; }
+        private bool _VisExistsAddRoleName { get; set; }
+        public bool VisExistsAddRoleName { get => _VisExistsAddRoleName; set { _VisExistsAddRoleName = value; OnPropertyChanged(); } }
+        private bool _VisExistsEditRoleName { get; set; }
+        public bool VisExistsEditRoleName { get => _VisExistsEditRoleName; set { _VisExistsEditRoleName = value; OnPropertyChanged(); } }
+        // Validation exist name role
+        public ICommand CheckExistAddUserName { get; set; }
+        private bool _VisExistsAddUserName { get; set; }
+        public bool VisExistsAddUserName { get => _VisExistsAddUserName; set { _VisExistsAddUserName = value; OnPropertyChanged(); } }
+  
+        // validation exist name user
         public ICommand AddEmployeeCommand { get; set; }
         public ICommand LookUpCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -190,7 +201,15 @@ namespace QuanLyGaraOto.ViewModel
             isSettingApp = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 9).SingleOrDefault().Permission;
 
             String oldName = RoleName;
-
+            // validate name
+            CheckExistEditRoleName = new RelayCommand<EditRoleWindow>((p) => { return true; }, (p) =>
+            {
+                VisExistsEditRoleName = false;
+                if (DataProvider.Ins.DB.ROLEs.Where(x => x.Role_Name == p.txtRoleName.Text && r.Role_Name != p.txtRoleName.Text).Count() != 0)
+                {
+                    VisExistsEditRoleName = true;
+                }
+            });
             // Sửa chức vụ
             EditRoleCommand = new RelayCommand<EditRoleWindow>((p) => {
                 if (String.IsNullOrEmpty(p.txtRoleName.Text))
@@ -543,7 +562,25 @@ namespace QuanLyGaraOto.ViewModel
 
             //Mở cửa số để thêm chức vụ
             AddRoleWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) => { AddRoleWindow wd = new AddRoleWindow(); wd.ShowDialog(); ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs); });
-
+            // Valididate name
+            CheckExistAddRoleName = new RelayCommand<AddRoleWindow>((p) => { return true; }, (p) =>
+            {
+                VisExistsAddRoleName = false;
+                if (DataProvider.Ins.DB.ROLEs.Where(x => x.Role_Name == p.txtRoleName.Text).Count() == 0)
+                {
+                    VisExistsAddRoleName = false;
+                }
+                else VisExistsAddRoleName = true;
+            });
+            CheckExistAddUserName = new RelayCommand<AddEmployee>((p) => { return true; }, (p) =>
+            {
+                VisExistsAddUserName = false;
+                if (DataProvider.Ins.DB.USERS.Where(x => x.UserName == p.txtUserName.Text).Count() == 0)
+                {
+                    VisExistsAddUserName = false;
+                }
+                else VisExistsAddUserName = true;
+            });
             //Nút thêm chức vụ trên AddRoleWindow
             AddRoleCommand = new RelayCommand<AddRoleWindow>((p) =>
             {
@@ -605,7 +642,7 @@ namespace QuanLyGaraOto.ViewModel
 
 
             });
-
+            
             // Mở cửa sổ chỉnh sửa thông tin chức vụ
             EditRoleWindowCommand = new RelayCommand<object>((p) => {
                 if (SelectedItemRole == null)

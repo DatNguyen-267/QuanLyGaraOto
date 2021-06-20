@@ -74,7 +74,7 @@
                             HorizontalAlignment="Right"
                             VerticalContentAlignment="Center" 
                             HorizontalContentAlignment="Left"
-                            FontWeight="SemiBold">
+                            FontWeight="Normal">
                             <TextBox.Text>
                                 <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>
@@ -118,7 +118,7 @@
                         HorizontalAlignment="Right"
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
-                        FontWeight="SemiBold" >
+                        FontWeight="Normal" >
                             <TextBox.Text>
                                 <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>
@@ -164,7 +164,7 @@
                             HorizontalAlignment="Right"
                             VerticalContentAlignment="Center" 
                             HorizontalContentAlignment="Left"
-                            FontWeight="SemiBold">
+                            FontWeight="Normal">
                         </ComboBox>
                     </Grid>
                     <Grid Grid.Row="3"                   
@@ -201,7 +201,7 @@
                         HorizontalAlignment="Right"
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
-                        FontWeight="SemiBold"
+                        FontWeight="Normal"
                         >
                             <DatePicker.Text>
                                 <Binding Path="BrithDate" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" StringFormat='dd/MM/yyyy'>
@@ -247,7 +247,7 @@
                         HorizontalAlignment="Right"
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
-                        FontWeight="SemiBold">
+                        FontWeight="Normal">
                             <TextBox.Text>
                                 <Binding Path="CMND" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>
@@ -291,7 +291,7 @@
                     HorizontalAlignment="Right"
                     VerticalContentAlignment="Center" 
                     HorizontalContentAlignment="Left"
-                    FontWeight="SemiBold">
+                    FontWeight="Normal">
                             <TextBox.Text>
                                 <Binding Path="Telephone" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>
@@ -338,7 +338,7 @@
                             HorizontalAlignment="Right"
                             VerticalContentAlignment="Center" 
                             HorizontalContentAlignment="Left"
-                            FontWeight="SemiBold">
+                            FontWeight="Normal">
                             <TextBox.Text>
                                 <Binding Path="Address" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>

@@ -237,7 +237,7 @@
                                         <Setter Property="FontSize" Value="14"></Setter>
                                         <Setter Property="Margin" Value="60 0 20 0"></Setter>
                                         <Setter Property="FontWeight" Value="Medium"></Setter>
-                                        
+                                        <Setter Property="IsReadOnly" Value="True"></Setter>
                                     </Style>
                                 </Grid.Resources>
                                 <Grid.RowDefinitions>
