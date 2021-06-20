@@ -289,6 +289,16 @@
                                 Command="{Binding ResetUserInformation}"
                                 IsEnabled="{Binding IsEnableResetButtonInUserInformation}"/>
                                 </Grid>
+
+                                <Grid>
+                                    <Button 
+                                        Width="250"
+                                        Style="{StaticResource FeatureButton}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Content="Đăng xuất"
+                                        Command="{Binding Logout}"/>
+                                </Grid>
                             </StackPanel>
                         </Grid>
                     </materialDesign:Card>
