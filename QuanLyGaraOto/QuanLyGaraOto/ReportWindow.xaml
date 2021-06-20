@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <TextBlock 
-                   Text="Báo Cáo"
+                   Text="Thống Kê"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Margin="15 0 5 0"            

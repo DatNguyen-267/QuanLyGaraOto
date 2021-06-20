@@ -6,11 +6,10 @@
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+        FontWeight="Normal"
         ResizeMode="NoResize"
-        Name="wdAddEmployee"
+        Name="wdAddEmployee" 
+        xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         WindowStartupLocation="CenterScreen"
         
@@ -75,7 +74,23 @@
                             HorizontalAlignment="Right"
                             VerticalContentAlignment="Center" 
                             HorizontalContentAlignment="Left"
-                            FontWeight="SemiBold">
+                            FontWeight="Normal">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding VisExistsAddUserName}" Value="True">
+                                            <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding CheckExistAddUserName}"
+                                                                       CommandParameter="{Binding ElementName=wdAddEmployee}"
+                                                                       ></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <TextBox.Text>
                                 <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>
@@ -84,6 +99,15 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
+                        <Label Grid.Row="1"
+                   Content="Tên tài khoản đã tồn tại"
+                   Foreground="red"
+                   VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                   Margin="15 10 100 -22"
+                   Visibility="{Binding VisExistsAddUserName, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                        </Label>
                     </Grid>
                     <Grid Grid.Row="1"                   
                     Margin="8 8 8 8"
@@ -118,7 +142,7 @@
                         HorizontalAlignment="Right"
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
-                        FontWeight="SemiBold">
+                        FontWeight="Normal">
                             <TextBox.Text>
                                 <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>
@@ -164,7 +188,7 @@
                             HorizontalAlignment="Right"
                             VerticalContentAlignment="Center" 
                             HorizontalContentAlignment="Left"
-                            FontWeight="SemiBold">
+                            FontWeight="Normal">
                         </ComboBox>
                     </Grid>
                     <Grid Grid.Row="3"                   
@@ -200,7 +224,7 @@
                         HorizontalAlignment="Right"
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
-                        FontWeight="SemiBold" Cursor="No" IsTodayHighlighted="False">
+                        FontWeight="Normal" Cursor="No" IsTodayHighlighted="False">
                             <DatePicker.Text>
                                 <Binding Path="BrithDate" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" StringFormat='dd/MM/yyyy'>
                                     <Binding.ValidationRules>
@@ -244,7 +268,7 @@
                         HorizontalAlignment="Right"
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
-                        FontWeight="SemiBold">
+                        FontWeight="Normal">
                         <TextBox.Text>
                                 <Binding Path="CMND" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>
@@ -287,7 +311,7 @@
                             HorizontalAlignment="Right"
                             VerticalContentAlignment="Center" 
                             HorizontalContentAlignment="Left"
-                            FontWeight="SemiBold">
+                            FontWeight="Normal">
                             <TextBox.Text>
                                 <Binding Path="Telephone" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>
@@ -332,7 +356,7 @@
                             HorizontalAlignment="Right"
                             VerticalContentAlignment="Center" 
                             HorizontalContentAlignment="Left"
-                            FontWeight="SemiBold">
+                            FontWeight="Normal">
                             <TextBox.Text>
                                 <Binding Path="Address" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>
