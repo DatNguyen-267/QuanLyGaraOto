@@ -13,7 +13,7 @@ namespace QuanLyGaraOto.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class REPAIR : BaseViewModel
+    public partial class REPAIR :BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public REPAIR()
@@ -30,6 +30,7 @@ namespace QuanLyGaraOto.Model
         public int Repair_TotalMoney { get => _Repair_TotalMoney; set { _Repair_TotalMoney = value; OnPropertyChanged(); } }
         private RECEPTION _RECEPTION { get; set; }
         public virtual RECEPTION RECEPTION { get => _RECEPTION; set { _RECEPTION = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REPAIR_DETAIL> REPAIR_DETAIL { get; set; }
     }

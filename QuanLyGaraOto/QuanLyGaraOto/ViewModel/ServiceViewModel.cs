@@ -65,6 +65,7 @@ namespace QuanLyGaraOto.ViewModel
         #endregion
         public ServiceViewModel()
         {
+
             InitData();
             CarReceptionCommand = new RelayCommand<object>((p) => {
                 LoadReceptionAmount();

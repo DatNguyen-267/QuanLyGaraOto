@@ -241,12 +241,11 @@ namespace QuanLyGaraOto.ViewModel
                     Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
-                }
-                
+                } 
             }
         }
 
-            public void PrintInventoryReport(InventoryReport inventoryReport)
+        public void PrintInventoryReport(InventoryReport inventoryReport)
         {
             using (ExcelEngine excelEngine = new ExcelEngine())
             {

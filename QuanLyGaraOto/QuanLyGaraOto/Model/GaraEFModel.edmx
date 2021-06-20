@@ -38,8 +38,8 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="ImportGoods_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ImportGoods_Date" Type="date" Nullable="false" />
           <Property Name="ImportGoods_TotalMoney" Type="int" Nullable="false" />
-          <Property Name="ImportGoods_Supplier" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="ImportGoods_UserName" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="ImportGoods_Supplier" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImportGoods_UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IdUser" Type="int" Nullable="false" />
           <Property Name="IdSupplier" Type="int" Nullable="false" />
         </EntityType>
@@ -752,8 +752,8 @@ warning 6002: The table/view 'GARA.dbo.GARA_INFO' does not have a primary key de
           <Property Name="ImportGoods_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImportGoods_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ImportGoods_TotalMoney" Type="Int32" Nullable="false" />
-          <Property Name="ImportGoods_Supplier" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="ImportGoods_UserName" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ImportGoods_Supplier" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImportGoods_UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IdUser" Type="Int32" Nullable="false" />
           <Property Name="IdSupplier" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SUPPLIER" Relationship="GARAModel.FK_IMPORTGOODS_SUPPLIER" FromRole="IMPORT_GOODS" ToRole="SUPPLIER" />

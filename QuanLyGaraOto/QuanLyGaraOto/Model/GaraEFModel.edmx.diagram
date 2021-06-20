@@ -5,26 +5,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="623bb268ee1943b6a1333b99ccaa6769" Name="Diagram1" ZoomLevel="83">
-        <EntityTypeShape EntityType="GARAModel.CAR_BRAND" Width="1.5" PointX="5.25" PointY="21.125" />
-        <EntityTypeShape EntityType="GARAModel.CUSTOMER" Width="1.5" PointX="5.25" PointY="24" />
-        <EntityTypeShape EntityType="GARAModel.IMPORT_GOODS" Width="1.5" PointX="8.25" PointY="10.75" />
-        <EntityTypeShape EntityType="GARAModel.IMPORT_GOODS_DETAIL" Width="1.5" PointX="10.5" PointY="11" />
-        <EntityTypeShape EntityType="GARAModel.INVENTORY_REPORT" Width="1.5" PointX="5.25" PointY="14.875" />
-        <EntityTypeShape EntityType="GARAModel.INVENTORY_REPORT_DETAIL" Width="1.5" PointX="7.5" PointY="14.875" />
+        <EntityTypeShape EntityType="GARAModel.CAR_BRAND" Width="1.5" PointX="5.25" PointY="14.125" />
+        <EntityTypeShape EntityType="GARAModel.CUSTOMER" Width="1.5" PointX="8.25" PointY="18" />
+        <EntityTypeShape EntityType="GARAModel.IMPORT_GOODS" Width="1.5" PointX="10.25" PointY="10.75" />
+        <EntityTypeShape EntityType="GARAModel.IMPORT_GOODS_DETAIL" Width="1.5" PointX="12.5" PointY="11" />
+        <EntityTypeShape EntityType="GARAModel.INVENTORY_REPORT" Width="1.5" PointX="5.25" PointY="7.875" />
+        <EntityTypeShape EntityType="GARAModel.INVENTORY_REPORT_DETAIL" Width="1.5" PointX="7.5" PointY="7.875" />
         <EntityTypeShape EntityType="GARAModel.PREMISSION_ITEM" Width="1.5" PointX="0.75" PointY="5.5" />
-        <EntityTypeShape EntityType="GARAModel.RECEIPT" Width="1.5" PointX="9.75" PointY="24.25" />
-        <EntityTypeShape EntityType="GARAModel.RECEPTION" Width="1.5" PointX="7.5" PointY="22.5" />
-        <EntityTypeShape EntityType="GARAModel.REPAIR" Width="1.5" PointX="9.75" PointY="21.375" />
-        <EntityTypeShape EntityType="GARAModel.REPAIR_DETAIL" Width="1.5" PointX="12" PointY="14.625" />
+        <EntityTypeShape EntityType="GARAModel.RECEIPT" Width="1.5" PointX="12.75" PointY="17.25" />
+        <EntityTypeShape EntityType="GARAModel.RECEPTION" Width="1.5" PointX="10.5" PointY="14.5" />
+        <EntityTypeShape EntityType="GARAModel.REPAIR" Width="1.5" PointX="12.75" PointY="14.375" />
+        <EntityTypeShape EntityType="GARAModel.REPAIR_DETAIL" Width="1.5" PointX="15" PointY="8.5" />
         <EntityTypeShape EntityType="GARAModel.ROLE" Width="1.5" PointX="0.75" PointY="8.375" />
         <EntityTypeShape EntityType="GARAModel.ROLE_DETAIL" Width="1.5" PointX="3" PointY="7.25" />
-        <EntityTypeShape EntityType="GARAModel.SALES_REPORT" Width="1.5" PointX="5.25" PointY="17.875" />
-        <EntityTypeShape EntityType="GARAModel.SALES_REPORT_DETAIL" Width="1.5" PointX="7.5" PointY="18.875" />
-        <EntityTypeShape EntityType="GARAModel.SUPPLIER" Width="1.5" PointX="6" PointY="11.25" />
-        <EntityTypeShape EntityType="GARAModel.SUPPLIES" Width="1.5" PointX="8.25" PointY="7" />
-        <EntityTypeShape EntityType="GARAModel.USER_INFO" Width="1.5" PointX="5.25" PointY="7.875" />
+        <EntityTypeShape EntityType="GARAModel.SALES_REPORT" Width="1.5" PointX="5.25" PointY="10.875" />
+        <EntityTypeShape EntityType="GARAModel.SALES_REPORT_DETAIL" Width="1.5" PointX="7.5" PointY="11.875" />
+        <EntityTypeShape EntityType="GARAModel.SUPPLIER" Width="1.5" PointX="8" PointY="15.25" />
+        <EntityTypeShape EntityType="GARAModel.SUPPLIES" Width="1.5" PointX="5.25" PointY="3.875" />
+        <EntityTypeShape EntityType="GARAModel.USER_INFO" Width="1.5" PointX="5.25" PointY="17.625" />
         <EntityTypeShape EntityType="GARAModel.USER" Width="1.5" PointX="3" PointY="10.875" />
-        <EntityTypeShape EntityType="GARAModel.WAGE" Width="1.5" PointX="9.75" PointY="15.375" />
+        <EntityTypeShape EntityType="GARAModel.WAGE" Width="1.5" PointX="12.75" PointY="8.25" />
         <EntityTypeShape EntityType="GARAModel.GARA_INFO" Width="1.5" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="GARAModel.FK_RECEPTION_CARBRAND" />
         <AssociationConnector Association="GARAModel.FK_SALESREPORTDETAIL_CARBRAND" />
