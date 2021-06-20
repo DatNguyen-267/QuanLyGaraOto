@@ -46,6 +46,10 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeAppSettingVis { get; set; }
         public ICommand ChangeUserSettingVis { get; set; }
 
+
+        // Log out
+        public ICommand Logout { get; set; }
+
         // IsEnable button setting in gara information
         private bool _IsEnableChangeButtonInGaraInformation;
         public bool IsEnableChangeButtonInGaraInformation
@@ -756,6 +760,12 @@ namespace QuanLyGaraOto.ViewModel
 
             //Set role
             isSettingApp = role;
+
+            // Log out
+            Logout = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+
+            });
         }
 
         private void SetEnableStatusButtonInGaraInformation(bool b)

@@ -18,6 +18,8 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand SupplierCommand { get; set; }
         public Grid Container { get; set; }
 
+        private MainWindow mainWindow;
+
         public ICommand OpenDashboard { get; set; }
         public ICommand OpenService { get; set; }
         public ICommand OpenEmployee { get; set; }

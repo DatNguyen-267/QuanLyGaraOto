@@ -116,7 +116,7 @@
                                     <StackPanel Orientation="Horizontal"
                                                 Grid.Row="0"
                                                 Margin="10 0 0 20">
-                                        
+
                                         <materialDesign:PackIcon 
                                             Width="30"
                                             Height="30"
@@ -172,14 +172,14 @@
                                             />
                                     </StackPanel>
                                 </Grid>
-                               
+
                                 <StackPanel
                                     Grid.Row="2" 
                                     Margin="16 0 16 0" 
                                     Orientation="Horizontal"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center">
-                                    
+
                                     <Button 
                                         Margin="10 0 30 0"
                                             Style="{StaticResource FeatureButton}"
@@ -193,14 +193,14 @@
                                             Style="{StaticResource FeatureButton}"
                                             Content="Hoàn tác"
                                             IsEnabled="{Binding IsEnableResetButtonInGaraInformation}"
-                                            Command="{Binding ResetGaraInformation}" Grid.ColumnSpan="2" /> 
+                                            Command="{Binding ResetGaraInformation}" Grid.ColumnSpan="2" />
                                 </StackPanel>
                             </Grid>
                         </materialDesign:Card>
 
                         <materialDesign:Card Grid.Row="1" 
                                              Margin="0 0 30 30" >
-                            
+
                             <Grid>
                                 <Grid.Resources>
                                     <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
@@ -210,7 +210,7 @@
                                         <Setter Property="FontWeight" Value="Normal"></Setter>
                                     </Style>
                                 </Grid.Resources>
-                                
+
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="75"/>
@@ -380,13 +380,13 @@
                                       Style="{StaticResource txbSearch}"
                                       
                                       VerticalAlignment="Center">
-                                        <TextBox.Text>
+                                    <TextBox.Text>
                                         <Binding Path="WageValue" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
                                             <Binding.ValidationRules>
                                                 <validation:OnlyNumberValidation ErrorMessage="Chỉ nhập số (0-9)"></validation:OnlyNumberValidation>
                                             </Binding.ValidationRules>
                                         </Binding>
-                                        </TextBox.Text>
+                                    </TextBox.Text>
                                 </TextBox>
                                 <Button Content="Tìm"
                                         Style="{StaticResource FeatureButton}"
@@ -401,7 +401,7 @@
                                         CommandParameter="{Binding ElementName=wdSetting}">
                                 </Button>
                             </StackPanel>
-                                
+
                             <Grid Grid.Row="2" Margin="10">
                                 <!--<ListView 
                                     FontSize="16"
@@ -459,7 +459,7 @@
 
                                     <DataGrid.ColumnHeaderStyle>
                                         <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                            
+
                                         </Style>
                                     </DataGrid.ColumnHeaderStyle>
 
@@ -592,7 +592,7 @@
                             <Label Grid.Row="0"
                                      Content="Thông tin tài khoản"
                                     Style="{StaticResource Title}"/>
-                            <StackPanel Grid.Row="2">
+                            <StackPanel Grid.Row="1">
                                 <Grid Grid.Row="1" Margin="16 8 16 0">
                                     <materialDesign:PackIcon Kind="Account" 
                                                  VerticalAlignment="Center"
@@ -736,7 +736,7 @@
 
                                     </TextBox>
                                 </Grid>
-                                <Grid Grid.Row="7" Margin="16 0 16 0">
+                                <Grid Grid.Row="6" Margin="16 0 16 0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
@@ -766,13 +766,22 @@
                                 Command="{Binding ResetUserInformation}"
                                 IsEnabled="{Binding IsEnableResetButtonInUserInformation}"/>
                                 </Grid>
+                                <Grid>
+                                    <Button 
+                                        Width="250"
+                                        Style="{StaticResource FeatureButton}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Content="Đăng xuất"
+                                        Command="{Binding Logout}"/>
+                                </Grid>
                             </StackPanel>
                         </Grid>
                     </materialDesign:Card>
-                  
-                        
+
+
                     <materialDesign:Card Grid.Column="1" Margin="30">
-                       
+
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -874,7 +883,7 @@
                                 </StackPanel>
                             </Grid>
 
-                           
+
                         </Grid>
                     </materialDesign:Card>
                 </Grid>
