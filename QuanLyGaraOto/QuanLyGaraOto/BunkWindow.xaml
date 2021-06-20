@@ -4,99 +4,165 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
+        xmlns:validation ="clr-namespace:QuanLyGaraOto.Validation"
         mc:Ignorable="d"
-        x:Name="BunkWD"
-        Height="500" Width="800"
+        x:Name="wdBunk"
+             Background="White"
+        Height="500" Width="1200"
         DataContext="{StaticResource BunkVM}"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
          xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="130"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="#ffffff">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition ></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" 
+              Margin="15 0 15 10"
+              Background="{StaticResource MainColor}">
             <Grid Grid.Column="0">
-                <TextBlock Text="Phụ Tùng" HorizontalAlignment="Center"
-                    TextAlignment="Center"
-                    Foreground="#FF673AB7"
-                    FontWeight="Bold"
-                    Height="auto"
-                    FontSize="28"
-                    Margin="16 0 0 0"
+                <TextBlock 
+                   Text="Kho Hàng"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="15 0 5 0"            
+                    FontSize="30"
+                    Foreground="White"
+                   FontWeight="Bold"
                     ></TextBlock>
             </Grid>
-            <Grid Grid.Column="1"
-                  Margin="0 0 16 0"
-                  Width="330"
-                  HorizontalAlignment="Right">
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="15 0 0 0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                    <Setter Property="Width" Value="100"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                </Style>
+            </Grid.Resources>
+            <StackPanel Grid.Column="0" Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <TextBox
+                    Width="150"
+                    x:Name="txbSuppliesName"
+                      materialDesign:HintAssist.Hint="Tên"
+                      Style="{StaticResource txbSearch}"
+                      VerticalAlignment="Center"
+                    Text="{Binding SuppliesName , UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                </TextBox>
+                <TextBox 
+                    Width="120"
+                    x:Name="txbSuppliesPrice"
+                      materialDesign:HintAssist.Hint="Giá"
+                      Style="{StaticResource txbSearch}"
+                      VerticalAlignment="Center">
+                    <TextBox.Text>
+                        <Binding Path="SuppliesPrice" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validation:OnlyNumberValidation ErrorMessage="Chỉ nhập số (0-9)"></validation:OnlyNumberValidation>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox
+                      x:Name="txbSuppliesAmount"
+                      materialDesign:HintAssist.Hint="Số lượng"
+                      Style="{StaticResource txbSearch}"
+                      VerticalAlignment="Center">
+                    <TextBox.Text>
+                        <Binding Path="SuppliesAmount" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validation:OnlyNumberValidation ErrorMessage="Chỉ nhập số (0-9)"></validation:OnlyNumberValidation>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <StackPanel  Grid.Column="1">
+                <StackPanel Orientation="Horizontal" Width="auto">
+
+                    <Button Content="Tìm"
+                        Style="{StaticResource FeatureButton}"
+                        Margin="20 5 0 0"
+                        Command="{Binding SearchSuppliesCommand}"
+                        CommandParameter="{Binding ElementName=wdBunk}">
+                    </Button>
+                    <Button Content="Làm mới"
+                        Margin="20 5 0 0"
+                        Style="{StaticResource FeatureButton}"
+                        Command="{Binding RefeshSuppliesCommand}"
+                        CommandParameter="{Binding ElementName=wdBunk}">
+
+                    </Button>
+                    <Button 
+                        Command="{Binding ExportCommand}"
+                        Margin="20 5 0 0"
+                        Style="{StaticResource ExportButton}"
+                    Content="Xuất">
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 20 0 0">
+                    <Button
+                    Margin="20 5 0 0"
+                        Command="{Binding OpenAddCommand}"
+                        Style="{StaticResource AddButton}"
+                        Content="Thêm"    
+                        HorizontalAlignment="Left">
+                    </Button>
+                    <Button
+                    Margin="20 5 0 0"
+                    Content="Xóa"
+                        Command="{Binding DeleteCommand}"
+                        Style="{StaticResource DeleteButton}">
+                    </Button>
+                    <Button
+                    Margin="20 5 0 0"
+                    Content="Sửa"
+                    Command="{Binding OpenEditCommand}"
+                    Style="{StaticResource FeatureButton}">
+
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right">
                 <Button
+                    Width="200"
+                    FontSize="15"
+                    Margin="0 0 50 0"
                     Command="{Binding OpenImportCommand}"
                     x:Name="btnAddGood"
-                    HorizontalAlignment="Left"
-                    FontSize="12"
-                    Width="150"
-                    Height="Auto"
-                    Margin="0 8 0 8"
-                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                    Style="{DynamicResource MainButton}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth2">
                     Nhập hàng
                 </Button>
                 <Button
+                    Width="200"
+                    FontSize="15"
+                    Margin="0 0 50 0"
                     Command="{Binding SuppliesBillCommand}"
                     x:Name="btnImportView"
-                    HorizontalAlignment="Right"
-                    FontSize="12"
-                    Width="150"
-                    Height="Auto"
-                    Margin="0 8 0 8"
-                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                    Style="{DynamicResource MainButton}"
                     materialDesign:ShadowAssist.ShadowDepth="Depth2">
                     Danh sách đơn nhập
                 </Button>
-            </Grid>
+            </StackPanel>
         </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition ></ColumnDefinition>
-                <ColumnDefinition Width="400"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Background="#f1f1f1">
-                <Label
-                    Content="Danh sách phụ tùng"
-                    Margin="16 4 220 386"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    />
-                <Grid
-                    Margin="200 8 8 386"
-                    VerticalAlignment="Top"
-                    >
-                    <Rectangle
-                    
-                        RadiusX="4"
-                        RadiusY="4"
-                        Stroke="Black"
-                        />
-                    <TextBox
-                        x:Name="txbSearch"
-                        
-                        materialDesign:HintAssist.Hint="Tìm phụ tùng"
-                        FontSize="14"
-                        Margin="8 0 0 0"
-                        Foreground="Black"
-                        />
 
-                </Grid>
-                <materialDesign:Card
-                    Margin="16 40 8 8">
-                    <DataGrid
+        <materialDesign:Card Grid.Row="3" Margin="15 0 15 20">
+            <DataGrid
                         ItemsSource="{Binding ListSupplies}" 
                       SelectedItem="{Binding SelectedItem}"
                       SelectionMode="Extended"
@@ -107,196 +173,50 @@
                       CanUserReorderColumns="True"
                       FontSize="16"
                       Name="dataGrid">
-                        <DataGrid.Resources>
-                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Gainsboro" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGrid.Resources>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Gainsboro" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
                                                    CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
-                            </i:EventTrigger>
+                    </i:EventTrigger>
 
-                        </i:Interaction.Triggers>
-                        <DataGrid.CellStyle>
-                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                                <Style.Triggers>
-                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                        <Setter Property="FontWeight" Value="DemiBold" />
-                                        <Setter Property="FontSize" Value="17" />
-                                        <Setter Property="Foreground" Value="Black"></Setter>
-                                    </Trigger>
+                </i:Interaction.Triggers>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="DemiBold" />
+                                <Setter Property="FontSize" Value="17" />
+                                <Setter Property="Foreground" Value="Black"></Setter>
+                            </Trigger>
 
-                                </Style.Triggers>
-                            </Style>
-                        </DataGrid.CellStyle>
-                        <DataGrid.ColumnHeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
-                                <Setter Property="Foreground" Value="White"></Setter>
-                                <Setter Property="FontWeight" Value="DemiBold"></Setter>
-                            </Style>
-                        </DataGrid.ColumnHeaderStyle>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                        <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
 
-                        <DataGrid.Columns>
-                            <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding Supplies_Id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Header="Tên" Binding="{Binding Supplies_Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Header="Giá" Binding="{Binding Supplies_Price,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding Supplies_Amount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
-                            
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </materialDesign:Card>
+                <DataGrid.Columns>
+                    <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding Supplies_Id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="250" Header="Tên vật tư" Binding="{Binding Supplies_Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="150" Header="Giá" Binding="{Binding Supplies_Price,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Số lượng" Binding="{Binding Supplies_Amount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
 
-            </Grid>
-            <Grid Grid.Column="1"  Background="#ffffff">
-                <Grid
-                    Margin="8 8 8 8">
-                <Label
-                    Content="Tên phụ tùng"
-                    Margin="0 0 0 0"
-                    FontSize="14"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    VerticalAlignment="Top"
-                    />
-                    <Grid
-                    Margin="0 40 0 0"
-                    Height="40"
-                    VerticalAlignment="Top"
-                    >
-                        <Rectangle
-                    
-                        RadiusX="4"
-                        RadiusY="4"
-                        Stroke="Black"
-                        />
-                        <TextBox
-                        x:Name="txbName"
-                        Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
-                        FontSize="16"
-                        
-                        Margin="8 0 0 0"
-                        Foreground="Black"
-                        />
-
-                    </Grid>
-                    <Label
-                    Content="Giá"
-                    Margin="0 80 0 0"
-                    FontSize="14"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    VerticalAlignment="Top"
-                    />
-                    <Grid
-                    Margin="0 120 0 0"
-                    Height="40"
-                    VerticalAlignment="Top"
-                    >
-                        <Rectangle
-                    
-                        RadiusX="4"
-                        RadiusY="4"
-                        Stroke="Black"
-                        />
-                        <TextBox
-                        x:Name="txbPrice"
-                        Text="{Binding Price,UpdateSourceTrigger=PropertyChanged}"
-                        FontSize="12"
-                        PreviewTextInput="NumberValidationTextBox"
-                        Margin="8 0 0 0"
-                        Foreground="Black"
-                        />
-
-                    </Grid>
-                    <Label
-                    Content="Số Lượng"
-                    Margin="0 160 0 0"
-                    FontSize="14"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    VerticalAlignment="Top"
-                    />
-                <Grid
-                    Margin="0 200 0 0"
-                    Height="40"
-                    VerticalAlignment="Top"
-                    >
-                    <Rectangle
-                    
-                        RadiusX="4"
-                        RadiusY="4"
-                        Stroke="Black"
-                        />
-                    <TextBox
-                        x:Name="txbPay"
-                        Text="{Binding Amount,UpdateSourceTrigger=PropertyChanged}"
-                        FontSize="12"
-                        Margin="8 0 0 0"
-                        IsReadOnly="True"
-                        Foreground="Black"
-                        />
-
-                </Grid>
-                
-                </Grid>
-                <Grid
-                    Margin="8 0 16 8"
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"
-                    Height="40"
-                    Width="160"
-                    >
-                    <Button
-                        Command="{Binding OpenAddCommand}"
-                        Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                        ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                        HorizontalAlignment="Left">
-                        <materialDesign:PackIcon
-                         Kind="Plus"
-                         Height="24"
-                         Width="24" />
-                    </Button>
-                    <ToggleButton
-                        Command="{Binding DeleteCommand}"
-                        Style="{StaticResource MaterialDesignActionToggleButton}"
-                        ToolTip="MaterialDesignActionLightToggleButton"
-                        HorizontalAlignment="Right"
-                        Height="40"
-                        Width="40">
-                        <ToggleButton.Content>
-                            <materialDesign:PackIcon
-                                Kind="LockOpen"
-                                Height="24"
-                                Width=" 24"/>
-                        </ToggleButton.Content>
-                        <materialDesign:ToggleButtonAssist.OnContent>
-                            <materialDesign:PackIcon
-                                Kind="LockOutline"
-                                Height="24"
-                                Width=" 24"/>
-                        </materialDesign:ToggleButtonAssist.OnContent>
-                    </ToggleButton>
-                    <Button
-                        Command="{Binding OpenEditCommand}"
-                         Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-                         ToolTip="MaterialDesignFloatingActionMiniLightButton"
-                         HorizontalAlignment="Center">
-                        <materialDesign:PackIcon
-                         Kind="BorderColor"
-                         Foreground="AliceBlue"
-                         Height="24"
-                         Width="24" />
-                    </Button>
-                </Grid>
-            </Grid>
-        </Grid>
+                </DataGrid.Columns>
+            </DataGrid>
+        </materialDesign:Card>
     </Grid>
-
 </UserControl>

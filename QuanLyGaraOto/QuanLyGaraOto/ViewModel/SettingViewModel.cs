@@ -396,12 +396,109 @@ namespace QuanLyGaraOto.ViewModel
         bool _isSettingApp = false;
         public bool isSettingApp { get => _isSettingApp; set { _isSettingApp = value; OnPropertyChanged(); } }
 
+        // Supplier
+        private ObservableCollection<SUPPLIER> _ListSupplier { get; set; }
+        public ObservableCollection<SUPPLIER> ListSupplier { get => _ListSupplier; set{ _ListSupplier = value;OnPropertyChanged();}}
+        private ObservableCollection<SUPPLIER> _TempListSupplier { get; set; }
+        public ObservableCollection<SUPPLIER> TempListSupplier { get => _TempListSupplier; set { _TempListSupplier = value; OnPropertyChanged(); } }
+        private SUPPLIER _SelectedSupplier { get; set; }
+        public SUPPLIER SelectedSupplier { get => _SelectedSupplier; set { _SelectedSupplier = value; OnPropertyChanged(); } }
+        public ICommand SearchSupplierCommand { get; set; }
+        public ICommand RefeshSupplierCommand { get; set; }
+        public ICommand OpenAddSupplierWindow { get; set; }
+        public ICommand OpenModifySupplierWindow { get; set; }
+        public ICommand DeleteSupplier { get; set; }
+        public ICommand SupplierSelectionChanged { get; set; }
+        private string _SupplierPhone { get; set; }
+        public string SupplierPhone { get => _SupplierPhone; set { _SupplierPhone = value; OnPropertyChanged(); } }
         public SettingViewModel()
         {
             // Visibility
             AppSettingVis = true;
             UserSettingVis = false;
+            // All command and setting Supplier
+            ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+            OpenAddSupplierWindow = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
+            {
+                AddSupplierWindow window = new AddSupplierWindow();
+                window.ShowDialog();
+                ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+            });
+            OpenModifySupplierWindow = new RelayCommand<SettingWindow>((p) => {
 
+                if (SelectedSupplier == null) return false;
+                return true; }, (p) =>
+            {
+                EditSupplierWindow window = new EditSupplierWindow(SelectedSupplier);
+                window.ShowDialog();
+                ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+            });
+            SupplierSelectionChanged = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
+            {
+                TempListSupplier = new ObservableCollection<SUPPLIER>(p.SelectedItems.Cast<SUPPLIER>().ToList());
+            });
+            DeleteSupplier = new RelayCommand<SettingWindow>((p) =>
+            {
+                if (SelectedSupplier == null)
+                {
+                    return false;
+                }
+                return true;
+            }, (p) =>
+            {
+                string s = "";
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    ObservableCollection<SUPPLIER> details = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+                    foreach (var item in TempListSupplier)
+                    {
+                        if (details.Any(x => x.Supplier_Id == item.Supplier_Id))
+                        {
+                            s = s + "Không thể xóa loại tiền công " + item.Supplier_Name + " vì tồn tại trong chi tiết sửa chữa!" + "\n";
+                            continue;
+                        }
+                        DataProvider.Ins.DB.SUPPLIERs.Remove(item);
+                        ListSupplier.Remove(item);
+                    }
+                    DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show(s , "Thông báo", MessageBoxButton.OK);
+                }
+            });
+            SearchSupplierCommand = new RelayCommand<SettingWindow>((p) => {
+                if (p == null) return false;
+                if (string.IsNullOrEmpty(p.txbSupplier.Text) && string.IsNullOrEmpty(p.txbSupplierEmail.Text)
+                && string.IsNullOrEmpty(p.txbPhoneSupplier.Text))
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+                UnicodeConvert uni = new UnicodeConvert();
+                TempListSupplier = new ObservableCollection<SUPPLIER>();
+
+                foreach (var item in ListSupplier)
+                {
+                    if ((string.IsNullOrEmpty(p.txbSupplier.Text) ||
+                    (!string.IsNullOrEmpty(p.txbSupplier.Text) && uni.RemoveUnicode(item.Supplier_Name).ToLower().Contains(uni.RemoveUnicode(p.txbSupplier.Text).ToLower())))
+                    && ((string.IsNullOrEmpty(p.txbPhoneSupplier.Text) ||
+                    (!string.IsNullOrEmpty(p.txbPhoneSupplier.Text) && uni.RemoveUnicode(item.Supplier_Phone).ToLower().Contains(uni.RemoveUnicode(p.txbPhoneSupplier.Text).ToLower()))))
+                    && ((string.IsNullOrEmpty(p.txbSupplierEmail.Text) ||
+                    (!string.IsNullOrEmpty(p.txbSupplierEmail.Text) && uni.RemoveUnicode(item.Supplier_Email).ToLower().Contains(uni.RemoveUnicode(p.txbSupplierEmail.Text).ToLower()))))
+                    )
+                        TempListSupplier.Add(item);
+                }
+                ListSupplier = TempListSupplier;
+            });
+            RefeshSupplierCommand = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
+            {
+                p.txbSupplier.Text = "";
+                p.txbPhoneSupplier.Text = "";
+                p.txbSupplierEmail.Text = "";
+                ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+            });
+
+
+            //------------------------------------------
             ChangeAppSettingVis = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 AppSettingVis = true;

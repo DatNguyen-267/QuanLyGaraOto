@@ -70,7 +70,7 @@
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
                                         <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
-                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource Dark}" />
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource MainColor}" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -79,484 +79,7 @@
 
                 </Style>
             </TabControl.Resources>
-            <TabItem Header="Thông tin ứng dụng" 
-                     Foreground="{StaticResource MainColor}"
-                     FontWeight="Bold"
-                     IsEnabled="{Binding isSettingApp}"
-                     FontSize="18">
-                <Grid Grid.Row="1" Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <!--Visibility="{Binding AppSettingVis, Converter={StaticResource BooleanToVisibilityConverter}}"-->
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="550"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="300"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <materialDesign:Card Grid.Row="0" Margin="0 30 30 30" >
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"></RowDefinition>
-                                    <RowDefinition ></RowDefinition>
-                                    <RowDefinition Height="60"></RowDefinition>
-
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0"
-                                        Content="Thông tin Gara"
-                                       Style="{StaticResource Title}"
-                                       />
-                                <Grid Grid.Row="1" 
-                                            Margin="20 0 0 10">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Orientation="Horizontal"
-                                                Grid.Row="0"
-                                                Margin="10 0 0 20">
-                                        
-                                        <materialDesign:PackIcon 
-                                            Width="30"
-                                            Height="30"
-                                            VerticalAlignment="Center"
-                                            Margin="0 15 10 0"
-                                                    Kind="Car"/>
-                                        <TextBox
-                                            x:Name="txtMaxCarReception"
-                                            FontWeight="Normal"
-                                            FontSize="16"
-                                            Width="200"
-                                            materialDesign:HintAssist.Hint="Số xe tối đa"
-                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                            VerticalAlignment="Center"
-                                            >
-                                            <TextBox.Text>
-                                                <Binding Path="MaxCarReception" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                                    <Binding.ValidationRules>
-                                                        <validation:NumberValidation ErrorMessage="Vui lòng nhập số (0-9)"
-                                                                        ErrorMessageNull="Vui lòng không để trống"
-                                                                       ></validation:NumberValidation>
-                                                    </Binding.ValidationRules>
-                                                </Binding>
-                                            </TextBox.Text>
-
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="TextChanged">
-                                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-                                        </TextBox>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal"
-                                                Grid.Row="1">
-                                        <CheckBox
-                                            Margin="15 10 5 10"
-                                      IsChecked="{Binding IsOverPay}">
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="Checked">
-                                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
-                                                </i:EventTrigger>
-                                                <i:EventTrigger EventName="Unchecked">
-                                                    <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-                                        </CheckBox>
-                                        <Label 
-                                            Margin="10 0 0 0"
-                                            FontWeight="Normal"
-                                            FontSize="16"
-                                            Content="Cho phép trả vượt tiền nợ"
-                                            VerticalAlignment="Center"
-                                            />
-                                    </StackPanel>
-                                </Grid>
-                               
-                                <StackPanel
-                                    Grid.Row="2" 
-                                    Margin="16 0 16 0" 
-                                    Orientation="Horizontal"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                    
-                                    <Button 
-                                        Margin="10 0 30 0"
-                                            Style="{StaticResource FeatureButton}"
-                                            Content="Thay đổi"
-                                            IsEnabled="{Binding IsEnableChangeButtonInGaraInformation}"
-                                            Command="{Binding ChangeGaraInformation}"
-                                            CommandParameter="{Binding ElementName= wdSetting}"
-                                             />
-                                    <Button 
-                                        Margin="30 0 0 0"
-                                            Style="{StaticResource FeatureButton}"
-                                            Content="Hoàn tác"
-                                            IsEnabled="{Binding IsEnableResetButtonInGaraInformation}"
-                                            Command="{Binding ResetGaraInformation}" Grid.ColumnSpan="2" /> 
-                                </StackPanel>
-                            </Grid>
-                        </materialDesign:Card>
-
-                        <materialDesign:Card Grid.Row="1" 
-                                             Margin="0 0 30 30" >
-                            
-                            <Grid>
-                                <Grid.Resources>
-                                    <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
-                                        <Setter Property="Margin" Value="10 0 0 0"></Setter>
-                                        <Setter Property="Width" Value="120"></Setter>
-                                        <Setter Property="FontSize" Value="16"></Setter>
-                                        <Setter Property="FontWeight" Value="Normal"></Setter>
-                                    </Style>
-                                </Grid.Resources>
-                                
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="75"/>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="60"/>
-                                </Grid.RowDefinitions>
-
-                                <Label Grid.Row="0"
-                                    Content="Danh sách hãng xe"
-                                    Style="{StaticResource Title}"/>
-                                <StackPanel Grid.Row="1"
-                                        Orientation="Horizontal" 
-                                        Width="auto">
-                                    <TextBox
-                                    x:Name="txtBrand"
-                                  materialDesign:HintAssist.Hint="Hãng xe"
-                                  Style="{StaticResource txbSearch}"
-                                    Text="{Binding BrandName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                                  VerticalAlignment="Center">
-                                    </TextBox>
-                                    <Button Content="Tìm"
-                                        Style="{StaticResource FeatureButton}"
-                                        Margin="20 5 0 0"
-                                        Command="{Binding SearchBrandCommand}"
-                                        CommandParameter="{Binding ElementName=wdSetting}">
-                                    </Button>
-                                    <Button Content="Làm mới"
-                                        Style="{StaticResource FeatureButton}"
-                                        Margin="20 5 0 0"
-                                        Command="{Binding RefeshBrandCommand}"
-                                        CommandParameter="{Binding ElementName=wdSetting}">
-                                    </Button>
-                                </StackPanel>
-                                <Grid Grid.Row="2">
-                                    <!--<ListView 
-                                        FontSize="16"
-                                        FontWeight="Normal"
-                                        ItemsSource="{Binding ListCarBrand}" 
-                                        SelectedItem="{Binding SelectedBrandItem}" >
-                                        <ListView.View>
-                                            <GridView>
-                                                <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding CarBrand_Id}"></GridViewColumn>
-                                                <GridViewColumn Header="Hãng xe" DisplayMemberBinding="{Binding CarBrand_Name}"></GridViewColumn>
-                                            </GridView>
-                                        </ListView.View>
-                                    </ListView>-->
-
-                                    <DataGrid ItemsSource="{Binding ListCarBrand}"
-                                          SelectedItem="{Binding SelectedBrandItem}"
-                                          SelectionMode="Extended"
-                                          IsReadOnly="True"
-                                          CanUserAddRows="False"
-                                          CanUserDeleteRows="False"
-                                          AutoGenerateColumns="False"
-                                          CanUserReorderColumns="True"
-                                          FontSize="16"
-                                              FontWeight="Normal"
-                                          Name="dataGrid_brand">
-                                        <DataGrid.Resources>
-                                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="Gainsboro" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </DataGrid.Resources>
-
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="SelectionChanged">
-                                                <i:InvokeCommandAction Command="{Binding BrandSelectionChanged}" 
-                                                                   CommandParameter="{Binding ElementName=dataGrid_brand}"/>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-
-                                        <DataGrid.CellStyle>
-                                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                                        <Setter Property="FontWeight" Value="DemiBold" />
-                                                        <Setter Property="FontSize" Value="17" />
-
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </DataGrid.CellStyle>
-
-                                        <DataGrid.ColumnHeaderStyle>
-                                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-
-                                            </Style>
-                                        </DataGrid.ColumnHeaderStyle>
-
-                                        <DataGrid.Columns>
-                                            <materialDesign:DataGridTextColumn  Width="100" Header="ID" Binding="{Binding CarBrand_Id}"/>
-                                            <materialDesign:DataGridTextColumn Header="Loại tiền công" Binding="{Binding CarBrand_Name}"/>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </Grid>
-
-                                <Grid Grid.Row="3" Margin="0 0 0 5">
-                                    <Grid.Resources>
-                                        <Style TargetType="Button" BasedOn="{StaticResource FeatureButton}">
-                                            <Setter Property="Margin" Value="10 0 20 0"></Setter>
-                                        </Style>
-                                    </Grid.Resources>
-                                    <StackPanel Orientation="Horizontal"
-                                                Margin="10 0 0 0">
-                                        <Button 
-                                             Margin="10 0 20 0"
-                                            Style="{StaticResource AddButton}"
-                                            Content="Thêm"
-                                            IsEnabled="True"
-                                            Command="{Binding OpenAddCarBrandWindow}"/>
-                                        <Button
-                                             Margin="10 0 20 0"
-                                            Content="Sửa"
-                                            IsEnabled="{Binding IsEnableModifyButtonInBrandSetting}"
-                                            Command="{Binding OpenModifyCarBrandWindow}"
-                                         />
-                                        <Button
-                                             Margin="10 0 20 0"
-                                            Content="Xóa"
-                                            Style="{StaticResource DeleteButton}"
-                                            IsEnabled="{Binding IsEnableDeleteButtonInBrandSetting}"
-                                            Command="{Binding DeleteCarBrand}"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Grid>
-                        </materialDesign:Card>
-                    </Grid>
-
-
-                    <materialDesign:Card Grid.Column="0" Margin="30">
-                        <Grid>
-                            <Grid.Resources>
-                                <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
-                                    <Setter Property="Margin" Value="10 0 0 0"></Setter>
-                                    <Setter Property="Width" Value="120"></Setter>
-                                    <Setter Property="FontSize" Value="16"></Setter>
-                                    <Setter Property="FontWeight" Value="Normal"></Setter>
-                                </Style>
-                            </Grid.Resources>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="70"/>
-                                <RowDefinition />
-                                <RowDefinition Height="70"/>
-                            </Grid.RowDefinitions>
-
-                            <Label Grid.Row="0"
-                                    Content="Tiền công"
-                                    Style="{StaticResource Title}"/>
-                            <StackPanel Grid.Row="1"
-                                        Orientation="Horizontal" 
-                                        Width="auto">
-                                <TextBox
-                                    x:Name="txbWageName"
-                                  materialDesign:HintAssist.Hint="Loại tiền công"
-                                  Style="{StaticResource txbSearch}"
-                                    Text="{Binding WageName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                                  VerticalAlignment="Center">
-                                </TextBox>
-                                <TextBox
-                                    x:Name="txbWageValue"
-                                      materialDesign:HintAssist.Hint="Tiền công"
-                                      Style="{StaticResource txbSearch}"
-                                      
-                                      VerticalAlignment="Center">
-                                        <TextBox.Text>
-                                        <Binding Path="WageValue" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
-                                            <Binding.ValidationRules>
-                                                <validation:OnlyNumberValidation ErrorMessage="Chỉ nhập số (0-9)"></validation:OnlyNumberValidation>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                        </TextBox.Text>
-                                </TextBox>
-                                <Button Content="Tìm"
-                                        Style="{StaticResource FeatureButton}"
-                                        Margin="20 5 0 0"
-                                        Command="{Binding SearchWageCommand}"
-                                        CommandParameter="{Binding ElementName=wdSetting}">
-                                </Button>
-                                <Button Content="Làm mới"
-                                        Style="{StaticResource FeatureButton}"
-                                        Margin="20 5 0 0"
-                                        Command="{Binding RefeshWageCommand}"
-                                        CommandParameter="{Binding ElementName=wdSetting}">
-                                </Button>
-                            </StackPanel>
-                                
-                            <Grid Grid.Row="2" Margin="10">
-                                <!--<ListView 
-                                    FontSize="16"
-                                    FontWeight="Normal"
-                                    ItemsSource="{Binding ListWage}" 
-                                    SelectedItem="{Binding SelectedWageItem}" >
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding Wage_Id}"></GridViewColumn>
-                                            <GridViewColumn Width="200" Header="Loại tiền công" DisplayMemberBinding="{Binding Wage_Name}"></GridViewColumn>
-                                            <GridViewColumn Width="200" Header="Giá trị" DisplayMemberBinding="{Binding Wage_Value}"></GridViewColumn>
-                                        </GridView>
-                                    </ListView.View>
-                                </ListView>-->
-                                <DataGrid ItemsSource="{Binding ListWage}"
-                                          SelectedItem="{Binding SelectedWageItem}"
-                                          SelectionMode="Extended"
-                                          IsReadOnly="True"
-                                          CanUserAddRows="False"
-                                          CanUserDeleteRows="False"
-                                          AutoGenerateColumns="False"
-                                          CanUserReorderColumns="True"
-                                          FontSize="16"
-                                          FontWeight="Normal"
-                                          materialDesign:ScrollViewerAssist.IgnorePadding="True"
-                                          Name="dataGrid_wage">
-                                    <DataGrid.Resources>
-                                        <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="Gainsboro" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </DataGrid.Resources>
-
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding WageSelectionChanged}" 
-                                                                   CommandParameter="{Binding ElementName=dataGrid_wage}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-
-                                    <DataGrid.CellStyle>
-                                        <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                                            <Style.Triggers>
-                                                <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                                    <Setter Property="FontWeight" Value="DemiBold" />
-                                                    <Setter Property="FontSize" Value="17" />
-
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </DataGrid.CellStyle>
-
-                                    <DataGrid.ColumnHeaderStyle>
-                                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                            
-                                        </Style>
-                                    </DataGrid.ColumnHeaderStyle>
-
-                                    <DataGrid.Columns>
-                                        <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding Wage_Id}"/>
-                                        <materialDesign:DataGridTextColumn Width="200" Header="Loại tiền công" Binding="{Binding Wage_Name}"/>
-                                        <materialDesign:DataGridTextColumn Header="Giá trị" Binding="{Binding Wage_Value}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Grid>
-
-                            <!--<Grid Grid.Row="2" Margin="10 0 10 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox Grid.Column="0"
-                                        materialDesign:HintAssist.Hint="Loại tiền công"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        VerticalAlignment="Center" 
-                                        Margin="0 0 10 0"
-                                        IsEnabled="{Binding IsEnableModifyFieldInWageSetting}">
-
-                                    <TextBox.Text>
-                                        <Binding Path="SelectedWageItem.Wage_Name" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
-                                                                       ></validation:NullDataValidation>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="TextChanged">
-                                            <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInWageBrandSetting}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </TextBox>
-
-                                <TextBox Grid.Column="1"
-                                        materialDesign:HintAssist.Hint="Giá trị"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        VerticalAlignment="Center" 
-                                        Margin="10 0 0 0"
-                                        IsEnabled="{Binding IsEnableModifyFieldInWageSetting}">
-
-                                    <TextBox.Text>
-                                        <Binding Path="SelectedWageItem.Wage_Value" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
-                                                                       ></validation:NullDataValidation>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="TextChanged">
-                                            <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInWageBrandSetting}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </TextBox>
-                            </Grid>-->
-
-                            <StackPanel Grid.Row="3" 
-                                Orientation="Horizontal"  
-                                Margin="10 0 10 0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center">
-                                <Button 
-                                         Margin="10 0 20 0"
-                                        Style="{StaticResource AddButton}"
-                                        Content="Thêm"
-                                      
-                                        IsEnabled="True"
-                                        Command="{Binding OpenAddWageWindow}"/>
-                                <Button 
-                                        Margin="10 0 20 0"
-                                        Style="{StaticResource FeatureButton}"
-                                        Content="Sửa"
-                                        IsEnabled="{Binding IsEnableModifyButtonInWageSetting}"
-                                        Command="{Binding OpenModifyWageWindow}"
-                                        />
-                                <Button
-                                        
-                                        Style="{StaticResource DeleteButton}"
-                                        Margin="10 0 20 0"
-                                        Content="Xóa"
-                                       
-                                        IsEnabled="{Binding IsEnableDeleteButtonInWageSetting}"
-                                        Command="{Binding DeleteWage}"
-                                        />
-                            </StackPanel>
-                        </Grid>
-                    </materialDesign:Card>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Thông tin tài khoản" 
+            <TabItem Header="Thông tin chung" 
                      Foreground="{StaticResource MainColor}"
                      FontWeight="Bold"
                      FontSize="18">
@@ -566,7 +89,7 @@
                         <ColumnDefinition ></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <materialDesign:Card Grid.Column="0" 
-                                         Margin="30">
+                                         Margin="30 30 30 30">
                         <Grid  >
                             <Grid.Resources>
                                 <Style TargetType="materialDesign:PackIcon">
@@ -769,31 +292,138 @@
                             </StackPanel>
                         </Grid>
                     </materialDesign:Card>
-                  
-                        
-                    <materialDesign:Card Grid.Column="1" Margin="30">
+                    <Grid Grid.Column="1" Margin="30 30 30 30">
                        
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition/>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0"
+                            <materialDesign:Card Grid.Row="0" Margin="0 0 0 15" >
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"></RowDefinition>
+                                        <RowDefinition Height="auto"></RowDefinition>
+                                        <RowDefinition ></RowDefinition>
+
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0"
+                                        Content="Thông tin Gara"
+                                       Style="{StaticResource Title}"
+                                       />
+                                    <Grid Grid.Row="1" 
+                                            Margin="60 0 0 10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Orientation="Horizontal"
+                                                Grid.Row="0"
+                                                Margin="10 0 0 20">
+
+                                            <materialDesign:PackIcon 
+                                            Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            Margin="0 15 10 0"
+                                                    Kind="Car"/>
+                                            <TextBox
+                                            x:Name="txtMaxCarReception"
+                                            FontWeight="Normal"
+                                            FontSize="16"
+                                            Width="200"
+                                            materialDesign:HintAssist.Hint="Số xe tối đa"
+                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                            VerticalAlignment="Center"
+                                            >
+                                                <TextBox.Text>
+                                                    <Binding Path="MaxCarReception" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                                        <Binding.ValidationRules>
+                                                            <validation:NumberValidation ErrorMessage="Vui lòng nhập số (0-9)"
+                                                                        ErrorMessageNull="Vui lòng không để trống"
+                                                                       ></validation:NumberValidation>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="TextChanged">
+                                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </TextBox>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal"
+                                                Grid.Row="1">
+                                            <CheckBox
+                                            Margin="15 10 5 10"
+                                      IsChecked="{Binding IsOverPay}">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Checked">
+                                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
+                                                    </i:EventTrigger>
+                                                    <i:EventTrigger EventName="Unchecked">
+                                                        <i:InvokeCommandAction Command="{Binding ChangeEnableButttonInGaraInformation}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </CheckBox>
+                                            <Label 
+                                            Margin="10 0 0 0"
+                                            FontWeight="Normal"
+                                            FontSize="16"
+                                            Content="Cho phép trả vượt tiền nợ"
+                                            VerticalAlignment="Center"
+                                            />
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <StackPanel
+                                    Grid.Row="2" 
+                                   Margin="60 20 10 10"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Top"
+                                    >
+
+                                        <Button 
+                                        Margin="10 0 50 0"
+                                            Style="{StaticResource FeatureButton}"
+                                            Content="Thay đổi"
+                                            IsEnabled="{Binding IsEnableChangeButtonInGaraInformation}"
+                                            Command="{Binding ChangeGaraInformation}"
+                                            CommandParameter="{Binding ElementName= wdSetting}"
+                                             />
+                                        <Button 
+                                      
+                                            Style="{StaticResource FeatureButton}"
+                                            Content="Hoàn tác"
+                                            IsEnabled="{Binding IsEnableResetButtonInGaraInformation}"
+                                            Command="{Binding ResetGaraInformation}" Grid.ColumnSpan="2" />
+                                    </StackPanel>
+                                </Grid>
+                            </materialDesign:Card>
+                            <materialDesign:Card Grid.Row="1">
+                                <Grid >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0"
                                     Content="Đổi mật khẩu"
                                     Style="{StaticResource Title}"/>
-                            <Grid Grid.Row="1">
-                                <StackPanel Margin="20" HorizontalAlignment="Center"
+                                    <Grid Grid.Row="1">
+                                        <StackPanel Margin="20" HorizontalAlignment="Center"
                                             Width="auto"
                                             >
-                                    <StackPanel Orientation="Horizontal" 
+                                            <StackPanel Orientation="Horizontal" 
                                                 Margin="10">
-                                        <materialDesign:PackIcon Kind="Password" 
+                                                <materialDesign:PackIcon Kind="Password" 
                                                  Width="30"
                                                  Height="30"
                                                  Margin="0 10 5 0"
                                                  VerticalAlignment="Center"
                                                     />
-                                        <PasswordBox
+                                                <PasswordBox
                                             Width="200"
                                             FontSize="16"
                                             FontWeight="Medium"
@@ -802,37 +432,37 @@
                                     materialDesign:TextFieldAssist.HasClearButton="True"
                                     
                                     IsEnabled="{Binding IsEnableOldPasswordField}">
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="PasswordChanged">
-                                                    <i:InvokeCommandAction Command="{Binding OldPasswordChangedCommand}" 
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="PasswordChanged">
+                                                            <i:InvokeCommandAction Command="{Binding OldPasswordChangedCommand}" 
                                                 CommandParameter="{Binding ElementName=OldPasswordBox}"/>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-                                        </PasswordBox>
-                                        <Button    
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </PasswordBox>
+                                                <Button    
                                             Margin="50 0 0 0"
                                             Style="{StaticResource FeatureButton}"
                                              Content="Kiểm tra"      
                                             Command="{Binding CheckPassword}"
                                             CommandParameter="{Binding ElementName=wdSetting}"
                                             IsEnabled="{Binding IsEnableCheckButtonInChangePassword}"/>
-                                    </StackPanel>
+                                            </StackPanel>
 
 
 
-                                    <StackPanel 
+                                            <StackPanel 
                                         Margin="10"
                                         Orientation="Horizontal"
                                         Visibility="{Binding IsCorrectPassword, Converter={StaticResource BooleanToVisibilityConverter}}">
 
 
-                                        <materialDesign:PackIcon Kind="Password" 
+                                                <materialDesign:PackIcon Kind="Password" 
                                                  Width="30"
                                                                  Margin="0 0 5 0"
                                                  Height="30"
                                                  VerticalAlignment="Center"
                                                  FontSize="16"/>
-                                        <PasswordBox
+                                                <PasswordBox
                                             Width="200"
                                             FontWeight="Medium"
                                             FontSize="16"
@@ -842,21 +472,21 @@
                                                 materialDesign:HintAssist.HelperText="Tối thiểu 5 ký tự" 
                                                  >
 
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="PasswordChanged">
-                                                    <i:InvokeCommandAction Command="{Binding NewPasswordChangedCommand}" 
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="PasswordChanged">
+                                                            <i:InvokeCommandAction Command="{Binding NewPasswordChangedCommand}" 
                                                 CommandParameter="{Binding ElementName=NewPasswordBox}"/>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-                                        </PasswordBox>
-                                    </StackPanel>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </PasswordBox>
+                                            </StackPanel>
 
-                                    <StackPanel 
+                                            <StackPanel 
                                         Margin="10 20 10 10"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal" 
                                         Visibility="{Binding IsCorrectPassword, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                        <Button
+                                                <Button
                                             Margin="0 0 50 0"
                                             Style="{StaticResource FeatureButton}"
                                             Content="Thay đổi"      
@@ -864,20 +494,546 @@
                                             CommandParameter="{Binding ElementName=wdSetting}"
                                             IsEnabled="True"/>
 
-                                        <Button 
+                                                <Button 
                                             Style="{StaticResource FeatureButton}"
                                             Content="Hủy bỏ"      
                                             Command="{Binding CancelChangePassword}"
                                             CommandParameter="{Binding ElementName=wdSetting}"
                                             IsEnabled="True"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </materialDesign:Card>
 
-                           
                         </Grid>
-                    </materialDesign:Card>
+                    </Grid>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Thông tin tiền công" 
+                     Foreground="{StaticResource MainColor}"
+                     FontWeight="Bold"
+                     FontSize="18">
+                <materialDesign:Card Grid.Column="0" Margin="30">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                                <Setter Property="Width" Value="120"></Setter>
+                                <Setter Property="FontSize" Value="16"></Setter>
+                                <Setter Property="FontWeight" Value="Normal"></Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="130"/>
+                            <RowDefinition />
+
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0"
+                              Margin="10 0 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Top">
+                                <TextBox
+                                Width="200"
+                                    x:Name="txbWageName"
+                                  materialDesign:HintAssist.Hint="Loại tiền công"
+                                  Style="{StaticResource txbSearch}"
+                                    Text="{Binding WageName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                  VerticalAlignment="Center">
+                                </TextBox>
+                                <TextBox
+                                    x:Name="txbWageValue"
+                                      materialDesign:HintAssist.Hint="Tiền công"
+                                      Style="{StaticResource txbSearch}"
+                                      
+                                      VerticalAlignment="Center">
+                                    <TextBox.Text>
+                                        <Binding Path="WageValue" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validation:OnlyNumberValidation ErrorMessage="Chỉ nhập số (0-9)"></validation:OnlyNumberValidation>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <StackPanel
+                                        Orientation="Horizontal" 
+                                        >
+                                    <Button Content="Tìm"
+                                        Style="{StaticResource FeatureButton}"
+                                        Margin="20 5 0 0"
+                                        Command="{Binding SearchWageCommand}"
+                                        CommandParameter="{Binding ElementName=wdSetting}">
+                                    </Button>
+                                    <Button Content="Làm mới"
+                                        Style="{StaticResource FeatureButton}"
+                                        Margin="20 5 0 0"
+                                        Command="{Binding RefeshWageCommand}"
+                                        CommandParameter="{Binding ElementName=wdSetting}">
+                                    </Button>
+                                    <Button Content="Xuất"
+                                        Style="{StaticResource ExportButton}"
+                                        Margin="20 5 0 0"
+                                        Command="{Binding ExportCommand}"
+                                        CommandParameter="{Binding ElementName=wdSetting}">
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel 
+                                    Orientation="Horizontal" 
+                                     Margin="0 20 0 0">
+                                    <Button 
+                                        Margin="20 5 0 0"
+                                        Style="{StaticResource AddButton}"
+                                        Content="Thêm"
+                                      
+                                        IsEnabled="True"
+                                        Command="{Binding OpenAddWageWindow}"/>
+                                    <Button 
+                                         Margin="20 5 0 0"
+                                        Style="{StaticResource FeatureButton}"
+                                        Content="Sửa"
+                                        IsEnabled="{Binding IsEnableModifyButtonInWageSetting}"
+                                        Command="{Binding OpenModifyWageWindow}"
+                                        />
+                                    <Button
+                                        Style="{StaticResource DeleteButton}"
+                                       Margin="20 5 0 0"
+                                        Content="Xóa"
+                                        IsEnabled="{Binding IsEnableDeleteButtonInWageSetting}"
+                                        Command="{Binding DeleteWage}"
+                                        />
+
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1" >
+
+                            <DataGrid ItemsSource="{Binding ListWage}"
+                                          SelectedItem="{Binding SelectedWageItem}"
+                                          SelectionMode="Extended"
+                                          IsReadOnly="True"
+                                          CanUserAddRows="False"
+                                          CanUserDeleteRows="False"
+                                          AutoGenerateColumns="False"
+                                          CanUserReorderColumns="True"
+                                          FontSize="16"
+                                          FontWeight="Normal"
+                                          materialDesign:ScrollViewerAssist.IgnorePadding="True"
+                                          Name="dataGrid_wage">
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gainsboro" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.Resources>
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding WageSelectionChanged}" 
+                                                                   CommandParameter="{Binding ElementName=dataGrid_wage}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                        <Style.Triggers>
+                                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                <Setter Property="FontWeight" Value="DemiBold" />
+                                                <Setter Property="FontSize" Value="17" />
+
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                        <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                        <Setter Property="Foreground" Value="White"></Setter>
+                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+
+                                <DataGrid.Columns>
+                                    <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding Wage_Id}"/>
+                                    <materialDesign:DataGridTextColumn Width="300" Header="Loại tiền công" Binding="{Binding Wage_Name}"/>
+                                    <materialDesign:DataGridTextColumn Width="200" Header="Tiền công" Binding="{Binding Wage_Value}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+
+                        <!--<Grid Grid.Row="2" Margin="10 0 10 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0"
+                                        materialDesign:HintAssist.Hint="Loại tiền công"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        VerticalAlignment="Center" 
+                                        Margin="0 0 10 0"
+                                        IsEnabled="{Binding IsEnableModifyFieldInWageSetting}">
+
+                                    <TextBox.Text>
+                                        <Binding Path="SelectedWageItem.Wage_Name" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
+                                                                       ></validation:NullDataValidation>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInWageBrandSetting}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+
+                                <TextBox Grid.Column="1"
+                                        materialDesign:HintAssist.Hint="Giá trị"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        VerticalAlignment="Center" 
+                                        Margin="10 0 0 0"
+                                        IsEnabled="{Binding IsEnableModifyFieldInWageSetting}">
+
+                                    <TextBox.Text>
+                                        <Binding Path="SelectedWageItem.Wage_Value" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
+                                                                       ></validation:NullDataValidation>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInWageBrandSetting}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+                            </Grid>-->
+
+                       
+                    </Grid>
+                </materialDesign:Card>
+            </TabItem>
+            
+            <TabItem Header="Thông tin hãng xe" 
+                     Foreground="{StaticResource MainColor}"
+                     FontWeight="Bold"
+                     FontSize="18">
+                <materialDesign:Card Grid.Row="1" 
+                                             Margin="30" >
+
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="TextBox" x:Key="txbSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                                <Setter Property="Width" Value="120"></Setter>
+                                <Setter Property="FontSize" Value="16"></Setter>
+                                <Setter Property="FontWeight" Value="Normal"></Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="130"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0"
+                                Orientation="Horizontal"
+                                        VerticalAlignment="Top">
+                                <TextBox
+                                    FontSize="16"
+                                    Width="200"
+                                    x:Name="txtBrand"
+                                    materialDesign:HintAssist.Hint="Hãng xe"
+                                    Style="{StaticResource txbSearch}"
+                                    Text="{Binding BrandName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                    VerticalAlignment="Center">
+                                </TextBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Tìm"
+                                        Style="{StaticResource FeatureButton}"
+                                        Margin="20 5 0 0"
+                                        Command="{Binding SearchBrandCommand}"
+                                        CommandParameter="{Binding ElementName=wdSetting}">
+                                    </Button>
+                                    <Button Content="Làm mới"
+                                        Style="{StaticResource FeatureButton}"
+                                        Margin="20 5 0 0"
+                                        Command="{Binding RefeshBrandCommand}"
+                                        CommandParameter="{Binding ElementName=wdSetting}">
+                                    </Button>
+                                    <Button Content="Xuất"
+                                        Style="{StaticResource ExportButton}"
+                                        Margin="20 5 0 0"
+                                        Command="{Binding ExportCommand}"
+                                        CommandParameter="{Binding ElementName=wdSetting}">
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0 20 0 0">
+                                    <Button 
+                                            Margin="20 5 0 0"
+                                            Style="{StaticResource AddButton}"
+                                            Content="Thêm"
+                                            IsEnabled="True"
+                                            Command="{Binding OpenAddCarBrandWindow}"/>
+                                    <Button
+                                            Style="{StaticResource FeatureButton}"
+                                             Margin="20 5 0 0"
+                                            Content="Sửa"
+                                            IsEnabled="{Binding IsEnableModifyButtonInBrandSetting}"
+                                            Command="{Binding OpenModifyCarBrandWindow}"
+                                         />
+                                    <Button
+                                           Margin="20 5 0 0"
+                                            Content="Xóa"
+                                            Style="{StaticResource DeleteButton}"
+                                            IsEnabled="{Binding IsEnableDeleteButtonInBrandSetting}"
+                                            Command="{Binding DeleteCarBrand}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <DataGrid ItemsSource="{Binding ListCarBrand}"
+                                          SelectedItem="{Binding SelectedBrandItem}"
+                                          SelectionMode="Extended"
+                                          IsReadOnly="True"
+                                          CanUserAddRows="False"
+                                          CanUserDeleteRows="False"
+                                          AutoGenerateColumns="False"
+                                          CanUserReorderColumns="True"
+                                          FontSize="16"
+                                              FontWeight="Normal"
+                                          Name="dataGrid_brand">
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gainsboro" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.Resources>
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding BrandSelectionChanged}" 
+                                                                   CommandParameter="{Binding ElementName=dataGrid_brand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                        <Style.Triggers>
+                                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                <Setter Property="FontWeight" Value="DemiBold" />
+                                                <Setter Property="FontSize" Value="17" />
+
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                        <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                        <Setter Property="Foreground" Value="White"></Setter>
+                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+
+                                <DataGrid.Columns>
+                                    <materialDesign:DataGridTextColumn  Width="100" Header="ID" Binding="{Binding CarBrand_Id}"/>
+                                    <materialDesign:DataGridTextColumn  Width="300" Header="Hãng xe" Binding="{Binding CarBrand_Name}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+
+                    </Grid>
+                </materialDesign:Card>
+            </TabItem>
+            <TabItem Header="Thông tin nhà cung cấp" 
+                     Foreground="{StaticResource MainColor}"
+                     FontWeight="Bold"
+                     FontSize="18">
+                <materialDesign:Card Grid.Column="0" Margin="30">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                                <Setter Property="Width" Value="120"></Setter>
+                                <Setter Property="FontSize" Value="16"></Setter>
+                                <Setter Property="FontWeight" Value="Normal"></Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="130"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal"
+                                        Grid.Column="0"
+                                        VerticalAlignment="Top">
+                                <TextBox
+                                Width="180"
+                                    x:Name="txbSupplier"
+                                  materialDesign:HintAssist.Hint="Tên nhà cung cấp"
+                                    Text="{Binding SupplierName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                  VerticalAlignment="Center">
+                                </TextBox>
+                                <TextBox
+                                Width="120"
+                                    x:Name="txbPhoneSupplier"
+                                      materialDesign:HintAssist.Hint="Số điện thoại"
+                                      VerticalAlignment="Center">
+                                    <TextBox.Text>
+                                        <Binding Path="SupplierPhone" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <validation:OnlyNumberValidation ErrorMessage="Chỉ nhập số (0-9)"></validation:OnlyNumberValidation>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <TextBox
+                                Width="180"
+                                    x:Name="txbSupplierEmail"
+                                  materialDesign:HintAssist.Hint="Email"
+                                    Text="{Binding SupplierEmail, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                  VerticalAlignment="Center">
+                                </TextBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Tìm"
+                                        Style="{StaticResource FeatureButton}"
+                                        Margin="20 5 0 0"
+                                        Command="{Binding SearchSupplierCommand}"
+                                        CommandParameter="{Binding ElementName=wdSetting}">
+                                    </Button>
+                                    <Button Content="Làm mới"
+                                        Style="{StaticResource FeatureButton}"
+                                        Margin="20 5 0 0"
+                                        Command="{Binding RefeshSupplierCommand}"
+                                        CommandParameter="{Binding ElementName=wdSetting}">
+                                    </Button>
+                                    <Button Content="Xuất"
+                                        Style="{StaticResource ExportButton}"
+                                        Margin="20 5 0 0"
+                                        Command="{Binding ExportCommand}"
+                                        CommandParameter="{Binding ElementName=wdSetting}">
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0 20 0 0">
+                                    <Button 
+                                        Margin="20 5 0 0"
+                                        Style="{StaticResource AddButton}"
+                                        Content="Thêm"
+                                        IsEnabled="True"
+                                        Command="{Binding OpenAddSupplierWindow}"/>
+                                    <Button 
+                                        Margin="20 5 0 0"
+                                        Style="{StaticResource FeatureButton}"
+                                        Content="Sửa"
+                                        Command="{Binding OpenModifySupplierWindow}"
+                                        />
+                                    <Button    
+                                        Style="{StaticResource DeleteButton}"
+                                        Margin="20 5 0 0"
+                                        Content="Xóa"
+                                        Command="{Binding DeleteSupplier}"
+                                        />
+                                </StackPanel>
+                            </StackPanel>
+                            
+                        </Grid>
+
+
+                        <Grid Grid.Row="1">
+
+                            <DataGrid   ItemsSource="{Binding ListSupplier}"
+                                          SelectedItem="{Binding SelectedSupplier}"
+                                          SelectionMode="Extended"
+                                          IsReadOnly="True"
+                                          CanUserAddRows="False"
+                                          CanUserDeleteRows="False"
+                                          AutoGenerateColumns="False"
+                                          CanUserReorderColumns="True"
+                                          FontSize="16"
+                                          FontWeight="Normal"
+                                          materialDesign:ScrollViewerAssist.IgnorePadding="True"
+                                          Name="dataGrid_supplier">
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gainsboro" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.Resources>
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SupplierSelectionChanged}" 
+                                                                   CommandParameter="{Binding ElementName=dataGrid_supplier}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                        <Style.Triggers>
+                                            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                <Setter Property="FontWeight" Value="DemiBold" />
+                                                <Setter Property="FontSize" Value="17" />
+
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                        <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                        <Setter Property="Foreground" Value="White"></Setter>
+                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+
+                                <DataGrid.Columns>
+                                    <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding Supplier_Id}"/>
+                                    <materialDesign:DataGridTextColumn Width="300" Header="Tên nhà cung cấp" Binding="{Binding Supplier_Name}"/>
+                                    <materialDesign:DataGridTextColumn Width="150" Header="Số điện thoại" Binding="{Binding Supplier_Phone}"/>
+                                    <materialDesign:DataGridTextColumn  Width="300" Header="Email" Binding="{Binding Supplier_Email}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+
+                    </Grid>
+                </materialDesign:Card>
             </TabItem>
         </TabControl>
     </Grid>
