@@ -53,6 +53,12 @@ namespace QuanLyGaraOto.ViewModel
 
         private string _ReportName { get; set; }
         public string ReportName { get => _ReportName; set { _ReportName = value; OnPropertyChanged(); } }
+
+        private string _UserName { get; set; }
+        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
+
+        private int _IdUser;
+        public int IdUser { get => _IdUser; set { _IdUser = value; OnPropertyChanged(); } }
         private bool _VisView { get; set; }
         public bool VisView { get => _VisView; set { _VisView = value; OnPropertyChanged(); } }
 
@@ -69,9 +75,13 @@ namespace QuanLyGaraOto.ViewModel
         public ReportMonthViewModel() { }
         public ReportMonthViewModel(bool check,USER User)
         {
+            var UserInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == User.Users_Id).SingleOrDefault();
+            UserName = UserInfo.UserInfo_Name;
+            IdUser = User.Users_Id;
             load_firstItem(check);
             LoadComboBox();
             VisReport(check);
+
             ReportCommand = new RelayCommand<ReportMonthWindow>(
                 (p) => { return true; },
                 (p) =>
@@ -125,7 +135,6 @@ namespace QuanLyGaraOto.ViewModel
                     int selectedYear = Int32.Parse(tmp[1]);
                     string[] tmp1 = p.Rpcb_SelectMonth.SelectedValue.ToString().Split(' ');
                     int selectedMonth = Int32.Parse(tmp1[1]);
-                    var uInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == User.Users_Id).SingleOrDefault();
                     DateTime date = new DateTime(selectedYear, selectedMonth, 1);
                     if (VisListView_Inventory)
                     {
@@ -147,14 +156,14 @@ namespace QuanLyGaraOto.ViewModel
                     int selectedYear = Int32.Parse(tmp[1]);
                     string[] tmp1 = p.Rpcb_SelectMonth.SelectedValue.ToString().Split(' ');
                     int selectedMonth = Int32.Parse(tmp1[1]);
-                    var uInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == User.Users_Id).SingleOrDefault();
+                  
                   
 
                     if (VisListView_Inventory)
                     {
                         InventoryReport = new InventoryReport();
                         var inventoryReport = DataProvider.Ins.DB.INVENTORY_REPORT.Where(x => x.InventoryReport_Date.Year == selectedYear && x.InventoryReport_Date.Month == selectedMonth).SingleOrDefault();
-                        InventoryReport.uSER_INFO = uInfo;
+                        InventoryReport.UserName = inventoryReport.InventoryReport_UserName;
                         InventoryReport.ReportDate = selectedMonth + "/" + selectedYear;
                         InventoryReport.IdReport = inventoryReport.InventoryReport_Id;
                         var InventoryReportDetail = DataProvider.Ins.DB.INVENTORY_REPORT_DETAIL.Where(x => x.IdInventoryReport == inventoryReport.InventoryReport_Id);
@@ -180,14 +189,14 @@ namespace QuanLyGaraOto.ViewModel
                     if (VisListView_Sales)
                     {
                         SalesReport = new SalesReport();
-                        SalesReport.uSER_INFO = uInfo;
+                      
                         SalesReport.ReportDate = selectedMonth + "/" + selectedYear;
                         var salesReport = DataProvider.Ins.DB.SALES_REPORT.Where(x => x.SalesReport_Date.Year == selectedYear && x.SalesReport_Date.Month == selectedMonth).SingleOrDefault();
                         SalesReport.IdReport = salesReport.SalesReport_Id;
-                       
+                        SalesReport.UserName = salesReport.SalesReport_UserName;
+                        SalesReport.TotalMoney = salesReport.SalesReport_Revenue;
                         var SalesReportDetail = DataProvider.Ins.DB.SALES_REPORT_DETAIL.Where(x => x.IdSalesReport == salesReport.SalesReport_Id);
 
-                        TotalMoney = salesReport.SalesReport_Revenue;
                         int i = 1;
                         SalesReport.ListSales = new ObservableCollection<ListSales>();
                         foreach (var item in SalesReportDetail)
@@ -419,8 +428,7 @@ namespace QuanLyGaraOto.ViewModel
                 DateTime date = new DateTime(selectedYear, selectedMonth, 1);
 
 
-                DataProvider.Ins.DB.SALES_REPORT.Add(new SALES_REPORT { SalesReport_Date = date, SalesReport_Revenue = TotalMoney });
-
+                DataProvider.Ins.DB.SALES_REPORT.Add(new SALES_REPORT { SalesReport_Date = date, SalesReport_Revenue = TotalMoney, SalesReport_UserName = UserName, IdUser = IdUser });
                 DataProvider.Ins.DB.SaveChanges();
                 int i = 0;
                 var salesReport = DataProvider.Ins.DB.SALES_REPORT;
@@ -464,7 +472,7 @@ namespace QuanLyGaraOto.ViewModel
                 DateTime date = new DateTime(selectedYear, selectedMonth, 1);
 
 
-                DataProvider.Ins.DB.INVENTORY_REPORT.Add(new INVENTORY_REPORT { InventoryReport_Date = date , IdUser = 1, InventoryReport_UserName = "dsada" });
+                DataProvider.Ins.DB.INVENTORY_REPORT.Add(new INVENTORY_REPORT { InventoryReport_Date = date, InventoryReport_UserName = UserName, IdUser = IdUser });
                 DataProvider.Ins.DB.SaveChanges();
                 int i = 0;
                 var inventoryReport = DataProvider.Ins.DB.INVENTORY_REPORT;

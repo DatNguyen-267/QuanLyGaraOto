@@ -15,8 +15,8 @@ namespace QuanLyGaraOto.Model
         private string _ReportDate { get; set; }
         public string ReportDate { get => _ReportDate; set { _ReportDate = value; OnPropertyChanged(); } }
 
-        private USER_INFO _uSER_INFO { get; set; }
-        public USER_INFO uSER_INFO { get => _uSER_INFO; set { _uSER_INFO = value; OnPropertyChanged(); } }
+        private string _UserName { get; set; }
+        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
 
         private ObservableCollection<ListSales> _ListSales;
         public ObservableCollection<ListSales> ListSales { get => _ListSales; set { _ListSales = value; OnPropertyChanged(); } }

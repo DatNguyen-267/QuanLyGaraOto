@@ -12,6 +12,8 @@ namespace QuanLyGaraOto.ViewModel
     {
         private string _Date;
         public string Date { get => _Date; set { _Date = value; OnPropertyChanged(); } }
+        private string _UserName { get; set; }
+        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
 
         private int _IdReport;
         public int IdReport { get => _IdReport; set { _IdReport = value; OnPropertyChanged(); } }
@@ -29,7 +31,7 @@ namespace QuanLyGaraOto.ViewModel
             Date = date.Month.ToString() + "/" + date.Year.ToString();
             var SalesReport = DataProvider.Ins.DB.SALES_REPORT.Where(x => x.SalesReport_Date.Year == date.Year && x.SalesReport_Date.Month == date.Month).SingleOrDefault();
             var SalesReportDetail = DataProvider.Ins.DB.SALES_REPORT_DETAIL.Where(x => x.IdSalesReport == SalesReport.SalesReport_Id);
-
+            UserName = SalesReport.SalesReport_UserName;
             IdReport = SalesReport.SalesReport_Id;
             TotalMoney = SalesReport.SalesReport_Revenue;
             int i = 1;
