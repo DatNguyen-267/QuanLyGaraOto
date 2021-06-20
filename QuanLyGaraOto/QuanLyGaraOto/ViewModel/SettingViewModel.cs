@@ -744,7 +744,7 @@ namespace QuanLyGaraOto.ViewModel
             // Set enable button to false
             SetEnableStatusButtonInGaraInformation(false);
         }
-        public SettingViewModel(string username, bool role) : this()
+        public SettingViewModel(string username, bool role, MainWindow mainWindow) : this()
         {
             // User information
             user = DataProvider.Ins.DB.USERS.Where(x => x.UserName == username).FirstOrDefault();
@@ -764,7 +764,9 @@ namespace QuanLyGaraOto.ViewModel
             // Log out
             Logout = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-
+                mainWindow.Hide();
+                mainWindow = new MainWindow();
+                mainWindow.Show();
             });
         }
 
