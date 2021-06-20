@@ -36,7 +36,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid Grid.Column="0" Margin="10">
                     <materialDesign:Card
                    
@@ -135,7 +135,7 @@
                                     />
                             <Separator Grid.Row="1" 
                                        Style="{StaticResource MaterialDesignLightSeparator}" />
-                            
+
                         </Grid>
                     </materialDesign:Card>
                 </Grid>
@@ -167,7 +167,9 @@
                         Width="160"
                         
                         ItemsSource="{Binding ItemSource_Year}"
-                        SelectedIndex="{Binding SelectedYear_Revenue}">
+                        DisplayMemberPath="Key"
+                        SelectedValuePath="Value"
+                        SelectedValue="{Binding SelectedYear_Revenue}">
 
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
@@ -189,7 +191,7 @@
                                 <lvc:CartesianChart.AxisY>
                                     <lvc:Axis 
                                          FontSize="14"
-   
+                                        MinValue="0"
                                         Title="VND" LabelFormatter="{Binding Formatter_Revenue}"></lvc:Axis>
                                 </lvc:CartesianChart.AxisY>
                             </lvc:CartesianChart>
@@ -218,7 +220,9 @@
                         Width="160"
                         
                         ItemsSource="{Binding ItemSource_Year}"
-                        SelectedIndex="{Binding SelectedYear_Car}">
+                        DisplayMemberPath="Key"
+                        SelectedValuePath="Value"
+                        SelectedValue="{Binding SelectedYear_Car}">
 
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
@@ -234,21 +238,21 @@
                                 <lvc:CartesianChart.AxisX>
                                     <lvc:Axis 
                                         FontSize="14"
-                                      
                                         Title="Tháng" 
                                         Labels="{Binding Labels_Car}"></lvc:Axis>
                                 </lvc:CartesianChart.AxisX>
                                 <lvc:CartesianChart.AxisY>
                                     <lvc:Axis Title="Chiếc" 
                                                FontSize="14"
-                                   
+                                                MinValue="0"
+                                                Separator="{Binding Separator}"
                                               LabelFormatter="{Binding Formatter_Car}"></lvc:Axis>
                                 </lvc:CartesianChart.AxisY>
                             </lvc:CartesianChart>
                         </Grid>
                     </Grid>
                 </Grid>
-              
+
             </Grid>
         </Grid>
     </Grid>

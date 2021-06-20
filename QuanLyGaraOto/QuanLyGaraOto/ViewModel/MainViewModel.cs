@@ -13,6 +13,8 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        private MainWindow mainWindow { get; set; }
+
         public bool IsLoaded = false;
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand SupplierCommand { get; set; }
@@ -139,7 +141,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 InitVis();
                 VisSetting = true;
-                p.DataContext = new SettingViewModel(User.UserName,isSettingApp);
+                p.DataContext = new SettingViewModel(User.UserName,isSettingApp, mainWindow);
             });
         }
         public void InitVis()
@@ -166,6 +168,8 @@ namespace QuanLyGaraOto.ViewModel
             {
                 p.Show();
                 User = loginVM.User;
+                mainWindow = p;
+                
 
                 if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 1).SingleOrDefault().Permission == true)
                     isServiceWindow = true;

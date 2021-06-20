@@ -46,6 +46,10 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand ChangeAppSettingVis { get; set; }
         public ICommand ChangeUserSettingVis { get; set; }
 
+
+        // Log out
+        public ICommand Logout { get; set; }
+
         // IsEnable button setting in gara information
         private bool _IsEnableChangeButtonInGaraInformation;
         public bool IsEnableChangeButtonInGaraInformation
@@ -837,7 +841,7 @@ namespace QuanLyGaraOto.ViewModel
             // Set enable button to false
             SetEnableStatusButtonInGaraInformation(false);
         }
-        public SettingViewModel(string username, bool role) : this()
+        public SettingViewModel(string username, bool role, MainWindow mainWindow) : this()
         {
             // User information
             user = DataProvider.Ins.DB.USERS.Where(x => x.UserName == username).FirstOrDefault();
@@ -853,6 +857,14 @@ namespace QuanLyGaraOto.ViewModel
 
             //Set role
             isSettingApp = role;
+
+            // Log out
+            Logout = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                mainWindow.Hide();
+                mainWindow = new MainWindow();
+                mainWindow.Show();
+            });
         }
 
         private void SetEnableStatusButtonInGaraInformation(bool b)
