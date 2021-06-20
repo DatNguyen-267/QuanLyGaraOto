@@ -61,7 +61,10 @@ namespace QuanLyGaraOto.ViewModel
             }
 
         }
+        public void GenaralStyleExcel (IWorkbook workbook, IWorksheet sheet)
+        {
 
+        }
         public void StyleExcel_Inventory(IWorkbook workbook, IWorksheet sheet)
         {
 
