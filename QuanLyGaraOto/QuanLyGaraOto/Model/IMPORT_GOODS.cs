@@ -22,12 +22,18 @@ namespace QuanLyGaraOto.Model
         }
     
         public int ImportGoods_Id { get; set; }
-        public System.DateTime ImportGoods_Date { get; set; }
-        public int ImportGoods_TotalMoney { get; set; }
-        public string ImportGoods_Supplier { get; set; }
-        public string ImportGoods_UserName { get; set; }
-        public int IdUser { get; set; }
-        public int IdSupplier { get; set; }
+        private System.DateTime _ImportGoods_Date { get; set; }
+        public System.DateTime ImportGoods_Date { get => _ImportGoods_Date; set { _ImportGoods_Date = value; OnPropertyChanged(); } }
+        private int _ImportGoods_TotalMoney { get; set; }
+        public int ImportGoods_TotalMoney { get => _ImportGoods_TotalMoney; set { _ImportGoods_TotalMoney = value; OnPropertyChanged(); } }
+        private string _ImportGoods_Supplier { get; set; }
+        public string ImportGoods_Supplier { get => _ImportGoods_Supplier; set { _ImportGoods_Supplier = value; OnPropertyChanged(); } }
+        private string _ImportGoods_UserName { get; set; }
+        public string ImportGoods_UserName { get=>_ImportGoods_UserName; set { _ImportGoods_UserName = value; OnPropertyChanged(); } }
+        private int _IdUser { get; set; }
+        public int IdUser { get => _IdUser; set { _IdUser = value; OnPropertyChanged(); } }
+        private int _IdSupplier { get; set; }
+        public int IdSupplier { get => _IdSupplier; set { _IdSupplier = value; OnPropertyChanged(); } }
     
         public virtual SUPPLIER SUPPLIER { get; set; }
         public virtual USER USER { get; set; }

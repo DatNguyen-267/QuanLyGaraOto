@@ -85,12 +85,8 @@ namespace QuanLyGaraOto.ViewModel
             ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
             ListImport = new ObservableCollection<ImportItem>();
             ImportDate = import.ImportGoods_Date;
-
-            ImportGoods = new IMPORT_GOODS() { ImportGoods_Date = ImportDate, ImportGoods_TotalMoney = 0 };
-            DataProvider.Ins.DB.IMPORT_GOODS.Add(ImportGoods);
-           
-            DataProvider.Ins.DB.SaveChanges();
-
+                
+            
             Command();
         }
         public void Command()
@@ -143,21 +139,7 @@ namespace QuanLyGaraOto.ViewModel
                 {   
                     Total = Int32.Parse(p.txbAmount.Text) * Int32.Parse(p.txbPrice.Text);
                 });
-            ImportCommand = new RelayCommand<ImportWindow>((p) => {
-                if (ListImport.Count == 0) return false;
-                return true;
             
-            }, (p) =>
-            {
-                foreach (var item in ListImport)
-                {
-                    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.ImportInfo.IdSupplies).SingleOrDefault();
-                    List.Supplies_Amount += item.ImportInfo.Amount;
-                }
-                IsImport = true;
-                DataProvider.Ins.DB.SaveChanges();
-                p.btnImport.IsEnabled = false;
-            });
             PayCommand = new RelayCommand<ImportWindow>(
                 (p) =>
                 {
@@ -167,6 +149,13 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
+                    foreach (var item in ListImport)
+                    {
+                        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.ImportInfo.IdSupplies).SingleOrDefault();
+                        List.Supplies_Amount += item.ImportInfo.Amount;
+                    }
+                    IsImport = true;
+                    DataProvider.Ins.DB.SaveChanges();
                     ImportPayWindow wd = new ImportPayWindow(ImportGoods);
                     if(ImportGoods.ImportGoods_TotalMoney != 0)
                     {

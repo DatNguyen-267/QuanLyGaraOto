@@ -22,6 +22,7 @@ namespace QuanLyGaraOto.ViewModel
         private int _Price { get; set; }
         public int Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
 
+
         public AddNewGoodViewModel()
         {
 

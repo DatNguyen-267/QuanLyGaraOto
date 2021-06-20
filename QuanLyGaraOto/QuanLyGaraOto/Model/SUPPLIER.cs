@@ -10,9 +10,10 @@
 namespace QuanLyGaraOto.Model
 {
     using System;
+    using QuanLyGaraOto.ViewModel;
     using System.Collections.Generic;
     
-    public partial class SUPPLIER
+    public partial class SUPPLIER : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SUPPLIER()
@@ -21,9 +22,12 @@ namespace QuanLyGaraOto.Model
         }
     
         public int Supplier_Id { get; set; }
-        public string Supplier_Name { get; set; }
-        public string Supplier_Phone { get; set; }
-        public string Supplier_Email { get; set; }
+        private string _Supplier_Name { get; set; }
+        public string Supplier_Name { get => _Supplier_Name; set { _Supplier_Name = value; OnPropertyChanged(); } }
+        private string _Supplier_Phone { get; set; }
+        public string Supplier_Phone { get => _Supplier_Phone; set { _Supplier_Phone = value; OnPropertyChanged(); } }
+        private string _Supplier_Email { get; set; }
+        public string Supplier_Email { get => _Supplier_Email; set { _Supplier_Email = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMPORT_GOODS> IMPORT_GOODS { get; set; }
