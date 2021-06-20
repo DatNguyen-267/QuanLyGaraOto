@@ -580,7 +580,7 @@
                                     <Button Content="Xuất"
                                         Style="{StaticResource ExportButton}"
                                         Margin="20 5 0 0"
-                                        Command="{Binding ExportCommand}"
+                                        Command="{Binding ExportWageCommand}"
                                         CommandParameter="{Binding ElementName=wdSetting}">
                                     </Button>
                                 </StackPanel>
@@ -783,7 +783,7 @@
                                     <Button Content="Xuất"
                                         Style="{StaticResource ExportButton}"
                                         Margin="20 5 0 0"
-                                        Command="{Binding ExportCommand}"
+                                        Command="{Binding ExportBrandCommand}"
                                         CommandParameter="{Binding ElementName=wdSetting}">
                                     </Button>
                                 </StackPanel>

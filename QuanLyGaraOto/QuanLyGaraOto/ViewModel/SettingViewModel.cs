@@ -185,6 +185,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand DeleteCarBrand { get; set; }
         public ICommand OpenAddCarBrandWindow { get; set; }
         public ICommand BrandSelectionChanged { get; set; }
+        public ICommand ExportBrandCommand { get; set; }
 
         // Add brand window
         private string _CarBrandInAdd;
@@ -262,6 +263,8 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand DeleteWage { get; set; }
         public ICommand OpenAddWageWindow { get; set; }
         public ICommand WageSelectionChanged { get; set; }
+
+        public ICommand ExportWageCommand { get; set; }
 
         // Add wage window
         public ICommand CancelAddWageWindow { get; set; }
@@ -666,6 +669,11 @@ namespace QuanLyGaraOto.ViewModel
                     ListCarBrand.Add(addCarBrandViewModel.br);
             });
 
+            ExportBrandCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                PrintViewModel printViewModel = new PrintViewModel();
+                printViewModel.Print_ThongTinHangXe(ListCarBrand);
+            });
             // Wage information
             ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
 
@@ -725,7 +733,12 @@ namespace QuanLyGaraOto.ViewModel
                 if (addWageViewModel.wage !=null) 
                 ListWage.Add(addWageViewModel.wage);
             });
+            ExportWageCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                  PrintViewModel printViewModel = new PrintViewModel();
+                  printViewModel.Print_ThongTinTienCong(ListWage);
 
+             });
             // User information
             ChangeUserInformation = new RelayCommand<SettingWindow>((p) =>
             {
