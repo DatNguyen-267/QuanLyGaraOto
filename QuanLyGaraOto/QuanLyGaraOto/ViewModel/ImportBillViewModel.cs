@@ -20,6 +20,12 @@ namespace QuanLyGaraOto.ViewModel
 
         private ObservableCollection<ListImport> _List { get; set; }
         public ObservableCollection<ListImport> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+
+        private SUPPLIER _Supplier { get; set; }
+        public SUPPLIER Supplier { get; set; }
+
+        private USER_INFO _userinfo { get; set; }
+        public USER_INFO userinfo { get => _userinfo; set { _userinfo = value; OnPropertyChanged(); } }
         public ImportBillViewModel()
         {
 
@@ -27,6 +33,9 @@ namespace QuanLyGaraOto.ViewModel
         public ImportBillViewModel(IMPORT_GOODS import)
         {
             Import = import;
+            Supplier = DataProvider.Ins.DB.SUPPLIERs.Where(x => x.Supplier_Id == Import.IdSupplier).FirstOrDefault();
+            userinfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == Import.IdUser).FirstOrDefault();
+            
             int i = 1;
             ListImport = new ObservableCollection<IMPORT_GOODS_DETAIL>(DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Where(x=> x.IdImportGood == import.ImportGoods_Id));
             List = new ObservableCollection<ListImport>();

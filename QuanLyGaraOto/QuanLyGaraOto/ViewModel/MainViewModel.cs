@@ -121,7 +121,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 InitVis();
                 VisBunk = true;
-                p.DataContext = new BunkViewModel(isImportBunk);
+                p.DataContext = new BunkViewModel(isImportBunk,User);
 
             });
             OpenReport = new RelayCommand<ReportWindow>((p) => 

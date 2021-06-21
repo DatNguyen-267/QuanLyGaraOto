@@ -52,6 +52,11 @@ namespace QuanLyGaraOto.ViewModel
 
         public string Amount { get => _Amount; set { _Amount = value; OnPropertyChanged(); } }
 
+        private USER _user { get; set; }
+
+        public USER user { get => _user; set { _user = value; OnPropertyChanged(); } }
+
+
         private SUPPLIES _SelectedItem { get; set; }
         public SUPPLIES SelectedItem
         {
@@ -79,9 +84,10 @@ namespace QuanLyGaraOto.ViewModel
 
         private string _SuppliesAmount { get; set; }
         public string SuppliesAmount { get => _SuppliesAmount; set { _SuppliesAmount = value; OnPropertyChanged(); } }
-        public BunkViewModel(bool role) : this()
+        public BunkViewModel(bool role, USER user) : this()
         {
             isImportBunk = role;
+            this.user = user;
         }
 
 
@@ -197,7 +203,7 @@ namespace QuanLyGaraOto.ViewModel
 
         public void OpenImportWd(MainWindow wd)
         {
-            AddImportWindow addImportWindow = new AddImportWindow();
+            AddImportWindow addImportWindow = new AddImportWindow(user);
             addImportWindow.ShowDialog();
         }
         void LoadSupplies()
