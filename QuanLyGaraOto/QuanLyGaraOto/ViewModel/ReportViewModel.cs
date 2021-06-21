@@ -153,6 +153,8 @@ namespace QuanLyGaraOto.ViewModel
                 var suppliesNameList = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.IdSupplies).SingleOrDefault();
                 importTemp.Supplies_Name = suppliesNameList.Supplies_Name;
                 var importDateList = DataProvider.Ins.DB.IMPORT_GOODS.Where(x => x.ImportGoods_Id == item.IdImportGood).SingleOrDefault();
+                importTemp.Supplier_Name = importDateList.ImportGoods_Supplier;
+                importTemp.IdImport = importDateList.ImportGoods_Id;
                 importTemp.ImportGoods_Date = importDateList.ImportGoods_Date;
                 if (importDateList.ImportGoods_Date.Year.ToString() == selectedYear && importDateList.ImportGoods_Date.Month.ToString() == selectedMonth)
                 {
