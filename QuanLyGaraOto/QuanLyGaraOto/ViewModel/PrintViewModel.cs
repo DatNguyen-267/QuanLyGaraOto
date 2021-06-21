@@ -517,8 +517,8 @@ namespace QuanLyGaraOto.ViewModel
                     worksheet.ImportArray(list, i, 1, false);
                     i++;
                 }
-                worksheet["D" + i].Text = "Tổng doanh thu: " + salesReport.TotalMoney;
-                worksheet["D" + i + ":" + "E" + i].Merge();
+                worksheet["D" + (i+1)].Text = "Tổng doanh thu: " + salesReport.TotalMoney;
+                worksheet["D" + (i + 1) + ":" + "E" + (i + 1)].Merge();
 
                 worksheet.Columns[1].ColumnWidth = 30;
                 worksheet.Columns[2].ColumnWidth = 20;
