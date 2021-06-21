@@ -18,6 +18,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand LoadCbCommand { get; set; }
         public ICommand ReportSalesCommand { get; set; }
         public ICommand ReportInventoryCommand { get; set; }
+        public ICommand ExportCommand { get; set; }
         private string first_item_year { get; set; }
         public string First_item_year { get => first_item_year; set { first_item_year = value; OnPropertyChanged(); } }
         private string first_item_month { get; set; }
@@ -47,6 +48,13 @@ namespace QuanLyGaraOto.ViewModel
 
         private USER _User { get; set; }
         public USER User { get => _User; set { _User = value; OnPropertyChanged(); } }
+
+        private bool _IsSelectedTabNhapHang { get; set; }
+        public bool IsSelectedTabNhapHang { get => _IsSelectedTabNhapHang; set { _IsSelectedTabNhapHang = value; OnPropertyChanged(); } }
+
+        private  bool _IsSelectedTabKinhDoanh { get; set; }
+        public bool IsSelectedTabKinhDoanh { get => _IsSelectedTabKinhDoanh; set { _IsSelectedTabKinhDoanh = value; OnPropertyChanged(); } }
+
         public ReportViewModel(bool role, USER u) : this()
         {
             isReport = role;
@@ -91,7 +99,20 @@ namespace QuanLyGaraOto.ViewModel
                 (p) => 
                 { 
                     LoadToView(p); 
-                });         
+                });
+            ExportCommand = new RelayCommand<ReportWindow>(
+                (p) => { return true; },
+                (p) =>
+                {
+                    PrintViewModel printViewModel = new PrintViewModel();
+                    if (IsSelectedTabKinhDoanh)
+                    {
+                        printViewModel.XuatLichSuKinhDoanh(List);
+                    }else if (IsSelectedTabNhapHang)
+                    {
+                        printViewModel.XuatLichSuNhapHang(ListImport);
+                    }
+                });
         }
 
         //Load combobox-selected item khi khởi tạo

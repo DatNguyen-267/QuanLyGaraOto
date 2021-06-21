@@ -10,8 +10,6 @@ namespace QuanLyGaraOto.Model
 {
     public class ListReceipt:BaseViewModel
     {
-        
-
         private string _LicensePlate { get; set; }
         public string LicensePlate { get => _LicensePlate; set { _LicensePlate = value; OnPropertyChanged(); } }
 

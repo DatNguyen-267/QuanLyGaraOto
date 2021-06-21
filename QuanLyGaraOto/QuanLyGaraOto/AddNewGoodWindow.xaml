@@ -6,22 +6,32 @@
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
         x:Name="wdAddSupply"
-        Title="Phụ tùng"
-        Height="300" Width="520"
+        Title="Thêm phụ tùng"
+        Height="370" Width="520"
         WindowStartupLocation="CenterScreen"
-      Background="#ffffff"
+        Background="#ffffff"
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         >
     <Grid>
-        <Grid
-            Margin="16 16 16 0"
-            VerticalAlignment="Top"
-            Height="240"
-            >
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#3d4751">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="Thêm phụ tùng"
+                       FontSize="30"
+                       Margin="0 20 0 20"
+                       Foreground="White"
+                       ></TextBlock>
+        </Grid>
+        <StackPanel Grid.Row="1"
+              Margin="20 20 20 0">
             <Grid
-                Margin="0 0 0 0"
+                Margin="0 20 0 0"
                 VerticalAlignment="Top"
                 Height="40">
                 <Label
@@ -32,23 +42,14 @@
                     FontWeight="Bold"
                     Foreground="Black"
                     />
-                <Rectangle
-                    Margin="0"
-                    Height="40"
-                    Width="320"
-                    HorizontalAlignment="Right"
-                    RadiusX="4"
-                    RadiusY="4"
-                    Stroke="Black"
-                    />
                 <TextBox
                     x:Name="txbName"
                     materialDesign:HintAssist.Hint="Nhập tên phụ tùng"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    FontSize="14"
                     IsReadOnly="False"
                     Width="300"
+                    FontSize="16"
                     Margin="0 0 10 0"
                     Foreground="Black"
                     >
@@ -62,7 +63,7 @@
                 </TextBox>
             </Grid>
             <Grid
-                Margin="0 60 0 0"
+                Margin="0 30 0 0"
                 VerticalAlignment="Top"
                 Height="40">
                 <Label
@@ -73,21 +74,12 @@
                     FontWeight="Bold"
                     Foreground="Black"
                     />
-                <Rectangle
-                    Margin="0"
-                    Height="40"
-                    Width="320"
-                    HorizontalAlignment="Right"
-                    RadiusX="4"
-                    RadiusY="4"
-                    Stroke="Black"
-                    />
                 <TextBox
                     x:Name="txbPrice"
                     materialDesign:HintAssist.Hint="Giá niêm yết"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    FontSize="14"
+                    FontSize="16"
                     IsReadOnly="False"
                     Width="300"
                     Margin="0 0 10 0"
@@ -104,19 +96,16 @@
                     </TextBox.Text>
                 </TextBox>
             </Grid>
+        </StackPanel>
 
-
-        </Grid>
-        <Grid
-            Margin="0 0 16 16"
-            Width="320"
-            Height="40"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom">
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
             <Button
                 x:Name="btnAdd"
-                Style="{StaticResource MaterialDesignRaisedButton}"
+                Style="{StaticResource FeatureButton}"
+                Background="{StaticResource MainBlue}"
+                BorderBrush="{StaticResource MainBlue}"
                 Command="{Binding AddCommand}"
                 CommandParameter="{Binding ElementName=wdAddSupply}"
                 Width="140"
@@ -126,25 +115,28 @@
             </Button>
             <Button
                 x:Name="btnEdit"
-                Style="{StaticResource MaterialDesignRaisedButton}"
+                Style="{StaticResource FeatureButton}"
+                Background="{StaticResource MainBlue}"
+                BorderBrush="{StaticResource MainBlue}"
                 Command="{Binding EditCommand}"
                 CommandParameter="{Binding ElementName=wdAddSupply}"
                 Width="140"
-                Visibility="Hidden"
+                Visibility="Collapsed"
                 HorizontalAlignment="Left"
                 ToolTip="Resource name: MaterialDesignRaisedButton">
                 _Sửa
             </Button>
             <Button
+                Margin="100 0 0 0"
                 x:Name="btnCancel"
-                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                Style="{StaticResource CloseButton}"
                 Command="{Binding CloseCommand}"
                 CommandParameter="{Binding ElementName=wdAddSupply}"
                 Width="140"
                 HorizontalAlignment="Right"
                 ToolTip="Resource name: MaterialDesignRaisedLightButton">
-                _Hủy
+
             </Button>
-        </Grid>
+        </StackPanel>
     </Grid>
 </Window>

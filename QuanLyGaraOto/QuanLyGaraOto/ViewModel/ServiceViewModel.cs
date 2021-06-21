@@ -62,10 +62,16 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand SearchCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
         public ICommand SelectionChanged { get; set; }
+        public ICommand ExportCommand { get; set; }
+        public ICommand ViewSelectionChanged { get; set; }
         #endregion
+        
+        private int _ViewSelectedIndex { get; set; }
+        public int ViewSelectedIndex { get => _ViewSelectedIndex; set { _ViewSelectedIndex = value; OnPropertyChanged(); } }
+        private string _ViewSelectedValue { get; set; }
+        public string ViewSelectedValue { get => _ViewSelectedValue; set { _ViewSelectedValue = value; OnPropertyChanged(); } }
         public ServiceViewModel()
         {
-
             InitData();
             CarReceptionCommand = new RelayCommand<object>((p) => {
                 LoadReceptionAmount();
@@ -149,7 +155,7 @@ namespace QuanLyGaraOto.ViewModel
                     return true;
                 }, (p) =>
                 {
-                    LoadListData();
+                    LoadList();
                     UnicodeConvert uni = new UnicodeConvert();
                     TempListCar = new ObservableCollection<ListCar>();
 
@@ -185,7 +191,7 @@ namespace QuanLyGaraOto.ViewModel
                     Debt = "";
                     SelectedBrand = null;
                     LicensePlate = "";
-                    LoadListData();
+                    LoadList();
                 }
             );
             LoadListData();
@@ -198,8 +204,34 @@ namespace QuanLyGaraOto.ViewModel
                     Temp = new ObservableCollection<ListCar>(p.SelectedItems.Cast<ListCar>().ToList()) ;
                 }
             );
+            ExportCommand = new RelayCommand<ServiceWindow>
+                ((p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    PrintViewModel printViewModel = new PrintViewModel();
+                    printViewModel.XuatDanhSachXe(ListCar, ViewSelectedValue.ToString().ToLower());
+                }
+            );
+            ViewSelectionChanged = new RelayCommand<object>
+                ((p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    LoadList();
+                }
+            );
+            
         }
-
+        public void LoadList()
+        {
+            if (ViewSelectedIndex == 0) LoadListData();
+            else if (ViewSelectedIndex == 1) LoadListData_AtDay();
+            else if (ViewSelectedIndex == 2) LoadListData_Pay();
+            else if (ViewSelectedIndex == 3) LoadListData_NotPay();
+        }
         public void LoadReceptionAmount()
         {
             ReceptionAmount = 0;
@@ -216,6 +248,7 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void InitData()
         {
+            ViewSelectedIndex = 0;
             GaraInfo = DataProvider.Ins.DB.GARA_INFO.FirstOrDefault();
             ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
             LoadReceptionAmount();
@@ -239,6 +272,53 @@ namespace QuanLyGaraOto.ViewModel
             }
             return Debt;
         }
+        public void LoadListData_Pay()
+        {
+            var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
+            ListCar = new ObservableCollection<ListCar>();
+            foreach (var item in ListReception)
+            {
+                if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == item.Reception_Id).Count() > 0)
+                {
+                    ListCar tempListCar = new ListCar();
+                    tempListCar.CarReception = item;
+                    tempListCar.Debt = item.Debt;
+                    ListCar.Add(tempListCar);
+                }
+            }
+        }
+        public void LoadListData_NotPay()
+        {
+            var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
+            ListCar = new ObservableCollection<ListCar>();
+            foreach (var item in ListReception)
+            {
+                if (DataProvider.Ins.DB.RECEIPTs.Where(x=>x.IdReception == item.Reception_Id).Count() == 0)
+                {
+                    ListCar tempListCar = new ListCar();
+                    tempListCar.CarReception = item;
+                    tempListCar.Debt = item.Debt;
+                    ListCar.Add(tempListCar);
+                }
+            }
+        }
+        public void LoadListData_AtDay()
+        {
+            var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
+            ListCar = new ObservableCollection<ListCar>();
+            foreach (var item in ListReception)
+            {
+                if (item.ReceptionDate.Date.Day == DateTime.Now.Date.Day
+                    && item.ReceptionDate.Date.Month == DateTime.Now.Date.Month
+                    && item.ReceptionDate.Date.Year == DateTime.Now.Date.Year)
+                {
+                    ListCar tempListCar = new ListCar();
+                    tempListCar.CarReception = item;
+                    tempListCar.Debt = item.Debt;
+                    ListCar.Add(tempListCar);
+                }
+            }
+        }
         public void LoadListData()
         {
             var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
@@ -247,19 +327,10 @@ namespace QuanLyGaraOto.ViewModel
             {
                 ListCar tempListCar = new ListCar();
                 tempListCar.CarReception = item;
-                tempListCar.Debt = GetDebt(item.Reception_Id);
+                tempListCar.Debt = item.Debt;
                 ListCar.Add(tempListCar);
             }
         }
-        public void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Temp = new ObservableCollection<ListCar>();
-            
-            foreach (var item in e.AddedItems)
-                
-            {
-                Temp.Add(item as ListCar);
-            }
-        }
+
     }
 }
