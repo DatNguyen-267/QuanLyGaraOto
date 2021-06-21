@@ -861,9 +861,8 @@ namespace QuanLyGaraOto.ViewModel
             // Log out
             Logout = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                mainWindow.Hide();
-                mainWindow = new MainWindow();
-                mainWindow.Show();
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown();
             });
         }
 
