@@ -895,9 +895,8 @@ namespace QuanLyGaraOto.ViewModel
             // Log out
             Logout = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                mainWindow.Hide();
-                mainWindow = new MainWindow();
-                mainWindow.Show();
+                mainWindow.DataContext = new MainViewModel();
+                LoadLoginWindow(mainWindow);
             });
         }
 
@@ -929,5 +928,26 @@ namespace QuanLyGaraOto.ViewModel
             }
             return hash.ToString();
         }
+
+        public void LoadLoginWindow(MainWindow p)
+        {
+            p.Hide();
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.ShowDialog();
+            if (loginWindow.DataContext == null)
+                return;
+            var loginVM = loginWindow.DataContext as LoginViewModel;
+            if (loginVM.IsLogin)
+            {
+                p.Show();
+                (p.DataContext as MainViewModel).User = loginVM.User;
+                (p.DataContext as MainViewModel).LoadRole();
+            }
+            else
+            {
+                p.Close();
+            }
+        }
     }
+
 }

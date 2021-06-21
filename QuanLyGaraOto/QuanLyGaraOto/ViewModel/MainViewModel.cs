@@ -13,7 +13,7 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        private MainWindow mainWindow { get; set; }
+        public static MainWindow mainWindow { get; set; }
 
         public bool IsLoaded = false;
         public ICommand LoadedWindowCommand { get; set; }
@@ -82,7 +82,6 @@ namespace QuanLyGaraOto.ViewModel
 
         public MainViewModel()
         {
-           
             InitVis();
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
@@ -178,7 +177,6 @@ namespace QuanLyGaraOto.ViewModel
                 p.Show();
                 User = loginVM.User;
                 mainWindow = p;
-                
 
                 if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 1).SingleOrDefault().Permission == true)
                     isServiceWindow = true;
@@ -220,6 +218,35 @@ namespace QuanLyGaraOto.ViewModel
             {
                 p.Close();
             }
+        }
+        public void LoadRole()
+        {
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 1).SingleOrDefault().Permission == true)
+                isServiceWindow = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 2).SingleOrDefault().Permission == true)
+                isBunkWindow = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 3).SingleOrDefault().Permission == true)
+                isImportBunk = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 4).SingleOrDefault().Permission == true)
+                isEmployeeWindow = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 5).SingleOrDefault().Permission == true)
+                isAddEmployee = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 6).SingleOrDefault().Permission == true)
+                isAddRole = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 7).SingleOrDefault().Permission == true)
+                isReportWindow = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 8).SingleOrDefault().Permission == true)
+                isReport = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 9).SingleOrDefault().Permission == true)
+                isSettingApp = true;
         }
     }
 }
