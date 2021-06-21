@@ -11,6 +11,7 @@
         Height="500"
         Width="1000"
         Background="#ffffff"
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"   
          xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
@@ -117,6 +118,7 @@
                         Width="220"
                         Margin="0,6,9.6,6"
                         Foreground="Black" Grid.ColumnSpan="2"
+                            PreviewTextInput="NumberValidationTextBox"
                         >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
@@ -161,13 +163,14 @@
                         />
                         <TextBox
                         x:Name="txbAmount"                        
-                        materialDesign:HintAssist.Hint="Chọn số lượng"
+                        materialDesign:HintAssist.Hint="Nhập số lượng"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         FontSize="14"
                         Width="220"
                         Margin="0 0 10 0"
                         Foreground="Black"
+                            PreviewTextInput="NumberValidationTextBox"
                         >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
@@ -302,20 +305,11 @@
             
             <Grid
                 Margin="0 0 16 0"
-                Width="480"
+                Width="360"
                 Height="40"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center">
-                <Button
-                    x:Name="btnImport"
-                    Command="{Binding ImportCommand}"
-                    CommandParameter="{Binding ElementName=wdImportSupply}"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Width="140"
-                    HorizontalAlignment="Center"
-                    ToolTip="Resource name: MaterialDesignRaisedButton">
-                    _Nhập hàng
-                </Button>
+                
                 <Button
                     x:Name="btnPay"
                     Command="{Binding PayCommand}"

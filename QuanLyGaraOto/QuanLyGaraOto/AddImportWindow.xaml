@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
-        Height="280" Width="360"
+        Height="380" Width="360"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="AddImportWindow"
+        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         Name="AddImportWD"
         >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -55,7 +57,39 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Row="2"
+        <Grid Grid.Row="2" Margin=" 30 0 30 0">
+            <Rectangle
+                        Margin="0"
+                        Height="40"
+                        Width="280"
+                        HorizontalAlignment="Right"
+                        RadiusX="4"
+                        RadiusY="4"
+                        Stroke="Black"
+                        />
+            <ComboBox
+                        x:Name="cbType"
+                        SelectedItem="{Binding SelectedSupplier}"
+                        ItemsSource="{Binding ListSupplier}"
+                        DisplayMemberPath="Supplier_Name"
+                        materialDesign:HintAssist.Hint="Chọn nhà phân phối"
+                        Height="40" 
+                        FontSize="14" 
+                        Width="260"
+                        BorderThickness="0" 
+                        
+                        Padding="0" 
+                        Margin="0,0,10,0" 
+                        HorizontalAlignment="Right"
+                        VerticalContentAlignment="Center" 
+                        HorizontalContentAlignment="Left"
+                        FontWeight="SemiBold"
+                        >
+                
+            </ComboBox>
+
+        </Grid>
+        <Grid Grid.Row="3"
               Margin="30 0 30 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
