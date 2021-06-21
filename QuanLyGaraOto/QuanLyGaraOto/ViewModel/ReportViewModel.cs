@@ -62,6 +62,7 @@ namespace QuanLyGaraOto.ViewModel
         }
         public ReportViewModel()
         {
+            IsSelectedTabKinhDoanh = true;
             load_firstItem();
             LoadComboBox();
             LoadCbCommand = new RelayCommand<ReportWindow>(
