@@ -47,6 +47,8 @@ namespace QuanLyGaraOto.ViewModel
 
         private USER _User { get; set; }
         public USER User { get => _User; set { _User = value; OnPropertyChanged(); } }
+
+
         public ReportViewModel(bool role, USER u) : this()
         {
             isReport = role;

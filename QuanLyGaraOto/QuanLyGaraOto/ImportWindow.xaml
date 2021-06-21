@@ -264,7 +264,7 @@
                                    HorizontalContentAlignment="Left">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding ImportInfo.SUPPLIES.Supplies_Name}" Width="220"></GridViewColumn>
+                                <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding Supplies_Name}" Width="220"></GridViewColumn>
                                 <GridViewColumn Header="Giá nhập" DisplayMemberBinding="{Binding ImportInfo.Price}" Width="120"></GridViewColumn>
                                 <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding ImportInfo.Amount}" Width="120"></GridViewColumn>
                                 <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding ImportInfo.TotalMoney}"></GridViewColumn>

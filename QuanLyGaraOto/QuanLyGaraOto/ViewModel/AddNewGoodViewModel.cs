@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyGaraOto.ViewModel
@@ -31,18 +32,20 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text);
                     if (List == null || List.Count() != 0) return false;
-                    if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text))
+                    if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text) || Int32.Parse(p.txbPrice.Text) == 0)
                         return false;
                     return true;
 
                 },
                 (p) =>
                 {
-                    Supplies = new SUPPLIES() { Supplies_Name = p.txbName.Text, Supplies_Price = Int32.Parse(p.txbPrice.Text), Supplies_Amount = 0 };
-                    DataProvider.Ins.DB.SUPPLIES.Add(Supplies);
-                    DataProvider.Ins.DB.SaveChanges();
-                    p.Close();
-
+                    if (MessageBox.Show("Bạn có chắc chắn muốn thêm phụ tùng", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        Supplies = new SUPPLIES() { Supplies_Name = p.txbName.Text, Supplies_Price = Int32.Parse(p.txbPrice.Text), Supplies_Amount = 0 };
+                        DataProvider.Ins.DB.SUPPLIES.Add(Supplies);
+                        DataProvider.Ins.DB.SaveChanges();
+                        p.Close();
+                    }
                 });
             CloseCommand = new RelayCommand<AddNewGoodWindow>(
                 (p) =>
@@ -62,7 +65,7 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     var Temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text);
                     if ((Temp == null || Temp.Count() != 0) && p.txbName.Text != supplies.Supplies_Name) return false;
-                    if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text))
+                    if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text) || Int32.Parse(p.txbPrice.Text) == 0)
                         return false;
                     if (supplies == null) return false;
                     return true;
@@ -70,14 +73,17 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    var Temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text);
-                    if ((Temp == null || Temp.Count() != 0) && p.txbName.Text != supplies.Supplies_Name) return;
-                    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == supplies.Supplies_Id).SingleOrDefault();
-                    List.Supplies_Name = p.txbName.Text;
-                    List.Supplies_Price = Int32.Parse(p.txbPrice.Text);
-                    DataProvider.Ins.DB.SaveChanges();
-                    OnPropertyChanged("List");
-                    p.Close();
+                    if (MessageBox.Show("Bạn có chắc chắn muốn sửa thông tin phụ tùng", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        var Temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text);
+                        if ((Temp == null || Temp.Count() != 0) && p.txbName.Text != supplies.Supplies_Name) return;
+                        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == supplies.Supplies_Id).SingleOrDefault();
+                        List.Supplies_Name = p.txbName.Text;
+                        List.Supplies_Price = Int32.Parse(p.txbPrice.Text);
+                        DataProvider.Ins.DB.SaveChanges();
+                        OnPropertyChanged("List");
+                        p.Close();
+                    }
                 }
                 );
             CloseCommand = new RelayCommand<AddNewGoodWindow>(
