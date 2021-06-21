@@ -310,7 +310,8 @@
                                 <RowDefinition></RowDefinition>
 
                             </Grid.RowDefinitions>
-                            <materialDesign:Card Grid.Row="0" Margin="0 0 0 15" >
+                            <materialDesign:Card Grid.Row="0" Margin="0 0 0 15" 
+                                                 IsEnabled="{Binding isGaraInfo}">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto"></RowDefinition>
@@ -608,7 +609,7 @@
                                          Margin="20 5 0 0"
                                         Style="{StaticResource FeatureButton}"
                                         Content="Sửa"
-                                        IsEnabled="{Binding IsEnableModifyButtonInWageSetting}"
+                                        IsEnabled="{Binding IsEnableModifyButtonInWageSetting}"                                     
                                         Command="{Binding OpenModifyWageWindow}"
                                         />
                                     <Button

@@ -82,6 +82,9 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0"
                        Style="{StaticResource Title}"
@@ -235,12 +238,48 @@
                     </CheckBox>
                 </Grid>
                 <Grid Grid.Row="9" Margin="16 8 16 0">
-                    <Label Content="Truy cập cài đặt ứng dụng"
+                    <Label Content="Quyền thay đổi thông tin gara"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
-                                           FontSize="14"
+                                          
                                            ></Label>
-                    <CheckBox IsChecked="{Binding isSettingApp, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    <CheckBox IsChecked="{Binding isGaraInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                              HorizontalAlignment="Left"
+                                              Background="{StaticResource MainColor}"
+                                              Foreground="White"
+                                              />
+                </Grid>
+                <Grid Grid.Row="10" Margin="16 8 16 0">
+                    <Label Content="Quyền thêm/xóa/sửa tiền công"
+                                           VerticalAlignment="Center"
+                                           Margin="40 0 0 0"
+                                          
+                                           ></Label>
+                    <CheckBox IsChecked="{Binding isWage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                              HorizontalAlignment="Left"
+                                              Background="{StaticResource MainColor}"
+                                              Foreground="White"
+                                              />
+                </Grid>
+                <Grid Grid.Row="11" Margin="16 8 16 0">
+                    <Label Content="Quyền thêm/xóa/sửa hãng xe"
+                                           VerticalAlignment="Center"
+                                           Margin="40 0 0 0"
+                                          
+                                           ></Label>
+                    <CheckBox IsChecked="{Binding isCarBranch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                              HorizontalAlignment="Left"
+                                              Background="{StaticResource MainColor}"
+                                              Foreground="White"
+                                              />
+                </Grid>
+                <Grid Grid.Row="12" Margin="16 8 16 0">
+                    <Label Content="Quyền thêm/xóa/sửa nhà cung cấp"
+                                           VerticalAlignment="Center"
+                                           Margin="40 0 0 0"
+                                          
+                                           ></Label>
+                    <CheckBox IsChecked="{Binding isSuplier, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
                                               Background="{StaticResource MainColor}"
                                               Foreground="White"
