@@ -103,7 +103,10 @@ namespace QuanLyGaraOto.ViewModel
                     isEmployeeRole = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 6).SingleOrDefault().Permission;
                     isReportWindow = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 7).SingleOrDefault().Permission;
                     isReport = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 8).SingleOrDefault().Permission;
-                    isSettingApp = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 9).SingleOrDefault().Permission;
+                    isGaraInfo = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 9).SingleOrDefault().Permission;
+                    isWage = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 10).SingleOrDefault().Permission;
+                    isCarBranch = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 11).SingleOrDefault().Permission;
+                    isSuplier = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 12).SingleOrDefault().Permission;
                 }
             }
         }
@@ -128,7 +131,10 @@ namespace QuanLyGaraOto.ViewModel
         public bool isEmployeeRole { get => _isEmployeeRole; set { _isEmployeeRole = value; OnPropertyChanged(); } }
         public bool isReportWindow { get => _isReportWindow; set { _isReportWindow = value; OnPropertyChanged(); } }
         public bool isReport { get => _isReport; set { _isReport = value; OnPropertyChanged(); } }
-        public bool isSettingApp { get => _isSettingApp; set { _isSettingApp = value; OnPropertyChanged(); } }
+        public bool isGaraInfo { get => _isGaraInfo; set { _isGaraInfo = value; OnPropertyChanged(); } }
+        public bool isWage { get => _isWage; set { _isWage = value; OnPropertyChanged(); } }
+        public bool isCarBranch { get => _isCarBranch; set { _isCarBranch = value; OnPropertyChanged(); } }
+        public bool isSuplier { get => _isSuplier; set { _isSuplier = value; OnPropertyChanged(); } }
 
         private ObservableCollection<USER_INFO> _List;
 
@@ -159,7 +165,10 @@ namespace QuanLyGaraOto.ViewModel
         private bool _isEmployeeRole;
         private bool _isReportWindow;
         private bool _isReport;
-        private bool _isSettingApp;
+        private bool _isGaraInfo;
+        private bool _isWage;
+        private bool _isCarBranch;
+        private bool _isSuplier;
 
         //Quyền
         bool _roleInfo = false;
@@ -199,7 +208,10 @@ namespace QuanLyGaraOto.ViewModel
             isEmployeeRole = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 6).SingleOrDefault().Permission;
             isReportWindow = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 7).SingleOrDefault().Permission;
             isReport = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 8).SingleOrDefault().Permission;
-            isSettingApp = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 9).SingleOrDefault().Permission;
+            isGaraInfo = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 9).SingleOrDefault().Permission;
+            isWage = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 10).SingleOrDefault().Permission;
+            isCarBranch = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 11).SingleOrDefault().Permission;
+            isSuplier = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 12).SingleOrDefault().Permission;
 
             String oldName = RoleName;
             // validate name
@@ -261,7 +273,19 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.SaveChanges();
 
                     var is9 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 9).SingleOrDefault();
-                    is9.Permission = isSettingApp;
+                    is9.Permission = isGaraInfo;
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    var is10 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 10).SingleOrDefault();
+                    is10.Permission = isWage;
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    var is11 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 11).SingleOrDefault();
+                    is11.Permission = isCarBranch;
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    var is12 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == RoleId).Where(x => x.IdPermissionItem == 12).SingleOrDefault();
+                    is12.Permission = isSuplier;
                     DataProvider.Ins.DB.SaveChanges();
 
                     MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -439,7 +463,7 @@ namespace QuanLyGaraOto.ViewModel
                 if (MessageBox.Show("Bạn có chắc chắn muốn thêm nhân viên này", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                 {
                     int id_role = DataProvider.Ins.DB.ROLEs.Where(x => x.Role_Name == RoleName).SingleOrDefault().Role_Id;
-                    var account = new USER() { UserName = UserName, Password = "1", IdRole = id_role };
+                    var account = new USER() { UserName = UserName, Password = MD5Hash(Base64Encode("1")), IdRole = id_role };
                     DataProvider.Ins.DB.USERS.Add(account);
                     DataProvider.Ins.DB.SaveChanges();
 
@@ -633,7 +657,16 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.ROLE_DETAIL.Add(new ROLE_DETAIL { IdRole = idRole, IdPermissionItem = 8, Permission = isReport });
                     DataProvider.Ins.DB.SaveChanges();
 
-                    DataProvider.Ins.DB.ROLE_DETAIL.Add(new ROLE_DETAIL { IdRole = idRole, IdPermissionItem = 9, Permission = isSettingApp });
+                    DataProvider.Ins.DB.ROLE_DETAIL.Add(new ROLE_DETAIL { IdRole = idRole, IdPermissionItem = 9, Permission = isGaraInfo });
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    DataProvider.Ins.DB.ROLE_DETAIL.Add(new ROLE_DETAIL { IdRole = idRole, IdPermissionItem = 10, Permission = isWage });
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    DataProvider.Ins.DB.ROLE_DETAIL.Add(new ROLE_DETAIL { IdRole = idRole, IdPermissionItem = 11, Permission = isCarBranch });
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    DataProvider.Ins.DB.ROLE_DETAIL.Add(new ROLE_DETAIL { IdRole = idRole, IdPermissionItem = 12, Permission = isSuplier });
                     DataProvider.Ins.DB.SaveChanges();
 
                     MessageBox.Show("Thêm thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -713,6 +746,15 @@ namespace QuanLyGaraOto.ViewModel
 
                             var dt9 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 9).SingleOrDefault();
                             DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt9);
+
+                            var dt10 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 10).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt10);
+
+                            var dt11 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 11).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt11);
+
+                            var dt12 = DataProvider.Ins.DB.ROLE_DETAIL.Where(x => x.IdRole == item.Role_Id).Where(x => x.IdPermissionItem == 12).SingleOrDefault();
+                            DataProvider.Ins.DB.ROLE_DETAIL.Remove(dt12);
 
                             DataProvider.Ins.DB.ROLEs.Remove(item);
                             DataProvider.Ins.DB.SaveChanges();
