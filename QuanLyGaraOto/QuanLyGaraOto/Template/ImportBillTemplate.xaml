@@ -52,21 +52,59 @@
                            Style="{StaticResource TitleTextBlock}"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Mã đơn nhập "
+                    <TextBlock Text="Mã đơn nhập: "
                            Style="{StaticResource ItemTextBlock}"></TextBlock>
                     <TextBlock Text="{Binding Import.ImportGoods_Id}"
                            Style="{StaticResource ItemTextBlock}"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Ngày nhập "
+                    <TextBlock Text="Ngày nhập: "
                            Style="{StaticResource ItemTextBlock}"></TextBlock>
                     <TextBlock Text="{Binding Import.ImportGoods_Date}"
+                           Style="{StaticResource ItemTextBlock}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Người nhập: "
+                           Style="{StaticResource ItemTextBlock}"></TextBlock>
+                    <TextBlock Text="{Binding userinfo.UserInfo_Name}"
+                           Style="{StaticResource ItemTextBlock}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Số điện thoại: "
+                           Style="{StaticResource ItemTextBlock}"></TextBlock>
+                    <TextBlock Text="{Binding userinfo.UserInfo_Telephone}"
                            Style="{StaticResource ItemTextBlock}"></TextBlock>
                 </StackPanel>
 
             </StackPanel>
             <!-- THÔNG TIN HÓA ĐƠN -->
+            <StackPanel Grid.Column="1"
+                        Margin="10 0 0 0">
+                <TextBlock  Text="Thông tin Nhà cung cấp"
+                            Style="{StaticResource TitleTextBlock}"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Nhà cung cấp: "
+                               Style="{StaticResource ItemTextBlock}"></TextBlock>
+                    <TextBlock Text="{Binding Supplier.Supplier_Name}"
+                               Style="{StaticResource ItemTextBlock}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Số điện thoại: "
+                               Style="{StaticResource ItemTextBlock}"></TextBlock>
+                    <TextBlock Text="{Binding Supplier.Supplier_Phone}"
+                               
+                               Style="{StaticResource ItemTextBlock}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Email: "
+                               Style="{StaticResource ItemTextBlock}"></TextBlock>
+                    <TextBlock Text="{Binding Supplier.Supplier_Email}"
+                               
+                               Style="{StaticResource ItemTextBlock}"></TextBlock>
+                </StackPanel>
 
+
+            </StackPanel>
 
         </Grid>
         <Grid Grid.Row="2" Margin="10 10 10 5">

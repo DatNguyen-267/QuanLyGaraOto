@@ -82,7 +82,7 @@ namespace QuanLyGaraOto.ViewModel
 
         private string _SuppliesAmount { get; set; }
         public string SuppliesAmount { get => _SuppliesAmount; set { _SuppliesAmount = value; OnPropertyChanged(); } }
-        public BunkViewModel(bool role) : this()
+        public BunkViewModel(bool role, USER user) : this()
         {
             isImportBunk = role;
             this.user = user;

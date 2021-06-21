@@ -2,6 +2,7 @@
 using QuanLyGaraOto.Model;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,11 @@ namespace QuanLyGaraOto
         {
             InitializeComponent();
             this.DataContext = (importGoodViewModel = new ImportGoodViewModel(import));
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
     }

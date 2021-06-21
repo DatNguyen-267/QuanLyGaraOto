@@ -37,7 +37,7 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition Width="350"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -117,7 +117,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="120"></RowDefinition>
-                    <RowDefinition Height="120"></RowDefinition>
+                    <RowDefinition Height="240"></RowDefinition>
                     <RowDefinition ></RowDefinition>
                     <RowDefinition Height="200"></RowDefinition>
                 </Grid.RowDefinitions>
@@ -142,14 +142,14 @@
                         <Grid Margin="10 5 10 5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="200" ></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock Text="Nhà cung cấp"
                                            Style="{StaticResource txbInfo}"></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBlock Text="{Binding Reception.CUSTOMER.Customer_Name}"
+                                <TextBlock Text="{Binding Supplier.Supplier_Name}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
                                            Style="{StaticResource txbInfo}"></TextBlock>
@@ -159,7 +159,7 @@
                         <Grid Margin="10 5 10 5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="200"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock Text="Điện Thoại"
@@ -168,11 +168,27 @@
                                            ></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBlock Text="{Binding Reception.CUSTOMER.Customer_Phone}"
+                                <TextBlock Text="{Binding Supplier.Supplier_Phone}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
                                            Style="{StaticResource txbInfo}"
                                            ></TextBlock>
+                            </Grid>
+                        </Grid>
+                        <Grid Margin="10 5 10 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="200"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock Text="Email"
+                                           Style="{StaticResource txbInfo}"></TextBlock>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBlock Text="{Binding Supplier.Supplier_Email}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Right"
+                                           Style="{StaticResource txbInfo}"></TextBlock>
                             </Grid>
                         </Grid>
                     </StackPanel>
@@ -188,7 +204,11 @@
                     StrokeThickness="1">
                     </Rectangle>
                     <Grid>
-
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Margin="10 0 10 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"></ColumnDefinition>
@@ -220,7 +240,80 @@
                                 </Border>
                             </Grid>
                         </Grid>
-                       
+                        <Grid Grid.Row="1" Margin="10 0 10 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock Text="Người Nhập"
+                                           
+                                            Style="{StaticResource txbInfo}"
+                                               VerticalAlignment="Center"
+                                       HorizontalAlignment="Stretch"
+                                           ></TextBlock>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Border BorderThickness="1"
+                                        BorderBrush="DarkGray"
+                                        CornerRadius="3"
+                                        Height="50"
+                                      
+                                        VerticalAlignment="Center">
+                                    <TextBox
+                                        x:Name="txbUserName"
+                                        materialDesign:ValidationAssist.Background="white"
+                                         Text="{Binding userinfo.UserInfo_Name}"
+                                        Margin="10 0 10 0"
+                                        FontSize="14"   
+                                        IsReadOnly="True"
+                                        VerticalAlignment="Center">
+                                        
+
+                                    </TextBox>
+                                </Border>
+                            </Grid>
+                            
+                            
+                        </Grid>
+                        <Grid Grid.Row="2" Margin="10 0 10 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock Text="Điện thoại"
+                                           
+                                            Style="{StaticResource txbInfo}"
+                                               VerticalAlignment="Center"
+                                       HorizontalAlignment="Stretch"
+                                           ></TextBlock>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Border BorderThickness="1"
+                                        BorderBrush="DarkGray"
+                                        CornerRadius="3"
+                                        Height="50"
+                                      
+                                        VerticalAlignment="Center">
+                                    <TextBox
+                                        x:Name="txbPhone"
+                                        materialDesign:ValidationAssist.Background="white"
+                                         Text="{Binding userinfo.UserInfo_Telephone}"
+                                        Margin="10 0 10 0"
+                                        IsReadOnly="True"
+                                        FontSize="14"        
+                                        VerticalAlignment="Center">
+
+
+                                    </TextBox>
+                                </Border>
+                            </Grid>
+
+
+                        </Grid>
+
+
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="3">

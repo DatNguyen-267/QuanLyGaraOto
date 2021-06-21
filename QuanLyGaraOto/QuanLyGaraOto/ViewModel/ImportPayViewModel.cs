@@ -31,6 +31,12 @@ namespace QuanLyGaraOto.ViewModel
         private int _TotalPay { get; set; }
         public int TotalPay { get => _TotalPay; set { _TotalPay = value; OnPropertyChanged(); } }
 
+        private SUPPLIER _Supplier { get; set; }
+        public SUPPLIER Supplier { get; set; }
+
+        private USER_INFO _userinfo { get; set; }
+        public USER_INFO userinfo { get => _userinfo; set { _userinfo = value; OnPropertyChanged(); } }
+
         private DateTime _ImportDate { get; set; }
         public DateTime ImportDate { get => _ImportDate; set { _ImportDate = value; OnPropertyChanged(); } }
         public ImportPayViewModel()
@@ -40,6 +46,9 @@ namespace QuanLyGaraOto.ViewModel
         public ImportPayViewModel(IMPORT_GOODS import)
         {
             Import = import;
+            Supplier = DataProvider.Ins.DB.SUPPLIERs.Where(x => x.Supplier_Id == Import.IdSupplier).FirstOrDefault();
+            userinfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == Import.IdUser).FirstOrDefault();
+            
             int i = 1;
             ImportDate = Import.ImportGoods_Date;
             if (Import.ImportGoods_TotalMoney != 0) Ispay = true ;
@@ -64,7 +73,7 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Thanh toán thành công!");
                     p.btnPay.Visibility = Visibility.Hidden;
-
+                    Ispay = true;
                 }
                 );
             CloseCommand = new RelayCommand<ImportPayWindow>(
@@ -87,12 +96,14 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     ImportBillTemplate bill = new ImportBillTemplate(Import);
                     bill.Show();
+                    bill.Close();
                     if(ListImport.Count()>14)
                     {
                         bill.Height = bill.Height + 35 * (ListImport.Count() - 13);
                     }
                     PrintViewModel printViewModel = new PrintViewModel();
                     printViewModel.PrintImportBill(bill);
+                    
                 }
                 );
         }

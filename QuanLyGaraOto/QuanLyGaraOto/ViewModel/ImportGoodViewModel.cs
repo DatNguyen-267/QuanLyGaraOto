@@ -85,6 +85,7 @@ namespace QuanLyGaraOto.ViewModel
             ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
             ListImport = new ObservableCollection<ImportItem>();
             ImportDate = import.ImportGoods_Date;
+            ImportGoods = import;
                 
             
             Command();
@@ -149,30 +150,42 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    foreach (var item in ListImport)
+                    MessageBoxResult rs = MessageBox.Show("Bạn đồng ý nhập tất cả vật tư đã chọn", "Thoát", MessageBoxButton.OKCancel);
+                    if (MessageBoxResult.OK == rs)
                     {
-                        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.ImportInfo.IdSupplies).SingleOrDefault();
-                        List.Supplies_Amount += item.ImportInfo.Amount;
+                        foreach (var item in ListImport)
+                        {
+                            var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.ImportInfo.IdSupplies).SingleOrDefault();
+                            List.Supplies_Amount += item.ImportInfo.Amount;
+                        }
+                        IsImport = true;
+                        DataProvider.Ins.DB.SaveChanges();
+                        ImportPayWindow wd = new ImportPayWindow(ImportGoods);
+                        if (ImportGoods.ImportGoods_TotalMoney != 0)
+                        {
+                            wd.btnPay.Visibility = Visibility.Hidden;
+                        }
+                        wd.ShowDialog();
                     }
-                    IsImport = true;
-                    DataProvider.Ins.DB.SaveChanges();
-                    ImportPayWindow wd = new ImportPayWindow(ImportGoods);
-                    if(ImportGoods.ImportGoods_TotalMoney != 0)
-                    {
-                        wd.btnPay.Visibility = Visibility.Hidden;
-                    }    
-                    wd.ShowDialog();
 
                 }
                 );
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
-                MessageBoxResult rs = MessageBox.Show("Bạn đồng ý thoát", "Thoát", MessageBoxButton.OKCancel);
-                if (MessageBoxResult.OK == rs)
+                if (!IsImport)
                 {
-                    DataProvider.Ins.DB.IMPORT_GOODS.Remove(ImportGoods);
-                    p.Close();
+                    MessageBoxResult rs = MessageBox.Show("Bạn đồng ý thoát và hủy tất cả vật tư", "Thoát", MessageBoxButton.OKCancel);
+                    if (MessageBoxResult.OK == rs)
+                    {
+                        DataProvider.Ins.DB.IMPORT_GOODS.Remove(ImportGoods);
+                        DataProvider.Ins.DB.SaveChanges();
+                        p.Close();
+                    }
                 }
+                else
+                {
+                    p.Close();
+                }    
             });
         }
         public void UpdateTotalMoney()
