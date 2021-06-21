@@ -246,7 +246,16 @@ namespace QuanLyGaraOto.ViewModel
                 isReport = true;
 
             if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 9).SingleOrDefault().Permission == true)
-                isSettingApp = true;
+                isGaraInfo = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 10).SingleOrDefault().Permission == true)
+                isWage = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 11).SingleOrDefault().Permission == true)
+                isCarBranch = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 12).SingleOrDefault().Permission == true)
+                isSuplier = true;
         }
     }
 }
