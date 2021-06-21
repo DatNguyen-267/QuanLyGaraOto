@@ -14,11 +14,11 @@ insert into Customer values(N'Kiet' , N'Quang Ngai' , '091923921')
 insert into Customer values(N'Hung' , N'TPHCM', '091923921')
 
 insert into SUPPLIER values(N'Phụ tùng ô tô Liên Việt','0918 340 288',N'kinhdoanhlienviet@gmail.com')
-insert into IMPORT_GOODS values('6/20/2021','0',N'kinhdoanhlienviet@gmail.com','Admin','1','1')
+
 
 --insert into CAR_STATUS values(N'Đang khám xe')
 --insert into CAR_STATUS values(N'Đang sửa chữa')
 --insert into CAR_STATUS values(N'Đã sửa chữa xong')
 --insert into CAR_STATUS values(N'Hoàn Thành')
 
-insert into SUPPLIER values(N'Huynh Anh Kiet', '1234012341', 'lfasdkflasjdfla@gmail.com') 
+

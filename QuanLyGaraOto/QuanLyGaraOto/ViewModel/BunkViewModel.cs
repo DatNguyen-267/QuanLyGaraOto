@@ -135,12 +135,14 @@ namespace QuanLyGaraOto.ViewModel
                 if (SelectedItem == null) return false;
                 return true; }, (p) => 
                 {
-                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa loại phụ tùng đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
-                    foreach(var item in Temp)
+                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa những phụ tùng đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
-                        DeleteModel delete = new DeleteModel();
-                        delete.SUPPLIES(item);
-                        ListSupplies.Remove(item);
+                        foreach (var item in Temp)
+                        {
+                            DeleteModel delete = new DeleteModel();
+                            delete.SUPPLIES(item);
+                            ListSupplies.Remove(item);
+                        }
                     }
                     LoadSupplies();
                 });

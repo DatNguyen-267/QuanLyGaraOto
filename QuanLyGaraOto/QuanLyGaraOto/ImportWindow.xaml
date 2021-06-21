@@ -267,7 +267,7 @@
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Columns>
-                            <materialDesign:DataGridTextColumn Header="Vật tư" Binding="{Binding ImportInfo.SUPPLIES.Supplies_Name}" Width="300"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Vật tư" Binding="{Binding Supplies_Name}" Width="300"></materialDesign:DataGridTextColumn>
                             <materialDesign:DataGridTextColumn Header="Giá nhập" Binding="{Binding ImportInfo.Price}" Width="120"></materialDesign:DataGridTextColumn>
                             <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding ImportInfo.Amount}" Width="120"></materialDesign:DataGridTextColumn>
                             <materialDesign:DataGridTextColumn Header="Đơn giá" Binding="{Binding ImportInfo.TotalMoney}"></materialDesign:DataGridTextColumn>
