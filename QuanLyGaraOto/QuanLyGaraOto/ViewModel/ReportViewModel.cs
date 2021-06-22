@@ -105,13 +105,32 @@ namespace QuanLyGaraOto.ViewModel
                 (p) => { return true; },
                 (p) =>
                 {
-                    PrintViewModel printViewModel = new PrintViewModel();
+                  
                     if (IsSelectedTabKinhDoanh)
                     {
-                        printViewModel.XuatLichSuKinhDoanh(List);
+                        if(List.Count()!=0)
+                        {
+                            PrintViewModel printViewModel = new PrintViewModel();
+                            printViewModel.XuatLichSuKinhDoanh(List);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không có dữ liệu để xuất", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Question);
+                        }
+                       
                     }else if (IsSelectedTabNhapHang)
                     {
-                        printViewModel.XuatLichSuNhapHang(ListImport);
+                        if(ListImport.Count()!=0)
+                        {
+                            PrintViewModel printViewModel = new PrintViewModel();
+                            printViewModel.XuatLichSuNhapHang(ListImport);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không có dữ liệu để xuất", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Question);
+
+                        }
+
                     }
                 });
         }
