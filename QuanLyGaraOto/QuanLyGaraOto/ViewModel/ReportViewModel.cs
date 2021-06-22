@@ -18,6 +18,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand LoadCbCommand { get; set; }
         public ICommand ReportSalesCommand { get; set; }
         public ICommand ReportInventoryCommand { get; set; }
+        public ICommand ExportCommand { get; set; }
         private string first_item_year { get; set; }
         public string First_item_year { get => first_item_year; set { first_item_year = value; OnPropertyChanged(); } }
         private string first_item_month { get; set; }
@@ -47,6 +48,13 @@ namespace QuanLyGaraOto.ViewModel
 
         private USER _User { get; set; }
         public USER User { get => _User; set { _User = value; OnPropertyChanged(); } }
+
+        private bool _IsSelectedTabNhapHang { get; set; }
+        public bool IsSelectedTabNhapHang { get => _IsSelectedTabNhapHang; set { _IsSelectedTabNhapHang = value; OnPropertyChanged(); } }
+
+        private  bool _IsSelectedTabKinhDoanh { get; set; }
+        public bool IsSelectedTabKinhDoanh { get => _IsSelectedTabKinhDoanh; set { _IsSelectedTabKinhDoanh = value; OnPropertyChanged(); } }
+
         public ReportViewModel(bool role, USER u) : this()
         {
             isReport = role;
@@ -54,6 +62,7 @@ namespace QuanLyGaraOto.ViewModel
         }
         public ReportViewModel()
         {
+            IsSelectedTabKinhDoanh = true;
             load_firstItem();
             LoadComboBox();
             LoadCbCommand = new RelayCommand<ReportWindow>(
@@ -91,7 +100,20 @@ namespace QuanLyGaraOto.ViewModel
                 (p) => 
                 { 
                     LoadToView(p); 
-                });         
+                });
+            ExportCommand = new RelayCommand<ReportWindow>(
+                (p) => { return true; },
+                (p) =>
+                {
+                    PrintViewModel printViewModel = new PrintViewModel();
+                    if (IsSelectedTabKinhDoanh)
+                    {
+                        printViewModel.XuatLichSuKinhDoanh(List);
+                    }else if (IsSelectedTabNhapHang)
+                    {
+                        printViewModel.XuatLichSuNhapHang(ListImport);
+                    }
+                });
         }
 
         //Load combobox-selected item khi khởi tạo
@@ -153,6 +175,8 @@ namespace QuanLyGaraOto.ViewModel
                 var suppliesNameList = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.IdSupplies).SingleOrDefault();
                 importTemp.Supplies_Name = suppliesNameList.Supplies_Name;
                 var importDateList = DataProvider.Ins.DB.IMPORT_GOODS.Where(x => x.ImportGoods_Id == item.IdImportGood).SingleOrDefault();
+                importTemp.Supplier_Name = importDateList.ImportGoods_Supplier;
+                importTemp.IdImport = importDateList.ImportGoods_Id;
                 importTemp.ImportGoods_Date = importDateList.ImportGoods_Date;
                 if (importDateList.ImportGoods_Date.Year.ToString() == selectedYear && importDateList.ImportGoods_Date.Month.ToString() == selectedMonth)
                 {

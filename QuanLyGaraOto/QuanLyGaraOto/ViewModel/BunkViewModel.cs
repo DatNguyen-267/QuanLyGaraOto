@@ -27,6 +27,8 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand RefeshSuppliesCommand { get; set; }
         public ICommand SelectionChanged { get; set; }
 
+        public ICommand ExportCommand { get; set; }
+
         private BunkWindow _MainWindow;
 
         public BunkWindow MainWindow { get => _MainWindow; set { _MainWindow = value; } }
@@ -49,6 +51,11 @@ namespace QuanLyGaraOto.ViewModel
         private string _Amount { get; set; }
 
         public string Amount { get => _Amount; set { _Amount = value; OnPropertyChanged(); } }
+
+        private USER _user { get; set; }
+
+        public USER user { get => _user; set { _user = value; OnPropertyChanged(); } }
+
 
         private SUPPLIES _SelectedItem { get; set; }
         public SUPPLIES SelectedItem
@@ -77,9 +84,10 @@ namespace QuanLyGaraOto.ViewModel
 
         private string _SuppliesAmount { get; set; }
         public string SuppliesAmount { get => _SuppliesAmount; set { _SuppliesAmount = value; OnPropertyChanged(); } }
-        public BunkViewModel(bool role) : this()
+        public BunkViewModel(bool role, USER user) : this()
         {
             isImportBunk = role;
+            this.user = user;
         }
 
 
@@ -127,12 +135,14 @@ namespace QuanLyGaraOto.ViewModel
                 if (SelectedItem == null) return false;
                 return true; }, (p) => 
                 {
-                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa loại phụ tùng đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) ;
-                    foreach(var item in Temp)
+                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa những phụ tùng đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
-                        DeleteModel delete = new DeleteModel();
-                        delete.SUPPLIES(item);
-                        ListSupplies.Remove(item);
+                        foreach (var item in Temp)
+                        {
+                            DeleteModel delete = new DeleteModel();
+                            delete.SUPPLIES(item);
+                            ListSupplies.Remove(item);
+                        }
                     }
                     LoadSupplies();
                 });
@@ -186,12 +196,16 @@ namespace QuanLyGaraOto.ViewModel
                 p.txbSuppliesPrice.Text = "";
                 ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
             });
-
+            ExportCommand = new RelayCommand<BunkWindow>((p) => { return true; }, (p) =>
+              {
+                  PrintViewModel printViewModel = new PrintViewModel();
+                  printViewModel.Print_DanhSachVatTu(ListSupplies);
+              });
         }
 
         public void OpenImportWd(MainWindow wd)
         {
-            AddImportWindow addImportWindow = new AddImportWindow();
+            AddImportWindow addImportWindow = new AddImportWindow(user);
             addImportWindow.ShowDialog();
         }
         void LoadSupplies()

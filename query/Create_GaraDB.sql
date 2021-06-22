@@ -244,11 +244,14 @@ insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Truy cập dịch v�
 insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Truy cập kho hàng');
 insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền nhập hàng');
 insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Truy cập nhân viên');
-insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền thêm nhân viên');
-insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền thêm chức vụ');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền thêm sửa xóa nhân viên');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền thêm sửa xóa chức vụ');
 insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Truy cập thống kê');
 insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền báo cáo');
-insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Truy cập cài đặt ứng dụng');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền thay đổi thông tin gara');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền thêm sửa xóa tiền công');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền thêm sửa xóa hãng xe');
+insert into PREMISSION_ITEM(PermissionItem_Name) values (N'Quyền thêm sửa xóa nhà cung cấp');
 
 insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,1,1)
 insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,2,1)
@@ -259,6 +262,9 @@ insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,6,1)
 insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,7,1)
 insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,8,1)
 insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,9,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,10,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,11,1)
+insert into ROLE_DETAIL(IdRole,IdPermissionItem,Permission) values (1,12,1)
 
 insert into USERS(UserName,Password,IdRole) values ('admin','db69fc039dcbd2962cb4d28f5891aae1',1);
 

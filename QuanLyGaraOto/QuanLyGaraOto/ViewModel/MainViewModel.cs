@@ -68,8 +68,17 @@ namespace QuanLyGaraOto.ViewModel
         bool _isReport = false;
         public bool isReport { get => _isReport; set { _isReport = value; OnPropertyChanged(); } }
 
-        bool _isSettingApp = false;
-        public bool isSettingApp { get => _isSettingApp; set { _isSettingApp = value; OnPropertyChanged(); } }
+        bool _isGaraInfo = false;
+        public bool isGaraInfo { get => _isGaraInfo; set { _isGaraInfo = value; OnPropertyChanged(); } }
+
+        bool _isWage = false;
+        public bool isWage { get => _isWage; set { _isWage = value; OnPropertyChanged(); } }
+
+        bool _isCarBranch = false;
+        public bool isCarBranch { get => _isCarBranch; set { _isCarBranch = value; OnPropertyChanged(); } }
+
+        bool _isSuplier = false;
+        public bool isSuplier { get => _isSuplier; set { _isSuplier = value; OnPropertyChanged(); } }
 
         public MainViewModel()
         {
@@ -120,7 +129,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 InitVis();
                 VisBunk = true;
-                p.DataContext = new BunkViewModel(isImportBunk);
+                p.DataContext = new BunkViewModel(isImportBunk,User);
 
             });
             OpenReport = new RelayCommand<ReportWindow>((p) => 
@@ -140,7 +149,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 InitVis();
                 VisSetting = true;
-                p.DataContext = new SettingViewModel(User.UserName,isSettingApp, mainWindow);
+                p.DataContext = new SettingViewModel(User.UserName,isGaraInfo,isWage,isCarBranch,isSuplier,mainWindow);
             });
         }
         public void InitVis()
@@ -194,7 +203,16 @@ namespace QuanLyGaraOto.ViewModel
                     isReport = true;
 
                 if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 9).SingleOrDefault().Permission == true)
-                    isSettingApp = true;
+                    isGaraInfo = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 10).SingleOrDefault().Permission == true)
+                    isWage = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 11).SingleOrDefault().Permission == true)
+                    isCarBranch = true;
+
+                if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 12).SingleOrDefault().Permission == true)
+                    isSuplier = true;
             }
             else
             {
@@ -228,7 +246,16 @@ namespace QuanLyGaraOto.ViewModel
                 isReport = true;
 
             if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 9).SingleOrDefault().Permission == true)
-                isSettingApp = true;
+                isGaraInfo = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 10).SingleOrDefault().Permission == true)
+                isWage = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 11).SingleOrDefault().Permission == true)
+                isCarBranch = true;
+
+            if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 12).SingleOrDefault().Permission == true)
+                isSuplier = true;
         }
     }
 }

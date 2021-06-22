@@ -189,6 +189,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand DeleteCarBrand { get; set; }
         public ICommand OpenAddCarBrandWindow { get; set; }
         public ICommand BrandSelectionChanged { get; set; }
+        public ICommand ExportBrandCommand { get; set; }
 
         // Add brand window
         private string _CarBrandInAdd;
@@ -266,6 +267,8 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand DeleteWage { get; set; }
         public ICommand OpenAddWageWindow { get; set; }
         public ICommand WageSelectionChanged { get; set; }
+
+        public ICommand ExportWageCommand { get; set; }
 
         // Add wage window
         public ICommand CancelAddWageWindow { get; set; }
@@ -397,8 +400,17 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand RefeshBrandCommand { get; set; }
 
         //Role
-        bool _isSettingApp = false;
-        public bool isSettingApp { get => _isSettingApp; set { _isSettingApp = value; OnPropertyChanged(); } }
+        bool _isGaraInfo = false;
+        public bool isGaraInfo { get => _isGaraInfo; set { _isGaraInfo = value; OnPropertyChanged(); } }
+
+        bool _isWage = false;
+        public bool isWage { get => _isWage; set { _isWage = value; OnPropertyChanged(); } }
+
+        bool _isCarBranch = false;
+        public bool isCarBranch { get => _isCarBranch; set { _isCarBranch = value; OnPropertyChanged(); } }
+
+        bool _isSuplier = false;
+        public bool isSuplier { get => _isSuplier; set { _isSuplier = value; OnPropertyChanged(); } }
 
         // Supplier
         private ObservableCollection<SUPPLIER> _ListSupplier { get; set; }
@@ -422,7 +434,7 @@ namespace QuanLyGaraOto.ViewModel
             UserSettingVis = false;
             // All command and setting Supplier
             ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
-            OpenAddSupplierWindow = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
+            OpenAddSupplierWindow = new RelayCommand<SettingWindow>((p) => { if (isSuplier == false) return false; return true; }, (p) =>
             {
                 AddSupplierWindow window = new AddSupplierWindow();
                 window.ShowDialog();
@@ -431,6 +443,7 @@ namespace QuanLyGaraOto.ViewModel
             OpenModifySupplierWindow = new RelayCommand<SettingWindow>((p) => {
 
                 if (SelectedSupplier == null) return false;
+                if (isSuplier == false) return false;
                 return true; }, (p) =>
             {
                 EditSupplierWindow window = new EditSupplierWindow(SelectedSupplier);
@@ -444,6 +457,10 @@ namespace QuanLyGaraOto.ViewModel
             DeleteSupplier = new RelayCommand<SettingWindow>((p) =>
             {
                 if (SelectedSupplier == null)
+                {
+                    return false;
+                }
+                if (isSuplier == false)
                 {
                     return false;
                 }
@@ -626,7 +643,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 SelectedBrandItems = new ObservableCollection<CAR_BRAND>(p.SelectedItems.Cast<CAR_BRAND>().ToList());
             });
-            OpenModifyCarBrandWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenModifyCarBrandWindow = new RelayCommand<object>((p) => { if (isCarBranch == false) return false;  return true; }, (p) =>
             {
                 if(SelectedBrandItems.Count > 1)
                 {
@@ -641,7 +658,7 @@ namespace QuanLyGaraOto.ViewModel
                 IsEnableDeleteButtonInBrandSetting = false;
                 ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
             });
-            DeleteCarBrand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            DeleteCarBrand = new RelayCommand<object>((p) => { if (isCarBranch == false) return false; return true; }, (p) =>
             {
                 if (MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
@@ -662,7 +679,7 @@ namespace QuanLyGaraOto.ViewModel
                     IsEnableDeleteButtonInBrandSetting = false;
                 }
             });
-            OpenAddCarBrandWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenAddCarBrandWindow = new RelayCommand<object>((p) => { if (isCarBranch == false) return false; return true; }, (p) =>
             {
                 AddCarBrandWindow window = new AddCarBrandWindow();
                 window.ShowDialog();
@@ -671,6 +688,11 @@ namespace QuanLyGaraOto.ViewModel
                     ListCarBrand.Add(addCarBrandViewModel.br);
             });
 
+            ExportBrandCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                PrintViewModel printViewModel = new PrintViewModel();
+                printViewModel.Print_ThongTinHangXe(ListCarBrand);
+            });
             // Wage information
             ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
 
@@ -678,7 +700,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 SelectedWageItems = new ObservableCollection<WAGE>(p.SelectedItems.Cast<WAGE>().ToList());
             });
-            OpenModifyWageWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenModifyWageWindow = new RelayCommand<object>((p) => { if (isWage == false) return false; return true; }, (p) =>
             {
                 if(SelectedWageItems.Count > 1)
                 {
@@ -696,6 +718,10 @@ namespace QuanLyGaraOto.ViewModel
             DeleteWage = new RelayCommand<object>((p) => 
             { 
                 if(SelectedWageItem == null)
+                {
+                    return false;
+                }
+                if (isWage == false)
                 {
                     return false;
                 }
@@ -722,7 +748,7 @@ namespace QuanLyGaraOto.ViewModel
                     IsEnableDeleteButtonInWageSetting = false;
                 }
             });
-            OpenAddWageWindow = new RelayCommand<object>((p) => { return true; }, (p) =>
+            OpenAddWageWindow = new RelayCommand<object>((p) => { if (isWage == false) return false; return true; }, (p) =>
             {
                 AddWageWindow window = new AddWageWindow();
                 window.ShowDialog();
@@ -730,7 +756,12 @@ namespace QuanLyGaraOto.ViewModel
                 if (addWageViewModel.wage !=null) 
                 ListWage.Add(addWageViewModel.wage);
             });
+            ExportWageCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                  PrintViewModel printViewModel = new PrintViewModel();
+                  printViewModel.Print_ThongTinTienCong(ListWage);
 
+             });
             // User information
             ChangeUserInformation = new RelayCommand<SettingWindow>((p) =>
             {
@@ -842,7 +873,7 @@ namespace QuanLyGaraOto.ViewModel
             // Set enable button to false
             SetEnableStatusButtonInGaraInformation(false);
         }
-        public SettingViewModel(string username, bool role, MainWindow mainWindow) : this()
+        public SettingViewModel(string username, bool garaInfo, bool wage, bool carBranch, bool suplier, MainWindow mainWindow) : this()
         {
             // User information
             user = DataProvider.Ins.DB.USERS.Where(x => x.UserName == username).FirstOrDefault();
@@ -857,7 +888,10 @@ namespace QuanLyGaraOto.ViewModel
             }
 
             //Set role
-            isSettingApp = role;
+            isGaraInfo = garaInfo;
+            isWage = wage;
+            isCarBranch = carBranch;
+            isSuplier = suplier;
 
             // Log out
             Logout = new RelayCommand<object>((p) => { return true; }, (p) =>

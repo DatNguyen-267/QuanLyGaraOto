@@ -11,7 +11,7 @@
      
         Name="reportWindow"
         DataContext="{StaticResource ReportVM}"
-       Height="450" Width="800">
+       Height="450" Width="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -38,8 +38,13 @@
                     ></TextBlock>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" >
-            <ComboBox
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <ComboBox
                 x:Name="cb_SelectYear"
                 materialDesign:HintAssist.Hint="Năm"
                 HorizontalAlignment="Left"
@@ -53,23 +58,20 @@
                 ItemsSource="{Binding ItemSource_Year}" 
                 SelectedItem="{Binding First_item_year}"
                 Text="{Binding First_item_year}">
-
-
-
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding YearChangedCommand}" 
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding YearChangedCommand}" 
                                                CommandParameter="{Binding ElementName=reportWindow}"/>
-                    </i:EventTrigger>
+                        </i:EventTrigger>
 
-                    <i:EventTrigger EventName="Loaded">
-                        <i:InvokeCommandAction Command="{Binding LoadCbCommand}" 
+                        <i:EventTrigger EventName="Loaded">
+                            <i:InvokeCommandAction Command="{Binding LoadCbCommand}" 
                                                CommandParameter="{Binding ElementName=reportWindow}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
 
-            </ComboBox>
-            <ComboBox
+                </ComboBox>
+                <ComboBox
                 x:Name="cb_SelectMonth"
                 materialDesign:HintAssist.Hint="Tháng"
                 HorizontalAlignment="Left"
@@ -77,7 +79,7 @@
                 VerticalContentAlignment="Center"
                 FontSize="16"
                 FontWeight="Medium"
-                Margin="220,0,0,0"
+                Margin="20,0,0,0"
                 Width="160"
                 ItemsSource="{Binding ItemSource_Month}"
                 SelectedItem="{Binding First_item_month}"
@@ -85,15 +87,24 @@
                 
                 
                 >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding MonthChangedCommand}" 
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding MonthChangedCommand}" 
                                                CommandParameter="{Binding ElementName=reportWindow}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
 
-            </ComboBox>
-            <StackPanel Orientation="Horizontal" 
+                </ComboBox>
+                <Button Content="Xuất"
+                        Style="{StaticResource ExportButton}"
+                        Margin="20 5 0 0"
+                        Command="{Binding ExportCommand}"
+                        CommandParameter="{Binding ElementName=reportWindow}">
+                </Button>
+              
+            </StackPanel>
+            <StackPanel Grid.Column="1"
+                Orientation="Horizontal" 
                         HorizontalAlignment="Right" 
                         VerticalAlignment="Center"
                         Margin="0 0 20 0">
@@ -114,6 +125,7 @@
                 CommandParameter="{Binding ElementName=reportWindow}"/>
             </StackPanel>
         </Grid>
+     
         <Grid Grid.Row="2" Margin="10,10,10,10">
             <TabControl>
                 <TabControl.Resources>
@@ -161,7 +173,9 @@
                     Header="Lịch sử kinh doanh"
                     Foreground="{StaticResource MainColor}"
                     FontWeight="Bold"
-                    FontSize="18">
+                    FontSize="18"
+                    IsSelected="{Binding IsSelectedTabKinhDoanh}"
+                    >
                     <Grid>
                         <DataGrid x:Name="lvs_Receipt" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                   SelectionMode="Extended"
@@ -229,7 +243,8 @@
                     Header="Lịch sử nhập hàng"
                     Foreground="{StaticResource MainColor}"
                     FontWeight="Bold"
-                    FontSize="18">
+                    FontSize="18"
+                     IsSelected="{Binding IsSelectedTabNhapHang}">
                     <Grid>
                         <DataGrid x:Name="lvs_Import" ItemsSource="{Binding ListImport, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                   SelectionMode="Extended"
@@ -268,10 +283,12 @@
                                 </Style>
                             </DataGrid.ColumnHeaderStyle>
                             <DataGrid.Columns>
-                                <materialDesign:DataGridTextColumn  Width="150" Header="Vật tư " Binding="{Binding Supplies_Name}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn  Width="300" Header="Vật tư " Binding="{Binding Supplies_Name}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn  Width="100" Header="Số lượng"   Binding="{Binding ImportInfo.Amount }"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn  Width="150" Header="Đơn giá"   Binding="{Binding ImportInfo.Price}"></materialDesign:DataGridTextColumn>
-                                <materialDesign:DataGridTextColumn  Width="150" Header="Thời gian"   Binding="{Binding ImportGoods_Date}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn  Width="150" Header="Nhà cung cấp"   Binding="{Binding Supplier_Name}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn  Width="180" Header="Ngày nhập hàng"   Binding="{Binding ImportGoods_Date, StringFormat='dd/MM/yyyy'}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn  Width="150" Header="Mã đơn nhập"   Binding="{Binding IdImport }"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn  Header="Tổng chi phí"   Binding="{Binding ImportInfo.TotalMoney}"></materialDesign:DataGridTextColumn>
                               
                                 
