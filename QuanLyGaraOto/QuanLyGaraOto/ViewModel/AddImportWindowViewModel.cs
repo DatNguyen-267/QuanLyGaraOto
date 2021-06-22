@@ -50,7 +50,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 p.Close();
             });
-            ConfirmCommand = new RelayCommand<Window>((p) => {
+            ConfirmCommand = new RelayCommand<AddImportWindow>((p) => {
                 if (ImportDate == null) return false;
                 if (SelectedSupplier == null) return false;
                 return true;
@@ -66,9 +66,9 @@ namespace QuanLyGaraOto.ViewModel
 
                 DataProvider.Ins.DB.IMPORT_GOODS.Add(NewImport);
                 DataProvider.Ins.DB.SaveChanges();
+                p.Close();
                 ImportWindow importWindow = new ImportWindow(NewImport);
-                importWindow.ShowDialog();
-                p.Close();                
+                importWindow.ShowDialog();               
             });
 
         }

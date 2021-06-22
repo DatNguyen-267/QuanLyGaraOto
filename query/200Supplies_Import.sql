@@ -6,7 +6,7 @@ insert into SUPPLIES values
 	(N'Ắc quy Đồng Nai N150',3050000,10),
 	(N'Ắc quy Đồng Nai N200',3850000,10),
 	(N'Ắc quy khô Đồng Nai CMF 31800',2250000,10),
-	(N'Ắc quy Đông Nai N70S',1400000,10),
+	(N'Ắc quy Đồng Nai N70S',1400000,10),
 	(N'Ắc quy Đồng Nai N70Z',1600000,10),
 	(N'Bọc vô lăng 1111GR',390000,10),
 	(N'Bọc vô lăng 1117GR',410000,10),

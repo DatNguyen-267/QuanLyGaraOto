@@ -139,6 +139,25 @@ namespace QuanLyGaraOto.ViewModel
                     {
                         foreach (var item in Temp)
                         {
+                            var ImportDetail = new ObservableCollection<IMPORT_GOODS_DETAIL>(DataProvider.Ins.DB.IMPORT_GOODS_DETAIL);
+                            var RepairDetail = new ObservableCollection<REPAIR_DETAIL>(DataProvider.Ins.DB.REPAIR_DETAIL);
+                            foreach(var temp in ImportDetail)
+                            {
+                                if (item.Supplies_Id == temp.IdSupplies)
+                                {
+                                    MessageBox.Show("Trong danh sách bạn chọn có phụ tùng đang được nhập không thể xóa");
+                                    return;
+                                }    
+                            }
+                            foreach (var temp in RepairDetail)
+                            {
+                                if (item.Supplies_Id == temp.IdSupplies)
+                                {
+                                    MessageBox.Show("Trong danh sách bạn chọn có phụ tùng đang được sử dụng không thể xóa");
+                                    return;
+                                }
+                            }
+
                             DeleteModel delete = new DeleteModel();
                             delete.SUPPLIES(item);
                             ListSupplies.Remove(item);

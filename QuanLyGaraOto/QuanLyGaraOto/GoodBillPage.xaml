@@ -164,6 +164,10 @@
                         Binding="{Binding ImportGoods_TotalMoney,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         Header="Tổng tiền thanh toán"
                         Width="auto"/>
+                    <materialDesign:DataGridTextColumn
+                        Binding="{Binding ImportGoods_Supplier,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat=dd/MM/yyyy}"
+                        Header="Đơn vị cung cáp"
+                        Width="200"/>
                 </DataGrid.Columns>
             </DataGrid>
             <!--<ListView
