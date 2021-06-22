@@ -588,7 +588,8 @@ namespace QuanLyGaraOto.ViewModel
             {
                 if (MessageBox.Show("Bạn có chắc chắn muốn thay đổi?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception
+                    String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception + 
+                                                ", IsOverPay=" + (this.IsOverPay ? "1" : "0")
                                             + "where MaxCarReception=" + GaraInfo.MaxCarReception.ToString();
 
                     string connectionString = ConfigurationManager.ConnectionStrings["GARAEntities"].ConnectionString;
