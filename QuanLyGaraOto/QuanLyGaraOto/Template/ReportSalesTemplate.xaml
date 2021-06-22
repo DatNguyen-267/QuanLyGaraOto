@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Name="wdReportSalesTemplate"
         WindowStyle="SingleBorderWindow"
-        ResizeMode="NoResize"
+       
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         Title="ReportSalesTemplate" Height="600" Width="850">

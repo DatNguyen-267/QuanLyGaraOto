@@ -474,7 +474,7 @@
                                                 <Trigger Property="DataGridCell.IsSelected" Value="True">
                                                     <Setter Property="FontWeight" Value="DemiBold" />
                                                     <Setter Property="FontSize" Value="17" />
-
+    
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
@@ -510,10 +510,16 @@
                             <Grid>
                                 <Grid.Resources>
                                     <Style TargetType="{x:Type Label}">
-                                        <Setter Property="FontSize" Value="16"></Setter>
-                                        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                                        <Setter Property="FontSize" Value="14"></Setter>
+                                        <Setter Property="FontWeight" Value="Medium"></Setter>
+                                        <Setter Property="VerticalAlignment" Value="Top"></Setter>
                                     </Style>
-
+                                    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource MaterialDesignCheckBox}">
+                                        <Setter Property="IsHitTestVisible" Value="False"></Setter>
+                                    </Style>
+                                    <Style TargetType="{x:Type Grid}">
+                                        <Setter Property="Margin" Value="16 0 16 0"></Setter>
+                                    </Style>
                                 </Grid.Resources>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"></RowDefinition>
@@ -537,9 +543,9 @@
                                    Style="{StaticResource Title}"
                                     ></Label>
                               
-                                <Grid Grid.Row="1" Margin="16 8 16 0">
+                                <Grid Grid.Row="1" >
                                     <Label Content="Truy cập dịch vụ"
-                                           VerticalAlignment="Center"
+                                           VerticalAlignment="Top"
                                            Margin="40 0 0 0"
                                            
                                            ></Label>
@@ -551,7 +557,7 @@
                                               
                                               />
                                 </Grid>
-                                <Grid Grid.Row="2" Margin="16 8 16 0">
+                                <Grid Grid.Row="2">
                                     <Label Content="Truy cập kho hàng"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -563,7 +569,7 @@
                                               Foreground="White"
                                               />
                                 </Grid>
-                                <Grid Grid.Row="3" Margin="64 8 16 0">
+                                <Grid Grid.Row="3" Margin="64 0 0 0">
                                     <Label Content="Quyền nhập hàng"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -576,7 +582,7 @@
                                                 
                                               />
                                 </Grid>
-                                <Grid Grid.Row="4" Margin="16 8 16 0">
+                                <Grid Grid.Row="4" >
                                     <Label Content="Truy cập nhân viên"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -588,7 +594,7 @@
                                               Foreground="White"
                                               />
                                 </Grid>
-                                <Grid Grid.Row="5" Margin="64 8 16 0">
+                                <Grid Grid.Row="5" Margin="64 0 0 0">
                                     <Label Content="Quyền thêm/xóa/sửa nhân viên"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -600,7 +606,7 @@
                                               Foreground="White"
                                               />
                                 </Grid>
-                                <Grid Grid.Row="6" Margin="64 8 16 0">
+                                <Grid Grid.Row="6" Margin="64 0 0 0">
                                     <Label Content="Quyền thêm/xóa/sửa chức vụ"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -612,7 +618,7 @@
                                               Foreground="White"
                                               />
                                 </Grid>
-                                <Grid Grid.Row="7" Margin="16 8 16 0">
+                                <Grid Grid.Row="7">
                                     <Label Content="Truy cập thống kê"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -624,7 +630,7 @@
                                               Foreground="White"
                                               />
                                 </Grid>
-                                <Grid Grid.Row="8" Margin="64 8 16 0">
+                                <Grid Grid.Row="8" Margin="64 0 0 0">
                                     <Label Content="Quyền báo cáo"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -636,7 +642,7 @@
                                               Foreground="White"
                                               />
                                 </Grid>
-                                <Grid Grid.Row="9" Margin="16 8 16 0">
+                                <Grid Grid.Row="9">
                                     <Label Content="Quyền thay đổi thông tin gara"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -648,7 +654,7 @@
                                               Foreground="White"
                                               />
                                 </Grid>
-                                <Grid Grid.Row="10" Margin="16 8 16 0">
+                                <Grid Grid.Row="10">
                                     <Label Content="Quyền thêm/xóa/sửa tiền công"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -660,7 +666,7 @@
                                               Foreground="White"
                                               />
                                 </Grid>
-                                <Grid Grid.Row="11" Margin="16 8 16 0">
+                                <Grid Grid.Row="11">
                                     <Label Content="Quyền thêm/xóa/sửa hãng xe"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -672,7 +678,7 @@
                                               Foreground="White"
                                               />
                                 </Grid>
-                                <Grid Grid.Row="12" Margin="16 8 16 0">
+                                <Grid Grid.Row="12">
                                     <Label Content="Quyền thêm/xóa/sửa nhà cung cấp"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
@@ -684,7 +690,7 @@
                                               Foreground="White"
                                               />
                                 </Grid>
-                                <Grid Grid.Row="13" Margin="16 0 16 20">
+                                <Grid Grid.Row="13" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
 

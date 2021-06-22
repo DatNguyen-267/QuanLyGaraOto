@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -70,8 +71,11 @@ namespace QuanLyGaraOto.ViewModel
         public int ViewSelectedIndex { get => _ViewSelectedIndex; set { _ViewSelectedIndex = value; OnPropertyChanged(); } }
         private string _ViewSelectedValue { get; set; }
         public string ViewSelectedValue { get => _ViewSelectedValue; set { _ViewSelectedValue = value; OnPropertyChanged(); } }
+        private DateTime _SelectedDate { get; set; }
+        public DateTime SelectedDate { get => _SelectedDate; set { _SelectedDate = value; OnPropertyChanged(); } }
         public ServiceViewModel()
         {
+            
             InitData();
             CarReceptionCommand = new RelayCommand<object>((p) => {
                 LoadReceptionAmount();
@@ -147,12 +151,18 @@ namespace QuanLyGaraOto.ViewModel
             SearchCommand = new RelayCommand<ServiceWindow>
                 ((p) =>
                 {
-                    if (string.IsNullOrEmpty(p.txbID.Text) 
+                   
+
+                    if  (string.IsNullOrEmpty(p.dpReceptionDate.Text)
                     && string.IsNullOrEmpty(p.txbDebt.Text) 
                     && string.IsNullOrEmpty(p.txbLicensePlate.Text) 
                     && (SelectedBrand == null ||SelectedBrand.CarBrand_Name == null ) 
                     && string.IsNullOrEmpty(CustomerName)
                     ) return false;
+
+                    Regex regex = new Regex(@"^[0-9]+$");
+                    if (!regex.IsMatch(p.txbDebt.Text) && !string.IsNullOrEmpty(p.txbDebt.Text)) return false;
+
                     return true;
                 }, (p) =>
                 {
@@ -163,10 +173,8 @@ namespace QuanLyGaraOto.ViewModel
 
                     foreach (var item in ListCar)
                     {
-                        if (((!string.IsNullOrEmpty(p.txbID.Text) && item.CarReception.Reception_Id.ToString().Contains(ID.ToString()))
-                        || (string.IsNullOrEmpty(p.txbID.Text)))
-
-                        && ((!string.IsNullOrEmpty(p.txbLicensePlate.Text) && uni.RemoveUnicode(item.CarReception.LicensePlate).ToLower().Contains(uni.RemoveUnicode(LicensePlate).ToLower()))
+                        if (
+                        ((!string.IsNullOrEmpty(p.txbLicensePlate.Text) && uni.RemoveUnicode(item.CarReception.LicensePlate).ToLower().Contains(uni.RemoveUnicode(LicensePlate).ToLower()))
                         || (string.IsNullOrEmpty(p.txbLicensePlate.Text)))
 
                         && ((SelectedBrand == null || SelectedBrand.CarBrand_Name == null) || ((SelectedBrand != null ) && item.CarReception.CAR_BRAND.CarBrand_Name == SelectedBrand.CarBrand_Name)
@@ -176,7 +184,10 @@ namespace QuanLyGaraOto.ViewModel
                         ||(string.IsNullOrEmpty(p.txbCustomerName.Text))) 
 
                         && ( (!string.IsNullOrEmpty(p.txbDebt.Text) && (item.CarReception.Debt.ToString() == Debt.ToString()))
-                        ||(string.IsNullOrEmpty(p.txbDebt.Text)))) TempListCar.Add(item);
+                        ||(string.IsNullOrEmpty(p.txbDebt.Text)))
+
+                        && ((!string.IsNullOrEmpty(p.dpReceptionDate.Text)) && (item.CarReception.ReceptionDate.Date == p.dpReceptionDate.SelectedDate.Value.Date))
+                        || (string.IsNullOrEmpty(p.dpReceptionDate.Text))) TempListCar.Add(item);
                     }
                     ListCar = TempListCar;
                 }
@@ -187,7 +198,7 @@ namespace QuanLyGaraOto.ViewModel
                     return true;
                 }, (p) =>
                 {
-                    ID = "";
+                    p.dpReceptionDate.SelectedDate = null;
                     CustomerName = "";
                     Debt = "";
                     SelectedBrand = null;

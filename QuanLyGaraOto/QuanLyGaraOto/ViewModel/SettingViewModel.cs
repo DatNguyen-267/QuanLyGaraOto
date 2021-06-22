@@ -490,7 +490,7 @@ namespace QuanLyGaraOto.ViewModel
                 if (p == null) return false;
 
                 Regex regex = new Regex(@"^[0-9]+$");
-                if (!regex.IsMatch(p.txbPhoneSupplier.Text)) return false;
+                if (!regex.IsMatch(p.txbPhoneSupplier.Text) && !string.IsNullOrEmpty(p.txbPhoneSupplier.Text)) return false;
 
                 if (string.IsNullOrEmpty(p.txbSupplier.Text) && string.IsNullOrEmpty(p.txbSupplierEmail.Text)
                 && string.IsNullOrEmpty(p.txbPhoneSupplier.Text))
@@ -535,7 +535,7 @@ namespace QuanLyGaraOto.ViewModel
                 UserSettingVis = true;
                 AppSettingVis = false;
             });
-            // Search Brand
+            //  Brand
             SearchBrandCommand = new RelayCommand<SettingWindow>((p) => {
                 if (p == null) return false;
                 if (string.IsNullOrEmpty(p.txtBrand.Text))
@@ -564,7 +564,7 @@ namespace QuanLyGaraOto.ViewModel
             SearchWageCommand = new RelayCommand<SettingWindow>((p) => {
                 if (p == null) return false;
                 Regex regex = new Regex(@"^[0-9]+$");
-                if (!regex.IsMatch(p.txbWageValue.Text)) return false;
+                if (!regex.IsMatch(p.txbWageValue.Text) && !string.IsNullOrEmpty(p.txbWageValue.Text)) return false;
 
                 if (string.IsNullOrEmpty(p.txbWageName.Text)
                     && string.IsNullOrEmpty(p.txbWageValue.Text))
@@ -613,9 +613,9 @@ namespace QuanLyGaraOto.ViewModel
             {
                 if (MessageBox.Show("Bạn có chắc chắn muốn thay đổi?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception
+                    String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception +
+                                                ", IsOverPay=" + (this.IsOverPay ? "1" : "0")
                                             + "where MaxCarReception=" + GaraInfo.MaxCarReception.ToString();
-
                     string connectionString = ConfigurationManager.ConnectionStrings["GARAEntities"].ConnectionString;
                     if (connectionString.ToLower().StartsWith("metadata="))
                     {

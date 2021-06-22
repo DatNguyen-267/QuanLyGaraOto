@@ -14,16 +14,21 @@
         Height="800" Width="400">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="80"></RowDefinition>
             <RowDefinition ></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0"
-               Style="{StaticResource Title}"
-               Content="Chỉnh sửa chức vụ">
-            
-        </Label>
+        <Grid Grid.Row="0" Background="{StaticResource MainColor}">
+            <TextBlock Text="Chỉnh sửa chức vụ"
+                       FontSize="30"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontWeight="DemiBold">
+
+            </TextBlock>
+        </Grid>
         <Grid Margin="10 5 10 5" Grid.Row="1">
             <TextBox
                 x:Name="txtRoleName"
@@ -70,7 +75,7 @@
 
         </Label>
         <materialDesign:Card Grid.Row="2" Margin="10 5 10 5" Grid.ColumnSpan="2">
-            <Grid>
+            <Grid Margin=" 0 0 0 10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -88,8 +93,7 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0"
                        Style="{StaticResource Title}"
-                      
-                       Content="Thông tin chi tiết"
+                       Content="Thông tin quyền hạn"
                            ></Label>
                 <Grid Grid.Row="1" Margin="16 8 16 0">
                     <Label Content="Truy cập dịch vụ"
@@ -241,7 +245,7 @@
                     <Label Content="Quyền thay đổi thông tin gara"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
-                                          
+                                           FontSize="14"
                                            ></Label>
                     <CheckBox IsChecked="{Binding isGaraInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
@@ -253,7 +257,7 @@
                     <Label Content="Quyền thêm/xóa/sửa tiền công"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
-                                          
+                                           FontSize="14"
                                            ></Label>
                     <CheckBox IsChecked="{Binding isWage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
@@ -265,7 +269,7 @@
                     <Label Content="Quyền thêm/xóa/sửa hãng xe"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
-                                          
+                                           FontSize="14"
                                            ></Label>
                     <CheckBox IsChecked="{Binding isCarBranch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
@@ -277,7 +281,7 @@
                     <Label Content="Quyền thêm/xóa/sửa nhà cung cấp"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
-                                          
+                                           FontSize="14"
                                            ></Label>
                     <CheckBox IsChecked="{Binding isSuplier, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
@@ -288,7 +292,7 @@
 
             </Grid>
         </materialDesign:Card>
-        <Grid Grid.Row="3" Margin="10 10 10 10">
+        <Grid Grid.Row="3" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>

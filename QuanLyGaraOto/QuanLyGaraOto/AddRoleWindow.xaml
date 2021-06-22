@@ -22,7 +22,7 @@
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="80"></RowDefinition>
             <RowDefinition ></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{StaticResource MainColor}">
             <Label
@@ -78,8 +78,8 @@
                    Visibility="{Binding VisExistsAddRoleName, Converter={StaticResource BooleanToVisibilityConverter}}">
 
         </Label>
-        <materialDesign:Card Grid.Row="2" Margin="10 5 10 5" Grid.ColumnSpan="2">
-            <Grid>
+        <materialDesign:Card Grid.Row="2" Margin="10 5 10 0" Grid.ColumnSpan="2">
+            <Grid Margin=" 0 0 0 10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -96,12 +96,9 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0"
-                           Content="Thông tin chi tiết"
-                           VerticalContentAlignment="Center"
-                           HorizontalContentAlignment="Center"
-                           Margin="0 8 0 0"
-                           FontSize="14"
-                           ></Label>
+                                   Content="Thông tin quyền hạn"
+                                   Style="{StaticResource Title}"
+                                    ></Label>
                 <Grid Grid.Row="1" Margin="16 8 16 0">
                     <Label Content="Truy cập dịch vụ"
                                            VerticalAlignment="Center"
@@ -252,7 +249,7 @@
                     <Label Content="Quyền thay đổi thông tin gara"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
-                                          
+                                          FontSize="14"
                                            ></Label>
                     <CheckBox IsChecked="{Binding isGaraInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
@@ -264,7 +261,7 @@
                     <Label Content="Quyền thêm/xóa/sửa tiền công"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
-                                          
+                                          FontSize="14"
                                            ></Label>
                     <CheckBox IsChecked="{Binding isWage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
@@ -276,7 +273,7 @@
                     <Label Content="Quyền thêm/xóa/sửa hãng xe"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
-                                          
+                                          FontSize="14"
                                            ></Label>
                     <CheckBox IsChecked="{Binding isCarBranch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"
@@ -288,7 +285,7 @@
                     <Label Content="Quyền thêm/xóa/sửa nhà cung cấp"
                                            VerticalAlignment="Center"
                                            Margin="40 0 0 0"
-                                          
+                                          FontSize="14"
                                            ></Label>
                     <CheckBox IsChecked="{Binding isSuplier, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                               HorizontalAlignment="Left"

@@ -394,7 +394,14 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.ShowDialog();
                 if (saveFileDialog1.FileName != null)
                 {
-                    Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    Stream excelStream;
+                    application.Application.IgnoreSheetNameException = false;
+                    if (File.Exists(Path.GetFullPath(saveFileDialog1.FileName)))
+                    {
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName));
+                    }
+                    else
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
                 }
@@ -438,7 +445,14 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.ShowDialog();
                 if (saveFileDialog1.FileName != null)
                 {
-                    Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    Stream excelStream;
+                    application.Application.IgnoreSheetNameException = false;
+                    if (File.Exists(Path.GetFullPath(saveFileDialog1.FileName)))
+                    {
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName));
+                    }
+                    else
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
                 }
@@ -482,7 +496,14 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.ShowDialog();
                 if (saveFileDialog1.FileName != null)
                 {
-                    Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    Stream excelStream;
+                    application.Application.IgnoreSheetNameException = false;
+                    if (File.Exists(Path.GetFullPath(saveFileDialog1.FileName)))
+                    {
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName));
+                    }
+                    else
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
                 }
@@ -534,7 +555,14 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.ShowDialog();
                 if (saveFileDialog1.FileName != null)
                 {
-                    Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    Stream excelStream;
+                    application.Application.IgnoreSheetNameException = false;
+                    if (File.Exists(Path.GetFullPath(saveFileDialog1.FileName)))
+                    {
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName));
+                    }
+                    else
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
                 } 
@@ -583,7 +611,14 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.ShowDialog();
                 if (saveFileDialog1.FileName != null)
                 {
-                    Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    Stream excelStream;
+                    application.Application.IgnoreSheetNameException = false;
+                    if (File.Exists(Path.GetFullPath(saveFileDialog1.FileName)))
+                    {
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName));
+                    }
+                    else
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
                 }
@@ -685,7 +720,14 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.ShowDialog();
                 if (saveFileDialog1.FileName != null)
                 {
-                    Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    Stream excelStream;
+                    application.Application.IgnoreSheetNameException = false;
+                    if (File.Exists(Path.GetFullPath(saveFileDialog1.FileName)))
+                    {
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName));
+                    }
+                    else
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
                 }
@@ -773,7 +815,14 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.ShowDialog();
                 if (saveFileDialog1.FileName != null)
                 {
-                    Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    Stream excelStream;
+                    application.Application.IgnoreSheetNameException = false;
+                    if (File.Exists(Path.GetFullPath(saveFileDialog1.FileName)))
+                    {
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName));
+                    }
+                    else
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
                 }
@@ -857,11 +906,20 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
+                
                 if (saveFileDialog1.FileName != null)
                 {
-                    Stream excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    Stream excelStream;
+                    application.Application.IgnoreSheetNameException = false;
+                    if (File.Exists(Path.GetFullPath(saveFileDialog1.FileName)))
+                    {
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName));
+                    }
+                    else
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
+                   
                 }
                 // này là save. copy y chang vô
             }
