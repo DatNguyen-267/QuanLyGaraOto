@@ -64,7 +64,7 @@ namespace QuanLyGaraOto.ViewModel
             set
             {
                 _SelectedItem = value;
-                OnPropertyChanged();
+                
                 if (SelectedItem != null)
                 {
                     Name = SelectedItem.UserInfo_Name;
@@ -81,6 +81,7 @@ namespace QuanLyGaraOto.ViewModel
                     RoleId = Account.IdRole;
                     RoleName = DataProvider.Ins.DB.ROLEs.Where(x => x.Role_Id == RoleId).SingleOrDefault().Role_Name;
                 }
+                OnPropertyChanged();
             }
         }
 
@@ -136,23 +137,23 @@ namespace QuanLyGaraOto.ViewModel
         public bool isCarBranch { get => _isCarBranch; set { _isCarBranch = value; OnPropertyChanged(); } }
         public bool isSuplier { get => _isSuplier; set { _isSuplier = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<USER_INFO> _List;
+        private ObservableCollection<USER_INFO> _List { get; set; }
 
         private ObservableCollection<ROLE> _ListRoles;
 
-        private USER_INFO _SelectedItem;
+        private USER_INFO _SelectedItem { get; set; }
 
         private ROLE _SelectedItemRole;
 
         //Thông tin 
-        private string _Name;
-        private DateTime? _BrithDate;
-        private string _CMND;
-        private string _Telephone;
-        private string _Address;
-        private string _UserName;
-        private int _Id;
-        private int _IdUser;
+        private string _Name { get; set; }
+        private DateTime? _BrithDate { get; set; }
+        private string _CMND { get; set; }
+        private string _Telephone { get; set; }
+        private string _Address { get; set; }
+        private string _UserName { get; set; }
+        private int _Id { get; set; }
+        private int _IdUser { get; set; }
 
         // Chức vụ
         private int _RoleId;
@@ -396,6 +397,7 @@ namespace QuanLyGaraOto.ViewModel
                     in4.UserInfo_Telephone = Telephone;
                     in4.UserInfo_Address = Address;
                     DataProvider.Ins.DB.SaveChanges();
+                   
                     MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     p.Close();
                 }
@@ -471,7 +473,6 @@ namespace QuanLyGaraOto.ViewModel
                     DateTime? date = BrithDate;
                     DataProvider.Ins.DB.USER_INFO.Add(new USER_INFO { UserInfo_Name = Name, UserInfo_BirthDate = date, UserInfo_CMND = CMND, UserInfo_Telephone = Telephone, UserInfo_Address = Address, IdUser = id_user });
                     DataProvider.Ins.DB.SaveChanges();
-
                     MessageBox.Show("Thêm thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     p.Close();
                 }
