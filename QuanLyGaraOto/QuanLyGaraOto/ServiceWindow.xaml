@@ -116,8 +116,9 @@
                     <materialDesign:DataGridTextColumn Width="150" Header="Biển Số" Binding="{Binding CarReception.LicensePlate}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="150" Header="Hiệu Xe" Binding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="150" Header="Chủ Xe" Binding="{Binding CarReception.CUSTOMER.Customer_Name}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="150" Header="Tiền nợ" Binding="{Binding CarReception.Debt}"></materialDesign:DataGridTextColumn>
+                    
                     <materialDesign:DataGridTextColumn Width="200" Header="Ngày tiếp nhận" Binding="{Binding CarReception.ReceptionDate, StringFormat=dd/MM/yyyy}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Tiền nợ" Binding="{Binding CarReception.Debt}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -205,7 +206,7 @@
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                             />
                 </StackPanel>
-                <Grid Grid.Row="1" Margin="0 0 0 0">
+                <Grid Grid.Row="1" Margin="0 0 0 10">
                     <materialDesign:Card Width="300"
                                           HorizontalAlignment="Left"
                                             VerticalAlignment="Center"

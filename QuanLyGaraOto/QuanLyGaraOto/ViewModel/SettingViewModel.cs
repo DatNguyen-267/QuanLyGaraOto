@@ -426,6 +426,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand OpenModifySupplierWindow { get; set; }
         public ICommand DeleteSupplier { get; set; }
         public ICommand SupplierSelectionChanged { get; set; }
+        public ICommand ExportSupplierCommand { get; set; }
         private string _SupplierPhone { get; set; }
         public string SupplierPhone { get => _SupplierPhone; set { _SupplierPhone = value; OnPropertyChanged(); } }
         public SettingViewModel()
@@ -471,12 +472,12 @@ namespace QuanLyGaraOto.ViewModel
                 string s = "";
                 if (MessageBox.Show("Bạn có chắc chắn muốn xóa", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    ObservableCollection<SUPPLIER> details = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+                    ObservableCollection<IMPORT_GOODS> details = new ObservableCollection<IMPORT_GOODS>(DataProvider.Ins.DB.IMPORT_GOODS);
                     foreach (var item in TempListSupplier)
                     {
-                        if (details.Any(x => x.Supplier_Id == item.Supplier_Id))
+                        if (details.Any(x => x.IdSupplier == item.Supplier_Id))
                         {
-                            s = s + "Không thể xóa loại tiền công " + item.Supplier_Name + " vì tồn tại trong chi tiết sửa chữa!" + "\n";
+                            s = s + "Không thể xóa nhà cung cấp " + item.Supplier_Name + " vì đang được sử dụng!" + "\n";
                             continue;
                         }
                         DataProvider.Ins.DB.SUPPLIERs.Remove(item);
@@ -769,6 +770,12 @@ namespace QuanLyGaraOto.ViewModel
                   printViewModel.Print_ThongTinTienCong(ListWage);
 
              });
+            ExportSupplierCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                PrintViewModel printViewModel = new PrintViewModel();
+                printViewModel.XuatDanhSachNhaCungCap(ListSupplier);
+
+            });
             // User information
             ChangeUserInformation = new RelayCommand<SettingWindow>((p) =>
             {

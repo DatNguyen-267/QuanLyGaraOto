@@ -36,6 +36,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand Print_ThongTinVatTuCommand { get; set; }
 
         public ICommand Print_ThongTinHangXeCommand { get; set; }
+       
         public PrintViewModel()
         {
             Print_ThongTinHangXeCommand= new RelayCommand<ObservableCollection<CAR_BRAND>>((p) => true, (p) => Print_ThongTinHangXe(p));
@@ -920,6 +921,190 @@ namespace QuanLyGaraOto.ViewModel
                     workbook.SaveAs(excelStream);
                     excelStream.Dispose();
                    
+                }
+                // này là save. copy y chang vô
+            }
+        }
+        public void StyleExcel_DanhSachNhaCungCap(IWorkbook workbook, IWorksheet sheet)
+        {
+            IStyle pageHeader = workbook.Styles.Add("PageHeaderStyle");
+            IStyle tableHeader = workbook.Styles.Add("TableHeaderStyle");
+
+            pageHeader.Color = Syncfusion.Drawing.Color.FromArgb(69, 90, 100);
+            pageHeader.Font.RGBColor = Syncfusion.Drawing.Color.White;
+            pageHeader.Font.FontName = "Calibri";
+            pageHeader.Font.Size = 18;
+            pageHeader.Font.Bold = true;
+            pageHeader.HorizontalAlignment = ExcelHAlign.HAlignCenter;
+            pageHeader.VerticalAlignment = ExcelVAlign.VAlignCenter;
+
+
+            tableHeader.Font.Color = ExcelKnownColors.Black;
+            tableHeader.Font.Bold = true;
+            tableHeader.Font.Size = 12;
+            tableHeader.Font.FontName = "Calibri";
+            tableHeader.HorizontalAlignment = ExcelHAlign.HAlignCenter;
+            tableHeader.VerticalAlignment = ExcelVAlign.VAlignCenter;
+
+            tableHeader.Borders[ExcelBordersIndex.EdgeLeft].LineStyle = ExcelLineStyle.Thin;
+            tableHeader.Borders[ExcelBordersIndex.EdgeRight].LineStyle = ExcelLineStyle.Thin;
+            tableHeader.Borders[ExcelBordersIndex.EdgeTop].LineStyle = ExcelLineStyle.Thin;
+            tableHeader.Borders[ExcelBordersIndex.EdgeBottom].LineStyle = ExcelLineStyle.Thin;
+
+            sheet["A1"].Text = "Danh sách nhà cung cấp";
+            sheet["A1"].CellStyle = pageHeader;
+            sheet["A1:D1"].Merge();
+
+            sheet["A2"].Text = "ID";
+            sheet["B2"].Text = "Tên nhà cung cấp";
+            sheet["C2"].Text = "Số điện thoại";
+            sheet["D2"].Text = "Email";
+            sheet["A2:D2"].CellStyle = tableHeader;
+
+            sheet.AutofitColumn(1);
+            sheet.UsedRange.AutofitColumns();
+
+        }
+        public void XuatDanhSachNhaCungCap(ObservableCollection<SUPPLIER> ListSupplier)
+        {
+            using (ExcelEngine excelEngine = new ExcelEngine())
+            {
+                IApplication application = excelEngine.Excel;
+                IWorkbook workbook = application.Workbooks.Create(1);
+                IWorksheet worksheet = workbook.Worksheets[0];
+
+                StyleExcel_DanhSachNhaCungCap(workbook, worksheet);
+               
+
+                int i = 3;
+                foreach (var item in ListSupplier)
+                {
+                    Object[] list = new object[] { item.Supplier_Id.ToString()
+                        , item.Supplier_Name
+                        , item.Supplier_Phone
+                        , item.Supplier_Email
+                        };
+                    worksheet.InsertRow(i, 1, ExcelInsertOptions.FormatDefault);
+                    worksheet.ImportArray(list, i, 1, false);
+                    i++;
+                }
+                // tạo từng dòng rồi load cái list vô
+                worksheet.Columns[1].ColumnWidth = 20;
+                worksheet.Columns[2].ColumnWidth = 20;
+                worksheet.Columns[3].ColumnWidth = 30;
+                // này là set chiều rộng column
+
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                saveFileDialog1.FilterIndex = 2;
+                saveFileDialog1.RestoreDirectory = true;
+                saveFileDialog1.ShowDialog();
+
+                if (saveFileDialog1.FileName != null)
+                {
+                    Stream excelStream;
+                    application.Application.IgnoreSheetNameException = false;
+                    if (File.Exists(Path.GetFullPath(saveFileDialog1.FileName)))
+                    {
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName));
+                    }
+                    else
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    workbook.SaveAs(excelStream);
+                    excelStream.Dispose();
+
+                }
+                // này là save. copy y chang vô
+            }
+        }
+        public void StyleExcel_XuatDanhSachDonNhapHang(IWorkbook workbook, IWorksheet sheet)
+        {
+            IStyle pageHeader = workbook.Styles.Add("PageHeaderStyle");
+            IStyle tableHeader = workbook.Styles.Add("TableHeaderStyle");
+
+            pageHeader.Color = Syncfusion.Drawing.Color.FromArgb(69, 90, 100);
+            pageHeader.Font.RGBColor = Syncfusion.Drawing.Color.White;
+            pageHeader.Font.FontName = "Calibri";
+            pageHeader.Font.Size = 18;
+            pageHeader.Font.Bold = true;
+            pageHeader.HorizontalAlignment = ExcelHAlign.HAlignCenter;
+            pageHeader.VerticalAlignment = ExcelVAlign.VAlignCenter;
+
+
+            tableHeader.Font.Color = ExcelKnownColors.Black;
+            tableHeader.Font.Bold = true;
+            tableHeader.Font.Size = 12;
+            tableHeader.Font.FontName = "Calibri";
+            tableHeader.HorizontalAlignment = ExcelHAlign.HAlignCenter;
+            tableHeader.VerticalAlignment = ExcelVAlign.VAlignCenter;
+
+            tableHeader.Borders[ExcelBordersIndex.EdgeLeft].LineStyle = ExcelLineStyle.Thin;
+            tableHeader.Borders[ExcelBordersIndex.EdgeRight].LineStyle = ExcelLineStyle.Thin;
+            tableHeader.Borders[ExcelBordersIndex.EdgeTop].LineStyle = ExcelLineStyle.Thin;
+            tableHeader.Borders[ExcelBordersIndex.EdgeBottom].LineStyle = ExcelLineStyle.Thin;
+
+            sheet["A1"].Text = "Lịch sử hóa đơn nhập hàng";
+            sheet["A1"].CellStyle = pageHeader;
+            sheet["A1:D1"].Merge();
+
+            sheet["A2"].Text = "Mã đơn nhập";
+            sheet["B2"].Text = "Tên nhà cung cấp";
+            sheet["C2"].Text = "Ngày nhập hàng";
+            sheet["D2"].Text = "Tổng tiền thanh toán";
+            sheet["A2:D2"].CellStyle = tableHeader;
+
+            sheet.AutofitColumn(1);
+            sheet.UsedRange.AutofitColumns();
+
+        }
+        public void XuatDanhSachDonNhapHang(ObservableCollection<IMPORT_GOODS> ListImport)
+        {
+            using (ExcelEngine excelEngine = new ExcelEngine())
+            {
+                IApplication application = excelEngine.Excel;
+                IWorkbook workbook = application.Workbooks.Create(1);
+                IWorksheet worksheet = workbook.Worksheets[0];
+
+                StyleExcel_XuatDanhSachDonNhapHang(workbook, worksheet);
+
+
+                int i = 3;
+                foreach (var item in ListImport)
+                {
+                    Object[] list = new object[] { item.ImportGoods_Id.ToString()
+                        , item.SUPPLIER.Supplier_Name
+                        , item.ImportGoods_Date.ToString("dd/MM/yyyy")
+                        , item.ImportGoods_TotalMoney.ToString()
+                        };
+                    worksheet.InsertRow(i, 1, ExcelInsertOptions.FormatDefault);
+                    worksheet.ImportArray(list, i, 1, false);
+                    i++;
+                }
+                // tạo từng dòng rồi load cái list vô
+                worksheet.Columns[1].ColumnWidth = 20;
+                worksheet.Columns[2].ColumnWidth = 20;
+                worksheet.Columns[3].ColumnWidth = 30;
+                // này là set chiều rộng column
+
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                saveFileDialog1.FilterIndex = 2;
+                saveFileDialog1.RestoreDirectory = true;
+                saveFileDialog1.ShowDialog();
+
+                if (saveFileDialog1.FileName != null)
+                {
+                    Stream excelStream;
+                    application.Application.IgnoreSheetNameException = false;
+                    if (File.Exists(Path.GetFullPath(saveFileDialog1.FileName)))
+                    {
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName));
+                    }
+                    else
+                        excelStream = File.Create(Path.GetFullPath(saveFileDialog1.FileName + ".xlsx"));
+                    workbook.SaveAs(excelStream);
+                    excelStream.Dispose();
+
                 }
                 // này là save. copy y chang vô
             }
