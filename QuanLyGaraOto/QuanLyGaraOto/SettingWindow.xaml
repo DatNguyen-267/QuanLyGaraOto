@@ -154,7 +154,7 @@
                                 materialDesign:HintAssist.Hint="Ngày sinh"
                                >
                                         <DatePicker.Text>
-                                            <Binding Path="UserBirth" StringFormat='dd-MMM-YYYY' 
+                                            <Binding Path="UserBirth" StringFormat='MM-dd-YYYY' 
                                              UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"
                                              ValidatesOnNotifyDataErrors="False"
                                              NotifyOnValidationError="False">
@@ -166,6 +166,10 @@
 
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="SelectedDateChanged">
+                                                <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
+                                            </i:EventTrigger>
+
+                                            <i:EventTrigger EventName="TextChanged">
                                                 <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>

@@ -780,12 +780,13 @@ namespace QuanLyGaraOto.ViewModel
             ChangeUserInformation = new RelayCommand<SettingWindow>((p) =>
             {
                 if (p == null || string.IsNullOrEmpty(p.txtAddress.Text)
-                             || string.IsNullOrEmpty(p.txtName.Text)
-                             || string.IsNullOrEmpty(p.dpBirth.DisplayDate.ToShortDateString())
-                             || !DateTime.TryParse(p.dpBirth.DisplayDate.ToShortDateString(), out var value)
-                                 || string.IsNullOrEmpty(p.txtTelephone.Text) || p.txtTelephone.Text.Any(x => char.IsLetter(x))
-                                 || string.IsNullOrEmpty(p.txtCMND.Text))
+                                || string.IsNullOrEmpty(p.txtName.Text)
+                                || string.IsNullOrEmpty(p.dpBirth.Text)
+                                || string.IsNullOrEmpty(p.txtTelephone.Text) 
+                                || p.txtTelephone.Text.Any(x => char.IsLetter(x))
+                                || string.IsNullOrEmpty(p.txtCMND.Text))
                 {
+
                     return false;
                 }
                 return true;
@@ -819,7 +820,14 @@ namespace QuanLyGaraOto.ViewModel
 
             OldPasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { OldPassword = p.Password; });
             NewPasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { NewPassword = p.Password; });
-            CheckPassword = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
+            CheckPassword = new RelayCommand<SettingWindow>((p) => 
+            { 
+                if(string.IsNullOrEmpty(OldPassword))
+                {
+                    return false;
+                }
+                return true;
+            }, (p) =>
             {
 
                 string encode = MD5Hash(Base64Encode(OldPassword));
