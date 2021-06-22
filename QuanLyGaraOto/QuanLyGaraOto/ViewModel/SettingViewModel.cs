@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using QuanLyGaraOto.Convert;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -487,6 +488,10 @@ namespace QuanLyGaraOto.ViewModel
             });
             SearchSupplierCommand = new RelayCommand<SettingWindow>((p) => {
                 if (p == null) return false;
+
+                Regex regex = new Regex(@"^[0-9]+$");
+                if (!regex.IsMatch(p.txbPhoneSupplier.Text)) return false;
+
                 if (string.IsNullOrEmpty(p.txbSupplier.Text) && string.IsNullOrEmpty(p.txbSupplierEmail.Text)
                 && string.IsNullOrEmpty(p.txbPhoneSupplier.Text))
                     return false;
@@ -558,6 +563,9 @@ namespace QuanLyGaraOto.ViewModel
             // Search Wage
             SearchWageCommand = new RelayCommand<SettingWindow>((p) => {
                 if (p == null) return false;
+                Regex regex = new Regex(@"^[0-9]+$");
+                if (!regex.IsMatch(p.txbWageValue.Text)) return false;
+
                 if (string.IsNullOrEmpty(p.txbWageName.Text)
                     && string.IsNullOrEmpty(p.txbWageValue.Text))
                     return false;

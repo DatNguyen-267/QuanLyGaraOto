@@ -97,6 +97,7 @@ namespace QuanLyGaraOto.ViewModel
                         tempListCar.CarReception = carServiceViewModel.CarReception;
                         tempListCar.Debt = carServiceViewModel.Total;
                         ListCar.Add(tempListCar);
+
                         LoadReceptionAmount();
                     }
                 }
