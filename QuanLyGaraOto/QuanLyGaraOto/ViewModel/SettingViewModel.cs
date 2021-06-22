@@ -673,15 +673,16 @@ namespace QuanLyGaraOto.ViewModel
                     ObservableCollection<RECEPTION> receptions = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
                     foreach (var item in SelectedBrandItems)
                     {
-                        if(receptions.Any(x => x.IdCarBrand == item.CarBrand_Id))
+                        if(receptions.Any(x => x.IdCarBrand == item.CarBrand_Id)
+                        || DataProvider.Ins.DB.SALES_REPORT_DETAIL.Where(x => x.IdCarBrand == item.CarBrand_Id).Count()>0)
                         {
-                            MessageBox.Show("Không thể xóa hãng xe " + item.CarBrand_Name + " vì tồn tại trong tiếp nhận xe!");
+                            MessageBox.Show("Không thể xóa hãng xe " + item.CarBrand_Name + " vì đang được sử dụng!");
                             continue;
                         }
                         DataProvider.Ins.DB.CAR_BRAND.Remove(item);
+                        DataProvider.Ins.DB.SaveChanges();
                         ListCarBrand.Remove(item);
                     }
-                    DataProvider.Ins.DB.SaveChanges();
                     IsEnableModifyButtonInBrandSetting = false;
                     IsEnableModifyFieldInBrandSetting = false;
                     IsEnableDeleteButtonInBrandSetting = false;

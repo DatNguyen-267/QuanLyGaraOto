@@ -116,17 +116,38 @@ namespace QuanLyGaraOto.ViewModel
                     return true;
                 }, (p) =>
                 {
-                    if (MessageBox.Show("Bạn chắc chắn muốn xóa những xe bạn đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Bạn chắc chắn muốn xóa những xe bạn đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                   SUPPLIES temp = new SUPPLIES();
+                    foreach (var item in Temp)
                     {
-                        foreach (var item in Temp)
+                        if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == item.CarReception.Reception_Id).Count() == 0)
                         {
-                            DeleteModel deleteModel = new DeleteModel();
-                            deleteModel.CarReception(item.CarReception);
-                            ListCar.Remove(item);
+                            REPAIR tempRepair = DataProvider.Ins.DB.REPAIRs.Where(x => x.IdReception == item.CarReception.Reception_Id).SingleOrDefault();
+                            if ( tempRepair!=null &&DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == tempRepair.Repair_Id).Count()>0)
+                            {
+                                ObservableCollection<REPAIR_DETAIL> tempList = 
+                                    new ObservableCollection<REPAIR_DETAIL>(DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == tempRepair.Repair_Id));
+                                foreach (var item2 in tempList)
+                                {
+                                    temp = DataProvider.Ins.DB.SUPPLIES.Where(z => z.Supplies_Id == item2.IdSupplies).SingleOrDefault();
+                                    temp.Supplies_Amount += item2.SuppliesAmount;
+                                        DataProvider.Ins.DB.SaveChanges();
+                                }
+                            }
+                                DeleteModel deleteModel = new DeleteModel();
+                                deleteModel.CarReception(item.CarReception);
+                                ListCar.Remove(item);
+                            }
+                        else
+                        {
+                                MessageBox.Show("Không thể xóa hóa đơn đã thanh tóan", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
-                        LoadReceptionAmount();
-                    } 
-                }
+                        
+                    }
+                    LoadReceptionAmount();
+                } 
+            }
             );
             OpenCommand = new RelayCommand<object>
                 ((p) =>
@@ -154,12 +175,10 @@ namespace QuanLyGaraOto.ViewModel
             SearchCommand = new RelayCommand<ServiceWindow>
                 ((p) =>
                 {
-                   
-
                     if  (string.IsNullOrEmpty(p.dpReceptionDate.Text)
                     && string.IsNullOrEmpty(p.txbDebt.Text) 
                     && string.IsNullOrEmpty(p.txbLicensePlate.Text) 
-                    && (SelectedBrand == null ||SelectedBrand.CarBrand_Name == null ) 
+                    && (string.IsNullOrEmpty(p.cbBrand.Text)) 
                     && string.IsNullOrEmpty(CustomerName)
                     ) return false;
 
@@ -180,17 +199,16 @@ namespace QuanLyGaraOto.ViewModel
                         ((!string.IsNullOrEmpty(p.txbLicensePlate.Text) && uni.RemoveUnicode(item.CarReception.LicensePlate).ToLower().Contains(uni.RemoveUnicode(LicensePlate).ToLower()))
                         || (string.IsNullOrEmpty(p.txbLicensePlate.Text)))
 
-                        && ((SelectedBrand == null || SelectedBrand.CarBrand_Name == null) || ((SelectedBrand != null ) && item.CarReception.CAR_BRAND.CarBrand_Name == SelectedBrand.CarBrand_Name)
+                        && ((string.IsNullOrEmpty(p.cbBrand.Text) || (!string.IsNullOrEmpty(p.cbBrand.Text) && item.CarReception.CAR_BRAND.CarBrand_Name == p.cbBrand.Text))
                          )
-
                         && ((!string.IsNullOrEmpty(p.txbCustomerName.Text) && uni.RemoveUnicode(item.CarReception.CUSTOMER.Customer_Name).ToLower().Contains(uni.RemoveUnicode(CustomerName).ToLower()))
                         ||(string.IsNullOrEmpty(p.txbCustomerName.Text))) 
 
                         && ( (!string.IsNullOrEmpty(p.txbDebt.Text) && (item.CarReception.Debt.ToString() == Debt.ToString()))
                         ||(string.IsNullOrEmpty(p.txbDebt.Text)))
 
-                        && ((!string.IsNullOrEmpty(p.dpReceptionDate.Text)) && (item.CarReception.ReceptionDate.Date == p.dpReceptionDate.SelectedDate.Value.Date))
-                        || (string.IsNullOrEmpty(p.dpReceptionDate.Text))) TempListCar.Add(item);
+                        && ((!string.IsNullOrEmpty(p.dpReceptionDate.Text)) && (item.CarReception.ReceptionDate.Date == p.dpReceptionDate.SelectedDate.Value.Date)
+                        || (string.IsNullOrEmpty(p.dpReceptionDate.Text)))) TempListCar.Add(item);
                     }
                     ListCar = TempListCar;
                 }

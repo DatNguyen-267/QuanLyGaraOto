@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -31,6 +32,9 @@ namespace QuanLyGaraOto.ViewModel
                 string.IsNullOrEmpty(p.txbSupplierPhone.Text) ||
                 string.IsNullOrEmpty(p.txbSupplierEmail.Text)) return false;
                 if (VisExistsName == true) return false;
+
+                Regex regex = new Regex(@"^[0-9]+$");
+                if (!regex.IsMatch((p.txbSupplierPhone.Text)) && !string.IsNullOrEmpty((p.txbSupplierPhone.Text))) return false;
 
                 return true;
             }, (p) =>

@@ -72,11 +72,11 @@ namespace QuanLyGaraOto.ViewModel
                (p) => {
                    if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbAddress.Text) || 
                    string.IsNullOrEmpty(p.txbLicensePlate.Text) || string.IsNullOrEmpty(p.txbPhone.Text) ||
-                   string.IsNullOrEmpty(p.cbbCarBrand.Text) || p.dpReceptionDate.SelectedDate == null ||
-                   p.dpRepairDate.SelectedDate == null) return false;
+                   string.IsNullOrEmpty(p.cbbCarBrand.Text) || string.IsNullOrEmpty(p.dpReceptionDate.Text))
+                   return false;
 
                    Regex regex = new Regex(@"^[0-9]+$");
-                   if (!regex.IsMatch(p.txbPhone.Text)) return false;
+                   if (!regex.IsMatch(p.txbPhone.Text) && !string.IsNullOrEmpty(p.txbPhone.Text)) return false;
 
                    return true;
                },
