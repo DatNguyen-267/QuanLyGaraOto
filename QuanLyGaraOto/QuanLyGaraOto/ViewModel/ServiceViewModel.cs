@@ -27,13 +27,17 @@ namespace QuanLyGaraOto.ViewModel
         private string _ReceptionOfDay { get; set; }
         public string ReceptionOfDay { get => _ReceptionOfDay; set { _ReceptionOfDay = value; OnPropertyChanged(); } }
         private GARA_INFO _GaraInfo { get; set; }
-        public GARA_INFO GaraInfo { get => _GaraInfo; set { _GaraInfo = value; OnPropertyChanged(); } }
+        public GARA_INFO GaraInfo { get => _GaraInfo; set { _GaraInfo = value;
+                if (_GaraInfo != null)
+                ReceptionOfDay = "Số xe đã tiếp nhận hôm nay: " + ReceptionAmount.ToString() + "/" + GaraInfo.MaxCarReception.ToString();
+                OnPropertyChanged(); } }
         private int _ReceptionAmount { get; set; }
         public int ReceptionAmount
         {
             get => _ReceptionAmount; set
             {
                 _ReceptionAmount = value;
+                if (_ReceptionAmount != null)
                 ReceptionOfDay = "Số xe đã tiếp nhận hôm nay: " + ReceptionAmount.ToString() + "/" + GaraInfo.MaxCarReception.ToString();
                 OnPropertyChanged(); } }
         #endregion
@@ -75,7 +79,6 @@ namespace QuanLyGaraOto.ViewModel
         public DateTime SelectedDate { get => _SelectedDate; set { _SelectedDate = value; OnPropertyChanged(); } }
         public ServiceViewModel()
         {
-            
             InitData();
             CarReceptionCommand = new RelayCommand<object>((p) => {
                 LoadReceptionAmount();

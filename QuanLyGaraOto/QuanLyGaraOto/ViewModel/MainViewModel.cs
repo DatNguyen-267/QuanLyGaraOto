@@ -95,7 +95,7 @@ namespace QuanLyGaraOto.ViewModel
                 VisDashboard = true;
                 p.DataContext = new DashboardViewModel();
             });
-            OpenService = new RelayCommand<object>((p) => 
+            OpenService = new RelayCommand<ServiceWindow>((p) => 
             {
                 if (isServiceWindow == false)
                     return false;
@@ -105,7 +105,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 InitVis();
                 VisService = true;
-
+                p.DataContext = new ServiceViewModel();
             });
             OpenEmployee = new RelayCommand<Employee>((p) => 
             {

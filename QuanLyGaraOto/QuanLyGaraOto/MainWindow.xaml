@@ -83,7 +83,9 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Command="{Binding OpenService}" Grid.Row="1">
+                <Button Command="{Binding OpenService}"
+                        CommandParameter="{Binding ElementName=wdService}"
+                        Grid.Row="1">
                     <StackPanel>
                         <materialDesign:PackIcon  Grid.Column="0"     
                                 Kind="FaceAgent" />
