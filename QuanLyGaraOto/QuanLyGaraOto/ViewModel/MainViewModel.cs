@@ -26,6 +26,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand OpenBunk { get; set; }
         public ICommand OpenSetting { get; set; }
         public ICommand OpenReport { get; set; }
+        public ICommand ExistCommand { get; set; }
         public bool _VisDashboard { get; set; }
         public bool VisDashboard { get => _VisDashboard; set { _VisDashboard = value; OnPropertyChanged(); } }
         public bool _VisService { get; set; }
@@ -150,6 +151,13 @@ namespace QuanLyGaraOto.ViewModel
                 InitVis();
                 VisSetting = true;
                 p.DataContext = new SettingViewModel(User.UserName,isGaraInfo,isWage,isCarBranch,isSuplier,mainWindow);
+            }); 
+            ExistCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
+            {
+                if (MessageBox.Show("Bạn chắc chắn muốn thoát chương trình","Thông báo",MessageBoxButton.YesNo,MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    p.Close();
+                }
             });
         }
         public void InitVis()

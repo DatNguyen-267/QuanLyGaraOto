@@ -135,7 +135,8 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Command="{Binding ExitCommand}"
+                <Button Command="{Binding ExistCommand}"
+                        CommandParameter="{Binding ElementName=mainWindow}"
                             Grid.Row="10" 
                         Margin="0 0 0 20"
                             VerticalAlignment="Bottom">

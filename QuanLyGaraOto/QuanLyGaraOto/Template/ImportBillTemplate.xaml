@@ -9,9 +9,9 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
-        ResizeMode="NoResize"
+        
         WindowStartupLocation="CenterScreen"
-        Title="BillTemplate" Height="auto" Width="800">
+        Title="BillTemplate" Height="800" Width="800">
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="TitleTextBlock">
             <Setter Property="FontSize" Value="15"></Setter>

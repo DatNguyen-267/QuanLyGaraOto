@@ -25,6 +25,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand SearchCommand { get; set; }
         public ICommand RefeshCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public ICommand ExportCommand { get; set; }
         public GoodBillWindowViewModel()
         {
             ListImport = new ObservableCollection<IMPORT_GOODS>(DataProvider.Ins.DB.IMPORT_GOODS);
@@ -76,6 +77,12 @@ namespace QuanLyGaraOto.ViewModel
             {
                 if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     p.Close();
+            });
+            ExportCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                PrintViewModel printViewModel = new PrintViewModel();
+                printViewModel.XuatDanhSachDonNhapHang(ListImport);
+
             });
         }
     }

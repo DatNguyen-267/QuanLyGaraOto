@@ -36,7 +36,8 @@ namespace QuanLyGaraOto.ViewModel
         public bool RolEmail { get => _RolEmail; set { _RolEmail = value; OnPropertyChanged(); } }
         private bool _EnabledReceiptDate { get; set; }
         public bool EnabledReceiptDate { get => _EnabledReceiptDate; set { _EnabledReceiptDate = value; OnPropertyChanged(); } }
-        public bool VisPay { get; set; }
+        private bool _VisPay { get; set; }
+        public bool VisPay { get => _VisPay; set { _VisPay = value; OnPropertyChanged(); } }
         private string _ReceivedMoney { get; set; }
         public string ReceivedMoney { get => _ReceivedMoney; set {
                         _ReceivedMoney = value;

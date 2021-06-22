@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using QuanLyGaraOto.Convert;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -425,6 +426,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand OpenModifySupplierWindow { get; set; }
         public ICommand DeleteSupplier { get; set; }
         public ICommand SupplierSelectionChanged { get; set; }
+        public ICommand ExportSupplierCommand { get; set; }
         private string _SupplierPhone { get; set; }
         public string SupplierPhone { get => _SupplierPhone; set { _SupplierPhone = value; OnPropertyChanged(); } }
         public SettingViewModel()
@@ -470,12 +472,12 @@ namespace QuanLyGaraOto.ViewModel
                 string s = "";
                 if (MessageBox.Show("Bạn có chắc chắn muốn xóa", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    ObservableCollection<SUPPLIER> details = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+                    ObservableCollection<IMPORT_GOODS> details = new ObservableCollection<IMPORT_GOODS>(DataProvider.Ins.DB.IMPORT_GOODS);
                     foreach (var item in TempListSupplier)
                     {
-                        if (details.Any(x => x.Supplier_Id == item.Supplier_Id))
+                        if (details.Any(x => x.IdSupplier == item.Supplier_Id))
                         {
-                            s = s + "Không thể xóa loại tiền công " + item.Supplier_Name + " vì tồn tại trong chi tiết sửa chữa!" + "\n";
+                            s = s + "Không thể xóa nhà cung cấp " + item.Supplier_Name + " vì đang được sử dụng!" + "\n";
                             continue;
                         }
                         DataProvider.Ins.DB.SUPPLIERs.Remove(item);
@@ -487,6 +489,10 @@ namespace QuanLyGaraOto.ViewModel
             });
             SearchSupplierCommand = new RelayCommand<SettingWindow>((p) => {
                 if (p == null) return false;
+
+                Regex regex = new Regex(@"^[0-9]+$");
+                if (!regex.IsMatch(p.txbPhoneSupplier.Text) && !string.IsNullOrEmpty(p.txbPhoneSupplier.Text)) return false;
+
                 if (string.IsNullOrEmpty(p.txbSupplier.Text) && string.IsNullOrEmpty(p.txbSupplierEmail.Text)
                 && string.IsNullOrEmpty(p.txbPhoneSupplier.Text))
                     return false;
@@ -530,7 +536,7 @@ namespace QuanLyGaraOto.ViewModel
                 UserSettingVis = true;
                 AppSettingVis = false;
             });
-            // Search Brand
+            //  Brand
             SearchBrandCommand = new RelayCommand<SettingWindow>((p) => {
                 if (p == null) return false;
                 if (string.IsNullOrEmpty(p.txtBrand.Text))
@@ -558,6 +564,9 @@ namespace QuanLyGaraOto.ViewModel
             // Search Wage
             SearchWageCommand = new RelayCommand<SettingWindow>((p) => {
                 if (p == null) return false;
+                Regex regex = new Regex(@"^[0-9]+$");
+                if (!regex.IsMatch(p.txbWageValue.Text) && !string.IsNullOrEmpty(p.txbWageValue.Text)) return false;
+
                 if (string.IsNullOrEmpty(p.txbWageName.Text)
                     && string.IsNullOrEmpty(p.txbWageValue.Text))
                     return false;
@@ -608,7 +617,6 @@ namespace QuanLyGaraOto.ViewModel
                     String query_string = "update GARA_INFO set MaxCarReception=" + this.MaxCarReception + 
                                                 ", IsOverPay=" + (this.IsOverPay ? "1" : "0")
                                             + "where MaxCarReception=" + GaraInfo.MaxCarReception.ToString();
-
                     string connectionString = ConfigurationManager.ConnectionStrings["GARAEntities"].ConnectionString;
                     if (connectionString.ToLower().StartsWith("metadata="))
                     {
@@ -762,6 +770,12 @@ namespace QuanLyGaraOto.ViewModel
                   printViewModel.Print_ThongTinTienCong(ListWage);
 
              });
+            ExportSupplierCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                PrintViewModel printViewModel = new PrintViewModel();
+                printViewModel.XuatDanhSachNhaCungCap(ListSupplier);
+
+            });
             // User information
             ChangeUserInformation = new RelayCommand<SettingWindow>((p) =>
             {

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         WindowStyle="SingleBorderWindow"
-        ResizeMode="NoResize"
+       
         WindowStartupLocation="CenterScreen"
         Name="wdInventoryReportTemplate"
         Title="InventoryReportTemplate" Height="600" Width="850">

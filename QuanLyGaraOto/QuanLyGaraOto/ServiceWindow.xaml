@@ -116,8 +116,9 @@
                     <materialDesign:DataGridTextColumn Width="150" Header="Biển Số" Binding="{Binding CarReception.LicensePlate}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="150" Header="Hiệu Xe" Binding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="150" Header="Chủ Xe" Binding="{Binding CarReception.CUSTOMER.Customer_Name}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="150" Header="Tiền nợ" Binding="{Binding CarReception.Debt}"></materialDesign:DataGridTextColumn>
+                    
                     <materialDesign:DataGridTextColumn Width="200" Header="Ngày tiếp nhận" Binding="{Binding CarReception.ReceptionDate, StringFormat=dd/MM/yyyy}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Tiền nợ" Binding="{Binding CarReception.Debt}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -125,7 +126,7 @@
 
         <Grid Grid.Row="2" Margin="15 0 0 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="580"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.Resources>
@@ -153,20 +154,6 @@
                 <StackPanel Grid.Row="0"
                         Orientation="Horizontal"
                         VerticalAlignment="Top">
-                    <TextBox
-                        x:Name="txbID"
-                      materialDesign:HintAssist.Hint="ID"
-                      Style="{StaticResource txbSearch}"
-                      Width="50"
-                      VerticalAlignment="Center">
-                        <TextBox.Text>
-                            <Binding Path="ID" UpdateSourceTrigger="PropertyChanged"  Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <validation:OnlyNumberValidation ErrorMessage="Chỉ nhập số (0-9)"></validation:OnlyNumberValidation>
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
                     <TextBox
                     x:Name="txbLicensePlate"
                       materialDesign:HintAssist.Hint="Biển số"
@@ -209,8 +196,17 @@
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
+                    <DatePicker
+                        x:Name="dpReceptionDate"
+                            
+                            FontSize="16"
+                            materialDesign:HintAssist.Hint="Ngày tiếp nhận"
+                            Width="auto"
+                            Margin="10 5 0 0"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                            />
                 </StackPanel>
-                <Grid Grid.Row="1" Margin="0 0 0 0">
+                <Grid Grid.Row="1" Margin="0 0 0 10">
                     <materialDesign:Card Width="300"
                                           HorizontalAlignment="Left"
                                             VerticalAlignment="Center"

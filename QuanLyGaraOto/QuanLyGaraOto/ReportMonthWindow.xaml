@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#3d4751">
             <TextBlock HorizontalAlignment="Center"
@@ -90,16 +90,70 @@
             <Grid Grid.Row="1" >
                 <Grid
                    Visibility="{Binding VisListView_Inventory, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.ColumnSpan="2">
-                    <ScrollViewer 
-                    Margin="10 10 10 0">
+                    <DataGrid  
+                        x:Name="lvs_Report_Inventory"
+                        ItemsSource="{Binding ListInventory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"            
+                        FontSize="18"
+                        SelectionMode="Extended"
+                        IsReadOnly="True"
+                        CanUserAddRows="False"
+                        AutoGenerateColumns="False"
+                        CanUserDeleteRows="False"
+                        CanUserReorderColumns="True"
+                      >
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Gainsboro" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                        </DataGrid.Resources>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+
+                        </i:Interaction.Triggers>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                        <Setter Property="FontWeight" Value="DemiBold" />
+                                        <Setter Property="FontSize" Value="19" />
+
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                <Setter Property="Foreground" Value="White"></Setter>
+                                <Setter Property="FontWeight" Value="DemiBold"></Setter>
+
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+
+                        <DataGrid.Columns>
+                            <materialDesign:DataGridTextColumn Width="100" Header="STT" Binding="{Binding STT}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="300"  Header="Vật tư phụ tùng" Binding="{Binding Supplies_Name}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="120" Header="Tồn đầu" Binding="{Binding TonDau}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="120" Header="Phát sinh" Binding="{Binding PhatSinh}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="120" Header="Tồn cuối" Binding="{Binding TonCuoi}"></materialDesign:DataGridTextColumn>
+                            
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--<ScrollViewer 
+                        Margin="10 10 10 0">
                         <ListView 
-                    
-                    x:Name="lvs_Report_Inventory"
-                    ItemsSource="{Binding ListInventory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                
-                    FontSize="18">
-
-
+                            x:Name="lvs_Report_Inventory"
+                            ItemsSource="{Binding ListInventory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"            
+                            FontSize="18">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
@@ -111,7 +165,7 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                    </ScrollViewer>
+                    </ScrollViewer>-->
                 </Grid>
                 <Grid
                      Visibility="{Binding VisListView_Sales, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.ColumnSpan="2">
@@ -119,16 +173,70 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition Height="60"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <ScrollViewer 
+                    <DataGrid  
+                        x:Name="lvs_Report_Sales"
+                                ItemsSource="{Binding ListSales, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                FontSize="18"          
+                                SelectionMode="Extended"
+                                IsReadOnly="True"
+                                CanUserAddRows="False"
+                                AutoGenerateColumns="False"
+                                CanUserDeleteRows="False"
+                                CanUserReorderColumns="True"
+                      >
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Gainsboro" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                        </DataGrid.Resources>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChanged}" 
+                                                   CommandParameter="{Binding ElementName=dataGrid}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+
+                        </i:Interaction.Triggers>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                        <Setter Property="FontWeight" Value="DemiBold" />
+                                        <Setter Property="FontSize" Value="19" />
+
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="Background" Value="{StaticResource MainColor}"></Setter>
+                                <Setter Property="Foreground" Value="White"></Setter>
+                                <Setter Property="FontWeight" Value="DemiBold"></Setter>
+
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+
+                        <DataGrid.Columns>
+
+                            <materialDesign:DataGridTextColumn Width="100" Header="STT" Binding="{Binding STT}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="200" Header="Hiệu xe" Binding="{Binding CarBrand_Name}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="150" Header="Số lượt sửa" Binding="{Binding AmountOfTurn}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="150" Header="Thành tiền" Binding="{Binding TotalMoney}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Width="150" Header="Tỉ lệ" Binding="{Binding Rate}"></materialDesign:DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--<ScrollViewer 
                     Margin="10 10 10 0" >
-                        <ListView 
-                    
-                    x:Name="lvs_Report_Sales"
-                    ItemsSource="{Binding ListSales, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                
-                    FontSize="18">
-
-
+                        <ListView  
+                                x:Name="lvs_Report_Sales"
+                                ItemsSource="{Binding ListSales, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                FontSize="18">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
@@ -136,11 +244,10 @@
                                     <GridViewColumn Header="Số lượt sửa" DisplayMemberBinding="{Binding AmountOfTurn}"></GridViewColumn>
                                     <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding TotalMoney}"></GridViewColumn>
                                     <GridViewColumn Header="Tỉ lệ" DisplayMemberBinding="{Binding Rate}"></GridViewColumn>
-
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                    </ScrollViewer>
+                    </ScrollViewer>-->
                     <Grid Grid.Row="1" >
 
                         <StackPanel Orientation="Horizontal" 
@@ -186,12 +293,12 @@
                        Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Name="bt_Print"
                         Width="150"
-                        Height="40"
+                        
                         FontSize="24"
                         Content="In báo cáo"
                         Margin="10 0 40 0"
                         VerticalAlignment="Center"
-                        Background="#455A64"
+                        Style="{StaticResource MainButton}"
                         HorizontalAlignment="Left"
                         Command="{Binding PrintReportCommand}"
                         CommandParameter="{Binding ElementName=wdReportMonth}">
@@ -200,12 +307,12 @@
                    Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Name="bt_ViewReport"
                         Width="180"
-                        Height="40"
+                        
                         FontSize="24"
                         Content="Xem báo cáo"
-                        Margin="10 0 220 0"
+                        Margin="10 0 250 0"
                         VerticalAlignment="Center"
-                        Background="#455A64"
+                        Style="{StaticResource MainButton}"
                         HorizontalAlignment="Right"
                         Command="{Binding ViewReportCommand}"
                         CommandParameter="{Binding ElementName=wdReportMonth}">
@@ -213,26 +320,26 @@
                 <Button Grid.Column="1"
                        Visibility="{Binding VisView, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Name="bt_Report"
-                        Width="150"
-                        Height="40"
+                        Width="180"
+                        Style="{StaticResource MainButton}"
                         FontSize="24"
                         Content="Báo cáo"
-                        Margin="10 0 220 0"
+                         Margin="10 0 250 0"
                         VerticalAlignment="Center"
-                        Background="#455A64"
                         HorizontalAlignment="Right"
                         Command="{Binding ReportCommand}"
                         CommandParameter="{Binding ElementName=wdReportMonth}">
                 </Button>
                 <Button Grid.Column="1"
                     IsCancel="True"
-                        Style="{StaticResource CloseButton}"
-                        Width="150"
-                        Height="40"
+                        Style="{StaticResource MainButton}"
+                        Width="180"
+           
                         FontSize="24"
-                       
-                        Margin="10 0 20 0"
-                        Background="#455A64"                        
+                        Content="Close"
+                        Margin="20 0 20 0"
+                        Background="{StaticResource MainColor}"    
+                        BorderBrush="{StaticResource MainColor}"
                         VerticalAlignment="Center"                       
                         HorizontalAlignment="Right"
                         Command="{Binding CloseCommand}"
