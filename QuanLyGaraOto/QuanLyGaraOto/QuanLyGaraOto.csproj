@@ -269,6 +269,7 @@
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TempModel.cs" />
+    <Compile Include="Model\UpdateDebtModel.cs" />
     <Compile Include="Model\USER.cs">
       <DependentUpon>GaraEFModel.tt</DependentUpon>
     </Compile>

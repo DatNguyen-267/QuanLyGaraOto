@@ -59,10 +59,12 @@ namespace QuanLyGaraOto.ViewModel
                         return;
                     }
                 }
-
+                
                 wage.Wage_Name = WageInModify;
                 wage.Wage_Value = ValueInModify;
                 DataProvider.Ins.DB.SaveChanges();
+                UpdateDebtModel update = new UpdateDebtModel();
+                update.UpdateDebtWhenChanged(wage);
                 MessageBox.Show("Sửa thành công!");
                 p.Close();
             });

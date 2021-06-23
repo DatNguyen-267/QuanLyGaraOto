@@ -82,6 +82,8 @@ namespace QuanLyGaraOto.ViewModel
                         List.Supplies_Price = Int32.Parse(p.txbPrice.Text);
                         DataProvider.Ins.DB.SaveChanges();
                         OnPropertyChanged("List");
+                        UpdateDebtModel update = new UpdateDebtModel();
+                        update.UpdateDebtWhenChanged(supplies);
                         p.Close();
                     }
                 }

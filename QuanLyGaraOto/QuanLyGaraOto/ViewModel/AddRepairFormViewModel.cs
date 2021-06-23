@@ -64,7 +64,9 @@ namespace QuanLyGaraOto.ViewModel
                 VisErrorDate = false;
                 VisOverDate = false;
 
-                if (p.SelectedDate < Reception.ReceptionDate)
+                if (p.SelectedDate.Value.Year <= Reception.ReceptionDate.Year &&
+                    p.SelectedDate.Value.Month <= Reception.ReceptionDate.Month &&
+                    p.SelectedDate.Value.Day < Reception.ReceptionDate.Day )
                 {
                     VisErrorDate = true;
                 }

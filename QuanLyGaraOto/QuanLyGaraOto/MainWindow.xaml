@@ -133,7 +133,7 @@
                     <StackPanel >
                         <materialDesign:PackIcon  Grid.Column="0"      
                                                     Kind="Cog" />
-                        <TextBlock Grid.Column="1" Text="Cài Đặt">
+                        <TextBlock Grid.Column="1" Text="Tùy Chọn">
                         </TextBlock>
                     </StackPanel>
                 </Button>
