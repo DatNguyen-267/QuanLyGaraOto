@@ -33,7 +33,7 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <TextBlock 
-                   Text="Dịch Vụ"
+                   Text="Dịch vụ"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Margin="15 0 5 0"            
@@ -113,9 +113,9 @@
 
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding CarReception.Reception_Id}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="150" Header="Biển Số" Binding="{Binding CarReception.LicensePlate}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="150" Header="Hiệu Xe" Binding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="250" Header="Chủ Xe" Binding="{Binding CarReception.CUSTOMER.Customer_Name}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="150" Header="Biển số" Binding="{Binding CarReception.LicensePlate}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="150" Header="Hiệu xe" Binding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="250" Header="Chủ xe" Binding="{Binding CarReception.CUSTOMER.Customer_Name}"></materialDesign:DataGridTextColumn>
                     
                     <materialDesign:DataGridTextColumn Width="200" Header="Ngày tiếp nhận" Binding="{Binding CarReception.ReceptionDate, StringFormat=dd/MM/yyyy}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="200" Header="Tiền nợ" Binding="{Binding CarReception.Debt}"></materialDesign:DataGridTextColumn>
@@ -277,7 +277,7 @@
                     <Button 
                         Command="{Binding OpenCommand}" 
                         Margin="20 5 0 0"
-                        Content="Chi Tiết">
+                        Content="Chi tiết">
                     </Button>
 
                 </StackPanel>

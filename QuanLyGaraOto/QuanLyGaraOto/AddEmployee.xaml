@@ -76,7 +76,7 @@
                             HorizontalContentAlignment="Left"
                             FontWeight="Normal">
                             <TextBox.Style>
-                                <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding VisExistsAddUserName}" Value="True">
                                             <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>

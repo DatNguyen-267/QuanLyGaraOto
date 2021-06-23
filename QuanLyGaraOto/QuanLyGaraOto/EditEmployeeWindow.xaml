@@ -10,7 +10,7 @@
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         Name="wdEditEmployee"
         WindowStartupLocation="CenterScreen"
-        
+       
         Title="EditEmployee" Height="750" Width="450">
     <Grid>
         <Grid.RowDefinitions>

@@ -47,7 +47,7 @@
                 <Grid Grid.Row="0" Margin="15 5 0 0">
                     <TextBlock HorizontalAlignment="Left"
                                VerticalAlignment="Top"
-                               Text="Thông Tin Nhập hàng"
+                               Text="Thông tin nhập hàng"
                                FontWeight="Bold"
                                Foreground="{StaticResource MainBlue}"
                                FontSize="16"
@@ -124,7 +124,7 @@
                 <Grid Grid.Row="0" Margin="15 5 0 0">
                     <TextBlock HorizontalAlignment="Left"
                                VerticalAlignment="Top"
-                               Text="Thông Tin nhà cung cấp"
+                               Text="Thông tin nhà cung cấp"
                                FontWeight="Bold"
                                Foreground="{StaticResource MainBlue}"
                                FontSize="16"
@@ -162,7 +162,7 @@
                                 <ColumnDefinition Width="200"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <TextBlock Text="Điện Thoại"
+                                <TextBlock Text="Điện thoại"
                                            Style="{StaticResource txbInfo}"
                                                
                                            ></TextBlock>
@@ -215,7 +215,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <TextBlock Text="Ngày Nhập"
+                                <TextBlock Text="Ngày nhập"
                                            
                                             Style="{StaticResource txbInfo}"
                                                VerticalAlignment="Center"
@@ -246,7 +246,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <TextBlock Text="Người Nhập"
+                                <TextBlock Text="Người nhập"
                                            
                                             Style="{StaticResource txbInfo}"
                                                VerticalAlignment="Center"
@@ -354,7 +354,7 @@
                             Grid.Row="0" 
                             Style="{StaticResource MainButton}"
                              Width="auto"
-                            Content="Thanh Toán"
+                            Content="Thanh toán"
                             FontWeight="Bold"
                             Height="40"
                         Margin="30 0 30 0"
@@ -365,7 +365,7 @@
                             Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
                             Grid.Row="1" 
                             BorderBrush="{StaticResource Green0}"
-                            Content="In Hóa Đơn"
+                            Content="In hóa đơn"
                             Margin="30 0 30 0"
                             FontWeight="Bold"
                             Height="40"
