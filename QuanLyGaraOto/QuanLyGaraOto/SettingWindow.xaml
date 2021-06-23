@@ -115,7 +115,8 @@
                             <Label Grid.Row="0"
                                      Content="Thông tin tài khoản"
                                     Style="{StaticResource Title}"/>
-                            <StackPanel Grid.Row="2">
+                            <StackPanel Grid.Row="1">
+                               
                                 <Grid Grid.Row="1" Margin="16 8 16 0">
                                     <materialDesign:PackIcon Kind="Account" 
                                                  VerticalAlignment="Center"
@@ -142,16 +143,20 @@
                                     </TextBox>
                                 </Grid>
                                 <Grid Grid.Row="2" Margin="16 8 16 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="355*"/>
+                                        <ColumnDefinition Width="138*"/>
+                                    </Grid.ColumnDefinitions>
                                     <materialDesign:PackIcon Kind="BirthdayCake" 
                                               
                                                  VerticalAlignment="Center"
                                                 
-                                                 FontSize="16" />
+                                                 FontSize="16" Margin="15,20,0,6" />
                                     <DatePicker
                                 x:Name="dpBirth"
-                                SelectedDate="{Binding UserBirth}"
+                                
                                 VerticalAlignment="Center"
-                                materialDesign:HintAssist.Hint="Ngày sinh"
+                                materialDesign:HintAssist.Hint="Ngày sinh" Grid.ColumnSpan="2" Margin="55,0,29.8,10"
                                >
                                         <DatePicker.Text>
                                             <Binding Path="UserBirth" StringFormat='dd-MMM-YYYY' 
@@ -298,12 +303,15 @@
                                         HorizontalAlignment="Center"
                                         Content="Đăng xuất"
                                         Command="{Binding Logout}"/>
+
                                 </Grid>
+
+                                
                             </StackPanel>
                         </Grid>
                     </materialDesign:Card>
                     <Grid Grid.Column="1" Margin="30 30 30 30">
-                       
+
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -734,11 +742,11 @@
                                 </TextBox>
                             </Grid>-->
 
-                       
+
                     </Grid>
                 </materialDesign:Card>
             </TabItem>
-            
+
             <TabItem Header="Thông tin hãng xe" 
                      Foreground="{StaticResource MainColor}"
                      FontWeight="Bold"
@@ -979,7 +987,7 @@
                                         />
                                 </StackPanel>
                             </StackPanel>
-                            
+
                         </Grid>
 
 

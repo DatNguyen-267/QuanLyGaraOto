@@ -314,6 +314,9 @@
     <Compile Include="Template\SubBillTemplate.xaml.cs">
       <DependentUpon>SubBillTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlGaraOto\TempUserControl.cs" />
     <Compile Include="Validation\DateValidation.cs" />
     <Compile Include="Validation\NonFocusValidation.cs" />
@@ -525,6 +528,10 @@
     <Page Include="Template\SubBillTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

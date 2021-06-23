@@ -275,6 +275,7 @@
                                                  VerticalAlignment="Center"
                                                  ></materialDesign:PackIcon>
                                         <TextBox Text="{Binding BrithDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='dd/MM/yyyy'}"
+                                                
                                                VerticalAlignment="Center"
                                                  materialDesign:HintAssist.Hint="Ngày sinh">
                                             
