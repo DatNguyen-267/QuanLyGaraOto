@@ -358,9 +358,9 @@
                                 <materialDesign:DataGridTextColumn Header="Nội dung" Binding="{Binding RepairInfo.Content}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn Header="Vật tư" Binding="{Binding RepairInfo.SUPPLIES.Supplies_Name}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding RepairInfo.SuppliesAmount}"></materialDesign:DataGridTextColumn>
-                                <materialDesign:DataGridTextColumn Header="Đơn giá" Binding="{Binding RepairInfo.SUPPLIES.Supplies_Price}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Đơn giá" Binding="{Binding RepairInfo.SuppliesPrice}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn Header="Loại tiền công" Binding="{Binding RepairInfo.WAGE.Wage_Name}"></materialDesign:DataGridTextColumn>
-                                <materialDesign:DataGridTextColumn Header="Tiền công" Binding="{Binding RepairInfo.WAGE.Wage_Value}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Tiền công" Binding="{Binding RepairInfo.WagePrice}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn Header="Thành tiền" Binding="{Binding RepairInfo.TotalMoney}"></materialDesign:DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
