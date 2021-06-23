@@ -301,8 +301,8 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
-        private DateTime _UserBirth;
-        public DateTime UserBirth
+        private string _UserBirth;
+        public string UserBirth
         {
             get => _UserBirth;
             set
@@ -797,7 +797,7 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     userInfo.UserInfo_Name = _UserName;
                     userInfo.UserInfo_Address = _UserAddress;
-                    userInfo.UserInfo_BirthDate = _UserBirth;
+                    userInfo.UserInfo_BirthDate = DateTime.Parse(UserBirth);
                     userInfo.UserInfo_Telephone = UserTelephone;
                     userInfo.UserInfo_CMND = UserCMND;
                     DataProvider.Ins.DB.SaveChanges();
@@ -808,7 +808,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 UserName = userInfo.UserInfo_Name;
                 UserAddress = userInfo.UserInfo_Address;
-                UserBirth = userInfo.UserInfo_BirthDate.Value;
+                UserBirth = ((DateTime)userInfo.UserInfo_BirthDate.Value).ToString("dd/MM/yyyy");
                 UserTelephone = userInfo.UserInfo_Telephone;
                 UserCMND = userInfo.UserInfo_CMND;
                 SetEnableStatusButtonInUserInformation(false);
@@ -905,7 +905,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 UserName = userInfo.UserInfo_Name;
                 UserAddress = userInfo.UserInfo_Address;
-                UserBirth = userInfo.UserInfo_BirthDate.Value;
+                UserBirth = userInfo.UserInfo_BirthDate.Value.ToString("dd/MM/yyyy");
                 UserTelephone = userInfo.UserInfo_Telephone;
                 UserCMND = userInfo.UserInfo_CMND;
             }
