@@ -8,7 +8,7 @@
          Title="Lịch sử nhập hàng"
         Name="GoodBillsWD"
       Height="600"
-      Width="1000"
+      Width="1200"
       WindowStartupLocation="CenterScreen"
       Background="#f1f1f1"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -67,6 +67,17 @@
                         materialDesign:HintAssist.Hint="Ngày nhập hàng"                           
                         VerticalAlignment="Center">
                 </DatePicker>
+                <ComboBox
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    x:Name="cbSupplier"
+                    Margin="15 0 0 5"
+                    Width="170"
+                    ItemsSource="{Binding ListSupplier}"
+                    DisplayMemberPath="Supplier_Name"
+                    materialDesign:HintAssist.Hint="Đơn vị cung cấp"
+                    FontSize="16">
+                    
+                </ComboBox>
                 <Button Content="Tìm"
                         Style="{StaticResource FeatureButton}"
                         Margin="20 5 0 0"
@@ -154,7 +165,7 @@
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn
                         Binding="{Binding ImportGoods_Id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                        Header="Mã đơn nhập" 
+                        Header="ID" 
                         Width="160"/>
                     <materialDesign:DataGridTextColumn
                         Binding="{Binding ImportGoods_Date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat=dd/MM/yyyy}"
@@ -166,7 +177,7 @@
                         Width="auto"/>
                     <materialDesign:DataGridTextColumn
                         Binding="{Binding ImportGoods_Supplier,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat=dd/MM/yyyy}"
-                        Header="Đơn vị cung cáp"
+                        Header="Đơn vị cung cấp"
                         Width="200"/>
                 </DataGrid.Columns>
             </DataGrid>

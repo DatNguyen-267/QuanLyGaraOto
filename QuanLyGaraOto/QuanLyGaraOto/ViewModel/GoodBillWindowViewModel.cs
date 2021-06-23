@@ -18,7 +18,8 @@ namespace QuanLyGaraOto.ViewModel
         public ObservableCollection<IMPORT_GOODS> ListImport { get => _ListImport;set { _ListImport = value; OnPropertyChanged(); } }
         private ObservableCollection<IMPORT_GOODS> _TempListImport { get; set; }
         public ObservableCollection<IMPORT_GOODS> TempListImport { get => _TempListImport; set { _TempListImport = value; OnPropertyChanged(); } }
-
+        private ObservableCollection<SUPPLIER> _ListSupplier { get; set; }
+        public ObservableCollection<SUPPLIER> ListSupplier { get => _ListSupplier; set { _ListSupplier = value; OnPropertyChanged(); } }
         private IMPORT_GOODS _SelectedItem { get; set; }
         public IMPORT_GOODS SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
 
@@ -29,6 +30,7 @@ namespace QuanLyGaraOto.ViewModel
         public GoodBillWindowViewModel()
         {
             ListImport = new ObservableCollection<IMPORT_GOODS>(DataProvider.Ins.DB.IMPORT_GOODS);
+            ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
             LoadCommand = new RelayCommand<GoodBillWindow>(
                 (p)=>
                 {
@@ -46,7 +48,8 @@ namespace QuanLyGaraOto.ViewModel
                 });
             SearchCommand = new RelayCommand<GoodBillWindow>((p) => {
                 if (p == null) return false;
-                if (string.IsNullOrEmpty(p.txbID.Text) && string.IsNullOrEmpty(p.dpImportDate.Text))
+                if (string.IsNullOrEmpty(p.txbID.Text) && string.IsNullOrEmpty(p.dpImportDate.Text)
+                && string.IsNullOrEmpty(p.cbSupplier.Text))
                     return false;
                 return true;
             }, (p) =>
@@ -56,7 +59,9 @@ namespace QuanLyGaraOto.ViewModel
                 TempListImport = new ObservableCollection<IMPORT_GOODS>();
                 foreach (var item in ListImport)
                 {
-                    if ((string.IsNullOrEmpty(p.txbID.Text) ||
+                    if ((string.IsNullOrEmpty(p.cbSupplier.Text) || (!string.IsNullOrEmpty(p.cbSupplier.Text) && (item.SUPPLIER.Supplier_Name == p.cbSupplier.Text)))
+                    &&
+                    (string.IsNullOrEmpty(p.txbID.Text) ||
                     (!string.IsNullOrEmpty(p.txbID.Text) && uni.RemoveUnicode(item.ImportGoods_Id.ToString()).ToLower().Contains(uni.RemoveUnicode(p.txbID.Text).ToLower())))
                     && ((string.IsNullOrEmpty(p.dpImportDate.Text) ||
                     (!string.IsNullOrEmpty(p.dpImportDate.Text) && item.ImportGoods_Date.Date.Day == p.dpImportDate.SelectedDate.Value.Date.Day
