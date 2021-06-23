@@ -957,11 +957,10 @@ namespace QuanLyGaraOto.ViewModel
         {
             p.Hide();
             LoginWindow loginWindow = new LoginWindow();
+            loginWindow.DataContext = new LoginViewModel();
             loginWindow.ShowDialog();
-            if (loginWindow.DataContext == null)
-                return;
             var loginVM = loginWindow.DataContext as LoginViewModel;
-            loginVM.IsLogin = false;
+            //loginVM.IsLogin = false;
             if (loginVM.IsLogin)
             {
                 p.Show();
