@@ -797,7 +797,11 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     userInfo.UserInfo_Name = _UserName;
                     userInfo.UserInfo_Address = _UserAddress;
+<<<<<<< Updated upstream
                     userInfo.UserInfo_BirthDate = DateTime.Parse(UserBirth);
+=======
+                    userInfo.UserInfo_BirthDate = DateTime.Parse(_UserBirth);
+>>>>>>> Stashed changes
                     userInfo.UserInfo_Telephone = UserTelephone;
                     userInfo.UserInfo_CMND = UserCMND;
                     DataProvider.Ins.DB.SaveChanges();
@@ -808,7 +812,11 @@ namespace QuanLyGaraOto.ViewModel
             {
                 UserName = userInfo.UserInfo_Name;
                 UserAddress = userInfo.UserInfo_Address;
+<<<<<<< Updated upstream
                 UserBirth = ((DateTime)userInfo.UserInfo_BirthDate.Value).ToString("dd/MM/yyyy");
+=======
+                UserBirth = userInfo.UserInfo_BirthDate.Value.ToString("dd/MM/yyyy");
+>>>>>>> Stashed changes
                 UserTelephone = userInfo.UserInfo_Telephone;
                 UserCMND = userInfo.UserInfo_CMND;
                 SetEnableStatusButtonInUserInformation(false);
@@ -961,6 +969,7 @@ namespace QuanLyGaraOto.ViewModel
             if (loginWindow.DataContext == null)
                 return;
             var loginVM = loginWindow.DataContext as LoginViewModel;
+            loginVM.IsLogin = false;
             if (loginVM.IsLogin)
             {
                 p.Show();

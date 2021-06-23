@@ -95,6 +95,7 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0"
+<<<<<<< Updated upstream
                                    Content="Thông tin tài khoản"
                                    Style="{StaticResource Title}"/>
                             <Grid Grid.Row="1">
@@ -123,6 +124,20 @@
                                              materialDesign:HintAssist.Hint="Tên"
                                              VerticalAlignment="Center"
                                              Margin="0 0 30 0">
+=======
+                                     Content="Thông tin tài khoản"
+                                    Style="{StaticResource Title}"/>
+                            <StackPanel Grid.Row="2">
+                                <Grid Margin="16 8 16 0">
+                                    <materialDesign:PackIcon Kind="Account" 
+                                                 VerticalAlignment="Center"
+                                                 FontSize="16"/>
+                                    <TextBox
+                                    x:Name="txtName"
+                                    materialDesign:HintAssist.Hint="Tên"
+                                    VerticalAlignment="Center" 
+                                    >
+>>>>>>> Stashed changes
                                         <TextBox.Text>
                                             <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                                 <Binding.ValidationRules>
@@ -138,6 +153,7 @@
                                         </i:Interaction.Triggers>
                                     </TextBox>
                                 </Grid>
+<<<<<<< Updated upstream
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50"></ColumnDefinition>
@@ -155,8 +171,21 @@
                                                 materialDesign:HintAssist.Hint="Ngày sinh" 
                                                 Grid.ColumnSpan="2"
                                                 Margin="0 0 30 0">
+=======
+                                
+                                <Grid Margin="16 8 16 0">
+                                    <materialDesign:PackIcon Kind="BirthdayCake" 
+                                              
+                                                 VerticalAlignment="Center"
+                                                
+                                                 FontSize="16" />
+                                    <DatePicker
+                                            x:Name="dpBirth"
+                                            VerticalAlignment="Center"
+                                            materialDesign:HintAssist.Hint="Ngày sinh">
+>>>>>>> Stashed changes
                                         <DatePicker.Text>
-                                            <Binding Path="UserBirth" StringFormat='MM-dd-YYYY' 
+                                            <Binding Path="UserBirth" StringFormat="dd/MM/yyyy"
                                              UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"
                                              ValidatesOnNotifyDataErrors="False"
                                              NotifyOnValidationError="False">
@@ -177,11 +206,15 @@
                                         </i:Interaction.Triggers>
                                     </DatePicker>
                                 </Grid>
+<<<<<<< Updated upstream
                                 <Grid Grid.Row="2">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
+=======
+                                <Grid Margin="16 8 16 0">
+>>>>>>> Stashed changes
                                     <materialDesign:PackIcon Kind="AccountCircle" 
                                                              Grid.Column="0"
                                                              VerticalAlignment="Center"
@@ -210,11 +243,15 @@
 
                                     </TextBox>
                                 </Grid>
+<<<<<<< Updated upstream
                                 <Grid Grid.Row="3">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
+=======
+                                <Grid Margin="16 8 16 0">
+>>>>>>> Stashed changes
                                     <materialDesign:PackIcon Kind="Phone" 
                                                              Grid.Column="0"
                                                              VerticalAlignment="Center"
@@ -245,11 +282,15 @@
 
                                     </TextBox>
                                 </Grid>
+<<<<<<< Updated upstream
                                 <Grid Grid.Row="4">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
+=======
+                                <Grid Margin="16 8 16 0">
+>>>>>>> Stashed changes
                                     <materialDesign:PackIcon Kind="AddressMarker" 
                                                              Grid.Column="0"
                                                              VerticalAlignment="Center"
@@ -278,7 +319,11 @@
 
                                     </TextBox>
                                 </Grid>
+<<<<<<< Updated upstream
                                 <Grid Grid.Row="5" Margin="16 0 16 0">
+=======
+                                <Grid Margin="16 0 16 0">
+>>>>>>> Stashed changes
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
