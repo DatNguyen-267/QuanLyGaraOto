@@ -297,7 +297,9 @@ namespace QuanLyGaraOto.ViewModel
 
             //Nút thoát khỏi cửa sổ 
             ExitCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
-                p.Close();
+
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    p.Close();
             });
 
             // Kiểm tra quyền truy cập kho hàng khi bỏ check

@@ -11,6 +11,9 @@
         WindowStartupLocation="CenterScreen"
         x:Name="wdAddSupplier"
         Title="Thêm nhà cung cấp" Height="300" Width="700">
+    
+    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>

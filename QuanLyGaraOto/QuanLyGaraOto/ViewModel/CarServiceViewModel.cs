@@ -341,7 +341,9 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    p.Close();
+                    if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        p.Close();
+                    
                 });
             SelectionChanged = new RelayCommand<DataGrid>
                 ((p) =>

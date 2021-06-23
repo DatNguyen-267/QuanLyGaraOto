@@ -48,7 +48,9 @@ namespace QuanLyGaraOto.ViewModel
             ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    p.Close();
+               
             });
             ConfirmCommand = new RelayCommand<AddImportWindow>((p) => {
                 if (ImportDate == null) return false;
