@@ -315,6 +315,7 @@
                     Command="{Binding ExitCommand}"
                    Style="{StaticResource MainButton}"
                     Background="{StaticResource MainColor}"
+                    BorderBrush="{StaticResource MainColor}"
                     CommandParameter="{Binding ElementName=wdAddRole}"
                     Content="Đóng"/>
         </Grid>

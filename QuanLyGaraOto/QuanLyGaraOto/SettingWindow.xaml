@@ -26,7 +26,7 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <TextBlock 
-                   Text="Tùy Chọn"
+                   Text="Tùy chọn"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Margin="15 0 5 0"            

@@ -13,6 +13,7 @@ using System.Windows;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Security.Cryptography;
+using QuanLyGaraOto.Convert;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -297,7 +298,8 @@ namespace QuanLyGaraOto.ViewModel
 
             //Nút thoát khỏi cửa sổ 
             ExitCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    p.Close();
             });
 
             // Kiểm tra quyền truy cập kho hàng khi bỏ check
@@ -406,7 +408,8 @@ namespace QuanLyGaraOto.ViewModel
 
             //Nút thoát khỏi cửa sổ 
             ExitCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    p.Close();
             }
             );
 
@@ -484,7 +487,8 @@ namespace QuanLyGaraOto.ViewModel
 
             //Nút thoát khỏi Window AddEmployee
             ExitCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    p.Close();
             }
             );
 
@@ -887,51 +891,77 @@ namespace QuanLyGaraOto.ViewModel
 
         public void LoadUsersToView(Employee p)
         {
+            UnicodeConvert uni = new UnicodeConvert();
+
             List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
-            if (String.IsNullOrEmpty(p.txtLookUp.Text))
-            {
+            ObservableCollection<USER_INFO> _ListTempt = new ObservableCollection<USER_INFO>();
+
+            //if (String.IsNullOrEmpty(p.txtLookUp.Text))
+            //{
                 
-                p.datagridUser.ItemsSource = List;
-            }
-            else
+            //    p.datagridUser.ItemsSource = List;
+            //}
+            //else
+            //{
+            //    ObservableCollection<USER_INFO> _ListTempt = new ObservableCollection<USER_INFO>();
+
+            //    foreach (var item in List)
+            //    {
+            //        if (item.UserInfo_Name.Contains(p.txtLookUp.Text.ToString()))
+            //        {
+            //            _ListTempt.Add(item);
+            //        }
+            //    }
+            //    List = _ListTempt;
+
+            //}
+            foreach (var item in List)
             {
-                ObservableCollection<USER_INFO> _ListTempt = new ObservableCollection<USER_INFO>();
-
-                foreach (var item in List)
+                if ((string.IsNullOrEmpty(p.txtLookUp.Text) ||
+                    (!string.IsNullOrEmpty(p.txtLookUp.Text) && uni.RemoveUnicode(item.UserInfo_Name).ToLower().Contains(uni.RemoveUnicode(p.txtLookUp.Text).ToLower()))))
                 {
-                    if (item.UserInfo_Name.Contains(p.txtLookUp.Text.ToString()))
-                    {
-                        _ListTempt.Add(item);
-                    }
+                    _ListTempt.Add(item);
                 }
-                List = _ListTempt;
-
             }
 
+            List = _ListTempt;
 
         }
 
         public void LoadRolesToView(Employee p)
         {
-            if (String.IsNullOrEmpty(p.txtLookUpRole.Text))
+            UnicodeConvert uni = new UnicodeConvert();
+            ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
+            ObservableCollection<ROLE> _ListTempt = new ObservableCollection<ROLE>();
+            foreach (var item in ListRoles)
             {
-                ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
-                p.datagrid.ItemsSource = ListRoles;
-            }
-            else
-            {
-                ObservableCollection<ROLE> _ListTempt = new ObservableCollection<ROLE>();
-
-                foreach (var item in ListRoles)
+                if ((string.IsNullOrEmpty(p.txtLookUpRole.Text) ||
+                    (!string.IsNullOrEmpty(p.txtLookUpRole.Text) && uni.RemoveUnicode(item.Role_Name).ToLower().Contains(uni.RemoveUnicode(p.txtLookUpRole.Text).ToLower()))))
                 {
-                    if (item.Role_Name.Contains(p.txtLookUpRole.Text.ToString()))
-                    {
-                        _ListTempt.Add(item);
-                    }
+                    _ListTempt.Add(item);
                 }
-                ListRoles = _ListTempt;
-
             }
+
+            ListRoles = _ListTempt;
+            //if (String.IsNullOrEmpty(p.txtLookUpRole.Text))
+            //{
+            //    ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
+            //    p.datagrid.ItemsSource = ListRoles;
+            //}
+            //else
+            //{
+            //    ObservableCollection<ROLE> _ListTempt = new ObservableCollection<ROLE>();
+
+            //    foreach (var item in ListRoles)
+            //    {
+            //        if (item.Role_Name.Contains(p.txtLookUpRole.Text.ToString()))
+            //        {
+            //            _ListTempt.Add(item);
+            //        }
+            //    }
+            //    ListRoles = _ListTempt;
+
+            //}
 
 
         }

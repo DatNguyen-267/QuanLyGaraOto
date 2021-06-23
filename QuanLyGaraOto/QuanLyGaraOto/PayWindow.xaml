@@ -125,7 +125,7 @@
                 <Grid Grid.Row="0" Margin="15 5 0 0">
                     <TextBlock HorizontalAlignment="Left"
                                VerticalAlignment="Top"
-                               Text="Thông Tin Khách Hàng"
+                               Text="Thông tin khách hàng"
                                FontWeight="Bold"
                                Foreground="{StaticResource MainBlue}"
                                FontSize="16"
@@ -146,7 +146,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <TextBlock Text="Tên Chủ Xe"
+                                <TextBlock Text="Tên chủ Xe"
                                            Style="{StaticResource txbInfo}"></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
@@ -181,7 +181,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <TextBlock Text="Điện Thoại"
+                                <TextBlock Text="Điện thoại"
                                            Style="{StaticResource txbInfo}"
                                                
                                            ></TextBlock>
@@ -430,7 +430,7 @@
                             Grid.Row="0" 
                             Style="{StaticResource MainButton}"
                              Width="auto"
-                            Content="Thanh Toán"
+                            Content="Thanh toán"
                             FontWeight="Bold"
                             Height="40"
                         Margin="30 0 30 0"
@@ -441,7 +441,7 @@
                             Visibility="{Binding VisPrint, Converter={StaticResource BooleanToVisibilityConverter}}"
                             Grid.Row="1" 
                             BorderBrush="{StaticResource Green0}"
-                            Content="In Hóa Đơn"
+                            Content="In hóa đơn"
                             Margin="30 0 30 0"
                             FontWeight="Bold"
                             Height="40"

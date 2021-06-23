@@ -100,7 +100,7 @@
                         <materialDesign:PackIcon  Grid.Column="0"
                                                    
                                                     Kind="Warehouse" />
-                        <TextBlock Grid.Column="1" Text="Kho Hàng"
+                        <TextBlock Grid.Column="1" Text="Kho hàng"
                                        >
                         </TextBlock>
                     </StackPanel>
@@ -111,7 +111,7 @@
                     <StackPanel>
                         <materialDesign:PackIcon
                                     Kind="CardAccountDetails" />
-                        <TextBlock Grid.Column="1" Text="Nhân Viên">
+                        <TextBlock Grid.Column="1" Text="Nhân viên">
                         </TextBlock>
                     </StackPanel>
                 </Button>
@@ -122,7 +122,7 @@
                         <materialDesign:PackIcon  Grid.Column="0"
                               
                                 Kind="DatabaseSettingsOutline" />
-                        <TextBlock Grid.Column="1" Text="Thống Kê"
+                        <TextBlock Grid.Column="1" Text="Thống kê"
                                        >
                         </TextBlock>
                     </StackPanel>
@@ -133,7 +133,7 @@
                     <StackPanel >
                         <materialDesign:PackIcon  Grid.Column="0"      
                                                     Kind="Cog" />
-                        <TextBlock Grid.Column="1" Text="Cài Đặt">
+                        <TextBlock Grid.Column="1" Text="Cài đặt">
                         </TextBlock>
                     </StackPanel>
                 </Button>

@@ -333,10 +333,9 @@
                 <Button Grid.Column="1"
                     IsCancel="True"
                         Style="{StaticResource MainButton}"
-                        Width="180"
-           
+                        Width="180"           
                         FontSize="24"
-                        Content="Close"
+                        Content="Đóng"
                         Margin="20 0 20 0"
                         Background="{StaticResource MainColor}"    
                         BorderBrush="{StaticResource MainColor}"
