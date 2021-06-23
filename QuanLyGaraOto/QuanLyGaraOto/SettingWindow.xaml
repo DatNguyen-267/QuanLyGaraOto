@@ -88,44 +88,41 @@
                         <ColumnDefinition ></ColumnDefinition>
                         <ColumnDefinition ></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <materialDesign:Card Grid.Column="0" 
-                                         Margin="30 30 30 30">
-                        <Grid  >
-                            <Grid.Resources>
-                                <Style TargetType="materialDesign:PackIcon">
-                                    <Setter Property="Width" Value="30"></Setter>
-                                    <Setter Property="Height" Value="30"></Setter>
-                                    <Setter Property="Margin" Value="15 15 0 0"></Setter>
-                                </Style>
-                                <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
-                                    <Setter Property="FontSize" Value="16"></Setter>
-                                    <Setter Property="FontWeight" Value="Medium"></Setter>
-                                    <Setter Property="Margin" Value="55 0 30 10"></Setter>
-                                </Style>
-                                <Style TargetType="DatePicker" BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
-                                    <Setter Property="Margin" Value="55 0 30 10"></Setter>
-                                    <Setter Property="FontSize" Value="16"></Setter>
-                                    <Setter Property="FontWeight" Value="Medium"></Setter>
-                                </Style>
-                            </Grid.Resources>
+                    <materialDesign:Card Grid.Column="0" Margin="30">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0"
-                                     Content="Thông tin tài khoản"
-                                    Style="{StaticResource Title}"/>
-                            <StackPanel Grid.Row="1">
-                               
-                                <Grid Grid.Row="1" Margin="16 8 16 0">
-                                    <materialDesign:PackIcon Kind="Account" 
-                                                 VerticalAlignment="Center"
-                                                 FontSize="16"/>
-                                    <TextBox
-                                    x:Name="txtName"
-                                    materialDesign:HintAssist.Hint="Tên"
-                                    VerticalAlignment="Center" 
-                                    >
+                                   Content="Thông tin tài khoản"
+                                   Style="{StaticResource Title}"/>
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <materialDesign:PackIcon Grid.Column="0" 
+                                                             Kind="Account"  
+                                                             VerticalAlignment="Center" 
+                                                             FontSize="16" 
+                                                             HorizontalAlignment="Center"
+                                                             Height="30" Width="30"/>
+                                    <TextBox Grid.Column="1"
+                                             x:Name="txtName"
+                                             materialDesign:HintAssist.Hint="Tên"
+                                             VerticalAlignment="Center"
+                                             Margin="0 0 30 0">
                                         <TextBox.Text>
                                             <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                                 <Binding.ValidationRules>
@@ -139,25 +136,25 @@
                                                 <i:InvokeCommandAction Command="{Binding ChangeEnableButtonInUserInformation}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
-
                                     </TextBox>
                                 </Grid>
-                                <Grid Grid.Row="2" Margin="16 8 16 0">
+                                <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="355*"/>
-                                        <ColumnDefinition Width="138*"/>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="BirthdayCake" 
-                                              
-                                                 VerticalAlignment="Center"
-                                                
-                                                 FontSize="16" Margin="15,20,0,6" />
-                                    <DatePicker
-                                x:Name="dpBirth"
-                                
-                                VerticalAlignment="Center"
-                                materialDesign:HintAssist.Hint="Ngày sinh" Grid.ColumnSpan="2" Margin="55,0,29.8,10"
-                               >
+                                    <materialDesign:PackIcon Grid.Column="0" 
+                                                             Kind="BirthdayCake" 
+                                                             VerticalAlignment="Center" 
+                                                             FontSize="16" 
+                                                             HorizontalAlignment="Center"
+                                                             Height="30" Width="30"/>
+                                    <DatePicker Grid.Column="1"
+                                                x:Name="dpBirth"                               
+                                                VerticalAlignment="Center"
+                                                materialDesign:HintAssist.Hint="Ngày sinh" 
+                                                Grid.ColumnSpan="2"
+                                                Margin="0 0 30 0">
                                         <DatePicker.Text>
                                             <Binding Path="UserBirth" StringFormat='dd-MMM-YYYY' 
                                              UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"
@@ -176,18 +173,23 @@
                                         </i:Interaction.Triggers>
                                     </DatePicker>
                                 </Grid>
-                                <Grid Grid.Row="3" Margin="16 8 16 0">
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
                                     <materialDesign:PackIcon Kind="AccountCircle" 
-                                               
-                                                 VerticalAlignment="Center"
-                                                    
-                                                 FontSize="16" />
+                                                             Grid.Column="0"
+                                                             VerticalAlignment="Center"
+                                                             HorizontalAlignment="Center"
+                                                             FontSize="16" 
+                                                             Height="30" Width="30"/>
                                     <TextBox
-                                    x:Name="txtCMND"
-                                    materialDesign:HintAssist.Hint="CMND"
-                                   
-                                    VerticalAlignment="Center" 
-                                    >
+                                        x:Name="txtCMND"
+                                        materialDesign:HintAssist.Hint="CMND"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center" 
+                                        Margin="0 0 30 0">
                                         <TextBox.Text>
                                             <Binding Path="UserCMND" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                                 <Binding.ValidationRules>
@@ -204,19 +206,23 @@
 
                                     </TextBox>
                                 </Grid>
-                                <Grid Grid.Row="4" Margin="16 8 16 0">
+                                <Grid Grid.Row="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
                                     <materialDesign:PackIcon Kind="Phone" 
-                                               
-                                                 VerticalAlignment="Center"
-                                                   
-                                                 FontSize="16"
-                                                 ></materialDesign:PackIcon>
+                                                             Grid.Column="0"
+                                                             VerticalAlignment="Center"
+                                                             HorizontalAlignment="Center"
+                                                             FontSize="16"
+                                                             Height="30" Width="30"/>
                                     <TextBox
-                                    x:Name="txtTelephone"
-                                    materialDesign:HintAssist.Hint="Số điện thoại"
-                                   
-                                    VerticalAlignment="Center" 
-                                   >
+                                            x:Name="txtTelephone"
+                                            materialDesign:HintAssist.Hint="Số điện thoại"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center" 
+                                            Margin=" 0 0 30 0">
                                         <TextBox.Text>
                                             <Binding Path="UserTelephone" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                                 <Binding.ValidationRules>
@@ -235,19 +241,23 @@
 
                                     </TextBox>
                                 </Grid>
-                                <Grid Grid.Row="5" Margin="16 8 16 0">
+                                <Grid Grid.Row="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
                                     <materialDesign:PackIcon Kind="AddressMarker" 
-                                                
-                                                 VerticalAlignment="Center"
-                                                  
-                                                 FontSize="16"
-                                                 ></materialDesign:PackIcon>
+                                                             Grid.Column="0"
+                                                             VerticalAlignment="Center"
+                                                             HorizontalAlignment="Center"
+                                                             FontSize="16"
+                                                             Height="30" Width="30"/>
                                     <TextBox
-                                    x:Name="txtAddress"
-                                    materialDesign:HintAssist.Hint="Địa chỉ"
-                                    
-                                    VerticalAlignment="Center" 
-                                    >
+                                        x:Name="txtAddress"
+                                        materialDesign:HintAssist.Hint="Địa chỉ"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center" 
+                                        Margin="0 0 30 0">
                                         <TextBox.Text>
                                             <Binding Path="UserAddress" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                                 <Binding.ValidationRules>
@@ -264,7 +274,7 @@
 
                                     </TextBox>
                                 </Grid>
-                                <Grid Grid.Row="7" Margin="16 0 16 0">
+                                <Grid Grid.Row="5" Margin="16 0 16 0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
@@ -294,8 +304,7 @@
                                 Command="{Binding ResetUserInformation}"
                                 IsEnabled="{Binding IsEnableResetButtonInUserInformation}"/>
                                 </Grid>
-
-                                <Grid>
+                                <Grid Grid.Row="6">
                                     <Button 
                                         Width="250"
                                         Style="{StaticResource FeatureButton}"
@@ -305,9 +314,7 @@
                                         Command="{Binding Logout}"/>
 
                                 </Grid>
-
-                                
-                            </StackPanel>
+                            </Grid>
                         </Grid>
                     </materialDesign:Card>
                     <Grid Grid.Column="1" Margin="30 30 30 30">
