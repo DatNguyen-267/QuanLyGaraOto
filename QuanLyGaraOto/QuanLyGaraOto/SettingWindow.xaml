@@ -160,7 +160,7 @@
                                                 Grid.ColumnSpan="2"
                                                 Margin="0 0 30 0">
                                         <DatePicker.SelectedDate>
-                                            <Binding Path="UserBirth" StringFormat="dd/MMM/yyyy"
+                                            <Binding Path="UserBirth" StringFormat='dd-MMM-YYYY' 
                                              UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"
                                              ValidatesOnNotifyDataErrors="False"
                                              NotifyOnValidationError="False">

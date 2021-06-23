@@ -797,7 +797,7 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     userInfo.UserInfo_Name = _UserName;
                     userInfo.UserInfo_Address = _UserAddress;
-                    userInfo.UserInfo_BirthDate =   UserBirth;
+                    userInfo.UserInfo_BirthDate = _UserBirth;
                     userInfo.UserInfo_Telephone = UserTelephone;
                     userInfo.UserInfo_CMND = UserCMND;
                     DataProvider.Ins.DB.SaveChanges();

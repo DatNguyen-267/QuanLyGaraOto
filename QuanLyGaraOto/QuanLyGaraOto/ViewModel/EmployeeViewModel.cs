@@ -69,7 +69,7 @@ namespace QuanLyGaraOto.ViewModel
                 if (SelectedItem != null)
                 {
                     Name = SelectedItem.UserInfo_Name;
-                    BrithDate = ((DateTime)SelectedItem.UserInfo_BirthDate).ToString("dd/MM/yyyy");
+                    BrithDate = ((DateTime)SelectedItem.UserInfo_BirthDate);
                     CMND = SelectedItem.UserInfo_CMND;
                     Telephone = SelectedItem.UserInfo_Telephone;
                     Address = SelectedItem.UserInfo_Address;
@@ -114,7 +114,7 @@ namespace QuanLyGaraOto.ViewModel
         }
 
         public string Name { get => _Name; set { _Name = value; OnPropertyChanged(); } }
-        public string BrithDate { get => _BrithDate; set { _BrithDate = value; OnPropertyChanged(); } }
+        public DateTime BrithDate { get => _BrithDate; set { _BrithDate = value; OnPropertyChanged(); } }
         public string CMND { get => _CMND; set { _CMND = value; OnPropertyChanged(); } }
         public string Telephone { get => _Telephone; set { _Telephone = value; OnPropertyChanged(); } }
         public string Address { get => _Address; set { _Address = value; OnPropertyChanged(); } }
@@ -148,7 +148,7 @@ namespace QuanLyGaraOto.ViewModel
 
         //Thông tin 
         private string _Name { get; set; }
-        private string _BrithDate { get; set; }
+        private DateTime _BrithDate { get; set; }
         private string _CMND { get; set; }
         private string _Telephone { get; set; }
         private string _Address { get; set; }
@@ -363,7 +363,7 @@ namespace QuanLyGaraOto.ViewModel
         
             ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
             Name = u.UserInfo_Name;
-            BrithDate = ((DateTime)u.UserInfo_BirthDate).ToString("dd/MM/yyyy");
+            BrithDate = ((DateTime)u.UserInfo_BirthDate);
             CMND = u.UserInfo_CMND;
             Telephone = u.UserInfo_Telephone;
             Address = u.UserInfo_Address;
@@ -396,7 +396,7 @@ namespace QuanLyGaraOto.ViewModel
                     var in4 = DataProvider.Ins.DB.USER_INFO.Where(x => x.UserInfo_Id == Id).SingleOrDefault();
                     in4.UserInfo_Name = Name;
                     in4.UserInfo_CMND = CMND;
-                    in4.UserInfo_BirthDate = DateTime.Parse(BrithDate);
+                    in4.UserInfo_BirthDate = BrithDate;
                     in4.UserInfo_Telephone = Telephone;
                     in4.UserInfo_Address = Address;
                     DataProvider.Ins.DB.SaveChanges();
@@ -474,7 +474,7 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.SaveChanges();
 
                     int id_user = DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName).SingleOrDefault().Users_Id;
-                    DateTime date = DateTime.Parse(BrithDate);
+                    DateTime date = BrithDate;
                     DataProvider.Ins.DB.USER_INFO.Add(new USER_INFO { UserInfo_Name = Name, UserInfo_BirthDate = date, UserInfo_CMND = CMND, UserInfo_Telephone = Telephone, UserInfo_Address = Address, IdUser = id_user });
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Thêm thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
