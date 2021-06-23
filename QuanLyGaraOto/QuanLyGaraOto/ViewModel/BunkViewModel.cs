@@ -141,7 +141,8 @@ namespace QuanLyGaraOto.ViewModel
                         {
                             var ImportDetail = new ObservableCollection<IMPORT_GOODS_DETAIL>(DataProvider.Ins.DB.IMPORT_GOODS_DETAIL);
                             var RepairDetail = new ObservableCollection<REPAIR_DETAIL>(DataProvider.Ins.DB.REPAIR_DETAIL);
-                            foreach(var temp in ImportDetail)
+                            var InventoryReport = new ObservableCollection<INVENTORY_REPORT_DETAIL>(DataProvider.Ins.DB.INVENTORY_REPORT_DETAIL);
+                            foreach (var temp in ImportDetail)
                             {
                                 if (item.Supplies_Id == temp.IdSupplies)
                                 {
@@ -150,6 +151,14 @@ namespace QuanLyGaraOto.ViewModel
                                 }    
                             }
                             foreach (var temp in RepairDetail)
+                            {
+                                if (item.Supplies_Id == temp.IdSupplies)
+                                {
+                                    MessageBox.Show("Trong danh sách bạn chọn có phụ tùng đang được sử dụng không thể xóa");
+                                    return;
+                                }
+                            }
+                            foreach (var temp in InventoryReport)
                             {
                                 if (item.Supplies_Id == temp.IdSupplies)
                                 {
