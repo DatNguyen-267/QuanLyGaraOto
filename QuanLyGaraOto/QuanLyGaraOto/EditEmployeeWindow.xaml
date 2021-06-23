@@ -203,14 +203,14 @@
                         HorizontalContentAlignment="Left"
                         FontWeight="Normal"
                         >
-                            <DatePicker.Text>
+                            <DatePicker.SelectedDate>
                                 <Binding Path="BrithDate" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" StringFormat='dd/MM/yyyy'>
                                     <Binding.ValidationRules>
                                         <validation:NullDataValidation ErrorMessage="Vui lòng nhập ngày sinh"/>
 
                                     </Binding.ValidationRules>
                                 </Binding>
-                            </DatePicker.Text>
+                            </DatePicker.SelectedDate>
                         </DatePicker>
                     </Grid>
                     <Grid Grid.Row="4"                   
