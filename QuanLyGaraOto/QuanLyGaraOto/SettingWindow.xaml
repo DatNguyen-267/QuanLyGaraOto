@@ -159,7 +159,7 @@
                                                 FontWeight="Medium"
                                                 Grid.ColumnSpan="2"
                                                 Margin="0 0 30 0">
-                                        <DatePicker.Text>
+                                        <DatePicker.SelectedDate>
                                             <Binding Path="UserBirth" StringFormat='dd-MMM-YYYY' 
                                              UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"
                                              ValidatesOnNotifyDataErrors="False"
@@ -168,7 +168,7 @@
                                                     <validation:DateValidation ErrorMessage="Vui lòng không để trống"></validation:DateValidation>
                                                 </Binding.ValidationRules>
                                             </Binding>
-                                        </DatePicker.Text>
+                                        </DatePicker.SelectedDate>
 
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="SelectedDateChanged">
