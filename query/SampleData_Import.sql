@@ -8,6 +8,12 @@ insert into CAR_BRAND values(N'Mercedes')
 insert into CAR_BRAND values(N'Toyota')
 insert into CAR_BRAND values(N'Vinfast')
 insert into CAR_BRAND values(N'Ford')
+insert into CAR_BRAND values(N'Honda')
+insert into CAR_BRAND values(N'KIA')
+insert into CAR_BRAND values(N'Hyundai')
+insert into CAR_BRAND values(N'Chervolet')
+insert into CAR_BRAND values(N'Nissan')
+
 
 insert into SUPPLIER values(N'Phụ tùng ô tô Liên Việt','0918 340 288',N'kinhdoanhlienviet@gmail.com')
 insert into SUPPLIER values(N'MAST','1800 1539',N'mast@gmai.com')

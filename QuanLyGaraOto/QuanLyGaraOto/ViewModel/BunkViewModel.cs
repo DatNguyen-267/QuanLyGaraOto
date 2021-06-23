@@ -135,42 +135,51 @@ namespace QuanLyGaraOto.ViewModel
                 if (SelectedItem == null) return false;
                 return true; }, (p) => 
                 {
+                    List<string> a = new List<string>();
                     if (MessageBox.Show("Bạn có chắc chắn muốn xóa những phụ tùng đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
+                        bool isUse = false;
                         foreach (var item in Temp)
                         {
                             var ImportDetail = new ObservableCollection<IMPORT_GOODS_DETAIL>(DataProvider.Ins.DB.IMPORT_GOODS_DETAIL);
                             var RepairDetail = new ObservableCollection<REPAIR_DETAIL>(DataProvider.Ins.DB.REPAIR_DETAIL);
                             var InventoryReport = new ObservableCollection<INVENTORY_REPORT_DETAIL>(DataProvider.Ins.DB.INVENTORY_REPORT_DETAIL);
+                            isUse = false;
                             foreach (var temp in ImportDetail)
                             {
                                 if (item.Supplies_Id == temp.IdSupplies)
                                 {
-                                    MessageBox.Show("Trong danh sách bạn chọn có phụ tùng đang được nhập không thể xóa");
-                                    return;
+                                    a.Add(item.Supplies_Name);
+                                    isUse = true;
+                                    break;
                                 }    
                             }
                             foreach (var temp in RepairDetail)
                             {
                                 if (item.Supplies_Id == temp.IdSupplies)
                                 {
-                                    MessageBox.Show("Trong danh sách bạn chọn có phụ tùng đang được sử dụng không thể xóa");
-                                    return;
+                                    isUse = true;
+                                    break;
                                 }
                             }
                             foreach (var temp in InventoryReport)
                             {
                                 if (item.Supplies_Id == temp.IdSupplies)
                                 {
-                                    MessageBox.Show("Trong danh sách bạn chọn có phụ tùng đang được sử dụng không thể xóa");
-                                    return;
+                                    isUse = true;
+                                    break;
                                 }
                             }
-
-                            DeleteModel delete = new DeleteModel();
-                            delete.SUPPLIES(item);
-                            ListSupplies.Remove(item);
+                            if(!isUse)
+                            {
+                                DeleteModel delete = new DeleteModel();
+                                delete.SUPPLIES(item);
+                                ListSupplies.Remove(item);
+                            }
+                            else { MessageBox.Show("Không thể xóa phụ tùng " + item.Supplies_Name + " vì đang được sử dụng"); }
+                            
                         }
+                           
                     }
                     LoadSupplies();
                 });
