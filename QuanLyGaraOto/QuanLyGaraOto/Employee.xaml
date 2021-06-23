@@ -274,7 +274,7 @@
                                         <materialDesign:PackIcon Kind="BirthdayCake" 
                                                  VerticalAlignment="Center"
                                                  ></materialDesign:PackIcon>
-                                        <TextBox Text="{Binding BrithDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='dd/MM/yyyy'}"
+                                        <TextBox Text="{Binding BrithDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat='MM/dd/yyyy'}"
                                                 
                                                VerticalAlignment="Center"
                                                  materialDesign:HintAssist.Hint="Ngày sinh">
