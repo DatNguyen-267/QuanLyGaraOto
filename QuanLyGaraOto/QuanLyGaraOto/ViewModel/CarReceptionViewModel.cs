@@ -81,7 +81,7 @@ namespace QuanLyGaraOto.ViewModel
                         {
                             IdCustomer = customer.Customer_Id,
                             LicensePlate = LicensePlate,
-                            ReceptionDate = ReceptionDate,
+                            ReceptionDate = ReceptionDate.Date,
                             IdCarBrand = SelectedBrand.CarBrand_Id
                         };
                         DataProvider.Ins.DB.RECEPTIONs.Add(carReception);
