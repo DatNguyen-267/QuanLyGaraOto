@@ -77,7 +77,7 @@ namespace QuanLyGaraOto.ViewModel
 
                    Regex regex = new Regex(@"^[0-9]+$");
                    if (!regex.IsMatch(p.txbPhone.Text) && !string.IsNullOrEmpty(p.txbPhone.Text)) return false;
-
+                   if (VisOverDate1 || VisOverDate2 || VisErrorDate2) return false;
                    return true;
                },
                (p) =>
@@ -118,6 +118,17 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     VisOverDate1 = true;
                 }
+                VisOverDate2 = false;
+                VisErrorDate2 = false;
+                if (p.dpReceptionDate.SelectedDate != null)
+                {
+                    if (p.dpReceptionDate.SelectedDate.Value.Date > p.dpRepairDate.SelectedDate.Value.Date)
+                    {
+                        VisErrorDate2 = true;
+                    }
+                    else if (p.dpRepairDate.SelectedDate.Value.Date > DateTime.Now.Date) VisOverDate2 = true;
+                }
+
             });
             CheckDate2 = new RelayCommand<ChangeCarInfoWindow>((p) => {
                 return true;
