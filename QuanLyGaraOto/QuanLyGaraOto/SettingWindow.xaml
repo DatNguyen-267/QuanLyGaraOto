@@ -122,6 +122,8 @@
                                              x:Name="txtName"
                                              materialDesign:HintAssist.Hint="Tên"
                                              VerticalAlignment="Center"
+                                             FontSize="16"
+                                             FontWeight="Medium"
                                              Margin="0 0 30 0">
                                         <TextBox.Text>
                                             <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -153,6 +155,8 @@
                                                 x:Name="dpBirth"                               
                                                 VerticalAlignment="Center"
                                                 materialDesign:HintAssist.Hint="Ngày sinh" 
+                                                FontSize="16"
+                                                FontWeight="Medium"
                                                 Grid.ColumnSpan="2"
                                                 Margin="0 0 30 0">
                                         <DatePicker.Text>
@@ -189,6 +193,8 @@
                                         materialDesign:HintAssist.Hint="CMND"
                                         Grid.Column="1"
                                         VerticalAlignment="Center" 
+                                        FontSize="16"
+                                        FontWeight="Medium"
                                         Margin="0 0 30 0">
                                         <TextBox.Text>
                                             <Binding Path="UserCMND" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -222,6 +228,8 @@
                                             materialDesign:HintAssist.Hint="Số điện thoại"
                                             Grid.Column="1"
                                             VerticalAlignment="Center" 
+                                            FontSize="16"
+                                             FontWeight="Medium"
                                             Margin=" 0 0 30 0">
                                         <TextBox.Text>
                                             <Binding Path="UserTelephone" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -257,6 +265,8 @@
                                         materialDesign:HintAssist.Hint="Địa chỉ"
                                         Grid.Column="1"
                                         VerticalAlignment="Center" 
+                                        FontSize="16"
+                                        FontWeight="Medium"
                                         Margin="0 0 30 0">
                                         <TextBox.Text>
                                             <Binding Path="UserAddress" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
