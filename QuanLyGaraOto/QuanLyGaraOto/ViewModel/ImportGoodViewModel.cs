@@ -192,7 +192,9 @@ namespace QuanLyGaraOto.ViewModel
                             IsImport = true;
                             
                         }
+                        else { return; }
                     }
+                    
                     ImportPayWindow wd = new ImportPayWindow(ImportGoods);
                     if (ImportGoods.ImportGoods_TotalMoney != 0)
                     {

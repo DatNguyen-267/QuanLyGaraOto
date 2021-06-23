@@ -393,7 +393,7 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
-                if (saveFileDialog1.FileName != null)
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
                     Stream excelStream;
                     application.Application.IgnoreSheetNameException = false;
@@ -444,7 +444,7 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
-                if (saveFileDialog1.FileName != null)
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
                     Stream excelStream;
                     application.Application.IgnoreSheetNameException = false;
@@ -495,7 +495,7 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
-                if (saveFileDialog1.FileName != null)
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
                     Stream excelStream;
                     application.Application.IgnoreSheetNameException = false;
@@ -554,7 +554,7 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
-                if (saveFileDialog1.FileName != null)
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
                     Stream excelStream;
                     application.Application.IgnoreSheetNameException = false;
@@ -610,7 +610,7 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
-                if (saveFileDialog1.FileName != null)
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
                     Stream excelStream;
                     application.Application.IgnoreSheetNameException = false;
@@ -719,7 +719,7 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
-                if (saveFileDialog1.FileName != null)
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
                     Stream excelStream;
                     application.Application.IgnoreSheetNameException = false;
@@ -814,7 +814,7 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
-                if (saveFileDialog1.FileName != null)
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
                     Stream excelStream;
                     application.Application.IgnoreSheetNameException = false;
@@ -907,8 +907,8 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
-                
-                if (saveFileDialog1.FileName != null)
+
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
                     Stream excelStream;
                     application.Application.IgnoreSheetNameException = false;
@@ -1000,7 +1000,7 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
 
-                if (saveFileDialog1.FileName != null)
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
                     Stream excelStream;
                     application.Application.IgnoreSheetNameException = false;
@@ -1092,7 +1092,7 @@ namespace QuanLyGaraOto.ViewModel
                 saveFileDialog1.RestoreDirectory = true;
                 saveFileDialog1.ShowDialog();
 
-                if (saveFileDialog1.FileName != null)
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
                     Stream excelStream;
                     application.Application.IgnoreSheetNameException = false;
