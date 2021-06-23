@@ -10,9 +10,11 @@
         Height="370" Width="520"
         WindowStartupLocation="CenterScreen"
         Background="#ffffff"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         >
+   
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>

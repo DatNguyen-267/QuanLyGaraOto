@@ -213,6 +213,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 if(item.ReceiptDate.Year!=DateTime.Now.Year)
                 {
+                    if(!(ItemSource_Year.Any(x=>x.Contains("Năm " + item.ReceiptDate.Year.ToString()))))
                     ItemSource_Year.Add("Năm " + item.ReceiptDate.Year.ToString());                    
                 }          
             }

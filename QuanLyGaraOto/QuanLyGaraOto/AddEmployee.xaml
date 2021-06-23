@@ -14,6 +14,8 @@
         WindowStartupLocation="CenterScreen"
         
         Title="Thêm nhân viên" Height="750" Width="450">
+    
+    
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>

@@ -96,14 +96,17 @@ namespace QuanLyGaraOto.ViewModel
             LoadSupplies();
             OpenAddCommand = new RelayCommand<MainWindow>((p) => true, (p) => 
             {
+
                 AddNewGoodWindow wdAddGoods = new AddNewGoodWindow();
 
                 wdAddGoods.txbName.Text = "";
                 wdAddGoods.btnAdd.Visibility = System.Windows.Visibility.Visible;
                 wdAddGoods.txbPrice.Text = "";
                 wdAddGoods.ShowDialog();
+                
                 AddNewGoodViewModel add = wdAddGoods.DataContext as AddNewGoodViewModel;
-                ListSupplies.Add(add.Supplies);
+                if(add.check)
+                     ListSupplies.Add(add.Supplies);
             });
 
             OpenEditCommand = new RelayCommand<MainWindow>((p) => {

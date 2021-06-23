@@ -7,10 +7,14 @@
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         WindowStyle="SingleBorderWindow"
         Name="wdWage"
         WindowStartupLocation="CenterScreen"
         Title="Thêm tiền công" Height="300" Width="600">
+
+   
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>

@@ -29,8 +29,12 @@ namespace QuanLyGaraOto.ViewModel
         {
             CancelAddCarBrand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    p.Close();
+               
             });
+
+
             AddCarBrand = new RelayCommand<AddCarBrandWindow>((p) => 
             { 
                 if(p == null || string.IsNullOrEmpty(p.txtBrand.Text.Trim()))

@@ -38,7 +38,8 @@ namespace QuanLyGaraOto.ViewModel
         {
             CancelAddWage = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    p.Close();
             });
             AddWage = new RelayCommand<AddWageWindow>((p) =>
             {

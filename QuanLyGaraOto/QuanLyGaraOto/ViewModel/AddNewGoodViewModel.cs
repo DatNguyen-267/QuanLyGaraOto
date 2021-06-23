@@ -23,9 +23,12 @@ namespace QuanLyGaraOto.ViewModel
         private int _Price { get; set; }
         public int Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
 
+        private bool _check { get; set; }
+        public bool check { get => _check; set { _check = value; OnPropertyChanged(); } }
 
         public AddNewGoodViewModel()
         {
+            check = false;
 
             AddCommand = new RelayCommand<AddNewGoodWindow>(
                 (p) =>
@@ -44,6 +47,8 @@ namespace QuanLyGaraOto.ViewModel
                         Supplies = new SUPPLIES() { Supplies_Name = p.txbName.Text, Supplies_Price = Int32.Parse(p.txbPrice.Text), Supplies_Amount = 0 };
                         DataProvider.Ins.DB.SUPPLIES.Add(Supplies);
                         DataProvider.Ins.DB.SaveChanges();
+                        check = true;
+
                         p.Close();
                     }
                 });
@@ -52,7 +57,8 @@ namespace QuanLyGaraOto.ViewModel
                 { return true; },
                 (p) =>
                 {
-                    p.Close();
+                    if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        p.Close();
                 }
                 );
         }

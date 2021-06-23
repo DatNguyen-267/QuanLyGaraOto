@@ -31,7 +31,9 @@ namespace QuanLyGaraOto.ViewModel
 
             CancelModifyCarBrand = new RelayCommand<ModifyCarBrandWindow>((p) => { return true; }, (p) =>
             {
-                p.Close();
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    p.Close();
+                
             });
             ModifyCarBrand = new RelayCommand<ModifyCarBrandWindow>((p) =>
             {

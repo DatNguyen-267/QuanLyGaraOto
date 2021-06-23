@@ -124,7 +124,8 @@ namespace QuanLyGaraOto.ViewModel
                (p) => { return true; },
                (p) =>
                {
-                   CloseWd(p);
+                   if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                       p.Close();
                });
             ViewReportCommand = new RelayCommand<ReportMonthWindow>(
                 (p) => { return true; },
@@ -227,8 +228,8 @@ namespace QuanLyGaraOto.ViewModel
             {
                 if (item.ReceiptDate.Year != DateTime.Now.Year)
                 {
-                   
-                    RpItemSource_Year.Add("Năm " + item.ReceiptDate.Year.ToString());
+                    if (!(RpItemSource_Year.Any(x => x.Contains("Năm " + item.ReceiptDate.Year.ToString()))))
+                        RpItemSource_Year.Add("Năm " + item.ReceiptDate.Year.ToString());
                 }
 
             }
