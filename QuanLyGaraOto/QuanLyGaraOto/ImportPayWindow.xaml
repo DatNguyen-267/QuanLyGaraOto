@@ -149,7 +149,7 @@
                                            Style="{StaticResource txbInfo}"></TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBlock Text="{Binding Supplier.Supplier_Name}"
+                                <TextBlock Text="{Binding Import.ImportGoods_Supplier}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
                                            Style="{StaticResource txbInfo}"></TextBlock>

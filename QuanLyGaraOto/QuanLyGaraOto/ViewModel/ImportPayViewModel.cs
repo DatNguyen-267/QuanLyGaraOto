@@ -46,6 +46,7 @@ namespace QuanLyGaraOto.ViewModel
         public ImportPayViewModel(IMPORT_GOODS import)
         {
             Import = import;
+            
             Supplier = DataProvider.Ins.DB.SUPPLIERs.Where(x => x.Supplier_Id == Import.IdSupplier).FirstOrDefault();
             userinfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == Import.IdUser).FirstOrDefault();
             
