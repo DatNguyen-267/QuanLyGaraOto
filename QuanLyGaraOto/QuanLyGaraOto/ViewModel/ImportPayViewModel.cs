@@ -70,6 +70,13 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p)=>
                 {
+                    foreach (var item in ListImport)
+                    {
+                        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.IdSupplies).SingleOrDefault();
+                        List.Supplies_Amount += item.Amount;
+                        //DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Add(item.ImportInfo);
+                        DataProvider.Ins.DB.SaveChanges();
+                    }
                     Import.ImportGoods_TotalMoney = TotalPay;
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Thanh toán thành công!");

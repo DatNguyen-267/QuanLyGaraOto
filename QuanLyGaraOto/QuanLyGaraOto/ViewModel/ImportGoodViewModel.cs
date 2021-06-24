@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -31,11 +32,13 @@ namespace QuanLyGaraOto.ViewModel
 
         public ICommand CloseCommand { get; set; }
 
+        public ICommand ViewCommand { get; set; }
+
         private ObservableCollection<SUPPLIES> _ListSupplies { get; set; }
         public ObservableCollection<SUPPLIES> ListSupplies { get => _ListSupplies; set { _ListSupplies = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<ImportItem> _ListImport { get; set; }
-        public ObservableCollection<ImportItem> ListImport { get => _ListImport; set { _ListImport = value; OnPropertyChanged(); } }
+        private ObservableCollection<IMPORT_GOODS_DETAIL> _ListImport { get; set; }
+        public ObservableCollection<IMPORT_GOODS_DETAIL> ListImport { get => _ListImport; set { _ListImport = value; OnPropertyChanged(); } }
 
 
         private int _ImportPrice { get; set; }
@@ -56,9 +59,9 @@ namespace QuanLyGaraOto.ViewModel
         private SUPPLIES _SelectedSupply { get; set; }
         public SUPPLIES SelectedSupply { get => _SelectedSupply; set { _SelectedSupply = value;OnPropertyChanged(); } }
 
-        private ImportItem _SelectedItem { get; set; }
+        private IMPORT_GOODS_DETAIL _SelectedItem { get; set; }
 
-        public ImportItem SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
+        public IMPORT_GOODS_DETAIL SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); } }
 
         private IMPORT_GOODS _ImportGoods { get; set; }
 
@@ -72,7 +75,6 @@ namespace QuanLyGaraOto.ViewModel
         {
             ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
             IsImport = false;
-            IsImport = false;
             Command();
 
 
@@ -81,11 +83,11 @@ namespace QuanLyGaraOto.ViewModel
         public ImportGoodViewModel(IMPORT_GOODS import)
         {
             IsImport = false;
-            IsImport = false;
-            ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
-            ListImport = new ObservableCollection<ImportItem>();
-            ImportDate = import.ImportGoods_Date;
             ImportGoods = import;
+            ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
+            ListImport = new ObservableCollection<IMPORT_GOODS_DETAIL>(DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Where(x=> x.IdImportGood == ImportGoods.ImportGoods_Id));
+            ImportDate = import.ImportGoods_Date;
+            if (import.ImportGoods_TotalMoney != 0) IsImport = true;
 
             Command();
         }
@@ -107,27 +109,29 @@ namespace QuanLyGaraOto.ViewModel
                     {
                         foreach (var tempitem in ListImport)
                         {
-                            if (tempitem.ImportInfo.IdSupplies == item.IdSupplies)
+                            if (tempitem.IdSupplies == item.IdSupplies)
                             {
-                                if(tempitem.ImportInfo.Price != item.Price)
+                                if (tempitem.Price != item.Price)
                                 {
                                     MessageBoxResult rs = MessageBox.Show("Vật tư bạn chọn đã được thêm vào với một giá nhập khác, bạn có muốn cập nhật lại giá vật tư?", "Thông báo", MessageBoxButton.YesNo);
-                                    if(MessageBoxResult.Yes == rs)
+                                    if (MessageBoxResult.Yes == rs)
                                     {
-                                        tempitem.ImportInfo.Price = item.Price;
-                                        tempitem.ImportInfo.TotalMoney = item.Price * tempitem.ImportInfo.Amount;
+                                        tempitem.Price = item.Price;
+                                        tempitem.TotalMoney = item.Price * tempitem.Amount;
                                     }
-                                    else { item.Price = tempitem.ImportInfo.Price; }
+                                    else { item.Price = tempitem.Price; }
                                 }
-                                
-                                tempitem.ImportInfo.Amount += item.Amount;
-                                tempitem.ImportInfo.TotalMoney += item.Price*item.Amount;
+
+                                tempitem.Amount += item.Amount;
+                                tempitem.TotalMoney += item.Price * item.Amount;
                                 return;
                             }
                         }
                     }
                     SUPPLIES sp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.IdSupplies).FirstOrDefault();
-                    ListImport.Add(new ImportItem() { ImportInfo = item,Supplies_Name = sp.Supplies_Name, TotalMoney = Total});
+                    DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Add(item);
+                    DataProvider.Ins.DB.SaveChanges();
+                    ListImport.Add(item);
                     UpdateTotalMoney();
 
                 }
@@ -142,15 +146,20 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    //if(SelectedItem.ImportInfo.IdSupplies != null)
-                    //{
-                    //    var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.ImportInfo.IdSupplies).SingleOrDefault();
-                    //    temp.Supplies_Amount = temp.Supplies_Amount - SelectedItem.ImportInfo.Amount;
-                    //}    
+                    
                     MessageBoxResult rs = MessageBox.Show("Bạn có muốn xóa vật tư này ra khỏi danh sách?", "Thông báo", MessageBoxButton.YesNo);
                     if (MessageBoxResult.Yes == rs)
                     {
+                        //if (SelectedItem.IdSupplies != null)
+                        //{
+                        //    var temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == SelectedItem.IdSupplies).SingleOrDefault();
+                        //    temp.Supplies_Amount = temp.Supplies_Amount - SelectedItem.Amount;
+                        //    DataProvider.Ins.DB.SaveChanges();
+                        //}
+                        DeleteModel delete = new DeleteModel();
+                        delete.ImportInfo(SelectedItem);
                         ListImport.Remove(SelectedItem);
+
                     }
 
                 }
@@ -159,8 +168,7 @@ namespace QuanLyGaraOto.ViewModel
                 (p) =>
                 {
                     if (SelectedSupply == null) return false;
-
-                    if (string.IsNullOrEmpty(p.txbPrice.Text) || string.IsNullOrEmpty(p.txbAmount.Text)) return false;
+                    if  (string.IsNullOrEmpty(p.txbPrice.Text) || string.IsNullOrEmpty(p.txbAmount.Text)) return false;
                     return true;
                 },
                 (p) =>
@@ -182,13 +190,14 @@ namespace QuanLyGaraOto.ViewModel
                         MessageBoxResult rs = MessageBox.Show("Bạn đồng ý nhập tất cả vật tư đã chọn", "Thông báo", MessageBoxButton.OKCancel);
                         if (MessageBoxResult.OK == rs)
                         {
-                            foreach (var item in ListImport)
-                            {
-                                var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.ImportInfo.IdSupplies).SingleOrDefault();
-                                List.Supplies_Amount += item.ImportInfo.Amount;
-                                DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Add(item.ImportInfo);
-                                DataProvider.Ins.DB.SaveChanges();
-                            }
+                            //foreach (var item in ListImport)
+                            //{
+                            //    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.IdSupplies).SingleOrDefault();
+                            //    List.Supplies_Amount += item.Amount;
+                            //    //DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Add(item.ImportInfo);
+                                
+                            //    DataProvider.Ins.DB.SaveChanges();
+                            //}
                             IsImport = true;
                             
                         }
@@ -196,31 +205,30 @@ namespace QuanLyGaraOto.ViewModel
                     }
                     
                     ImportPayWindow wd = new ImportPayWindow(ImportGoods);
+                    wd.ShowDialog();
                     if (ImportGoods.ImportGoods_TotalMoney != 0)
                     {
-                        wd.btnPay.Visibility = Visibility.Hidden;
+                        p.btnPay.Visibility = Visibility.Hidden;
+                        p.btnView.Visibility = Visibility.Visible;
                     }
-                    wd.ShowDialog();
+                    
 
                 }
                 );
+            ViewCommand = new RelayCommand<Window>((p) => true, (p) =>
+            {
+                ImportPayWindow wd = new ImportPayWindow(ImportGoods);
+                if (ImportGoods.ImportGoods_TotalMoney != 0)
+                {
+                    wd.btnPay.Visibility = Visibility.Hidden;
+                }
+                wd.ShowDialog();
+
+            });
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
-                if (!IsImport)
-                {
-                    MessageBoxResult rs = MessageBox.Show("Bạn đồng ý thoát và hủy tất cả vật tư", "Thoát", MessageBoxButton.OKCancel);
-                    if (MessageBoxResult.OK == rs)
-                    {
-                        DataProvider.Ins.DB.IMPORT_GOODS.Remove(ImportGoods);
+                p.Close();
 
-                        DataProvider.Ins.DB.SaveChanges();
-                        p.Close();
-                    }
-                }
-                else
-                {
-                    p.Close();
-                }    
             });
         }
         public void UpdateTotalMoney()
@@ -228,7 +236,7 @@ namespace QuanLyGaraOto.ViewModel
             TotalMoney = 0;
             foreach (var item in ListImport)
             {
-                TotalMoney += (int)item.ImportInfo.TotalMoney;
+                TotalMoney += (int)item.TotalMoney;
             }
         }
 
