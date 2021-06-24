@@ -260,15 +260,25 @@ namespace QuanLyGaraOto.ViewModel
             CloseCommand = new RelayCommand<Window>(
                (p) => { return true;},
                (p) => {
-                   if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                   {
+                  
+                   
                        p.Close();
-                   }
+                   
                });
         }
         public void Calculate()
         {
             TotalMoney = (int)SelectedSupply.Supplies_Price * (int)SelectedAmount + (int)SelectedPay.Wage_Value;
         }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
+        }
     }
 }
+

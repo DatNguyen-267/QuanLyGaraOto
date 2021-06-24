@@ -129,6 +129,8 @@
                                  Width="250"
                                  Margin="35 8 0 8"
                                  Name="txtLookUp"
+                                     FontSize="16"
+                                     FontWeight="Normal"
                                 >
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">
@@ -409,7 +411,9 @@
                                      Width="250"
                                      Margin="35 8 0 8"
                                      Name="txtLookUpRole"
-                                     FontSize="18"
+                                      FontSize="16"
+                                     FontWeight="Normal"
+
                                     >
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="TextChanged">

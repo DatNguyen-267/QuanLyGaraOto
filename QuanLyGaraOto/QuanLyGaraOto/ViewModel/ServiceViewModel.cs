@@ -309,14 +309,14 @@ namespace QuanLyGaraOto.ViewModel
         {
             var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
             ListCar = new ObservableCollection<ListCar>();
-            for (int i = ListReception.Count() - 1; i >= 0; i--)
+            foreach (var item in ListReception)
             {
-                if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == ListReception[i].Reception_Id).Count() > 0)
+                if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == item.Reception_Id).Count() > 0)
                 {
                     ListCar tempListCar = new ListCar();
-                    tempListCar.CarReception = ListReception[i];
-                    tempListCar.Debt = ListReception[i].Debt;
-                    ListCar.Add(tempListCar);
+                    tempListCar.CarReception = item;
+                    tempListCar.Debt = item.Debt;
+                    ListCar.Insert(0, tempListCar);
                 }
             }
 
@@ -325,33 +325,33 @@ namespace QuanLyGaraOto.ViewModel
         {
             var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
             ListCar = new ObservableCollection<ListCar>();
-            
-            for (int i = ListReception.Count() - 1; i >= 0; i--)
+            foreach (var item in ListReception)
             {
-                if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == ListReception[i].Reception_Id).Count() == 0)
+                if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == item.Reception_Id).Count() == 0)
                 {
 
                     ListCar tempListCar = new ListCar();
-                    tempListCar.CarReception = ListReception[i];
-                    tempListCar.Debt = ListReception[i].Debt;
-                    ListCar.Add(tempListCar);
+                    tempListCar.CarReception = item;
+                    tempListCar.Debt = item.Debt;
+                    ListCar.Insert(0,tempListCar);
                 }
             }
+
         }
         public void LoadListData_AtDay()
         {
             var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
             ListCar = new ObservableCollection<ListCar>();
-            for (int i = ListReception.Count() - 1; i >= 0; i--)
+            foreach (var item in ListReception)
             {
-                if (ListReception[i].ReceptionDate.Date.Day == DateTime.Now.Date.Day
-                      && ListReception[i].ReceptionDate.Date.Month == DateTime.Now.Date.Month
-                      && ListReception[i].ReceptionDate.Date.Year == DateTime.Now.Date.Year)
+                if (item.ReceptionDate.Date.Day == DateTime.Now.Date.Day
+                      && item.ReceptionDate.Date.Month == DateTime.Now.Date.Month
+                      && item.ReceptionDate.Date.Year == DateTime.Now.Date.Year)
                 {
                     ListCar tempListCar = new ListCar();
-                    tempListCar.CarReception = ListReception[i];
-                    tempListCar.Debt = ListReception[i].Debt;
-                    ListCar.Add(tempListCar);
+                    tempListCar.CarReception = item;
+                    tempListCar.Debt = item.Debt;
+                    ListCar.Insert(0, tempListCar);
                 }
             }
         }
@@ -359,14 +359,14 @@ namespace QuanLyGaraOto.ViewModel
         {
             var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
             ListCar = new ObservableCollection<ListCar>();
-            for (int i = ListReception.Count() -1 ; i >= 0 ; i--)
+            foreach (var item in ListReception)
             {
                 ListCar tempListCar = new ListCar();
-                tempListCar.CarReception = ListReception[i];
-                tempListCar.Debt = ListReception[i].Debt;
-                ListCar.Add(tempListCar);
+                tempListCar.CarReception = item;
+                tempListCar.Debt = item.Debt;
+                ListCar.Insert(0,tempListCar);
             }
-
+         
         }
 
     }

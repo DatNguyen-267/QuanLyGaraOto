@@ -26,9 +26,10 @@ namespace QuanLyGaraOto.ViewModel
 
         private bool _check { get; set; }
         public bool check { get => _check; set { _check = value; OnPropertyChanged(); } }
-
+        public string Title { get; set; }
         public AddNewGoodViewModel()
         {
+            Title = "Thêm phụ tùng";
             check = false;
 
             AddCommand = new RelayCommand<AddNewGoodWindow>(
@@ -61,13 +62,14 @@ namespace QuanLyGaraOto.ViewModel
                 { return true; },
                 (p) =>
                 {
-                    if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                   
                         p.Close();
                 }
                 );
         }
         public AddNewGoodViewModel(SUPPLIES supplies)
         {
+            Title = "Sửa đổi phụ tùng";
             Name = supplies.Supplies_Name;
             Price = (int)supplies.Supplies_Price;
             EditCommand = new RelayCommand<AddNewGoodWindow>(
@@ -75,8 +77,9 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     var Temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text);
                     if ((Temp == null || Temp.Count() != 0) && p.txbName.Text != supplies.Supplies_Name) return false;
-                    if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text) || Int32.Parse(p.txbPrice.Text) == 0)
+                    if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text) )
                         return false;
+
                     Regex regex = new Regex(@"^[0-9]+$");
                     if (!regex.IsMatch((p.txbPrice.Text)) && !string.IsNullOrEmpty((p.txbPrice.Text))) return false;
 
@@ -110,5 +113,15 @@ namespace QuanLyGaraOto.ViewModel
                 }
                 );
         }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
+        }
     }
+
 }

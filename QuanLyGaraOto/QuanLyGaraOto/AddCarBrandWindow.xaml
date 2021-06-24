@@ -10,9 +10,17 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow"
         Name="wdAddCarBrand"
+        
           xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        Title="Thêm hãng xe" Height="300" Width="400">
-
+        Title="Thêm hãng xe" Height="300" Width="400"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+            
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>

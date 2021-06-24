@@ -12,8 +12,14 @@
         MinHeight="800"
         MinWidth="1000"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
     <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
                                    CommandParameter="{Binding ElementName=mainWindow}"
@@ -22,6 +28,7 @@
             </i:InvokeCommandAction>
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    
     <Grid Background="#3d4751">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" x:Name="WidthMenu"></ColumnDefinition>

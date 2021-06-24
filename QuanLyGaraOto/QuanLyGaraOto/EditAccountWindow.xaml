@@ -9,9 +9,17 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Name="wdEditAccount"
-        
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="Đặt lại mật khẩu" Height="400" Width="300">
+        Title="Đặt lại mật khẩu" Height="400" Width="300"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <materialDesign:Card>
         <Grid>
             <Grid.RowDefinitions>

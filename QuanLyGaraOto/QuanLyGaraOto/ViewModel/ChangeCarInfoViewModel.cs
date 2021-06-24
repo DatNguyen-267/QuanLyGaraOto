@@ -104,10 +104,9 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                    {
+                   
                         p.Close();
-                    }
+                    
                 });
             CheckDate1 = new RelayCommand<ChangeCarInfoWindow>((p) => {
                 return true;
@@ -160,5 +159,15 @@ namespace QuanLyGaraOto.ViewModel
             this.SelectedBrand = CarReception.CAR_BRAND;
             this.ReceptionDate = CarReception.ReceptionDate;
         }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
+        }
     }
+
 }
