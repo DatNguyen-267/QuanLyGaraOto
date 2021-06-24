@@ -8,8 +8,8 @@
         Title="Nhập phụ tùng"
          xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         x:Name="wdImportSupply"
-        Height="600"
-        Width="1200"
+        Height="800"
+        Width="1400"
         FontSize="16"
         Background="#ffffff"
         WindowStartupLocation="CenterScreen"
@@ -274,10 +274,10 @@
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Columns>
-                            <materialDesign:DataGridTextColumn Header="Vật tư" Binding="{Binding Supplies_Name}" Width="300"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Header="Giá nhập" Binding="{Binding ImportInfo.Price}" Width="120"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding ImportInfo.Amount}" Width="120"></materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Header="Đơn giá" Binding="{Binding ImportInfo.TotalMoney}"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Vật tư" Binding="{Binding SUPPLIES.Supplies_Name}" Width="300"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Giá nhập" Binding="{Binding Price}" Width="120"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Số lượng" Binding="{Binding Amount}" Width="120"></materialDesign:DataGridTextColumn>
+                            <materialDesign:DataGridTextColumn Header="Đơn giá" Binding="{Binding TotalMoney}"></materialDesign:DataGridTextColumn>
 
                         </DataGrid.Columns>
                     </DataGrid>
@@ -328,22 +328,32 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Margin="0 0 50 0">
-
+            <Button
+                    x:Name="btnView"
+                    Command="{Binding ViewCommand}"
+                    CommandParameter="{Binding ElementName=wdImportSupply}"
+                    Style="{StaticResource MainButton}"
+                    Visibility="Hidden"
+                    Width="160"
+                    Height="43">
+                _Xem Hóa đơn
+            </Button>
             <Button
                     x:Name="btnPay"
                     Command="{Binding PayCommand}"
                     CommandParameter="{Binding ElementName=wdImportSupply}"
                     Style="{StaticResource MainButton}"
-                    Width="140"
+                    Width="160"
                     Height="43">
                 _Thanh toán
             </Button>
+            
             <Button
                 Margin="60 0 0 0"
                     Style="{StaticResource CloseButton}"
                     Command="{Binding CloseCommand}"
                     CommandParameter="{Binding ElementName=wdImportSupply}"
-                    Width="140"
+                    Width="160"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton">
                 _Đóng
             </Button>
