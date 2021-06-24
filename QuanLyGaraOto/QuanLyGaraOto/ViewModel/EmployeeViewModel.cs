@@ -432,6 +432,7 @@ namespace QuanLyGaraOto.ViewModel
 
         public EmployeeViewModel()
         {
+            BrithDate = DateTime.Now;
 
             //Thêm danh sách nhân viên vào List
             List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
@@ -440,7 +441,12 @@ namespace QuanLyGaraOto.ViewModel
             ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
 
             //Mở cửa số để thêm nhân viên
-            AddEmployeeCommand = new RelayCommand<object>((p) => { return true; }, (p) => { AddEmployee wd = new AddEmployee(); wd.ShowDialog(); List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO); });
+            AddEmployeeCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                AddEmployee wd = new AddEmployee(); 
+                wd.ShowDialog(); 
+                List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO); 
+                SelectedItem = null; 
+                ResetEmployee(); });
 
             //Tìm kiếm nhân viên
             LookUpCommand = new RelayCommand<Employee>((p) => { return true; }, (p) => { LoadUsersToView(p); });
@@ -451,6 +457,7 @@ namespace QuanLyGaraOto.ViewModel
             //Nút thêm nhân viên trên AddEmployee
             AddCommand = new RelayCommand<AddEmployee>((p) =>
             {
+                BrithDate = DateTime.Now;
                 Regex regex = new Regex(@"^[0-9]+$");
                 if (String.IsNullOrEmpty(p.txtName.Text) || String.IsNullOrEmpty(p.dpkBrithDate.Text) || String.IsNullOrEmpty(p.txtCMND.Text) || String.IsNullOrEmpty(p.txtTelephone.Text) || String.IsNullOrEmpty(p.txtAddress.Text) || String.IsNullOrEmpty(p.cbxRoleName.Text) || String.IsNullOrEmpty(p.txtUserName.Text) || !regex.IsMatch(p.txtTelephone.Text))
                 {
@@ -509,6 +516,7 @@ namespace QuanLyGaraOto.ViewModel
                 wd.ShowDialog();
                 List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
                 SelectedItem = null;
+                ResetEmployee();
             });
 
             //Mở cửa sổ cho nút tài khoản
@@ -587,13 +595,14 @@ namespace QuanLyGaraOto.ViewModel
 
                     List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
                     SelectedItem = null;
+                    ResetEmployee();
                 }
 
 
             });
 
             //Mở cửa số để thêm chức vụ
-            AddRoleWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) => { AddRoleWindow wd = new AddRoleWindow(); wd.ShowDialog(); ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs); });
+            AddRoleWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) => { AddRoleWindow wd = new AddRoleWindow(); wd.ShowDialog(); ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs); SelectedItemRole = null; ResetRole(); });
             // Valididate name
             CheckExistAddRoleName = new RelayCommand<AddRoleWindow>((p) => { return true; }, (p) =>
             {
@@ -698,6 +707,7 @@ namespace QuanLyGaraOto.ViewModel
                 ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
                 List = new ObservableCollection<USER_INFO>(DataProvider.Ins.DB.USER_INFO);
                 SelectedItemRole = null;
+                ResetRole();
             });
 
             //Xóa chức vụ
@@ -807,6 +817,7 @@ namespace QuanLyGaraOto.ViewModel
 
                     ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
                     SelectedItemRole = null;
+                    ResetRole();
                 }
 
 
@@ -982,6 +993,31 @@ namespace QuanLyGaraOto.ViewModel
                 hash.Append(bytes[i].ToString("x2"));
             }
             return hash.ToString();
+        }
+        public void ResetEmployee()
+        {
+            Name = null;
+            BrithDate = DateTime.Now;
+            UserName = null;
+            Telephone = null;
+            Address = null;
+            CMND = null;
+        }
+
+        public void ResetRole()
+        {
+            isServiceWindow = false;
+            isBunkWindow = false;
+            isImportBunk = false;
+            isEmployeeWindow = false;
+            isEmployeeInfo = false;
+            isEmployeeRole = false;
+            isReportWindow = false;
+            isReport = false;
+            isGaraInfo = false;
+            isWage = false;
+            isCarBranch = false;
+            isSuplier = false;
         }
     }
 }
