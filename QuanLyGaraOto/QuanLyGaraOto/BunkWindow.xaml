@@ -25,7 +25,7 @@
               Background="{StaticResource MainColor}">
             <Grid Grid.Column="0">
                 <TextBlock 
-                   Text="Kho Hàng"
+                   Text="Kho hàng"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Margin="15 0 5 0"            
@@ -140,6 +140,7 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right">
                 <Button
+                    IsEnabled="{Binding isImportBunk}"
                     Width="200"
                     FontSize="15"
                     Margin="0 0 50 0"
@@ -150,6 +151,7 @@
                     Nhập hàng
                 </Button>
                 <Button
+                    IsEnabled="{Binding isImportBunk}"
                     Width="200"
                     FontSize="15"
                     Margin="0 0 50 0"

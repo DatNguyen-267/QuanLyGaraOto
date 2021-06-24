@@ -438,6 +438,7 @@ namespace QuanLyGaraOto.ViewModel
 
         public EmployeeViewModel()
         {
+            IsClose = true;
             BrithDate = DateTime.Now;
 
             //Thêm danh sách nhân viên vào List
@@ -463,7 +464,7 @@ namespace QuanLyGaraOto.ViewModel
             //Nút thêm nhân viên trên AddEmployee
             AddCommand = new RelayCommand<AddEmployee>((p) =>
             {
-                BrithDate = DateTime.Now;
+                
                 Regex regex = new Regex(@"^[0-9]+$");
                 if (String.IsNullOrEmpty(p.txtName.Text) || String.IsNullOrEmpty(p.dpkBrithDate.Text) || String.IsNullOrEmpty(p.txtCMND.Text) || String.IsNullOrEmpty(p.txtTelephone.Text) || String.IsNullOrEmpty(p.txtAddress.Text) || String.IsNullOrEmpty(p.cbxRoleName.Text) || String.IsNullOrEmpty(p.txtUserName.Text) || !regex.IsMatch(p.txtTelephone.Text))
                 {
