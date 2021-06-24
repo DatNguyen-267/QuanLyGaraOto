@@ -97,7 +97,7 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p)=>
                 {
-                    if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    
                         p.Close();
                 }
                 );
