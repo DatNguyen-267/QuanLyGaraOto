@@ -25,8 +25,12 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand CheckSupplierName { get; set; }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+
         public EditSupplierViewModel(SUPPLIER supplier)
         {
+            IsClose = true;
             VisExistsName = false;
             this.Supplier = supplier;
             this.SupplierName = this.Supplier.Supplier_Name;
@@ -50,6 +54,7 @@ namespace QuanLyGaraOto.ViewModel
                         tempSupplier.Supplier_Phone = p.txbSupplierPhone.Text;
                         tempSupplier.Supplier_Email = p.txbSupplierEmail.Text;
                         DataProvider.Ins.DB.SaveChanges();
+                        IsClose = false;
                         p.Close();
                     }
             });
@@ -69,12 +74,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
     }  
     

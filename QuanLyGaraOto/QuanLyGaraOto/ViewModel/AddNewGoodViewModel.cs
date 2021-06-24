@@ -27,11 +27,13 @@ namespace QuanLyGaraOto.ViewModel
         private bool _check { get; set; }
         public bool check { get => _check; set { _check = value; OnPropertyChanged(); } }
         public string Title { get; set; }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
         public AddNewGoodViewModel()
         {
             Title = "Thêm phụ tùng";
             check = false;
-
+            IsClose = true;
             AddCommand = new RelayCommand<AddNewGoodWindow>(
                 (p) =>
                 {
@@ -53,7 +55,7 @@ namespace QuanLyGaraOto.ViewModel
                         DataProvider.Ins.DB.SUPPLIES.Add(Supplies);
                         DataProvider.Ins.DB.SaveChanges();
                         check = true;
-
+                        IsClose = false;
                         p.Close();
                     }
                 });
@@ -100,6 +102,7 @@ namespace QuanLyGaraOto.ViewModel
                         OnPropertyChanged("List");
                         UpdateDebtModel update = new UpdateDebtModel();
                         update.UpdateDebtWhenChanged(supplies);
+                        IsClose = false;
                         p.Close();
                     }
                 }
@@ -115,12 +118,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
     }
 

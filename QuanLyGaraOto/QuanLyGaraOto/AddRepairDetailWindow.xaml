@@ -146,7 +146,7 @@
                     Style="{StaticResource MainButton}"
                     Margin="0 0 40 0"
                     IsDefault="True"
-                  Content="Thêm" />
+                  Content="{Binding ButtonTitle}" />
                 
                 <Button
                     IsCancel="True"

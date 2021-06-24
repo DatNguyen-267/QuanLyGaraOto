@@ -80,9 +80,13 @@ namespace QuanLyGaraOto.ViewModel
 
         bool _isSuplier = false;
         public bool isSuplier { get => _isSuplier; set { _isSuplier = value; OnPropertyChanged(); } }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
         public MainViewModel()
         {
+            IsClose = true;
+
             InitVis();
             VisDashboard = true;
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
@@ -224,6 +228,7 @@ namespace QuanLyGaraOto.ViewModel
             }
             else
             {
+                IsClose = false;
                 p.Close();
             }
         }

@@ -90,7 +90,6 @@ namespace QuanLyGaraOto.ViewModel
             this.user = user;
         }
 
-
         public BunkViewModel()
         {
             LoadSupplies();

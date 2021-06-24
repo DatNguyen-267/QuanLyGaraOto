@@ -75,9 +75,15 @@ namespace QuanLyGaraOto.ViewModel
         public bool IsAdd { get; set; }
         private string _Title { get; set; }
         public string Title { get => _Title; set { _Title = value; OnPropertyChanged(); } }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+        private string _ButtonTitle { get; set; }
+        public string ButtonTitle { get => _ButtonTitle; set { _ButtonTitle = value; OnPropertyChanged(); } }
         public AddRepairDetailViewModel(REPAIR_DETAIL repair_Detail)
         {
-            Title = "Thay đổi thông tin sửa chữa";
+            ButtonTitle = "Sửa";
+            IsClose = true;
+            Title = "Sửa đổi thông tin sửa chữa";
             this.RepairDetail = DataProvider.Ins.DB.REPAIR_DETAIL.Where(x=>x.RepairDetail_Id == repair_Detail.RepairDetail_Id).SingleOrDefault();
             IsAdd = false;
             LoadRepairDetail();
@@ -86,6 +92,8 @@ namespace QuanLyGaraOto.ViewModel
         }
         public AddRepairDetailViewModel(REPAIR Repair)
         {
+            ButtonTitle = "Thêm";
+            IsClose = true;
             Title = "Thêm thông tin sửa chữa";
             this.Repair = Repair;
             IsAdd = true;
@@ -186,7 +194,7 @@ namespace QuanLyGaraOto.ViewModel
                                 temp.Supplies_Amount = temp.Supplies_Amount - ReturnRepairDetail.SuppliesAmount;
                             }
                             DataProvider.Ins.DB.SaveChanges();
-
+                            IsClose = false;
                             p.Close();
                         }
                     }
@@ -253,6 +261,7 @@ namespace QuanLyGaraOto.ViewModel
                                 DataProvider.Ins.DB.SaveChanges();
                             }
                             DataProvider.Ins.DB.SaveChanges();
+                            IsClose = false;
                             p.Close();
                         }
                     }
@@ -272,12 +281,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
     }
 }

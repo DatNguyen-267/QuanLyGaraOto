@@ -69,10 +69,13 @@ namespace QuanLyGaraOto.ViewModel
 
         private IMPORT_GOODS_DETAIL _ImportDetail { get; set; }
         public IMPORT_GOODS_DETAIL ImportDetail { get => _ImportDetail; set { _ImportDetail = value; OnPropertyChanged(); } }
-       
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+
         public ImportGoodViewModel()
-            
+
         {
+            IsClose = true;
             ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
             IsImport = false;
             Command();
@@ -82,6 +85,7 @@ namespace QuanLyGaraOto.ViewModel
         }
         public ImportGoodViewModel(IMPORT_GOODS import)
         {
+            IsClose = true;
             IsImport = false;
             ImportGoods = import;
             ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);

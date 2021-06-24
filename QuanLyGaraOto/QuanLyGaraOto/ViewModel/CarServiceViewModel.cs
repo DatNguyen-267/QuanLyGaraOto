@@ -113,13 +113,19 @@ namespace QuanLyGaraOto.ViewModel
         private int _Total { get; set; }
         public int Total { get => _Total; set { _Total = value; OnPropertyChanged(); } }
         #endregion
+
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+
         public CarServiceViewModel()
         {
+            IsClose = true;
             GenaralFunction();
             VisPay = false;
         }
         public CarServiceViewModel(RECEPTION carReception)
         {
+            IsClose = true;
             GenaralFunction();
             this.CarReception = DataProvider.Ins.DB.RECEPTIONs.Where(x=>x.Reception_Id == carReception.Reception_Id).SingleOrDefault();
             // base data

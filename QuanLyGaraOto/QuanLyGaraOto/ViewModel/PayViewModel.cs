@@ -59,13 +59,16 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand CheckIsOverPay { get; set; }
         public ICommand PrintCommand { get; set; }
         public ICommand CheckDate { get; set; }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+
         public PayViewModel()
         {
 
         }
         public PayViewModel(RECEPTION Reception)
         {
-            
+            IsClose = true;
             TotalMoney = 0;
             SelectedDate = DateTime.Now.Date;
             this.Reception = Reception;
@@ -102,7 +105,9 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     RECEIPT newReceipt = new RECEIPT();
                     newReceipt.ReceiptDate = SelectedDate;
-                    newReceipt.MoneyReceived = int.Parse(ReceivedMoney);
+                    if (int.Parse(ReceivedMoney) < TotalMoney)
+                        newReceipt.MoneyReceived = int.Parse(ReceivedMoney);
+                    else newReceipt.MoneyReceived = TotalMoney;
                     newReceipt.Phone = Reception.CUSTOMER.Customer_Phone;
                     newReceipt.IdReception = Reception.Reception_Id;
                     newReceipt.Email = Email;

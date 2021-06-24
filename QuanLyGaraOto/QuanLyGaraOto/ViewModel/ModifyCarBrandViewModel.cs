@@ -24,9 +24,13 @@ namespace QuanLyGaraOto.ViewModel
 
         public ICommand ModifyCarBrand { get; set; }
         public ICommand CancelModifyCarBrand { get; set; }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
         public ModifyCarBrandViewModel(CAR_BRAND brand)
         {
+            IsClose = true;
+
             CarBrandInModify = brand.CarBrand_Name;
 
             CancelModifyCarBrand = new RelayCommand<ModifyCarBrandWindow>((p) => { return true; }, (p) =>
@@ -56,17 +60,22 @@ namespace QuanLyGaraOto.ViewModel
                 brand.CarBrand_Name = CarBrandInModify;
                 DataProvider.Ins.DB.SaveChanges();
                 MessageBox.Show("Sửa thành công!");
+                IsClose = false;
                 p.Close();
             });
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
     }
 }

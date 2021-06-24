@@ -28,8 +28,11 @@ namespace QuanLyGaraOto.ViewModel
 
         private bool _VisExistsName { get; set; }
         public bool VisExistsName { get => _VisExistsName; set { _VisExistsName = value; OnPropertyChanged(); } }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
         public AddCarBrandViewModel()
         {
+            IsClose = true;
             CancelAddCarBrand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                     p.Close();
@@ -61,6 +64,7 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.CAR_BRAND.Add(br);
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Thêm thành công!");
+                    IsClose = false;
                     p.Close();
                 }
 
@@ -77,12 +81,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
     }
 }

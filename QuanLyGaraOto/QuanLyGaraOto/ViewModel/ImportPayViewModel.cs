@@ -39,14 +39,17 @@ namespace QuanLyGaraOto.ViewModel
 
         private DateTime _ImportDate { get; set; }
         public DateTime ImportDate { get => _ImportDate; set { _ImportDate = value; OnPropertyChanged(); } }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+
         public ImportPayViewModel()
         {
 
         }
         public ImportPayViewModel(IMPORT_GOODS import)
         {
-            Import = import;
-            
+            Import = import;  IsClose = true;
+
             Supplier = DataProvider.Ins.DB.SUPPLIERs.Where(x => x.Supplier_Id == Import.IdSupplier).FirstOrDefault();
             userinfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == Import.IdUser).FirstOrDefault();
             

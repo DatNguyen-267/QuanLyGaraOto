@@ -27,12 +27,16 @@ namespace QuanLyGaraOto.ViewModel
 
         private USER_INFO _userinfo { get; set; }
         public USER_INFO userinfo { get => _userinfo; set { _userinfo = value; OnPropertyChanged(); } }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+
         public ImportBillViewModel()
         {
 
         }
         public ImportBillViewModel(IMPORT_GOODS import)
         {
+            IsClose = true;
             Import = import;
             Supplier = DataProvider.Ins.DB.SUPPLIERs.Where(x => x.Supplier_Id == Import.IdSupplier).FirstOrDefault();
             userinfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == Import.IdUser).FirstOrDefault();
@@ -51,12 +55,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
     }
 }

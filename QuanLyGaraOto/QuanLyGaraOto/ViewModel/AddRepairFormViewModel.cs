@@ -27,9 +27,12 @@ namespace QuanLyGaraOto.ViewModel
         public bool VisOverDate { get => _VisOverDate; set { _VisOverDate = value; OnPropertyChanged(); } }
         private bool _VisErrorDate { get; set; }
         public bool VisErrorDate { get => _VisErrorDate; set { _VisErrorDate = value; OnPropertyChanged(); } }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
         public AddRepairFormViewModel(RECEPTION reception)
         {
+            IsClose = true;
             this.Reception = reception;
             IsSuccess = false;
             VisErrorDate = false;
@@ -51,7 +54,8 @@ namespace QuanLyGaraOto.ViewModel
                     {
                         NewRepairForm = new REPAIR();
                         NewRepairForm.RepairDate = RepairDate;
-                        IsSuccess = true;
+                        IsSuccess = true; 
+                        IsClose = false;
                         p.Close();
                     }
                 
@@ -77,12 +81,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
     }
 

@@ -71,10 +71,13 @@ namespace QuanLyGaraOto.ViewModel
 
         private bool _VisListView_Inventory { get; set; }
         public bool VisListView_Inventory { get => _VisListView_Inventory; set { _VisListView_Inventory = value; OnPropertyChanged(); } }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
         public ReportMonthViewModel() { }
         public ReportMonthViewModel(bool check,USER User)
         {
+            IsClose = true;
             var UserInfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == User.Users_Id).SingleOrDefault();
             UserName = UserInfo.UserInfo_Name;
             IdUser = User.Users_Id;

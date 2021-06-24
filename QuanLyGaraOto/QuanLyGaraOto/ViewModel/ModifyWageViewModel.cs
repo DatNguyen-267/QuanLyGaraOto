@@ -12,6 +12,9 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class ModifyWageViewModel : BaseViewModel
     {
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+
         private string _WageInModify { get; set; }
         public string WageInModify
         {
@@ -38,7 +41,7 @@ namespace QuanLyGaraOto.ViewModel
         {
             WageInModify = wage.Wage_Name;
             ValueInModify = wage.Wage_Value;
-
+            IsClose = true;
             CancelModifyWage = new RelayCommand<ModifyWageWindow>((p) => { return true; }, (p) => 
             {
                
@@ -71,17 +74,22 @@ namespace QuanLyGaraOto.ViewModel
                 UpdateDebtModel update = new UpdateDebtModel();
                 update.UpdateDebtWhenChanged(wage);
                 MessageBox.Show("Sửa thành công!");
+                IsClose = false;
                 p.Close();
             });
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
     }
 }

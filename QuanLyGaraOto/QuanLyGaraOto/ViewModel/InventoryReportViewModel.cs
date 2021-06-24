@@ -21,6 +21,8 @@ namespace QuanLyGaraOto.ViewModel
 
         private ObservableCollection<ListInventory> _ListInventory;
         public ObservableCollection<ListInventory> ListInventory { get => _ListInventory; set { _ListInventory = value; OnPropertyChanged(); } }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
         public InventoryReportViewModel(DateTime date)
         {

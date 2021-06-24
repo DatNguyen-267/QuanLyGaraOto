@@ -188,9 +188,12 @@ namespace QuanLyGaraOto.ViewModel
 
         private ObservableCollection<USER_INFO> _TempUser { get; set; }
         public ObservableCollection<USER_INFO> TempUser { get => _TempUser; set { _TempUser = value; OnPropertyChanged(); } }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
         public EmployeeViewModel(bool role1, bool role2, String username) : this()
         {
+            IsClose = true;
             roleInfo = role1;
             roleRole = role2;
             currentUserName = username;
@@ -198,7 +201,7 @@ namespace QuanLyGaraOto.ViewModel
 
         public EmployeeViewModel(ROLE r)
         {
-
+            IsClose = true;
             ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
             RoleName = r.Role_Name;
             RoleId = r.Role_Id;           
@@ -291,6 +294,7 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.SaveChanges();
 
                     MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    IsClose = false;
                     p.Close();
                 }
 
@@ -360,7 +364,7 @@ namespace QuanLyGaraOto.ViewModel
 
         public EmployeeViewModel(USER_INFO u)
         {
-        
+            IsClose = true;
             ListRoles = new ObservableCollection<ROLE>(DataProvider.Ins.DB.ROLEs);
             Name = u.UserInfo_Name;
             BrithDate = ((DateTime)u.UserInfo_BirthDate);
@@ -402,6 +406,7 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.SaveChanges();
                    
                     MessageBox.Show("Sửa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    IsClose = false;
                     p.Close();
                 }
             });
@@ -422,6 +427,7 @@ namespace QuanLyGaraOto.ViewModel
                     acc.Password = MD5Hash(Base64Encode("1"));
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Đặt lại mật khẩu thành công!\nMật khẩu hiện tại: 1", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    IsClose = false;
                     p.Close();
                 }
 
@@ -485,6 +491,7 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.USER_INFO.Add(new USER_INFO { UserInfo_Name = Name, UserInfo_BirthDate = date, UserInfo_CMND = CMND, UserInfo_Telephone = Telephone, UserInfo_Address = Address, IdUser = id_user });
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Thêm thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    IsClose = false;
                     p.Close();
                 }
 
@@ -686,6 +693,7 @@ namespace QuanLyGaraOto.ViewModel
                     DataProvider.Ins.DB.SaveChanges();
 
                     MessageBox.Show("Thêm thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    IsClose = false;
                     p.Close();
                 }
 
@@ -996,12 +1004,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
         public void ResetEmployee()
         {

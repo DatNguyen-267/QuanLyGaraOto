@@ -41,10 +41,13 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand CloseCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
         public ICommand CheckDate { get; set; }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
         public CarReceptionViewModel()
         {
             VisOverDate = false;
+            IsClose = true;
             ReceptionDate = DateTime.Now;
             IsSuccess = false;
             ListBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
@@ -89,6 +92,7 @@ namespace QuanLyGaraOto.ViewModel
                         IsSuccess = true;
                         IdNew = carReception.Reception_Id;
                         MessageBox.Show("Tiếp nhận xe thành công", "Thông báo", MessageBoxButton.OK);
+                        IsClose = false;
                         p.Close();
                     }
                 }
@@ -111,12 +115,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
     }
 

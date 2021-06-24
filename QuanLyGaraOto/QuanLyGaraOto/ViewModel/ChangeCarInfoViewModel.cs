@@ -46,6 +46,8 @@ namespace QuanLyGaraOto.ViewModel
         public bool VisOverDate2 { get => _VisOverDate2; set { _VisOverDate2 = value; OnPropertyChanged(); } }
         private bool _VisErrorDate2 { get; set; }
         public bool VisErrorDate2 { get => _VisErrorDate2; set { _VisErrorDate2 = value; OnPropertyChanged(); } }
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
         public ICommand CheckDate1 { get; set; }
         public ICommand CheckDate2 { get; set; }
@@ -53,6 +55,7 @@ namespace QuanLyGaraOto.ViewModel
         public ChangeCarInfoViewModel() { }
         public ChangeCarInfoViewModel(RECEPTION carReception)
         {
+            IsClose = true;
             VisErrorDate2 = false;
             VisOverDate1 = false;
             VisOverDate2 = false;
@@ -93,7 +96,7 @@ namespace QuanLyGaraOto.ViewModel
                        carReceptionTemp.LicensePlate = LicensePlate;
                        var repairFormTemp = DataProvider.Ins.DB.REPAIRs.Where(x => x.IdReception == CarReception.Reception_Id).SingleOrDefault();
                        if (repairFormTemp != null) repairFormTemp.RepairDate = RepairDate;
-
+                       IsClose = false;
                        DataProvider.Ins.DB.SaveChanges();
                        p.Close();
                    }
@@ -161,12 +164,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
     }
 

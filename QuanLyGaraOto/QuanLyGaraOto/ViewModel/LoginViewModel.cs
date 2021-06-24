@@ -27,9 +27,13 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand CloseCommand { get; set; }
 
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
         public LoginViewModel()
         {
+            IsClose = true;
+
             IsLogin = false;
             Password = "";
             UserName = "";
@@ -54,6 +58,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 User = DataProvider.Ins.DB.USERS.Where(x => x.UserName == UserName && x.Password == passEncode).SingleOrDefault();
                 IsLogin = true;
+                IsClose = false;
                 p.Close();
             }
             else

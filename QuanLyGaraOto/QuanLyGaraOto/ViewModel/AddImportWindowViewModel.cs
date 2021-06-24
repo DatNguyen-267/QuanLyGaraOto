@@ -41,9 +41,12 @@ namespace QuanLyGaraOto.ViewModel
         public SUPPLIER SelectedSupplier { get => _SelectedSupplier; set { _SelectedSupplier = value; OnPropertyChanged(); } }
         private bool _VisOverDate { get; set; }
         public bool VisOverDate { get => _VisOverDate; set { _VisOverDate = value; OnPropertyChanged(); } }
-
+        private bool _IsClose { get; set; }
+        public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
         public AddImportWindowViewModel(USER user)
         {
+            IsClose = true;
+
             this.user = user;
             userinfo = DataProvider.Ins.DB.USER_INFO.Where(x => x.IdUser == user.Users_Id).FirstOrDefault();
             IsSuccess = false;
@@ -71,6 +74,7 @@ namespace QuanLyGaraOto.ViewModel
 
                 DataProvider.Ins.DB.IMPORT_GOODS.Add(NewImport);
                 DataProvider.Ins.DB.SaveChanges();
+                IsClose = false;
                 p.Close();
                 ImportWindow importWindow = new ImportWindow(NewImport);
                 importWindow.ShowDialog();               
@@ -89,12 +93,16 @@ namespace QuanLyGaraOto.ViewModel
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
-            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (IsClose)
             {
-                e.Cancel = false;
+                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+               MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else e.Cancel = true;
             }
-            else e.Cancel = true;
+            else e.Cancel = false;
         }
 
     }
