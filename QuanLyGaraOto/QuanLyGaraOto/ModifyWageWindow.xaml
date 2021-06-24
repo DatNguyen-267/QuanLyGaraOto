@@ -71,8 +71,9 @@
                 <TextBox.Text>
                     <Binding Path="ValueInModify" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
-                            <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
-                                                                       ></validation:NullDataValidation>
+                            <validation:NumberValidation ErrorMessageNull="Vui lòng không để trống"    
+                                                         ErrorMessage="Chỉ nhập số (0-9)"
+                                                                       ></validation:NumberValidation>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
