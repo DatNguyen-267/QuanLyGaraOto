@@ -77,6 +77,13 @@ namespace QuanLyGaraOto.ViewModel
                         MessageBox.Show("Thanh toán thành công!");
                         p.btnPay.Visibility = Visibility.Hidden;
                         Ispay = true;
+                        foreach (var item in ListImport)
+                        {
+                        var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.IdSupplies).SingleOrDefault();
+                        List.Supplies_Amount += item.Amount;
+                        //DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Add(item.ImportInfo);
+                        DataProvider.Ins.DB.SaveChanges();
+                        }
                     }
                 }
                 );

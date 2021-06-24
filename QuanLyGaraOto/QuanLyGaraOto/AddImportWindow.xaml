@@ -28,7 +28,7 @@
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition></RowDefinition>
            
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#3d4751">
             <TextBlock HorizontalAlignment="Center"
@@ -43,7 +43,7 @@
             <Grid.Resources>
             </Grid.Resources>
             <StackPanel >
-                <Grid Margin="10 30 50 0">
+                <Grid Margin="10 30 50 15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="70"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
@@ -56,15 +56,46 @@
                         Kind="DateRange"               
                         Grid.Column="0"/>
                     <DatePicker 
+                        x:Name="DatePicker"
                                 SelectedDate="{Binding ImportDate}"
                                 Grid.Column="1"
                                Width="auto"
                                         Height="auto"
                                 VerticalAlignment="Center"
-                              materialDesign:HintAssist.Hint="Ngày nhập hàng"
-                              Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                              materialDesign:HintAssist.Hint="Ngày nhập hàng">
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedDateChanged">
+                                <i:InvokeCommandAction Command="{Binding CheckDate}"
+                                                                       CommandParameter="{Binding ElementName=DatePicker}"
+                                                                       ></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <DatePicker.Style>
+                            <Style TargetType="DatePicker"  BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding VisOverDate}" Value="True">
+                                        <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DatePicker.Style>
+                    </DatePicker>
+                    <Grid Grid.Column="1" Visibility="{Binding VisOverDate, Converter={StaticResource BooleanToVisibilityConverter }}">
+                        <TextBlock Text="Ngày nhập hàng không được quá ngày hiện tại"
+                                       TextWrapping="WrapWithOverflow"
+                                       Margin="-5 0 10 -35"
+                                       VerticalAlignment="Bottom"
+                                       FontSize="13"
+                                       Foreground="Red"
+                                       Background="white"
+                                       Padding="3 0 3 0"
+                                       >
+                        </TextBlock>
+                    </Grid>
                 </Grid>
-                <Grid Margin="10 30 50 0">
+                
+                <Grid Margin="10 25 50 0" Height="60">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="70"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -78,11 +109,11 @@
                         Grid.Column="0"/>
                         <ComboBox   
                             Grid.Column="1"
-                        x:Name="cbType"
-                        SelectedItem="{Binding SelectedSupplier}"
-                        ItemsSource="{Binding ListSupplier}"
-                        DisplayMemberPath="Supplier_Name"
-                        materialDesign:HintAssist.Hint="Nhà cung cấp"
+                            x:Name="cbType"
+                            SelectedItem="{Binding SelectedSupplier}"
+                            ItemsSource="{Binding ListSupplier}"
+                            DisplayMemberPath="Supplier_Name"
+                            materialDesign:HintAssist.Hint="Nhà cung cấp"
                         >
 
                         </ComboBox>

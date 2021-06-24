@@ -239,7 +239,7 @@
                                         VerticalAlignment="Center">
                                     <DatePicker
                                         x:Name="DatePickerPay"
-                                    
+                                        IsHitTestVisible="False"    
                                     SelectedDate="{Binding ImportDate}"
                                         Margin="10 0 10 10"
                                   materialDesign:HintAssist.Hint="Ngày thu tiền"

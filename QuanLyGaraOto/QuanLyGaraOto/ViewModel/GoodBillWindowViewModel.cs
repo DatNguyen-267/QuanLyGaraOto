@@ -39,10 +39,12 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p)=>
                 {
-                    ImportPayWindow wd = new ImportPayWindow(SelectedItem);
+                    ImportWindow wd = new ImportWindow(SelectedItem);
                     if(SelectedItem.ImportGoods_TotalMoney != 0)
                     {
                         wd.btnPay.Visibility = Visibility.Hidden;
+                        wd.btnView.Visibility = Visibility.Visible;
+                        
                     }    
                     wd.ShowDialog();
                 });
