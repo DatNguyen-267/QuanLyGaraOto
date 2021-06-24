@@ -735,7 +735,7 @@ namespace QuanLyGaraOto.ViewModel
                                 || string.IsNullOrEmpty(p.txtName.Text)
                                 || string.IsNullOrEmpty(p.dpBirth.Text)
                                 || string.IsNullOrEmpty(p.txtTelephone.Text) 
-                                || p.txtTelephone.Text.Any(x => char.IsLetter(x))
+                                || p.txtTelephone.Text.Any(x => !(x >= '0' && x <= '9'))
                                 || string.IsNullOrEmpty(p.txtCMND.Text))
                 {
 
