@@ -204,7 +204,7 @@ namespace QuanLyGaraOto.ViewModel
                                 
                             //    DataProvider.Ins.DB.SaveChanges();
                             //}
-                            IsImport = true;
+                            
                             
                         }
                         else { return; }
@@ -216,6 +216,7 @@ namespace QuanLyGaraOto.ViewModel
                     {
                         p.btnPay.Visibility = Visibility.Hidden;
                         p.btnView.Visibility = Visibility.Visible;
+                        IsImport = true;
                     }
                     
 
