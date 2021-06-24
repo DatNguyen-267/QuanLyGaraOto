@@ -70,11 +70,14 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p)=>
                 {
-                    Import.ImportGoods_TotalMoney = TotalPay;
-                    DataProvider.Ins.DB.SaveChanges();
-                    MessageBox.Show("Thanh toán thành công!");
-                    p.btnPay.Visibility = Visibility.Hidden;
-                    Ispay = true;
+                    if (MessageBox.Show("Bạn chắc chắn muốn thanh toán","Thông báo",MessageBoxButton.YesNo,MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        Import.ImportGoods_TotalMoney = TotalPay;
+                        DataProvider.Ins.DB.SaveChanges();
+                        MessageBox.Show("Thanh toán thành công!");
+                        p.btnPay.Visibility = Visibility.Hidden;
+                        Ispay = true;
+                    }
                 }
                 );
             CloseCommand = new RelayCommand<ImportPayWindow>(

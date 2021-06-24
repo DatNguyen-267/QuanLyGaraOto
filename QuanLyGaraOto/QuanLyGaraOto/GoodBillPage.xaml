@@ -176,7 +176,7 @@
                         Header="Tổng tiền thanh toán"
                         Width="200"/>
                     <materialDesign:DataGridTextColumn
-                        Binding="{Binding ImportGoods_Supplier,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat=dd/MM/yyyy}"
+                        Binding="{Binding ImportGoods_Supplier,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         Header="Đơn vị cung cấp"
                         Width="200"/>
                 </DataGrid.Columns>
