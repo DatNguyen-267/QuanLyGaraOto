@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -35,10 +36,13 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text);
                     if (List == null || List.Count() != 0) return false;
-                    if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text) || Int32.Parse(p.txbPrice.Text) == 0)
+                    if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text) )
                         return false;
-                    return true;
 
+                    Regex regex = new Regex(@"^[0-9]+$");
+                    if (!regex.IsMatch((p.txbPrice.Text)) && !string.IsNullOrEmpty((p.txbPrice.Text))) return false;
+
+                    return true;
                 },
                 (p) =>
                 {
@@ -73,6 +77,9 @@ namespace QuanLyGaraOto.ViewModel
                     if ((Temp == null || Temp.Count() != 0) && p.txbName.Text != supplies.Supplies_Name) return false;
                     if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text) || Int32.Parse(p.txbPrice.Text) == 0)
                         return false;
+                    Regex regex = new Regex(@"^[0-9]+$");
+                    if (!regex.IsMatch((p.txbPrice.Text)) && !string.IsNullOrEmpty((p.txbPrice.Text))) return false;
+
                     if (supplies == null) return false;
                     return true;
 

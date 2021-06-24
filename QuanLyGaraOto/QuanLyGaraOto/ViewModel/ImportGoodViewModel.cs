@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -97,7 +98,13 @@ namespace QuanLyGaraOto.ViewModel
                     if (IsImport) return false;
                     if (Total == 0) return false;
                     if (string.IsNullOrEmpty(p.txbPrice.Text) || string.IsNullOrEmpty(p.txbAmount.Text)) return false;
+                    Regex regex = new Regex(@"^[0-9]+$");
+                    if (!regex.IsMatch((p.txbPrice.Text)) && !string.IsNullOrEmpty((p.txbPrice.Text))) return false;
+                    
+                    if (!regex.IsMatch((p.txbAmount.Text)) && !string.IsNullOrEmpty((p.txbAmount.Text))) return false;
+
                     return true;
+
                 },
                 (p) =>
                 {
