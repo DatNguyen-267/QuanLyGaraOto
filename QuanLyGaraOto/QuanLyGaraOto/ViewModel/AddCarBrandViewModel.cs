@@ -32,20 +32,18 @@ namespace QuanLyGaraOto.ViewModel
         {
             CancelAddCarBrand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     p.Close();
-               
             });
 
 
-            AddCarBrand = new RelayCommand<AddCarBrandWindow>((p) => 
+            AddCarBrand = new RelayCommand<AddCarBrandWindow>((p) =>
             {
                 if (VisExistsName == true) return false;
                 if (p == null || string.IsNullOrEmpty(p.txtBrand.Text.Trim()))
                 {
                     return false;
                 }
-                return true; 
+                return true;
             }, (p) =>
             {
                 if (MessageBox.Show("Bạn chắc chắn muốn thêm", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
@@ -65,7 +63,7 @@ namespace QuanLyGaraOto.ViewModel
                     MessageBox.Show("Thêm thành công!");
                     p.Close();
                 }
-                   
+
             });
             CheckName = new RelayCommand<AddCarBrandWindow>((p) => { return true; }, (p) =>
             {
@@ -77,5 +75,15 @@ namespace QuanLyGaraOto.ViewModel
                 else VisExistsName = true;
             });
         }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
+        }
     }
 }
+

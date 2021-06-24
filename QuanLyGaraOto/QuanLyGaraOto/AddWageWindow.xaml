@@ -11,9 +11,15 @@
         WindowStyle="SingleBorderWindow"
         Name="wdWage"
         WindowStartupLocation="CenterScreen"
-        Title="Thêm tiền công" Height="300" Width="600">
+        Title="Thêm tiền công" Height="300" Width="600"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
 
-   
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Grid>
         <Grid.RowDefinitions>

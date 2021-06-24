@@ -15,8 +15,15 @@
         WindowStartupLocation="CenterScreen"
 
          xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
 
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>

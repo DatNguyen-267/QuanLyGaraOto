@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -97,7 +98,13 @@ namespace QuanLyGaraOto.ViewModel
                     if (IsImport) return false;
                     if (Total == 0) return false;
                     if (string.IsNullOrEmpty(p.txbPrice.Text) || string.IsNullOrEmpty(p.txbAmount.Text)) return false;
+                    Regex regex = new Regex(@"^[0-9]+$");
+                    if (!regex.IsMatch((p.txbPrice.Text)) && !string.IsNullOrEmpty((p.txbPrice.Text))) return false;
+                    
+                    if (!regex.IsMatch((p.txbAmount.Text)) && !string.IsNullOrEmpty((p.txbAmount.Text))) return false;
+
                     return true;
+
                 },
                 (p) =>
                 {
@@ -179,9 +186,8 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     if (!IsImport)
                     {
-                        MessageBoxResult rs = MessageBox.Show("Bạn đồng ý nhập tất cả vật tư đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        
-                        if (MessageBoxResult.Yes == rs)
+                        MessageBoxResult rs = MessageBox.Show("Bạn đồng ý nhập tất cả vật tư đã chọn", "Thông báo", MessageBoxButton.OKCancel);
+                        if (MessageBoxResult.OK == rs)
                         {
                             foreach (var item in ListImport)
                             {
@@ -207,18 +213,7 @@ namespace QuanLyGaraOto.ViewModel
                 );
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
-
-                
-                MessageBoxResult rs = MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (MessageBoxResult.Yes == rs)
-                    {
-                        DataProvider.Ins.DB.IMPORT_GOODS.Remove(ImportGoods);
-
-                        DataProvider.Ins.DB.SaveChanges();
-                        p.Close();
-                    }
-                
-               
+                    p.Close();  
             });
         }
         public void UpdateTotalMoney()
@@ -229,9 +224,14 @@ namespace QuanLyGaraOto.ViewModel
                 TotalMoney += (int)item.ImportInfo.TotalMoney;
             }
         }
-
-
-        
-
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
+        }
     }
 }

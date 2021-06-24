@@ -9,7 +9,16 @@
         mc:Ignorable="d"
         Name="wdModifyWage"
         WindowStartupLocation="CenterScreen"
-        Title="Sửa tiền công" Height="300" Width="600">
+        Title="Sửa tiền công" Height="300" Width="600"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -62,8 +71,9 @@
                 <TextBox.Text>
                     <Binding Path="ValueInModify" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
-                            <validation:NullDataValidation ErrorMessage="Vui lòng không để trống"     
-                                                                       ></validation:NullDataValidation>
+                            <validation:NumberValidation ErrorMessageNull="Vui lòng không để trống"    
+                                                         ErrorMessage="Chỉ nhập số (0-9)"
+                                                                       ></validation:NumberValidation>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>

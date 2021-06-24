@@ -37,10 +37,9 @@ namespace QuanLyGaraOto.ViewModel
             RepairDate = DateTime.Now;
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
-                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
+             
                     p.Close();
-                }
+                
             });
             ConfirmCommand = new RelayCommand<Window>((p) => {
                 if (VisOverDate || VisErrorDate) return false;
@@ -76,5 +75,15 @@ namespace QuanLyGaraOto.ViewModel
                 }
             });
         }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
+        }
     }
+
 }

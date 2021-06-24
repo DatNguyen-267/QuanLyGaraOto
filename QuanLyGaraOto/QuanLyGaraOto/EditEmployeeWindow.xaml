@@ -11,7 +11,16 @@
         Name="wdEditEmployee"
         WindowStartupLocation="CenterScreen"
        
-        Title="EditEmployee" Height="750" Width="450">
+        Title="EditEmployee" Height="750" Width="450"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>

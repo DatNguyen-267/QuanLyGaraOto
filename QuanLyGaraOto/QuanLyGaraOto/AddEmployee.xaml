@@ -13,9 +13,16 @@
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         WindowStartupLocation="CenterScreen"
         
-        Title="Thêm nhân viên" Height="750" Width="450">
-    
-    
+        Title="Thêm nhân viên" Height="750" Width="450"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>

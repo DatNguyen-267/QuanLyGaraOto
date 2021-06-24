@@ -122,17 +122,18 @@
                     </Button>
                     <Button
                     Margin="20 5 0 0"
-                    Content="Xóa"
-                        Command="{Binding DeleteCommand}"
-                        Style="{StaticResource DeleteButton}">
-                    </Button>
-                    <Button
-                    Margin="20 5 0 0"
                     Content="Sửa"
                     Command="{Binding OpenEditCommand}"
                     Style="{StaticResource FeatureButton}">
 
                     </Button>
+                    <Button
+                    Margin="20 5 0 0"
+                    Content="Xóa"
+                        Command="{Binding DeleteCommand}"
+                        Style="{StaticResource DeleteButton}">
+                    </Button>
+                    
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Column="2" Orientation="Horizontal"

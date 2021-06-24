@@ -11,11 +11,12 @@
         Name="loginWindow"
         DataContext="{StaticResource LoginVM}"
         WindowStartupLocation="CenterScreen"
-        Title="LoginWindow" Height="450" Width="380"
+        Title="LoginWindow" Height="500" Width="380"
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
         
-       >
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+
     <Grid>
         <Grid >
             <Grid.RowDefinitions>

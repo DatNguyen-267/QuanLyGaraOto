@@ -33,8 +33,11 @@ namespace QuanLyGaraOto.ViewModel
             IsLogin = false;
             Password = "";
             UserName = "";
-            LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
-            CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
+            LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { 
+                
+                Login(p); });
+            CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                    p.Close(); });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
         }
         void Login(Window p)
@@ -60,6 +63,6 @@ namespace QuanLyGaraOto.ViewModel
             }
 
         }
-       
+        
     }
 }

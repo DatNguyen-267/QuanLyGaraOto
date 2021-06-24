@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -40,7 +41,7 @@ namespace QuanLyGaraOto.ViewModel
 
             CancelModifyWage = new RelayCommand<ModifyWageWindow>((p) => { return true; }, (p) => 
             {
-                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+               
                     p.Close();
                 
             });
@@ -50,6 +51,8 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     return false;
                 }
+                Regex regex = new Regex(@"^[0-9]+$");
+                if (!regex.IsMatch((p.txtValue.Text)) && !string.IsNullOrEmpty((p.txtValue.Text))) return false;
                 return true;
             }, (p) =>
             {
@@ -70,6 +73,15 @@ namespace QuanLyGaraOto.ViewModel
                 MessageBox.Show("Sửa thành công!");
                 p.Close();
             });
+        }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
         }
     }
 }

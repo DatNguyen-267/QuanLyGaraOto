@@ -16,7 +16,15 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
-        Height="800" Width="400">
+        Height="800" Width="400"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>

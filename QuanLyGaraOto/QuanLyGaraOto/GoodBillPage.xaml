@@ -14,8 +14,15 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
+        
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
 
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
@@ -176,7 +183,7 @@
                         Header="Tổng tiền thanh toán"
                         Width="200"/>
                     <materialDesign:DataGridTextColumn
-                        Binding="{Binding ImportGoods_Supplier,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat=dd/MM/yyyy}"
+                        Binding="{Binding ImportGoods_Supplier,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         Header="Đơn vị cung cấp"
                         Width="200"/>
                 </DataGrid.Columns>

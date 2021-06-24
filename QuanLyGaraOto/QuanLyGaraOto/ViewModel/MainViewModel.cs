@@ -155,10 +155,9 @@ namespace QuanLyGaraOto.ViewModel
             }); 
             ExistCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
-                if (MessageBox.Show("Bạn chắc chắn muốn thoát chương trình","Thông báo",MessageBoxButton.YesNo,MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
+               
                     p.Close();
-                }
+              
             });
         }
         public void InitVis()
@@ -265,6 +264,15 @@ namespace QuanLyGaraOto.ViewModel
 
             if (User.ROLE.ROLE_DETAIL.Where(x => x.IdPermissionItem == 12).SingleOrDefault().Permission == true)
                 isSuplier = true;
+        }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn thoát chương trình", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
         }
     }
 }

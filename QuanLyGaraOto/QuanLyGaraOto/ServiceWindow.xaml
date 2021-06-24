@@ -117,7 +117,7 @@
                     <materialDesign:DataGridTextColumn Width="150" Header="Hiệu xe" Binding="{Binding CarReception.CAR_BRAND.CarBrand_Name}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="250" Header="Chủ xe" Binding="{Binding CarReception.CUSTOMER.Customer_Name}"></materialDesign:DataGridTextColumn>
                     
-                    <materialDesign:DataGridTextColumn Width="200" Header="Ngày tiếp nhận" Binding="{Binding CarReception.ReceptionDate, StringFormat=dd/MM/yyyy}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="200" Header="Ngày tiếp nhận" Binding="{Binding CarReception.ReceptionDate, StringFormat=MM/dd/yyyy}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="200" Header="Tiền nợ" Binding="{Binding CarReception.Debt}"></materialDesign:DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>

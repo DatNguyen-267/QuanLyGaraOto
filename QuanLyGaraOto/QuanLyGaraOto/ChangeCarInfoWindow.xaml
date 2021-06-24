@@ -9,10 +9,18 @@
         Name="ChangeCarInfoWD"
         WindowStartupLocation="CenterScreen"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+       
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Thay đổi thông tin" Height="750" Width="400">
+        Title="Thay đổi thông tin" Height="750" Width="400"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>

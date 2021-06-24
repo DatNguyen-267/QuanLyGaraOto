@@ -120,7 +120,9 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
+               
                     p.Close();
+                
             });
             CheckIsOverPay = new RelayCommand<TextBox>((p) => {
                 return true;
@@ -210,6 +212,15 @@ namespace QuanLyGaraOto.ViewModel
                 ListRepair.Add(temp);
                 TotalMoney = TotalMoney + temp.RepairDetail.TotalMoney;
             }
+        }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
         }
     }
 }

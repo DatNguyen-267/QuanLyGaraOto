@@ -9,9 +9,17 @@
         Name="ImportPayWD"
         WindowStartupLocation="CenterScreen"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Hóa đơn nhập hàng" Height="800" Width="1200">
+        Title="Hóa đơn nhập hàng" Height="800" Width="1200"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="txbInfo" BasedOn="{StaticResource MaterialDesignTextBlock}">
             <Setter Property="FontSize" Value="14"></Setter>

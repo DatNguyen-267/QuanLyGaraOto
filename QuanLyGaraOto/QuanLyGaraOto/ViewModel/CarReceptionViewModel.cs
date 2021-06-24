@@ -50,7 +50,7 @@ namespace QuanLyGaraOto.ViewModel
             ListBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
-                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                
                     p.Close();
             });
             ConfirmCommand = new RelayCommand<CarReceptionWindow>((p) => {
@@ -109,5 +109,15 @@ namespace QuanLyGaraOto.ViewModel
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
+        }
     }
+
 }

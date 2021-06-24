@@ -298,7 +298,7 @@ namespace QuanLyGaraOto.ViewModel
 
             //Nút thoát khỏi cửa sổ 
             ExitCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
-                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+               
                     p.Close();
             });
 
@@ -408,7 +408,7 @@ namespace QuanLyGaraOto.ViewModel
 
             //Nút thoát khỏi cửa sổ 
             ExitCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
-                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+              
                     p.Close();
             }
             );
@@ -487,7 +487,7 @@ namespace QuanLyGaraOto.ViewModel
 
             //Nút thoát khỏi Window AddEmployee
             ExitCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
-                if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+              
                     p.Close();
             }
             );
@@ -982,6 +982,15 @@ namespace QuanLyGaraOto.ViewModel
                 hash.Append(bytes[i].ToString("x2"));
             }
             return hash.ToString();
+        }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
         }
     }
 }

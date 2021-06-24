@@ -341,7 +341,7 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                   
                         p.Close();
                     
                 });
@@ -463,5 +463,15 @@ namespace QuanLyGaraOto.ViewModel
             DataProvider.Ins.DB.SaveChanges();
             RepairForm = newRepairForm;
         }
+        public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo",
+            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
+        }
     }
 }
+

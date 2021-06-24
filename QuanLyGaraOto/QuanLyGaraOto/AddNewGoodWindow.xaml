@@ -6,15 +6,23 @@
         xmlns:local="clr-namespace:QuanLyGaraOto"
         mc:Ignorable="d"
         x:Name="wdAddSupply"
-        Title="Thêm phụ tùng"
-        Height="370" Width="520"
+        Title="{Binding Title}"
+        Height="400" Width="600"
+       
         WindowStartupLocation="CenterScreen"
         Background="#ffffff"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:validation="clr-namespace:QuanLyGaraOto.Validation"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        >
-   
+        
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
@@ -24,7 +32,7 @@
         <Grid Grid.Row="0" Background="#3d4751">
             <TextBlock HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Text="Thêm phụ tùng"
+                       Text="{Binding Title}"
                        FontSize="30"
                        Margin="0 20 0 20"
                        Foreground="White"

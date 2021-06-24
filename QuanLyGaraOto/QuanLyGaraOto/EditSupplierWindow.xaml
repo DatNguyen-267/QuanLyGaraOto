@@ -11,7 +11,15 @@
         x:Name="wdEditSupplier"
         
          WindowStartupLocation="CenterScreen"
-        Title="Sửa đổi nhà cung cấp" Height="300" Width="700">
+        Title="Sửa đổi nhà cung cấp" Height="300" Width="700"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    <i:Interaction.Triggers>
+        <i:EventTrigger  EventName="Closing">
+            <ei:CallMethodAction TargetObject="{Binding}" MethodName="WindowClosing">
+
+            </ei:CallMethodAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
