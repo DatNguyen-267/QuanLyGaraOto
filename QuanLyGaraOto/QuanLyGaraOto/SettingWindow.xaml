@@ -90,6 +90,13 @@
                     </Grid.ColumnDefinitions>
                     <materialDesign:Card Grid.Column="0" Margin="30">
                         <Grid>
+                            <Grid.Resources>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Setter Property="Margin" Value="0 20 0 0"></Setter>
+                                    <Setter Property="Height" Value="35"></Setter>
+                                    <Setter Property="Width" Value="35"></Setter>
+                                </Style>
+                            </Grid.Resources>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -117,14 +124,16 @@
                                                              VerticalAlignment="Center" 
                                                              FontSize="16" 
                                                              HorizontalAlignment="Center"
-                                                             Height="30" Width="30"/>
+                                                            />
                                     <TextBox Grid.Column="1"
                                              x:Name="txtName"
                                              materialDesign:HintAssist.Hint="Tên"
                                              VerticalAlignment="Center"
                                              FontSize="16"
                                              FontWeight="Medium"
-                                             Margin="0 0 30 0">
+                                             Margin="0 0 30 0"
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                             >
                                         <TextBox.Text>
                                             <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                                 <Binding.ValidationRules>
@@ -150,7 +159,7 @@
                                                              VerticalAlignment="Center" 
                                                              FontSize="16" 
                                                              HorizontalAlignment="Center"
-                                                             Height="30" Width="30"/>
+                                                            />
                                     <DatePicker Grid.Column="1"
                                                 x:Name="dpBirth"                               
                                                 VerticalAlignment="Center"
@@ -158,6 +167,7 @@
                                                 FontSize="16"
                                                 FontWeight="Medium"
                                                 Grid.ColumnSpan="2"
+                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                                                 Margin="0 0 30 0">
                                         <DatePicker.SelectedDate>
                                             <Binding Path="UserBirth" StringFormat='dd-MMM-YYYY' 
@@ -182,18 +192,19 @@
                                         <ColumnDefinition Width="50"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon Kind="AccountCircle" 
+                                    <materialDesign:PackIcon Kind="CardAccountDetails" 
                                                              Grid.Column="0"
                                                              VerticalAlignment="Center"
                                                              HorizontalAlignment="Center"
                                                              FontSize="16" 
-                                                             Height="30" Width="30"/>
+                                                             />
                                     <TextBox
                                         x:Name="txtCMND"
                                         materialDesign:HintAssist.Hint="CMND"
                                         Grid.Column="1"
                                         VerticalAlignment="Center" 
                                         FontSize="16"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         FontWeight="Medium"
                                         Margin="0 0 30 0">
                                         <TextBox.Text>
@@ -222,7 +233,7 @@
                                                              VerticalAlignment="Center"
                                                              HorizontalAlignment="Center"
                                                              FontSize="16"
-                                                             Height="30" Width="30"/>
+                                                            />
                                     <TextBox
                                             x:Name="txtTelephone"
                                             materialDesign:HintAssist.Hint="Số điện thoại"
@@ -230,6 +241,7 @@
                                             VerticalAlignment="Center" 
                                             FontSize="16"
                                              FontWeight="Medium"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                             Margin=" 0 0 30 0">
                                         <TextBox.Text>
                                             <Binding Path="UserTelephone" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
@@ -259,7 +271,7 @@
                                                              VerticalAlignment="Center"
                                                              HorizontalAlignment="Center"
                                                              FontSize="16"
-                                                             Height="30" Width="30"/>
+                                                             />
                                     <TextBox
                                         x:Name="txtAddress"
                                         materialDesign:HintAssist.Hint="Địa chỉ"
@@ -267,6 +279,7 @@
                                         VerticalAlignment="Center" 
                                         FontSize="16"
                                         FontWeight="Medium"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Margin="0 0 30 0">
                                         <TextBox.Text>
                                             <Binding Path="UserAddress" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
