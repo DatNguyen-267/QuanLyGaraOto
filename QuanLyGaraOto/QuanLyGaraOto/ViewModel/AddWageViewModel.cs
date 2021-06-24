@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -29,11 +30,14 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
-        public WAGE wage;
+        public WAGE wage { get; set; }
 
         public ICommand CancelAddWage { get; set; }
         public ICommand AddWage { get; set; }
+        public ICommand CheckName { get; set; }
 
+        private bool _VisExistsName { get; set; }
+        public bool VisExistsName { get => _VisExistsName; set { _VisExistsName = value; OnPropertyChanged(); } }
         public AddWageViewModel()
         {
             CancelAddWage = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -43,27 +47,43 @@ namespace QuanLyGaraOto.ViewModel
             });
             AddWage = new RelayCommand<AddWageWindow>((p) =>
             {
-                if(p == null || string.IsNullOrEmpty(p.txtWage.Text) || string.IsNullOrEmpty(p.txtValue.Text))
+                if (VisExistsName == true) return false;
+                if (p == null || string.IsNullOrEmpty(p.txtWage.Text) || string.IsNullOrEmpty(p.txtValue.Text))
                 {
                     return false;
                 }
+                Regex regex = new Regex(@"^[0-9]+$");
+                if (!regex.IsMatch((p.txtValue.Text)) && !string.IsNullOrEmpty((p.txtValue.Text))) return false;
+
                 return true;
             }, (p) =>
             {
-                foreach(WAGE w in DataProvider.Ins.DB.WAGEs)
+                if (MessageBox.Show("Bạn chắc chắn muốn thêm", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    if(w.Wage_Name == WageInAdd.Trim())
+                    foreach (WAGE w in DataProvider.Ins.DB.WAGEs)
                     {
-                        MessageBox.Show("Đã tồn tại loại tiền công:" + WageInAdd.Trim() + "!");
-                        return;
+                        if (w.Wage_Name == WageInAdd.Trim())
+                        {
+                            MessageBox.Show("Đã tồn tại loại tiền công:" + WageInAdd.Trim() + "!");
+                            return;
+                        }
                     }
-                }
 
-                wage = new WAGE { Wage_Name = WageInAdd.Trim(), Wage_Value = ValueInAdd };
-                DataProvider.Ins.DB.WAGEs.Add(wage);
-                DataProvider.Ins.DB.SaveChanges();
-                MessageBox.Show("Thêm thành công!");
-                p.Close();
+                    wage = new WAGE { Wage_Name = WageInAdd.Trim(), Wage_Value = ValueInAdd };
+                    DataProvider.Ins.DB.WAGEs.Add(wage);
+                    DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show("Thêm thành công!");
+                    p.Close();
+                }
+            });
+            CheckName = new RelayCommand<AddWageWindow>((p) => { return true; }, (p) =>
+            {
+                VisExistsName = false;
+                if (DataProvider.Ins.DB.WAGEs.Where(x => x.Wage_Name == p.txtWage.Text).Count() == 0)
+                {
+                    VisExistsName = false;
+                }
+                else VisExistsName = true;
             });
         }
     }

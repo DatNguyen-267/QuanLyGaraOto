@@ -46,7 +46,22 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding CheckName}"
+                                                                       CommandParameter="{Binding ElementName=wdAddCarBrand}"
+                                                                       ></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </TextBox>
+            <Label Grid.Column="0"
+                   Content="Hãng xe này đã tồn tại"
+                   Foreground="red"
+                   VerticalAlignment="Bottom"
+                   Margin="10 0 10 3"
+                   Visibility="{Binding VisExistsName, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+            </Label>
         </Grid>
 
         <Grid Grid.Row="2">

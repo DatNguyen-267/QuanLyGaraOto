@@ -106,7 +106,7 @@ namespace QuanLyGaraOto.ViewModel
                 
                 AddNewGoodViewModel add = wdAddGoods.DataContext as AddNewGoodViewModel;
                 if(add.check)
-                     ListSupplies.Add(add.Supplies);
+                     ListSupplies.Insert(0,add.Supplies);
             });
 
             OpenEditCommand = new RelayCommand<MainWindow>((p) => {
@@ -212,7 +212,7 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
+                LoadSupplies();
                 UnicodeConvert uni = new UnicodeConvert();
                 TempListSupplies = new ObservableCollection<SUPPLIES>();
 
@@ -234,7 +234,7 @@ namespace QuanLyGaraOto.ViewModel
                 p.txbSuppliesName.Text = "";
                 p.txbSuppliesAmount.Text = "";
                 p.txbSuppliesPrice.Text = "";
-                ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
+                LoadSupplies();
             });
             ExportCommand = new RelayCommand<BunkWindow>((p) => { return true; }, (p) =>
               {
@@ -250,7 +250,13 @@ namespace QuanLyGaraOto.ViewModel
         }
         void LoadSupplies()
         {
-            ListSupplies = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
+            ListSupplies = new ObservableCollection<SUPPLIES>();
+            ObservableCollection<SUPPLIES> tempSupplier = new ObservableCollection<SUPPLIES>(DataProvider.Ins.DB.SUPPLIES);
+            for (int i = tempSupplier.Count()- 1; i >= 0; i--)
+            {
+                ListSupplies.Add(tempSupplier[i]);
+            }
+            
         }
 
     }

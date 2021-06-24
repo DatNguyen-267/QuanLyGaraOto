@@ -211,7 +211,7 @@
 
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding Supplies_Id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay }"></materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Width="250" Header="Tên vật tư" Binding="{Binding Supplies_Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
+                    <materialDesign:DataGridTextColumn Width="350" Header="Tên vật tư" Binding="{Binding Supplies_Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="150" Header="Giá" Binding="{Binding Supplies_Price,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Width="200" Header="Số lượng" Binding="{Binding Supplies_Amount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></materialDesign:DataGridTextColumn>
 

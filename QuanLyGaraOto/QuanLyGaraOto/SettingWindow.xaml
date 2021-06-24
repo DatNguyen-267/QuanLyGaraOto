@@ -701,7 +701,7 @@
 
                                 <DataGrid.Columns>
                                     <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding Wage_Id}"/>
-                                    <materialDesign:DataGridTextColumn Width="300" Header="Loại tiền công" Binding="{Binding Wage_Name}"/>
+                                    <materialDesign:DataGridTextColumn Width="350" Header="Loại tiền công" Binding="{Binding Wage_Name}"/>
                                     <materialDesign:DataGridTextColumn Width="200" Header="Tiền công" Binding="{Binding Wage_Value}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
@@ -1061,7 +1061,7 @@
 
                                 <DataGrid.Columns>
                                     <materialDesign:DataGridTextColumn Width="100" Header="ID" Binding="{Binding Supplier_Id}"/>
-                                    <materialDesign:DataGridTextColumn Width="300" Header="Tên nhà cung cấp" Binding="{Binding Supplier_Name}"/>
+                                    <materialDesign:DataGridTextColumn Width="350" Header="Tên nhà cung cấp" Binding="{Binding Supplier_Name}"/>
                                     <materialDesign:DataGridTextColumn Width="150" Header="Số điện thoại" Binding="{Binding Supplier_Phone}"/>
                                     <materialDesign:DataGridTextColumn  Width="300" Header="Email" Binding="{Binding Supplier_Email}"/>
                                 </DataGrid.Columns>

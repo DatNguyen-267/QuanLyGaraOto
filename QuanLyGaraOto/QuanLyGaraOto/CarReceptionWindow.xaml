@@ -11,6 +11,7 @@
         Title="Tiếp nhận xe" Height="700" Width="450"
         ResizeMode="NoResize"
         FontSize="16"
+       
         WindowStartupLocation="CenterScreen"
          xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
@@ -66,13 +67,22 @@
                                 
                                 TabIndex="0"
                                 x:Name="txbName"
-                                Text="{Binding Name}"
+                               
                                 Grid.Column="2"
                             materialDesign:HintAssist.Hint="Tên chủ xe"
                                      Width="200"
                                          Margin="0 0 0 10"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng nhập tên chủ xe"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 10 0 0">
@@ -86,13 +96,22 @@
                             <TextBox 
                                 TabIndex="1"
                                 x:Name="txbLicensePlate"
-                                Text="{Binding LicensePlate}"
+                               
                                 Grid.Column="1"
                                      Margin="0 0 0 10"
                             materialDesign:HintAssist.Hint="Biển số xe"
                                      Width="200"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="LicensePlate" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng nhập biển số xe"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 10 0 0">
@@ -128,13 +147,22 @@
                             <TextBox 
                                 TabIndex="3"
                                 x:Name="txbAddress"
-                                Text="{Binding Address}"
+                              
                                 Grid.Column="2"
                             materialDesign:HintAssist.Hint="Địa chỉ"
                                      Width="200"
                                          Margin="0 0 0 10"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Center">
+                                <TextBox.Text>
+                                    <Binding Path="Address" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <validation:NullDataValidation ErrorMessage="Vui lòng nhập địa chỉ"     
+                                                                       ></validation:NullDataValidation>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 10 0 0">

@@ -151,10 +151,12 @@ namespace QuanLyGaraOto.ViewModel
                 VisErrorDate = false;
                 VisOverDate = false;
                 
-                if (p.SelectedDate < Repair.RepairDate)
-                {
-                    VisErrorDate = true;
-                } 
+                if (p.SelectedDate.Value.Date.Year <= Repair.RepairDate.Date.Year
+                    && p.SelectedDate.Value.Date.Month <= Repair.RepairDate.Date.Month
+                    && p.SelectedDate.Value.Date.Day < Repair.RepairDate.Date.Day)
+                    {
+                        VisErrorDate = true;
+                    } 
                 else if (p.SelectedDate > DateTime.Now.Date)
                 {
                     VisOverDate = true;

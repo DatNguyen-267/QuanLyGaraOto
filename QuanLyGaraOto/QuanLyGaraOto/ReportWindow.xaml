@@ -222,7 +222,7 @@
                             </DataGrid.ColumnHeaderStyle>
                             <DataGrid.Columns>
                                 <materialDesign:DataGridTextColumn Header="Mã hóa đơn" Width="140"  Binding="{Binding Receipt.Receipt_Id}"></materialDesign:DataGridTextColumn>
-                                <materialDesign:DataGridTextColumn Header="Khách hàng" Width="140"  Binding="{Binding Customer_Name}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Khách hàng" Width="200"  Binding="{Binding Customer_Name}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn Header="Biển số xe" Width="140"  Binding="{Binding LicensePlate}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn Header="Ngày thanh toán" Width="180"  Binding="{Binding Receipt.ReceiptDate , StringFormat='dd/MM/yyyy'}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn Header="Doanh thu" Width="180"  Binding="{Binding Receipt.MoneyReceived}"></materialDesign:DataGridTextColumn>
@@ -286,7 +286,7 @@
                                 <materialDesign:DataGridTextColumn  Width="300" Header="Vật tư " Binding="{Binding Supplies_Name}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn  Width="100" Header="Số lượng"   Binding="{Binding ImportInfo.Amount }"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn  Width="150" Header="Đơn giá"   Binding="{Binding ImportInfo.Price}"></materialDesign:DataGridTextColumn>
-                                <materialDesign:DataGridTextColumn  Width="150" Header="Nhà cung cấp"   Binding="{Binding Supplier_Name}"></materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn  Width="200" Header="Nhà cung cấp"   Binding="{Binding Supplier_Name}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn  Width="180" Header="Ngày nhập hàng"   Binding="{Binding ImportGoods_Date, StringFormat='dd/MM/yyyy'}"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn  Width="150" Header="Mã đơn nhập"   Binding="{Binding IdImport }"></materialDesign:DataGridTextColumn>
                                 <materialDesign:DataGridTextColumn  Header="Tổng chi phí"   Binding="{Binding ImportInfo.TotalMoney}"></materialDesign:DataGridTextColumn>

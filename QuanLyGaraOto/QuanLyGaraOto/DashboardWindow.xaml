@@ -129,7 +129,7 @@
                             </StackPanel>
                             <TextBlock Grid.Row="0"
                                         Style="{StaticResource TextBlockTitleStyle}"
-                                    Text="Số xe hiện tại / Tối đa"
+                                    Text="Số xe tiếp nhận hôm nay / Tối đa"
                                     TextAlignment="Center"
                                     HorizontalAlignment="Center"
                                     />

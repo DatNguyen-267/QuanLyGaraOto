@@ -84,6 +84,7 @@ namespace QuanLyGaraOto.ViewModel
         public MainViewModel()
         {
             InitVis();
+            VisDashboard = true;
             LoadedWindowCommand = new RelayCommand<MainWindow>((p) => { return true; }, (p) =>
             {
                 Container = (p as MainWindow).Container;

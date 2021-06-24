@@ -23,6 +23,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand CheckSupplierName { get; set; }
+        public SUPPLIER Supplier { get; set; }
         public AddSupplierViewModel()
         {
             VisExistsName = false;
@@ -31,6 +32,7 @@ namespace QuanLyGaraOto.ViewModel
                 if (string.IsNullOrEmpty(p.txtSupplierName.Text) ||
                 string.IsNullOrEmpty(p.txbSupplierPhone.Text) ||
                 string.IsNullOrEmpty(p.txbSupplierEmail.Text)) return false;
+
                 if (VisExistsName == true) return false;
 
                 Regex regex = new Regex(@"^[0-9]+$");
@@ -41,12 +43,13 @@ namespace QuanLyGaraOto.ViewModel
             {
                 if (MessageBox.Show("Bạn chắc chắn muốn thêm", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    SUPPLIER Supplier = new SUPPLIER();
+                    Supplier = new SUPPLIER();
                     Supplier.Supplier_Name = p.txtSupplierName.Text;
                     Supplier.Supplier_Phone = p.txbSupplierPhone.Text;
                     Supplier.Supplier_Email = p.txbSupplierEmail.Text;
                     DataProvider.Ins.DB.SUPPLIERs.Add(Supplier);
                     DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show("Thêm thành công");
                     p.Close();
                 }
                     

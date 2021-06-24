@@ -166,15 +166,15 @@
                     <materialDesign:DataGridTextColumn
                         Binding="{Binding ImportGoods_Id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         Header="ID" 
-                        Width="160"/>
+                        Width="100"/>
                     <materialDesign:DataGridTextColumn
-                        Binding="{Binding ImportGoods_Date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat=dd/MM/yyyy}"
+                        Binding="{Binding ImportGoods_Date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat=MM/dd/yyyy}"
                         Header="Ngày nhập hàng"
-                        Width="160"/>
+                        Width="200"/>
                     <materialDesign:DataGridTextColumn
                         Binding="{Binding ImportGoods_TotalMoney,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         Header="Tổng tiền thanh toán"
-                        Width="auto"/>
+                        Width="200"/>
                     <materialDesign:DataGridTextColumn
                         Binding="{Binding ImportGoods_Supplier,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat=dd/MM/yyyy}"
                         Header="Đơn vị cung cấp"

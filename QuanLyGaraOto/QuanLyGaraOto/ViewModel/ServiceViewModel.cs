@@ -103,7 +103,7 @@ namespace QuanLyGaraOto.ViewModel
                         ListCar tempListCar = new ListCar();
                         tempListCar.CarReception = carServiceViewModel.CarReception;
                         tempListCar.Debt = carServiceViewModel.Total;
-                        ListCar.Add(tempListCar);
+                        ListCar.Insert(0,tempListCar);
 
                         LoadReceptionAmount();
                     }
@@ -141,7 +141,7 @@ namespace QuanLyGaraOto.ViewModel
                             }
                         else
                         {
-                                MessageBox.Show("Không thể xóa hóa đơn đã thanh tóan", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                MessageBox.Show("Không thể xóa xe có ID là " + item.CarReception.Reception_Id.ToString() +" vì đã thanh tóan", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                         
                     }
@@ -309,28 +309,31 @@ namespace QuanLyGaraOto.ViewModel
         {
             var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
             ListCar = new ObservableCollection<ListCar>();
-            foreach (var item in ListReception)
+            for (int i = ListReception.Count() - 1; i >= 0; i--)
             {
-                if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == item.Reception_Id).Count() > 0)
+                if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == ListReception[i].Reception_Id).Count() > 0)
                 {
                     ListCar tempListCar = new ListCar();
-                    tempListCar.CarReception = item;
-                    tempListCar.Debt = item.Debt;
+                    tempListCar.CarReception = ListReception[i];
+                    tempListCar.Debt = ListReception[i].Debt;
                     ListCar.Add(tempListCar);
                 }
             }
+
         }
         public void LoadListData_NotPay()
         {
             var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
             ListCar = new ObservableCollection<ListCar>();
-            foreach (var item in ListReception)
+            
+            for (int i = ListReception.Count() - 1; i >= 0; i--)
             {
-                if (DataProvider.Ins.DB.RECEIPTs.Where(x=>x.IdReception == item.Reception_Id).Count() == 0)
+                if (DataProvider.Ins.DB.RECEIPTs.Where(x => x.IdReception == ListReception[i].Reception_Id).Count() == 0)
                 {
+
                     ListCar tempListCar = new ListCar();
-                    tempListCar.CarReception = item;
-                    tempListCar.Debt = item.Debt;
+                    tempListCar.CarReception = ListReception[i];
+                    tempListCar.Debt = ListReception[i].Debt;
                     ListCar.Add(tempListCar);
                 }
             }
@@ -339,15 +342,15 @@ namespace QuanLyGaraOto.ViewModel
         {
             var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
             ListCar = new ObservableCollection<ListCar>();
-            foreach (var item in ListReception)
+            for (int i = ListReception.Count() - 1; i >= 0; i--)
             {
-                if (item.ReceptionDate.Date.Day == DateTime.Now.Date.Day
-                    && item.ReceptionDate.Date.Month == DateTime.Now.Date.Month
-                    && item.ReceptionDate.Date.Year == DateTime.Now.Date.Year)
+                if (ListReception[i].ReceptionDate.Date.Day == DateTime.Now.Date.Day
+                      && ListReception[i].ReceptionDate.Date.Month == DateTime.Now.Date.Month
+                      && ListReception[i].ReceptionDate.Date.Year == DateTime.Now.Date.Year)
                 {
                     ListCar tempListCar = new ListCar();
-                    tempListCar.CarReception = item;
-                    tempListCar.Debt = item.Debt;
+                    tempListCar.CarReception = ListReception[i];
+                    tempListCar.Debt = ListReception[i].Debt;
                     ListCar.Add(tempListCar);
                 }
             }
@@ -356,13 +359,14 @@ namespace QuanLyGaraOto.ViewModel
         {
             var ListReception = new ObservableCollection<RECEPTION>(DataProvider.Ins.DB.RECEPTIONs);
             ListCar = new ObservableCollection<ListCar>();
-            foreach (var item in ListReception)
+            for (int i = ListReception.Count() -1 ; i >= 0 ; i--)
             {
                 ListCar tempListCar = new ListCar();
-                tempListCar.CarReception = item;
-                tempListCar.Debt = item.Debt;
+                tempListCar.CarReception = ListReception[i];
+                tempListCar.Debt = ListReception[i].Debt;
                 ListCar.Add(tempListCar);
             }
+
         }
 
     }

@@ -44,6 +44,7 @@
                         <Setter Property="BorderBrush" Value="Transparent"></Setter>
                         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
                         <Setter Property="materialDesign:RippleAssist.IsDisabled" Value="True"></Setter>
+                        
                     </Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="VerticalAlignment" Value="Center"></Setter>
@@ -73,10 +74,10 @@
                 </Grid.RowDefinitions>
                 <Button Command="{Binding OpenDashboard}" CommandParameter="{Binding ElementName=wdDashboard}" 
                         Grid.Row="0">
+                    
                     <StackPanel>
                         <materialDesign:PackIcon  
-                                Grid.Column="0" 
-                
+                                Grid.Column="0"  
                                 Kind="HomeCircle" />
                         <TextBlock Grid.Column="1" 
                                        Text="Trang chủ">
@@ -133,7 +134,7 @@
                     <StackPanel >
                         <materialDesign:PackIcon  Grid.Column="0"      
                                                     Kind="Cog" />
-                        <TextBlock Grid.Column="1" Text="Cài đặt">
+                        <TextBlock Grid.Column="1" Text="Tùy chọn">
                         </TextBlock>
                     </StackPanel>
                 </Button>

@@ -18,159 +18,208 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class SettingViewModel : BaseViewModel
     {
-        // login account
-        public USER user;
+        #region Command
+            public ICommand CancelAddCarBrandWindow { get; set; }
+            public ICommand AddCarBrand { get; set; }
+            public ICommand ChangeUserInformation { get; set; }
+            public ICommand ResetUserInformation { get; set; }
+            public ICommand OldPasswordChangedCommand { get; set; }
+            public ICommand NewPasswordChangedCommand { get; set; }
+            public ICommand CheckPassword { get; set; }
+            public ICommand ChangePassword { get; set; }
+            public ICommand CancelChangePassword { get; set; }
+            public ICommand SearchWageCommand { get; set; }
+            public ICommand RefeshWageCommand { get; set; }
+            public ICommand SearchBrandCommand { get; set; }
+            public ICommand RefeshBrandCommand { get; set; }
+            public ICommand SearchSupplierCommand { get; set; }
+            public ICommand RefeshSupplierCommand { get; set; }
+            public ICommand OpenAddSupplierWindow { get; set; }
+            public ICommand OpenModifySupplierWindow { get; set; }
+            public ICommand DeleteSupplier { get; set; }
+            public ICommand SupplierSelectionChanged { get; set; }
+            public ICommand ExportSupplierCommand { get; set; }
+            public ICommand ChangeAppSettingVis { get; set; }
+            public ICommand ChangeUserSettingVis { get; set; }
+            public ICommand Logout { get; set; }
+            public ICommand ChangeEnableButttonInGaraInformation { get; set; }
+            public ICommand ChangeEnableButtonInUserInformation { get; set; }
+            public ICommand ChangeGaraInformation { get; set; }
+            public ICommand ResetGaraInformation { get; set; }
+            public ICommand ChangeEnableButtonInCarBrandSetting { get; set; }
+            public ICommand OpenModifyCarBrandWindow { get; set; }
+            public ICommand DeleteCarBrand { get; set; }
+            public ICommand OpenAddCarBrandWindow { get; set; }
+            public ICommand BrandSelectionChanged { get; set; }
+            public ICommand ExportBrandCommand { get; set; }
+            public ICommand ChangeEnableButtonInWageBrandSetting { get; set; }
+            public ICommand OpenModifyWageWindow { get; set; }
+            public ICommand DeleteWage { get; set; }
+            public ICommand OpenAddWageWindow { get; set; }
+            public ICommand WageSelectionChanged { get; set; }
+            public ICommand ExportWageCommand { get; set; }
+            public ICommand CancelAddWageWindow { get; set; }
+            public ICommand AddWage { get; set; }
+        #endregion
 
-        // Setting visibility
-        private bool _AppSettingVis;
-        public bool AppSettingVis
-        {
-            get => _AppSettingVis;
-            set
+        #region Vis
+            private bool _AppSettingVis;
+            public bool AppSettingVis { get => _AppSettingVis; set { _AppSettingVis = value; OnPropertyChanged(); } }
+
+            private bool _UserSettingVis;
+            public bool UserSettingVis { get => _UserSettingVis; set { _UserSettingVis = value; OnPropertyChanged(); } }
+        #endregion
+
+        #region Enabled
+            private bool _IsEnableChangeButtonInGaraInformation;
+            public bool IsEnableChangeButtonInGaraInformation
             {
-                _AppSettingVis = value;
-                OnPropertyChanged();
+                get => _IsEnableChangeButtonInGaraInformation; set
+                {
+                    _IsEnableChangeButtonInGaraInformation = value;
+                    OnPropertyChanged();
+                }
             }
-        }
-
-        private bool _UserSettingVis;
-        public bool UserSettingVis
-        {
-            get => _UserSettingVis;
-            set
+            private bool _IsEnableResetButtonInGaraInformation;
+            public bool IsEnableResetButtonInGaraInformation
             {
-                _UserSettingVis = value;
-                OnPropertyChanged();
+                get => _IsEnableResetButtonInGaraInformation; set
+                {
+                    _IsEnableResetButtonInGaraInformation = value;
+                    OnPropertyChanged();
+                }
             }
-        }
-
-        public ICommand ChangeAppSettingVis { get; set; }
-        public ICommand ChangeUserSettingVis { get; set; }
-
-
-        // Log out
-        public ICommand Logout { get; set; }
-
-        // IsEnable button setting in gara information
-        private bool _IsEnableChangeButtonInGaraInformation;
-        public bool IsEnableChangeButtonInGaraInformation
-        {
-            get => _IsEnableChangeButtonInGaraInformation; set
+            private bool _IsEnableChangeButtonInUserInformation;
+            public bool IsEnableChangeButtonInUserInformation
             {
-                _IsEnableChangeButtonInGaraInformation = value;
-                OnPropertyChanged();
+                get => _IsEnableChangeButtonInUserInformation; set
+                {
+                    _IsEnableChangeButtonInUserInformation = value;
+                    OnPropertyChanged();
+                }
             }
-        }
-        private bool _IsEnableResetButtonInGaraInformation;
-        public bool IsEnableResetButtonInGaraInformation
-        {
-            get => _IsEnableResetButtonInGaraInformation; set
+            private bool _IsEnableResetButtonInUserInformation;
+            public bool IsEnableResetButtonInUserInformation
             {
-                _IsEnableResetButtonInGaraInformation = value;
-                OnPropertyChanged();
+                get => _IsEnableResetButtonInUserInformation; set
+                {
+                    _IsEnableResetButtonInUserInformation = value;
+                    OnPropertyChanged();
+                }
             }
-        }
-        // IsEnable button setting in user information
-        private bool _IsEnableChangeButtonInUserInformation;
-        public bool IsEnableChangeButtonInUserInformation
-        {
-            get => _IsEnableChangeButtonInUserInformation; set
+            // IsEnable button setting in change password
+            private bool _IsEnableCheckButtonInChangePassword;
+            public bool IsEnableCheckButtonInChangePassword
             {
-                _IsEnableChangeButtonInUserInformation = value;
-                OnPropertyChanged();
+                get => _IsEnableCheckButtonInChangePassword; set
+                {
+                    _IsEnableCheckButtonInChangePassword = value;
+                    OnPropertyChanged();
+                }
             }
-        }
-        private bool _IsEnableResetButtonInUserInformation;
-        public bool IsEnableResetButtonInUserInformation
-        {
-            get => _IsEnableResetButtonInUserInformation; set
+            // Is enable button in car brand setting
+            private bool _IsEnableModifyButtonInBrandSetting;
+            public bool IsEnableModifyButtonInBrandSetting
             {
-                _IsEnableResetButtonInUserInformation = value;
-                OnPropertyChanged();
+                get => _IsEnableModifyButtonInBrandSetting; set
+                {
+                    _IsEnableModifyButtonInBrandSetting = value;
+                    OnPropertyChanged();
+                }
             }
-        }
-        // IsEnable button setting in change password
-        private bool _IsEnableCheckButtonInChangePassword;
-        public bool IsEnableCheckButtonInChangePassword
-        {
-            get => _IsEnableCheckButtonInChangePassword; set
+            private bool _IsEnableDeleteButtonInBrandSetting;
+            public bool IsEnableDeleteButtonInBrandSetting
             {
-                _IsEnableCheckButtonInChangePassword = value;
-                OnPropertyChanged();
+                get => _IsEnableDeleteButtonInBrandSetting; set
+                {
+                    _IsEnableDeleteButtonInBrandSetting = value;
+                    OnPropertyChanged();
+                }
             }
-        }
+            private bool _IsEnableModifyFieldInBrandSetting;
+            public bool IsEnableModifyFieldInBrandSetting
+            {
+                get => _IsEnableModifyFieldInBrandSetting; set
+                {
+                    _IsEnableModifyFieldInBrandSetting = value;
+                    OnPropertyChanged();
+                }
+            }
 
-        public ICommand ChangeEnableButttonInGaraInformation { get; set; }
-        public ICommand ChangeEnableButtonInUserInformation { get; set; }
-
-        // Setting gara information
-        private GARA_INFO GaraInfo;
-
-        private int _MaxCarReception;
-        public int MaxCarReception
-        {
-            get => _MaxCarReception;
-            set
+            private bool _IsEnableModifyButtonInWageSetting;
+            public bool IsEnableModifyButtonInWageSetting
             {
-                _MaxCarReception = value;
-                OnPropertyChanged();
+                get => _IsEnableModifyButtonInWageSetting; set
+                {
+                    _IsEnableModifyButtonInWageSetting = value;
+                    OnPropertyChanged();
+                }
             }
-        }
-
-        private bool _IsOverPay;
-        public bool IsOverPay
-        {
-            get => _IsOverPay; set
+            private bool _IsEnableDeleteButtonInWageSetting;
+            public bool IsEnableDeleteButtonInWageSetting
             {
-                _IsOverPay = value;
-                OnPropertyChanged();
+                get => _IsEnableDeleteButtonInWageSetting; set
+                {
+                    _IsEnableDeleteButtonInWageSetting = value;
+                    OnPropertyChanged();
+                }
             }
-        }
-
-        public ICommand ChangeGaraInformation { get; set; }
-        public ICommand ResetGaraInformation { get; set; }
-
-        // Is enable button in car brand setting
-        private bool _IsEnableModifyButtonInBrandSetting;
-        public bool IsEnableModifyButtonInBrandSetting
-        {
-            get => _IsEnableModifyButtonInBrandSetting; set
+            private bool _IsEnableModifyFieldInWageSetting;
+            public bool IsEnableModifyFieldInWageSetting
             {
-                _IsEnableModifyButtonInBrandSetting = value;
-                OnPropertyChanged();
+                get => _IsEnableModifyFieldInWageSetting; set
+                {
+                    _IsEnableModifyFieldInWageSetting = value;
+                    OnPropertyChanged();
+                }
             }
-        }
-        private bool _IsEnableDeleteButtonInBrandSetting;
-        public bool IsEnableDeleteButtonInBrandSetting
-        {
-            get => _IsEnableDeleteButtonInBrandSetting; set
-            {
-                _IsEnableDeleteButtonInBrandSetting = value;
-                OnPropertyChanged();
-            }
-        }
-        private bool _IsEnableModifyFieldInBrandSetting;
-        public bool IsEnableModifyFieldInBrandSetting
-        {
-            get => _IsEnableModifyFieldInBrandSetting; set
-            {
-                _IsEnableModifyFieldInBrandSetting = value;
-                OnPropertyChanged();
-            }
-        }
+        #endregion
 
-        // Setting car brand
+        #region Data 
+            public USER user;
+            private GARA_INFO GaraInfo;
+            USER_INFO userInfo;
+            private int _MaxCarReception;
+            public int MaxCarReception { get => _MaxCarReception; set { _MaxCarReception = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<CAR_BRAND> _ListCarBrand;
-        public ObservableCollection<CAR_BRAND> ListCarBrand
-        {
-            get => _ListCarBrand; set
+            private bool _IsOverPay;
+            public bool IsOverPay { get => _IsOverPay; set { _IsOverPay = value; OnPropertyChanged(); } }
+        #endregion
+
+        #region List 
+            private ObservableCollection<CAR_BRAND> _ListCarBrand;
+            public ObservableCollection<CAR_BRAND> ListCarBrand
             {
-                _ListCarBrand = value;
-                OnPropertyChanged();
+                get => _ListCarBrand; set
+                {
+                    _ListCarBrand = value;
+                    OnPropertyChanged();
+                }
             }
-        }
+            public ObservableCollection<CAR_BRAND> SelectedBrandItems { get; set; }
+            private ObservableCollection<CAR_BRAND> _TempListBrand { get; set; }
+            public ObservableCollection<CAR_BRAND> TempListBrand { get => _TempListBrand; set { _TempListBrand = value; OnPropertyChanged(); } }
+            private ObservableCollection<WAGE> _ListWage;
+            public ObservableCollection<WAGE> ListWage
+            {
+                get => _ListWage; set
+                {
+                    _ListWage = value;
+                    OnPropertyChanged();
+                }
+            }
+            private ObservableCollection<WAGE> _TempListWage { get; set; }
+            public ObservableCollection<WAGE> TempListWage { get => _TempListWage; set { _TempListWage = value; OnPropertyChanged(); } }
+            public ObservableCollection<WAGE> SelectedWageItems { get; set; }
+            private ObservableCollection<SUPPLIER> _ListSupplier { get; set; }
+            public ObservableCollection<SUPPLIER> ListSupplier { get => _ListSupplier; set { _ListSupplier = value; OnPropertyChanged(); } }
+            private ObservableCollection<SUPPLIER> _TempListSupplier { get; set; }
+            public ObservableCollection<SUPPLIER> TempListSupplier { get => _TempListSupplier; set { _TempListSupplier = value; OnPropertyChanged(); } }
 
+
+        #endregion
+
+        #region data tao lao di do
         private CAR_BRAND _SelectedBrandItem;
         public CAR_BRAND SelectedBrandItem
         {
@@ -183,16 +232,6 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
-        public ObservableCollection<CAR_BRAND> SelectedBrandItems { get; set; }
-
-        public ICommand ChangeEnableButtonInCarBrandSetting { get; set; }
-        public ICommand OpenModifyCarBrandWindow { get; set; }
-        public ICommand DeleteCarBrand { get; set; }
-        public ICommand OpenAddCarBrandWindow { get; set; }
-        public ICommand BrandSelectionChanged { get; set; }
-        public ICommand ExportBrandCommand { get; set; }
-
-        // Add brand window
         private string _CarBrandInAdd;
         public string CarBrandInAdd
         {
@@ -202,53 +241,6 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        public ICommand CancelAddCarBrandWindow { get; set; }
-        public ICommand AddCarBrand { get; set; }
-
-
-        // Is enable button in wage setting
-
-        private bool _IsEnableModifyButtonInWageSetting;
-        public bool IsEnableModifyButtonInWageSetting
-        {
-            get => _IsEnableModifyButtonInWageSetting; set
-            {
-                _IsEnableModifyButtonInWageSetting = value;
-                OnPropertyChanged();
-            }
-        }
-        private bool _IsEnableDeleteButtonInWageSetting;
-        public bool IsEnableDeleteButtonInWageSetting
-        {
-            get => _IsEnableDeleteButtonInWageSetting; set
-            {
-                _IsEnableDeleteButtonInWageSetting = value;
-                OnPropertyChanged();
-            }
-        }
-        private bool _IsEnableModifyFieldInWageSetting;
-        public bool IsEnableModifyFieldInWageSetting
-        {
-            get => _IsEnableModifyFieldInWageSetting; set
-            {
-                _IsEnableModifyFieldInWageSetting = value;
-                OnPropertyChanged();
-            }
-        }
-
-        // setting wage information
-
-        private ObservableCollection<WAGE> _ListWage;
-        public ObservableCollection<WAGE> ListWage
-        {
-            get => _ListWage; set
-            {
-                _ListWage = value;
-                OnPropertyChanged();
-            }
-        }
-
         private WAGE _SelectedWageItem;
         public WAGE SelectedWageItem
         {
@@ -260,24 +252,6 @@ namespace QuanLyGaraOto.ViewModel
                 IsEnableModifyButtonInWageSetting = true;
             }
         }
-
-        public ObservableCollection<WAGE> SelectedWageItems { get; set; }
-
-        public ICommand ChangeEnableButtonInWageBrandSetting { get; set; }
-        public ICommand OpenModifyWageWindow { get; set; }
-        public ICommand DeleteWage { get; set; }
-        public ICommand OpenAddWageWindow { get; set; }
-        public ICommand WageSelectionChanged { get; set; }
-
-        public ICommand ExportWageCommand { get; set; }
-
-        // Add wage window
-        public ICommand CancelAddWageWindow { get; set; }
-        public ICommand AddWage { get; set; }
-
-        // Setting user information
-
-        USER_INFO userInfo;
 
         private string _UserName;
         public string UserName
@@ -334,10 +308,6 @@ namespace QuanLyGaraOto.ViewModel
             }
         }
 
-        public ICommand ChangeUserInformation { get; set; }
-        public ICommand ResetUserInformation { get; set; }
-
-        // Change password
         private bool _IsEnableOldPasswordField;
         public bool IsEnableOldPasswordField
         {
@@ -365,7 +335,6 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
-
         private bool _IsCorrectPassword;
         public bool IsCorrectPassword
         {
@@ -375,32 +344,14 @@ namespace QuanLyGaraOto.ViewModel
                 OnPropertyChanged();
             }
         }
-        public ICommand OldPasswordChangedCommand { get; set; }
-        public ICommand NewPasswordChangedCommand { get; set; }
-        public ICommand CheckPassword { get; set; }
-        public ICommand ChangePassword { get; set; }
-        public ICommand CancelChangePassword { get; set; }
-
-        // Search Wage
-
         private string _WageName { get; set; }
         public string WageName { get => _WageName; set { _WageName = value; OnPropertyChanged(); } }
         private string _WageValue { get; set; }
         public string WageValue { get => _WageValue; set { _WageValue = value; OnPropertyChanged(); } }
-        private ObservableCollection<WAGE> _TempListWage { get; set; }
-        public ObservableCollection<WAGE> TempListWage { get => _TempListWage; set { _TempListWage = value; OnPropertyChanged(); } }
-        public ICommand SearchWageCommand { get; set; }
-        public ICommand RefeshWageCommand { get; set; }
 
-        // Search Brand
         private string _BrandName { get; set; }
         public string BrandName { get => _BrandName; set { _BrandName = value; OnPropertyChanged(); } }
-        private ObservableCollection<CAR_BRAND> _TempListBrand { get; set; }
-        public ObservableCollection<CAR_BRAND> TempListBrand { get => _TempListBrand; set { _TempListBrand = value; OnPropertyChanged(); } }
-        public ICommand SearchBrandCommand { get; set; }
-        public ICommand RefeshBrandCommand { get; set; }
 
-        //Role
         bool _isGaraInfo = false;
         public bool isGaraInfo { get => _isGaraInfo; set { _isGaraInfo = value; OnPropertyChanged(); } }
 
@@ -413,34 +364,28 @@ namespace QuanLyGaraOto.ViewModel
         bool _isSuplier = false;
         public bool isSuplier { get => _isSuplier; set { _isSuplier = value; OnPropertyChanged(); } }
 
-        // Supplier
-        private ObservableCollection<SUPPLIER> _ListSupplier { get; set; }
-        public ObservableCollection<SUPPLIER> ListSupplier { get => _ListSupplier; set{ _ListSupplier = value;OnPropertyChanged();}}
-        private ObservableCollection<SUPPLIER> _TempListSupplier { get; set; }
-        public ObservableCollection<SUPPLIER> TempListSupplier { get => _TempListSupplier; set { _TempListSupplier = value; OnPropertyChanged(); } }
         private SUPPLIER _SelectedSupplier { get; set; }
         public SUPPLIER SelectedSupplier { get => _SelectedSupplier; set { _SelectedSupplier = value; OnPropertyChanged(); } }
-        public ICommand SearchSupplierCommand { get; set; }
-        public ICommand RefeshSupplierCommand { get; set; }
-        public ICommand OpenAddSupplierWindow { get; set; }
-        public ICommand OpenModifySupplierWindow { get; set; }
-        public ICommand DeleteSupplier { get; set; }
-        public ICommand SupplierSelectionChanged { get; set; }
-        public ICommand ExportSupplierCommand { get; set; }
         private string _SupplierPhone { get; set; }
         public string SupplierPhone { get => _SupplierPhone; set { _SupplierPhone = value; OnPropertyChanged(); } }
+
+        #endregion
+
         public SettingViewModel()
         {
             // Visibility
             AppSettingVis = true;
             UserSettingVis = false;
             // All command and setting Supplier
-            ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+            LoadListBrand();
+            LoadListSupplier();
+            LoadListWage();
+
             OpenAddSupplierWindow = new RelayCommand<SettingWindow>((p) => { if (isSuplier == false) return false; return true; }, (p) =>
             {
                 AddSupplierWindow window = new AddSupplierWindow();
                 window.ShowDialog();
-                ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+                LoadListSupplier();
             });
             OpenModifySupplierWindow = new RelayCommand<SettingWindow>((p) => {
 
@@ -450,7 +395,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 EditSupplierWindow window = new EditSupplierWindow(SelectedSupplier);
                 window.ShowDialog();
-                ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+                LoadListSupplier();
             });
             SupplierSelectionChanged = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
@@ -499,7 +444,7 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+                LoadListSupplier();
                 UnicodeConvert uni = new UnicodeConvert();
                 TempListSupplier = new ObservableCollection<SUPPLIER>();
 
@@ -521,7 +466,7 @@ namespace QuanLyGaraOto.ViewModel
                 p.txbSupplier.Text = "";
                 p.txbPhoneSupplier.Text = "";
                 p.txbSupplierEmail.Text = "";
-                ListSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+                LoadListSupplier();
             });
 
 
@@ -544,7 +489,7 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) =>
             {
-                ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
+                LoadListBrand();
                 UnicodeConvert uni = new UnicodeConvert();
                 TempListBrand = new ObservableCollection<CAR_BRAND>();
 
@@ -559,7 +504,7 @@ namespace QuanLyGaraOto.ViewModel
             RefeshBrandCommand = new RelayCommand<SettingWindow>((p) => { return true; }, (p) =>
             {
                 BrandName = "";
-                ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
+                LoadListBrand();
             });
             // Search Wage
             SearchWageCommand = new RelayCommand<SettingWindow>((p) => {
@@ -573,7 +518,7 @@ namespace QuanLyGaraOto.ViewModel
                 return true;
             }, (p) => 
             {
-                ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
+                LoadListWage();
                 UnicodeConvert uni = new UnicodeConvert();
                 TempListWage = new ObservableCollection<WAGE>();
 
@@ -595,7 +540,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 WageName = "";
                 WageValue = "";
-                ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
+                LoadListWage();
             });
             // Gara information
             GaraInfo = DataProvider.Ins.DB.GARA_INFO.First();
@@ -645,13 +590,15 @@ namespace QuanLyGaraOto.ViewModel
             });
 
             // Car brand information
-            ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
+            LoadListBrand();
 
             BrandSelectionChanged = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
                 SelectedBrandItems = new ObservableCollection<CAR_BRAND>(p.SelectedItems.Cast<CAR_BRAND>().ToList());
             });
-            OpenModifyCarBrandWindow = new RelayCommand<object>((p) => { if (isCarBranch == false) return false;  return true; }, (p) =>
+            OpenModifyCarBrandWindow = new RelayCommand<object>((p) => {
+                if (SelectedBrandItem == null) return false;
+                if (isCarBranch == false) return false;  return true; }, (p) =>
             {
                 if(SelectedBrandItems.Count > 1)
                 {
@@ -664,9 +611,11 @@ namespace QuanLyGaraOto.ViewModel
                 IsEnableModifyButtonInBrandSetting = false;
                 IsEnableModifyFieldInBrandSetting = false;
                 IsEnableDeleteButtonInBrandSetting = false;
-                ListCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
+                LoadListBrand();
             });
-            DeleteCarBrand = new RelayCommand<object>((p) => { if (isCarBranch == false) return false; return true; }, (p) =>
+            DeleteCarBrand = new RelayCommand<object>((p) => { 
+                if (SelectedBrandItem == null ) return false;
+                if (isCarBranch == false) return false; return true; }, (p) =>
             {
                 if (MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
@@ -694,7 +643,7 @@ namespace QuanLyGaraOto.ViewModel
                 window.ShowDialog();
                 AddCarBrandViewModel addCarBrandViewModel = window.DataContext as AddCarBrandViewModel;
                 if (addCarBrandViewModel.br != null)
-                    ListCarBrand.Add(addCarBrandViewModel.br);
+                    ListCarBrand.Insert(0,addCarBrandViewModel.br);
             });
 
             ExportBrandCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -703,13 +652,15 @@ namespace QuanLyGaraOto.ViewModel
                 printViewModel.Print_ThongTinHangXe(ListCarBrand);
             });
             // Wage information
-            ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
+            LoadListWage();
 
             WageSelectionChanged = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
                 SelectedWageItems = new ObservableCollection<WAGE>(p.SelectedItems.Cast<WAGE>().ToList());
             });
-            OpenModifyWageWindow = new RelayCommand<object>((p) => { if (isWage == false) return false; return true; }, (p) =>
+            OpenModifyWageWindow = new RelayCommand<object>((p) => {
+                if (SelectedWageItem == null) return false;
+                if (isWage == false) return false; return true; }, (p) =>
             {
                 if(SelectedWageItems.Count > 1)
                 {
@@ -722,7 +673,7 @@ namespace QuanLyGaraOto.ViewModel
                 IsEnableModifyButtonInWageSetting = false;
                 IsEnableModifyFieldInWageSetting = false;
                 IsEnableDeleteButtonInWageSetting = false;
-                ListWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
+                LoadListWage();
             });
             DeleteWage = new RelayCommand<object>((p) => 
             { 
@@ -763,7 +714,7 @@ namespace QuanLyGaraOto.ViewModel
                 window.ShowDialog();
                 AddWageViewModel addWageViewModel = window.DataContext as AddWageViewModel;
                 if (addWageViewModel.wage !=null) 
-                ListWage.Add(addWageViewModel.wage);
+                ListWage.Insert(0,addWageViewModel.wage);
             });
             ExportWageCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -970,6 +921,33 @@ namespace QuanLyGaraOto.ViewModel
             else
             {
                 p.Close();
+            }
+        }
+        public void LoadListWage()
+        {
+            ListWage = new ObservableCollection<WAGE>();
+            ObservableCollection<WAGE> tempWage = new ObservableCollection<WAGE>(DataProvider.Ins.DB.WAGEs);
+            foreach (var item in tempWage)
+            {
+                ListWage.Insert(0, item);
+            }
+        }
+        public void LoadListBrand()
+        {
+            ListCarBrand = new ObservableCollection<CAR_BRAND>();
+            ObservableCollection<CAR_BRAND> tempCarBrand = new ObservableCollection<CAR_BRAND>(DataProvider.Ins.DB.CAR_BRAND);
+            foreach (var item in tempCarBrand)
+            {
+                ListCarBrand.Insert(0, item);
+            }
+        }
+        public void LoadListSupplier()
+        {
+            ListSupplier = new ObservableCollection<SUPPLIER>();
+            ObservableCollection<SUPPLIER> tempSupplier = new ObservableCollection<SUPPLIER>(DataProvider.Ins.DB.SUPPLIERs);
+            foreach (var item in tempSupplier)
+            {
+                ListSupplier.Insert(0, item);
             }
         }
     }
