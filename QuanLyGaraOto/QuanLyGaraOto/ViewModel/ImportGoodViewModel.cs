@@ -179,8 +179,9 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     if (!IsImport)
                     {
-                        MessageBoxResult rs = MessageBox.Show("Bạn đồng ý nhập tất cả vật tư đã chọn", "Thông báo", MessageBoxButton.OKCancel);
-                        if (MessageBoxResult.OK == rs)
+                        MessageBoxResult rs = MessageBox.Show("Bạn đồng ý nhập tất cả vật tư đã chọn", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        
+                        if (MessageBoxResult.Yes == rs)
                         {
                             foreach (var item in ListImport)
                             {
@@ -206,21 +207,18 @@ namespace QuanLyGaraOto.ViewModel
                 );
             CloseCommand = new RelayCommand<Window>((p) => true, (p) =>
             {
-                if (!IsImport)
-                {
-                    MessageBoxResult rs = MessageBox.Show("Bạn đồng ý thoát và hủy tất cả vật tư", "Thoát", MessageBoxButton.OKCancel);
-                    if (MessageBoxResult.OK == rs)
+
+                
+                MessageBoxResult rs = MessageBox.Show("Bạn chắc chắn muốn đóng cửa sổ này", "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (MessageBoxResult.Yes == rs)
                     {
                         DataProvider.Ins.DB.IMPORT_GOODS.Remove(ImportGoods);
 
                         DataProvider.Ins.DB.SaveChanges();
                         p.Close();
                     }
-                }
-                else
-                {
-                    p.Close();
-                }    
+                
+               
             });
         }
         public void UpdateTotalMoney()
