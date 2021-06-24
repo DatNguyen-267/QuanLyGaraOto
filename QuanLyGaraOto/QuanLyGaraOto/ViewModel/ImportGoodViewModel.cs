@@ -191,25 +191,6 @@ namespace QuanLyGaraOto.ViewModel
                 },
                 (p) =>
                 {
-                    if (!IsImport)
-                    {
-                        MessageBoxResult rs = MessageBox.Show("Bạn đồng ý nhập tất cả vật tư đã chọn", "Thông báo", MessageBoxButton.OKCancel);
-                        if (MessageBoxResult.OK == rs)
-                        {
-                            //foreach (var item in ListImport)
-                            //{
-                            //    var List = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Id == item.IdSupplies).SingleOrDefault();
-                            //    List.Supplies_Amount += item.Amount;
-                            //    //DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Add(item.ImportInfo);
-                                
-                            //    DataProvider.Ins.DB.SaveChanges();
-                            //}
-                            
-                            
-                        }
-                        else { return; }
-                    }
-                    
                     ImportPayWindow wd = new ImportPayWindow(ImportGoods);
                     wd.ShowDialog();
                     if (ImportGoods.ImportGoods_TotalMoney != 0)
@@ -217,9 +198,7 @@ namespace QuanLyGaraOto.ViewModel
                         p.btnPay.Visibility = Visibility.Hidden;
                         p.btnView.Visibility = Visibility.Visible;
                         IsImport = true;
-                    }
-                    
-
+                    } 
                 }
                 );
             ViewCommand = new RelayCommand<Window>((p) => true, (p) =>

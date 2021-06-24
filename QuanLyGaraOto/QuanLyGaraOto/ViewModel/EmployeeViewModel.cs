@@ -1002,6 +1002,7 @@ namespace QuanLyGaraOto.ViewModel
                 e.Cancel = false;
             }
             else e.Cancel = true;
+        }
         public void ResetEmployee()
         {
             Name = null;

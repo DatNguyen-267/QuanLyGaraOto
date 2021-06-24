@@ -7,6 +7,7 @@ using QuanLyGaraOto.Model;
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace QuanLyGaraOto.ViewModel
 {
@@ -20,6 +21,7 @@ namespace QuanLyGaraOto.ViewModel
 
         public ICommand CloseCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
+        public ICommand CheckDate { get; set; }
 
         private IMPORT_GOODS _NewImport { get; set; }
         public IMPORT_GOODS NewImport { get => _NewImport; set{ _NewImport = value; OnPropertyChanged(); } }
@@ -37,7 +39,8 @@ namespace QuanLyGaraOto.ViewModel
 
         private SUPPLIER _SelectedSupplier { get; set; }
         public SUPPLIER SelectedSupplier { get => _SelectedSupplier; set { _SelectedSupplier = value; OnPropertyChanged(); } }
-
+        private bool _VisOverDate { get; set; }
+        public bool VisOverDate { get => _VisOverDate; set { _VisOverDate = value; OnPropertyChanged(); } }
 
         public AddImportWindowViewModel(USER user)
         {
@@ -72,7 +75,17 @@ namespace QuanLyGaraOto.ViewModel
                 ImportWindow importWindow = new ImportWindow(NewImport);
                 importWindow.ShowDialog();               
             });
-
+            CheckDate = new RelayCommand<DatePicker>((p) => {
+                return true;
+            }, (p) =>
+            {
+               
+                VisOverDate = false;
+                if (p.SelectedDate > DateTime.Now.Date)
+                {
+                    VisOverDate = true;
+                }
+            });
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
