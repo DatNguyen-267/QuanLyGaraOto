@@ -227,12 +227,22 @@ namespace QuanLyGaraOto.ViewModel
         public void LoadComboBox()
         {
             ObservableCollection<RECEIPT> temp = new ObservableCollection<RECEIPT>(DataProvider.Ins.DB.RECEIPTs);
+            ObservableCollection<IMPORT_GOODS> temp1 = new ObservableCollection<IMPORT_GOODS>(DataProvider.Ins.DB.IMPORT_GOODS);
             foreach (var item in temp)
             {
                 if (item.ReceiptDate.Year != DateTime.Now.Year)
                 {
                     if (!(RpItemSource_Year.Any(x => x.Contains("Năm " + item.ReceiptDate.Year.ToString()))))
                         RpItemSource_Year.Add("Năm " + item.ReceiptDate.Year.ToString());
+                }
+
+            }
+            foreach (var item in temp1)
+            {
+                if (item.ImportGoods_Date.Year != DateTime.Now.Year && item.ImportGoods_TotalMoney!=0)
+                {
+                    if (!(RpItemSource_Year.Any(x => x.Contains("Năm " + item.ImportGoods_Date.Year.ToString()))))
+                        RpItemSource_Year.Add("Năm " + item.ImportGoods_Date.Year.ToString());
                 }
 
             }
@@ -345,6 +355,7 @@ namespace QuanLyGaraOto.ViewModel
             int i = 1;
 
             var list_Supplies = DataProvider.Ins.DB.SUPPLIES;
+
             if (list_Supplies != null)
             {
                 foreach (var item in list_Supplies)
@@ -359,44 +370,63 @@ namespace QuanLyGaraOto.ViewModel
                     int Sudung=0;
                     int temp = (int)item.Supplies_Amount;
 
-                    for (int a = DateTime.Now.Year; a >= report_Year; a--)
-                    {
-                        for (int b = DateTime.Now.Month; b >= report_Month; b--)
-                        {
-                             
-                            TonCuoi = temp;
-                            PhatSinh = 0;
-                            Sudung = 0;
-                            var import_Good = DataProvider.Ins.DB.IMPORT_GOODS.Where(x => x.ImportGoods_Date.Year == a && x.ImportGoods_Date.Month == b);
-                            if (import_Good != null)
-                            {
-                                foreach (var item1 in import_Good)
-                                {
-                                    foreach (var item4 in DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Where(x => x.IdImportGood == item1.ImportGoods_Id && x.IdSupplies == item.Supplies_Id))
-                                    {
-                                        if (item4 != null)
-                                            PhatSinh += (int)item4.Amount;
-                                    }
-                                }
-                            }
+                    int a = DateTime.Now.Year;
+                    int b = DateTime.Now.Month;
 
-                            var repair = DataProvider.Ins.DB.REPAIRs.Where(x => x.RepairDate.Year == a && x.RepairDate.Month == b);
-                            if (repair != null)
+                    if (!(report_Year == a && report_Month > b))
+                    while (a>=0 && b>=0)
+                    {
+                       
+                        if(b==0)
+                        {
+                            b = 12;
+                            a--;
+
+                        }
+
+                       
+
+                        TonCuoi = temp;
+                        PhatSinh = 0;
+                        Sudung = 0;
+                        var import_Good = DataProvider.Ins.DB.IMPORT_GOODS.Where(x => x.ImportGoods_Date.Year == a && x.ImportGoods_Date.Month == b && x.ImportGoods_TotalMoney != 0);
+                        if (import_Good != null)
+                        {
+                            foreach (var item1 in import_Good)
                             {
-                                foreach (var item2 in repair)
+                                foreach (var item4 in DataProvider.Ins.DB.IMPORT_GOODS_DETAIL.Where(x => x.IdImportGood == item1.ImportGoods_Id && x.IdSupplies == item.Supplies_Id))
                                 {
-                                    foreach (var item3 in DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == item2.Repair_Id && x.IdSupplies == item.Supplies_Id))
-                                    {
-                                         if (item3 != null)
-                                            Sudung += (int)item3.SuppliesAmount;
-                                    } 
-                                    
+                                    if (item4 != null)
+                                        PhatSinh += (int)item4.Amount;
                                 }
                             }
-                            Tondau = TonCuoi - PhatSinh + Sudung;
-                            temp = Tondau;
                         }
+
+                        var repair = DataProvider.Ins.DB.REPAIRs.Where(x => x.RepairDate.Year == a && x.RepairDate.Month == b);
+                        if (repair != null)
+                        {
+                            foreach (var item2 in repair)
+                            {
+                                foreach (var item3 in DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == item2.Repair_Id && x.IdSupplies == item.Supplies_Id))
+                                {
+                                    if (item3 != null)
+                                        Sudung += (int)item3.SuppliesAmount;
+                                }
+
+                            }
+                        }
+                        Tondau = TonCuoi - PhatSinh + Sudung;
+                        temp = Tondau;
+
+                        if (a == report_Year && b == report_Month)
+                        {
+                            break;
+                        }
+                        b--;
+
                     }
+
+                    
                     listInventory.STT = i;
                     listInventory.Supplies_Name = item.Supplies_Name;
                     listInventory.IdSupplies = item.Supplies_Id;
@@ -405,7 +435,7 @@ namespace QuanLyGaraOto.ViewModel
                     listInventory.PhatSinh = PhatSinh;
                     ListInventory.Add(listInventory);
                     i++;
-
+                   
                 }
             }
 

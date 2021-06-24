@@ -82,6 +82,7 @@ namespace QuanLyGaraOto.ViewModel
             {
                 p.txbID.Text = "";
                 p.dpImportDate.Text = "";
+                p.cbSupplier.Text = "";
                 ListImport = new ObservableCollection<IMPORT_GOODS>(DataProvider.Ins.DB.IMPORT_GOODS);
             });
             CloseCommand = new RelayCommand<GoodBillWindow>((p) => { return true; }, (p) =>
