@@ -213,18 +213,30 @@ namespace QuanLyGaraOto.ViewModel
         public void LoadComboBox()
         {
             ObservableCollection<RECEIPT> temp = new ObservableCollection<RECEIPT>(DataProvider.Ins.DB.RECEIPTs);
+            ObservableCollection<IMPORT_GOODS> temp1 = new ObservableCollection<IMPORT_GOODS>(DataProvider.Ins.DB.IMPORT_GOODS);
             foreach (var item in temp)
             {
-                if(item.ReceiptDate.Year!=DateTime.Now.Year)
+                if (item.ReceiptDate.Year != DateTime.Now.Year)
                 {
-                    if(!(ItemSource_Year.Any(x=>x.Contains("Năm " + item.ReceiptDate.Year.ToString()))))
-                    ItemSource_Year.Add("Năm " + item.ReceiptDate.Year.ToString());                    
-                }          
+                    if (!(ItemSource_Year.Any(x => x.Contains("Năm " + item.ReceiptDate.Year.ToString()))))
+                        ItemSource_Year.Add("Năm " + item.ReceiptDate.Year.ToString());
+                }
+
             }
-            for(int i=1;i<13;i++)
-                if (DateTime.Now.Month!=i)
+            foreach (var item in temp1)
+            {
+                if (item.ImportGoods_Date.Year != DateTime.Now.Year && item.ImportGoods_TotalMoney != 0)
                 {
-                    ItemSource_Month.Add("Tháng " + i);                  
+                    if (!(ItemSource_Year.Any(x => x.Contains("Năm " + item.ImportGoods_Date.Year.ToString()))))
+                        ItemSource_Year.Add("Năm " + item.ImportGoods_Date.Year.ToString());
+                }
+
+            }
+            for (int i = 1; i < 13; i++)
+                if (DateTime.Now.Month != i)
+                {
+
+                    ItemSource_Month.Add("Tháng " + i);
                 }
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
