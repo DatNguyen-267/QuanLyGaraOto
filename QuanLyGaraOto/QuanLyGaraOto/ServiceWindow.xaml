@@ -184,6 +184,7 @@
                       VerticalAlignment="Center">
                     </TextBox>
                     <TextBox
+                        materialDesign:ValidationAssist.FontSize="14"
                         x:Name="txbDebt"
                       materialDesign:HintAssist.Hint="Tiền nợ"
                       Style="{StaticResource txbSearch}"

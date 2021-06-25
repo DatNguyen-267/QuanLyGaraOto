@@ -37,13 +37,29 @@
         </Grid>
         <Grid Grid.Row="1">
             <TextBox
+                materialDesign:ValidationAssist.FontSize="14"
                 x:Name="txtBrand"
                 materialDesign:HintAssist.Hint="Tên hãng xe"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                
                 VerticalAlignment="Center" 
                 Margin="20 0 20 0"
                 FontSize="16">
-
+                <TextBox.Style>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding VisExistsName}" Value="True">
+                                <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding CheckName}"
+                                                                       CommandParameter="{Binding ElementName=wdModifyCarBrand}"
+                                                                       ></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <TextBox.Text>
                     <Binding Path="CarBrandInModify" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -53,6 +69,14 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
+            <Label Grid.Column="0"
+                   Content="Tên hãng xe này đã tồn tại"
+                   Foreground="red"
+                   FontSize="14"
+                   VerticalAlignment="Bottom"
+                   Margin="15 0 10 3"
+                   Visibility="{Binding VisExistsName, Converter={StaticResource BooleanToVisibilityConverter}}">
+            </Label>
         </Grid>
 
         <Grid Grid.Row="2">

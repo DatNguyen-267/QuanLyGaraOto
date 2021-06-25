@@ -74,7 +74,7 @@
             
         </Grid>
         <Label Grid.Row="1"
-               FontSize="13"
+               FontSize="14"
                    Content="Tên chức vụ này đã tồn tại"
                    Foreground="red"
                    VerticalAlignment="Bottom"

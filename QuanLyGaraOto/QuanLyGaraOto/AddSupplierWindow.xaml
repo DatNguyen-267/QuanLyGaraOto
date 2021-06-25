@@ -45,7 +45,7 @@
             <TextBox Grid.Column="0"
                 x:Name="txtSupplierName"
                 materialDesign:HintAssist.Hint="Tên nhà cung cấp"
-
+                materialDesign:ValidationAssist.FontSize="14"
                 VerticalAlignment="Center" 
                 Margin="5"
                 FontSize="14" Height="40">
@@ -78,7 +78,8 @@
                    Content="Nhà cung cấp này đã tồn tại"
                    Foreground="red"
                    VerticalAlignment="Bottom"
-                   Margin="0 0 10 10"
+                   Margin="0 0 10 5"
+                     FontSize="14"
                    Visibility="{Binding VisExistsName, Converter={StaticResource BooleanToVisibilityConverter}}">
                 
             </Label>
@@ -88,6 +89,7 @@
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center" 
                 Margin="5"
+                     materialDesign:ValidationAssist.FontSize="14"
                 FontSize="14" Height="40">
 
                 <TextBox.Text>
@@ -103,6 +105,7 @@
             <TextBox Grid.Column="2"
                 x:Name="txbSupplierEmail"
                 materialDesign:HintAssist.Hint="Email"
+                     materialDesign:ValidationAssist.FontSize="14"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center" 
                 Margin="5"

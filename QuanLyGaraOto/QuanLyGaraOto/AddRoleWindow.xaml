@@ -83,6 +83,7 @@
                    Foreground="red"
                    VerticalAlignment="Bottom"
                    Margin="15 0 10 5"
+                    FontSize="14"  
                    Visibility="{Binding VisExistsAddRoleName, Converter={StaticResource BooleanToVisibilityConverter}}">
 
         </Label>

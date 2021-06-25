@@ -429,6 +429,7 @@ namespace QuanLyGaraOto.ViewModel
                         ListSupplier.Remove(item);
                     }
                     DataProvider.Ins.DB.SaveChanges();
+                    if (!string.IsNullOrEmpty(s))
                     MessageBox.Show(s , "Thông báo", MessageBoxButton.OK);
                 }
             });

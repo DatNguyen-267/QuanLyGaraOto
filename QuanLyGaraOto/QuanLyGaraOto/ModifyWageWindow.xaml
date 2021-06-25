@@ -44,11 +44,27 @@
             <TextBox Grid.Column="0"
                    Margin=" 0 0 20 0"
                 x:Name="txtWage"
+                     materialDesign:ValidationAssist.FontSize="14"
                 materialDesign:HintAssist.Hint="Loại tiền công"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+
                 VerticalAlignment="Center" 
                 FontSize="16">
-
+                <TextBox.Style>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding VisExistsName}" Value="True">
+                                <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding CheckName}"
+                                                                       CommandParameter="{Binding ElementName=wdModifyWage}"
+                                                                       ></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <TextBox.Text>
                     <Binding Path="WageInModify" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -58,10 +74,17 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-
+            <Label Grid.Column="0"
+                   Content="Tên tiền công này đã tồn tại"
+                   Foreground="red"
+                   FontSize="14"
+                   VerticalAlignment="Bottom"
+                   Margin="0 0 10 3"
+                   Visibility="{Binding VisExistsName, Converter={StaticResource BooleanToVisibilityConverter}}">
+            </Label>
             <TextBox Grid.Column="1"
                 x:Name="txtValue"
-                     
+                materialDesign:ValidationAssist.FontSize="14"
                 materialDesign:HintAssist.Hint="Giá trị"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 VerticalAlignment="Center" 

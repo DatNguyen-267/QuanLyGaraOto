@@ -37,10 +37,10 @@
 
             <StackPanel Grid.Row="0" VerticalAlignment="Center" >
 
-                <TextBlock Text="Login"
+                <TextBlock Text="GARA OTO"
                            FontWeight="Bold"
                            FontFamily="helvetica"
-                           FontSize="60"
+                           FontSize="50"
                            Foreground="#3d4751"
                            HorizontalAlignment="Center"/>
             </StackPanel>

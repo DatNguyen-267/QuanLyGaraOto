@@ -74,6 +74,7 @@
                         <TextBox
                             x:Name="txtUserName"                          
                             materialDesign:HintAssist.Hint="Nhập tên tài khoản"
+                              materialDesign:ValidationAssist.FontSize="14"
                             Height="40" 
                             FontSize="14" 
                             Width="220"
@@ -111,9 +112,10 @@
                         <Label Grid.Row="1"
                    Content="Tên tài khoản đã tồn tại"
                    Foreground="red"
+                                 FontSize="14"
                    VerticalAlignment="Bottom"
                     HorizontalAlignment="Right"
-                   Margin="15 10 100 -22"
+                   Margin="15 10 85 -25"
                    Visibility="{Binding VisExistsAddUserName, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         </Label>
@@ -142,6 +144,7 @@
                         <TextBox
                             Name="txtName"
                         materialDesign:HintAssist.Hint="Nhập họ và tên"
+                              materialDesign:ValidationAssist.FontSize="14"
                         Height="40" 
                         FontSize="14" 
                         Width="220"
@@ -184,6 +187,7 @@
                             />
                         <ComboBox
                             Name='cbxRoleName'
+                              materialDesign:ValidationAssist.FontSize="14"
                             ItemsSource="{Binding ListRoles, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             DisplayMemberPath="Role_Name"
                             Text="{Binding RoleName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                           
@@ -223,6 +227,7 @@
                     />
                         <DatePicker
                             Name="dpkBrithDate"
+                              materialDesign:ValidationAssist.FontSize="14"
                         materialDesign:HintAssist.Hint="Nhập ngày sinh"
                         Height="40" 
                         FontSize="14" 
@@ -268,6 +273,7 @@
                     />
                         <TextBox
                             x:Name="txtCMND"
+                              materialDesign:ValidationAssist.FontSize="14"
                         materialDesign:HintAssist.Hint="Nhập CMND/CCCD"
                         Height="40" 
                         FontSize="14" 
@@ -278,7 +284,7 @@
                         HorizontalAlignment="Right"
                         VerticalContentAlignment="Center" 
                         HorizontalContentAlignment="Left"
-                        FontWeight="Normal">
+                        FontWeight="Normal" VerticalAlignment="Top">
                         <TextBox.Text>
                                 <Binding Path="CMND" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                     <Binding.ValidationRules>
@@ -311,6 +317,7 @@
                     />
                         <TextBox
                            x:Name="txtTelephone"
+                              materialDesign:ValidationAssist.FontSize="14"
                             materialDesign:HintAssist.Hint="Nhập số điện thoại"
                             Height="40" 
                             FontSize="14" 
@@ -356,6 +363,7 @@
                             />
                         <TextBox
                           x:Name="txtAddress"
+                              materialDesign:ValidationAssist.FontSize="14"
                             materialDesign:HintAssist.Hint="Nhập địa chỉ"
                             Height="40" 
                             FontSize="14" 

@@ -72,7 +72,7 @@
                             <materialDesign:PackIcon Kind="Account" 
                                                      Grid.Column="0"/>
                             <TextBox 
-                                
+                                materialDesign:ValidationAssist.FontSize="14"
                                 TabIndex="0"
                                 x:Name="txbName"
                                
@@ -104,7 +104,7 @@
                             <TextBox 
                                 TabIndex="1"
                                 x:Name="txbLicensePlate"
-                               
+                               materialDesign:ValidationAssist.FontSize="14"
                                 Grid.Column="1"
                                      Margin="0 0 0 10"
                             materialDesign:HintAssist.Hint="Biển số xe"
@@ -155,7 +155,7 @@
                             <TextBox 
                                 TabIndex="3"
                                 x:Name="txbAddress"
-                              
+                              materialDesign:ValidationAssist.FontSize="14"
                                 Grid.Column="2"
                             materialDesign:HintAssist.Hint="Địa chỉ"
                                      Width="200"
@@ -182,6 +182,7 @@
                             <materialDesign:PackIcon Kind="Phone" 
                                                      Grid.Column="0"/>
                             <TextBox 
+                                materialDesign:ValidationAssist.FontSize="14"
                                 TabIndex="4"
                                 x:Name="txtPhone"
                                 Grid.Column="1"
@@ -250,7 +251,7 @@
                                        TextWrapping="WrapWithOverflow"
                                        Margin="0 0 0 -30"
                                        VerticalAlignment="Bottom"
-                                       FontSize="13"
+                                       FontSize="14"
                                        Foreground="Red"
                                        Background="white"
                                        >

@@ -44,7 +44,11 @@
                 Margin="0 20 0 0"
                 VerticalAlignment="Top"
                 Height="40">
-                <Label
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0"
                     Content="Tên phụ tùng"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
@@ -52,9 +56,10 @@
                     FontWeight="Bold"
                     Foreground="Black"
                     />
-                <TextBox
+                <TextBox Grid.Column="1"
                     x:Name="txbName"
                     materialDesign:HintAssist.Hint="Nhập tên phụ tùng"
+                    materialDesign:ValidationAssist.FontSize="14"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     IsReadOnly="False"
@@ -63,14 +68,39 @@
                     Margin="0 0 10 0"
                     Foreground="Black"
                     >
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding VisExistsName}" Value="True">
+                                    <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="Red"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
                     <TextBox.Text>
                         <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                             <Binding.ValidationRules>
-                                <validation:NullDataValidation ErrorMessage="Vui lòng nhập teeb phụ tùng"/>
+                                
+                                <validation:NullDataValidation ErrorMessage="Vui lòng nhập tên phụ tùng"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding CheckName}"
+                                                                       CommandParameter="{Binding ElementName=wdAddSupply}"
+                                                                       ></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </TextBox>
+                <Label Grid.Column="1"
+                   Content="Tên phụ tùng này đã tồn tại"
+                   Foreground="red"
+                   FontSize="14"
+                   VerticalAlignment="Bottom"
+                   Margin="36 0 10 -22"
+                   Visibility="{Binding VisExistsName, Converter={StaticResource BooleanToVisibilityConverter}}">
+                </Label>
             </Grid>
             <Grid
                 Margin="0 30 0 0"
@@ -85,6 +115,7 @@
                     Foreground="Black"
                     />
                 <TextBox
+                    materialDesign:ValidationAssist.FontSize="14"
                     x:Name="txbPrice"
                     materialDesign:HintAssist.Hint="Giá niêm yết"
                     HorizontalAlignment="Right"

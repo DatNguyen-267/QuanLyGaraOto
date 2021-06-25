@@ -61,6 +61,7 @@
                     Text="{Binding SuppliesName , UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                 </TextBox>
                 <TextBox 
+                    materialDesign:ValidationAssist.FontSize="14"
                     Width="120"
                     x:Name="txbSuppliesPrice"
                       materialDesign:HintAssist.Hint="Giá"
@@ -75,6 +76,7 @@
                     </TextBox.Text>
                 </TextBox>
                 <TextBox
+                    materialDesign:ValidationAssist.FontSize="14"
                       x:Name="txbSuppliesAmount"
                       materialDesign:HintAssist.Hint="Số lượng"
                       Style="{StaticResource txbSearch}"

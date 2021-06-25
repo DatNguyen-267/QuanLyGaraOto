@@ -71,6 +71,7 @@
                             Stroke="Black"
                             />
                         <TextBox
+                            materialDesign:ValidationAssist.FontSize="14"
                            x:Name="txtUserName"          
                             materialDesign:HintAssist.Hint="Nhập tên tài khoản"
                             Height="40" 
@@ -116,7 +117,7 @@
                     />
                         <TextBox
                             x:Name="txtName"
-                            
+                            materialDesign:ValidationAssist.FontSize="14"
                         materialDesign:HintAssist.Hint="Nhập họ và tên"
                         Height="40" 
                         FontSize="14" 
@@ -245,7 +246,7 @@
                     />
                         <TextBox
                             x:Name="txtCMND"
-                          
+                          materialDesign:ValidationAssist.FontSize="14"
                         materialDesign:HintAssist.Hint="Nhập CMND"
                         Height="40" 
                         FontSize="14" 
@@ -289,7 +290,7 @@
                     />
                         <TextBox
                            x:Name="txtTelephone"
-                         
+                         materialDesign:ValidationAssist.FontSize="14"
                     materialDesign:HintAssist.Hint="Nhập số điện thoại"
                     Height="40" 
                     FontSize="14" 
@@ -336,7 +337,7 @@
                     />
                         <TextBox
                             x:Name="txtAddress"
-                          
+                          materialDesign:ValidationAssist.FontSize="14"
                             materialDesign:HintAssist.Hint="Nhập địa chỉ"
                             Height="40" 
                             FontSize="14" 

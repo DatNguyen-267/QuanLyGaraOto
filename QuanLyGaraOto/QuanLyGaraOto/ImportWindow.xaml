@@ -104,6 +104,7 @@
 
                             <TextBox
                         x:Name="txbPrice"
+                                materialDesign:ValidationAssist.FontSize="14"
                         materialDesign:HintAssist.Hint="Nhập giá sản phẩm"                        
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
@@ -143,7 +144,8 @@
                         Foreground="Black"
                         />
                             <TextBox
-                        x:Name="txbAmount"                        
+                        x:Name="txbAmount"      
+                                materialDesign:ValidationAssist.FontSize="14"
                         materialDesign:HintAssist.Hint="Nhập số lượng"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"

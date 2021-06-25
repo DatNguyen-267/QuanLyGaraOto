@@ -90,13 +90,14 @@ namespace QuanLyGaraOto.ViewModel
         public void Command()
         {
             PayCommand = new RelayCommand<PayWindow>((p) => {
-                if (SelectedDate == null || string.IsNullOrEmpty(p.txtPay.Text) || string.IsNullOrEmpty(p.txbEmail.Text))
+                if (SelectedDate == null || string.IsNullOrEmpty(p.txtPay.Text))
                 {
                     return false;
                 }
                 if (VisErrorDate == true || VisOverDate == true) return false;
                 Regex regex = new Regex(@"^[0-9]+$");
                 if (!regex.IsMatch(p.txtPay.Text.ToString())) return false;
+
                 if (int.Parse(ReceivedMoney) > Reception.Debt && !DataProvider.Ins.DB.GARA_INFO.FirstOrDefault().IsOverPay) return false;
                 return true; }, (p) =>
             {

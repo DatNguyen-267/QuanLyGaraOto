@@ -12,6 +12,7 @@ namespace QuanLyGaraOto.ViewModel
 {
     public class ModifyWageViewModel : BaseViewModel
     {
+        public ICommand CheckName { get; set; }
         private bool _IsClose { get; set; }
         public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
 
@@ -36,7 +37,8 @@ namespace QuanLyGaraOto.ViewModel
 
         public ICommand ModifyWage { get; set; }
         public ICommand CancelModifyWage { get; set; }
-
+        private bool _VisExistsName { get; set; }
+        public bool VisExistsName { get => _VisExistsName; set { _VisExistsName = value; OnPropertyChanged(); } }
         public ModifyWageViewModel(WAGE wage)
         {
             WageInModify = wage.Wage_Name;
@@ -54,6 +56,7 @@ namespace QuanLyGaraOto.ViewModel
                 {
                     return false;
                 }
+                if (VisExistsName) return false;
                 Regex regex = new Regex(@"^[0-9]+$");
                 if (!regex.IsMatch((p.txtValue.Text)) && !string.IsNullOrEmpty((p.txtValue.Text))) return false;
                 return true;
@@ -76,6 +79,15 @@ namespace QuanLyGaraOto.ViewModel
                 MessageBox.Show("Sửa thành công!");
                 IsClose = false;
                 p.Close();
+            });
+            CheckName = new RelayCommand<ModifyWageWindow>((p) => { return true; }, (p) =>
+            {
+                VisExistsName = false;
+                if (DataProvider.Ins.DB.WAGEs.Where(x => x.Wage_Name == p.txtWage.Text && x.Wage_Id != wage.Wage_Id).Count() == 0)
+                {
+                    VisExistsName = false;
+                }
+                else VisExistsName = true;
             });
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)

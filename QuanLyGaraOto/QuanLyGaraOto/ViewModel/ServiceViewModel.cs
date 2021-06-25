@@ -130,11 +130,16 @@ namespace QuanLyGaraOto.ViewModel
                                     new ObservableCollection<REPAIR_DETAIL>(DataProvider.Ins.DB.REPAIR_DETAIL.Where(x => x.IdRepair == tempRepair.Repair_Id));
                                 foreach (var item2 in tempList)
                                 {
-                                    temp = DataProvider.Ins.DB.SUPPLIES.Where(z => z.Supplies_Id == item2.IdSupplies).SingleOrDefault();
-                                    temp.Supplies_Amount += item2.SuppliesAmount;
-                                        DataProvider.Ins.DB.SaveChanges();
+                                        if (item2.IdSupplies != null)
+                                        {
+                                            temp = DataProvider.Ins.DB.SUPPLIES.Where(z => z.Supplies_Id == item2.IdSupplies).SingleOrDefault();
+                                            temp.Supplies_Amount += item2.SuppliesAmount;
+                                            DataProvider.Ins.DB.SaveChanges();
+                                        }
+                                    
                                 }
                             }
+                                MessageBox.Show("Xóa thành công " ,"Thông báo", MessageBoxButton.OK);
                                 DeleteModel deleteModel = new DeleteModel();
                                 deleteModel.CarReception(item.CarReception);
                                 ListCar.Remove(item);

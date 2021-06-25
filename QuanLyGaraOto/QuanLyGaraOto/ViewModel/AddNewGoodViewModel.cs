@@ -15,6 +15,7 @@ namespace QuanLyGaraOto.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public ICommand CheckName { get; set; }
 
         public SUPPLIES Supplies { get; set; }
 
@@ -29,6 +30,8 @@ namespace QuanLyGaraOto.ViewModel
         public string Title { get; set; }
         private bool _IsClose { get; set; }
         public bool IsClose { get => _IsClose; set { _IsClose = value; OnPropertyChanged(); } }
+        private bool _VisExistsName { get; set; }
+        public bool VisExistsName { get => _VisExistsName; set { _VisExistsName = value; OnPropertyChanged(); } }
         public AddNewGoodViewModel()
         {
             Title = "Thêm phụ tùng";
@@ -41,7 +44,7 @@ namespace QuanLyGaraOto.ViewModel
                     if (List == null || List.Count() != 0) return false;
                     if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text) )
                         return false;
-
+                    if (VisExistsName) return false;
                     Regex regex = new Regex(@"^[0-9]+$");
                     if (!regex.IsMatch((p.txbPrice.Text)) && !string.IsNullOrEmpty((p.txbPrice.Text))) return false;
 
@@ -68,6 +71,15 @@ namespace QuanLyGaraOto.ViewModel
                         p.Close();
                 }
                 );
+            CheckName = new RelayCommand<AddNewGoodWindow>((p) => { return true; }, (p) =>
+            {
+                VisExistsName = false;
+                if (DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text).Count() == 0)
+                {
+                    VisExistsName = false;
+                }
+                else VisExistsName = true;
+            });
         }
         public AddNewGoodViewModel(SUPPLIES supplies)
         {
@@ -77,6 +89,7 @@ namespace QuanLyGaraOto.ViewModel
             EditCommand = new RelayCommand<AddNewGoodWindow>(
                 (p) =>
                 {
+                    if (VisExistsName) return false;
                     var Temp = DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text);
                     if ((Temp == null || Temp.Count() != 0) && p.txbName.Text != supplies.Supplies_Name) return false;
                     if (string.IsNullOrEmpty(p.txbName.Text) || string.IsNullOrEmpty(p.txbPrice.Text) )
@@ -115,6 +128,15 @@ namespace QuanLyGaraOto.ViewModel
                     p.Close();
                 }
                 );
+            CheckName = new RelayCommand<AddNewGoodWindow>((p) => { return true; }, (p) =>
+            {
+                VisExistsName = false;
+                if (DataProvider.Ins.DB.SUPPLIES.Where(x => x.Supplies_Name == p.txbName.Text).Count() == 0)
+                {
+                    VisExistsName = false;
+                }
+                else VisExistsName = true;
+            });
         }
         public void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {

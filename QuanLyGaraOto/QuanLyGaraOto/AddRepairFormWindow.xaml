@@ -93,11 +93,11 @@
                         </TextBlock>
                     </Grid>
                     <Grid Grid.Column="1" Visibility="{Binding VisOverDate, Converter={StaticResource BooleanToVisibilityConverter }}">
-                        <TextBlock Text="Ngày hóa đơn không được quá ngày hiện tại"
+                        <TextBlock Text="Ngày sửa chữa không được quá ngày hiện tại"
                                        TextWrapping="WrapWithOverflow"
-                                       Margin="10 0 10 -14"
+                                       Margin="10 0 10 -15"
                                        VerticalAlignment="Bottom"
-                                       FontSize="13"
+                                       FontSize="14"
                                        Foreground="Red"
                                        Background="white"
                                        Padding="3 0 3 0"

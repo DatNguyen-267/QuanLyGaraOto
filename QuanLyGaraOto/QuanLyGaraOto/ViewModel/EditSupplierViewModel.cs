@@ -41,7 +41,7 @@ namespace QuanLyGaraOto.ViewModel
                 if (string.IsNullOrEmpty(p.txtSupplierName.Text) ||
                 string.IsNullOrEmpty(p.txbSupplierPhone.Text) ||
                 string.IsNullOrEmpty(p.txbSupplierEmail.Text)) return false;
-
+                if (VisExistsName) return false;
                 Regex regex = new Regex(@"^[0-9]+$");
                 if (!regex.IsMatch((p.txbSupplierPhone.Text)) && !string.IsNullOrEmpty((p.txbSupplierPhone.Text))) return false;
 

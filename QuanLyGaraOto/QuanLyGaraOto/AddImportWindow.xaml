@@ -56,6 +56,7 @@
                         Kind="DateRange"               
                         Grid.Column="0"/>
                     <DatePicker 
+                          materialDesign:ValidationAssist.FontSize="14"
                         x:Name="DatePicker"
                                 SelectedDate="{Binding ImportDate}"
                                 Grid.Column="1"
@@ -84,9 +85,10 @@
                     <Grid Grid.Column="1" Visibility="{Binding VisOverDate, Converter={StaticResource BooleanToVisibilityConverter }}">
                         <TextBlock Text="Ngày nhập hàng không được quá ngày hiện tại"
                                        TextWrapping="WrapWithOverflow"
-                                       Margin="-5 0 10 -35"
+                                     FontSize="14"
+                                       Margin="-3 0 10 -37"
                                        VerticalAlignment="Bottom"
-                                       FontSize="13"
+                                       
                                        Foreground="Red"
                                        Background="white"
                                        Padding="3 0 3 0"
