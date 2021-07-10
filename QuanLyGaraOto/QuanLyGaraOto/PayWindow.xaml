@@ -239,6 +239,7 @@
                                     <TextBox
                                         x:Name="txtPay"
                                         materialDesign:ValidationAssist.Background="white"
+                                        materialDesign:ValidationAssist.FontSize="12"
                                         IsReadOnly="{Binding RolReceivedMoney}"
                                         Margin="10 0 10 8"  
                                         VerticalAlignment="Center" 
@@ -277,9 +278,9 @@
                             <Grid Grid.Column="1" Visibility="{Binding VisValidationPay, Converter={StaticResource BooleanToVisibilityConverter }}">
                                 <TextBlock Text="Số tiền thu không quá số tiền nợ"
                                        TextWrapping="WrapWithOverflow"
-                                       Margin="10 0 10 0"
+                                       Margin="10 0 10 -10"
                                        VerticalAlignment="Bottom"
-                                       FontSize="10"
+                                       FontSize="14"
                                        Foreground="Red"
                                        Background="white"
                                            Padding="3 0 3 0"
@@ -309,6 +310,7 @@
                                       
                                         VerticalAlignment="Center">
                                     <DatePicker
+                                             materialDesign:ValidationAssist.FontSize="12"
                                             x:Name="DatePickerPay"
                                             IsEnabled="{Binding EnabledReceiptDate}"
                                             SelectedDate="{Binding SelectedDate}"
@@ -341,9 +343,9 @@
                             <Grid Grid.Column="1" Visibility="{Binding VisOverDate, Converter={StaticResource BooleanToVisibilityConverter }}">
                                 <TextBlock Text="Ngày hóa đơn không được quá ngày hiện tại"
                                        TextWrapping="WrapWithOverflow"
-                                       Margin="10 0 10 -3"
+                                       Margin="10 0 0 -8"
                                        VerticalAlignment="Bottom"
-                                       FontSize="10"
+                                       FontSize="12"
                                        Foreground="Red"
                                        Background="white"
                                        Padding="3 0 3 0"
@@ -353,9 +355,9 @@
                             <Grid Grid.Column="1" Visibility="{Binding VisErrorDate, Converter={StaticResource BooleanToVisibilityConverter }}">
                                 <TextBlock Text="Ngày hóa đơn không được nhỏ hơn ngày sửa chữa"
                                        TextWrapping="WrapWithOverflow"
-                                       Margin="10 0 10 -3"
+                                       Margin="10 0 0 -8"
                                        VerticalAlignment="Bottom"
-                                       FontSize="10"
+                                       FontSize="12"
                                        Foreground="Red"
                                        Background="white"
                                        Padding="3 0 3 0"
